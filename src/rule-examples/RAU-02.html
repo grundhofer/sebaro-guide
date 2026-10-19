@@ -1,0 +1,16 @@
+<div class="g-examples">
+  <div class="g-ex g-ex--do"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p><div class="g-ex__stage">
+    <div class="g-rx-grids">
+      <div class="g-rx-grid"><div class="g-rx-grid__frame g-rx-grid__frame--4" aria-hidden="true"><span></span><span></span><span></span><span></span></div><p class="g-rx-cap">Unter 640&nbsp;px: 4 Spalten, Rand 16, Gutter 16</p></div>
+      <div class="g-rx-grid"><div class="g-rx-grid__frame g-rx-grid__frame--8" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><p class="g-rx-cap">640 bis 1023&nbsp;px: 8 Spalten, Rand 16, Gutter 24</p></div>
+      <div class="g-rx-grid"><div class="g-rx-grid__frame g-rx-grid__frame--12" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><p class="g-rx-cap">Ab 1024&nbsp;px: 12 Spalten, Rand 48, Gutter 24; Seite höchstens 1.440&nbsp;px breit</p></div>
+    </div>
+  </div><p class="g-ex__note">Drei Raster, ein Seitenrahmen: <code>sb-container</code> setzt Rand und Höchstbreite, <code>sb-section</code> den Abschnittsabstand mit Haarlinie dazwischen.</p></div>
+  <div class="g-ex g-ex--dont"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p><div class="g-ex__stage">
+    <div class="sb-code">
+      <div class="sb-code__bar"><span class="sb-code__lang">CSS</span></div>
+<pre tabindex="0" role="region" aria-label="CSS-Beispiel: eigene Seitenbreiten"><code>.startseite { max-width: <span class="sb-tok-constant">960px</span>; margin: <span class="sb-tok-constant">0</span> auto; }
+.blog       { max-width: <span class="sb-tok-constant">1100px</span>; padding: <span class="sb-tok-constant">0</span> <span class="sb-tok-constant">20px</span>; }</code></pre>
+    </div>
+  </div><p class="g-ex__note">Jede Seite mit eigener Höchstbreite und eigenem Rand: Inhalte springen beim Wechsel der Seite hin und her.</p></div>
+</div>

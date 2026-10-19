@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Heute · Produktname</title>
+<!-- sebaro/ = a copy of docs/sebaro/ from the sebaro Guide (a verified export); never edit inside it -->
+<script src="sebaro/js/theme-init.js"></script>
+<link rel="stylesheet" href="sebaro/fonts/fonts.css">
+<link rel="stylesheet" href="sebaro/tokens.css">
+<link rel="stylesheet" href="sebaro/icons/sprite.css">
+<link rel="stylesheet" href="sebaro/css/sebaro.css">
+<script defer src="sebaro/js/theme-button.js"></script>
+<!-- favicons etc.: copy the lines of sebaro/brand/site-root/head.snippet.html for your product export -->
+</head>
+<body class="sb-page">
+<!-- paste sebaro/icons/sprite.svg here unchanged (it hides itself), or reference it same-origin over http -->
+<a class="sb-skip-link" href="#inhalt">Zum Inhalt</a>
+<header class="sb-site-header">
+  <a class="sb-lockup" href="./"><span class="sb-wordmark">Produktname</span></a>
+  <button class="sb-theme-button" type="button" data-sb-theme-button>Hell oder Dunkel</button>
+  <div class="sb-site-header__links">
+    <nav class="sb-site-nav" aria-label="Hauptmenü"><a href="./" aria-current="page">Heute</a> <a href="#verlauf">Verlauf</a></nav>
+  </div>
+  <span class="sb-visually-hidden" role="status" data-sb-theme-status></span>
+</header>
+<main id="inhalt" class="sb-container">
+  <section class="sb-section" aria-labelledby="h">
+    <h1 class="sb-page-lead__title" id="h">Heute</h1>
+    <p class="sb-page-lead__text">Noch 2 offen.</p>
+    <div class="sb-section__actions">
+      <a class="sb-primary-action" href="#neu">Neue Gewohnheit</a>
+    </div>
+  </section>
+</main>
+<footer class="sb-site-footer">
+  <p>© 2026 sebaro</p>
+</footer>
+</body>
+</html>

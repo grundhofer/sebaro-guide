@@ -1,0 +1,23 @@
+<div class="g-examples">
+<div class="g-ex g-ex--do">
+  <p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p>
+  <div class="g-ex__stage">
+<ul class="g-rx-lines"><li><p class="demo-label">In Ruhe</p><span>Mehr dazu steht im <a href="#LNK-01">Verlauf</a>.</span></li><li><p class="demo-label">Zeiger darauf</p><span>Mehr dazu steht im <a class="is-hover" href="#LNK-01">Verlauf</a>.</span></li><li><p class="demo-label">Besucht (Fließtext)</p><span>Mehr dazu steht im <a class="is-visited" href="#LNK-01">Verlauf</a>.</span></li><li><p class="demo-label">Fokus</p><span>Mehr dazu steht im <a class="is-focus" href="#LNK-01">Verlauf</a>.</span></li><li><p class="demo-label">Textaktion, gleicher Stil</p><button class="sb-text-action" type="button">Rückgängig</button></li></ul>
+  </div>
+  <p class="g-ex__note">Das Wort bleibt in Textfarbe, darunter liegt eine 2-px-Linie in Kobalt; Zeigen färbt das Wort, besucht ändert nur die Linie.</p>
+  <details class="g-source"><summary>Markup</summary><div class="sb-code"><pre tabindex="0" role="region" aria-label="Markup: Link-Stil (CSS)"><code>a {
+  color: var(--sb-color-text);
+  text-decoration: underline var(--sb-color-link) var(--sb-x-sebaro-link-underline-width);
+  text-underline-offset: <span class="sb-tok-constant">0.2em</span>;
+}
+a:hover, a:active { color: var(--sb-color-link); }
+.sb-prose a:visited { text-decoration-color: var(--sb-color-link-visited); }</code></pre></div></details>
+</div>
+<div class="g-ex g-ex--dont">
+  <p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p>
+  <div class="g-ex__stage">
+<ul class="g-rx-lines"><li><p class="demo-label">Blau ohne Linie</p><span>Mehr dazu steht im <span class="g-rx-link-blue">Verlauf</span>.</span></li><li><p class="demo-label">Kasten dahinter</p><span>Mehr dazu steht im <a class="g-rx-link-box" href="#LNK-01">Verlauf</a>.</span></li></ul>
+  </div>
+  <p class="g-ex__note">Blau ohne Linie erkennt man ohne Farbsehen nicht als Link (hier nur als Bild gezeigt, nicht anklickbar), und ein Kasten dahinter macht aus dem Link eine getönte Fläche.</p>
+</div>
+</div>

@@ -1,0 +1,40 @@
+<div class="g-examples">
+  <div class="g-ex g-ex--do"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p><div class="g-ex__stage">
+    <div class="g-rx-stack g-rx-stack--stretch">
+      <button class="sb-danger-action demo-start" type="button" data-sb-opens="EBE-03-dlg"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#trash"/></svg>Gewohnheit löschen</button>
+      <div class="demo-stage">
+        <div class="demo-stage__scrim"></div>
+        <div class="sb-dialog" role="dialog" aria-labelledby="EBE-03-st-title" aria-describedby="EBE-03-st-text">
+          <p class="sb-dialog__title" id="EBE-03-st-title">Gewohnheit löschen?</p>
+          <p class="sb-dialog__text" id="EBE-03-st-text">„Wasser trinken“ und der Verlauf von 221&nbsp;Tagen werden entfernt. Das lässt sich nicht rückgängig machen.</p>
+          <div class="sb-dialog__actions"><button class="sb-secondary-action" type="button">Abbrechen</button><button class="sb-danger-action sb-danger-action--outlined" type="button">Löschen</button></div>
+        </div>
+      </div>
+    </div>
+    <dialog class="sb-dialog" id="EBE-03-dlg" aria-labelledby="EBE-03-dlg-title" aria-describedby="EBE-03-dlg-text">
+      <form method="dialog">
+        <p class="sb-dialog__title" id="EBE-03-dlg-title">Gewohnheit löschen?</p>
+        <p class="sb-dialog__text" id="EBE-03-dlg-text">„Wasser trinken“ und der Verlauf von 221&nbsp;Tagen werden entfernt. Das lässt sich nicht rückgängig machen.</p>
+        <div class="sb-dialog__actions"><button class="sb-secondary-action" value="cancel" autofocus>Abbrechen</button><button class="sb-danger-action sb-danger-action--outlined" value="confirm">Löschen</button></div>
+      </form>
+    </dialog>
+  </div><p class="g-ex__note">Ein natives &lt;dialog&gt; über dem Scrim: Frage als Titel, Folge als Text, Aktionen rechtsbündig und keine Hauptaktion; die Taste öffnet ihn echt.</p>
+  <details class="g-source"><summary>Markup</summary><div class="sb-code"><pre tabindex="0" role="region" aria-label="Markup: Bestätigungsdialog"><code>&lt;<span class="sb-tok-keyword">button</span> class=<span class="sb-tok-string">"sb-danger-action"</span> type=<span class="sb-tok-string">"button"</span> data-sb-opens=<span class="sb-tok-string">"dlg-delete"</span>&gt;&lt;<span class="sb-tok-keyword">svg</span> class=<span class="sb-tok-string">"sb-icon"</span> aria-hidden=<span class="sb-tok-string">"true"</span> focusable=<span class="sb-tok-string">"false"</span>&gt;&lt;<span class="sb-tok-keyword">use</span> href=<span class="sb-tok-string">"#trash"</span>/&gt;&lt;/<span class="sb-tok-keyword">svg</span>&gt;Gewohnheit löschen&lt;/<span class="sb-tok-keyword">button</span>&gt;
+&lt;<span class="sb-tok-keyword">dialog</span> class=<span class="sb-tok-string">"sb-dialog"</span> id=<span class="sb-tok-string">"dlg-delete"</span> aria-labelledby=<span class="sb-tok-string">"dlg-delete-title"</span> aria-describedby=<span class="sb-tok-string">"dlg-delete-text"</span>&gt;
+  &lt;<span class="sb-tok-keyword">form</span> method=<span class="sb-tok-string">"dialog"</span>&gt;
+    &lt;<span class="sb-tok-keyword">h2</span> class=<span class="sb-tok-string">"sb-dialog__title"</span> id=<span class="sb-tok-string">"dlg-delete-title"</span>&gt;Gewohnheit löschen?&lt;/<span class="sb-tok-keyword">h2</span>&gt;
+    &lt;<span class="sb-tok-keyword">p</span> class=<span class="sb-tok-string">"sb-dialog__text"</span> id=<span class="sb-tok-string">"dlg-delete-text"</span>&gt;„Wasser trinken“ und der Verlauf von 221&amp;nbsp;Tagen werden entfernt. Das lässt sich nicht rückgängig machen.&lt;/<span class="sb-tok-keyword">p</span>&gt;
+    &lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-dialog__actions"</span>&gt;
+      &lt;<span class="sb-tok-keyword">button</span> class=<span class="sb-tok-string">"sb-secondary-action"</span> value=<span class="sb-tok-string">"cancel"</span> autofocus&gt;Abbrechen&lt;/<span class="sb-tok-keyword">button</span>&gt;
+      &lt;<span class="sb-tok-keyword">button</span> class=<span class="sb-tok-string">"sb-danger-action sb-danger-action--outlined"</span> value=<span class="sb-tok-string">"confirm"</span>&gt;Löschen&lt;/<span class="sb-tok-keyword">button</span>&gt;
+    &lt;/<span class="sb-tok-keyword">div</span>&gt;
+  &lt;/<span class="sb-tok-keyword">form</span>&gt;
+&lt;/<span class="sb-tok-keyword">dialog</span>&gt;</code></pre></div></details></div>
+  <div class="g-ex g-ex--dont"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p><div class="g-ex__stage">
+    <div class="g-rx-wrong-alert" style="box-shadow: 0 8px 24px var(--sb-color-scrim);">
+      <p class="g-rx-cardtitle">Achtung</p>
+      <p>Bist du sicher?</p>
+      <div class="g-rx-wrong-alert__actions"><button class="sb-text-action" type="button">Abbrechen</button><button class="sb-primary-action" type="button">OK</button></div>
+    </div>
+  </div><p class="g-ex__note">Schattenkasten ohne Scrim, ein Titel ohne Frage, kein Wort zur Folge und eine lindgrüne „OK“-Taste, die zum Löschen drängt.</p></div>
+</div>

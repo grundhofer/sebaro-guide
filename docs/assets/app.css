@@ -1,0 +1,104 @@
+/* app.css: page chrome of app.html (the example phone app). Guide only, never in products.
+ * Same discipline as sebaro.css: only var(--sb-*) tokens, no colour literals, no shadows, no tinted grounds.
+ * Classes start with "g-app-". Patterns built here that the system does not have are marked on the page with
+ * „Vorschlag, noch nicht im System“: g-app-intro, g-app-pick, g-app-bar, g-app-notif, g-app-sysdialog,
+ * g-app-launcher, g-app-widget. Load right after the guide:head block. */
+
+/* ------------------------------------------------------------------ screen list: stacked, side by side from 900 px (D25) */
+.g-app-screens { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-12) var(--sb-space-10); align-items: start; margin: 0; padding: 0; list-style: none; }
+@media (min-width: 900px) { .g-app-screens { grid-template-columns: repeat(auto-fill, 390px); } }
+.g-app-screen { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-2); align-content: start; min-inline-size: 0; max-inline-size: 390px; scroll-margin-block-start: var(--sb-space-4); }
+/* a screen is 390 x 844; a longer screen shows its whole content and the bottom block at its end (as mobile.html) */
+.g-app-screen > .sb-phone:not(.sb-phone--auto) { block-size: auto; min-block-size: 844px; }
+.g-app-screen__title { margin: var(--sb-space-2) 0 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
+.g-app-screen__text { margin: 0; }
+.g-app-screen__meta { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.g-app-screen__meta code, .g-app-screen__text code { color: var(--sb-color-text); overflow-wrap: anywhere; }
+.g-app-screen .g-source, .g-app-wide .g-source { margin-block-start: 0; }
+.g-app-replay { display: flex; flex-wrap: wrap; gap: var(--sb-space-3); }
+.g-app-wide { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-2); margin-block-start: var(--sb-space-12); max-inline-size: 880px; }
+.g-app-wide:first-child { margin-block-start: 0; }
+.g-app-subhead { margin: var(--sb-space-12) 0 var(--sb-space-4); font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
+
+/* at phone width the frame is the screen: no side margins, no frame corners (as pages.css does for mobile.html) */
+@media (max-width: 429px) {
+  .g-app-screen > .sb-phone {
+    margin-inline: calc(-1 * var(--sb-spacing-gutter)); inline-size: calc(100% + 2 * var(--sb-spacing-gutter)); max-inline-size: none;
+    border-inline: 0; border-radius: 0;
+  }
+}
+
+/* states of the primary action, each in its own small frame (one lime action per frame) */
+.g-app-states { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: var(--sb-space-6); margin: 0; padding: 0; list-style: none; }
+.g-app-states > li { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-2); align-content: start; min-inline-size: 0; }
+
+/* ------------------------------------------------------------------ the start as a still: the tile in the middle of bg */
+.g-app-start-still { display: grid; place-items: center; }
+.g-app-start-still__tile { display: block; inline-size: var(--sb-x-sebaro-start-tile-size); block-size: var(--sb-x-sebaro-start-tile-size); line-height: 0; }
+.g-app-start-still__tile > svg { display: block; inline-size: 100%; block-size: 100%; }
+
+/* ------------------------------------------------------------------ overlays inside a frame */
+.g-app-sheet-dock { position: absolute; inset: auto 0 0; z-index: var(--sb-layer-modal); }
+.g-app-menu-dock { position: absolute; inset-block-start: var(--sb-space-12); inset-inline-end: var(--sb-space-2); z-index: var(--sb-layer-dropdown); }
+.g-app-anchor { position: relative; }
+
+/* ------------------------------------------------------------------ Vorschlag: one onboarding step */
+.g-app-intro { display: grid; justify-items: start; gap: var(--sb-space-3); padding: var(--sb-space-4) var(--sb-spacing-gutter); }
+.g-app-intro > .sb-icon--spot { color: var(--sb-color-text-muted); --sb-icon-tone: var(--sb-color-border); }
+.g-app-intro__title { margin: 0; font: var(--sb-type-mobile-headline); letter-spacing: var(--sb-type-mobile-headline-tracking); }
+.g-app-intro__text { margin: 0; }
+.g-app-intro .sb-progress { justify-self: stretch; }
+
+/* ------------------------------------------------------------------ Vorschlag: multi-select rows on the phone */
+.g-app-pick { border-inline-start: var(--sb-border-width-strong) solid transparent; padding-inline-start: calc(var(--sb-spacing-gutter) - var(--sb-border-width-strong)); }
+.g-app-pick:has(input:checked) { border-inline-start-color: var(--sb-color-accent); }
+.g-app-pick:has(input:checked) .sb-checkbox span { font-weight: var(--sb-type-title-weight); }
+.g-app-pick .sb-checkbox { min-block-size: var(--sb-size-target-touch); }
+
+/* Vorschlag: a bottom bar for a destructive action of a selection (never the primary action bar) */
+.g-app-bar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-3); padding: var(--sb-space-3) var(--sb-spacing-gutter); }
+
+/* ------------------------------------------------------------------ Vorschlag: system surfaces, only hinted at */
+.g-app-notif, .g-app-sysdialog {
+  box-sizing: border-box; display: grid; gap: var(--sb-space-1); inline-size: 100%;
+  border: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-sheet); background: var(--sb-color-bg);
+}
+.g-app-notif { padding: var(--sb-space-3) var(--sb-space-4); }
+.g-app-notif p, .g-app-sysdialog p { margin: 0; }
+.g-app-notif__head { display: flex; align-items: center; gap: var(--sb-space-2); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.g-app-notif__sign { flex: none; inline-size: 16px; block-size: 16px; color: var(--sb-color-text); }
+.g-app-notif__title { font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
+.g-app-notif__actions, .g-app-sysdialog__actions { display: flex; flex-wrap: wrap; gap: var(--sb-space-2) var(--sb-space-6); margin-block-start: var(--sb-space-2); font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
+.g-app-sysdialog { gap: var(--sb-space-3); padding: var(--sb-space-6); }
+.g-app-sysdialog__title { font: var(--sb-type-mobile-title); letter-spacing: var(--sb-type-mobile-title-tracking); }
+.g-app-sysdialog__actions { flex-direction: column; align-items: stretch; gap: var(--sb-space-2); }
+.g-app-sysdialog__actions span { display: flex; align-items: center; justify-content: center; min-block-size: var(--sb-size-target-touch); border: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-pill); }
+.g-app-system-ground { box-sizing: border-box; display: grid; align-content: start; gap: var(--sb-space-4); padding: var(--sb-space-6) var(--sb-space-3); }
+.g-app-system-ground__time { margin: 0; font: var(--sb-type-mobile-display); letter-spacing: var(--sb-type-mobile-display-tracking); font-variant-numeric: var(--sb-type-numeric-variant); }
+
+.g-app-launcher { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sb-space-6) var(--sb-space-2); margin: 0; padding: var(--sb-space-6) var(--sb-space-3); list-style: none; }
+.g-app-launcher > li { display: grid; justify-items: center; align-content: start; gap: var(--sb-space-1); min-inline-size: 0; text-align: center; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); overflow-wrap: anywhere; }
+
+/* Vorschlag: home-screen widget, a level-1 layer (bg + 2 px ink line, radius 12) */
+.g-app-widget {
+  box-sizing: border-box; display: grid; gap: var(--sb-space-1); margin: 0 var(--sb-space-3); padding: var(--sb-space-3) 0 var(--sb-space-2);
+  border: var(--sb-elevation-level-1-border-width) solid var(--sb-elevation-level-1-border-color); border-radius: var(--sb-radius-container);
+  background: var(--sb-elevation-level-1-surface);
+}
+.g-app-widget__head { display: flex; align-items: center; gap: var(--sb-space-2); margin: 0; padding: 0 var(--sb-space-4); font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
+.g-app-widget .sb-day-summary { padding-block: 0 var(--sb-space-1); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+
+/* fixes after the first screenshots */
+.g-app-screen__meta a { white-space: nowrap; }
+.g-app-wide + .g-app-screens { margin-block-start: var(--sb-space-12); }
+.g-app-pick .sb-list-row__meta { padding-inline-start: var(--sb-space-8); }
+/* Über-Kopf: 64-px-Kachel neben Name und Version (sb-app-row ist für 48 px gebaut) */
+.g-app-about { display: flex; align-items: center; gap: var(--sb-space-4); padding: var(--sb-space-4) var(--sb-spacing-gutter); }
+.g-app-about p { margin: 0; }
+.g-app-about__name { font: var(--sb-type-mobile-title); letter-spacing: var(--sb-type-mobile-title-tracking); }
+.g-app-about__text { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+/* stacked demo-window below 640 px: .sb-view's min-block-size: 100% resolves against the window and clips the bottom
+   block (vendored demo.css); the stand-in grows with its content instead */
+@media (max-width: 639px) { .g-app-wide .demo-window > .sb-view { min-block-size: 0; } }
+/* the class-to-Compose table reflows at phone width instead of scrolling sideways */
+#ueberblick .sb-table code { white-space: normal; overflow-wrap: anywhere; }

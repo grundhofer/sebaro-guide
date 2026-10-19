@@ -1,0 +1,36 @@
+<div class="g-examples">
+  <div class="g-ex g-ex--do"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p><div class="g-ex__stage">
+    <div class="g-rx-stack g-rx-stack--stretch">
+      <div class="g-rx-modes">
+        <div class="g-rx-mode" data-theme="light"><div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">Kotlin, hell</span></div><pre tabindex="0" role="region" aria-label="Kotlin-Beispiel mit Codetönen, hell"><code><span class="sb-tok-comment">// Gläser am Tag</span>
+<span class="sb-tok-keyword">val</span> ziel = <span class="sb-tok-constant">8</span>
+<span class="sb-tok-keyword">val</span> name = <span class="sb-tok-string">"Wasser"</span>
+<span class="sb-tok-keyword">var</span> aktiv = <span class="sb-tok-constant">true</span></code></pre></div></div>
+        <div class="g-rx-mode" data-theme="dark"><div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">Kotlin, dunkel</span></div><pre tabindex="0" role="region" aria-label="Kotlin-Beispiel mit Codetönen, dunkel"><code><span class="sb-tok-comment">// Gläser am Tag</span>
+<span class="sb-tok-keyword">val</span> ziel = <span class="sb-tok-constant">8</span>
+<span class="sb-tok-keyword">val</span> name = <span class="sb-tok-string">"Wasser"</span>
+<span class="sb-tok-keyword">var</span> aktiv = <span class="sb-tok-constant">true</span></code></pre></div></div>
+      </div>
+      <div class="sb-table-wrap" role="region" aria-labelledby="FAR-11-cap" tabindex="0">
+        <table class="sb-table">
+          <caption id="FAR-11-cap">Codetöne als Tokens (D69), Wert im aktuellen Modus</caption>
+          <thead><tr><th scope="col">Rolle</th><th scope="col">Im Code</th><th scope="col">Token und Wert</th></tr></thead>
+          <tbody>
+            <tr><td>Schlüsselwort (Indigo)</td><td><code><span class="sb-tok-keyword">val</span></code></td><td><code>--sb-syntax-keyword</code><br><code data-g-token="--sb-syntax-keyword"></code></td></tr>
+            <tr><td>Zeichenkette (Waldgrün)</td><td><code><span class="sb-tok-string">"Wasser"</span></code></td><td><code>--sb-syntax-string</code><br><code data-g-token="--sb-syntax-string"></code></td></tr>
+            <tr><td>Zahl, Konstante (Himbeere)</td><td><code><span class="sb-tok-constant">8</span></code></td><td><code>--sb-syntax-constant</code><br><code data-g-token="--sb-syntax-constant"></code></td></tr>
+            <tr><td>Kommentar</td><td><code><span class="sb-tok-comment">// Ziel</span></code></td><td><code>--sb-color-text-muted</code><br><code data-g-token="--sb-color-text-muted"></code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div><p class="g-ex__note">Code bekommt drei eigene Töne nur im Codeblock, Kommentare in text-muted, alles andere in text. Seit D69 sind das die Tokens <code>--sb-syntax-*</code>; <code>sebaro.css</code> färbt damit highlight.js, Prism und eigene <code>sb-tok-*</code>-Spans, hell und dunkel.</p></div>
+  <div class="g-ex g-ex--dont"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p><div class="g-ex__stage">
+    <div class="sb-code">
+      <div class="sb-code__bar"><span class="sb-code__lang">Kotlin</span></div>
+<pre tabindex="0" role="region" aria-label="Kotlin-Beispiel mit falschen Farben"><code>// Tagesziel in Gläsern
+<span class="g-rx-wrong-code-cobalt">val</span> ziel = <span class="g-rx-wrong-code-danger">8</span>
+<span class="g-rx-wrong-code-cobalt">val</span> name = <span class="g-rx-wrong-code-lime">"Wasser trinken"</span></code></pre>
+    </div>
+  </div><p class="g-ex__note">Kobalt sieht aus wie ein Link, Lindgrün wie eine Hauptaktion und Rot wie ein Fehler: Codetöne dürfen keine Rollen leihen.</p></div>
+</div>

@@ -1,0 +1,6 @@
+.DS_Store
+__pycache__/
+*.pyc
+tools/sync.local.json
+.work/
+node_modules/

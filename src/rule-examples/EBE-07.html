@@ -1,0 +1,26 @@
+<div class="g-examples">
+  <div class="g-ex g-ex--do"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p><div class="g-ex__stage">
+    <div class="demo-anchor">
+      <button class="sb-icon-button is-pressed" type="button" aria-label="Mehr" aria-haspopup="menu" aria-expanded="true" aria-controls="EBE-07-menu"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#more-vertical"/></svg></button>
+      <ul class="sb-menu" role="menu" id="EBE-07-menu" aria-label="Mehr">
+        <li role="none"><button class="sb-menu__item" type="button" role="menuitem"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#edit"/></svg>Bearbeiten</button></li>
+        <li role="none"><button class="sb-menu__item" type="button" role="menuitem"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#share"/></svg>Teilen</button></li>
+        <li role="separator" class="sb-menu__sep"></li>
+        <li role="none"><button class="sb-menu__item sb-menu__item--danger" type="button" role="menuitem"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#trash"/></svg>Gewohnheit löschen</button></li>
+      </ul>
+    </div>
+  </div><p class="g-ex__note">Menü nach ARIA-Muster mit Tintenlinie; Löschen steht zuletzt nach der Trennlinie, in danger, ohne Kante, und öffnet trotzdem den Dialog.</p>
+  <details class="g-source"><summary>Markup</summary><div class="sb-code"><pre tabindex="0" role="region" aria-label="Markup: Menü Mehr"><code>&lt;<span class="sb-tok-keyword">button</span> class=<span class="sb-tok-string">"sb-icon-button"</span> type=<span class="sb-tok-string">"button"</span> aria-label=<span class="sb-tok-string">"Mehr"</span> aria-haspopup=<span class="sb-tok-string">"menu"</span> aria-expanded=<span class="sb-tok-string">"true"</span> aria-controls=<span class="sb-tok-string">"menu-more"</span>&gt;…&lt;/<span class="sb-tok-keyword">button</span>&gt;
+&lt;<span class="sb-tok-keyword">ul</span> class=<span class="sb-tok-string">"sb-menu"</span> role=<span class="sb-tok-string">"menu"</span> id=<span class="sb-tok-string">"menu-more"</span> aria-label=<span class="sb-tok-string">"Mehr"</span>&gt;
+  &lt;<span class="sb-tok-keyword">li</span> role=<span class="sb-tok-string">"none"</span>&gt;&lt;<span class="sb-tok-keyword">button</span> class=<span class="sb-tok-string">"sb-menu__item"</span> type=<span class="sb-tok-string">"button"</span> role=<span class="sb-tok-string">"menuitem"</span>&gt;…Bearbeiten&lt;/<span class="sb-tok-keyword">button</span>&gt;&lt;/<span class="sb-tok-keyword">li</span>&gt;
+  &lt;<span class="sb-tok-keyword">li</span> role=<span class="sb-tok-string">"separator"</span> class=<span class="sb-tok-string">"sb-menu__sep"</span>&gt;&lt;/<span class="sb-tok-keyword">li</span>&gt;
+  &lt;<span class="sb-tok-keyword">li</span> role=<span class="sb-tok-string">"none"</span>&gt;&lt;<span class="sb-tok-keyword">button</span> class=<span class="sb-tok-string">"sb-menu__item sb-menu__item--danger"</span> type=<span class="sb-tok-string">"button"</span> role=<span class="sb-tok-string">"menuitem"</span>&gt;…Gewohnheit löschen&lt;/<span class="sb-tok-keyword">button</span>&gt;&lt;/<span class="sb-tok-keyword">li</span>&gt;
+&lt;/<span class="sb-tok-keyword">ul</span>&gt;</code></pre></div></details></div>
+  <div class="g-ex g-ex--dont"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p><div class="g-ex__stage">
+    <ul class="sb-menu" role="menu" aria-label="Mehr, Beispiel falsch">
+      <li role="none"><button class="sb-menu__item" type="button" role="menuitem"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#edit"/></svg>Bearbeiten</button></li>
+      <li role="none"><button class="sb-danger-action g-rx-wrong-menurow" type="button" role="menuitem"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#trash"/></svg>Sofort löschen</button></li>
+      <li role="none"><button class="sb-menu__item" type="button" role="menuitem"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#share"/></svg>Teilen</button></li>
+    </ul>
+  </div><p class="g-ex__note">Eine gerahmte Löschzeile mit 45°-Kante mitten im Menü, die ohne Rückfrage löscht: Kante, Rahmen und Position sind falsch.</p></div>
+</div>

@@ -1,0 +1,18 @@
+<div class="g-examples">
+<div class="g-ex g-ex--do"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p><div class="g-ex__stage">
+<div class="g-rx-c-stack"><div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">Kotlin</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="Kotlin-Beispiel: Gläserzähler"><code><span class="sb-tok-comment">// Zählt die Gläser des Tages</span>
+<span class="sb-tok-keyword">@Composable</span>
+<span class="sb-tok-keyword">fun</span> GlassCounter(goal: Int = <span class="sb-tok-constant">8</span>) {
+    <span class="sb-tok-keyword">var</span> count <span class="sb-tok-keyword">by</span> remember { mutableStateOf(<span class="sb-tok-constant">0</span>) }
+    Text(<span class="sb-tok-string">"$count / $goal\u00A0Gläser"</span>)
+}</code></pre></div><p>Suchen: <kbd>Strg</kbd> + <kbd>K</kbd>. Version <code>1.4.0</code>.</p></div>
+</div><p class="g-ex__note">sebaro Mono (Medium 500, D70), Schlüsselwörter, Zeichenketten und Zahlen in den drei Codetönen (FAR-11, D69), Kommentar in text-muted, Leiste mit Sprache und „Kopieren“, Tasten als <code>&lt;kbd&gt;</code>. Eigener Code bekommt die Töne über <code>sb-tok-*</code>-Spans, Ausgaben von highlight.js und Prism färbt <code>sebaro.css</code> von selbst.</p></div>
+<div class="g-ex g-ex--dont"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p><div class="g-ex__stage">
+<div class="g-rx-c-stack"><div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">Kotlin</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="Kotlin-Beispiel mit falschen Syntaxfarben"><code><span class="sb-tok-comment">// Zählt die Gläser des Tages</span>
+<span class="g-rx-c-hl-key">@Composable</span>
+<span class="g-rx-c-hl-lime">fun</span> GlassCounter(goal: Int = <span class="g-rx-c-hl-num">8</span>) {
+    <span class="g-rx-c-hl-key">var</span> count by remember { mutableStateOf(<span class="g-rx-c-hl-num">0</span>) }
+    Text(<span class="g-rx-c-hl-str">"$count / $goal Gläser"</span>)
+}</code></pre></div><p class="g-rx-c-mono-prose">Mit diesem Zähler trägst du Gläser ein.</p></div>
+</div><p class="g-ex__note">Kobalt, Lindgrün und Statusfarben im Code verwischen ihre Jobs; Prosa in Mono liest sich wie eine Maschine.</p></div>
+</div>

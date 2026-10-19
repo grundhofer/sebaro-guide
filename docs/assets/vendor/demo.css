@@ -1,0 +1,101 @@
+/* demo.css: page chrome of the sebaro demo pages (not part of the system; products never load it).
+ * Only var(--sb-*) tokens, like css/sebaro.css. Classes here start with "demo-" except .sb-phone, the demo-only
+ * phone frame of spec/09 §4.1. Load it after css/sebaro.css. */
+
+/* ------------------------------------------------------------------ page frame: table of contents + content */
+.demo-layout {
+  box-sizing: border-box; inline-size: 100%; max-inline-size: var(--sb-size-container-max); margin-inline: auto;
+  padding: 0 var(--sb-spacing-gutter) var(--sb-spacing-section);
+}
+.demo-toc { padding-block-start: var(--sb-space-6); }
+.demo-content { min-inline-size: 0; }
+.demo-lead { padding-block: var(--sb-spacing-section) var(--sb-space-6); }
+.demo-lead p { margin: 0; color: var(--sb-color-text-muted); }
+.demo-lead p + p { margin-block-start: var(--sb-space-2); }
+@media (min-width: 1024px) {
+  .demo-layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); column-gap: var(--sb-space-12); padding-inline: var(--sb-spacing-gutter-wide); }
+  .demo-toc { position: sticky; inset-block-start: 0; align-self: start; max-block-size: 100vh; overflow-y: auto; box-sizing: border-box; padding-block-end: var(--sb-space-6); }
+  .demo-lead { padding-block-start: var(--sb-spacing-section-wide); }
+}
+
+/* ------------------------------------------------------------------ specimen groups */
+.demo-content > .sb-section:first-of-type { border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+.demo-section-text { margin: calc(-1 * var(--sb-space-4)) 0 var(--sb-space-8); color: var(--sb-color-text-muted); }
+.demo-group + .demo-group { margin-block-start: var(--sb-space-12); }
+.demo-group > h3 { margin: 0 0 var(--sb-space-1); }
+.demo-note { margin: 0 0 var(--sb-space-4); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.demo-row { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--sb-space-6) var(--sb-space-8); }
+.demo-row--end { align-items: flex-end; }
+.demo-row--tight { gap: var(--sb-space-2) var(--sb-space-6); }
+.demo-cell { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-2); justify-items: start; min-inline-size: 0; max-inline-size: 100%; }
+.demo-cell > * { max-inline-size: 100%; }
+.demo-start { justify-self: start; }
+.demo-cell--wide { flex: 1 1 320px; justify-items: stretch; }
+.demo-cell--fixed { inline-size: 320px; max-inline-size: 100%; justify-items: stretch; }
+.demo-label { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.demo-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--sb-space-8) var(--sb-spacing-group); align-items: start; }
+.demo-columns--3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.demo-columns--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); }
+.demo-chart { inline-size: 400px; max-inline-size: 100%; }
+.demo-wide { inline-size: 520px; max-inline-size: 100%; }
+.demo-box { padding: var(--sb-space-2) 0; border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container); background: var(--sb-color-bg); }
+.demo-box--pad { padding: var(--sb-space-4); }
+.demo-stack { display: grid; gap: var(--sb-spacing-stack); }
+.demo-count { margin: var(--sb-space-2) 0 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant); max-inline-size: 390px; }
+
+/* state matrix: rows = components, columns = states */
+.demo-states { border-collapse: collapse; }
+.demo-states th { padding: 0 var(--sb-space-4) var(--sb-space-2) 0; text-align: start; vertical-align: bottom; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); white-space: nowrap; }
+.demo-states th[scope="row"] { padding-block: var(--sb-space-3); vertical-align: middle; color: var(--sb-color-text); font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); white-space: nowrap; }
+.demo-states td { padding: var(--sb-space-3) var(--sb-space-4) var(--sb-space-3) 0; vertical-align: middle; white-space: nowrap; }
+.demo-states tbody tr + tr > * { border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+.demo-states-wrap { overflow-x: auto; }
+
+/* ------------------------------------------------------------------ phone frame (demo only, spec/09 §4.1) */
+.sb-phone {
+  position: relative; display: flex; flex-direction: column; box-sizing: border-box; flex: none;
+  inline-size: 390px; max-inline-size: 100%; block-size: 844px; overflow: hidden;
+  border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-sheet);
+  background: var(--sb-color-bg);
+}
+.sb-phone--auto { block-size: auto; }
+.sb-phone > .sb-view { flex: 1 1 auto; }
+/* frames are stand-ins: the bottom block sits at the end of the frame, it does not stick to the page's viewport */
+.sb-phone .sb-bottom-block, .demo-window .sb-bottom-block { position: relative; }
+.demo-window {
+  display: flex; box-sizing: border-box; inline-size: 100%; max-inline-size: 880px; min-block-size: 420px; overflow: hidden;
+  border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container);
+  background: var(--sb-color-bg);
+}
+.demo-window > .sb-side-nav { flex: none; padding-block: var(--sb-space-3); border-inline-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+.demo-window > .sb-view { flex: 1 1 auto; min-inline-size: 0; }
+@media (max-width: 639px) {
+  .demo-window { flex-direction: column; }
+  .demo-window > .sb-side-nav { inline-size: auto; border-inline-end: 0; border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+}
+
+/* overlays shown in place: a scrim stage for the dialog, static popover and sheet specimens */
+.demo-stage {
+  position: relative; display: grid; place-items: center; box-sizing: border-box; inline-size: 100%; max-inline-size: 720px; min-block-size: 360px;
+  padding: var(--sb-space-6) var(--sb-spacing-gutter); overflow: hidden;
+  border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container); background: var(--sb-color-bg);
+}
+.demo-stage__scrim { position: absolute; inset: 0; background: var(--sb-color-scrim); }
+.demo-stage > .sb-dialog { position: relative; inset: auto; margin: 0; inline-size: min(560px, 100%); }
+.demo-static.sb-note-popover { position: relative; inset: auto; display: block; max-block-size: none; overflow: visible; inline-size: 100%; max-inline-size: 390px; border: var(--sb-elevation-overlay-border-width) solid var(--sb-elevation-overlay-border-color); border-radius: var(--sb-radius-sheet) var(--sb-radius-sheet) 0 0; }
+.demo-sheet-host { position: relative; box-sizing: border-box; display: flex; flex-direction: column; justify-content: flex-end; inline-size: 390px; max-inline-size: 100%; min-block-size: 440px; overflow: hidden; border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-sheet); background: var(--sb-color-bg); }
+.demo-sheet-host > .sb-sheet { position: relative; }
+.demo-anchor { display: grid; gap: var(--sb-space-1); justify-items: start; }
+
+/* sign tiles of every product */
+.demo-signs { border-collapse: collapse; }
+.demo-signs th, .demo-signs td { padding: var(--sb-space-3) var(--sb-space-6) var(--sb-space-3) 0; text-align: start; vertical-align: middle; border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+.demo-signs thead th { border-block-start: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.demo-signs tbody th { font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
+.demo-signs .demo-family { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+
+/* the page's header specimen is a <div>: one banner landmark per page */
+.demo-header-specimen { margin-block-end: var(--sb-space-2); border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container); overflow: hidden; }
+/* round 3 (D48, D52): a fixed progress share for the static state cell; the start replay frame */
+.demo-progress-60 { --sb-progress: 0.6; }
+.demo-start-frame { block-size: 520px; }

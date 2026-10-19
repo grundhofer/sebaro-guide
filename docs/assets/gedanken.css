@@ -1,0 +1,88 @@
+/* gedanken.css: page chrome of gedanken.html. Not part of the system; products never load it.
+ * Only var(--sb-*) tokens, no colour literals, no shadows. Classes start with "g-gedanken-". */
+
+/* ------------------------------------------------------------------ text helpers */
+.g-gedanken-h3 { margin: var(--sb-space-10) 0 var(--sb-space-3); }
+.g-gedanken-intro { margin: 0 0 var(--sb-space-4); max-inline-size: 42em; color: var(--sb-color-text-muted); }
+.g-gedanken-note { margin: var(--sb-space-2) 0 0; max-inline-size: 42em; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.g-gedanken-rules { margin: var(--sb-space-6) 0 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.g-gedanken-rules a { color: var(--sb-color-text); }
+.g-gedanken-space { margin-block-start: var(--sb-space-6); }
+.sb-table-wrap + .sb-prose { margin-block-start: var(--sb-space-4); }
+
+/* ------------------------------------------------------------------ pull quote (proposal: the system has no quote block) */
+.g-gedanken-quote { margin: var(--sb-space-6) 0; padding-inline-start: var(--sb-space-4); max-inline-size: 42em; border-inline-start: var(--sb-border-width-strong) solid var(--sb-color-border-strong); }
+.g-gedanken-quote blockquote { margin: 0; }
+.g-gedanken-quote blockquote p { margin: 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
+.g-gedanken-quote figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1) var(--sb-space-3); margin-block-start: var(--sb-space-2); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+
+/* ------------------------------------------------------------------ products and values */
+.g-gedanken-tiles { display: flex; flex-wrap: wrap; gap: var(--sb-space-4) var(--sb-space-6); margin: 0; padding: 0; list-style: none; }
+.g-gedanken-tiles li { display: grid; justify-items: start; gap: var(--sb-space-1); inline-size: 7.5rem; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
+.g-gedanken-value { padding-block-start: var(--sb-space-3); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+.g-gedanken-value h4 { margin: 0 0 var(--sb-space-2); font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
+.g-gedanken-value p { margin: 0; }
+.g-gedanken-value .g-gedanken-rules { margin-block-start: var(--sb-space-3); }
+.g-gedanken-apps { display: inline-flex; align-items: center; gap: var(--sb-space-2); margin-inline-end: var(--sb-space-4); white-space: nowrap; }
+
+/* ------------------------------------------------------------------ live demo: colour jobs */
+.g-gedanken-demo { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-8); align-items: start; }
+@media (min-width: 1100px) { .g-gedanken-demo { grid-template-columns: minmax(0, 1fr) 390px; } }
+.g-gedanken-demo__controls { display: grid; gap: var(--sb-space-4); align-content: start; min-inline-size: 0; }
+.g-gedanken-demo__say { margin: 0; font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
+.g-gedanken-demo__legend { margin: 0; padding-inline-start: var(--sb-space-5); max-inline-size: 42em; }
+.g-gedanken-demo__legend li + li { margin-block-start: var(--sb-space-1); }
+.g-gedanken-demo [data-g-job] { transition: filter var(--sb-motion-duration-medium) var(--sb-motion-easing-standard); }
+.g-gedanken-demo[data-g-show="ort"] [data-g-job]:not([data-g-job="ort"]),
+.g-gedanken-demo[data-g-show="schritt"] [data-g-job]:not([data-g-job="schritt"]),
+.g-gedanken-demo[data-g-show="zustand"] [data-g-job]:not([data-g-job="zustand"]),
+.g-gedanken-demo[data-g-show="app"] [data-g-job]:not([data-g-job="app"]) { filter: grayscale(1); }
+@media (prefers-reduced-motion: reduce) { .g-gedanken-demo [data-g-job] { transition: none; } }
+html[data-sb-motion="reduce"] .g-gedanken-demo [data-g-job] { transition: none; }
+
+/* ------------------------------------------------------------------ type specimen */
+.g-gedanken-glyphs { display: flex; flex-wrap: wrap; gap: var(--sb-space-6) var(--sb-space-12); margin-block-start: var(--sb-space-6); }
+.g-gedanken-glyphs__sample { margin: 0; font: var(--sb-type-display); letter-spacing: var(--sb-type-display-tracking); }
+.g-gedanken-glyphs__sample.sb-mono { font-family: var(--sb-font-family-mono); font-weight: var(--sb-type-code-weight); }
+.g-gedanken-glyphs__name { margin: var(--sb-space-1) 0 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+
+/* ------------------------------------------------------------------ signature specimens */
+.g-gedanken-cell { display: grid; gap: var(--sb-space-3); justify-items: start; align-content: start; min-inline-size: 0; }
+.g-gedanken-cell > .sb-card, .g-gedanken-cell > .sb-list { justify-self: stretch; }
+.g-gedanken-cell__label { margin: 0; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
+.g-gedanken-cell .g-gedanken-note { margin: 0; }
+.g-gedanken-motion { border-block: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+.g-gedanken-pre { margin: 0; padding: var(--sb-space-4); overflow-x: auto; white-space: pre; }
+
+/* ------------------------------------------------------------------ history timeline (proposal: the system has no timeline) */
+.g-gedanken-timeline { margin: var(--sb-space-6) 0 0; padding: 0; list-style: none; border-inline-start: var(--sb-border-width-strong) solid var(--sb-color-border-strong); }
+.g-gedanken-timeline__item { position: relative; padding: 0 0 var(--sb-space-8) var(--sb-space-6); max-inline-size: 48em; }
+.g-gedanken-timeline__item:last-child { padding-block-end: 0; }
+.g-gedanken-timeline__item::before { content: ""; position: absolute; inset-inline-start: 0; inset-block-start: 0.6em; inline-size: var(--sb-space-4); border-block-start: var(--sb-border-width-strong) solid var(--sb-color-border-strong); }
+.g-gedanken-timeline__date { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant); }
+.g-gedanken-timeline__title { margin: var(--sb-space-1) 0 var(--sb-space-2); font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
+.g-gedanken-timeline__item p:last-child { margin: 0; }
+
+/* ------------------------------------------------------------------ lists and gates */
+.g-gedanken-list { max-inline-size: 56em; }
+.g-gedanken-gates { margin: 0 0 var(--sb-space-4); padding-inline-start: var(--sb-space-6); max-inline-size: 42em; }
+.g-gedanken-gates li + li { margin-block-start: var(--sb-space-1); }
+
+/* rule ids stay in one piece */
+.g-gedanken-rules a.sb-mono, .g-gedanken-list a.sb-mono { white-space: nowrap; }
+
+/* ------------------------------------------------------------------ tables that reflow on phones (guide pattern, not in the system:
+ * sb-table scrolls inside sb-table-wrap; these reference tables read better as one block per row below 560 px).
+ * Explicit table roles in the markup keep the table semantics when display changes. */
+@media (max-width: 559.98px) {
+  .g-gedanken-reflow, .g-gedanken-reflow tbody { display: block; }
+  .g-gedanken-reflow caption { display: block; }
+  .g-gedanken-reflow thead { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .g-gedanken-reflow tr { display: grid; gap: var(--sb-space-1); padding-block: var(--sb-space-3); border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+  .g-gedanken-reflow td { display: block; padding: 0; border: 0; min-inline-size: 0; overflow-wrap: anywhere; }
+  .g-gedanken-reflow td:first-child { font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
+  .g-gedanken-reflow td + td[data-label]::before { content: attr(data-label) ": "; color: var(--sb-color-text-muted); }
+  .g-gedanken-reflow td:has(.g-gedanken-apps)::before { display: block; margin-block-end: var(--sb-space-1); }
+  .g-gedanken-reflow .g-gedanken-apps { margin-block: var(--sb-space-1); }
+  .sb-table-wrap:has(.g-gedanken-reflow) + .sb-prose { margin-block-start: var(--sb-space-4); }
+}

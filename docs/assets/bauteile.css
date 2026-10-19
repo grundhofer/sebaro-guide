@@ -1,0 +1,119 @@
+/* bauteile.css: page chrome of bauteile.html (component catalogue). Not part of the system; products never load it.
+ * Only var(--sb-*) tokens, no raw colours, no shadows. Classes start with "g-bauteile-". Load after the guide:head block. */
+
+/* ------------------------------------------------------------------ entries */
+.g-bauteile-entry { padding-block: var(--sb-space-10); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); scroll-margin-block-start: var(--sb-space-4); min-inline-size: 0; }
+.g-bauteile-entry:first-of-type { border-block-start: 0; padding-block-start: var(--sb-space-2); }
+.g-bauteile-entry:target { border-block-start: var(--sb-border-width-strong) solid var(--sb-color-accent); padding-block-start: var(--sb-space-10); }
+.g-bauteile-entry__title { margin: 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
+.g-bauteile-entry__classes { display: flex; flex-wrap: wrap; gap: var(--sb-space-1) var(--sb-space-2); margin: var(--sb-space-2) 0 0; max-inline-size: none; }
+.g-bauteile-entry__classes .sb-code-inline { overflow-wrap: anywhere; }
+.g-bauteile-entry__purpose { margin: var(--sb-space-3) 0 var(--sb-space-6); max-inline-size: 42em; }
+
+/* specimens: a grid of state cells, each with its label */
+.g-bauteile-states { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: var(--sb-space-6) var(--sb-space-8); align-items: start; }
+.g-bauteile-states--wide { grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); }
+.g-bauteile-state { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-2); justify-items: start; min-inline-size: 0; }
+.g-bauteile-state > * { max-inline-size: 100%; }
+.g-bauteile-state > .demo-label { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1) var(--sb-space-2); }
+.g-bauteile-state--wide { grid-column: span 2; }
+/* controls and boxes fill their cell; buttons and words keep their natural width */
+.g-bauteile-state > :is(.sb-field, .sb-field__row, .sb-range, .sb-progress, .sb-skeleton, .sb-switch-row, .sb-segmented, .demo-box, .sb-chart) { justify-self: stretch; }
+/* primary action states: wider cells, frames of equal width */
+.g-bauteile-states--pa { grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); }
+.g-bauteile-states--pa > .g-bauteile-state > .g-bauteile-frame { justify-self: stretch; }
+.g-bauteile-state--full { grid-column: 1 / -1; justify-items: stretch; }
+@media (max-width: 639.98px) { .g-bauteile-state--wide { grid-column: 1 / -1; } }
+.g-bauteile-states--wide > .g-bauteile-state { justify-items: stretch; }
+.g-bauteile-states--wide > .g-bauteile-state > .sb-phone,
+.g-bauteile-states--wide > .g-bauteile-state > .demo-sheet-host,
+.g-bauteile-states--wide > .g-bauteile-state > .sb-secondary-action,
+.g-bauteile-states--wide > .g-bauteile-state > .sb-danger-action,
+.g-bauteile-states--wide > .g-bauteile-state > .demo-anchor,
+.g-bauteile-start { justify-self: start; }
+
+/* one frame = one view: holds at most one lime primary action */
+.g-bauteile-frame { box-sizing: border-box; max-inline-size: 100%; }
+.g-bauteile-state--wide > .g-bauteile-frame, .g-bauteile-state--full > .g-bauteile-frame { inline-size: 100%; }
+.g-bauteile-flat.sb-section { padding-block: var(--sb-space-2); border: 0; }
+.g-bauteile-flat.sb-primary-action-bar { padding: 0; }
+.g-bauteile-flat.sb-site-footer { margin: 0; }
+
+.g-bauteile-note { margin: var(--sb-space-4) 0 0; max-inline-size: 42em; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.g-bauteile-plain { margin: 0; }
+.g-bauteile-small { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); max-inline-size: 30em; }
+.g-bauteile-inline { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-2) var(--sb-space-6); }
+.g-bauteile-inline > .sb-status { margin: 0; }
+.g-bauteile-prose { max-inline-size: 42em; }
+.g-bauteile-fake-h { font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
+.sb-prose > .g-bauteile-fake-h { margin-block-start: var(--sb-space-6); }
+
+/* sign tiles in a row, all products as a list */
+.g-bauteile-tiles { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-4); margin: 0; }
+.g-bauteile-tilelist { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr)); gap: var(--sb-space-2) var(--sb-space-6); margin: 0; padding: 0; list-style: none; inline-size: 100%; }
+.g-bauteile-tilelist li { display: flex; align-items: center; gap: var(--sb-space-2); min-block-size: var(--sb-size-control-md); }
+
+/* phone stand-ins that only need a short content area */
+.g-bauteile-phone-gap { padding: var(--sb-space-4) var(--sb-spacing-gutter) var(--sb-space-16); }
+.g-bauteile-phone-short .sb-view__content { min-block-size: 360px; }
+
+/* the toc specimen stays a <details> at every width, like below 1024 px */
+.g-bauteile-toc-specimen { inline-size: 300px; max-inline-size: 100%; }
+.g-bauteile-toc-specimen summary { display: flex; }
+.g-bauteile-toc-specimen .sb-toc__title { display: none; }
+
+/* ------------------------------------------------------------------ proposals (marked on the page) */
+/* ICO-08 (D68): a shortcut at the row end, grey, no frame; sebaro.css has no class for it yet */
+.g-bauteile-keys { flex: none; margin-inline-start: auto; padding-inline-start: var(--sb-space-3); color: var(--sb-color-text-muted); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); white-space: nowrap; }
+.sb-tooltip .g-bauteile-keys { margin-inline-start: var(--sb-space-1); padding-inline-start: 0; }
+/* D67 (2): rows of 32 px in desktop windows; only the height changes */
+.g-bauteile-dense .sb-side-nav__item, .g-bauteile-dense .sb-menu__item { min-block-size: var(--sb-size-control-sm); }
+/* D67 (11): desktop card with a 1 px edge, place line only with focus, "Mehr" always visible */
+.g-bauteile-deskcard {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: var(--sb-space-2);
+  inline-size: 280px; max-inline-size: 100%; box-sizing: border-box; padding: var(--sb-space-2) var(--sb-space-1) var(--sb-space-3) var(--sb-space-4);
+  border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-control); background: var(--sb-color-bg);
+}
+.g-bauteile-deskcard:focus-visible { outline: var(--sb-focus-ring); outline-offset: var(--sb-focus-offset); border-inline-start: var(--sb-border-width-strong) solid var(--sb-color-accent); padding-inline-start: calc(var(--sb-space-4) - var(--sb-border-width-strong) + var(--sb-border-width-control)); }
+.g-bauteile-deskcard__title { margin: 0; font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
+.g-bauteile-deskcard__text { grid-column: 1 / -1; margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+
+/* ------------------------------------------------------------------ do / don't, rules, script */
+.g-bauteile-dodont { display: grid; gap: var(--sb-space-2); margin: var(--sb-space-6) 0 0; padding: 0; list-style: none; max-inline-size: 48em; }
+.g-bauteile-dodont li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); column-gap: var(--sb-space-3); align-items: baseline; }
+.g-bauteile-dodont .sb-status { white-space: nowrap; }
+@media (max-width: 479.98px) { .g-bauteile-dodont li { grid-template-columns: minmax(0, 1fr); row-gap: var(--sb-space-1); } }
+
+.g-bauteile-meta { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); column-gap: var(--sb-space-3); row-gap: var(--sb-space-2); margin-block-start: var(--sb-space-4); max-inline-size: 48em; }
+.g-bauteile-meta__label { margin: 0; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); color: var(--sb-color-text-muted); }
+.g-bauteile-meta__value { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
+@media (max-width: 479.98px) { .g-bauteile-meta { grid-template-columns: minmax(0, 1fr); row-gap: var(--sb-space-1); } .g-bauteile-meta__label:not(:first-child) { margin-block-start: var(--sb-space-2); } }
+.g-bauteile-rules { display: grid; gap: var(--sb-space-1); margin: 0; padding: 0; list-style: none; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
+.g-bauteile-ruleid { font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); }
+
+/* ------------------------------------------------------------------ index table and gap list */
+.g-bauteile-index { max-inline-size: 60rem; }
+.g-bauteile-index__group th { padding-block-start: var(--sb-space-6); font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
+.g-bauteile-index__rules { font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); }
+/* rule ids are links in a row: 24 px targets (WCAG 2.5.8; ZUG-03 allows 24 px for inline links on pointer pages) */
+.g-bauteile-index__rules a { display: inline-flex; align-items: center; min-block-size: 24px; margin-inline-end: var(--sb-space-1); }
+.g-bauteile-more { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); white-space: nowrap; }
+.g-bauteile-gaps { display: grid; gap: var(--sb-space-3); margin: 0; padding-inline-start: var(--sb-space-6); max-inline-size: 48em; }
+
+/* demo-window stacks below 640 px, but its view keeps min-block-size: 100 % of the window, so the window's overflow cut
+   off the action zone; the view takes its content height instead */
+@media (max-width: 639.98px) { .g-bauteile-window > .sb-view { min-block-size: 0; } }
+/* proposal (EBE-08, D67 (1)): from 640 px the action zone runs under side nav and content; the markup stays the same,
+   the view gives up its box so its three parts join the window grid */
+@media (min-width: 640px) {
+  .g-bauteile-window--zone { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; }
+  .g-bauteile-window--zone > .sb-side-nav { grid-column: 1; grid-row: 1 / 3; }
+  .g-bauteile-window--zone > .sb-view { display: contents; }
+  .g-bauteile-window--zone > .sb-view > :not(.sb-bottom-block) { grid-column: 2; }
+  .g-bauteile-window--zone > .sb-view > .sb-bottom-block { grid-column: 1 / -1; grid-row: 3; }
+}
+
+/* the code-tone table in the code entry */
+.g-bauteile-tokens { margin-block-start: var(--sb-space-4); }
+.g-bauteile-toklist { max-inline-size: 42em; }
+.g-bauteile-tokval { color: var(--sb-color-text-muted); font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); }

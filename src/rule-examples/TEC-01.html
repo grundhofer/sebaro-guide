@@ -1,0 +1,14 @@
+<div class="g-examples">
+<div class="g-ex g-ex--do"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p><div class="g-ex__stage">
+<div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">CSS</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="CSS und Lint: nur Tokens"><code>.sb-hint { color: var(--sb-color-text-muted); }
+
+$ grep -nE <span class="sb-tok-string">'#[0-9A-Fa-f]{3,8}\b'</span> css/app.css
+(keine Treffer)</code></pre></div>
+</div><p class="g-ex__note">Farbe über das Token; der Lint findet nichts.</p></div>
+<div class="g-ex g-ex--dont"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p><div class="g-ex__stage">
+<div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">CSS</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="CSS und Lint: Rohfarbe"><code>.hint { color: <span class="sb-tok-constant">#66696E</span>; }
+
+$ grep -nE <span class="sb-tok-string">'#[0-9A-Fa-f]{3,8}\b'</span> css/app.css
+css/app.css:12:  .hint { color: #66696E; }</code></pre></div>
+</div><p class="g-ex__note">Der Wert stimmt heute im hellen Modus und nirgends sonst; im Dunkeln bleibt er falsch.</p></div>
+</div>

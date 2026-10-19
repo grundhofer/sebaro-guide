@@ -1,0 +1,63 @@
+/* guide.css: page chrome of the sebaro Guide site. Not part of the system; products never load it.
+ * Same discipline as sebaro.css: only var(--sb-*) tokens, no raw colours, no shadows, no tinted card grounds.
+ * Classes start with "g-". Load after sebaro.css and the vendored demo/pages specimens. */
+
+/* ------------------------------------------------------------------ header and footer */
+.g-header__suffix { font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); color: var(--sb-color-text-muted); }
+.g-nav { row-gap: 0; }
+.g-footer code { font-size: 0.875em; }
+
+/* ------------------------------------------------------------------ page lead and long-page layout */
+.g-lead { padding-block: var(--sb-spacing-section) var(--sb-space-6); }
+.g-lead h1 { margin: 0 0 var(--sb-space-3); }
+.g-lead p { margin: 0; max-inline-size: 42em; color: var(--sb-color-text-muted); }
+.g-lead p + p { margin-block-start: var(--sb-space-2); }
+@media (min-width: 1024px) { .g-lead { padding-block-start: var(--sb-spacing-section-wide); } }
+
+.g-toc-list { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--sb-space-1); }
+.g-toc-list a { display: inline-flex; min-block-size: var(--sb-size-target-pointer); align-items: center; }
+.g-toc__count, .g-area__count { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant); }
+
+/* ------------------------------------------------------------------ rules (regeln.html) */
+.g-area__intro { margin: calc(-1 * var(--sb-space-4)) 0 var(--sb-space-8); max-inline-size: 42em; color: var(--sb-color-text-muted); }
+.g-rule { padding-block: var(--sb-space-8); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); scroll-margin-block-start: var(--sb-space-4); }
+.g-rule:target { border-block-start: var(--sb-border-width-strong) solid var(--sb-color-accent); }
+.g-rule__head { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--sb-space-3); align-items: baseline; }
+.g-rule__id { font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); color: var(--sb-color-text-muted); text-decoration: none; }
+.g-rule__id:hover { color: var(--sb-color-link); text-decoration: underline; text-decoration-thickness: 2px; }
+.g-rule__title { margin: 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
+.g-rule__meta { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-2); margin: var(--sb-space-2) 0 0; }
+.g-rule__status { display: inline-flex; align-items: center; gap: var(--sb-space-1); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.g-rule__status--entschieden { color: var(--sb-color-text); }
+.g-rule__text { margin: var(--sb-space-4) 0 0; max-inline-size: 42em; }
+.g-rule__example { margin-block-start: var(--sb-space-6); }
+.g-rule__more { margin-block-start: var(--sb-space-6); }
+.g-rule__more > summary { display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-pointer); cursor: pointer; color: var(--sb-color-text); text-decoration: underline; text-decoration-color: var(--sb-color-link); text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
+.g-rule__facts { margin-block-start: var(--sb-space-3); max-inline-size: 48em; }
+
+/* ------------------------------------------------------------------ examples: right and wrong side by side */
+.g-examples { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--sb-space-6); align-items: start; }
+.g-ex { display: grid; gap: var(--sb-space-3); min-inline-size: 0; }
+.g-ex__label { display: inline-flex; align-items: center; gap: var(--sb-space-1); margin: 0; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
+.g-ex--do .g-ex__label { color: var(--sb-color-success); }
+.g-ex--dont .g-ex__label { color: var(--sb-color-danger); }
+.g-ex__stage { box-sizing: border-box; min-inline-size: 0; padding: var(--sb-space-6) var(--sb-space-4); border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container); background: var(--sb-color-bg); overflow-x: auto; }
+.g-ex--do .g-ex__stage { border-block-start: var(--sb-border-width-strong) solid var(--sb-color-success); }
+.g-ex--dont .g-ex__stage { border-block-start: var(--sb-border-width-strong) solid var(--sb-color-danger); }
+.g-ex__note { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); max-inline-size: 42em; }
+
+/* ------------------------------------------------------------------ specimens: sources, swatches, page cards */
+.g-source { margin-block-start: var(--sb-space-3); }
+.g-source > summary { display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-pointer); cursor: pointer; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.g-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: var(--sb-space-6) var(--sb-spacing-group); align-items: start; }
+.g-mark-proposal { display: inline-flex; align-items: center; gap: var(--sb-space-1); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+
+/* ------------------------------------------------------------------ filter bar on regeln.html */
+.g-filter { display: flex; flex-wrap: wrap; align-items: end; gap: var(--sb-space-4) var(--sb-space-6); margin-block: var(--sb-space-6) 0; }
+.g-filter__count { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant); }
+.g-rule[hidden], .g-area[hidden] { display: none; }
+
+@media print {
+  .g-header, .g-footer, .g-filter, .sb-theme-button { display: none; }
+  .g-rule__more { display: block; }
+}

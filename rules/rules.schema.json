@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/grundhofer/sebaro-guide/rules/rules.schema.json",
+  "title": "sebaro rule catalogue",
+  "description": "Canonical design rules of the sebaro system. Status: entschieden = owner decision (I-row in sebaroDesign/DECISIONS.md, binding); vorläufig = agent decision or spec without an owner row; offen = proposal awaiting an owner answer.",
+  "type": "object",
+  "required": ["$schema", "version", "date", "source", "areas", "rules"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "date": { "type": "string", "format": "date" },
+    "source": {
+      "type": "object",
+      "required": ["repo", "system", "decisions"],
+      "additionalProperties": false,
+      "properties": {
+        "repo": { "type": "string" },
+        "system": { "type": "string" },
+        "decisions": { "type": "string", "pattern": "^D\\d+-D\\d+$" }
+      }
+    },
+    "areas": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "prefix", "title", "intro"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "#/$defs/areaId" },
+          "prefix": { "type": "string", "pattern": "^[A-Z]{3}$" },
+          "title": { "type": "string", "minLength": 1 },
+          "intro": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/rule" }
+    }
+  },
+  "$defs": {
+    "areaId": {
+      "enum": ["haltung", "farbe", "schrift", "raum", "form", "ebenen", "bewegung", "aktionen", "navigation", "links", "status", "eingaben", "daten", "text", "belege", "zeichen", "icons", "bilder", "zugang", "start", "plattform-web", "plattform-mobile", "plattform-desktop", "technik"]
+    },
+    "rule": {
+      "type": "object",
+      "required": ["id", "area", "title", "rule", "rule_en", "why", "do", "dont", "numbers", "decisions", "source", "platforms", "status", "check", "example_hint"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^(HAL|FAR|SCH|RAU|FOR|EBE|BEW|AKT|NAV|LNK|STA|EIN|DAT|TXT|BEL|ZEI|ICO|BIL|ZUG|STR|WEB|MOB|DSK|TEC)-\\d{2}$", "description": "Stable id: area prefix + two-digit number." },
+        "area": { "$ref": "#/$defs/areaId" },
+        "title": { "type": "string", "minLength": 1, "description": "German, short; open proposals start with 'Vorschlag:'." },
+        "rule": { "type": "string", "minLength": 1, "description": "German statement, du-form, imperative." },
+        "rule_en": { "type": "string", "minLength": 1, "description": "English one-liner for agents." },
+        "why": { "type": "string", "minLength": 1, "description": "Reason, with the owner's words where an I-row exists." },
+        "do": { "type": "string", "minLength": 1 },
+        "dont": { "type": "string", "minLength": 1 },
+        "numbers": { "type": "string", "description": "Exact values and token names; may be empty." },
+        "decisions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^D\\d+$" }
+        },
+        "source": { "type": "string", "minLength": 1, "description": "Paths relative to the sebaroDesign root, with section." },
+        "platforms": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["alle", "web", "mobile", "desktop"] }
+        },
+        "status": { "enum": ["entschieden", "vorläufig", "offen"] },
+        "check": { "type": "string", "minLength": 1 },
+        "example_hint": { "type": "string", "minLength": 1, "description": "Live HTML example (correct vs wrong) buildable with sebaro.css classes." },
+        "note": { "type": "string", "description": "Optional: resolved source conflict or known gap behind this rule." }
+      }
+    }
+  }
+}

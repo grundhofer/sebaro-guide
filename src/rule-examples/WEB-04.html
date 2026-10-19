@@ -1,0 +1,15 @@
+<div class="g-examples">
+<div class="g-ex g-ex--do"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p><div class="g-ex__stage">
+<div class="g-rx-c-stack"><div class="g-rx-c-paper" aria-hidden="true"><p class="g-rx-c-title">Regeln</p><p>Jede Regel hat eine ID, eine Begründung und ein Beispiel.</p><p>Quelle: GitHub (https://github.com/grundhofer/sebaro-guide)</p></div><p class="g-rx-c-caption">Druckvorschau, nachgestellt</p><p>Probier es hier: <kbd>Strg</kbd> + <kbd>P</kbd>. Kopf, Filter und Tasten fehlen auf dem Papier.</p><div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">CSS</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="CSS: Druckregeln"><code><span class="sb-tok-keyword">@media</span> print {
+  .sb-note-popover, .sb-theme-button,
+  .sb-skip-link, .sb-bottom-block { display: none; }
+  .sb-note__body a[href^=<span class="sb-tok-string">"http"</span>]::after,
+  .sb-prose a[href^=<span class="sb-tok-string">"http"</span>]::after {
+    content: <span class="sb-tok-string">" ("</span> attr(href) <span class="sb-tok-string">")"</span>;
+  }
+}</code></pre></div></div>
+</div><p class="g-ex__note">Gedruckt wird nur Inhalt; externe Links zeigen ihre Adresse.</p></div>
+<div class="g-ex g-ex--dont"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p><div class="g-ex__stage">
+<div class="g-rx-c-stack"><div class="g-rx-c-paper" aria-hidden="true"><span class="g-rx-c-moonbtn g-rx-c-printed">Hell oder Dunkel</span><p class="g-rx-c-title">Regeln</p><p>Quelle: GitHub</p></div><p class="g-rx-c-caption">Druckvorschau, nachgestellt</p></div>
+</div><p class="g-ex__note">Eine gedruckte Taste kann niemand drücken, und „GitHub“ auf Papier führt nirgendwohin.</p></div>
+</div>

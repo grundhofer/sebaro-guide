@@ -1,0 +1,23 @@
+{
+  "$comment": "written by tools/sync_from_design.py; do not edit",
+  "system": "sebaro",
+  "product": "studio",
+  "sebaroDesignCommit": "65a8067864ab213b25e9a744a19ae5a7e432e64c",
+  "sebaroDesignUncommitted": true,
+  "exportTool": "export_system.py 1.2.1",
+  "contracts": {
+    "tokens": "1.6",
+    "palette": "2.4",
+    "fontsConfig": 1,
+    "iconSet": "sebaro-icon-set/1",
+    "brandAssetsTool": "1.5.0",
+    "facts": "1.1"
+  },
+  "excludedProducts": 1,
+  "droppedFiles": 4,
+  "vendorSpecimens": {
+    "demo.css": "469b6f4362c9383acb7ba705cdfec12f94a30fa4b2c81aa68d90d7a1962e8979",
+    "pages.css": "3e88c86f41cab837df7acd6c150ebe333ee47911533e94050b09f42dbb726baf",
+    "sb-colour-count.js": "dc276dabb7fe85fcc6e9fda15a9abae77e842e681165c4b1c30c175ef09ae12c"
+  }
+}

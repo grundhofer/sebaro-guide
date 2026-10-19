@@ -1,0 +1,18 @@
+<div class="g-examples">
+  <div class="g-ex g-ex--do"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p><div class="g-ex__stage">
+    <div class="demo-anchor">
+      <button class="sb-icon-button is-hover" type="button" aria-label="Kalender" aria-describedby="EBE-06-tip"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#calendar"/></svg></button>
+      <span class="sb-tooltip" role="tooltip" id="EBE-06-tip">Kalender öffnen</span>
+    </div>
+  </div><p class="g-ex__note">Der Tooltip ergänzt nur; die Taste hat ihren Namen trotzdem im aria-label, und der Tooltip hängt per aria-describedby daran.</p></div>
+  <div class="g-ex g-ex--dont"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p><div class="g-ex__stage">
+    <div class="g-rx-stack">
+      <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#flask--16"/></svg>Baumzeile: Vorschlag, noch nicht im System</span>
+      <ul class="g-rx-dtree" aria-label="Ordnerbaum, Beispiel mit Status nur im Tooltip">
+        <li><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#file-text"/></svg>Einkaufsliste</li>
+        <li aria-describedby="EBE-06-tip-x"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#file-text"/></svg>Reiseplan<span class="g-rx-dtree__trail"><span class="g-rx-glyph-only"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#warning--filled-16"/></svg></span></span></li>
+      </ul>
+      <span class="sb-tooltip" role="tooltip" id="EBE-06-tip-x">Konflikt: auf zwei Geräten geändert</span>
+    </div>
+  </div><p class="g-ex__note">Der Konflikt steht nur im Tooltip: Ohne Maus, am Handy oder mit Bildschirmleser bleibt nur eine Glyphe ohne Wort.</p></div>
+</div>

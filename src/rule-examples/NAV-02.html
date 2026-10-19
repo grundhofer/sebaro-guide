@@ -1,0 +1,32 @@
+<div class="g-examples">
+<div class="g-ex g-ex--do">
+  <p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p>
+  <div class="g-ex__stage">
+<div class="g-rx-frame g-rx-frame--phone"><nav class="sb-bottom-nav" aria-label="Beispiel: Tagwerk-Navigation">
+<a class="sb-bottom-nav__item" href="#NAV-02" aria-current="page"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#home--filled"/></svg><span class="sb-bottom-nav__label">Heute</span></a>
+<a class="sb-bottom-nav__item" href="#NAV-02"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#history"/></svg><span class="sb-bottom-nav__label">Verlauf</span></a>
+<a class="sb-bottom-nav__item" href="#NAV-02"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#chart-bar"/></svg><span class="sb-bottom-nav__label">Statistik</span></a>
+<a class="sb-bottom-nav__item" href="#NAV-02"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#settings"/></svg><span class="sb-bottom-nav__label">Einstellungen</span></a>
+</nav></div>
+  </div>
+  <p class="g-ex__note">Jedes Ziel zeigt Icon und Wort; der aktuelle Ort hat das gefüllte Icon, Linkfarbe und Titelgewicht. „Heute“ ist das Haus, nicht das Kalenderblatt.</p>
+  <details class="g-source"><summary>Markup</summary><div class="sb-code"><pre tabindex="0" role="region" aria-label="Markup: Untere Navigation"><code>&lt;<span class="sb-tok-keyword">nav</span> class=<span class="sb-tok-string">"sb-bottom-nav"</span> aria-label=<span class="sb-tok-string">"Tagwerk"</span>&gt;
+&lt;<span class="sb-tok-keyword">a</span> class=<span class="sb-tok-string">"sb-bottom-nav__item"</span> href=<span class="sb-tok-string">"…"</span> aria-current=<span class="sb-tok-string">"page"</span>&gt;&lt;<span class="sb-tok-keyword">svg</span> class=<span class="sb-tok-string">"sb-icon"</span> aria-hidden=<span class="sb-tok-string">"true"</span> focusable=<span class="sb-tok-string">"false"</span>&gt;&lt;<span class="sb-tok-keyword">use</span> href=<span class="sb-tok-string">"#home--filled"</span>/&gt;&lt;/<span class="sb-tok-keyword">svg</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-bottom-nav__label"</span>&gt;Heute&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;/<span class="sb-tok-keyword">a</span>&gt;
+&lt;<span class="sb-tok-keyword">a</span> class=<span class="sb-tok-string">"sb-bottom-nav__item"</span> href=<span class="sb-tok-string">"…"</span>&gt;&lt;<span class="sb-tok-keyword">svg</span> class=<span class="sb-tok-string">"sb-icon"</span> aria-hidden=<span class="sb-tok-string">"true"</span> focusable=<span class="sb-tok-string">"false"</span>&gt;&lt;<span class="sb-tok-keyword">use</span> href=<span class="sb-tok-string">"#history"</span>/&gt;&lt;/<span class="sb-tok-keyword">svg</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-bottom-nav__label"</span>&gt;Verlauf&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;/<span class="sb-tok-keyword">a</span>&gt;
+&lt;<span class="sb-tok-keyword">a</span> class=<span class="sb-tok-string">"sb-bottom-nav__item"</span> href=<span class="sb-tok-string">"…"</span>&gt;&lt;<span class="sb-tok-keyword">svg</span> class=<span class="sb-tok-string">"sb-icon"</span> aria-hidden=<span class="sb-tok-string">"true"</span> focusable=<span class="sb-tok-string">"false"</span>&gt;&lt;<span class="sb-tok-keyword">use</span> href=<span class="sb-tok-string">"#chart-bar"</span>/&gt;&lt;/<span class="sb-tok-keyword">svg</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-bottom-nav__label"</span>&gt;Statistik&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;/<span class="sb-tok-keyword">a</span>&gt;
+&lt;<span class="sb-tok-keyword">a</span> class=<span class="sb-tok-string">"sb-bottom-nav__item"</span> href=<span class="sb-tok-string">"…"</span>&gt;&lt;<span class="sb-tok-keyword">svg</span> class=<span class="sb-tok-string">"sb-icon"</span> aria-hidden=<span class="sb-tok-string">"true"</span> focusable=<span class="sb-tok-string">"false"</span>&gt;&lt;<span class="sb-tok-keyword">use</span> href=<span class="sb-tok-string">"#settings"</span>/&gt;&lt;/<span class="sb-tok-keyword">svg</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-bottom-nav__label"</span>&gt;Einstellungen&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;/<span class="sb-tok-keyword">a</span>&gt;
+&lt;/<span class="sb-tok-keyword">nav</span>&gt;</code></pre></div></details>
+</div>
+<div class="g-ex g-ex--dont">
+  <p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p>
+  <div class="g-ex__stage">
+<div class="g-rx-frame g-rx-frame--phone"><div class="sb-bottom-nav g-rx-pillnav">
+<a class="sb-bottom-nav__item" href="#NAV-02" aria-current="page" aria-label="Heute"><span class="g-rx-pill"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#home--filled"/></svg></span></a>
+<a class="sb-bottom-nav__item" href="#NAV-02" aria-label="Verlauf"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#history"/></svg></a>
+<a class="sb-bottom-nav__item" href="#NAV-02" aria-label="Statistik"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#chart-bar"/></svg></a>
+<a class="sb-bottom-nav__item" href="#NAV-02" aria-label="Einstellungen"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#settings"/></svg></a>
+</div></div>
+  </div>
+  <p class="g-ex__note">Nur Icons mit Material-Pille: Man muss raten, wohin „Diagramm“ oder „Uhr“ führt, und die Wörter fehlen für alle.</p>
+</div>
+</div>

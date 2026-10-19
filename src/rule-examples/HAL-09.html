@@ -1,0 +1,28 @@
+<div class="g-examples">
+  <div class="g-ex g-ex--do"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p><div class="g-ex__stage">
+    <div class="sb-table-wrap g-rx-wrapcode" role="region" aria-labelledby="HAL-09-cap-do" tabindex="0">
+      <table class="sb-table">
+        <caption id="HAL-09-cap-do">Anfragen beim Laden einer Seite <span class="sb-demo-marker">Beispieldaten</span></caption>
+        <thead><tr><th scope="col">Datei</th><th scope="col">Herkunft</th></tr></thead>
+        <tbody>
+          <tr><td><code>fonts/web/sebaro-sans-latin-de.woff2</code></td><td>eigene Seite</td></tr>
+          <tr><td><code>sebaro/css/sebaro.css</code></td><td>eigene Seite</td></tr>
+          <tr><td><code>sebaro/icons/sprite.svg</code></td><td>eigene Seite</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div><p class="g-ex__note">Schriften, Icons und Stile liegen im Projekt; beim Laden verlässt keine Anfrage die eigene Seite.</p></div>
+  <div class="g-ex g-ex--dont"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p><div class="g-ex__stage">
+    <div class="sb-table-wrap g-rx-wrapcode" role="region" aria-labelledby="HAL-09-cap-dont" tabindex="0">
+      <table class="sb-table">
+        <caption id="HAL-09-cap-dont">Anfragen beim Laden einer Seite <span class="sb-demo-marker">Beispieldaten</span></caption>
+        <thead><tr><th scope="col">Datei</th><th scope="col">Herkunft</th></tr></thead>
+        <tbody>
+          <tr><td><code>sebaro/css/sebaro.css</code></td><td>eigene Seite</td></tr>
+          <tr><td><code>s/radiocanada/v1/…woff2</code></td><td><code>fonts.gstatic.com</code></td></tr>
+          <tr><td><code>track.js</code></td><td><code>analytics.example.org</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div><p class="g-ex__note">Eine fremde Schriftquelle und ein Analyse-Skript verraten bei jedem Aufruf, wer die Seite liest.</p></div>
+</div>

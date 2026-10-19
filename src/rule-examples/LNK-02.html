@@ -1,0 +1,17 @@
+<div class="g-examples">
+<div class="g-ex g-ex--do">
+  <p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p>
+  <div class="g-ex__stage">
+<div class="g-rx-col"><p>Der <a href="https://example.org/">Quellcode<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a> liegt offen.</p><p class="g-rx-word"><a href="mailto:example@example.org">example@example.org<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a></p></div>
+  </div>
+  <p class="g-ex__note">Wer die App oder Website verlässt, sieht es vorher: Der Link endet im Icon external-link, 16&nbsp;px, 2&nbsp;px Abstand.</p>
+  <details class="g-source"><summary>Markup</summary><div class="sb-code"><pre tabindex="0" role="region" aria-label="Markup: Externer Link"><code>&lt;<span class="sb-tok-keyword">a</span> href=<span class="sb-tok-string">"https://example.org/"</span>&gt;Quellcode&lt;<span class="sb-tok-keyword">svg</span> class=<span class="sb-tok-string">"sb-icon sb-icon--16"</span> aria-hidden=<span class="sb-tok-string">"true"</span> focusable=<span class="sb-tok-string">"false"</span>&gt;&lt;<span class="sb-tok-keyword">use</span> href=<span class="sb-tok-string">"#external-link--16"</span>/&gt;&lt;/<span class="sb-tok-keyword">svg</span>&gt;&lt;/<span class="sb-tok-keyword">a</span>&gt;</code></pre></div></details>
+</div>
+<div class="g-ex g-ex--dont">
+  <p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p>
+  <div class="g-ex__stage">
+<div class="g-rx-col"><p class="g-rx-fallback">Der <a href="https://example.org/">Quellcode ↗</a> liegt offen.</p><p>Der <a href="https://example.org/">Quellcode</a> liegt offen.</p></div>
+  </div>
+  <p class="g-ex__note">Der getippte Schrägpfeil fehlt in sebaro Sans (der umbenannten Radio Canada, D68), also zeichnet ihn eine fremde Systemschrift, auf jedem Gerät anders (das ist der Fehler, den dieses Beispiel absichtlich zeigt); ohne Hinweis kommt der Wechsel unangekündigt.</p>
+</div>
+</div>

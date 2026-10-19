@@ -1,0 +1,35 @@
+<div class="g-examples">
+  <div class="g-ex g-ex--do"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p><div class="g-ex__stage">
+    <div class="g-rx-stack g-rx-stack--stretch">
+      <div class="sb-table-wrap" role="region" aria-labelledby="SCH-02-cap" tabindex="0">
+        <table class="sb-table">
+          <caption id="SCH-02-cap">Schriftdateien je Plattform, alle im Projekt</caption>
+          <thead><tr><th scope="col">Plattform</th><th scope="col">Dateien</th><th scope="col" class="sb-num">Umfang</th></tr></thead>
+          <tbody>
+            <tr><td>Website</td><td>variable WOFF2 aus <code>fonts/web/</code>, Gewicht 400–700 und kursiv</td><td class="sb-num">ca. 62&nbsp;KB</td></tr>
+            <tr><td>Tauri auf macOS</td><td>dieselben WOFF2 aus <code>fonts/web/</code></td><td class="sb-num">ca. 62&nbsp;KB</td></tr>
+            <tr><td>Android</td><td>7 statische TTF in <code>res/font</code> (400, 430, 570, 600, 670, 700 und Mono 500)</td><td class="sb-num">318.296&nbsp;B</td></tr>
+            <tr><td>Tauri auf Windows und Linux</td><td><span class="sb-status sb-status--warning"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#pending--16"/></svg>offen</span></td><td class="sb-num">–</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sb-code">
+        <div class="sb-code__bar"><span class="sb-code__lang">CSS, fonts/fonts.css</span></div>
+<pre tabindex="0" role="region" aria-label="CSS-Beispiel: Schrift selbst ausliefern"><code><span class="sb-tok-keyword">@font-face</span> {
+  font-family: <span class="sb-tok-string">"sebaro Sans"</span>;
+  src: url(<span class="sb-tok-string">"web/sebaro-sans-latin-de.woff2"</span>) format(<span class="sb-tok-string">"woff2"</span>);
+  font-weight: <span class="sb-tok-constant">400</span> <span class="sb-tok-constant">700</span>;
+}</code></pre>
+      </div>
+    </div>
+  </div><p class="g-ex__note">Jede Plattform lädt ihre Schriftdateien selbst, relativ und ohne fremden Server; was noch nicht entschieden ist, steht als „offen“ da.</p></div>
+  <div class="g-ex g-ex--dont"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p><div class="g-ex__stage">
+    <div class="sb-code">
+      <div class="sb-code__bar"><span class="sb-code__lang">CSS</span></div>
+<pre tabindex="0" role="region" aria-label="CSS-Beispiel: Schrift von fremdem Server"><code><span class="sb-tok-keyword">@import</span> url(<span class="sb-tok-string">"https://fonts.googleapis.com/css2?family=Radio+Canada"</span>);
+<span class="sb-tok-comment">/* Tauri auf macOS: */</span>
+src: url(<span class="sb-tok-string">"desktop/RadioCanada-Bold.ttf"</span>);   <span class="sb-tok-comment">/* gehintet, 240 KB */</span>
+font-weight: bold;                           <span class="sb-tok-comment">/* synthetisiert */</span></code></pre>
+    </div>
+  </div><p class="g-ex__note">Fremder Schriftserver, schwere gehintete Dateien am falschen Ort und synthetisierte Gewichte statt der echten Schnitte.</p></div>
+</div>
