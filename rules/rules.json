@@ -1,11 +1,11 @@
 {
  "$schema": "./rules.schema.json",
- "version": "1.0.0",
+ "version": "1.1.0",
  "date": "2026-10-19",
  "source": {
   "repo": "sebaroDesign",
   "system": "sebaro",
-  "decisions": "D1-D70"
+  "decisions": "D1-D71"
  },
  "areas": [
   {
@@ -24,7 +24,7 @@
    "id": "schrift",
    "prefix": "SCH",
    "title": "Schrift",
-   "intro": "sebaro Sans (die umbenannte Radio Canada) für alles, sebaro Mono nur für Code, wenige feste Rollen."
+   "intro": "sebaro Sans für alles, sebaro Mono nur für Code, wenige feste Rollen."
   },
   {
    "id": "raum",
@@ -144,7 +144,7 @@
    "id": "plattform-desktop",
    "prefix": "DSK",
    "title": "Plattform Desktop",
-   "intro": "Was nur für Tauri-Desktop-Apps gilt; vieles ist noch offen (Runde 5)."
+   "intro": "Was nur für Tauri-Desktop-Apps gilt; die Desktop-Grundlagen aus Runde 5 (D67) stehen bei ihren Bereichen, manches ist noch offen."
   },
   {
    "id": "technik",
@@ -592,71 +592,75 @@
    "why": "Inhaber D67 (12), Wortlaut „12b bitte jetzt einmal das highlighting für sämntliche projekte definieren“. Skizze §12: A (nur Grau) ist „für längeren Code zu flach: Zeichenketten und Schlüsselwörter sehen gleich aus“; die drei Töne werden geprüft wie die Kachelfarben (D51). D69 (Inhaber): „ja, halte das so fest.“ auf die zweite Fassung; die erste (Violett, Petrol, Ocker) war „zu blass, schwer zu erkennen“.",
    "do": "Schlüsselwort #54258C, Zeichenkette #1B490F, Zahl #951D52 (hell); #BC98F9, #7BB76E, #FAA6B2 (dunkel); im Code über die Tokens des Abschnitts syntax, nie als Rohwert.",
    "dont": "Kobalt, Lindgrün oder Statusfarben im Code; Kommentare in text-subtle (hell nur 3,10 : 1); Codetöne außerhalb von Codeblöcken.",
-   "numbers": "Hell: Indigo #54258C, Waldgrün #1B490F, Himbeere #951D52; dunkel: #BC98F9, #7BB76E, #FAA6B2 (D69); Kommentar text-muted",
+   "numbers": "Hell: Indigo #54258C, Waldgrün #1B490F, Himbeere #951D52; dunkel: #BC98F9, #7BB76E, #FAA6B2 (D69); Kommentar text-muted; Y1 hell 6,82–10,17 : 1, dunkel 6,55–10,20 : 1 auf allen vier Gründen",
    "decisions": [
     "D67",
     "D69",
     "D51"
    ],
-   "source": "DECISIONS.md D67 (12), D69; systems/sebaro/spec/01-foundations.md §1.8; palettes/sebaro.json syntax",
+   "source": "DECISIONS.md D67 (12), D69; systems/sebaro/spec/01-foundations.md §1.8; palettes/sebaro.json syntax; shared/PALETTE-CONTRACT.md 2.4 §7.2b, §8.4; shared/TOKEN-CONTRACT.md 1.6 §10.3",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
-   "check": "Nach dem Bau: check_palette.py palettes/sebaro.json mit dem neuen Abschnitt, CVD-Prüfung der drei Töne; Farbprüfung je Ansicht muss die Codetöne nur in Codeblöcken zulassen.",
+   "check": "check_palette.py 2.4.0 palettes/sebaro.json: Y1 (≥ 4,5 auf bg, surface, surface-raised, surface-sunken), Y2/Y2-cvd (untereinander und gegen text, text-muted ≥ 0,08 / ≥ 0,04), Y3 (gegen accent, link, Status, primary-action ≥ 0,08) mit Exit 0; Farbprüfung je Ansicht lässt die Codetöne nur in Code zu.",
    "example_hint": "Derselbe sb-code-Block hell und dunkel mit den drei Tönen; falsch: Code in Kobalt und Lindgrün.",
-   "note": "Entschieden mit D69, gebaut als --sb-syntax-keyword, --sb-syntax-string, --sb-syntax-constant; css/sebaro.css färbt highlight.js, Prism und eigene sb-tok-*-Spans. spec/03 §1.2 („never … violet“) ist älter; D67 (12) gilt für Code."
+   "note": "Entschieden mit D69, gebaut als --sb-syntax-keyword, --sb-syntax-string, --sb-syntax-constant (Tailwind text-syntax-*, Compose SebaroTheme.syntax.*, SwiftUI SebaroSyntax.*); css/sebaro.css färbt highlight.js, Prism und eigene sb-tok-*-Spans, Shiki und CodeMirror siehe TEC-08. spec/03 §1.2 („never … violet“) ist älter; D67 (12) gilt für Code."
   },
   {
    "id": "SCH-01",
    "area": "schrift",
    "title": "sebaro Sans für alles, sebaro Mono für Code",
-   "rule": "Setz Oberfläche, Lesetext, Überschriften und Zahlen in sebaro Sans (die umbenannte Radio Canada, D68); sebaro Mono (umbenannte IBM Plex Mono, Medium 500, D70) nur für Code, IDs, Versionen und Befehle. Beide Schriften bleiben in allen sebaro-Projekten; Lesbarkeit geht vor Eigenart.",
-   "rule_en": "sebaro Sans (renamed Radio Canada, D68) for everything; sebaro Mono (renamed IBM Plex Mono, Medium 500, D70) only for code, IDs, versions, commands; both fonts stay in every project; legibility before character.",
-   "why": "D28: „die schriftart muss frei berwendbar und sehr gut lesbar sein.“ D38: „nimm nur radio canada alleine“ (im Blindvergleich gewählt, entgegen der Agentenempfehlung Inter). D66: „wir behalten beide schriftarten und merke dir diese entscheidung für unsere anderen projekte“. „Plex“ ist ein reservierter Name, daher sebaro Mono. D68: „ja, lass uns das mit sebaro sans und sebaro mono machen. gib beiden die schriftzeichen.“ D70: Mono Medium 500 statt Regular, weil Code zu schwach wirkte.",
+   "rule": "Setz Oberfläche, Lesetext, Überschriften und Zahlen in sebaro Sans (D68, D71); sebaro Mono (umbenannte IBM Plex Mono, Medium 500, D70) nur für Code, IDs, Versionen und Befehle. Es gibt nur diese beiden Schriften; beide bleiben in allen sebaro-Projekten. Lesbarkeit geht vor Eigenart.",
+   "rule_en": "sebaro Sans (D68, D71) for everything; sebaro Mono (renamed IBM Plex Mono, Medium 500, D70) only for code, IDs, versions, commands; these are the only two families and both stay in every project; legibility before character.",
+   "why": "D28: „die schriftart muss frei berwendbar und sehr gut lesbar sein.“ D38: „nimm nur [sebaro Sans] alleine“ (die UI-Schrift, heute sebaro Sans, im Blindvergleich gewählt, entgegen der Agentenempfehlung Inter). D66: „wir behalten beide schriftarten und merke dir diese entscheidung für unsere anderen projekte“. „Plex“ ist ein reservierter Name, daher sebaro Mono. D68: „ja, lass uns das mit sebaro sans und sebaro mono machen. gib beiden die schriftzeichen.“ D70: Mono Medium 500 statt Regular, weil Code zu schwach wirkte. D71: „es gibt nur noch sebaro sans und mono“.",
    "do": "--sb-font-family-ui für UI, --sb-font-family-mono für „v1.4.2“; in IDs, die 0 und O mischen, font-feature-settings 'zero' (Standard ist die gepunktete Null).",
-   "dont": "Inter oder Geist, eine dritte Familie, Wörter oder Statistiken in Mono, den Namen „Plex“.",
+   "dont": "Inter oder Geist, eine dritte Familie, den früheren Namen der UI-Schrift, Wörter oder Statistiken in Mono, den Namen „Plex“.",
    "numbers": "--sb-font-family-ui, --sb-font-family-display (Alias), --sb-font-family-mono; Compose SebaroFonts.ui/display/mono",
    "decisions": [
     "D28",
     "D38",
     "D66",
     "D68",
-    "D70"
+    "D70",
+    "D71"
    ],
-   "source": "DECISIONS.md D28, D38, D66; systems/sebaro/spec/01-foundations.md §2.1; research/08-schriften.md §0, §8",
+   "source": "DECISIONS.md D28, D38, D66, D68, D70, D71; systems/sebaro/spec/01-foundations.md §2.1; shared/FONTS-GUIDE.md (Kopf, §3.12); research/08-schriften.md §0, §8",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Computed font-family aller Textelemente: sebaro Sans außer code/kbd/IDs.",
    "example_hint": "Absatz mit „Il1 0O“, Inline-Code (sb-code-inline) und Versionsnummer in Mono; falsch: Zahlenspalte oder ganze Überschrift in Mono.",
-   "note": "Die Gestalt ist Radio Canada; ausgeliefert wird sie seit D68 unter dem Namen sebaro Sans (umbenannte Fassung, OFL)."
+   "note": "sebaro Sans ist sebaros UI-Schrift: eine abgeleitete Schrift unter der SIL Open Font License 1.1 mit eigener Quelle (systems/sebaro/fonts/sebaro-sans/src/), Lizenztext in docs/sebaro/fonts/web/sebaro-sans-OFL.txt (D71). Der Copyright-Vermerk der Urheber bleibt in Datei und Lizenztext, wie die OFL es verlangt."
   },
   {
    "id": "SCH-02",
    "area": "schrift",
    "title": "Schriftdateien je Plattform, selbst gehostet",
-   "rule": "Liefere die Schriften selbst aus. Websites und Tauri-Apps auf macOS laden die variablen WOFF2 aus fonts/web/ (zusammen ca. 62 KB); Android nutzt sieben statische, autogehintete TTF in res/font, ohne variable Schrift.",
-   "rule_en": "Self-host fonts: websites and Tauri on macOS load the variable WOFF2 from fonts/web/ (~62 KB); Android ships 7 static autohinted TTFs in res/font, no variable font.",
+   "rule": "Liefere die Schriften selbst aus. Websites und Tauri-Apps auf macOS laden die variablen WOFF2 aus fonts/web/ (zusammen ca. 62 KB); Android nutzt sieben statische TTF in res/font (sechs autogehintete sebaro-Sans-Schnitte, sebaro Mono Medium 500 mit den Hints der Gießerei), ohne variable Schrift. Die OFL-Texte liegen neben den Dateien.",
+   "rule_en": "Self-host fonts: websites and Tauri on macOS load the variable WOFF2 from fonts/web/ (~62 KB); Android ships 7 static TTFs in res/font (six autohinted sebaro Sans cuts, sebaro Mono Medium 500 with foundry hints), no variable font; OFL texts next to the files.",
    "why": "D66 (I, 2026-10-19): „Websites und Tauri-Apps auf macOS laden die variablen WOFF2 aus systems/sebaro/fonts/web/“; die 318-KB-Rechnung mit gehinteten Desktop-TTF war falsch. Android: Compose interpoliert nicht, minSdk 24 ignoriert FontVariation (D43, O).",
-   "do": "fonts/fonts.css mit url('web/…woff2'); Android radio_canada_regular_430.ttf für Dunkel-Fließtext; novalis: 57,5 KB WOFF2 gegen 250 KB Budget.",
+   "do": "fonts/fonts.css mit url('web/…woff2'); Android sebaro_sans_regular_430.ttf für Dunkel-Fließtext, sebaro_mono_medium_500.ttf für Code; novalis: ca. 62 KB WOFF2 gegen 250 KB Budget.",
    "dont": "fonts.googleapis.com; gehintete Web-Schnitte (240 KB statt 28 KB); desktop/*.ttf für Tauri auf macOS; Gewichte synthetisieren.",
-   "numbers": "Web variabel wght 400–700 + italic, ca. 28 KB je Schnitt, zusammen ca. 62 KB; Android 400/430/570/600/670/700 + Mono 500, 7 Dateien, 318296 B",
+   "numbers": "Web: sebaro-sans-latin-de.woff2 22 116 B, sebaro-sans-italic-latin-de.woff2 22 992 B, sebaro-mono-latin-de.woff2 16 824 B, zusammen 61 932 B (wght 400–700 variabel, Mono 500, mit Tastenzeichen); Android sebaro_sans_regular_400, _regular_430, _medium_570, _semibold_600, _semibold_670, _bold_700 + sebaro_mono_medium_500, 7 Dateien, 336 128 B; Lizenzen sebaro-sans-OFL.txt, sebaro-mono-OFL.txt",
    "decisions": [
     "D18",
     "D43",
     "D66",
-    "D38"
+    "D38",
+    "D68",
+    "D70",
+    "D71"
    ],
-   "source": "DECISIONS.md D43, D66; systems/sebaro/spec/01-foundations.md §2.1; spec/08-platform-android.md §2.1; spec/09-platform-web.md §13 (veraltet)",
+   "source": "DECISIONS.md D43, D66, D68, D70, D71; systems/sebaro/spec/01-foundations.md §2.1; spec/08-platform-android.md §2.1; spec/09-platform-web.md §1, §13 (veraltet); fonts/fonts.lock.json",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Netzwerk-Panel: Fontdateien nur aus eigenem Pfad; Tauri-Bundle enthält fonts/web/*.woff2; fonts.py verify sebaro (Android).",
    "example_hint": "Tabelle (sb-table) Plattform → Schriftdatei mit Zeile „Tauri Windows/Linux: offen“.",
-   "note": "Konflikt D43/spec/09 §13 (gehintete TTF für Tauri) gegen D66 aufgelöst: D66 gilt. Windows/Linux-Tauri ist von D66 nicht gedeckt (offen)."
+   "note": "Konflikt D43/spec/09 §13 (gehintete TTF für Tauri, Export mit font-display: swap) gegen D66 aufgelöst: D66 gilt. Windows/Linux-Tauri ist von D66 nicht gedeckt (offen)."
   },
   {
    "id": "SCH-03",
@@ -716,7 +720,7 @@
     "D44",
     "D70"
    ],
-   "source": "systems/sebaro/spec/01-foundations.md §2.4, §11; spec/02-components.md §0.3; spec/09-platform-web.md §3",
+   "source": "systems/sebaro/spec/01-foundations.md §2.4, §11; spec/02-components.md §0.3; spec/09-platform-web.md §3; systems/sebaro/AGENTS.md (Dark typography)",
    "platforms": [
     "alle"
    ],
@@ -2355,18 +2359,19 @@
    "id": "TXT-08",
    "area": "text",
    "title": "Code in sebaro Mono mit drei gedämpften Tönen",
-   "rule": "Zeig Codeblöcke als sb-code (surface-sunken, Radius 12) mit Leiste: Sprache in caption und Knopf „Kopieren“, der 2 s „Kopiert“ zeigt; <pre tabindex='0'> in code 14/20. Syntax nur in den drei Codetönen (FAR-11), Kommentare in text-muted. Inline-Code nur für Maschinenwerte; Tasten als <kbd>.",
-   "rule_en": "Code blocks: surface-sunken, radius 12, bar with language + „Kopieren“ (2 s „Kopiert“), focusable <pre>, sebaro Mono 14/20, syntax only in the three code tones (FAR-11); inline code only for machine values; keys as <kbd>.",
+   "rule": "Zeig Codeblöcke als sb-code (surface-sunken, Radius 12) mit Leiste: Sprache in caption und Knopf „Kopieren“, der 2 s „Kopiert“ zeigt; <pre tabindex='0'> in code 14/20 (sebaro Mono 500). Hervorgehobener Code nutzt nur die fünf Looks (TXT-10, Töne FAR-11), ohne Fett und Kursiv; nicht hervorgehobener Code steht in text. Inline-Code nur für Maschinenwerte; Tasten als <kbd>.",
+   "rule_en": "Code blocks: surface-sunken, radius 12, bar with language + „Kopieren“ (2 s „Kopiert“), focusable <pre>, sebaro Mono 500 14/20; highlighted code only in the five looks (TXT-10, tones FAR-11), no bold or italic; unhighlighted code is text; inline code only for machine values; keys as <kbd>.",
    "why": "D38: Mono nur für Code, IDs und Versionen. D67 (12, Inhaber): Code bekommt drei gedämpfte Töne als eigenen Abschnitt der Palette, einmal für sämtliche Projekte.",
    "do": "<pre tabindex='0'><code>…</code></pre>; „Strg + K“ als <kbd> mit 2-px-Unterkante. Eigene Hervorhebung mit <span class='sb-tok-keyword|string|constant|comment'>.",
-   "dont": "Syntaxfarben außerhalb der drei Codetöne; Prosa in Mono.",
-   "numbers": "Radius 12px; code 14/20; „Kopiert“ 2 s",
+   "dont": "Syntaxfarben außerhalb der drei Codetöne; fette oder kursive Code-Teile; Prosa in Mono.",
+   "numbers": "Radius 12px; code 14/20, wght 500; „Kopiert“ 2 s",
    "decisions": [
     "D38",
     "D36",
-    "D67"
+    "D67",
+    "D70"
    ],
-   "source": "systems/sebaro/spec/02-components.md §3.10; css/sebaro.css Z. 734-753; DECISIONS.md D67 (12)",
+   "source": "systems/sebaro/spec/02-components.md §3.10; spec/01-foundations.md §1.8; css/sebaro.css Z. 735-761; DECISIONS.md D67 (12), D70",
    "platforms": [
     "alle"
    ],
@@ -2395,6 +2400,53 @@
    "status": "entschieden",
    "check": "Lange Namen in 32-px-Zeilen und schmaler Seitenleiste: Status und Zahl bleiben ganz sichtbar, der Tooltip zeigt den vollen Namen.",
    "example_hint": "Zwei ähnliche lange Namen, am Ende gekürzt, mit Tooltip; falsch: gekürztes Statuswort."
+  },
+  {
+   "id": "TXT-10",
+   "area": "text",
+   "title": "Fünf Looks für Code, kein Fett, kein Kursiv",
+   "rule": "Ordne jede Code-Art genau einem von fünf Looks zu: keyword (Schlüsselwörter, Annotationen, Präprozessor, Tag-Namen, CSS-At-Regeln, !important), string (Zeichenketten mit Anführungszeichen, reguläre Ausdrücke, Attributwerte), constant (Zahlen mit Einheit, true, false, null, Konstanten, Escape-Sequenzen, Farbwerte), comment (Kommentare in text-muted) und plain (alles andere in text: Namen, Funktionen, Typen, Schlüssel, Operatoren, Klammern, ${…}). Code steht nur in sebaro Mono Medium 500, ohne Fett und Kursiv, und bleibt ohne Farbe vollständig lesbar.",
+   "rule_en": "Map every kind of code to one of five looks: keyword, string, constant (the three syntax tones), comment (text-muted), plain (text: identifiers, functions, types, keys, operators, punctuation, interpolation); a name no mapping lists is plain; code is sebaro Mono Medium 500 only, no bold or italic, readable without colour.",
+   "why": "Inhaber D67 (12): „bitte jetzt einmal das highlighting für sämntliche projekte definieren“; D69 bestätigt die Töne. sebaro liefert einen einzigen Mono-Schnitt (D38, D70), ein künstliches Fett oder Kursiv wird unscharf. Die Zuordnung je Code-Art ist die Ausarbeitung der Agenten in spec/01 §1.8.",
+   "do": "In einer Zeichenkette: \\n als constant, ${name} zurück in plain; JSON: Werte tragen die Töne, Schlüssel bleiben in text; Markdown im Codeblock: Auszeichnungszeichen in text-muted.",
+   "dont": "Funktions- oder Typnamen einfärben; kursive Kommentare oder fette Schlüsselwörter; eigene Farben je Projekt oder Sprache; ein vierter Ton.",
+   "numbers": "5 Looks, 3 Töne (FAR-11); code 14/20, wght 500; jede Rolle ≥ 4,5 : 1 auf jedem Grund (Y1)",
+   "decisions": [
+    "D67",
+    "D69",
+    "D70",
+    "D38"
+   ],
+   "source": "DECISIONS.md D67 (12), D69, D70; systems/sebaro/spec/01-foundations.md §1.8 (Five looks, Markup languages), §1.8.1; spec/02-components.md §3.10",
+   "platforms": [
+    "alle"
+   ],
+   "status": "vorläufig",
+   "check": "Computed style in .sb-code: font-weight 500, font-style normal, Farben nur --sb-syntax-*, text, text-muted; Graustufen-Screenshot bleibt lesbar.",
+   "example_hint": "TypeScript-Zeilen mit Schlüsselwort, Zeichenkette mit ${…}, Zahl und Kommentar in den fünf Looks; falsch: farbige Funktionsnamen, kursiver Kommentar, fettes Schlüsselwort.",
+   "note": "Die Töne sind entschieden (FAR-11, D69); die Zuordnung der Code-Arten ist eine Ausarbeitung der Agenten auf D67 (12) und gilt, bis der Inhaber sie ändert."
+  },
+  {
+   "id": "TXT-11",
+   "area": "text",
+   "title": "Fehler und Änderungen im Code nie nur über Farbe",
+   "rule": "Markier fehlerhaften Code mit einer 2 px gewellten Unterlinie in danger und der Meldung in der Problemzeile; der Text behält seinen Look. Zeig Änderungen (Diff) mit dem Randzeichen + oder − (U+2212) und einer Zeilenfläche in success-subtle bzw. danger-subtle; der Code darin behält seine fünf Looks, Hunk-Köpfe stehen in text-muted.",
+   "rule_en": "Code errors: 2 px wavy danger underline plus the message in the problem line, the text keeps its look; diffs: gutter + / − (U+2212) plus a success-subtle / danger-subtle line fill, code keeps its five looks, hunk headers text-muted; never colour alone.",
+   "why": "Ein Zustand muss den Verlust der Farbe überstehen (STA-01). spec/01 §1.8: „Never mark a change by colour alone“ (Ausarbeitung der Agenten zu D67 (12)).",
+   "do": "<span class='sb-tok-invalid'>…</span> plus Meldung; Diff-Zeile „− return 0“ auf danger-subtle, „+ return total“ auf success-subtle.",
+   "dont": "Fehlerhaften Code rot einfärben; Diff nur mit grüner und roter Fläche ohne Randzeichen; Bindestrich statt U+2212.",
+   "numbers": "Unterlinie 2 px wavy, danger; Randzeichen + / U+2212; Flächen success-subtle / danger-subtle",
+   "decisions": [
+    "D67",
+    "D36"
+   ],
+   "source": "systems/sebaro/spec/01-foundations.md §1.8 (Where marks are not colour, Diff); css/sebaro.css .sb-tok-invalid; spec/09-platform-web.md §17",
+   "platforms": [
+    "alle"
+   ],
+   "status": "vorläufig",
+   "check": "Graustufen-Screenshot: Fehler an der Wellenlinie, Änderungen an + und − erkennbar.",
+   "example_hint": "Diff mit einer entfernten und einer neuen Zeile, darunter eine Zeile mit Wellenlinie und Meldung; falsch: Diff nur als rote und grüne Flächen, Fehler nur rot gefärbt."
   },
   {
    "id": "BEL-01",
@@ -2840,9 +2892,11 @@
     "D38",
     "D40",
     "D44",
-    "D36"
+    "D36",
+    "D68",
+    "D71"
    ],
-   "source": "systems/sebaro/spec/05-brand.md §3, §4, §11",
+   "source": "systems/sebaro/spec/05-brand.md §3 (Quelle fonts/sebaro-sans/src/sebaroSans[wdth,wght].ttf), §4, §11",
    "platforms": [
     "alle"
    ],
@@ -2925,7 +2979,7 @@
    "title": "Eine ruhige Linie: 1,75, rund, konstruiert",
    "rule": "Zeichne Icons als Linie in einer Stärke mit runden Enden und Ecken: 1,75 auf dem 24er-Master, 1,5 auf dem 16er-Master, 2 bei Spots. Gerade Segmente nur in 0, 30, 45, 60, 90, 120, 135, 150 Grad, Kurven als Kreisbögen, höchstens 5 Teile, feste Lücken und Containerradien.",
    "rule_en": "One-weight outline strokes, round caps/joins: 1.75 on 24, 1.5 on 16, 2 on spots; live area 2–22 / 1–15; grid 0.125; angles 0/30/45/60/90/120/135/150 (±0.5); circular arcs; ≤ 5 parts; gaps 2.25/2.0/2.5; container radius 2/1.25/3.",
-   "why": "1,75 px entspricht dem Stamm von Radio Canada label 14 px / 570 (1,76), Icon und Wort lesen als ein Gewicht; gleiche Geometrie hält das Set ruhig. Radius 2 ergibt außen 0,16 der Kante wie Control-Radius und Zeichenkachel.",
+   "why": "1,75 px entspricht dem Stamm von sebaro Sans label 14 px / 570 (1,76), Icon und Wort lesen als ein Gewicht; gleiche Geometrie hält das Set ruhig. Radius 2 ergibt außen 0,16 der Kante wie Control-Radius und Zeichenkachel.",
    "do": "stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'; Ring r 9.125 für alle Status-Ringe; Punkte als gefüllte Kreise d 2.5.",
    "dont": "Zweite Strichstärke, eckige Enden, Perspektive, Schattierung, Verläufe, Deckkraftstufen, 37°-Schrägen, Bézier-Gekrakel.",
    "numbers": "Strich 24: 1.75, 16: 1.5, Spot: 2; Arbeitsbereich 24: 2–22, 16: 1–15, Spot Rand 4; Raster 0.125 (Spots 0.25); Kreis-Keyline r 9.125 bei (12,12); Quadrat 3.875–20.125; Teile ≤ 5; Lücke 2.25 / 2.0 / 2.5; Radius 2 (≥ 8) / 1, 1.25 (≥ 6) / 0.75, 3 (≥ 12) / 1.5",
@@ -2935,7 +2989,7 @@
     "D40",
     "D44"
    ],
-   "source": "systems/sebaro/spec/04-icons.md §0, §1.1, §1.4, §1.5, §2",
+   "source": "systems/sebaro/spec/04-icons.md §0, §1.1 (gemessen an fonts/desktop/sebaroSans-*.ttf), §1.4, §1.5, §2",
    "platforms": [
     "alle"
    ],
@@ -3018,7 +3072,7 @@
    "id": "ICO-06",
    "area": "icons",
    "title": "Pfeile und Zeichen sind Icons",
-   "rule": "Setz Pfeile, Chevrons und das Zeichen für externe Links immer als Icon, nie als Schriftzeichen. Chevrons stehen für Aufklappen und Zeilen, Pfeile für „dorthin gehen“; in RTL werden Richtungs-Icons gespiegelt.",
+   "rule": "Setz Pfeile, Chevrons und das Zeichen für externe Links in der Oberfläche immer als Icon, nie als Schriftzeichen. Chevrons stehen für Aufklappen und Zeilen, Pfeile für „dorthin gehen“; in RTL werden Richtungs-Icons gespiegelt. Die Pfeilzeichen ← ↑ → ↓ der Schrift gibt es nur für Tastenkürzel (ICO-08).",
    "rule_en": "Arrows, chevrons and external-link are icons, never characters (in prose; the font arrows ← ↑ → ↓ exist only for shortcuts, D68); chevrons = disclosure/rows, arrows = go there; mirrored in RTL.",
    "why": "Inhaber D38: „Pfeile als Icons“; ein fehlendes Zeichen zieht eine Systemschrift nach. D56 (2): external-link-Icon.",
    "do": "Linktext + 4 px + arrow-right--16; <svg class='sb-icon'><use href='#arrow-left'/></svg>.",
@@ -3027,9 +3081,10 @@
    "decisions": [
     "D38",
     "D56",
-    "D52"
+    "D52",
+    "D68"
    ],
-   "source": "DECISIONS.md D38, D56 (2); systems/sebaro/spec/01-foundations.md §2.1; spec/04-icons.md §7.4",
+   "source": "DECISIONS.md D38, D56 (2), D68; systems/sebaro/spec/01-foundations.md §2.1; spec/04-icons.md §7.4; spec/08-platform-android.md §10",
    "platforms": [
     "alle"
    ],
@@ -3065,16 +3120,16 @@
    "title": "Tastenzeichen kommen aus der Schrift",
    "rule": "Zeig Tastenkürzel mit den eigenen Tastenzeichen von sebaro Sans und sebaro Mono (⌘ ⇧ ⌥ ⌃ ↩ ⎋ ⌫ ⇥ ↑ ↓ ← →), als echte Schriftzeichen, grau, am Zeilenende, ohne Rahmen; Tastenkappen nur in Hilfetexten. Auf Windows und Linux stehen Wörter („Strg+Umschalt+P“).",
    "rule_en": "Shortcuts use the own key glyphs drawn into sebaro Sans and sebaro Mono (D68) as real characters: grey, end of row, no frame; keycaps only in help text; words on Windows/Linux.",
-   "why": "D68 (Inhaber, beantwortet D67 Frage 3): „ja, lass uns das mit sebaro sans und sebaro mono machen. gib beiden die schriftzeichen.“ Radio Canada und Plex Mono hatten ⌘ ⇧ ⌥ ↩ nicht; eine Systemschrift sieht je System anders aus.",
+   "why": "D68 (Inhaber, beantwortet D67 Frage 3): „ja, lass uns das mit sebaro sans und sebaro mono machen. gib beiden die schriftzeichen.“ Die UI-Schrift (heute sebaro Sans) und Plex Mono hatten ⌘ ⇧ ⌥ ↩ nicht; eine Systemschrift sieht je System anders aus.",
    "do": "„⇧⌘P“ in text-muted am Zeilenende, mit aria-label „Befehl Umschalt P“.",
    "dont": "Tastenzeichen aus einer Systemschrift oder als SVG-Bastelei neben dem Text; gerahmte Kappen in Menüs.",
-   "numbers": "",
+   "numbers": "12 Zeichen: U+2318 ⌘, U+21E7 ⇧, U+2325 ⌥, U+2303 ⌃, U+21A9 ↩, U+238B ⎋, U+232B ⌫, U+21E5 ⇥, U+2190–2193; auf Versalhöhe gezeichnet, folgen dem Gewicht; in beiden Familien und im unicode-range von fonts.css",
    "decisions": [
     "D67",
     "D68",
     "D38"
    ],
-   "source": "DECISIONS.md D67 (3), D68",
+   "source": "DECISIONS.md D67 (3), D68; systems/sebaro/spec/01-foundations.md §2.1; shared/FONTS-GUIDE.md §3.12 (addGlyphs); systems/sebaro/fonts/glyphs/draw_keys.py",
    "platforms": [
     "desktop",
     "web"
@@ -3594,6 +3649,31 @@
    "note": "novalis nutzt heute die Palette als Einstellungsseite (ADR-0004); nach D67 braucht der Punkt dort eine ADR mit dem Wortlaut des Inhabers."
   },
   {
+   "id": "DSK-03",
+   "area": "plattform-desktop",
+   "title": "Editor: Markdown-Quelltext und die Umgebung des Codes",
+   "rule": "Zeig Markdown-Quelltext im Editor in sebaro Sans, nicht in Mono: Auszeichnungszeichen (# * _ ` > - [] () | ---) in text-muted, Überschriftentext in text im Gewicht der Überschrift, echtes Kursiv und Fett, Links im Link-Stil, Inline-Code in Mono auf surface-sunken. Rund um Code: Grund bg im Editor, surface-sunken im Codeblock; Auswahl selection; Caret 2 px accent; aktuelle Zeile hover-fill; Zeilennummern text-muted, die aktuelle in text; Suchtreffer und Klammerpaar mit 1-px-Rahmen in border-strong (aktueller Treffer zusätzlich auf selection); Einrückhilfen border; Falten mit chevron-right--16 / chevron-down--16 in text-muted.",
+   "rule_en": "Markdown source in an editor is sebaro Sans: markup characters text-muted, heading text in heading weight, real italic/bold, links in link style, inline code mono on surface-sunken. Around code: ground bg (editor) / surface-sunken (block), selection, 2 px accent caret, current line hover-fill, line numbers text-muted (current text), matches and bracket pair 1 px border-strong frame, indent guides border, fold chevrons text-muted.",
+   "why": "D67 (12): ein Highlighting für alle Projekte, auch für Editoren in Desktop-Apps (novalis). Der Caret ist der Ort, an dem du bist, und trägt deshalb Kobalt (FAR-03); alles andere bleibt grau. Ausarbeitung der Agenten in spec/01 §1.8.",
+   "do": "CodeMirror: .cm-selectionBackground → --sb-color-selection, .cm-cursor → 2 px --sb-color-accent, .cm-activeLine → --sb-color-hover-fill, .cm-searchMatch und .cm-matchingBracket → outline 1px solid var(--sb-color-border-strong).",
+   "dont": "Markdown-Quelltext in Mono; farbige #- oder *-Zeichen; gefüllte Suchtreffer in Lindgrün oder Gelb; Zeilennummern in Kobalt.",
+   "numbers": "Caret 2 px accent; Rahmen 1 px border-strong; Falt-Icons 16 px",
+   "decisions": [
+    "D67",
+    "D52",
+    "D65"
+   ],
+   "source": "systems/sebaro/spec/01-foundations.md §1.8 (Markdown source in an editor, Around the code); spec/09-platform-web.md §17 (CodeMirror, Editor chrome)",
+   "platforms": [
+    "desktop",
+    "web"
+   ],
+   "status": "vorläufig",
+   "check": "Editor in beiden Modi gegen spec/09 §17; Caret, aktuelle Zeile und Suchtreffer im Graustufen-Screenshot erkennbar.",
+   "example_hint": "Editor-Ausschnitt mit Markdown-Zeilen, Zeilennummern, aktueller Zeile und Suchtreffer; falsch: Markdown in Mono mit farbigen #-Zeichen und gelb gefüllten Treffern.",
+   "note": "Der CodeMirror-Teil ist nur gelesen, nicht ausgeführt (spec/09 §17)."
+  },
+  {
    "id": "TEC-01",
    "area": "technik",
    "title": "Nur Tokens, nie Rohfarben",
@@ -3745,6 +3825,29 @@
    "check": "Im App-Repo nach der Umbenennung: grep -rn -- '--ds-' → 0 Treffer; tokens.css kommt aus export_system.py.",
    "example_hint": "Fluss tokens.json → export_system.py → tokens.css mit --sb-*-Namen; falsch: Zuordnungsdatei, die --ds-* schreibt.",
    "note": "shared/ADOPTION.md (Stand 2026-10-12) und der frühere Vorschlag A sind überholt. Die Umbenennung geschieht im novalis-Repo, nicht in sebaroDesign."
+  },
+  {
+   "id": "TEC-08",
+   "area": "technik",
+   "title": "Highlighter nur über sebaros fertige Teile",
+   "rule": "Bind jeden Highlighter über sebaros fertige Teile an, nie mit eigenem Farbschema: highlight.js, Prism und eigene Spans (sb-tok-keyword, -string, -constant, -comment, -invalid) färbt css/sebaro.css, ohne ein zusätzliches Theme-Stylesheet. Shiki, Astro, VS Code, Monaco und Sublime nutzen das TextMate-Theme „sebaro“, CodeMirror 6 das HighlightStyle sebaroHighlight (beide spec/09 §17); Android und Apple bauen AnnotatedString mit SebaroTheme.syntax.* bzw. AttributedString mit SebaroSyntax.*.",
+   "rule_en": "Wire highlighters only through sebaro's pieces: hljs, Prism and sb-tok-* are coloured by css/sebaro.css (no theme stylesheet); Shiki/Astro/VS Code/Monaco/Sublime use the TextMate theme „sebaro“, CodeMirror 6 sebaroHighlight (spec/09 §17); Compose SebaroTheme.syntax.*, SwiftUI SebaroSyntax.*.",
+   "why": "D67 (12): das Highlighting gilt „für sämtliche Projekte“. Alle Teile nutzen nur var(--sb-*), so folgen Hell und Dunkel dem Modus ohne zweites Theme (TEC-01).",
+   "do": "Astro: markdown: { shikiConfig: { theme: sebaroTheme } } mit dem JSON aus spec/09 §17, dazu tokens.css; Shikis pre in sb-code legen; Compose: SpanStyle(color = SebaroTheme.syntax.keyword).",
+   "dont": "Ein highlight.js- oder Prism-Theme (z. B. github-dark.css) neben sebaro.css; ein Shiki-Standardtheme; Hexwerte im Theme; eine eigene Zuordnung je Projekt.",
+   "numbers": "--sb-syntax-keyword, --sb-syntax-string, --sb-syntax-constant; Tailwind text-syntax-*; Palette 2.4, Tokenvertrag 1.6",
+   "decisions": [
+    "D67",
+    "D69"
+   ],
+   "source": "systems/sebaro/spec/09-platform-web.md §17; spec/01-foundations.md §1.8.1; css/sebaro.css Z. 749-761; shared/TOKEN-CONTRACT.md §10.3",
+   "platforms": [
+    "alle"
+   ],
+   "status": "vorläufig",
+   "check": "Kein Theme-Stylesheet eines Highlighters im Bundle; Shiki-Ausgabe enthält nur var(--sb-…)-Farben.",
+   "example_hint": "Drei Snippets zum Kopieren (Astro-Konfiguration, CodeMirror-HighlightStyle, Compose-SpanStyle); falsch: <link> auf ein highlight.js-Theme.",
+   "note": "Geprüft ist nur Shiki 1.29.2 auf einer Prüfseite mit 14 Sprachen; highlight.js und Prism nur nach ihren Klassenlisten, CodeMirror nur gelesen, Monaco und Sublime ungeprüft (spec/09 §17)."
   }
  ]
 }

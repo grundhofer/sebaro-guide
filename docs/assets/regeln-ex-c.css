@@ -371,3 +371,42 @@ caption.g-rx-c-caption { caption-side: top; text-align: start; padding-block-end
 .g-rx-c-breakcells :is(td, th) { overflow-wrap: break-word; }                       /* long API names wrap instead of hiding at 390 px */
 .g-rx-c-paircell { display: grid; gap: var(--sb-space-0-5); justify-items: start; }   /* ZUG-01: pair, limit and result stacked so the table fits 390 px */
 .g-rx-fallback { font-family: var(--sb-font-family-ui), "g-fallback-specimen"; }   /* LNK-02, ICO-06 "Nicht so": the typed ↗ falls back on purpose; the name is declared in <meta name="sb-font-fallback"> so the font gate reports it as intended (FNT6) */
+
+/* ------------------------------------------------------------------ Code looks, diff, editor (TXT-10, TXT-11, DSK-03) */
+.g-rx-c-looks { display: flex; flex-wrap: wrap; gap: var(--sb-space-2) var(--sb-space-4); margin: 0; padding: 0; list-style: none; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.g-rx-c-looks > li { display: inline-flex; align-items: baseline; gap: var(--sb-space-1); }
+.sb-code .g-rx-c-wrong-italic { font-style: italic; }                                  /* wrong: synthetic italic in code */
+.sb-code .g-rx-c-wrong-bold { font-weight: 700; }                                      /* wrong: synthetic bold in code */
+.g-rx-c-wrong-errcolor { color: var(--sb-color-danger); }                             /* wrong: error by colour alone */
+/* diff lines inside sb-code: one block per line, sign in the gutter, line fill helps the sign */
+.g-rx-c-diff.g-rx-c-diff { padding-inline: 0; }
+.g-rx-c-diff__hunk, .g-rx-c-diff__line { display: block; padding-inline: var(--sb-space-4); }
+.g-rx-c-diff__hunk { color: var(--sb-color-text-muted); }
+.g-rx-c-diff__sign { display: inline-block; inline-size: 2ch; }
+.g-rx-c-diff__line--del { background: var(--sb-color-danger-subtle); }
+.g-rx-c-diff__line--add { background: var(--sb-color-success-subtle); }
+.g-rx-c-problem {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1) var(--sb-space-2); margin: 0; padding: var(--sb-space-2) var(--sb-space-4);
+  border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border);
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking);
+}
+/* DSK-03 editor specimen; in a product CodeMirror carries this with the settings of TEC-08 */
+.g-rx-c-ed { padding-block: var(--sb-space-2); background: var(--sb-color-bg); color: var(--sb-color-text); font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); overflow-x: auto; }
+.g-rx-c-ed__line { display: grid; grid-template-columns: 2.5em 24px max-content; align-items: center; min-block-size: 28px; padding-inline-end: var(--sb-space-4); }
+.g-rx-c-ed__line--current { background: var(--sb-color-hover-fill); }
+.g-rx-c-ed__num { text-align: end; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: tabular-nums; color: var(--sb-color-text-muted); }
+.g-rx-c-ed__line--current .g-rx-c-ed__num { color: var(--sb-color-text); }
+.g-rx-c-ed__fold { display: grid; place-items: center; color: var(--sb-color-text-muted); }
+.g-rx-c-ed__text { white-space: pre; }
+.g-rx-c-ed__mono { font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); }
+.g-rx-c-ed__mk { color: var(--sb-color-text-muted); }
+.g-rx-c-ed__h { font-weight: var(--sb-type-title-weight); }
+.g-rx-c-ed__link { text-decoration: underline var(--sb-color-link) var(--sb-x-sebaro-link-underline-width); text-underline-offset: 0.2em; }
+.g-rx-c-ed__code { padding: 0 var(--sb-space-1); border-radius: var(--sb-radius-small); background: var(--sb-color-surface-sunken); font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); }
+.g-rx-c-ed__match, .g-rx-c-ed__pair { outline: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); outline-offset: -1px; }
+.g-rx-c-ed__match--current, .g-rx-c-ed__sel { background: var(--sb-color-selection); }
+.g-rx-c-ed__caret { display: inline-block; inline-size: 2px; block-size: 1.25em; margin-inline-start: 1px; vertical-align: text-bottom; background: var(--sb-color-accent); }
+.g-rx-c-ed--wrong .g-rx-c-ed__text { font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); }   /* wrong: Markdown in mono */
+.g-rx-c-ed--wrong .g-rx-c-ed__mk { color: var(--sb-color-accent); }                  /* wrong: markup in cobalt */
+.g-rx-c-ed--wrong .g-rx-c-ed__num { color: var(--sb-color-link); }                   /* wrong: line numbers in cobalt */
+.g-rx-c-ed--wrong .g-rx-c-ed__match { outline: 0; background: var(--sb-color-warning); color: var(--sb-color-on-warning); }   /* wrong: filled yellow match */

@@ -1,0 +1,199 @@
+<div class="g-examples g-rx-c-one">
+<div class="g-ex g-ex--do"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p><div class="g-ex__stage">
+<div class="g-rx-c-stack">
+<p class="g-rx-c-caption">Astro und Shiki: Theme „sebaro“ (spec/09 §17), dazu <code>tokens.css</code> auf der Seite und Shikis <code>pre</code> in <code>sb-code</code></p>
+<div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">JavaScript, astro.config.mjs</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="Astro-Konfiguration mit Theme sebaro"><code><span class="sb-tok-keyword">import</span> { defineConfig } <span class="sb-tok-keyword">from</span> <span class="sb-tok-string">"astro/config"</span>;
+<span class="sb-tok-keyword">import</span> sebaroTheme <span class="sb-tok-keyword">from</span> <span class="sb-tok-string">"./sebaro-shiki.json"</span>;   <span class="sb-tok-comment">// das Theme-JSON darunter</span>
+
+<span class="sb-tok-keyword">export</span> <span class="sb-tok-keyword">default</span> defineConfig({
+  markdown: { shikiConfig: { theme: sebaroTheme } },
+});</code></pre></div>
+<details class="g-source"><summary>Theme-JSON <code>sebaro-shiki.json</code> (Shiki, VS Code, Monaco, Sublime)</summary><div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">JSON, sebaro-shiki.json</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="Shiki-Theme sebaro als JSON"><code>{
+  "name": <span class="sb-tok-string">"sebaro"</span>,
+  "displayName": <span class="sb-tok-string">"sebaro (spec/01 §1.8, D67)"</span>,
+  "type": <span class="sb-tok-string">"light"</span>,
+  "colors": {
+    "editor.background": <span class="sb-tok-string">"var(--sb-color-surface-sunken)"</span>,
+    "editor.foreground": <span class="sb-tok-string">"var(--sb-color-text)"</span>
+  },
+  "tokenColors": [
+    {
+      "settings": {
+        "foreground": <span class="sb-tok-string">"var(--sb-color-text)"</span>
+      }
+    },
+    {
+      "scope": [
+        <span class="sb-tok-string">"keyword"</span>,
+        <span class="sb-tok-string">"storage"</span>,
+        <span class="sb-tok-string">"punctuation.decorator"</span>,
+        <span class="sb-tok-string">"meta.decorator entity.name.function"</span>,
+        <span class="sb-tok-string">"entity.name.function.decorator"</span>,
+        <span class="sb-tok-string">"punctuation.definition.decorator"</span>,
+        <span class="sb-tok-string">"entity.name.type.annotation"</span>,
+        <span class="sb-tok-string">"meta.attribute.rust"</span>,
+        <span class="sb-tok-string">"entity.name.function.macro"</span>,
+        <span class="sb-tok-string">"meta.preprocessor"</span>,
+        <span class="sb-tok-string">"entity.name.tag"</span>,
+        <span class="sb-tok-string">"keyword.control.at-rule"</span>,
+        <span class="sb-tok-string">"keyword.other.important"</span>
+      ],
+      "settings": {
+        "foreground": <span class="sb-tok-string">"var(--sb-syntax-keyword)"</span>,
+        "fontStyle": <span class="sb-tok-string">""</span>
+      }
+    },
+    {
+      "scope": [
+        <span class="sb-tok-string">"keyword.operator"</span>
+      ],
+      "settings": {
+        "foreground": <span class="sb-tok-string">"var(--sb-color-text)"</span>,
+        "fontStyle": <span class="sb-tok-string">""</span>
+      }
+    },
+    {
+      "scope": [
+        <span class="sb-tok-string">"keyword.operator.expression"</span>,
+        <span class="sb-tok-string">"keyword.operator.new"</span>,
+        <span class="sb-tok-string">"keyword.operator.word"</span>
+      ],
+      "settings": {
+        "foreground": <span class="sb-tok-string">"var(--sb-syntax-keyword)"</span>,
+        "fontStyle": <span class="sb-tok-string">""</span>
+      }
+    },
+    {
+      "scope": [
+        <span class="sb-tok-string">"string"</span>,
+        <span class="sb-tok-string">"string.regexp"</span>,
+        <span class="sb-tok-string">"punctuation.definition.string"</span>
+      ],
+      "settings": {
+        "foreground": <span class="sb-tok-string">"var(--sb-syntax-string)"</span>,
+        "fontStyle": <span class="sb-tok-string">""</span>
+      }
+    },
+    {
+      "scope": [
+        <span class="sb-tok-string">"constant.numeric"</span>,
+        <span class="sb-tok-string">"constant.language"</span>,
+        <span class="sb-tok-string">"constant.character"</span>,
+        <span class="sb-tok-string">"constant.other"</span>,
+        <span class="sb-tok-string">"variable.other.constant"</span>,
+        <span class="sb-tok-string">"variable.other.enummember"</span>,
+        <span class="sb-tok-string">"keyword.other.unit"</span>,
+        <span class="sb-tok-string">"support.constant.color"</span>
+      ],
+      "settings": {
+        "foreground": <span class="sb-tok-string">"var(--sb-syntax-constant)"</span>,
+        "fontStyle": <span class="sb-tok-string">""</span>
+      }
+    },
+    {
+      "scope": [
+        <span class="sb-tok-string">"meta.template.expression"</span>,
+        <span class="sb-tok-string">"meta.embedded.line"</span>,
+        <span class="sb-tok-string">"punctuation.definition.template-expression"</span>,
+        <span class="sb-tok-string">"punctuation.section.embedded"</span>,
+        <span class="sb-tok-string">"variable.string-escape"</span>,
+        <span class="sb-tok-string">"constant.character.format.placeholder"</span>,
+        <span class="sb-tok-string">"string.unquoted.argument.shell"</span>,
+        <span class="sb-tok-string">"string.unquoted.shell"</span>,
+        <span class="sb-tok-string">"constant.other.option"</span>,
+        <span class="sb-tok-string">"markup.inline.raw"</span>,
+        <span class="sb-tok-string">"string.other.link"</span>
+      ],
+      "settings": {
+        "foreground": <span class="sb-tok-string">"var(--sb-color-text)"</span>,
+        "fontStyle": <span class="sb-tok-string">""</span>
+      }
+    },
+    {
+      "scope": [
+        <span class="sb-tok-string">"comment"</span>,
+        <span class="sb-tok-string">"punctuation.definition.comment"</span>
+      ],
+      "settings": {
+        "foreground": <span class="sb-tok-string">"var(--sb-color-text-muted)"</span>,
+        "fontStyle": <span class="sb-tok-string">""</span>
+      }
+    },
+    {
+      "scope": [
+        <span class="sb-tok-string">"punctuation.definition.heading"</span>,
+        <span class="sb-tok-string">"punctuation.definition.bold"</span>,
+        <span class="sb-tok-string">"punctuation.definition.italic"</span>,
+        <span class="sb-tok-string">"punctuation.definition.list"</span>,
+        <span class="sb-tok-string">"punctuation.definition.quote"</span>,
+        <span class="sb-tok-string">"punctuation.definition.raw"</span>,
+        <span class="sb-tok-string">"punctuation.definition.link"</span>,
+        <span class="sb-tok-string">"punctuation.definition.metadata"</span>,
+        <span class="sb-tok-string">"punctuation.definition.markdown"</span>,
+        <span class="sb-tok-string">"meta.separator.markdown"</span>
+      ],
+      "settings": {
+        "foreground": <span class="sb-tok-string">"var(--sb-color-text-muted)"</span>,
+        "fontStyle": <span class="sb-tok-string">""</span>
+      }
+    },
+    {
+      "scope": [
+        <span class="sb-tok-string">"markup.underline.link"</span>
+      ],
+      "settings": {
+        "foreground": <span class="sb-tok-string">"var(--sb-color-text)"</span>,
+        "fontStyle": <span class="sb-tok-string">"underline"</span>
+      }
+    },
+    {
+      "scope": [
+        <span class="sb-tok-string">"invalid"</span>,
+        <span class="sb-tok-string">"invalid.illegal"</span>
+      ],
+      "settings": {
+        "foreground": <span class="sb-tok-string">"var(--sb-color-text)"</span>,
+        "fontStyle": <span class="sb-tok-string">"underline"</span>
+      }
+    }
+  ]
+}</code></pre></div></details>
+<p class="g-rx-c-caption">CodeMirror&nbsp;6 (novalis): <code>sebaroHighlight</code></p>
+<div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">TypeScript, CodeMirror 6</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="CodeMirror-HighlightStyle sebaroHighlight"><code><span class="sb-tok-keyword">import</span> { HighlightStyle } <span class="sb-tok-keyword">from</span> <span class="sb-tok-string">"@codemirror/language"</span>;
+<span class="sb-tok-keyword">import</span> { tags <span class="sb-tok-keyword">as</span> t } <span class="sb-tok-keyword">from</span> <span class="sb-tok-string">"@lezer/highlight"</span>;
+
+<span class="sb-tok-comment">/** sebaro code looks (spec/01 §1.8): three tones, comments grey, the rest ink; no bold or italic in code. */</span>
+<span class="sb-tok-keyword">export</span> <span class="sb-tok-keyword">const</span> sebaroHighlight = HighlightStyle.define([
+  { tag: [t.keyword, t.controlKeyword, t.definitionKeyword, t.moduleKeyword, t.operatorKeyword, t.modifier, t.self,
+          t.annotation, t.meta, t.macroName, t.tagName], color: <span class="sb-tok-string">"var(--sb-syntax-keyword)"</span> },
+  { tag: [t.string, t.special(t.string), t.regexp, t.character, t.attributeValue, t.docString],
+    color: <span class="sb-tok-string">"var(--sb-syntax-string)"</span> },
+  { tag: [t.number, t.integer, t.float, t.bool, t.null, t.atom, t.unit, t.color, t.escape, t.constant(t.variableName)],
+    color: <span class="sb-tok-string">"var(--sb-syntax-constant)"</span> },
+  { tag: [t.comment, t.lineComment, t.blockComment, t.docComment], color: <span class="sb-tok-string">"var(--sb-color-text-muted)"</span> },
+  { tag: t.invalid, textDecoration: <span class="sb-tok-string">"underline wavy var(--sb-color-danger) 2px"</span> },
+]);</code></pre></div>
+<p class="g-rx-c-caption">Android (Compose): <code>SebaroTheme.syntax.*</code>, auf Apple entsprechend <code>SebaroSyntax.*</code></p>
+<div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">Kotlin, Compose</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="Compose-Beispiel mit SpanStyle"><code><span class="sb-tok-keyword">val</span> zeile = buildAnnotatedString {
+    withStyle(SpanStyle(color = SebaroTheme.syntax.keyword)) { append(<span class="sb-tok-string">"val"</span>) }
+    append(<span class="sb-tok-string">" ziel = "</span>)
+    withStyle(SpanStyle(color = SebaroTheme.syntax.constant)) { append(<span class="sb-tok-string">"8"</span>) }
+}
+Text(zeile, style = SebaroTheme.typography.code)</code></pre></div>
+</div>
+</div><p class="g-ex__note">highlight.js, Prism und eigene <code>sb-tok-*</code>-Spans färbt <code>sebaro.css</code> von selbst; für alles andere gibt es diese fertigen Teile. Sie nutzen nur <code>var(--sb-*)</code>, so folgen Hell und Dunkel dem Modus ohne zweites Theme. Geprüft ist nur Shiki 1.29.2; den CodeMirror-Teil haben die Agenten nur gelesen, nicht ausgeführt.</p></div>
+<div class="g-ex g-ex--dont"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p><div class="g-ex__stage">
+<div class="g-rx-c-stack">
+<div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">HTML</span></div><pre tabindex="0" role="region" aria-label="HTML: zusätzliches highlight.js-Theme"><code><span class="sb-tok-comment">&lt;!-- zweites Farbschema neben sebaro.css --&gt;</span>
+&lt;<span class="sb-tok-keyword">link</span> rel=<span class="sb-tok-string">"stylesheet"</span> href=<span class="sb-tok-string">"sebaro/css/sebaro.css"</span>&gt;
+&lt;<span class="sb-tok-keyword">link</span> rel=<span class="sb-tok-string">"stylesheet"</span> href=<span class="sb-tok-string">"vendor/highlight/github-dark.css"</span>&gt;</code></pre></div>
+<div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">JavaScript</span></div><pre tabindex="0" role="region" aria-label="Standardtheme und eigene Hexwerte"><code>markdown: { shikiConfig: { theme: <span class="sb-tok-string">"github-light"</span> } },
+
+<span class="sb-tok-comment">// eigene Farben für dieses eine Projekt</span>
+HighlightStyle.define([
+  { tag: t.keyword, color: <span class="sb-tok-string">"#d73a49"</span>, fontWeight: <span class="sb-tok-string">"bold"</span> },
+  { tag: t.comment, color: <span class="sb-tok-string">"#6a737d"</span>, fontStyle: <span class="sb-tok-string">"italic"</span> },
+]);</code></pre></div>
+</div>
+</div><p class="g-ex__note">Ein zweites Theme-Stylesheet, ein Shiki-Standardtheme oder eigene Hexwerte überschreiben die Codetöne, bleiben im Dunkeln hell und bringen Fett und Kursiv zurück.</p></div>
+</div>

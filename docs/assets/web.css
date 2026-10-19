@@ -183,3 +183,6 @@
 .g-web-price { font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); font-variant-numeric: var(--sb-type-numeric-variant); }
 .g-web-yes, .g-web-no { display: inline-flex; align-items: center; gap: var(--sb-space-1); white-space: nowrap; }
 .g-web-no { color: var(--sb-color-text-muted); }
+
+/* Shiki theme block in the article case (TEC-08): a sentence between the two code blocks */
+.g-web-shiki-note { margin: var(--sb-space-3) 0; max-inline-size: 42em; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }

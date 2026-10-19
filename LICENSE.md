@@ -4,7 +4,7 @@ This repository is public so the guide can be read and used as a reference. Unle
 
 | What | Licence |
 |---|---|
-| Fonts in `docs/sebaro/fonts/` (Radio Canada, sebaro Mono = renamed IBM Plex Mono) | SIL Open Font License 1.1, licence texts next to the font files |
+| Fonts in `docs/sebaro/fonts/` (sebaro Sans and sebaro Mono) | SIL Open Font License 1.1, licence texts next to the font files (`sebaro-sans-OFL.txt`, `sebaro-mono-OFL.txt`) |
 | sebaro name, wordmark, logo, app signs and tiles (`docs/sebaro/brand/`) | all rights reserved |
 | everything else (texts, rules, page code, tools, icons, CSS) | all rights reserved for now; an open licence is an open owner decision (see `docs/ausblick.html`) |
 

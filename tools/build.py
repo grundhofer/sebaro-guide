@@ -317,7 +317,7 @@ def llms_txt() -> str:
               f"- [tokens.css]({SITE_URL}sebaro/tokens.css): every --sb-* custom property, light and dark",
               f"- [sebaro.css]({SITE_URL}sebaro/css/sebaro.css): reference components (sb-*)",
               f"- [sprite.svg]({SITE_URL}sebaro/icons/sprite.svg): icon sprite",
-              f"- [fonts.css]({SITE_URL}sebaro/fonts/fonts.css): self-hosted Radio Canada + sebaro Mono", ""]
+              f"- [fonts.css]({SITE_URL}sebaro/fonts/fonts.css): self-hosted sebaro Sans + sebaro Mono", ""]
     return "\n".join(lines)
 
 
@@ -337,6 +337,9 @@ def main() -> int:
     args = ap.parse_args()
     stale = []
     files = [Path(p).resolve() for p in args.pages] if args.pages else sorted(DOCS.glob("*.html"))
+    if not args.pages:
+        # keep the guide:tile blocks inside rule fragments fresh too (they are inlined into regeln.html)
+        files += sorted(EXAMPLES.glob("*.html"))
     targets = {p: fill(p.read_text(encoding="utf-8")) for p in files}
     if not args.pages:
         targets.update(outputs())

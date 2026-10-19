@@ -22,7 +22,9 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
 - [ ] Links: text-coloured word with 2 px cobalt underline; external links end in the external-link icon (LNK)
 
 ## Type and text
-- [ ] sebaro Sans for UI/prose/numbers; sebaro Mono only for code, IDs, versions (SCH)
+- [ ] sebaro Sans for UI/prose/numbers; sebaro Mono (Medium 500) only for code, IDs, versions; shortcuts as text with the
+      key glyphs („⇧⌘P“) (SCH, ICO)
+- [ ] Code only in the five looks (three tones, comments grey, rest ink), no bold or italic; errors and diffs not by colour alone (TXT, FAR)
 - [ ] du, verb + thing, concrete sentences; U+00A0 between number and unit; German thousands 10.000 (TXT)
 - [ ] Empty states have a useful sentence; errors say what happened and what to do (TXT)
 

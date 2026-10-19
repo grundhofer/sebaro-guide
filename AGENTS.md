@@ -42,7 +42,8 @@ messages and ADRs.
    over the view, no toast for the result. (AKT-05, EBE-05)
 8. **Motion**: new content enters from below, 8 px in 200 ms; only a fade with reduced motion or the app setting
    „Bewegung immer reduzieren“. (BEW-02, BEW-04)
-9. **Type**: sebaro Sans (renamed Radio Canada, D68) for everything, sebaro Mono (Medium 500, D70) only for code, IDs, versions; U+00A0 between number and unit,
+9. **Type**: sebaro Sans for everything, sebaro Mono (Medium 500, D70) only for code, IDs, versions; these are the only
+   two families (D71). Code only in the five looks, no bold or italic (TXT-10, FAR-11). U+00A0 between number and unit,
    German thousands `10.000`. (SCH-01, SCH-03, TXT-04)
 10. **Honest content**: no claim without proof; outflows stay visible; demo data is labelled „Beispieldaten“. (HAL-03, BEL-01, BEL-09)
 
@@ -72,7 +73,9 @@ never edits colours, fonts, icons or brand files by hand. `docs/sebaro/` is a **
 | Website, web app (plain CSS, Astro, React, Tailwind v4) | copy `docs/sebaro/` into your project as one folder, never edit inside it; wiring in `docs/sebaro/README.md` |
 | Tauri / macOS / Android (Compose) | with a sebaroDesign checkout: `python3 tools/export_system.py sebaro --target tauri|macos|android --out <dir> --product <id>` then `--verify <dir>` |
 
-Fonts are self-hosted (D18, D66, D68): sebaro Sans + sebaro Mono as variable WOFF2, key glyphs (⌘ ⇧ ⌥ ↩ …) included, for web and Tauri on macOS.
+Fonts are self-hosted (D18, D66, D68, D71): sebaro Sans + sebaro Mono, the only two families, as variable WOFF2 with
+the key glyphs (⌘ ⇧ ⌥ ⌃ ↩ ⎋ ⌫ ⇥ ↑ ↓ ← →) included, for web and Tauri on macOS; OFL texts in `docs/sebaro/fonts/web/`.
+Code highlighting (highlight.js, Prism, `sb-tok-*`) comes with `css/sebaro.css`; Shiki and CodeMirror see TEC-08.
 No request may leave for a foreign server (no Google Fonts, no CDNs, no analytics).
 
 ## 5 Changing this guide

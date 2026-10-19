@@ -160,7 +160,9 @@ th[aria-sort] .g-daten-sort { text-decoration: none; }
 .g-daten-diff li { display: grid; grid-template-columns: 2.5rem auto; padding-inline-end: var(--sb-space-4); white-space: pre; }
 .g-daten-diff__sign { padding-inline-start: var(--sb-space-4); color: var(--sb-color-text-muted); }
 .g-daten-diff li[data-change] .g-daten-diff__sign { color: var(--sb-color-text); }
-.g-daten-diff li[data-change="removed"] .g-daten-diff__text { text-decoration: line-through; text-decoration-color: var(--sb-color-text-muted); }
+.g-daten-diff li[data-change="removed"] { background: var(--sb-color-danger-subtle); }
+.g-daten-diff li[data-change="added"] { background: var(--sb-color-success-subtle); }
+.g-daten-diff__hunk { color: var(--sb-color-text-muted); }
 
 /* ------------------------------------------------------------------ code tones under the code block (FAR-11, D69) */
 .g-daten-tones { margin-block-start: var(--sb-space-4); }

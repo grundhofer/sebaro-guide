@@ -1,8 +1,8 @@
-/* generated — do not edit: tools/fonts.py build from fonts.json (sha256 26ee9d5a46226f62). */
+/* generated — do not edit: tools/fonts.py build from fonts.json (sha256 c6a5ee5f38668d1b). */
 /* Self-hosted OFL fonts (D18). URLs are relative to this file: serve it together with web/. */
 /* font-feature-settings is deliberately not set: enable tnum, zero, case … per role in your CSS. */
 
-/* sebaro Sans — roles: ui, display; licence: web/sebaro-sans-OFL.txt; a renamed Modified Version of "Radio Canada" (its licence reserves no font name; the new name is the system's choice) */
+/* sebaro Sans — roles: ui, display; licence: web/sebaro-sans-OFL.txt */
 @font-face {
   font-family: "sebaro Sans";
   src: url("web/sebaro-sans-latin-de.woff2") format("woff2");

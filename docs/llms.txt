@@ -22,4 +22,4 @@ Machine-readable rules: https://grundhofer.github.io/sebaro-guide/rules.json · 
 - [tokens.css](https://grundhofer.github.io/sebaro-guide/sebaro/tokens.css): every --sb-* custom property, light and dark
 - [sebaro.css](https://grundhofer.github.io/sebaro-guide/sebaro/css/sebaro.css): reference components (sb-*)
 - [sprite.svg](https://grundhofer.github.io/sebaro-guide/sebaro/icons/sprite.svg): icon sprite
-- [fonts.css](https://grundhofer.github.io/sebaro-guide/sebaro/fonts/fonts.css): self-hosted Radio Canada + sebaro Mono
+- [fonts.css](https://grundhofer.github.io/sebaro-guide/sebaro/fonts/fonts.css): self-hosted sebaro Sans + sebaro Mono

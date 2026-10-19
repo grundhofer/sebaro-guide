@@ -210,6 +210,23 @@ th[aria-sort] .g-desktop-sort { color: var(--sb-color-link); }
 /* code view: live token value under the token name (filled by guide.js from data-g-token) */
 .g-desktop-tokval { font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); color: var(--sb-color-text-muted); }
 
+/* editor (DSK-03, nachgebaut): sebaro.css has no editor classes; novalis sets the same values through CodeMirror (TEC-08).
+ * Markdown source in sebaro Sans, markup grey; ground bg; current line hover-fill; caret 2 px accent; matches framed. */
+.g-desktop-editor { padding-block: var(--sb-space-2); background: var(--sb-color-bg); color: var(--sb-color-text); font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); overflow-x: auto; }
+.g-desktop-editor__line { box-sizing: border-box; inline-size: max-content; min-inline-size: 100%; display: grid; grid-template-columns: var(--sb-space-10) var(--sb-space-6) minmax(0, 1fr); align-items: baseline; min-block-size: 1.5em; padding-inline-end: var(--sb-space-4); }
+.g-desktop-editor__line.is-current { background: var(--sb-color-hover-fill); }
+.g-desktop-editor__num { text-align: end; color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant); }
+.g-desktop-editor__line.is-current .g-desktop-editor__num { color: var(--sb-color-text); }
+.g-desktop-editor__fold { display: inline-grid; justify-content: center; align-self: center; color: var(--sb-color-text-muted); }
+.g-desktop-editor__text { white-space: pre; }
+.g-desktop-editor__line--code .g-desktop-editor__text { font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); }
+.g-desktop-md-mark { color: var(--sb-color-text-muted); }
+.g-desktop-md-heading { font-weight: var(--sb-type-title-weight); }
+.g-desktop-md-link { text-decoration: underline var(--sb-color-link) var(--sb-x-sebaro-link-underline-width); text-underline-offset: 0.2em; }
+.g-desktop-match { outline: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); }
+.g-desktop-match.is-current { background: var(--sb-color-selection); }
+.g-desktop-caret { display: inline-block; inline-size: 0; block-size: 1.25em; margin-inline: -1px; vertical-align: text-bottom; border-inline-start: 2px solid var(--sb-color-accent); }
+
 /* toast placement inside a window, right above the zone */
 .g-desktop-toastspot { display: flex; justify-content: center; padding: var(--sb-space-3) var(--sb-space-4); }
 

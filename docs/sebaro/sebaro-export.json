@@ -82,15 +82,15 @@
     {
       "path": "tokens.css",
       "source": "systems/sebaro/dist/tokens.css",
-      "sourceSha256": "423c2b5cd460d3570560684408248e6bb231420fb6b4b1264ec57a057d273342",
-      "sha256": "423c2b5cd460d3570560684408248e6bb231420fb6b4b1264ec57a057d273342",
+      "sourceSha256": "830df30d7f458c550f7c6d48fced32b794dd3c80dcc17a9a0bdaee3db094860a",
+      "sha256": "830df30d7f458c550f7c6d48fced32b794dd3c80dcc17a9a0bdaee3db094860a",
       "bytes": 31262
     },
     {
       "path": "tokens.tailwind.css",
       "source": "systems/sebaro/dist/tokens.tailwind.css",
-      "sourceSha256": "e467428c01c250436b073eee522c8e76f0ffd659e3bca4306bf366c625adc347",
-      "sha256": "e467428c01c250436b073eee522c8e76f0ffd659e3bca4306bf366c625adc347",
+      "sourceSha256": "a1f304975c8ba7f5d4fcf6f3239adb4f0473d09993ea64e378ca53f263be7f53",
+      "sha256": "a1f304975c8ba7f5d4fcf6f3239adb4f0473d09993ea64e378ca53f263be7f53",
       "bytes": 9368
     },
     {
@@ -103,9 +103,9 @@
     {
       "path": "fonts/fonts.css",
       "source": "systems/sebaro/fonts/fonts.css",
-      "sourceSha256": "f813b79b36f55b1f3d3872f8f0d791b5bff5645b009d7024c8ae7a8591d68674",
-      "sha256": "f813b79b36f55b1f3d3872f8f0d791b5bff5645b009d7024c8ae7a8591d68674",
-      "bytes": 2249
+      "sourceSha256": "c10d1061c7a7687e73b9030b9660dafa9d81876ac787328c8bc16bbd6d929c7a",
+      "sha256": "c10d1061c7a7687e73b9030b9660dafa9d81876ac787328c8bc16bbd6d929c7a",
+      "bytes": 2130
     },
     {
       "path": "fonts/web/sebaro-sans-latin-de.woff2",
@@ -145,429 +145,429 @@
     {
       "path": "icons/sprite.svg",
       "source": "systems/sebaro/icons/dist/sprite.svg",
-      "sourceSha256": "9791673e36714d49f977df4cffab1060b506c42b6e132254c835e8368445eac4",
-      "sha256": "9791673e36714d49f977df4cffab1060b506c42b6e132254c835e8368445eac4",
+      "sourceSha256": "10201f18cebae12b93c6487521de825cb83c11b059f16fdea632e289e3347be9",
+      "sha256": "10201f18cebae12b93c6487521de825cb83c11b059f16fdea632e289e3347be9",
       "bytes": 37128
     },
     {
       "path": "icons/sprite.css",
       "source": "systems/sebaro/icons/dist/sprite.css",
-      "sourceSha256": "eb49110d427cfbdf2471803cd0f5c8d10d7555ec55c70481630f9bf8cff11c3c",
-      "sha256": "eb49110d427cfbdf2471803cd0f5c8d10d7555ec55c70481630f9bf8cff11c3c",
+      "sourceSha256": "15855e9a9f35adf80544b3a156b487f00b3dc1447aa525101de5bbc447fe20a4",
+      "sha256": "15855e9a9f35adf80544b3a156b487f00b3dc1447aa525101de5bbc447fe20a4",
       "bytes": 1831
     },
     {
       "path": "icons/icons.json",
       "source": "systems/sebaro/icons/dist/icons.json",
-      "sourceSha256": "144830246f71a83b1bfba1aa1d4464a3ec8bb68d4bb26ede04b1e9508b0d8de9",
-      "sha256": "144830246f71a83b1bfba1aa1d4464a3ec8bb68d4bb26ede04b1e9508b0d8de9",
-      "bytes": 67193
+      "sourceSha256": "2eaa466a96ade1b427971949748bf95f4f1709084012bdf6e624368702690afa",
+      "sha256": "2eaa466a96ade1b427971949748bf95f4f1709084012bdf6e624368702690afa",
+      "bytes": 67192
     },
     {
       "path": "brand/logo/lockup-horizontal.dark.svg",
       "source": "systems/sebaro/brand/src/lockup-horizontal.dark.svg",
-      "sourceSha256": "68238895b1314edb2674e48e20e2e4cc411a059276fa3ef92568269b08dbc4f9",
-      "sha256": "68238895b1314edb2674e48e20e2e4cc411a059276fa3ef92568269b08dbc4f9",
-      "bytes": 4083
+      "sourceSha256": "c28e77621a4e1cf849e86663b48b310e7f284bebdb9ea1f557674baf7013487b",
+      "sha256": "c28e77621a4e1cf849e86663b48b310e7f284bebdb9ea1f557674baf7013487b",
+      "bytes": 4082
     },
     {
       "path": "brand/logo/lockup-horizontal.svg",
       "source": "systems/sebaro/brand/src/lockup-horizontal.svg",
-      "sourceSha256": "eb6657e6ce4941fc97cf9548f7da9fa1640eb59b65d05a09892cf1eb3b536d54",
-      "sha256": "eb6657e6ce4941fc97cf9548f7da9fa1640eb59b65d05a09892cf1eb3b536d54",
-      "bytes": 5622
+      "sourceSha256": "07bfb658d855a52ba6a2db5cd23968efd04269b3c585197617eb57cacc7fdade",
+      "sha256": "07bfb658d855a52ba6a2db5cd23968efd04269b3c585197617eb57cacc7fdade",
+      "bytes": 5621
     },
     {
       "path": "brand/logo/lockup-stacked.dark.svg",
       "source": "systems/sebaro/brand/src/lockup-stacked.dark.svg",
-      "sourceSha256": "a968b10d71ef3790fca8dc4e9db0756d2eb3cee8283cdd629c50cd10f686994d",
-      "sha256": "a968b10d71ef3790fca8dc4e9db0756d2eb3cee8283cdd629c50cd10f686994d",
-      "bytes": 4038
+      "sourceSha256": "848d4e8515e40653442f42c84b52ed2e3cf41d793ddffb6681ba0d0bb09a4854",
+      "sha256": "848d4e8515e40653442f42c84b52ed2e3cf41d793ddffb6681ba0d0bb09a4854",
+      "bytes": 4037
     },
     {
       "path": "brand/logo/lockup-stacked.svg",
       "source": "systems/sebaro/brand/src/lockup-stacked.svg",
-      "sourceSha256": "1751d02778edf9dc9f932de4e942076fdc1a76be19fae5295a738d01d5025e65",
-      "sha256": "1751d02778edf9dc9f932de4e942076fdc1a76be19fae5295a738d01d5025e65",
-      "bytes": 5580
+      "sourceSha256": "96cd6b6ce4664dcdd575a869eb188a378ff4e5fa1192c737ccb4b1c135bc82e4",
+      "sha256": "96cd6b6ce4664dcdd575a869eb188a378ff4e5fa1192c737ccb4b1c135bc82e4",
+      "bytes": 5579
     },
     {
       "path": "brand/logo/mark.dark.svg",
       "source": "systems/sebaro/brand/src/mark.dark.svg",
-      "sourceSha256": "f8dc4d9cdb4bb9e3205dfcdb8736a197f20e8bfe3e07822e40b7e8bce96ab03a",
-      "sha256": "f8dc4d9cdb4bb9e3205dfcdb8736a197f20e8bfe3e07822e40b7e8bce96ab03a",
-      "bytes": 893
+      "sourceSha256": "6b350db229cb301c4f6c8854bad9f2a60042580438e03a08dcf1af343482f1a6",
+      "sha256": "6b350db229cb301c4f6c8854bad9f2a60042580438e03a08dcf1af343482f1a6",
+      "bytes": 892
     },
     {
       "path": "brand/logo/mark.svg",
       "source": "systems/sebaro/brand/src/mark.svg",
-      "sourceSha256": "602f7f61e9ee9a0894eb7c8e46328432b539d384403eefec0552b2c2ef3b5ab3",
-      "sha256": "602f7f61e9ee9a0894eb7c8e46328432b539d384403eefec0552b2c2ef3b5ab3",
-      "bytes": 894
+      "sourceSha256": "99e8e4d6c5b1f0dcf25150451c9511a25c290ad6fecc879e1799b5dd07f219d7",
+      "sha256": "99e8e4d6c5b1f0dcf25150451c9511a25c290ad6fecc879e1799b5dd07f219d7",
+      "bytes": 893
     },
     {
       "path": "brand/logo/wordmark.dark.svg",
       "source": "systems/sebaro/brand/src/wordmark.dark.svg",
-      "sourceSha256": "bdf088a774d89a0511a24248cf971978329677ac44c555d2bad4c053fe23138f",
-      "sha256": "bdf088a774d89a0511a24248cf971978329677ac44c555d2bad4c053fe23138f",
-      "bytes": 3987
+      "sourceSha256": "4d9bd3e562b0cb544c071ea70b7d5ef39255be258963f881aabd1ae28d651d50",
+      "sha256": "4d9bd3e562b0cb544c071ea70b7d5ef39255be258963f881aabd1ae28d651d50",
+      "bytes": 3984
     },
     {
       "path": "brand/logo/wordmark.svg",
       "source": "systems/sebaro/brand/src/wordmark.svg",
-      "sourceSha256": "182d50e93870100660e856b6e0f8a08133932ae5bdba9df435bdf8c5e45ce775",
-      "sha256": "182d50e93870100660e856b6e0f8a08133932ae5bdba9df435bdf8c5e45ce775",
-      "bytes": 5525
+      "sourceSha256": "da634eebc27886c7217123dc5aa3f8fe4accbf0fead96e90ed99d93efec84f33",
+      "sha256": "da634eebc27886c7217123dc5aa3f8fe4accbf0fead96e90ed99d93efec84f33",
+      "bytes": 5522
     },
     {
       "path": "brand/logo/variants/lockup-horizontal-large.dark.svg",
       "source": "systems/sebaro/brand/src/variants/lockup-horizontal-large.dark.svg",
-      "sourceSha256": "8aa60333eb0932cf66ee462cdf00927b129ac0b1c8ebd5a304494d58b346a458",
-      "sha256": "8aa60333eb0932cf66ee462cdf00927b129ac0b1c8ebd5a304494d58b346a458",
-      "bytes": 4004
+      "sourceSha256": "11e757e72141cdd4e46424375f34930827a00953429a51c412e04fa8ae6795b1",
+      "sha256": "11e757e72141cdd4e46424375f34930827a00953429a51c412e04fa8ae6795b1",
+      "bytes": 4003
     },
     {
       "path": "brand/logo/variants/lockup-horizontal-large.svg",
       "source": "systems/sebaro/brand/src/variants/lockup-horizontal-large.svg",
-      "sourceSha256": "7d5c2bb097434f3846381f132b72faf44fb637a53118f31a4e163bbe6be2347a",
-      "sha256": "7d5c2bb097434f3846381f132b72faf44fb637a53118f31a4e163bbe6be2347a",
-      "bytes": 5543
+      "sourceSha256": "228e123fc01775a0e56e8b0dd0db8417943781aec0a657ef6fa91cf702934d7e",
+      "sha256": "228e123fc01775a0e56e8b0dd0db8417943781aec0a657ef6fa91cf702934d7e",
+      "bytes": 5542
     },
     {
       "path": "brand/logo/variants/lockup-horizontal-mono.svg",
       "source": "systems/sebaro/brand/src/variants/lockup-horizontal-mono.svg",
-      "sourceSha256": "dceb56b491bf49ed435528d65024a0042ecc028ef894f11905a0f94ab82a5c39",
-      "sha256": "dceb56b491bf49ed435528d65024a0042ecc028ef894f11905a0f94ab82a5c39",
-      "bytes": 5561
+      "sourceSha256": "55e9d2283197cc012a9f1e2fbdf3eca68eb16b7bbe6d1acb0bcff58be17835b0",
+      "sha256": "55e9d2283197cc012a9f1e2fbdf3eca68eb16b7bbe6d1acb0bcff58be17835b0",
+      "bytes": 5560
     },
     {
       "path": "brand/logo/variants/mark-large.dark.svg",
       "source": "systems/sebaro/brand/src/variants/mark-large.dark.svg",
-      "sourceSha256": "3b33459b7e7d02ad8c02ff6a1cb618114abe3f38fce0b31e6a531c8984468c3b",
-      "sha256": "3b33459b7e7d02ad8c02ff6a1cb618114abe3f38fce0b31e6a531c8984468c3b",
-      "bytes": 820
+      "sourceSha256": "c7de670e225464c1eb954369e85354bcbe3e46a03288391ba1410deb9131d1e3",
+      "sha256": "c7de670e225464c1eb954369e85354bcbe3e46a03288391ba1410deb9131d1e3",
+      "bytes": 819
     },
     {
       "path": "brand/logo/variants/mark-large.svg",
       "source": "systems/sebaro/brand/src/variants/mark-large.svg",
-      "sourceSha256": "bae1ef789e546aece2a0d3b47c751b90d44052ed5df66ee800083974d3fc7b2f",
-      "sha256": "bae1ef789e546aece2a0d3b47c751b90d44052ed5df66ee800083974d3fc7b2f",
-      "bytes": 821
+      "sourceSha256": "988a93dfea42c28c0fc49407df64bb86c96e2ffc814d556e1e78d214aa7ede85",
+      "sha256": "988a93dfea42c28c0fc49407df64bb86c96e2ffc814d556e1e78d214aa7ede85",
+      "bytes": 820
     },
     {
       "path": "brand/logo/variants/mark-mono.svg",
       "source": "systems/sebaro/brand/src/variants/mark-mono.svg",
-      "sourceSha256": "d4054405f9b6c0f02ce9d8349ddf4855c8199725593137ae51860f5089f9f224",
-      "sha256": "d4054405f9b6c0f02ce9d8349ddf4855c8199725593137ae51860f5089f9f224",
-      "bytes": 741
+      "sourceSha256": "49dd3633d2605693140ef926c8b2de3911d270344aeef72d63e5fe5325cbd7dc",
+      "sha256": "49dd3633d2605693140ef926c8b2de3911d270344aeef72d63e5fe5325cbd7dc",
+      "bytes": 740
     },
     {
       "path": "brand/inline/lockup-horizontal-large.svg",
       "source": "systems/sebaro/brand/inline/lockup-horizontal-large.svg",
-      "sourceSha256": "5b4bb310c9b3936dcd181c65b069836e1234bbe4c237853af0804b592d81fe05",
-      "sha256": "5b4bb310c9b3936dcd181c65b069836e1234bbe4c237853af0804b592d81fe05",
-      "bytes": 5719
+      "sourceSha256": "7524d4c1686e4952ca22088314378703c1e396dea88e512695808256c782599f",
+      "sha256": "7524d4c1686e4952ca22088314378703c1e396dea88e512695808256c782599f",
+      "bytes": 5718
     },
     {
       "path": "brand/inline/lockup-horizontal.svg",
       "source": "systems/sebaro/brand/inline/lockup-horizontal.svg",
-      "sourceSha256": "a10c309a417e5a5bd127876b8888befc7d1ceac06d0dc829c68006da3374ad53",
-      "sha256": "a10c309a417e5a5bd127876b8888befc7d1ceac06d0dc829c68006da3374ad53",
-      "bytes": 5718
+      "sourceSha256": "684f2e4b347f8b338f4a79118d2d7f6e030b3c5ef22f8c595d3cf5722a66915d",
+      "sha256": "684f2e4b347f8b338f4a79118d2d7f6e030b3c5ef22f8c595d3cf5722a66915d",
+      "bytes": 5717
     },
     {
       "path": "brand/inline/sign-coden-small.svg",
       "source": "systems/sebaro/brand/inline/sign-coden-small.svg",
-      "sourceSha256": "6bf93a7ab4ec7f7b4a180b9a226f6f856105ade64b8c06df26cf1f64993992cc",
-      "sha256": "6bf93a7ab4ec7f7b4a180b9a226f6f856105ade64b8c06df26cf1f64993992cc",
-      "bytes": 607
+      "sourceSha256": "fd8b0cff9f1514ef7d4f1c953cee2f6041890fad94c64cc0b43165f50e15c588",
+      "sha256": "fd8b0cff9f1514ef7d4f1c953cee2f6041890fad94c64cc0b43165f50e15c588",
+      "bytes": 606
     },
     {
       "path": "brand/inline/sign-coden.svg",
       "source": "systems/sebaro/brand/inline/sign-coden.svg",
-      "sourceSha256": "158878d1476bde8bc8e20a2fd9418e33c044c1683eb1e3223c069b04a05859c2",
-      "sha256": "158878d1476bde8bc8e20a2fd9418e33c044c1683eb1e3223c069b04a05859c2",
-      "bytes": 590
+      "sourceSha256": "98a43fb3f53829e8c8bb9bfb1b8162935c1a9eed01bf053152c915c52e58b4ef",
+      "sha256": "98a43fb3f53829e8c8bb9bfb1b8162935c1a9eed01bf053152c915c52e58b4ef",
+      "bytes": 589
     },
     {
       "path": "brand/inline/sign-compass-small.svg",
       "source": "systems/sebaro/brand/inline/sign-compass-small.svg",
-      "sourceSha256": "a0c1f1bf3d304cf8eb0feaafee458121968e71aa14f32839a2d45c89c38f785c",
-      "sha256": "a0c1f1bf3d304cf8eb0feaafee458121968e71aa14f32839a2d45c89c38f785c",
-      "bytes": 667
+      "sourceSha256": "3e99a7227109061fb88182d784fc3b649a72e7f9e056dc312192a454d76f4da6",
+      "sha256": "3e99a7227109061fb88182d784fc3b649a72e7f9e056dc312192a454d76f4da6",
+      "bytes": 666
     },
     {
       "path": "brand/inline/sign-compass.svg",
       "source": "systems/sebaro/brand/inline/sign-compass.svg",
-      "sourceSha256": "6d6f735308505222b28e02d40bbd7d8b4fecd9e60ce029cd86bebe639d87ce3f",
-      "sha256": "6d6f735308505222b28e02d40bbd7d8b4fecd9e60ce029cd86bebe639d87ce3f",
-      "bytes": 650
+      "sourceSha256": "8fd76aa06ce8baab7b1353a07ea0668fb8b53f067c8b2ecae52760d5ef4e0d01",
+      "sha256": "8fd76aa06ce8baab7b1353a07ea0668fb8b53f067c8b2ecae52760d5ef4e0d01",
+      "bytes": 649
     },
     {
       "path": "brand/inline/sign-habittracker-small.svg",
       "source": "systems/sebaro/brand/inline/sign-habittracker-small.svg",
-      "sourceSha256": "22d876b2e7a910ed4212363e71d82c8e3c3a63e0199c0d5aed052b946f7b4923",
-      "sha256": "22d876b2e7a910ed4212363e71d82c8e3c3a63e0199c0d5aed052b946f7b4923",
-      "bytes": 778
+      "sourceSha256": "a8f2360acaa1b2533396ad95a48b986032ace375a4279716c977db2555d240a5",
+      "sha256": "a8f2360acaa1b2533396ad95a48b986032ace375a4279716c977db2555d240a5",
+      "bytes": 777
     },
     {
       "path": "brand/inline/sign-habittracker.svg",
       "source": "systems/sebaro/brand/inline/sign-habittracker.svg",
-      "sourceSha256": "59f7f6fc69191cf6c6b2344d8fdb1cee636166c1f0bbee08c2843a677a24f41c",
-      "sha256": "59f7f6fc69191cf6c6b2344d8fdb1cee636166c1f0bbee08c2843a677a24f41c",
-      "bytes": 759
+      "sourceSha256": "5e04f48c0977d9cd6f3e676d9462c27530eaace7a3024777dee19e9caf6e9b38",
+      "sha256": "5e04f48c0977d9cd6f3e676d9462c27530eaace7a3024777dee19e9caf6e9b38",
+      "bytes": 758
     },
     {
       "path": "brand/inline/sign-intervaltimer-small.svg",
       "source": "systems/sebaro/brand/inline/sign-intervaltimer-small.svg",
-      "sourceSha256": "a4dade65333fe76c5b5c214c5e8ae52f817107eb0c82e2f664b2004afd30c252",
-      "sha256": "a4dade65333fe76c5b5c214c5e8ae52f817107eb0c82e2f664b2004afd30c252",
-      "bytes": 518
+      "sourceSha256": "120f3daeb8abbe18254895c2bbb785e4b214f7ce7f574d72b8398a402617ebdc",
+      "sha256": "120f3daeb8abbe18254895c2bbb785e4b214f7ce7f574d72b8398a402617ebdc",
+      "bytes": 517
     },
     {
       "path": "brand/inline/sign-intervaltimer.svg",
       "source": "systems/sebaro/brand/inline/sign-intervaltimer.svg",
-      "sourceSha256": "b38a262008600b35f260abb00e53b20f234042d5aa8cd9985ac47ae94dc5ab9b",
-      "sha256": "b38a262008600b35f260abb00e53b20f234042d5aa8cd9985ac47ae94dc5ab9b",
-      "bytes": 499
+      "sourceSha256": "268cd26702a577ca2fe845fc0cd982e802900ff803320e5ff53200b9136a1162",
+      "sha256": "268cd26702a577ca2fe845fc0cd982e802900ff803320e5ff53200b9136a1162",
+      "bytes": 498
     },
     {
       "path": "brand/inline/sign-novalis-small.svg",
       "source": "systems/sebaro/brand/inline/sign-novalis-small.svg",
-      "sourceSha256": "3b17670a5e07c084c932fe442c3fbfec540d4bebbcef3f17cda588f4a4a11e8e",
-      "sha256": "3b17670a5e07c084c932fe442c3fbfec540d4bebbcef3f17cda588f4a4a11e8e",
-      "bytes": 591
+      "sourceSha256": "3f7fdc3de9f570dd162296ac534ee55a04089382516e4a0c89cafd3989fe7b79",
+      "sha256": "3f7fdc3de9f570dd162296ac534ee55a04089382516e4a0c89cafd3989fe7b79",
+      "bytes": 590
     },
     {
       "path": "brand/inline/sign-novalis.svg",
       "source": "systems/sebaro/brand/inline/sign-novalis.svg",
-      "sourceSha256": "5a47f00205b10cd62844cc8afce0abe4136327e09be5ea10f2b548c166533ddb",
-      "sha256": "5a47f00205b10cd62844cc8afce0abe4136327e09be5ea10f2b548c166533ddb",
-      "bytes": 570
+      "sourceSha256": "cced18120d6c78243b3a4d1ed22224125f9a3743d6b73901089c988a61e20dcf",
+      "sha256": "cced18120d6c78243b3a4d1ed22224125f9a3743d6b73901089c988a61e20dcf",
+      "bytes": 569
     },
     {
       "path": "brand/inline/sign-retrobeam-small.svg",
       "source": "systems/sebaro/brand/inline/sign-retrobeam-small.svg",
-      "sourceSha256": "beffd6970a16dd358e0517b4bad13e8a16d8d6368d87f42fce842be8aef22252",
-      "sha256": "beffd6970a16dd358e0517b4bad13e8a16d8d6368d87f42fce842be8aef22252",
-      "bytes": 622
+      "sourceSha256": "1646b830ecc48a35887977844b82404b4bcba2808be0252123f273ba00430036",
+      "sha256": "1646b830ecc48a35887977844b82404b4bcba2808be0252123f273ba00430036",
+      "bytes": 621
     },
     {
       "path": "brand/inline/sign-retrobeam.svg",
       "source": "systems/sebaro/brand/inline/sign-retrobeam.svg",
-      "sourceSha256": "29fab3627598e78296b2e248d43d32e6831b0246e4ec751d6d24cb9c82b75850",
-      "sha256": "29fab3627598e78296b2e248d43d32e6831b0246e4ec751d6d24cb9c82b75850",
-      "bytes": 601
+      "sourceSha256": "9753bf3bd88caafb0d48893cb0c3d29b0a55c6d4c2f22f11e513ed4fabec5b14",
+      "sha256": "9753bf3bd88caafb0d48893cb0c3d29b0a55c6d4c2f22f11e513ed4fabec5b14",
+      "bytes": 600
     },
     {
       "path": "brand/inline/sign-studio-small.svg",
       "source": "systems/sebaro/brand/inline/sign-studio-small.svg",
-      "sourceSha256": "8d8d7ee752b87567ad166bce20cd04a3d9344dc8db51d89142caab6188a4f36e",
-      "sha256": "8d8d7ee752b87567ad166bce20cd04a3d9344dc8db51d89142caab6188a4f36e",
-      "bytes": 752
+      "sourceSha256": "aa7bcc6fae98b410cdb3fd0132626d1ef026370482bb934ee3794ea279fc9ca5",
+      "sha256": "aa7bcc6fae98b410cdb3fd0132626d1ef026370482bb934ee3794ea279fc9ca5",
+      "bytes": 751
     },
     {
       "path": "brand/inline/sign-studio.svg",
       "source": "systems/sebaro/brand/inline/sign-studio.svg",
-      "sourceSha256": "3b943b1ec8de1cd7a1731b6bef3cd97344095f61d63608b65d4e58417551694b",
-      "sha256": "3b943b1ec8de1cd7a1731b6bef3cd97344095f61d63608b65d4e58417551694b",
-      "bytes": 733
+      "sourceSha256": "e2f2da5181a939bfb768ae961b9e808b2ba8044da8aff751e122ef1323e03617",
+      "sha256": "e2f2da5181a939bfb768ae961b9e808b2ba8044da8aff751e122ef1323e03617",
+      "bytes": 732
     },
     {
       "path": "brand/inline/sign-tagwerk-small.svg",
       "source": "systems/sebaro/brand/inline/sign-tagwerk-small.svg",
-      "sourceSha256": "477f11d135ebb8c7b6db8c36352b85c88da9f9cb2274158ccaade1bd9b031448",
-      "sha256": "477f11d135ebb8c7b6db8c36352b85c88da9f9cb2274158ccaade1bd9b031448",
-      "bytes": 505
+      "sourceSha256": "75e1105e3800ec112949adc99824bd717792b360f261b0c7be160ced00cf82ce",
+      "sha256": "75e1105e3800ec112949adc99824bd717792b360f261b0c7be160ced00cf82ce",
+      "bytes": 504
     },
     {
       "path": "brand/inline/sign-tagwerk.svg",
       "source": "systems/sebaro/brand/inline/sign-tagwerk.svg",
-      "sourceSha256": "9cc1525d53ab69fb079972257aff1eee1e2f320893d8d93b2cfd057691c2035b",
-      "sha256": "9cc1525d53ab69fb079972257aff1eee1e2f320893d8d93b2cfd057691c2035b",
-      "bytes": 486
+      "sourceSha256": "f4c855cf8d2be72d04e907feff61122ac0863f1510bc6cf1f1c130e967e20aaa",
+      "sha256": "f4c855cf8d2be72d04e907feff61122ac0863f1510bc6cf1f1c130e967e20aaa",
+      "bytes": 485
     },
     {
       "path": "brand/inline/sign-tally-small.svg",
       "source": "systems/sebaro/brand/inline/sign-tally-small.svg",
-      "sourceSha256": "0cde7729add4dfdd6749ea15d645868154d947050beb0a7d161a5a5380556e27",
-      "sha256": "0cde7729add4dfdd6749ea15d645868154d947050beb0a7d161a5a5380556e27",
-      "bytes": 833
+      "sourceSha256": "8f6d0e420bf46f5f5d73e73cbd19ed5647c8825006c69b1aa0f1abc199fdbfef",
+      "sha256": "8f6d0e420bf46f5f5d73e73cbd19ed5647c8825006c69b1aa0f1abc199fdbfef",
+      "bytes": 832
     },
     {
       "path": "brand/inline/sign-tally.svg",
       "source": "systems/sebaro/brand/inline/sign-tally.svg",
-      "sourceSha256": "a642ade25dfbcedb559a4989b6751e2b9ff567d9833baf73469bc4defa5db95c",
-      "sha256": "a642ade25dfbcedb559a4989b6751e2b9ff567d9833baf73469bc4defa5db95c",
-      "bytes": 944
+      "sourceSha256": "ca62933381cd7398751ed50dbf42bccf2e8b8b98b4123acf18cbb0a8158ffa34",
+      "sha256": "ca62933381cd7398751ed50dbf42bccf2e8b8b98b4123acf18cbb0a8158ffa34",
+      "bytes": 943
     },
     {
       "path": "brand/inline/sign-waterreminder-small.svg",
       "source": "systems/sebaro/brand/inline/sign-waterreminder-small.svg",
-      "sourceSha256": "d2cb1f569e90a28e58e4910db9e944412c41c771483a0e0df0956ba1935b927f",
-      "sha256": "d2cb1f569e90a28e58e4910db9e944412c41c771483a0e0df0956ba1935b927f",
-      "bytes": 569
+      "sourceSha256": "41fcb82f982724f09de7bb1a059ea11a622ab475e1babee80cf257e7c17af01d",
+      "sha256": "41fcb82f982724f09de7bb1a059ea11a622ab475e1babee80cf257e7c17af01d",
+      "bytes": 568
     },
     {
       "path": "brand/inline/sign-waterreminder.svg",
       "source": "systems/sebaro/brand/inline/sign-waterreminder.svg",
-      "sourceSha256": "8a6df663d82ada77b81af7022654355c6f76517c44dd36254b927d95ac3818e9",
-      "sha256": "8a6df663d82ada77b81af7022654355c6f76517c44dd36254b927d95ac3818e9",
-      "bytes": 550
+      "sourceSha256": "87efa8fe15e82445288b9ef6222471b0f62aa05293d008c53858200105a32484",
+      "sha256": "87efa8fe15e82445288b9ef6222471b0f62aa05293d008c53858200105a32484",
+      "bytes": 549
     },
     {
       "path": "brand/inline/tile-coden-small.svg",
       "source": "systems/sebaro/brand/inline/tile-coden-small.svg",
-      "sourceSha256": "55e9bed0dfe4174899adf74368edd8bfb52315698beb5b91499fbda679908948",
-      "sha256": "55e9bed0dfe4174899adf74368edd8bfb52315698beb5b91499fbda679908948",
-      "bytes": 919
+      "sourceSha256": "21c6174cda8fb174b2cfc6ea9722f0f094245b92b47a3ceeef2a642c0dc279af",
+      "sha256": "21c6174cda8fb174b2cfc6ea9722f0f094245b92b47a3ceeef2a642c0dc279af",
+      "bytes": 918
     },
     {
       "path": "brand/inline/tile-coden.svg",
       "source": "systems/sebaro/brand/inline/tile-coden.svg",
-      "sourceSha256": "bd830ea7c143f66589d18220c1beb89451536873dd9274e3de8aedb2d90ecf37",
-      "sha256": "bd830ea7c143f66589d18220c1beb89451536873dd9274e3de8aedb2d90ecf37",
-      "bytes": 2551
+      "sourceSha256": "ab6c3948082205672adb4a999b8a10d0216313f559fa7aaa1692022083c96784",
+      "sha256": "ab6c3948082205672adb4a999b8a10d0216313f559fa7aaa1692022083c96784",
+      "bytes": 2550
     },
     {
       "path": "brand/inline/tile-compass-small.svg",
       "source": "systems/sebaro/brand/inline/tile-compass-small.svg",
-      "sourceSha256": "3f0646b9fa06dec1e1b734e33733c3b9b0ba6843834bc6db573dff5bc7508590",
-      "sha256": "3f0646b9fa06dec1e1b734e33733c3b9b0ba6843834bc6db573dff5bc7508590",
-      "bytes": 976
+      "sourceSha256": "7c0b6504fe016dae9ff5be78f9d6b4c8695f1e9cd3c03d15d58bed6c49c8b816",
+      "sha256": "7c0b6504fe016dae9ff5be78f9d6b4c8695f1e9cd3c03d15d58bed6c49c8b816",
+      "bytes": 975
     },
     {
       "path": "brand/inline/tile-compass.svg",
       "source": "systems/sebaro/brand/inline/tile-compass.svg",
-      "sourceSha256": "76aaa1776c6d15a558c222fb915218dbe70f78412e9786dc42599d0ba130b4ec",
-      "sha256": "76aaa1776c6d15a558c222fb915218dbe70f78412e9786dc42599d0ba130b4ec",
-      "bytes": 2627
+      "sourceSha256": "bc73eb2e6978ea0981e5aab9ccef4ecec5d93aee68e1d6df8d756bc954b49687",
+      "sha256": "bc73eb2e6978ea0981e5aab9ccef4ecec5d93aee68e1d6df8d756bc954b49687",
+      "bytes": 2626
     },
     {
       "path": "brand/inline/tile-habittracker-small.svg",
       "source": "systems/sebaro/brand/inline/tile-habittracker-small.svg",
-      "sourceSha256": "3aaa6830af358cbd531a9ab1920f164c4d43eef5b87401d7cd6913a6d2cb93a8",
-      "sha256": "3aaa6830af358cbd531a9ab1920f164c4d43eef5b87401d7cd6913a6d2cb93a8",
-      "bytes": 1085
+      "sourceSha256": "f60b02d2e5b05fd29949bac1f8977b358bbf703a176c1e34c5e2367a8e260d65",
+      "sha256": "f60b02d2e5b05fd29949bac1f8977b358bbf703a176c1e34c5e2367a8e260d65",
+      "bytes": 1084
     },
     {
       "path": "brand/inline/tile-habittracker.svg",
       "source": "systems/sebaro/brand/inline/tile-habittracker.svg",
-      "sourceSha256": "c1883a909d691670acc423ad8a2224581697ba409aea2cc9949f7418434103fb",
-      "sha256": "c1883a909d691670acc423ad8a2224581697ba409aea2cc9949f7418434103fb",
-      "bytes": 1934
+      "sourceSha256": "dcf7dbc17f0fcd79c2d54bc347fc2ab2425066811eae2daea2acb8f68e50b561",
+      "sha256": "dcf7dbc17f0fcd79c2d54bc347fc2ab2425066811eae2daea2acb8f68e50b561",
+      "bytes": 1933
     },
     {
       "path": "brand/inline/tile-intervaltimer-small.svg",
       "source": "systems/sebaro/brand/inline/tile-intervaltimer-small.svg",
-      "sourceSha256": "10e9238a6ef69972fa81a2ed5588b82bc69c4e790943af15f11fd8c9a3b106e1",
-      "sha256": "10e9238a6ef69972fa81a2ed5588b82bc69c4e790943af15f11fd8c9a3b106e1",
-      "bytes": 841
+      "sourceSha256": "23626df481f41568e44f6b0c1bcf2c24edf2d1050ebed1d4cefefa38f0a8706f",
+      "sha256": "23626df481f41568e44f6b0c1bcf2c24edf2d1050ebed1d4cefefa38f0a8706f",
+      "bytes": 840
     },
     {
       "path": "brand/inline/tile-intervaltimer.svg",
       "source": "systems/sebaro/brand/inline/tile-intervaltimer.svg",
-      "sourceSha256": "9e67c14b93b637fab5e19a259d604ccb4a9ffe8653bfbca909660270cbcce85c",
-      "sha256": "9e67c14b93b637fab5e19a259d604ccb4a9ffe8653bfbca909660270cbcce85c",
-      "bytes": 1988
+      "sourceSha256": "fe1076a6604c35c745c47b2a1e367b0003f654071a19dc82db591ad327f10b4c",
+      "sha256": "fe1076a6604c35c745c47b2a1e367b0003f654071a19dc82db591ad327f10b4c",
+      "bytes": 1987
     },
     {
       "path": "brand/inline/tile-novalis-small.svg",
       "source": "systems/sebaro/brand/inline/tile-novalis-small.svg",
-      "sourceSha256": "0f301639aa53d40c003aa319e2752f379ad78f2183e20aa82c5444df548872d8",
-      "sha256": "0f301639aa53d40c003aa319e2752f379ad78f2183e20aa82c5444df548872d8",
-      "bytes": 906
+      "sourceSha256": "c90cc230437440786d6e2105a621911899571c50300a209bffe42326f656c050",
+      "sha256": "c90cc230437440786d6e2105a621911899571c50300a209bffe42326f656c050",
+      "bytes": 905
     },
     {
       "path": "brand/inline/tile-novalis.svg",
       "source": "systems/sebaro/brand/inline/tile-novalis.svg",
-      "sourceSha256": "001ad1c38e50e41c4c2495297dd0b84f668a5cae70f527bfbaed6375e2e60d63",
-      "sha256": "001ad1c38e50e41c4c2495297dd0b84f668a5cae70f527bfbaed6375e2e60d63",
-      "bytes": 2060
+      "sourceSha256": "3f4683ad139ae635e28eafdec3650688a55c174e257190834b566fd75b84952b",
+      "sha256": "3f4683ad139ae635e28eafdec3650688a55c174e257190834b566fd75b84952b",
+      "bytes": 2059
     },
     {
       "path": "brand/inline/tile-retrobeam-small.svg",
       "source": "systems/sebaro/brand/inline/tile-retrobeam-small.svg",
-      "sourceSha256": "c79f6c61e17a57280f09793ea0102fc9c1bccf92d04a3a7285e1dd96c526a57d",
-      "sha256": "c79f6c61e17a57280f09793ea0102fc9c1bccf92d04a3a7285e1dd96c526a57d",
-      "bytes": 929
+      "sourceSha256": "5a1f3825e19e20518d9fab8d60c7d301c7723be0652025630d05118cf90c153f",
+      "sha256": "5a1f3825e19e20518d9fab8d60c7d301c7723be0652025630d05118cf90c153f",
+      "bytes": 928
     },
     {
       "path": "brand/inline/tile-retrobeam.svg",
       "source": "systems/sebaro/brand/inline/tile-retrobeam.svg",
-      "sourceSha256": "2044b7c0e172abc56d93959985c18a559df1935628dfbb86e4b6599400726676",
-      "sha256": "2044b7c0e172abc56d93959985c18a559df1935628dfbb86e4b6599400726676",
-      "bytes": 2276
+      "sourceSha256": "aa65a5c76d1177c514b73b0136a5af57ed5ae21e3972e41e5163424244b2e018",
+      "sha256": "aa65a5c76d1177c514b73b0136a5af57ed5ae21e3972e41e5163424244b2e018",
+      "bytes": 2275
     },
     {
       "path": "brand/inline/tile-studio-small.svg",
       "source": "systems/sebaro/brand/inline/tile-studio-small.svg",
-      "sourceSha256": "4db714f416e11b39b7cdb43abfd0a4db6a8b6a0290f23b38f2744e3470dfeca7",
-      "sha256": "4db714f416e11b39b7cdb43abfd0a4db6a8b6a0290f23b38f2744e3470dfeca7",
-      "bytes": 1053
+      "sourceSha256": "1b5c1d662e2318c5ff1854715a9b0e322625f252e0c32be7f12e49666a4abaec",
+      "sha256": "1b5c1d662e2318c5ff1854715a9b0e322625f252e0c32be7f12e49666a4abaec",
+      "bytes": 1052
     },
     {
       "path": "brand/inline/tile-studio.svg",
       "source": "systems/sebaro/brand/inline/tile-studio.svg",
-      "sourceSha256": "3dc47310d79c0b05600c60bfd9daceea86ed5eec7609dbacb936729530b5c11c",
-      "sha256": "3dc47310d79c0b05600c60bfd9daceea86ed5eec7609dbacb936729530b5c11c",
-      "bytes": 2744
+      "sourceSha256": "dd16f7f3b53f825d9662e77105fc6b93e26f5744dc1c80d05cc5b7569f6e2508",
+      "sha256": "dd16f7f3b53f825d9662e77105fc6b93e26f5744dc1c80d05cc5b7569f6e2508",
+      "bytes": 2743
     },
     {
       "path": "brand/inline/tile-tagwerk-small.svg",
       "source": "systems/sebaro/brand/inline/tile-tagwerk-small.svg",
-      "sourceSha256": "eb7414cdf51760bfe98bbfd909b22e44a7f0277c7d0b24928130dee137cc3802",
-      "sha256": "eb7414cdf51760bfe98bbfd909b22e44a7f0277c7d0b24928130dee137cc3802",
-      "bytes": 822
+      "sourceSha256": "29d6a24b209f73b93a5396d983768db6cbed034b4f77571da5f12f818b07719f",
+      "sha256": "29d6a24b209f73b93a5396d983768db6cbed034b4f77571da5f12f818b07719f",
+      "bytes": 821
     },
     {
       "path": "brand/inline/tile-tagwerk.svg",
       "source": "systems/sebaro/brand/inline/tile-tagwerk.svg",
-      "sourceSha256": "22d04b7b18ba594cf36b510e1caca275fd927eff7a17f4e1df8d788277efa16c",
-      "sha256": "22d04b7b18ba594cf36b510e1caca275fd927eff7a17f4e1df8d788277efa16c",
-      "bytes": 1985
+      "sourceSha256": "84fd788d7e50a346e0dd8146765e99cc3a2b7eaa5aa2de278d753dd6ab6a4e45",
+      "sha256": "84fd788d7e50a346e0dd8146765e99cc3a2b7eaa5aa2de278d753dd6ab6a4e45",
+      "bytes": 1984
     },
     {
       "path": "brand/inline/tile-tally-small.svg",
       "source": "systems/sebaro/brand/inline/tile-tally-small.svg",
-      "sourceSha256": "2cfc197dab5c4b63bb255eeaa06682ad4d08d0cbc35df8516084d3d1006bf2d6",
-      "sha256": "2cfc197dab5c4b63bb255eeaa06682ad4d08d0cbc35df8516084d3d1006bf2d6",
-      "bytes": 1258
+      "sourceSha256": "4e481f1266f1fa5f3fbbae4311d891d52bcbca81edab80dbeac06398cd1ad84e",
+      "sha256": "4e481f1266f1fa5f3fbbae4311d891d52bcbca81edab80dbeac06398cd1ad84e",
+      "bytes": 1257
     },
     {
       "path": "brand/inline/tile-tally.svg",
       "source": "systems/sebaro/brand/inline/tile-tally.svg",
-      "sourceSha256": "fd547357071ae52b54caff08e16d8656aed514095d8c4d4c4fef7d569c3a4b40",
-      "sha256": "fd547357071ae52b54caff08e16d8656aed514095d8c4d4c4fef7d569c3a4b40",
-      "bytes": 1923
+      "sourceSha256": "0128ae6a21bf240a944d755bdd5cb969f8171a13ebd5237e244f08fa9ff09124",
+      "sha256": "0128ae6a21bf240a944d755bdd5cb969f8171a13ebd5237e244f08fa9ff09124",
+      "bytes": 1922
     },
     {
       "path": "brand/inline/tile-waterreminder-small.svg",
       "source": "systems/sebaro/brand/inline/tile-waterreminder-small.svg",
-      "sourceSha256": "07e051c7de461a1e8b6b7776a81c05abec47bb0346fe1e56a8dc05aefd580923",
-      "sha256": "07e051c7de461a1e8b6b7776a81c05abec47bb0346fe1e56a8dc05aefd580923",
-      "bytes": 892
+      "sourceSha256": "8214c89039ad9c6e1ad201528ec0fa05b1864b3308a142c49b59d4a073d3ea27",
+      "sha256": "8214c89039ad9c6e1ad201528ec0fa05b1864b3308a142c49b59d4a073d3ea27",
+      "bytes": 891
     },
     {
       "path": "brand/inline/tile-waterreminder.svg",
       "source": "systems/sebaro/brand/inline/tile-waterreminder.svg",
-      "sourceSha256": "e65cf82560fa33760b3bda5a1a74821ad0cf0273701227222ccf960e958a5c85",
-      "sha256": "e65cf82560fa33760b3bda5a1a74821ad0cf0273701227222ccf960e958a5c85",
-      "bytes": 1925
+      "sourceSha256": "4dccb1495e2a7029a1ed1dca265dc7d68a5601affb69edfda1f549db5761e2b3",
+      "sha256": "4dccb1495e2a7029a1ed1dca265dc7d68a5601affb69edfda1f549db5761e2b3",
+      "bytes": 1924
     },
     {
       "path": "brand/inline/wordmark-dark-cut.svg",
       "source": "systems/sebaro/brand/inline/wordmark-dark-cut.svg",
-      "sourceSha256": "d7890f445e155b1725099722eb9919b46968b0f6192365e8b853a6d3abc3606d",
-      "sha256": "d7890f445e155b1725099722eb9919b46968b0f6192365e8b853a6d3abc3606d",
-      "bytes": 3992
+      "sourceSha256": "cc8b5c025640115985446dd55d9487c18d1564d0ea6d07e77c70b3429c51aa14",
+      "sha256": "cc8b5c025640115985446dd55d9487c18d1564d0ea6d07e77c70b3429c51aa14",
+      "bytes": 3989
     },
     {
       "path": "brand/inline/wordmark.svg",
       "source": "systems/sebaro/brand/inline/wordmark.svg",
-      "sourceSha256": "e883d39efd0b7c9d8a72cb002dc8ba47552f90d2840d19e9d8f2baadac5e56fd",
-      "sha256": "e883d39efd0b7c9d8a72cb002dc8ba47552f90d2840d19e9d8f2baadac5e56fd",
-      "bytes": 5530
+      "sourceSha256": "267f86ca4d6b19dca792aebdb07529a12fc6f537aecf0dfa48279816487143e7",
+      "sha256": "267f86ca4d6b19dca792aebdb07529a12fc6f537aecf0dfa48279816487143e7",
+      "bytes": 5527
     },
     {
       "path": "brand/site-root/apple-touch-icon.png",

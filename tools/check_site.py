@@ -13,6 +13,8 @@ Groups
   RULES  rules/rules.json: unique ids, required fields, known areas/status; every rule rendered in regeln.html;
          missing example fragments in src/rule-examples/ are warnings
   TEXT   U+202F / U+2009 are not used in page text (D22: U+00A0 between number and unit)
+  TERM   retired names do not appear in pages, fragments, rules or docs (D71: only "sebaro Sans" and "sebaro Mono");
+         the font licence files in docs/sebaro/ keep the authors' copyright as the OFL requires
 """
 from __future__ import annotations
 
@@ -170,6 +172,17 @@ def main() -> int:
         for ch, label in ((" ", "U+202F"), (" ", "U+2009")):
             if ch in text:
                 errors.append(f"TEXT {name}: {label} in text (D22: use U+00A0)")
+
+    # TERM
+    retired = re.compile(r"radio[\s_-]*canada", re.I)
+    term_files = [p for p in DOCS.glob("*.html")] + [p for p in DOCS.glob("assets/*.*")] + \
+        sorted(EXAMPLES.glob("*.html")) + [RULES, ROOT / "AGENTS.md", ROOT / "README.md", ROOT / "LICENSE.md"] + \
+        sorted((ROOT / "templates").rglob("*.*")) + sorted((ROOT / "guide").glob("*.md")) + \
+        [DOCS / "llms.txt", DOCS / "rules.json"] + [p for p in (ROOT / "tools").glob("*.py") if p.name != "check_site.py"]
+    for f in term_files:
+        if f.is_file() and retired.search(f.read_text(encoding="utf-8", errors="ignore")):
+            n = len(retired.findall(f.read_text(encoding="utf-8", errors="ignore")))
+            errors.append(f"TERM {f.relative_to(ROOT)}: {n}x retired font name (D71: only sebaro Sans / sebaro Mono)")
 
     # RULES
     if RULES.is_file():
