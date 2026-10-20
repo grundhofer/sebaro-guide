@@ -5,16 +5,28 @@
     python3 tools/check_site.py --strict   # warnings count as errors
 
 Groups
-  PAGE   every docs/*.html: lang="de", <title>, exactly one <h1>, guide:head/header/footer blocks, unique ids
-  LINK   every relative href/src resolves to a file; same-page and cross-page #fragments exist
+  PAGE   every docs/*.html: lang="de", <title>, exactly one <h1>, guide:head/header/footer blocks, unique ids (the
+         inlined icon sprite included: a section id equal to an icon id is reported as such); rule fragments in
+         src/rule-examples/ use no icon id of the sprite
+  LINK   every relative href/src resolves to a file; same-page and cross-page #fragments exist; a link never points
+         at an icon of the inlined sprite (only <use href> does)
   NET    no foreign requests: no http(s) in src=, <link href>, CSS url(), @import (plain <a href> links are allowed)
-  CSS    docs/assets/*.css (not vendor/): only var(--sb-*) colours, no hex/rgb/hsl literals, no box-shadow
-  STYLE  inline style="" attributes contain no colour literals
+  CSS    docs/assets/*.css (not vendor/): only var(--sb-*) colours, no hex/rgb/hsl literals, no box-shadow; a rule
+         whose every selector is scoped by .g-ex--dont (a deliberate "Nicht so" specimen, not its label or note)
+         may use both
+  TOKEN  every var(--sb-*) in docs/*.html and docs/assets/*.css (not vendor/, not sebaro/) names a custom property
+         that docs/sebaro/tokens.css or docs/sebaro/css/sebaro.css defines or reads (removed tokens fail here; prose
+         like "--sb-space-" without var() is not checked)
+  STYLE  inline style="" attributes contain no colour literals, except inside a .g-ex--dont specimen
+  SWATCH every .g-swatch (FAR-13) sits on a reference page (index, grundlagen, regeln), has role="img" and a name
+         that starts with "Farbfeld"
+  LICENSE LICENSE.md is byte-identical to docs/sebaro/LICENSE.md (D76: one licence file for workshop, guide, export)
   RULES  rules/rules.json: unique ids, required fields, known areas/status; every rule rendered in regeln.html;
          missing example fragments in src/rule-examples/ are warnings
   TEXT   U+202F / U+2009 are not used in page text (D22: U+00A0 between number and unit)
   CHANGE every rule that differs from the last snapshot in rules/releases/ (new, changed, removed) is named under
-         "Unveröffentlicht" in CHANGELOG.md and carries a newer "changed" date; the version is the last release's
+         "Unveröffentlicht" in CHANGELOG.md and carries a newer "changed" date (a rule already dated on the day of the
+         last release may keep that day, it cannot move further the same day); the version is the last release's
   TERM   retired names do not appear in pages, fragments, rules or docs (D71: only "sebaro Sans" and "sebaro Mono");
          the font licence files in docs/sebaro/ keep the authors' copyright as the OFL requires
 """
@@ -35,6 +47,39 @@ EXAMPLES = ROOT / "src" / "rule-examples"
 REQUIRED_RULE_FIELDS = ["id", "area", "title", "rule", "rule_en", "why", "do", "dont", "decisions", "source",
                         "platforms", "status", "check", "changed"]
 COLOUR_LITERAL = re.compile(r"#[0-9a-fA-F]{3,8}\b|\b(?:rgb|rgba|hsl|hsla|oklch|oklab|lab|lch|color)\(", re.I)
+VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
+SWATCH_PAGES = {"index.html", "grundlagen.html", "regeln.html"}
+# a token name; wildcards in prose such as var(--sb-color-*) or var(--sb-space-…) are not names
+VAR_SB = re.compile(r"var\(\s*(--sb-[A-Za-z0-9_-]*[A-Za-z0-9_])(?![-*…A-Za-z0-9_])")
+
+
+def is_dont_scoped(prelude: str) -> bool:
+    """True when every selector of a CSS rule targets the inside of a .g-ex--dont specimen (not its label or note)."""
+    sels = [x.strip() for x in prelude.split(",") if x.strip()]
+    return bool(sels) and all(".g-ex--dont" in x and "g-ex__label" not in x and "g-ex__note" not in x for x in sels)
+
+
+def css_blocks(body: str) -> list[tuple[int, int, str]]:
+    """(start, end, prelude) of every {…} block, outermost first; comments must be stripped already."""
+    blocks, stack, last = [], [], 0
+    for i, ch in enumerate(body):
+        if ch == "{":
+            stack.append((i, body[last:i].strip()))
+            last = i + 1
+        elif ch == "}":
+            if stack:
+                start, prelude = stack.pop()
+                blocks.append((start, i, prelude))
+            last = i + 1
+        elif ch == ";":
+            last = i + 1
+    return blocks
+
+
+def dont_exempt(blocks: list[tuple[int, int, str]], pos: int) -> bool:
+    """Is position pos inside a rule (not an @-rule) whose selectors are all .g-ex--dont scoped?"""
+    inner = [b for b in blocks if b[0] < pos < b[1] and not b[2].startswith("@")]
+    return bool(inner) and is_dont_scoped(min(inner, key=lambda b: b[1] - b[0])[2])
 
 
 class Page(HTMLParser):
@@ -49,9 +94,24 @@ class Page(HTMLParser):
         self._in_title = False
         self.text: list[str] = []
         self._skip = 0
+        self._stack: list[tuple[str, bool]] = []   # (tag, inside a .g-ex--dont specimen)
+        self.dont_styles = 0
+        self.swatches: list[dict] = []
+        self.var_refs: list[str] = []
 
-    def handle_starttag(self, tag, attrs):
+    def _dont(self, a: dict) -> bool:
+        cls = (a.get("class") or "").split()
+        if "g-ex__label" in cls or "g-ex__note" in cls:
+            return False
+        return "g-ex--dont" in cls or (bool(self._stack) and self._stack[-1][1])
+
+    def handle_starttag(self, tag, attrs, closed=False):
         a = dict(attrs)
+        dont = self._dont(a)
+        if not closed and tag not in VOID:
+            self._stack.append((tag, dont))
+        if "g-swatch" in (a.get("class") or "").split():
+            self.swatches.append(a)
         if tag == "html":
             self.lang = a.get("lang")
         if tag == "h1":
@@ -66,14 +126,22 @@ class Page(HTMLParser):
             if a.get(attr):
                 self.refs.append((tag, attr, a[attr]))
         if a.get("style"):
-            self.styles.append(a["style"])
+            self.var_refs += VAR_SB.findall(a["style"])
+            if dont:
+                self.dont_styles += bool(COLOUR_LITERAL.search(a["style"]))
+            else:
+                self.styles.append(a["style"])
 
     def handle_startendtag(self, tag, attrs):
-        self.handle_starttag(tag, attrs)
+        self.handle_starttag(tag, attrs, closed=True)
         if tag in ("script", "style"):
             self._skip -= 1
 
     def handle_endtag(self, tag):
+        for i in range(len(self._stack) - 1, -1, -1):
+            if self._stack[i][0] == tag:
+                del self._stack[i:]
+                break
         if tag == "title":
             self._in_title = False
         if tag in ("script", "style"):
@@ -82,6 +150,7 @@ class Page(HTMLParser):
     def handle_data(self, data):
         if self._in_title and data.strip():
             self.title = True
+        self.var_refs += VAR_SB.findall(data)   # <style> blocks and code samples alike
         if not self._skip:
             self.text.append(data)
 
@@ -101,6 +170,9 @@ def main() -> int:
     warnings: list[str] = []
     pages = sorted(DOCS.glob("*.html"))
     parsed = {p.name: parse(p) for p in pages}
+    sprite_file = DOCS / "sebaro" / "icons" / "sprite.svg"
+    sprite_ids = set(re.findall(r'<symbol[^>]*\sid="([^"]+)"', sprite_file.read_text(encoding="utf-8"))) \
+        if sprite_file.is_file() else set()
 
     # PAGE
     for name, pg in parsed.items():
@@ -117,8 +189,13 @@ def main() -> int:
         seen = set()
         for i in pg.ids:
             if i in seen:
-                errors.append(f"PAGE {name}: duplicate id {i!r}")
+                where = " (also an icon id of the inlined sprite; rename the page id)" if i in sprite_ids else ""
+                errors.append(f"PAGE {name}: duplicate id {i!r}{where}")
             seen.add(i)
+    for frag in sorted(EXAMPLES.glob("*.html")) if EXAMPLES.is_dir() else []:
+        fp = parse(frag)
+        for i in sorted(set(fp.ids) & sprite_ids):
+            errors.append(f"PAGE src/rule-examples/{frag.name}: id {i!r} is an icon id of the sprite inlined into regeln.html")
 
     # LINK + NET
     for name, pg in parsed.items():
@@ -143,18 +220,30 @@ def main() -> int:
             else:
                 target = DOCS / name
             frag = unquote(parts.fragment)
+            if frag and tag != "use" and frag in sprite_ids and target.suffix == ".html":
+                errors.append(f"LINK {name}: {value!r} points at an icon of the inlined sprite, not at a section")
+                continue
             if frag and target.suffix == ".html" and target.parent == DOCS and target.name in parsed:
                 if frag not in parsed[target.name].ids and frag != "top":
                     errors.append(f"LINK {name}: {value!r} -> no id {frag!r} in {target.name}")
 
     # CSS
+    dont_css = 0
     for css in sorted((DOCS / "assets").glob("*.css")):
         text = css.read_text(encoding="utf-8")
-        body = re.sub(r"/\*.*?\*/", "", text, flags=re.S)
+        # blank the comments but keep their newlines, so line numbers stay true
+        body = re.sub(r"/\*.*?\*/", lambda m: re.sub(r"[^\n]", " ", m.group(0)), text, flags=re.S)
+        blocks = css_blocks(body)
         for m in COLOUR_LITERAL.finditer(body):
+            if dont_exempt(blocks, m.start()):
+                dont_css += 1
+                continue
             line = body[: m.start()].count("\n") + 1
             errors.append(f"CSS {css.name}:{line}: colour literal {m.group(0)!r}; use var(--sb-color-*)")
         for m in re.finditer(r"box-shadow\s*:\s*(?!none)", body):
+            if dont_exempt(blocks, m.start()):
+                dont_css += 1
+                continue
             line = body[: m.start()].count("\n") + 1
             errors.append(f"CSS {css.name}:{line}: box-shadow (D46: ink lines instead of shadows)")
         for m in re.finditer(r"url\(\s*['\"]?https?:", body):
@@ -162,11 +251,46 @@ def main() -> int:
         for m in re.finditer(r"@import\s+['\"]?https?:", body):
             errors.append(f"NET {css.name}: remote @import")
 
+    # TOKEN
+    known: set[str] = set()
+    for src in (DOCS / "sebaro" / "tokens.css", DOCS / "sebaro" / "css" / "sebaro.css"):
+        if src.is_file():
+            known |= set(re.findall(r"(--sb-[A-Za-z0-9_-]+)\s*:", src.read_text(encoding="utf-8")))   # defined
+            known |= set(VAR_SB.findall(src.read_text(encoding="utf-8")))                          # read as input
+    if not known:
+        errors.append("TOKEN docs/sebaro/tokens.css and css/sebaro.css missing or empty")
+    else:
+        for name, pg in parsed.items():
+            for v in sorted(set(pg.var_refs) - known):
+                errors.append(f"TOKEN {name}: var({v}) is not a sebaro token (removed or misspelt)")
+        for css in sorted((DOCS / "assets").glob("*.css")):
+            body = css.read_text(encoding="utf-8")
+            for m in VAR_SB.finditer(body):
+                if m.group(1) not in known:
+                    line = body[: m.start()].count("\n") + 1
+                    errors.append(f"TOKEN {css.name}:{line}: var({m.group(1)}) is not a sebaro token (removed or misspelt)")
+
     # STYLE
     for name, pg in parsed.items():
         for st in pg.styles:
             if COLOUR_LITERAL.search(st):
                 errors.append(f"STYLE {name}: colour literal in style={st!r}")
+
+    # SWATCH
+    for name, pg in parsed.items():
+        for a in pg.swatches:
+            label = (a.get("aria-label") or "").strip()
+            if name not in SWATCH_PAGES:
+                errors.append(f"SWATCH {name}: g-swatch only on reference pages {sorted(SWATCH_PAGES)} (FAR-13)")
+            if a.get("role") != "img" or not label.startswith("Farbfeld"):
+                errors.append(f"SWATCH {name}: g-swatch needs role=\"img\" and aria-label \"Farbfeld …\" (got {label!r})")
+
+    # LICENSE
+    lic, lic_export = ROOT / "LICENSE.md", DOCS / "sebaro" / "LICENSE.md"
+    if not lic_export.is_file():
+        errors.append("LICENSE docs/sebaro/LICENSE.md missing (re-export with tools/sync_from_design.py)")
+    elif not lic.is_file() or lic.read_bytes() != lic_export.read_bytes():
+        errors.append("LICENSE LICENSE.md differs from docs/sebaro/LICENSE.md (D76: the same file; copy it over)")
 
     # TEXT
     for name, pg in parsed.items():
@@ -185,6 +309,7 @@ def main() -> int:
         pending = m.group(1) if m else ""
         if cur.get("version") != releases[-1].stem:
             errors.append(f"CHANGE rules.json version {cur.get('version')} != last release {releases[-1].stem} (use tools/release.py)")
+        rel_date = last.get("date", "")
         old = {r["id"]: r for r in last.get("rules", [])}
         new = {r["id"]: r for r in cur.get("rules", [])}
         strip = lambda r: {k: v for k, v in r.items() if k != "changed"}
@@ -194,8 +319,11 @@ def main() -> int:
             if not re.search(rf"\b{re.escape(rid)}\b", pending):
                 kind = "new" if rid not in old else "removed" if rid not in new else "changed"
                 errors.append(f"CHANGE {rid} is {kind} since {releases[-1].stem} but not listed under 'Unveröffentlicht' in CHANGELOG.md")
-            if rid in old and rid in new and new[rid].get("changed", "") <= old[rid].get("changed", ""):
-                errors.append(f"CHANGE {rid} changed but its 'changed' date was not moved forward")
+            # the date moves forward; a rule already dated on the day of the last release may keep that day
+            if rid in old and rid in new:
+                was, now = old[rid].get("changed", ""), new[rid].get("changed", "")
+                if now < rel_date or (now <= was and was < rel_date):
+                    errors.append(f"CHANGE {rid} changed but its 'changed' date was not moved forward")
 
     # TERM
     retired = re.compile(r"radio[\s_-]*canada", re.I)
@@ -245,7 +373,9 @@ def main() -> int:
     for e in errors:
         print(f"error: {e}")
     fail = bool(errors) or (args.strict and bool(warnings))
-    print(f"check_site: {len(pages)} pages, {len(errors)} errors, {len(warnings)} warnings -> {'FAIL' if fail else 'PASS'}")
+    dont_styles = sum(pg.dont_styles for pg in parsed.values())
+    print(f"check_site: {len(pages)} pages, {len(errors)} errors, {len(warnings)} warnings -> {'FAIL' if fail else 'PASS'}"
+          f" (.g-ex--dont exemptions used: {dont_css} in CSS, {dont_styles} inline styles)")
     return 1 if fail else 0
 
 

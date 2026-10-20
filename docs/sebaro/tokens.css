@@ -1,8 +1,8 @@
 /* generated — do not edit.
- * sebaroDesign token contract 1.6 · draft "sebaro" · palette "sebaro"
- * source: systems/sebaro/tokens/tokens.json (sha256 0bab4509d8f8cace)
- *         palettes/sebaro.json (sha256 e3d1887434ee384f)
- * builder: tools/build_tokens.py 1.6.0 · spec: shared/TOKEN-CONTRACT.md
+ * sebaroDesign token contract 1.7 · draft "sebaro" · palette "sebaro"
+ * source: systems/sebaro/tokens/tokens.json (sha256 2058035356b6eae1)
+ *         palettes/sebaro.json (sha256 f11812f50628e459)
+ * builder: tools/build_tokens.py 1.7.0 · spec: shared/TOKEN-CONTRACT.md
  */
 
 /* 1. Mode-independent tokens. */
@@ -62,8 +62,6 @@
   --sb-size-control-lg: 56px;
   --sb-size-measure-prose: 70ch;
   --sb-size-container-max: 1440px;
-  --sb-layer-base: 0;
-  --sb-layer-raised: 10;
   --sb-layer-sticky: 20;
   --sb-layer-dropdown: 30;
   --sb-layer-overlay: 40;
@@ -72,13 +70,7 @@
   --sb-layer-toast: 70;
   --sb-layer-tooltip: 80;
   --sb-breakpoint-sm: 640px;
-  --sb-breakpoint-md: 768px;
   --sb-breakpoint-lg: 1024px;
-  --sb-breakpoint-xl: 1280px;
-  --sb-opacity-state-hover: 0.08;
-  --sb-opacity-state-pressed: 0.12;
-  --sb-opacity-disabled-content: 0.38;
-  --sb-opacity-disabled-container: 0.12;
   --sb-x-sebaro-primary-action-outline-width: 2px;
   --sb-x-sebaro-primary-action-progress-height: 6px;
   --sb-x-sebaro-primary-action-progress-period: 1100ms;
@@ -347,7 +339,7 @@
     --sb-dataviz-diverging-1: #FFC0AA;
     --sb-dataviz-diverging-2: #D88669;
     --sb-dataviz-diverging-3: #955640;
-    --sb-dataviz-diverging-4: #343539;
+    --sb-dataviz-diverging-4: #32353C;
     --sb-dataviz-diverging-5: #237486;
     --sb-dataviz-diverging-6: #46AEC5;
     --sb-dataviz-diverging-7: #9BDDEE;
@@ -536,7 +528,7 @@
   --sb-dataviz-diverging-1: #FFC0AA;
   --sb-dataviz-diverging-2: #D88669;
   --sb-dataviz-diverging-3: #955640;
-  --sb-dataviz-diverging-4: #343539;
+  --sb-dataviz-diverging-4: #32353C;
   --sb-dataviz-diverging-5: #237486;
   --sb-dataviz-diverging-6: #46AEC5;
   --sb-dataviz-diverging-7: #9BDDEE;

@@ -47,3 +47,19 @@
   if (!window.matchMedia("(max-width: 1023.98px)").matches) return;
   document.querySelectorAll(".demo-toc > details[open]").forEach(function (d) { d.open = false; });
 })();
+
+// 4) tables with .g-table-stack restack per row in narrow places (guide.css); a display change drops the table
+//    semantics in some browsers, so the explicit roles are added where the markup does not carry them already.
+(function () {
+  var tables = document.querySelectorAll("table.g-table-stack");
+  function role(el, name) { if (!el.hasAttribute("role")) el.setAttribute("role", name); }
+  Array.prototype.forEach.call(tables, function (table) {
+    role(table, "table");
+    Array.prototype.forEach.call(table.querySelectorAll(":scope > thead, :scope > tbody, :scope > tfoot"), function (g) { role(g, "rowgroup"); });
+    Array.prototype.forEach.call(table.querySelectorAll("tr"), function (tr) { role(tr, "row"); });
+    Array.prototype.forEach.call(table.querySelectorAll("th"), function (th) {
+      role(th, th.getAttribute("scope") === "row" ? "rowheader" : "columnheader");
+    });
+    Array.prototype.forEach.call(table.querySelectorAll("td"), function (td) { role(td, "cell"); });
+  });
+})();

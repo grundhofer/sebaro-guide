@@ -32,6 +32,13 @@
 .g-bauteile-states--wide > .g-bauteile-state > .demo-anchor,
 .g-bauteile-start { justify-self: start; }
 
+/* fixed-width demo frames (vendor demo.css) keep their width in a state cell; the generic max 100 % above would win.
+   The widths repeat demo.css: 390 page, 720 page, 520 view, 680 narrow window */
+.g-bauteile-state > .demo-page-frame--390 { max-inline-size: min(100%, calc(390px + 2 * var(--sb-border-width-hairline))); }
+.g-bauteile-state > .demo-page-frame--720 { max-inline-size: min(100%, 720px); }
+.g-bauteile-state > .demo-view-frame--520 { max-inline-size: min(100%, 520px); }
+.g-bauteile-state > .demo-window-frame--narrow { max-inline-size: min(100%, 680px); }
+
 /* one frame = one view: holds at most one lime primary action */
 .g-bauteile-frame { box-sizing: border-box; max-inline-size: 100%; }
 .g-bauteile-state--wide > .g-bauteile-frame, .g-bauteile-state--full > .g-bauteile-frame { inline-size: 100%; }
@@ -62,22 +69,6 @@
 .g-bauteile-toc-specimen summary { display: flex; }
 .g-bauteile-toc-specimen .sb-toc__title { display: none; }
 
-/* ------------------------------------------------------------------ proposals (marked on the page) */
-/* ICO-08 (D68): a shortcut at the row end, grey, no frame; sebaro.css has no class for it yet */
-.g-bauteile-keys { flex: none; margin-inline-start: auto; padding-inline-start: var(--sb-space-3); color: var(--sb-color-text-muted); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); white-space: nowrap; }
-.sb-tooltip .g-bauteile-keys { margin-inline-start: var(--sb-space-1); padding-inline-start: 0; }
-/* D67 (2): rows of 32 px in desktop windows; only the height changes */
-.g-bauteile-dense .sb-side-nav__item, .g-bauteile-dense .sb-menu__item { min-block-size: var(--sb-size-control-sm); }
-/* D67 (11): desktop card with a 1 px edge, place line only with focus, "Mehr" always visible */
-.g-bauteile-deskcard {
-  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: var(--sb-space-2);
-  inline-size: 280px; max-inline-size: 100%; box-sizing: border-box; padding: var(--sb-space-2) var(--sb-space-1) var(--sb-space-3) var(--sb-space-4);
-  border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-control); background: var(--sb-color-bg);
-}
-.g-bauteile-deskcard:focus-visible { outline: var(--sb-focus-ring); outline-offset: var(--sb-focus-offset); border-inline-start: var(--sb-border-width-strong) solid var(--sb-color-accent); padding-inline-start: calc(var(--sb-space-4) - var(--sb-border-width-strong) + var(--sb-border-width-control)); }
-.g-bauteile-deskcard__title { margin: 0; font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
-.g-bauteile-deskcard__text { grid-column: 1 / -1; margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
-
 /* ------------------------------------------------------------------ do / don't, rules, script */
 .g-bauteile-dodont { display: grid; gap: var(--sb-space-2); margin: var(--sb-space-6) 0 0; padding: 0; list-style: none; max-inline-size: 48em; }
 .g-bauteile-dodont li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); column-gap: var(--sb-space-3); align-items: baseline; }
@@ -100,20 +91,10 @@
 .g-bauteile-more { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); white-space: nowrap; }
 .g-bauteile-gaps { display: grid; gap: var(--sb-space-3); margin: 0; padding-inline-start: var(--sb-space-6); max-inline-size: 48em; }
 
-/* demo-window stacks below 640 px, but its view keeps min-block-size: 100 % of the window, so the window's overflow cut
-   off the action zone; the view takes its content height instead */
-@media (max-width: 639.98px) { .g-bauteile-window > .sb-view { min-block-size: 0; } }
-/* proposal (EBE-08, D67 (1)): from 640 px the action zone runs under side nav and content; the markup stays the same,
-   the view gives up its box so its three parts join the window grid */
-@media (min-width: 640px) {
-  .g-bauteile-window--zone { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; }
-  .g-bauteile-window--zone > .sb-side-nav { grid-column: 1; grid-row: 1 / 3; }
-  .g-bauteile-window--zone > .sb-view { display: contents; }
-  .g-bauteile-window--zone > .sb-view > :not(.sb-bottom-block) { grid-column: 2; }
-  .g-bauteile-window--zone > .sb-view > .sb-bottom-block { grid-column: 1 / -1; grid-row: 3; }
-}
-
 /* the code-tone table in the code entry */
 .g-bauteile-tokens { margin-block-start: var(--sb-space-4); }
 .g-bauteile-toklist { max-inline-size: 42em; }
 .g-bauteile-tokval { color: var(--sb-color-text-muted); font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); }
+
+/* a live specimen right after a do/don't pair (Kurzmeldung) */
+.g-examples + .g-bauteile-states { margin-block-start: var(--sb-space-6); }

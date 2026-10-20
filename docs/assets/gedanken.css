@@ -69,20 +69,10 @@ html[data-sb-motion="reduce"] .g-gedanken-demo [data-g-job] { transition: none; 
 .g-gedanken-gates li + li { margin-block-start: var(--sb-space-1); }
 
 /* rule ids stay in one piece */
-.g-gedanken-rules a.sb-mono, .g-gedanken-list a.sb-mono { white-space: nowrap; }
+.g-gedanken-rules a.sb-mono, .g-gedanken-list a.sb-mono, .g-table-stack a.sb-mono { white-space: nowrap; }
 
-/* ------------------------------------------------------------------ tables that reflow on phones (guide pattern, not in the system:
- * sb-table scrolls inside sb-table-wrap; these reference tables read better as one block per row below 560 px).
- * Explicit table roles in the markup keep the table semantics when display changes. */
-@media (max-width: 559.98px) {
-  .g-gedanken-reflow, .g-gedanken-reflow tbody { display: block; }
-  .g-gedanken-reflow caption { display: block; }
-  .g-gedanken-reflow thead { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  .g-gedanken-reflow tr { display: grid; gap: var(--sb-space-1); padding-block: var(--sb-space-3); border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
-  .g-gedanken-reflow td { display: block; padding: 0; border: 0; min-inline-size: 0; overflow-wrap: anywhere; }
-  .g-gedanken-reflow td:first-child { font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
-  .g-gedanken-reflow td + td[data-label]::before { content: attr(data-label) ": "; color: var(--sb-color-text-muted); }
-  .g-gedanken-reflow td:has(.g-gedanken-apps)::before { display: block; margin-block-end: var(--sb-space-1); }
-  .g-gedanken-reflow .g-gedanken-apps { margin-block: var(--sb-space-1); }
-  .sb-table-wrap:has(.g-gedanken-reflow) + .sb-prose { margin-block-start: var(--sb-space-4); }
+/* tables restack with the shared guide pattern g-table-stack (guide.css); the app column keeps tile and name together */
+@container g-table (width < 560px) {
+  .g-table-stack td:has(.g-gedanken-apps)::before { display: block; margin-block-end: var(--sb-space-1); }
+  .g-table-stack .g-gedanken-apps { margin-block: var(--sb-space-1); }
 }

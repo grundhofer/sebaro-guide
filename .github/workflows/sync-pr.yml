@@ -1,0 +1,52 @@
+# Pull request for every branch sync/<short sha> that sebaroDesign's guide-sync workflow pushes (D88).
+# Nothing merges automatically: the PR waits for review and a merge by hand. check.yml runs on the same push.
+# A newer sync replaces older open sync PRs (each sync is a full snapshot against main); they are closed, not merged.
+# Needs the repository setting "Allow GitHub Actions to create and approve pull requests" (Settings > Actions).
+name: sync-pr
+on:
+  push:
+    branches: ["sync/**"]
+permissions:
+  contents: read
+  pull-requests: write
+concurrency:
+  group: sync-pr
+  cancel-in-progress: false
+jobs:
+  pr:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+      BRANCH: ${{ github.ref_name }}
+    steps:
+      - name: Open the pull request (or keep the open one)
+        id: pr
+        run: |
+          set -euo pipefail
+          short="${BRANCH#sync/}"
+          number=$(gh pr list --head "$BRANCH" --base main --state open --json number --jq '.[0].number // empty')
+          if [ -z "$number" ]; then
+            body=$(printf '%s\n\n%s\n\n%s\n' \
+              "Automatischer Abgleich aus sebaroDesign, Commit \`$short\`: \`docs/sebaro/\` und die Musterdateien neu exportiert, die Seiten mit \`tools/build.py\` neu gebaut." \
+              "Nichts wird ohne Durchsicht übernommen: Prüfungen (check) ansehen, die Seiten in Hell und Dunkel bei 390 und 1440 px ansehen, dann von Hand zusammenführen." \
+              "Ein neuerer Abgleich schließt diesen Antrag.")
+            url=$(gh pr create --base main --head "$BRANCH" --title "Abgleich mit sebaroDesign $short" --body "$body")
+            number="${url##*/}"
+            echo "opened $url"
+          else
+            echo "pull request #$number is already open for $BRANCH; the new push updates it"
+          fi
+          echo "number=$number" >> "$GITHUB_OUTPUT"
+      - name: Close older sync pull requests
+        env:
+          NEW: ${{ steps.pr.outputs.number }}
+        run: |
+          set -euo pipefail
+          gh pr list --base main --state open --json number,headRefName \
+            --jq '.[] | select(.headRefName | startswith("sync/")) | select(.headRefName != env.BRANCH) | .number' |
+          while read -r old; do
+            gh pr close "$old" --comment "Ersetzt durch #$NEW."
+            echo "closed #$old (replaced by #$NEW)"
+          done

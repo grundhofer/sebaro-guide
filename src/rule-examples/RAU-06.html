@@ -1,24 +1,16 @@
 <div class="g-examples">
-  <div class="g-ex g-ex--do"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p><div class="g-ex__stage">
-    <div class="g-rx-stack">
-      <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#flask--16"/></svg>Vorschlag, noch nicht im System</span>
-      <ul class="g-rx-dtree" aria-label="Ordnerbaum, Beispiel mit 32-px-Zeilen">
-        <li><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#chevron-down--16"/></svg>Projekte</li>
-        <li class="g-rx-dtree__l2" aria-current="true"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#file-text"/></svg>Einkaufsliste</li>
-        <li class="g-rx-dtree__l2 g-rx-dtree__touch"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#file-text"/></svg>Reiseplan<span class="g-rx-dtree__trail">48&nbsp;px bei Touch</span></li>
-        <li class="g-rx-dtree__l2"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#file-text"/></svg>Rezepte</li>
-        <li><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#chevron-right--16"/></svg>Archiv</li>
-      </ul>
-      <p class="g-rx-cap">Jede Zeile 32&nbsp;px, der Ort mit 3-px-Kobaltlinie; der Rahmen um „Reiseplan“ zeigt die 48-px-Trefferfläche bei Touch.</p>
-    </div>
-  </div><p class="g-ex__note">Im Fenster sind Baum-, Listen- und Menüzeilen 32&nbsp;px hoch; bei Touch wächst nur die Trefferfläche, nicht die Zeile.</p></div>
-  <div class="g-ex g-ex--dont"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p><div class="g-ex__stage">
-    <ul class="g-rx-dtree g-rx-dtree--40" aria-label="Ordnerbaum, Beispiel mit 40-px-Zeilen">
-      <li><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#chevron-down--16"/></svg>Projekte</li>
-      <li class="g-rx-dtree__l2" aria-current="true"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#file-text"/></svg>Einkaufsliste</li>
-      <li class="g-rx-dtree__l2"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#file-text"/></svg>Reiseplan</li>
-      <li class="g-rx-dtree__l2"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#file-text"/></svg>Rezepte</li>
-      <li><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#chevron-right--16"/></svg>Archiv</li>
-    </ul>
-  </div><p class="g-ex__note">40-px-Zeilen sind am Schreibtisch zu locker und für Touch trotzdem zu klein: ein Mittelmaß, das keinem Gerät passt.</p></div>
+<div class="g-ex g-ex--do">
+  <p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p>
+  <div class="g-ex__stage">
+<ul class="sb-listbox demo-box g-rx-rowsbox" role="listbox" aria-label="Zeilenhöhen im Fenster" data-sb-density="window"><li class="sb-row" role="option" id="RAU-06-1" aria-selected="true" tabindex="0"><svg class="sb-icon sb-row__icon" aria-hidden="true" focusable="false"><use href="#file-text"/></svg><span class="sb-row__name">Eine Zeile, 32&nbsp;px</span><span class="sb-row__meta">heute</span></li><li class="sb-row" role="option" id="RAU-06-2" aria-selected="false" tabindex="-1"><svg class="sb-icon sb-row__icon" aria-hidden="true" focusable="false"><use href="#file-text"/></svg><span class="sb-row__main"><span class="sb-row__name">Zwei Zeilen, 48&nbsp;px</span><span class="sb-row__sub">Projekte · gestern</span></span></li><li class="sb-row" role="option" id="RAU-06-3" aria-selected="false" tabindex="-1"><svg class="sb-icon sb-row__icon" aria-hidden="true" focusable="false"><use href="#file-text"/></svg><span class="sb-row__main"><span class="sb-row__name">Drei Zeilen, 64&nbsp;px</span><span class="sb-row__sub">Projekte · 12.10.</span><span class="sb-row__text">Zwei Termine stehen fest, der Rest ist frei.</span></span></li></ul>
+  </div>
+  <p class="g-ex__note">Im Fenster: eine Zeile 32, zwei Zeilen 48, drei Zeilen 64&nbsp;px; unter Touch wächst nur die Trefferfläche auf 48&nbsp;px.</p>
+</div>
+<div class="g-ex g-ex--dont">
+  <p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p>
+  <div class="g-ex__stage">
+<ul class="sb-list demo-box g-rx-rowsbox" aria-label="Zeilen mit Handy-Höhen im Fenster"><li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Eine Zeile, 56&nbsp;px</p></div></li><li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Zwei Zeilen, 64&nbsp;px</p><p class="sb-list-row__meta">Projekte · gestern</p></div></li><li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Drei Zeilen, 88&nbsp;px</p><p class="sb-list-row__meta">Projekte · 12.10.</p><p class="sb-list-row__text">Zwei Termine stehen fest, der Rest ist frei.</p></div></li></ul>
+  </div>
+  <p class="g-ex__note">Handy-Höhen im Fenster: Ein Baum mit 30 Notizen braucht fast doppelt so viel Höhe, und man scrollt, statt zu lesen.</p>
+</div>
 </div>

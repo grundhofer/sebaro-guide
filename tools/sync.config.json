@@ -1,5 +1,5 @@
 {
-  "$comment": "Input of tools/sync_from_design.py. Unreleased products to leave out go into the git-ignored tools/sync.local.json as {\"excludeProducts\": [\"<id>\"]}.",
+  "$comment": "Input of tools/sync_from_design.py. Unreleased products to leave out go into the git-ignored tools/sync.local.json as {\"excludeProducts\": [\"<id>\"]}, a file outside this repository (--exclude-from) or $SEBARO_EXCLUDE_PRODUCTS (the workshop CI passes a secret); never into a tracked file.",
   "system": "sebaro",
   "product": "studio",
   "vendorSpecimens": ["demo.css", "pages.css", "sb-colour-count.js"]

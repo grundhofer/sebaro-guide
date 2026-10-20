@@ -1,0 +1,22 @@
+<div class="g-examples">
+<div class="g-ex g-ex--do">
+  <p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p>
+  <div class="g-ex__stage">
+<div class="sb-form-grid"><div class="sb-field"><label class="sb-field__label" for="RAU-07-name">Name</label><div class="sb-field__control"><input id="RAU-07-name" type="text" value="Wasser trinken" autocomplete="off"></div></div><div class="sb-field"><label class="sb-field__label" for="RAU-07-goal">Tagesziel</label><div class="sb-field__control"><input id="RAU-07-goal" type="text" value="8" autocomplete="off"><span class="sb-field__suffix">Gläser</span></div></div><div class="sb-field sb-form-grid__wide"><label class="sb-field__label" for="RAU-07-note">Notiz</label><div class="sb-field__control"><input id="RAU-07-note" type="text" value="Ein Glas vor jeder Mahlzeit" autocomplete="off"></div></div><div class="sb-form-grid__actions"><button class="sb-secondary-action" type="button">Abbrechen</button><button class="sb-primary-action" type="button"><span class="sb-primary-action__label">Sichern</span><i class="sb-primary-action__bar" aria-hidden="true"></i></button></div></div>
+  </div>
+  <p class="g-ex__note">sb-form-grid: eine Spalte, ab 536&nbsp;px Rasterbreite zwei; die Abstände gehören dem Baustein, die Aktionen stehen als eigene Gruppe am Ende, die Hauptaktion zuletzt.</p>
+  <details class="g-source"><summary>Markup</summary><div class="sb-code"><pre tabindex="0" role="region" aria-label="Markup: Formularraster"><code>&lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-form-grid"</span>&gt;
+  &lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-field"</span>&gt;…&lt;/<span class="sb-tok-keyword">div</span>&gt;
+  &lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-field"</span>&gt;…&lt;/<span class="sb-tok-keyword">div</span>&gt;
+  &lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-field sb-form-grid__wide"</span>&gt;…&lt;/<span class="sb-tok-keyword">div</span>&gt;
+  &lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-form-grid__actions"</span>&gt;&lt;<span class="sb-tok-keyword">button</span> class=<span class="sb-tok-string">"sb-secondary-action"</span> type=<span class="sb-tok-string">"button"</span>&gt;Abbrechen&lt;/<span class="sb-tok-keyword">button</span>&gt;&lt;<span class="sb-tok-keyword">button</span> class=<span class="sb-tok-string">"sb-primary-action"</span> type=<span class="sb-tok-string">"button"</span>&gt;…Sichern…&lt;/<span class="sb-tok-keyword">button</span>&gt;&lt;/<span class="sb-tok-keyword">div</span>&gt;
+&lt;/<span class="sb-tok-keyword">div</span>&gt;</code></pre></div></details>
+</div>
+<div class="g-ex g-ex--dont">
+  <p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p>
+  <div class="g-ex__stage">
+<div><div class="sb-field" style="margin-block-start: 20px;"><label class="sb-field__label" for="RAU-07-x-name">Name</label><div class="sb-field__control"><input id="RAU-07-x-name" type="text" value="Wasser trinken" autocomplete="off"></div></div><div class="sb-field" style="margin-block-start: 6px;"><label class="sb-field__label" for="RAU-07-x-goal">Tagesziel</label><div class="sb-field__control"><input id="RAU-07-x-goal" type="text" value="8" autocomplete="off"><span class="sb-field__suffix">Gläser</span></div></div><div class="g-rx-row" style="margin-block-start: 10px;"><button class="sb-primary-action" type="button"><span class="sb-primary-action__label">Sichern</span><i class="sb-primary-action__bar" aria-hidden="true"></i></button><button class="sb-secondary-action" type="button">Abbrechen</button></div></div>
+  </div>
+  <p class="g-ex__note">Jedes Feld mit eigenem Rand von Hand (20, 6, 10&nbsp;px), die Hauptaktion vorn: Abstände springen, und die Reihenfolge stimmt nicht.</p>
+</div>
+</div>

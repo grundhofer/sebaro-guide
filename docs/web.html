@@ -24,12 +24,13 @@
 <script defer src="sebaro/js/sb-controls.js"></script>
 <script defer src="sebaro/js/sb-notes.js"></script>
 <script defer src="sebaro/js/sb-start.js"></script>
+<script defer src="sebaro/js/sb-search.js"></script>
 <script defer src="assets/web.js"></script>
 </head>
 <body class="sb-page" id="top">
 <!-- guide:sprite -->
 <svg xmlns="http://www.w3.org/2000/svg" class="sb-sprite" width="0" height="0" aria-hidden="true" focusable="false">
-<!-- generated — do not edit. tools/icons.py 1.1.0 · system "sebaro" · grammar "Line 1.75 round" · source 59858c23f5e7780d · use with sprite.css (shared/ICONS-GUIDE.md §9.1) -->
+<!-- generated — do not edit. tools/icons.py 1.1.0 · system "sebaro" · grammar "Line 1.75 round" · source c3518d76b9da3b04 · use with sprite.css (shared/ICONS-GUIDE.md §9.1) -->
 <symbol id="arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><path d="M12 4.5 V19.5"/><path d="M6.5 14 L12 19.5 L17.5 14"/></symbol>
 <symbol id="arrow-down--16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="sb-sym-16"><path d="M8 3 V13"/><path d="M4 9 L8 13 L12 9"/></symbol>
 <symbol id="arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><path d="M4.5 12 H19.5"/><path d="M10 6.5 L4.5 12 L10 17.5"/></symbol>
@@ -109,6 +110,7 @@
 <symbol id="pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><path d="M9 5 V19"/><path d="M15 5 V19"/></symbol>
 <symbol id="pending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><path d="M21.125 12 A9.125 9.125 0 0 1 21.002 13.493 M19.421 17.31 A9.125 9.125 0 0 1 17.309 19.421 M13.493 21.002 A9.125 9.125 0 0 1 12 21.125 A9.125 9.125 0 0 1 10.507 21.002 M6.69 19.421 A9.125 9.125 0 0 1 4.579 17.309 M2.998 13.493 A9.125 9.125 0 0 1 2.875 12 A9.125 9.125 0 0 1 2.998 10.507 M4.579 6.69 A9.125 9.125 0 0 1 6.691 4.579 M10.507 2.998 A9.125 9.125 0 0 1 12 2.875 A9.125 9.125 0 0 1 13.494 2.998 M17.31 4.579 A9.125 9.125 0 0 1 19.421 6.691 M21.002 10.507 A9.125 9.125 0 0 1 21.125 12"/></symbol>
 <symbol id="pending--16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="sb-sym-16"><path d="M14.25 8 A6.25 6.25 0 0 1 14.189 8.872 M12.993 11.759 A6.25 6.25 0 0 1 11.76 12.993 M8.872 14.189 A6.25 6.25 0 0 1 8 14.25 A6.25 6.25 0 0 1 7.128 14.189 M4.241 12.993 A6.25 6.25 0 0 1 3.007 11.76 M1.811 8.872 A6.25 6.25 0 0 1 1.75 8 A6.25 6.25 0 0 1 1.811 7.128 M3.007 4.241 A6.25 6.25 0 0 1 4.24 3.007 M7.128 1.811 A6.25 6.25 0 0 1 8 1.75 A6.25 6.25 0 0 1 8.872 1.811 M11.759 3.007 A6.25 6.25 0 0 1 12.993 4.24 M14.189 7.128 A6.25 6.25 0 0 1 14.25 8"/></symbol>
+<symbol id="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><path d="M12 21.125 C12 21.125 4.75 14.75 4.75 10.25 A7.25 7.25 0 0 1 19.25 10.25 C19.25 14.75 12 21.125 12 21.125 Z"/><circle cx="12" cy="10.25" r="2.75"/></symbol>
 <symbol id="play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><path d="M7.5 4.5 L20.5 12 L7.5 19.5 Z"/></symbol>
 <symbol id="play--filled" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M6.625 4.5 A0.875 0.875 0 0 1 7.875 3.75 L20.875 11.25 A0.875 0.875 0 0 1 20.875 12.75 L7.875 20.25 A0.875 0.875 0 0 1 6.625 19.5 L6.625 4.5 Z"/></symbol>
 <symbol id="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><path d="M12 5 V19"/><path d="M5 12 H19"/></symbol>
@@ -127,6 +129,8 @@
 <symbol id="skipped" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><circle cx="12" cy="12" r="9.125"/><path d="M8.5 15.5 L15.5 8.5"/></symbol>
 <symbol id="skipped--16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="sb-sym-16"><circle cx="8" cy="8" r="6.25"/><path d="M6.125 9.875 L9.875 6.125"/></symbol>
 <symbol id="smartphone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><rect x="6.5" y="2.875" width="11" height="18.25" rx="2"/><circle cx="12" cy="16.75" r="1.25" fill="currentColor" stroke="none"/></symbol>
+<symbol id="star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><path d="M12 3.375 L14.625 9.25 L21 10 L16.25 14.25 L17.625 20.5 L12 17.375 L6.375 20.5 L7.75 14.25 L3 10 L9.375 9.25 Z"/></symbol>
+<symbol id="star--filled" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M11.25 3 A0.875 0.875 0 0 1 12.75 3 L15.25 8.5 L21.125 9.125 A0.875 0.875 0 0 1 21.625 10.625 L17.25 14.5 L18.5 20.25 A0.875 0.875 0 0 1 17.25 21.25 L12 18.375 L6.75 21.25 A0.875 0.875 0 0 1 5.5 20.25 L6.75 14.5 L2.375 10.625 A0.875 0.875 0 0 1 2.875 9.125 L8.75 8.5 Z"/></symbol>
 <symbol id="success" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><circle cx="12" cy="12" r="9.125"/><path d="M7.5 12.25 L10.75 15.5 L16.5 9.75"/></symbol>
 <symbol id="success--filled" viewBox="0 0 24 24" fill="currentColor" stroke="none" fill-rule="evenodd"><path d="M2 12 A10 10 0 1 1 22 12 A10 10 0 1 1 2 12 Z M6.875 12.875 A0.875 0.875 0 0 1 8.125 11.625 L10.75 14.25 L15.875 9.125 A0.875 0.875 0 0 1 17.125 10.375 L11.375 16.125 A0.875 0.875 0 0 1 10.125 16.125 L6.875 12.875 Z"/></symbol>
 <symbol id="success--16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="sb-sym-16"><circle cx="8" cy="8" r="6.25"/><path d="M5.5 8.5 L7.25 10.25 L10.5 7"/></symbol>
@@ -157,12 +161,12 @@
     <span class="sb-sign-tile sb-sign-tile--32" aria-hidden="true"><svg class="sb-app-sign" data-sb-product="studio" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" width="32" height="32" role="img" aria-label="sebaro"><title>sebaro</title><!-- generated by systems/sebaro/brand/gen/build_brand_src.py from signs.json, dist/tokens.json and sebaro Sans — do not edit. tile of studio for tiles below 48 px: the symbol alone, 32-px master; signTiles pair #3057B1 / #FFFFFF in every mode (the launcher's colours; D40: product colour only inside the sign tile) --><rect class="sb-app-sign__tile" width="72" height="72" rx="12.002" fill="#3057B1"/><g class="sb-app-sign__glyph" transform="translate(14.4 14.4) scale(1.8)"><path d="M1.6 11.5 L12 3 L22.4 11.5" fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 18.5 A2.5 2.5 0 1 1 7 18.5 A2.5 2.5 0 1 1 2 18.5 Z" fill="#FFFFFF"/><path d="M9.5 18.5 A2.5 2.5 0 1 1 14.5 18.5 A2.5 2.5 0 1 1 9.5 18.5 Z" fill="#FFFFFF"/><path d="M17 18.5 A2.5 2.5 0 1 1 22 18.5 A2.5 2.5 0 1 1 17 18.5 Z" fill="#FFFFFF"/></g></svg></span>
     <span class="sb-wordmark">sebaro</span><span class="g-header__suffix">Guide</span>
   </a>
-  <button class="sb-theme-button" type="button" data-sb-theme-button>Hell oder Dunkel</button>
   <div class="sb-site-header__links">
     <nav class="sb-site-nav g-nav" aria-label="Hauptmenü">
       <a href="index.html">Start</a> <a href="regeln.html">Regeln</a> <a href="grundlagen.html">Grundlagen</a> <a href="bauteile.html">Bauteile</a> <a href="daten.html">Daten</a> <a href="web.html" aria-current="page">Web</a> <a href="app.html">App</a> <a href="desktop.html">Desktop</a> <a href="gedanken.html">Gedanken</a> <a href="ausblick.html">Ausblick</a>
     </nav>
   </div>
+  <button class="sb-theme-button" type="button" data-sb-theme-button>Hell oder Dunkel</button>
   <span class="sb-visually-hidden" role="status" data-sb-theme-status></span>
 </header>
 <!-- /guide:header -->
@@ -207,7 +211,7 @@
         <h1 id="lead-h">Eine Website in sebaro, Fall für Fall</h1>
         <p>Hier steht eine erfundene Website von sebaro mit allem, was eine Website typischerweise braucht: Einstieg, App-Seite, Übersicht mit Filter, Suche, Artikel, Dokumentation, Formulare, Rechtstexte und die Seiten für den Fall, dass etwas schiefgeht. Jeder Fall nennt die Regeln, die er zeigt, und verlinkt sie.</p>
         <p>Jeder Rahmen ist ein Browserfenster. Oben steht die Beispieladresse, darunter die Seite, gebaut nur aus Klassen von <code class="sb-code-inline">sebaro.css</code>. Unter 430&nbsp;px Breite füllt der Rahmen den Bildschirm, so siehst du die Seite wie auf einem Telefon. Kopf und Fuß sind auf jeder Seite gleich; viele Rahmen zeigen darum nur den Inhalt.</p>
-        <p>Alle Namen, Zahlen, Adressen und Belege sind erfunden. Wo etwas wie eine Tatsache über ein Produkt aussieht, steht <span class="sb-demo-marker">Beispieldaten</span> daneben. Muster, die es in sebaro noch nicht gibt, tragen den Hinweis <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#flask--16"/></svg>Vorschlag, noch nicht im System</span>.</p>
+        <p>Alle Namen, Zahlen, Adressen und Belege sind erfunden. Wo etwas wie eine Tatsache über ein Produkt aussieht, steht <span class="sb-demo-marker">Beispieldaten</span> daneben. Website-Muster, die in der Werkstatt skizziert sind und auf die Wahl des Inhabers warten (Formular-Ergebnis, Seitenzahlen, häufige Fragen, Gruppen in der Doku-Navigation, Bildschirmfotos, Vorschau beim Teilen, Sprachwechsel, Druck), tragen den Hinweis <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#clock--16"/></svg>Skizziert, wartet auf die Wahl des Inhabers</span>. Die Fassung hier ist ein Vorschlag, kein entschiedenes Muster.</p>
       </section>
 
       <!-- ============================================================ Startseite -->
@@ -238,8 +242,8 @@
     <h3 class="sb-page-lead__title g-web-title">Software, die man versteht.</h3>
     <p class="sb-page-lead__text">sebaro baut Apps und Websites für den Alltag: ohne Analyse-Skripte, ohne Werbe-IDs, ohne Cookies<a class="sb-note-ref" id="w1-ref-1" href="#w1-beleg-1" role="doc-noteref" aria-label="Beleg 1" data-claim-text="ohne Analyse-Skripte, ohne Werbe-IDs, ohne Cookies">1</a> und mit Servern in Falkenstein (DE)<a class="sb-note-ref" id="w1-ref-2" href="#w1-beleg-2" role="doc-noteref" aria-label="Beleg 2" data-claim-text="mit Servern in Falkenstein (DE)">2</a>.</p>
     <div class="sb-section__actions">
-      <a class="sb-primary-action" href="#w1-apps-h">Apps ansehen</a>
       <a class="sb-secondary-action" href="#w1-arbeit-h">Wie ich arbeite</a>
+      <a class="sb-primary-action" href="#w1-apps-h">Apps ansehen</a>
     </div>
   </div>
   <div class="sb-section">
@@ -331,8 +335,8 @@
         </div>
 </figure>
         <ul class="g-web-points">
-          <li>Kopf: Kachel 32 und Wortmarke, die vier Wörter, „DE / EN“ und „Hell oder Dunkel“. Alle vier Wörter bleiben bei 390&nbsp;px sichtbar, es gibt keinen Menüknopf.</li>
-          <li>Lindgrün ist nur „Apps ansehen“. „Apps“, „Wie ich arbeite“ und „Zuletzt geändert“ haben keine Hauptaktion, weil dort kein nächster Schritt wartet.</li>
+          <li>Kopf: Kachel 32 und Wortmarke, die vier Wörter, „DE / EN“ und „Hell oder Dunkel“, im Markup in dieser Reihenfolge. Bei 390&nbsp;px stehen Kachel und Taste in der ersten Zeile, die vier Wörter und „DE / EN“ in der zweiten: gemessen 347,5&nbsp;px hell und 351,8&nbsp;px dunkel von 358&nbsp;px. Es gibt keinen Menüknopf; werden die Wörter eines Produkts länger, kürzt es die Wörter, nie die 48-px-Ziele.</li>
+          <li>Lindgrün ist nur „Apps ansehen“, 56&nbsp;px hoch und als Letztes in seiner Gruppe, nach „Wie ich arbeite“. „Apps“, „Wie ich arbeite“ und „Zuletzt geändert“ haben keine Hauptaktion, weil dort kein nächster Schritt wartet.</li>
           <li>„Jeder Seitenaufruf geht an diesen Server“ ist ein Abfluss. Er steht in der Liste, auch wenn er nicht beruhigt.</li>
           <li>Unter 1024&nbsp;px öffnet eine Ziffer ihren Beleg zusätzlich als Popover; die Liste bleibt immer stehen.</li>
         </ul>
@@ -356,8 +360,8 @@
       &lt;<span class="sb-tok-keyword">h1</span> class=<span class="sb-tok-string">"sb-page-lead__title"</span> id=<span class="sb-tok-string">"lead-h"</span>&gt;Software, die man versteht.&lt;/<span class="sb-tok-keyword">h1</span>&gt;
       &lt;<span class="sb-tok-keyword">p</span> class=<span class="sb-tok-string">"sb-page-lead__text"</span>&gt;… ohne Analyse-Skripte, ohne Werbe-IDs, ohne Cookies&lt;<span class="sb-tok-keyword">a</span> class=<span class="sb-tok-string">"sb-note-ref"</span> id=<span class="sb-tok-string">"ref-1"</span> href=<span class="sb-tok-string">"#beleg-1"</span> role=<span class="sb-tok-string">"doc-noteref"</span> aria-label=<span class="sb-tok-string">"Beleg 1"</span> data-claim-text=<span class="sb-tok-string">"ohne Analyse-Skripte, ohne Werbe-IDs, ohne Cookies"</span>&gt;1&lt;/<span class="sb-tok-keyword">a</span>&gt; …&lt;/<span class="sb-tok-keyword">p</span>&gt;
       &lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-section__actions"</span>&gt;
-        &lt;<span class="sb-tok-keyword">a</span> class=<span class="sb-tok-string">"sb-primary-action"</span> href=<span class="sb-tok-string">"#apps"</span>&gt;Apps ansehen&lt;/<span class="sb-tok-keyword">a</span>&gt;
         &lt;<span class="sb-tok-keyword">a</span> class=<span class="sb-tok-string">"sb-secondary-action"</span> href=<span class="sb-tok-string">"#ueber"</span>&gt;Wie ich arbeite&lt;/<span class="sb-tok-keyword">a</span>&gt;
+        &lt;<span class="sb-tok-keyword">a</span> class=<span class="sb-tok-string">"sb-primary-action"</span> href=<span class="sb-tok-string">"#apps"</span>&gt;Apps ansehen&lt;/<span class="sb-tok-keyword">a</span>&gt;
       &lt;/<span class="sb-tok-keyword">div</span>&gt;
     &lt;/<span class="sb-tok-keyword">section</span>&gt;
     …
@@ -423,14 +427,14 @@
     <p class="sb-page-lead__text">Hak deine Gewohnheiten ab, ohne Konto und ohne Druck. Die Einträge bleiben auf deinem Telefon.</p>
     <p class="sb-facts-line"><span class="sb-facts-line__name">Tagwerk</span><span class="sb-facts-line__cell"><span class="sb-facts-line__sep" aria-hidden="true">·</span>Version <code>1.4.0</code></span><span class="sb-facts-line__cell"><span class="sb-facts-line__sep" aria-hidden="true">·</span>Android 10 oder neuer</span><span class="sb-facts-line__cell"><span class="sb-facts-line__sep" aria-hidden="true">·</span>12,4&nbsp;MB</span><span class="sb-facts-line__cell"><span class="sb-facts-line__sep" aria-hidden="true">·</span>kostenlos</span></p>
     <div class="sb-section__actions">
-      <a class="sb-primary-action" href="https://play.google.com/">Im Play Store laden<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a>
       <a class="sb-secondary-action" href="#fall-changelog">Alle Versionen</a>
+      <a class="sb-primary-action" href="https://play.google.com/">Im Play Store laden<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a>
     </div>
     <p class="g-web-download">Ohne Store: <a href="#fall-changelog">tagwerk-1.4.0.apk</a> direkt von diesem Server, 12,4&nbsp;MB, Prüfsumme bei den Versionen.</p>
   </div>
   <div class="sb-section">
     <h4 class="sb-section__title">Bildschirmfotos</h4>
-    <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#flask--16"/></svg>Vorschlag, noch nicht im System</span>
+    <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#clock--16"/></svg>Skizziert, wartet auf die Wahl des Inhabers</span>
     <ul class="g-web-shots">
       <li><figure class="g-web-shot"><div class="g-web-shot__slot"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#image"/></svg><span>Bildschirmfoto folgt</span></div><figcaption>Heute: was noch offen ist</figcaption></figure></li>
       <li><figure class="g-web-shot"><div class="g-web-shot__slot"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#image"/></svg><span>Bildschirmfoto folgt</span></div><figcaption>Verlauf der Woche</figcaption></figure></li>
@@ -498,8 +502,8 @@
 &lt;<span class="sb-tok-keyword">p</span> class=<span class="sb-tok-string">"sb-page-lead__text"</span>&gt;Hak deine Gewohnheiten ab, ohne Konto und ohne Druck.&lt;/<span class="sb-tok-keyword">p</span>&gt;
 &lt;<span class="sb-tok-keyword">p</span> class=<span class="sb-tok-string">"sb-facts-line"</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-facts-line__name"</span>&gt;Tagwerk&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-facts-line__cell"</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-facts-line__sep"</span> aria-hidden=<span class="sb-tok-string">"true"</span>&gt;·&lt;/<span class="sb-tok-keyword">span</span>&gt;Version &lt;<span class="sb-tok-keyword">code</span>&gt;1.4.0&lt;/<span class="sb-tok-keyword">code</span>&gt;&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-facts-line__cell"</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-facts-line__sep"</span> aria-hidden=<span class="sb-tok-string">"true"</span>&gt;·&lt;/<span class="sb-tok-keyword">span</span>&gt;12,4<span class="sb-tok-constant">&amp;nbsp;</span>MB&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;/<span class="sb-tok-keyword">p</span>&gt;
 &lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-section__actions"</span>&gt;
-  &lt;<span class="sb-tok-keyword">a</span> class=<span class="sb-tok-string">"sb-primary-action"</span> href=<span class="sb-tok-string">"https://play.google.com/…"</span>&gt;Im Play Store laden&lt;<span class="sb-tok-keyword">svg</span> class=<span class="sb-tok-string">"sb-icon sb-icon--16"</span> aria-hidden=<span class="sb-tok-string">"true"</span> focusable=<span class="sb-tok-string">"false"</span>&gt;&lt;<span class="sb-tok-keyword">use</span> href=<span class="sb-tok-string">"#external-link--16"</span>/&gt;&lt;/<span class="sb-tok-keyword">svg</span>&gt;&lt;/<span class="sb-tok-keyword">a</span>&gt;
   &lt;<span class="sb-tok-keyword">a</span> class=<span class="sb-tok-string">"sb-secondary-action"</span> href=<span class="sb-tok-string">"/apps/tagwerk/versionen/"</span>&gt;Alle Versionen&lt;/<span class="sb-tok-keyword">a</span>&gt;
+  &lt;<span class="sb-tok-keyword">a</span> class=<span class="sb-tok-string">"sb-primary-action"</span> href=<span class="sb-tok-string">"https://play.google.com/…"</span>&gt;Im Play Store laden&lt;<span class="sb-tok-keyword">svg</span> class=<span class="sb-tok-string">"sb-icon sb-icon--16"</span> aria-hidden=<span class="sb-tok-string">"true"</span> focusable=<span class="sb-tok-string">"false"</span>&gt;&lt;<span class="sb-tok-keyword">use</span> href=<span class="sb-tok-string">"#external-link--16"</span>/&gt;&lt;/<span class="sb-tok-keyword">svg</span>&gt;&lt;/<span class="sb-tok-keyword">a</span>&gt;
 &lt;/<span class="sb-tok-keyword">div</span>&gt;</code></pre></div></details>
       </section>
 
@@ -946,7 +950,7 @@
         <h2 class="sb-section__title" id="fall-blog-h">Liste mit Seiten (Blog)</h2>
         <p class="demo-section-text">Viele Beiträge, aufgeteilt in Seiten. Jede Zeile ist ein Link über die ganze Breite mit Datum und Lesezeit. Unten die Seitenzahlen und der Weiter-Link zur nächsten Seite; endloses Nachladen gibt es nicht.</p>
         <p class="g-web-rules"><span>Regeln:</span> <a href="regeln.html#DAT-01">DAT-01</a> <a href="regeln.html#TXT-04">TXT-04</a> <a href="regeln.html#NAV-01">NAV-01</a> <a href="regeln.html#NAV-08">NAV-08</a> <a href="regeln.html#LNK-01">LNK-01</a></p>
-        <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#flask--16"/></svg>Vorschlag, noch nicht im System</span>
+        <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#clock--16"/></svg>Skizziert, wartet auf die Wahl des Inhabers</span>
         <figure class="g-web-frame">
 <figcaption class="g-web-frame__bar"><span class="g-web-frame__path"><span class="sb-visually-hidden">Beispielseite </span>sebaro.example/notizen/seite/2/</span></figcaption>
 <div class="g-web-frame__page">
@@ -977,9 +981,9 @@
         <ul class="g-web-points">
           <li>Die aktuelle Seite hat die 3-px-Ortslinie in Kobalt und ist kein Link. Jede Zahl ist ein Ziel von 48&nbsp;px.</li>
           <li>Das Datum steht ausgeschrieben, nie nur „vor 3&nbsp;Tagen“.</li>
-          <li>Die Seitenzahlen sind ein Vorschlag: sebaro hat bisher nur den Weiter-Link (<code>sb-pager</code>).</li>
+          <li>Die Seitenzahlen sind skizziert und warten auf die Wahl des Inhabers (Zahlen mit Weiter-Link oder nur Zurück und Weiter); entschieden ist bisher nur der Weiter-Link (<code>sb-pager</code>).</li>
         </ul>
-        <details class="g-source"><summary>Markup</summary><div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">HTML</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="Markup: Seitenzahlen (Vorschlag) und Weiter-Link"><code><span class="sb-tok-comment">&lt;!-- Vorschlag, noch nicht im System: numbered pages; the current page is not a link and carries the place line --&gt;</span>
+        <details class="g-source"><summary>Markup</summary><div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">HTML</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="Markup: Seitenzahlen (Vorschlag) und Weiter-Link"><code><span class="sb-tok-comment">&lt;!-- Sketched, waits for the owner; not part of sebaro: numbered pages; the current page is not a link and carries the place line --&gt;</span>
 &lt;<span class="sb-tok-keyword">nav</span> aria-label=<span class="sb-tok-string">"Seiten"</span>&gt;
   &lt;<span class="sb-tok-keyword">ol</span> class=<span class="sb-tok-string">"g-web-pages"</span>&gt;
     &lt;<span class="sb-tok-keyword">li</span>&gt;&lt;<span class="sb-tok-keyword">a</span> href=<span class="sb-tok-string">"/notizen/"</span> aria-label=<span class="sb-tok-string">"Seite 1"</span>&gt;1&lt;/<span class="sb-tok-keyword">a</span>&gt;&lt;/<span class="sb-tok-keyword">li</span>&gt;
@@ -998,7 +1002,7 @@
         <h2 class="sb-section__title" id="fall-doku-h">Dokumentation</h2>
         <p class="demo-section-text">Eine Hilfeseite mit Seitennavigation: Der Ort ist die 3-px-Kobaltlinie am Anfang der Zeile. Darüber Brotkrumen, im Text Schritte, Hinweise und Code.</p>
         <p class="g-web-rules"><span>Regeln:</span> <a href="regeln.html#NAV-01">NAV-01</a> <a href="regeln.html#NAV-08">NAV-08</a> <a href="regeln.html#STA-05">STA-05</a> <a href="regeln.html#TXT-08">TXT-08</a> <a href="regeln.html#TXT-07">TXT-07</a> <a href="regeln.html#LNK-01">LNK-01</a> <a href="regeln.html#AKT-04">AKT-04</a></p>
-        <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#flask--16"/></svg>Vorschlag, noch nicht im System</span>
+        <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#clock--16"/></svg>Skizziert, wartet auf die Wahl des Inhabers</span>
         <figure class="g-web-frame">
 <figcaption class="g-web-frame__bar"><span class="g-web-frame__path"><span class="sb-visually-hidden">Beispielseite </span>sebaro.example/apps/tagwerk/doku/daten-sichern/</span></figcaption>
 <div class="g-web-frame__page">
@@ -1082,13 +1086,13 @@
 </figure>
         <ul class="g-web-points">
           <li>Die Seitennavigation nutzt <code>sb-toc</code> mit <code>aria-current="true"</code>: Kobaltlinie am Anfang, Wort in Kobalt und kräftiger. Auf dem Telefon klappt sie unter „Dokumentation“ auf.</li>
-          <li>Die Gruppenüberschriften der Navigation sind ein Vorschlag; <code>sb-toc</code> kennt nur eine Liste.</li>
+          <li>Gruppen in der Doku-Navigation sind skizziert und warten auf die Wahl des Inhabers; <code>sb-toc</code> kennt nur eine Liste.</li>
           <li>Bedienwege schreibst du als Satz mit den Wörtern der App in Fett („Öffne <strong>Einstellungen</strong>, dann <strong>Daten</strong>“). Ein „›“ als Schriftzeichen wäre ein Pfeil aus Text.</li>
         </ul>
         <details class="g-source"><summary>Markup</summary><div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">HTML</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="Markup: Seitennavigation der Dokumentation"><code>&lt;<span class="sb-tok-keyword">nav</span> class=<span class="sb-tok-string">"sb-toc"</span> aria-label=<span class="sb-tok-string">"Tagwerk-Dokumentation"</span>&gt;
   &lt;<span class="sb-tok-keyword">details</span> open&gt;
     &lt;<span class="sb-tok-keyword">summary</span>&gt;Dokumentation &lt;<span class="sb-tok-keyword">svg</span> class=<span class="sb-tok-string">"sb-icon"</span> aria-hidden=<span class="sb-tok-string">"true"</span> focusable=<span class="sb-tok-string">"false"</span>&gt;&lt;<span class="sb-tok-keyword">use</span> href=<span class="sb-tok-string">"#chevron-down"</span>/&gt;&lt;/<span class="sb-tok-keyword">svg</span>&gt;&lt;/<span class="sb-tok-keyword">summary</span>&gt;
-    <span class="sb-tok-comment">&lt;!-- Vorschlag: group labels; sb-toc itself knows one list --&gt;</span>
+    <span class="sb-tok-comment">&lt;!-- Sketched, waits for the owner: group labels; sb-toc itself knows one list --&gt;</span>
     &lt;<span class="sb-tok-keyword">p</span> class=<span class="sb-tok-string">"g-web-docnav__group"</span>&gt;Deine Daten&lt;/<span class="sb-tok-keyword">p</span>&gt;
     &lt;<span class="sb-tok-keyword">ol</span>&gt;
       &lt;<span class="sb-tok-keyword">li</span>&gt;&lt;<span class="sb-tok-keyword">a</span> href=<span class="sb-tok-string">"/apps/tagwerk/doku/daten-sichern/"</span> aria-current=<span class="sb-tok-string">"true"</span>&gt;Daten sichern&lt;/<span class="sb-tok-keyword">a</span>&gt;&lt;/<span class="sb-tok-keyword">li</span>&gt;
@@ -1178,7 +1182,7 @@
         <h2 class="sb-section__title" id="fall-faq-h">Häufige Fragen</h2>
         <p class="demo-section-text">Fragen, die man aufklappt. Jede Frage ist ein natives <code>&lt;details&gt;</code> mit einer Zeile von 56&nbsp;px, die Antwort spricht mit „du“ und bleibt konkret.</p>
         <p class="g-web-rules"><span>Regeln:</span> <a href="regeln.html#TXT-01">TXT-01</a> <a href="regeln.html#TXT-02">TXT-02</a> <a href="regeln.html#ZUG-03">ZUG-03</a> <a href="regeln.html#ZUG-06">ZUG-06</a> <a href="regeln.html#FOR-02">FOR-02</a> <a href="regeln.html#BEW-04">BEW-04</a></p>
-        <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#flask--16"/></svg>Vorschlag, noch nicht im System</span>
+        <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#clock--16"/></svg>Skizziert, wartet auf die Wahl des Inhabers</span>
         <figure class="g-web-frame">
 <figcaption class="g-web-frame__bar"><span class="g-web-frame__path"><span class="sb-visually-hidden">Beispielseite </span>sebaro.example/apps/tagwerk/fragen/</span></figcaption>
 <div class="g-web-frame__page">
@@ -1198,9 +1202,9 @@
         <ul class="g-web-points">
           <li>Die ganze Zeile ist die Taste; der Chevron dreht sich, bei reduzierter Bewegung springt er nur.</li>
           <li>Ohne Skript, ohne eigene Tastenlogik: <code>&lt;details&gt;</code> kann Tastatur und Bildschirmleser von selbst.</li>
-          <li>Die Fragezeile ist ein Vorschlag. Die aufklappbare Aussage-Zeile (<code>sb-claim-row</code>) gehört den Belegen in Apps und ist hier nicht gemeint.</li>
+          <li>Die Fragezeile ist skizziert und wartet auf die Wahl des Inhabers. Die aufklappbare Aussage-Zeile (<code>sb-claim-row</code>) gehört den Belegen in Apps und ist hier nicht gemeint.</li>
         </ul>
-        <details class="g-source"><summary>Markup</summary><div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">HTML</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="Markup: Fragen zum Aufklappen (Vorschlag)"><code><span class="sb-tok-comment">&lt;!-- Vorschlag, noch nicht im System --&gt;</span>
+        <details class="g-source"><summary>Markup</summary><div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">HTML</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="Markup: Fragen zum Aufklappen (Vorschlag)"><code><span class="sb-tok-comment">&lt;!-- Sketched, waits for the owner; not part of sebaro --&gt;</span>
 &lt;<span class="sb-tok-keyword">ul</span> class=<span class="sb-tok-string">"g-web-faq"</span>&gt;
   &lt;<span class="sb-tok-keyword">li</span>&gt;&lt;<span class="sb-tok-keyword">details</span>&gt;&lt;<span class="sb-tok-keyword">summary</span>&gt;Brauche ich ein Konto?&lt;<span class="sb-tok-keyword">svg</span> class=<span class="sb-tok-string">"sb-icon"</span> aria-hidden=<span class="sb-tok-string">"true"</span> focusable=<span class="sb-tok-string">"false"</span>&gt;&lt;<span class="sb-tok-keyword">use</span> href=<span class="sb-tok-string">"#chevron-down"</span>/&gt;&lt;/<span class="sb-tok-keyword">svg</span>&gt;&lt;/<span class="sb-tok-keyword">summary</span>&gt;&lt;<span class="sb-tok-keyword">div</span>&gt;&lt;<span class="sb-tok-keyword">p</span>&gt;Nein. …&lt;/<span class="sb-tok-keyword">p</span>&gt;&lt;/<span class="sb-tok-keyword">div</span>&gt;&lt;/<span class="sb-tok-keyword">details</span>&gt;&lt;/<span class="sb-tok-keyword">li</span>&gt;
   &lt;<span class="sb-tok-keyword">li</span>&gt;&lt;<span class="sb-tok-keyword">details</span>&gt;&lt;<span class="sb-tok-keyword">summary</span>&gt;Wo liegen meine Daten?&lt;<span class="sb-tok-keyword">svg</span> class=<span class="sb-tok-string">"sb-icon"</span> aria-hidden=<span class="sb-tok-string">"true"</span> focusable=<span class="sb-tok-string">"false"</span>&gt;&lt;<span class="sb-tok-keyword">use</span> href=<span class="sb-tok-string">"#chevron-down"</span>/&gt;&lt;/<span class="sb-tok-keyword">svg</span>&gt;&lt;/<span class="sb-tok-keyword">summary</span>&gt;&lt;<span class="sb-tok-keyword">div</span>&gt;&lt;<span class="sb-tok-keyword">p</span>&gt;…&lt;/<span class="sb-tok-keyword">p</span>&gt;&lt;/<span class="sb-tok-keyword">div</span>&gt;&lt;/<span class="sb-tok-keyword">details</span>&gt;&lt;/<span class="sb-tok-keyword">li</span>&gt;
@@ -1212,7 +1216,7 @@
         <h2 class="sb-section__title" id="fall-kontakt-h">Kontakt-Formular</h2>
         <p class="demo-section-text">Die Felder werden erst beim Senden geprüft; jeder Fehler steht am Feld und sagt, was zu tun ist. Dann zeigt die Hauptaktion selbst, dass gesendet wird, und danach „Gesendet“. Kein Toast. Probier es im Rahmen aus: einmal leer senden, einmal ausgefüllt.</p>
         <p class="g-web-rules"><span>Regeln:</span> <a href="regeln.html#EIN-01">EIN-01</a> <a href="regeln.html#EIN-02">EIN-02</a> <a href="regeln.html#TXT-07">TXT-07</a> <a href="regeln.html#AKT-04">AKT-04</a> <a href="regeln.html#AKT-05">AKT-05</a> <a href="regeln.html#EBE-05">EBE-05</a> <a href="regeln.html#ZUG-04">ZUG-04</a> <a href="regeln.html#LNK-02">LNK-02</a> <a href="regeln.html#TXT-01">TXT-01</a></p>
-        <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#flask--16"/></svg>Vorschlag, noch nicht im System</span>
+        <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#clock--16"/></svg>Skizziert, wartet auf die Wahl des Inhabers</span>
         <figure class="g-web-frame">
 <figcaption class="g-web-frame__bar"><span class="g-web-frame__path"><span class="sb-visually-hidden">Beispielseite </span>sebaro.example/kontakt/</span></figcaption>
 <div class="g-web-frame__page">
@@ -1277,15 +1281,15 @@
 </figure>
         </div>
         <ul class="g-web-points">
-          <li>Feldfehler: 2-px-Linie in Gefahrrot, Fehlerglyphe, Satz in Textfarbe. Keine rote Schrift, kein rosa Kasten. Nur der Grund eines gescheiterten Sendens steht nach AKT-05 in Gefahrrot über der Taste; dieser Widerspruch zu STA-01 ist offen (siehe <a href="ausblick.html#p-w-fehlergrund">Ausblick</a>).</li>
+          <li>Feldfehler: 2-px-Linie in Gefahrrot, Fehlerglyphe, Satz in Textfarbe. Keine rote Schrift, kein rosa Kasten. Auch der Grund eines gescheiterten Sendens steht als Satz in Textfarbe mit der Fehlerglyphe davor in der Aktionszone (<a href="regeln.html#AKT-05">AKT-05</a>, D83).</li>
           <li>Die Meldung sagt, was fehlt und wie es richtig aussieht, mit einer Beispieladresse statt „Ungültige Eingabe“.</li>
           <li>Ein Toast „Nachricht gesendet“ wäre doppelt: Die Taste zeigt das Ergebnis selbst. Der Satz darunter bleibt stehen, weil „Gesendet“ nach 1,5&nbsp;s wieder zu „Nachricht senden“ wird.</li>
-          <li>Vorschlag: Die Aktionszone (<code>sb-primary-action-bar</code>) steht hier in einem Website-Formular, ohne seitlichen Innenabstand und ab 640&nbsp;px nicht über die ganze Breite. Der Satz nach dem Senden ist ebenfalls neu.</li>
+          <li>Was nach dem Senden stehen bleibt (das Ergebnis ersetzt das Formular, oder das Formular bleibt mit einem Satz in der Aktionszone), ist skizziert und wartet auf die Wahl des Inhabers. Hier steht die zweite Fassung: die Aktionszone (<code>sb-primary-action-bar</code>) in einem Website-Formular, ohne seitlichen Innenabstand und ab 640&nbsp;px nicht über die ganze Breite.</li>
         </ul>
         <details class="g-source"><summary>Markup</summary><div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">HTML</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="Markup: Formular mit Aktionszone"><code>&lt;<span class="sb-tok-keyword">form</span> novalidate&gt;
   &lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-field"</span>&gt;&lt;<span class="sb-tok-keyword">label</span> class=<span class="sb-tok-string">"sb-field__label"</span> for=<span class="sb-tok-string">"mail"</span>&gt;E-Mail-Adresse&lt;/<span class="sb-tok-keyword">label</span>&gt;&lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-field__control"</span>&gt;&lt;<span class="sb-tok-keyword">input</span> id=<span class="sb-tok-string">"mail"</span> type=<span class="sb-tok-string">"email"</span> autocomplete=<span class="sb-tok-string">"email"</span> required aria-invalid=<span class="sb-tok-string">"true"</span> aria-describedby=<span class="sb-tok-string">"mail-error"</span>&gt;&lt;/<span class="sb-tok-keyword">div</span>&gt;&lt;<span class="sb-tok-keyword">p</span> class=<span class="sb-tok-string">"sb-field__error"</span> id=<span class="sb-tok-string">"mail-error"</span>&gt;&lt;<span class="sb-tok-keyword">svg</span> class=<span class="sb-tok-string">"sb-icon sb-icon--16"</span> aria-hidden=<span class="sb-tok-string">"true"</span> focusable=<span class="sb-tok-string">"false"</span>&gt;&lt;<span class="sb-tok-keyword">use</span> href=<span class="sb-tok-string">"#error--filled-16"</span>/&gt;&lt;/<span class="sb-tok-keyword">svg</span>&gt;Die E-Mail-Adresse ist unvollständig. Vollständig sieht sie so aus: name@example.org&lt;/<span class="sb-tok-keyword">p</span>&gt;&lt;/<span class="sb-tok-keyword">div</span>&gt;
   &lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-field"</span>&gt;&lt;<span class="sb-tok-keyword">label</span> class=<span class="sb-tok-string">"sb-field__label"</span> for=<span class="sb-tok-string">"text"</span>&gt;Nachricht&lt;/<span class="sb-tok-keyword">label</span>&gt;&lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-field__control"</span>&gt;&lt;<span class="sb-tok-keyword">textarea</span> id=<span class="sb-tok-string">"text"</span> rows=<span class="sb-tok-string">"5"</span> required aria-describedby=<span class="sb-tok-string">"text-help"</span>&gt;&lt;/<span class="sb-tok-keyword">textarea</span>&gt;&lt;/<span class="sb-tok-keyword">div</span>&gt;&lt;<span class="sb-tok-keyword">p</span> class=<span class="sb-tok-string">"sb-field__help"</span> id=<span class="sb-tok-string">"text-help"</span>&gt;&lt;<span class="sb-tok-keyword">span</span>&gt;Bitte höchstens 1.000 Zeichen.&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-num"</span>&gt;0 / 1.000&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;/<span class="sb-tok-keyword">p</span>&gt;&lt;/<span class="sb-tok-keyword">div</span>&gt;
-  <span class="sb-tok-comment">&lt;!-- Vorschlag: the action zone inside a website form (the page removes its side padding) --&gt;</span>
+  <span class="sb-tok-comment">&lt;!-- Sketched, waits for the owner: the action zone inside a website form (the page removes its side padding) --&gt;</span>
   &lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-primary-action-bar"</span>&gt;
     &lt;<span class="sb-tok-keyword">p</span> class=<span class="sb-tok-string">"sb-primary-action-bar__message"</span> role=<span class="sb-tok-string">"status"</span>&gt;&lt;/<span class="sb-tok-keyword">p</span>&gt;
     &lt;<span class="sb-tok-keyword">button</span> class=<span class="sb-tok-string">"sb-primary-action"</span> type=<span class="sb-tok-string">"submit"</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-primary-action__label"</span>&gt;Nachricht senden&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;<span class="sb-tok-keyword">i</span> class=<span class="sb-tok-string">"sb-primary-action__bar"</span> aria-hidden=<span class="sb-tok-string">"true"</span>&gt;&lt;/<span class="sb-tok-keyword">i</span>&gt;&lt;/<span class="sb-tok-keyword">button</span>&gt;
@@ -1972,8 +1976,8 @@
 </figure>
         <ul class="g-web-points">
           <li>Datum und Tausender folgen der Sprache: „12.10.2026“ und „10.000“ auf Deutsch, „2026-10-12“ und „10,000“ auf Englisch.</li>
-          <li>Die Statusansage nach „Light or dark“ lautet „Dark is on.“ oder „Light is on.“; das mitgelieferte Skript schreibt bisher nur die deutschen Sätze.</li>
-          <li><span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#flask--16"/></svg>Vorschlag, noch nicht im System</span> Der Umschalter führt zur selben Seite in der anderen Sprache, nicht zur Startseite, und die Seite leitet nie von selbst nach der Browsersprache um.</li>
+          <li>Die Statusansage nach „Light or dark“ lautet „Dark is on.“ oder „Light is on.“; <code>theme-button.js</code> wählt den Satz nach dem <code>lang</code> der Seite, weitere Sprachen kommen über <code>window.sbMessages</code> dazu (TEC-10).</li>
+          <li><span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#clock--16"/></svg>Skizziert, wartet auf die Wahl des Inhabers</span> Der Umschalter führt zur selben Seite in der anderen Sprache, nicht zur Startseite, und die Seite leitet nie von selbst nach der Browsersprache um.</li>
         </ul>
         <details class="g-source"><summary>Markup</summary><div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">HTML</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="Markup: Sprachwahl und hreflang"><code><span class="sb-tok-comment">&lt;!-- head of the German page --&gt;</span>
 &lt;<span class="sb-tok-keyword">link</span> rel=<span class="sb-tok-string">"alternate"</span> hreflang=<span class="sb-tok-string">"de"</span> href=<span class="sb-tok-string">"https://sebaro.example/"</span>&gt;
@@ -1995,7 +1999,7 @@
   .sb-note__body a[href^=<span class="sb-tok-string">"http"</span>]::after, .sb-prose a[href^=<span class="sb-tok-string">"http"</span>]::after { content: <span class="sb-tok-string">" ("</span> attr(href) <span class="sb-tok-string">")"</span>; }
 }</code></pre>
         </div>
-        <p class="g-web-text">Belege bleiben im Druck stehen, denn sie stehen ohnehin als Liste am Abschnittsende. <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#flask--16"/></svg>Vorschlag, noch nicht im System</span> Gedruckt wird immer hell, auch wenn die Seite gerade dunkel ist. sebaro regelt das bisher nicht ausdrücklich.</p>
+        <p class="g-web-text">Belege bleiben im Druck stehen, denn sie stehen ohnehin als Liste am Abschnittsende. <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#clock--16"/></svg>Skizziert, wartet auf die Wahl des Inhabers</span> Gedruckt wird hier immer hell, auch wenn die Seite gerade dunkel ist. Ob das so bleibt oder der Druck dem Bildschirm folgt, ist skizziert und wartet auf die Wahl des Inhabers.</p>
       </section>
 
       <!-- ============================================================ Vorschau beim Teilen -->
@@ -2003,7 +2007,7 @@
         <h2 class="sb-section__title" id="fall-vorschau-h">Vorschau beim Teilen (Open Graph)</h2>
         <p class="demo-section-text">Wird ein Link geteilt, zeigen Messenger und soziale Netze ein Bild mit Titel. sebaro liefert dafür ein erzeugtes Bild in 1200&nbsp;×&nbsp;630&nbsp;px: dunkler Grund, Lockup, der Satz der Startseite und die Kacheln der Apps. Titel und Beschreibung kommen als Text aus dem Kopf der Seite, nie aus dem Bild.</p>
         <p class="g-web-rules"><span>Regeln:</span> <a href="regeln.html#ZEI-09">ZEI-09</a> <a href="regeln.html#ZEI-10">ZEI-10</a> <a href="regeln.html#BIL-01">BIL-01</a> <a href="regeln.html#BIL-04">BIL-04</a> <a href="regeln.html#HAL-09">HAL-09</a></p>
-        <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#flask--16"/></svg>Vorschlag, noch nicht im System</span>
+        <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#clock--16"/></svg>Skizziert, wartet auf die Wahl des Inhabers</span>
         <figure class="g-web-og g-web-demo">
           <img src="sebaro/brand/og/studio.png" width="1200" height="630" alt="Vorschaubild: das sebaro-Lockup, der Satz „Software, die man versteht.“ die Kacheln von Tagwerk, RetroBeam, novalis und Android Coden und die Adresse der Website auf dunklem Grund.">
           <figcaption class="g-web-og__text">
@@ -2052,7 +2056,7 @@
 </dialog>
 <!-- guide:footer -->
 <footer class="sb-site-footer g-footer">
-  <p>sebaro Guide <a href="https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md">Version 1.1.0<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a> · System sebaro, Token-Vertrag 1.6 · aus sebaroDesign <code class="sb-code-inline">65a8067</code></p>
+  <p>sebaro Guide <a href="https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md">Version 2.0.0<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a> · System sebaro, Token-Vertrag 1.7 · aus sebaroDesign <code class="sb-code-inline">f2510b0</code></p>
   <ul class="sb-site-footer__links">
     <li><a href="rules.json">rules.json</a></li>
     <li><a href="llms.txt">llms.txt</a></li>

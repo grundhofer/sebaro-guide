@@ -1,0 +1,20 @@
+<div class="g-examples">
+<div class="g-ex g-ex--do">
+  <p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p>
+  <div class="g-ex__stage">
+<div class="g-rx-col g-rx-col--stretch"><div class="g-rx-part"><p class="demo-label">Im Fließtext</p><p>Öffne Einstellungen, dann Über, dann Barrierefreiheit.</p></div><div class="g-rx-part"><p class="demo-label">In der Oberfläche</p><nav class="sb-breadcrumb" aria-label="Pfad, Beispiel TXT-16"><ol><li><a href="#TXT-16">Einstellungen</a><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#chevron-right--16"/></svg></li><li><a href="#TXT-16">Über</a><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#chevron-right--16"/></svg></li><li><span aria-current="page">Barrierefreiheit</span></li></ol></nav></div></div>
+  </div>
+  <p class="g-ex__note">Im Satz trägt „dann“ den Weg, auch vorgelesen; in der Oberfläche trennt das Chevron-Icon die Stufen.</p>
+  <details class="g-source"><summary>Markup</summary><div class="sb-code"><pre tabindex="0" role="region" aria-label="Markup: Brotkrumen"><code>&lt;<span class="sb-tok-keyword">nav</span> class=<span class="sb-tok-string">"sb-breadcrumb"</span> aria-label=<span class="sb-tok-string">"Pfad"</span>&gt;&lt;<span class="sb-tok-keyword">ol</span>&gt;
+  &lt;<span class="sb-tok-keyword">li</span>&gt;&lt;<span class="sb-tok-keyword">a</span> href=<span class="sb-tok-string">"einstellungen.html"</span>&gt;Einstellungen&lt;/<span class="sb-tok-keyword">a</span>&gt;&lt;<span class="sb-tok-keyword">svg</span> class=<span class="sb-tok-string">"sb-icon sb-icon--16"</span> aria-hidden=<span class="sb-tok-string">"true"</span> focusable=<span class="sb-tok-string">"false"</span>&gt;&lt;<span class="sb-tok-keyword">use</span> href=<span class="sb-tok-string">"#chevron-right--16"</span>/&gt;&lt;/<span class="sb-tok-keyword">svg</span>&gt;&lt;/<span class="sb-tok-keyword">li</span>&gt;
+  &lt;<span class="sb-tok-keyword">li</span>&gt;&lt;<span class="sb-tok-keyword">span</span> aria-current=<span class="sb-tok-string">"page"</span>&gt;Über&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;/<span class="sb-tok-keyword">li</span>&gt;
+&lt;/<span class="sb-tok-keyword">ol</span>&gt;&lt;/<span class="sb-tok-keyword">nav</span>&gt;</code></pre></div></details>
+</div>
+<div class="g-ex g-ex--dont">
+  <p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p>
+  <div class="g-ex__stage">
+<p>Öffne Einstellungen › Über › Barrierefreiheit.</p><p>Einstellungen &gt; Über &gt; Barrierefreiheit</p>
+  </div>
+  <p class="g-ex__note">Winkel und Größer-Zeichen als Text: Ein Bildschirmleser liest „Größer als“ vor, und Pfeile sind in sebaro Icons, keine Zeichen.</p>
+</div>
+</div>

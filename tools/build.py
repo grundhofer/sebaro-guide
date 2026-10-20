@@ -12,6 +12,9 @@ Pages in docs/*.html are hand-written. Shared parts sit between marker comments 
     <!-- guide:rules-toc -->       … <!-- /guide:rules-toc --> regeln.html: area list
     <!-- guide:stats -->           … <!-- /guide:stats -->     rule counts by status
 
+Markers may nest at any depth: open and close markers are paired with a stack, and markers inside generated output
+(a guide:tile in a rule fragment inside guide:rules) are filled as well. An unclosed or crossed marker stops the build.
+
 Rule examples are fragments in src/rule-examples/<RULE-ID>.html. Outputs written besides the pages:
 docs/rules.json (copy of rules/rules.json), guide/RULES.md (all rules as Markdown for agents), docs/llms.txt.
 
@@ -39,7 +42,7 @@ SITE_URL = "https://grundhofer.github.io/sebaro-guide/"
 
 # file, label, icon (sprite id), one line for llms.txt
 PAGES = [
-    ("index.html", "Start", "home", "Einstieg: was sebaro ist, die Kernregeln in sieben Sätzen, Wege durch den Guide"),
+    ("index.html", "Start", "home", "Einstieg: was sebaro ist, der Kern in neun Sätzen, Wege durch den Guide"),
     ("regeln.html", "Regeln", "check", "Alle Gestaltungsregeln mit ID, Begründung, Prüfung und Live-Beispiel (richtig/falsch)"),
     ("grundlagen.html", "Grundlagen", "board", "Farben, Schrift, Raum, Form, Linien, Ebenen, Bewegung: alle Tokens mit Werten"),
     ("bauteile.html", "Bauteile", "copy", "Alle Komponenten mit Zuständen und Markup"),
@@ -48,7 +51,7 @@ PAGES = [
     ("app.html", "App", "file", "Beispiel-App am Handy: alle typischen Bildschirme und Zustände"),
     ("desktop.html", "Desktop", "folder", "Beispiel-Desktop-App (Tauri/macOS): Fenster, Seitenleiste, Tabellen, Menüs, Tastatur"),
     ("gedanken.html", "Gedanken", "book", "Die Gedanken dahinter: Haltung, Geschichte, Entscheidungen, Abwägungen"),
-    ("ausblick.html", "Ausblick", "arrow-right", "Vorschläge zur Weiterentwicklung und offene Fragen"),
+    ("ausblick.html", "Ausblick", "arrow-right", "Was auf eine Wahl des Inhabers wartet, was offen ist, später kommt oder erledigt ist"),
 ]
 
 STATUS_LABEL = {"entschieden": ("check--16", "Entschieden"), "vorläufig": ("clock--16", "Vorläufig"),
@@ -143,12 +146,13 @@ def block_header(attrs: dict) -> str:
         f'    <span class="sb-sign-tile sb-sign-tile--32" aria-hidden="true">{tile_svg("studio", "32")}</span>',
         '    <span class="sb-wordmark">sebaro</span><span class="g-header__suffix">Guide</span>',
         '  </a>',
-        '  <button class="sb-theme-button" type="button" data-sb-theme-button>Hell oder Dunkel</button>',
+        # NAV-07: DOM order lockup, navigation, language, theme button; the guide is German only, so no language switch
         '  <div class="sb-site-header__links">',
         '    <nav class="sb-site-nav g-nav" aria-label="Hauptmenü">',
         "      " + " ".join(links),
         '    </nav>',
         '  </div>',
+        '  <button class="sb-theme-button" type="button" data-sb-theme-button>Hell oder Dunkel</button>',
         '  <span class="sb-visually-hidden" role="status" data-sb-theme-status></span>',
         '</header>',
     ])
@@ -262,19 +266,41 @@ def block_stats(_attrs: dict) -> str:
 
 BLOCKS = {"head": block_head, "sprite": block_sprite, "header": block_header, "footer": block_footer,
           "tile": block_tile, "rules": block_rules, "rules-toc": block_rules_toc, "stats": block_stats}
-MARKER = re.compile(r'<!-- guide:(?P<name>[a-z-]+)(?P<attrs>(?:\s+[a-z]+="[^"]*")*)\s*-->'
-                    r'(?P<body>.*?)<!-- /guide:(?P=name) -->', re.S)
+# one pattern for open and close markers; pairs are matched with a stack, so markers may nest at any depth
+MARKER = re.compile(r'<!-- (?P<close>/)?guide:(?P<name>[a-z-]+)(?P<attrs>(?:\s+[a-z]+="[^"]*")*)\s*-->')
 ATTR = re.compile(r'([a-z]+)="([^"]*)"')
+MAX_DEPTH = 8
 
 
-def fill(text: str) -> str:
-    def repl(m: re.Match) -> str:
+def fill(text: str, depth: int = 0) -> str:
+    """Rewrite every outermost marker block; markers inside the generated output (for example guide:tile in a rule
+    fragment inside guide:rules) are filled too, at any depth. A body is always regenerated, never kept."""
+    if depth > MAX_DEPTH:
+        raise SystemExit(f"guide markers nested deeper than {MAX_DEPTH} levels")
+    out, pos, stack = [], 0, []
+    for m in MARKER.finditer(text):
         name = m.group("name")
-        attrs = dict(ATTR.findall(m.group("attrs") or ""))
+        if not m.group("close"):
+            stack.append(m)
+            continue
+        if not stack or stack[-1].group("name") != name:
+            line = text.count("\n", 0, m.start()) + 1
+            raise SystemExit(f"line {line}: <!-- /guide:{name} --> without a matching open marker")
+        start = stack.pop()
+        if stack:
+            continue  # inner pair: its outermost block is regenerated as a whole
         if name not in BLOCKS:
             raise SystemExit(f"unknown block guide:{name}")
-        return f'<!-- guide:{name}{m.group("attrs")} -->\n{BLOCKS[name](attrs)}\n<!-- /guide:{name} -->'
-    return MARKER.sub(repl, text)
+        attrs_raw = start.group("attrs") or ""
+        body = fill(BLOCKS[name](dict(ATTR.findall(attrs_raw))), depth + 1)
+        out.append(text[pos:start.start()])
+        out.append(f'<!-- guide:{name}{attrs_raw} -->\n{body}\n<!-- /guide:{name} -->')
+        pos = m.end()
+    if stack:
+        line = text.count("\n", 0, stack[-1].start()) + 1
+        raise SystemExit(f"line {line}: <!-- guide:{stack[-1].group('name')} --> is never closed")
+    out.append(text[pos:])
+    return "".join(out)
 
 
 # ------------------------------------------------------------------ outputs

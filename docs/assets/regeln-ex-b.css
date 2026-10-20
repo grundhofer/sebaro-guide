@@ -1,9 +1,9 @@
 /* regeln-ex-b.css: specimen helpers for the rule examples of batch b on regeln.html (areas aktionen, navigation, links,
  * status, eingaben, daten, start). Guide chrome, never part of the system; products never load it.
  * Only var(--sb-*) tokens, no raw colours, no shadows. Classes start with "g-rx-".
- * Three groups: (1) frames and layout helpers, (2) desktop patterns that sebaro.css does not have yet (marked on the
- * page as „Vorschlag, noch nicht im System“), (3) deliberately wrong specimens for the „Nicht so“ side: they use the
- * right tokens for the wrong job and keep text contrast and labels intact. */
+ * Four groups: (1) frames and layout helpers, (2) the board head of AKT-10, (3) deliberately wrong specimens for the
+ * „Nicht so“ side: they use the right tokens for the wrong job and keep text contrast and labels intact, (4) frames
+ * around the round-6 system parts (sb-window, sb-tree, sb-command-palette, sb-listbox, sb-card--item). */
 
 /* ================================================================ 1 frames and layout */
 
@@ -40,7 +40,6 @@
 .g-rx-pad { padding: var(--sb-space-2) var(--sb-spacing-gutter) var(--sb-space-3); }
 .g-rx-dialog-host { min-block-size: 0; }
 .sb-phone.g-rx-start-frame { block-size: 440px; }
-.g-rx-mark { margin: 0; }
 
 /* the same site header in three container widths (NAV-06, NAV-07): the system switches the header by viewport width;
    these container rules repeat its three layouts so that the specimens show them side by side */
@@ -86,103 +85,15 @@
 .g-rx-startscreen { display: grid; place-items: center; align-content: center; gap: var(--sb-space-4); min-block-size: 360px; padding: var(--sb-space-6); }
 .g-rx-startscreen progress { inline-size: 160px; }
 
-/* ================================================================ 2 desktop patterns (Vorschlag, noch nicht im System)
-   D67 (2) decided 32 px rows for trees, lists, menus, palette and tool buttons in desktop windows; sebaro.css has no
-   compact variant yet. With a coarse pointer the rows grow back to the 48 px target. */
+/* ================================================================ 2 desktop board head (AKT-10)
+   The window parts themselves (rows, tree, palette, menus, tools) are sebaro.css classes since round 6 (D80); see
+   group 4. Only the board head around them is guide chrome. */
 
-.g-rx-pane {
-  box-sizing: border-box; inline-size: 100%; max-inline-size: 420px; overflow: hidden;
-  border: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color); border-radius: var(--sb-radius-container);
-  background: var(--sb-color-bg);
-}
-.g-rx-pane--wide { max-inline-size: none; }
-.g-rx-pane__head {
-  display: flex; align-items: center; gap: var(--sb-space-2); min-block-size: var(--sb-space-12);
-  padding: var(--sb-space-1) var(--sb-space-2) var(--sb-space-1) var(--sb-space-3); box-sizing: border-box;
-  border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border);
-}
-.g-rx-pane__title { flex: 1 1 auto; min-inline-size: 0; margin: 0; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
-.g-rx-pane__foot {
-  display: grid; gap: var(--sb-space-1); padding: var(--sb-space-2) var(--sb-space-3);
-  border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border);
-}
-.g-rx-pane__zone {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sb-space-2) var(--sb-space-4);
-  min-block-size: var(--sb-space-12); padding: var(--sb-space-2) var(--sb-space-3); box-sizing: border-box; margin: 0;
-  border-block-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color);
-  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
-  font-variant-numeric: var(--sb-type-numeric-variant);
-}
 
-.g-rx-tree { margin: 0; padding: var(--sb-space-1) 0; list-style: none; }
-.g-rx-tree__row {
-  display: flex; align-items: center; gap: var(--sb-space-2); min-inline-size: 0;
-  min-block-size: var(--sb-size-control-sm); padding-inline: calc(var(--sb-space-3) - var(--sb-border-width-strong)) var(--sb-space-3); box-sizing: border-box;
-  border-inline-start: var(--sb-border-width-strong) solid transparent;
-  font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); font-weight: var(--sb-type-body-weight); white-space: nowrap;
-}
-.g-rx-tree__row > .sb-icon { flex: none; color: var(--sb-color-text-muted); }
-.g-rx-tree__name { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; }
-.g-rx-tree__row > .sb-status, .g-rx-tree__end { margin-inline-start: auto; flex: none; }
-a.g-rx-tree__row { color: var(--sb-color-text); text-decoration: none; }
-a.g-rx-tree__row:hover { background: var(--sb-color-hover-fill); }
-a.g-rx-tree__row:focus-visible { outline-offset: calc(-1 * var(--sb-focus-width)); }
-.g-rx-tree__row[aria-current="page"], .g-rx-tree__row[aria-current="true"] { color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
-.g-rx-tree__row[aria-current="page"] { border-inline-start-color: var(--sb-color-accent); }
-.g-rx-tree__row[aria-selected="true"] { border-inline-start-color: var(--sb-color-accent); }
-.g-rx-tree__row[aria-selected="true"] > .sb-icon { color: var(--sb-color-link); }
-
-.g-rx-toolbar { display: flex; align-items: center; gap: var(--sb-space-0-5); flex: none; }
-.sb-icon-button.g-rx-tool { inline-size: var(--sb-size-control-sm); block-size: var(--sb-size-control-sm); }
-.sb-icon-button.g-rx-tool .sb-icon { inline-size: var(--sb-size-icon-md); block-size: var(--sb-size-icon-md); }
-.g-rx-tipped { display: grid; justify-items: end; gap: var(--sb-space-1); padding: var(--sb-space-2) var(--sb-space-3); }
-.sb-secondary-action.g-rx-compact { min-block-size: var(--sb-size-control-sm); padding: 0 var(--sb-space-3); font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
-
-.sb-menu.g-rx-menu32 { min-inline-size: 240px; }
-.g-rx-menu32 .sb-menu__item { min-block-size: var(--sb-size-control-sm); font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); font-weight: var(--sb-type-body-weight); }
-.g-rx-menu32 .sb-menu__item .sb-icon { inline-size: var(--sb-size-icon-md); block-size: var(--sb-size-icon-md); }
-.g-rx-keys { margin-inline-start: auto; padding-inline-start: var(--sb-space-4); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); white-space: nowrap; }
-.sb-menu__item--danger .g-rx-keys { color: var(--sb-color-text-muted); }
 .g-rx-boardhead { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-2); padding: var(--sb-space-2) var(--sb-space-3); }
 .g-rx-boardhead__title { flex: 1 1 auto; margin: 0; font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
 .g-rx-boardhead .sb-danger-action { min-block-size: var(--sb-size-control-sm); padding-inline: var(--sb-space-3); font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
 .g-rx-boardhead .sb-danger-action .sb-icon { inline-size: var(--sb-size-icon-md); block-size: var(--sb-size-icon-md); }
-
-.g-rx-palette {
-  box-sizing: border-box; inline-size: 100%; max-inline-size: 460px; overflow: hidden;
-  border: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color); border-radius: var(--sb-radius-container);
-  background: var(--sb-color-bg);
-}
-.g-rx-palette__input {
-  display: flex; align-items: center; gap: var(--sb-space-2); padding: var(--sb-space-1) var(--sb-space-3);
-  border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border);
-}
-.g-rx-palette__input > .sb-icon { flex: none; color: var(--sb-color-text-muted); }
-.g-rx-palette__input > input {
-  flex: 1 1 auto; min-inline-size: 0; min-block-size: var(--sb-size-target-pointer); block-size: 40px; margin: 0; padding: 0;
-  border: 0; background: transparent; color: var(--sb-color-text); font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking);
-}
-.g-rx-palette__input > input::placeholder { color: var(--sb-color-text-muted); opacity: 1; }
-.g-rx-palette__group { margin: 0; padding: var(--sb-space-2) var(--sb-space-3) var(--sb-space-0-5); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
-.g-rx-palette__row {
-  display: flex; align-items: center; gap: var(--sb-space-2); min-block-size: var(--sb-size-control-sm);
-  padding-inline: calc(var(--sb-space-3) - var(--sb-border-width-strong)) var(--sb-space-3); box-sizing: border-box;
-  border-inline-start: var(--sb-border-width-strong) solid transparent;
-  font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); font-weight: var(--sb-type-body-weight);
-}
-.g-rx-palette__row[aria-selected="true"] { border-inline-start-color: var(--sb-color-accent); background: var(--sb-color-hover-fill); }
-.g-rx-palette__check { display: inline-flex; inline-size: 16px; flex: none; color: var(--sb-color-link); }
-.g-rx-palette__foot {
-  display: flex; flex-wrap: wrap; gap: var(--sb-space-1) var(--sb-space-4); margin: 0; padding: var(--sb-space-2) var(--sb-space-3);
-  border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border);
-  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
-}
-.g-rx-palette__foot > span { display: inline-flex; align-items: center; gap: var(--sb-space-1); }
-
-@media (pointer: coarse) {
-  .g-rx-tree__row, .g-rx-palette__row, .g-rx-menu32 .sb-menu__item { min-block-size: var(--sb-size-target-touch); }
-  .sb-icon-button.g-rx-tool { inline-size: var(--sb-size-target-touch); block-size: var(--sb-size-target-touch); }
-}
 
 /* ================================================================ 3 wrong specimens („Nicht so“) */
 
@@ -197,9 +108,9 @@ a.g-rx-tree__row:focus-visible { outline-offset: calc(-1 * var(--sb-focus-width)
 .g-rx-btn--accent { background: var(--sb-color-accent); color: var(--sb-color-on-accent); }
 .g-rx-btn--grey { background: var(--sb-color-surface-sunken); color: var(--sb-color-text); }
 .g-rx-btn--lime { background: var(--sb-color-primary-action); color: var(--sb-color-on-primary-action); }
-.g-rx-btn--faded { background: var(--sb-color-primary-action); color: var(--sb-color-on-primary-action); opacity: var(--sb-opacity-disabled-content); cursor: not-allowed; }
+.g-rx-btn--faded { background: var(--sb-color-primary-action); color: var(--sb-color-on-primary-action); opacity: 0.38; cursor: not-allowed; }   /* the retired contract value opacity.disabled-content (TOKEN-CONTRACT 1.7 removed the token) */
 .g-rx-fab {
-  position: absolute; inset-block-end: var(--sb-space-4); inset-inline-end: var(--sb-space-4); z-index: var(--sb-layer-raised);
+  position: absolute; inset-block-end: var(--sb-space-4); inset-inline-end: var(--sb-space-4); z-index: var(--sb-layer-sticky);
   display: grid; place-items: center; inline-size: var(--sb-size-control-lg); block-size: var(--sb-size-control-lg); padding: 0;
   border: 0; border-radius: var(--sb-radius-container); background: var(--sb-color-primary-action); color: var(--sb-color-on-primary-action); cursor: pointer;
 }
@@ -311,9 +222,7 @@ progress.sb-progress__bar.g-rx-progress-blue::-moz-progress-bar { background: va
 .g-rx-empty-center { display: grid; justify-items: center; gap: var(--sb-space-3); padding: var(--sb-space-10) var(--sb-spacing-gutter); text-align: center; }
 .g-rx-empty-center p { margin: 0; }
 .g-rx-empty-center__title { font: var(--sb-type-mobile-headline); letter-spacing: var(--sb-type-mobile-headline-tracking); }
-.g-rx-tree__row.g-rx-selfill[aria-selected="true"] { border-inline-start-color: transparent; background: var(--sb-color-selection); }
-.g-rx-tree__row.g-rx-boldonly[aria-selected="true"] { border-inline-start-color: transparent; font-weight: var(--sb-type-title-weight); }
-.g-rx-tree__row.g-rx-boldonly[aria-selected="true"] > .sb-icon { color: var(--sb-color-text-muted); }
+
 .g-rx-mini-switch {
   position: relative; display: inline-block; flex: none; margin-inline-start: auto; inline-size: 28px; block-size: 16px; box-sizing: border-box;
   border: 2px solid var(--sb-color-border-strong); border-radius: var(--sb-radius-pill);
@@ -324,11 +233,93 @@ progress.sb-progress__bar.g-rx-progress-blue::-moz-progress-bar { background: va
 }
 .g-rx-mini-switch--on { border-color: var(--sb-color-accent); }
 .g-rx-mini-switch--on::after { inset-inline-start: 14px; background: var(--sb-color-accent); }
-.g-rx-palette__row.g-rx-rowfill[aria-selected="true"] { border-inline-start-color: transparent; background: var(--sb-color-accent); color: var(--sb-color-on-accent); }
-.g-rx-palette__row.g-rx-rowfill[aria-selected="true"] .g-rx-keys { color: var(--sb-color-on-accent); }
+
 .g-rx-menuhost { display: flex; justify-content: flex-end; padding: 0 var(--sb-space-2) var(--sb-space-3); }
 .g-rx-caption { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
 .sb-app-grid.g-rx-onecol { grid-template-columns: minmax(0, 1fr); }
-.g-rx-boardhead > .g-rx-tool { margin-inline-start: auto; }
+
 /* DAT-05 "Nicht so": the wrong table still scrolls inside its own focusable region, so the page stays usable */
 .g-rx-scroll { max-inline-size: 100%; overflow-x: auto; }
+
+/* ================================================================ 4 round 6 (D72–D90): frames around the system's own parts
+   The window, tree, palette, listbox, row and card specimens are sebaro.css classes (sb-window, sb-tree, sb-row,
+   sb-listbox, sb-command-palette, sb-card--item, data-sb-density="window"); these helpers only frame them on the
+   rule page. Docked side parts need 722 px of window (D81), so a window specimen keeps that width and its stage
+   scrolls sideways on a phone instead of showing the overlay state without sb-window.js. */
+
+.g-rx-winscroll { max-inline-size: 100%; overflow-x: auto; }
+.demo-window-frame.g-rx-winwide { min-inline-size: 740px; }
+.g-rx-wincol { grid-column: 2; display: grid; grid-template-rows: minmax(0, 1fr) auto; min-inline-size: 0; }
+.g-rx-wincol > .sb-bottom-block { position: static; }
+.g-rx-wincol > .sb-window__content { overflow: visible; }
+.g-rx-sidefoot {
+  display: grid; gap: var(--sb-space-1); margin: auto 0 0; padding: var(--sb-space-2) var(--sb-space-4);
+  border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border);
+}
+/* DSK-04 „Nicht so“: three fixed columns that squeeze the text (the system would turn the inspector into an overlay) */
+.g-rx-squeeze .sb-window__body { grid-template-columns: 240px minmax(0, 1fr) 280px; }
+.g-rx-squeeze .sb-window__inspector { position: static; grid-column: 3; max-inline-size: none; }
+.g-rx-squeeze .sb-window__content { padding: var(--sb-space-4); }
+.g-rx-treebox { inline-size: 100%; max-inline-size: 360px; padding-block: var(--sb-space-2); box-sizing: border-box; }
+.g-rx-rowsbox { inline-size: 100%; max-inline-size: 420px; box-sizing: border-box; }
+.g-rx-menubox { display: flex; }
+.g-rx-sidebox.sb-side-nav { border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container); padding-block: var(--sb-space-1); }
+.sb-tooltip.g-rx-tipshow { position: static; justify-self: start; }
+.g-rx-titlebar-only { border-radius: inherit; }
+.g-rx-boardcol { display: grid; gap: var(--sb-space-2); inline-size: 100%; max-inline-size: 320px; box-sizing: border-box; }
+.g-rx-boardcol > .sb-list-header { margin: 0; }
+.g-rx-boardcard { padding: var(--sb-space-2) var(--sb-space-2) var(--sb-space-3) var(--sb-space-4); }
+.g-rx-boardcard__head { display: flex; align-items: center; gap: var(--sb-space-2); }
+.g-rx-boardcard__head > h4 { flex: 1 1 auto; min-inline-size: 0; margin: 0; }
+.g-rx-boardcard > .sb-card__text { margin: 0; }
+.g-rx-plainlist { margin: 0; padding: 0; list-style: none; }
+.g-rx-indent { padding-inline-start: var(--sb-space-6); }
+.g-rx-rating { display: inline-flex; align-items: center; gap: var(--sb-space-1); margin: 0; font-variant-numeric: var(--sb-type-numeric-variant); }
+.g-rx-narrowtext { max-inline-size: 13rem; margin: 0; hyphens: manual; }
+.g-rx-iconrail { display: grid; gap: var(--sb-space-1); justify-content: start; }
+
+/* DAT-10: three series with direct labels, a legend and line styles (D83 (10)); the chart is drawn at natural size */
+.g-rx-chartfig { display: grid; gap: var(--sb-space-2); margin: 0; min-inline-size: 0; }
+.g-rx-linechart { display: block; overflow: visible; }
+.g-rx-line { fill: none; stroke-width: var(--sb-x-sebaro-chart-line-width); stroke-linecap: round; stroke-linejoin: round; }
+.g-rx-line--1 { stroke: var(--sb-dataviz-categorical-1); }
+.g-rx-line--2 { stroke: var(--sb-dataviz-categorical-2); stroke-dasharray: 8 5; }
+.g-rx-line--3 { stroke: var(--sb-dataviz-categorical-3); stroke-dasharray: 1 5; }
+.g-rx-line.g-rx-line--solid { stroke-dasharray: none; }
+.g-rx-line__label { fill: var(--sb-color-text); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
+.g-rx-serieslegend { display: flex; flex-wrap: wrap; gap: var(--sb-space-1) var(--sb-space-4); margin: 0; padding: 0; list-style: none; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
+.g-rx-serieslegend > li { display: inline-flex; align-items: center; gap: var(--sb-space-2); }
+.g-rx-serieslegend svg { overflow: visible; }
+
+/* FAR-12: until the tones are chosen a search hit is the editor's 1 px frame (spec/01 §1.8) */
+mark.g-rx-hit { padding: 0 var(--sb-space-0-5); border: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-small); background: transparent; color: inherit; }
+
+/* round 6 „Nicht so“ specimens: the right tokens in the wrong job */
+mark.g-rx-hit-lime { padding: 0 var(--sb-space-0-5); background: var(--sb-color-primary-action); color: var(--sb-color-on-primary-action); }
+.g-rx-dot--cat1 { background: var(--sb-dataviz-categorical-2); }
+.g-rx-dot--cat2 { background: var(--sb-dataviz-categorical-3); }
+.sb-row.g-rx-rowfill[aria-selected="true"] { border-inline-start-color: transparent; background: var(--sb-color-accent); color: var(--sb-color-on-accent); }
+.sb-row.g-rx-rowfill[aria-selected="true"] .sb-keys { color: var(--sb-color-on-accent); }
+.sb-row.g-rx-selfill-row:is([aria-selected="true"], [aria-current="true"]) {
+  border-inline-start-color: transparent; background: var(--sb-color-selection); color: var(--sb-color-text); font-weight: var(--sb-type-body-weight);
+}
+.sb-row.g-rx-selfill-row:is([aria-selected="true"], [aria-current="true"]) > .sb-row__icon { color: var(--sb-color-text-muted); }
+.sb-row.g-rx-selfill-row:is([aria-selected="true"], [aria-current="true"]) > .sb-row__meta { color: var(--sb-color-text); }
+.sb-card.g-rx-wrongcard { border-inline-start: var(--sb-border-width-strong) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-control); }
+.g-rx-pill-shape { border-radius: var(--sb-radius-pill); }
+.g-rx-btn.g-rx-swatchbtn { inline-size: var(--sb-size-control-lg); padding: 0; }
+.g-rx-stars { display: inline-flex; gap: var(--sb-space-0-5); margin: 0; color: var(--sb-color-warning); }
+.g-rx-autohyph { hyphens: auto; text-align: justify; }
+.g-rx-glyph-warn { color: var(--sb-color-warning); }
+/* RAU-03: the same view at two widths on one screen; sb-view--wide is a size container (spec/02 §5.3) */
+.g-rx-viewbox--360 { max-inline-size: 360px; }
+.g-rx-viewbox--700 { inline-size: 700px; max-inline-size: none; }
+/* ZEI-07 „Nicht so“: a word laid onto the tile (kept readable: text on bg) */
+.g-rx-tilewrap { position: relative; display: inline-block; line-height: 0; }
+.g-rx-tilewrap__word {
+  position: absolute; inset-inline: 0; inset-block-end: var(--sb-space-1); margin-inline: auto; inline-size: max-content; padding: 0 var(--sb-space-1);
+  border-radius: var(--sb-radius-small); background: var(--sb-color-bg); color: var(--sb-color-text);
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); line-height: 1.4;
+}
+/* DSK-04 „Nicht so“: a 760 px window, so the three fixed columns leave the text about 236 px */
+.demo-window-frame.g-rx-winfixed { inline-size: 760px; max-inline-size: none; }

@@ -1,7 +1,9 @@
 // sb-start.js: the same start on every platform (D49, D52; spec/03 §14). The app sign tile stands in the middle of
 // the ground while the page really loads, then moves to its place in the header ([data-sb-start-target]) while the
 // content enters from below (D46 rule E). Only on the first call of a tab session, only on pages that opt in with
-// <html data-sb-start>. Reduced motion (system, or html[data-sb-motion="reduce"]) = the tile fades out, nothing moves.
+// <html data-sb-start>. Reduced motion (system, html[data-sb-motion="reduce"], or data-sb-motion="reduce" on a container
+// around a replay frame, D80) = the tile fades out, nothing moves. "First call of a tab session" = the first page of
+// this site that a browser tab opens (sessionStorage "sb-started"); later pages and reloads in that tab show no start (D85).
 // Load it in <head> as a classic script right after theme-init.js, so the start screen is there at first paint.
 // Markup: <div class="sb-start" aria-hidden="true"><span class="sb-start__tile">(inline tile svg)</span></div> as the
 // first child of <body>; the header tile carries data-sb-start-target; elements to enter carry data-sb-start-enter.
@@ -12,8 +14,9 @@
   var root = document.documentElement;
   var holds = 0, loaded = false, done = false;
 
-  function reduced() {
-    return root.getAttribute("data-sb-motion") === "reduce" || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function reduced(scope) {
+    var el = scope && scope !== document && scope.closest ? scope : root;
+    return !!el.closest('[data-sb-motion="reduce"]') || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }
   function token(name, fallback) {
     var v = getComputedStyle(root).getPropertyValue(name).trim();
@@ -29,7 +32,7 @@
     var easing = token("--sb-motion-easing-emphasized", "ease-out");
     var enter = Array.prototype.slice.call(scope.querySelectorAll("[data-sb-start-enter]"));
     enter.forEach(function (el) { el.classList.remove("sb-enter"); void el.offsetWidth; el.classList.add("sb-enter"); });
-    if (!tile || !target || reduced() || typeof tile.animate !== "function") {
+    if (!tile || !target || reduced(scope) || typeof tile.animate !== "function") {
       var fade = typeof overlay.animate === "function" ? overlay.animate([{ opacity: 1 }, { opacity: 0 }], { duration: duration, fill: "forwards" }) : null;
       if (fade) fade.onfinish = finish; else finish();
       return;

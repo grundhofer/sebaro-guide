@@ -22,12 +22,13 @@
 <!-- /guide:head -->
 <link rel="stylesheet" href="assets/grundlagen.css">
 <script defer src="sebaro/js/sb-controls.js"></script>
+<script defer src="sebaro/js/sb-window.js"></script>
 <script defer src="assets/grundlagen.js"></script>
 </head>
 <body class="sb-page" id="top">
 <!-- guide:sprite -->
 <svg xmlns="http://www.w3.org/2000/svg" class="sb-sprite" width="0" height="0" aria-hidden="true" focusable="false">
-<!-- generated — do not edit. tools/icons.py 1.1.0 · system "sebaro" · grammar "Line 1.75 round" · source 59858c23f5e7780d · use with sprite.css (shared/ICONS-GUIDE.md §9.1) -->
+<!-- generated — do not edit. tools/icons.py 1.1.0 · system "sebaro" · grammar "Line 1.75 round" · source c3518d76b9da3b04 · use with sprite.css (shared/ICONS-GUIDE.md §9.1) -->
 <symbol id="arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><path d="M12 4.5 V19.5"/><path d="M6.5 14 L12 19.5 L17.5 14"/></symbol>
 <symbol id="arrow-down--16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="sb-sym-16"><path d="M8 3 V13"/><path d="M4 9 L8 13 L12 9"/></symbol>
 <symbol id="arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><path d="M4.5 12 H19.5"/><path d="M10 6.5 L4.5 12 L10 17.5"/></symbol>
@@ -107,6 +108,7 @@
 <symbol id="pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><path d="M9 5 V19"/><path d="M15 5 V19"/></symbol>
 <symbol id="pending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><path d="M21.125 12 A9.125 9.125 0 0 1 21.002 13.493 M19.421 17.31 A9.125 9.125 0 0 1 17.309 19.421 M13.493 21.002 A9.125 9.125 0 0 1 12 21.125 A9.125 9.125 0 0 1 10.507 21.002 M6.69 19.421 A9.125 9.125 0 0 1 4.579 17.309 M2.998 13.493 A9.125 9.125 0 0 1 2.875 12 A9.125 9.125 0 0 1 2.998 10.507 M4.579 6.69 A9.125 9.125 0 0 1 6.691 4.579 M10.507 2.998 A9.125 9.125 0 0 1 12 2.875 A9.125 9.125 0 0 1 13.494 2.998 M17.31 4.579 A9.125 9.125 0 0 1 19.421 6.691 M21.002 10.507 A9.125 9.125 0 0 1 21.125 12"/></symbol>
 <symbol id="pending--16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="sb-sym-16"><path d="M14.25 8 A6.25 6.25 0 0 1 14.189 8.872 M12.993 11.759 A6.25 6.25 0 0 1 11.76 12.993 M8.872 14.189 A6.25 6.25 0 0 1 8 14.25 A6.25 6.25 0 0 1 7.128 14.189 M4.241 12.993 A6.25 6.25 0 0 1 3.007 11.76 M1.811 8.872 A6.25 6.25 0 0 1 1.75 8 A6.25 6.25 0 0 1 1.811 7.128 M3.007 4.241 A6.25 6.25 0 0 1 4.24 3.007 M7.128 1.811 A6.25 6.25 0 0 1 8 1.75 A6.25 6.25 0 0 1 8.872 1.811 M11.759 3.007 A6.25 6.25 0 0 1 12.993 4.24 M14.189 7.128 A6.25 6.25 0 0 1 14.25 8"/></symbol>
+<symbol id="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><path d="M12 21.125 C12 21.125 4.75 14.75 4.75 10.25 A7.25 7.25 0 0 1 19.25 10.25 C19.25 14.75 12 21.125 12 21.125 Z"/><circle cx="12" cy="10.25" r="2.75"/></symbol>
 <symbol id="play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><path d="M7.5 4.5 L20.5 12 L7.5 19.5 Z"/></symbol>
 <symbol id="play--filled" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M6.625 4.5 A0.875 0.875 0 0 1 7.875 3.75 L20.875 11.25 A0.875 0.875 0 0 1 20.875 12.75 L7.875 20.25 A0.875 0.875 0 0 1 6.625 19.5 L6.625 4.5 Z"/></symbol>
 <symbol id="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><path d="M12 5 V19"/><path d="M5 12 H19"/></symbol>
@@ -125,6 +127,8 @@
 <symbol id="skipped" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><circle cx="12" cy="12" r="9.125"/><path d="M8.5 15.5 L15.5 8.5"/></symbol>
 <symbol id="skipped--16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="sb-sym-16"><circle cx="8" cy="8" r="6.25"/><path d="M6.125 9.875 L9.875 6.125"/></symbol>
 <symbol id="smartphone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><rect x="6.5" y="2.875" width="11" height="18.25" rx="2"/><circle cx="12" cy="16.75" r="1.25" fill="currentColor" stroke="none"/></symbol>
+<symbol id="star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><path d="M12 3.375 L14.625 9.25 L21 10 L16.25 14.25 L17.625 20.5 L12 17.375 L6.375 20.5 L7.75 14.25 L3 10 L9.375 9.25 Z"/></symbol>
+<symbol id="star--filled" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M11.25 3 A0.875 0.875 0 0 1 12.75 3 L15.25 8.5 L21.125 9.125 A0.875 0.875 0 0 1 21.625 10.625 L17.25 14.5 L18.5 20.25 A0.875 0.875 0 0 1 17.25 21.25 L12 18.375 L6.75 21.25 A0.875 0.875 0 0 1 5.5 20.25 L6.75 14.5 L2.375 10.625 A0.875 0.875 0 0 1 2.875 9.125 L8.75 8.5 Z"/></symbol>
 <symbol id="success" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><circle cx="12" cy="12" r="9.125"/><path d="M7.5 12.25 L10.75 15.5 L16.5 9.75"/></symbol>
 <symbol id="success--filled" viewBox="0 0 24 24" fill="currentColor" stroke="none" fill-rule="evenodd"><path d="M2 12 A10 10 0 1 1 22 12 A10 10 0 1 1 2 12 Z M6.875 12.875 A0.875 0.875 0 0 1 8.125 11.625 L10.75 14.25 L15.875 9.125 A0.875 0.875 0 0 1 17.125 10.375 L11.375 16.125 A0.875 0.875 0 0 1 10.125 16.125 L6.875 12.875 Z"/></symbol>
 <symbol id="success--16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="sb-sym-16"><circle cx="8" cy="8" r="6.25"/><path d="M5.5 8.5 L7.25 10.25 L10.5 7"/></symbol>
@@ -155,12 +159,12 @@
     <span class="sb-sign-tile sb-sign-tile--32" aria-hidden="true"><svg class="sb-app-sign" data-sb-product="studio" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" width="32" height="32" role="img" aria-label="sebaro"><title>sebaro</title><!-- generated by systems/sebaro/brand/gen/build_brand_src.py from signs.json, dist/tokens.json and sebaro Sans — do not edit. tile of studio for tiles below 48 px: the symbol alone, 32-px master; signTiles pair #3057B1 / #FFFFFF in every mode (the launcher's colours; D40: product colour only inside the sign tile) --><rect class="sb-app-sign__tile" width="72" height="72" rx="12.002" fill="#3057B1"/><g class="sb-app-sign__glyph" transform="translate(14.4 14.4) scale(1.8)"><path d="M1.6 11.5 L12 3 L22.4 11.5" fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 18.5 A2.5 2.5 0 1 1 7 18.5 A2.5 2.5 0 1 1 2 18.5 Z" fill="#FFFFFF"/><path d="M9.5 18.5 A2.5 2.5 0 1 1 14.5 18.5 A2.5 2.5 0 1 1 9.5 18.5 Z" fill="#FFFFFF"/><path d="M17 18.5 A2.5 2.5 0 1 1 22 18.5 A2.5 2.5 0 1 1 17 18.5 Z" fill="#FFFFFF"/></g></svg></span>
     <span class="sb-wordmark">sebaro</span><span class="g-header__suffix">Guide</span>
   </a>
-  <button class="sb-theme-button" type="button" data-sb-theme-button>Hell oder Dunkel</button>
   <div class="sb-site-header__links">
     <nav class="sb-site-nav g-nav" aria-label="Hauptmenü">
       <a href="index.html">Start</a> <a href="regeln.html">Regeln</a> <a href="grundlagen.html" aria-current="page">Grundlagen</a> <a href="bauteile.html">Bauteile</a> <a href="daten.html">Daten</a> <a href="web.html">Web</a> <a href="app.html">App</a> <a href="desktop.html">Desktop</a> <a href="gedanken.html">Gedanken</a> <a href="ausblick.html">Ausblick</a>
     </nav>
   </div>
+  <button class="sb-theme-button" type="button" data-sb-theme-button>Hell oder Dunkel</button>
   <span class="sb-visually-hidden" role="status" data-sb-theme-status></span>
 </header>
 <!-- /guide:header -->
@@ -262,9 +266,10 @@
               </li>
             </ol>
           </div>
-          <p class="g-grundlagen-text g-grundlagen-gap">Zwei Farbfamilien haben einen sechsten, örtlich begrenzten Job: Datenfarben trennen Reihen in einem Diagramm, Codefarben gliedern Code im Codeblock. Außerhalb davon gibt es sie nicht. Gezählt wird je Ansicht: Hauptaktions-Flächen 0 oder 1, andere Flächen hinter Text 0, Farben ohne Rolle 0.</p>
-          <p class="g-grundlagen-text">Die Farbfelder auf dieser Seite sind Muster zum Nachschlagen, keine Flächen einer Oberfläche.</p>
-          <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#FAR-01">FAR-01</a>, <a href="regeln.html#FAR-02">FAR-02</a>, <a href="regeln.html#FAR-09">FAR-09</a>, <a href="regeln.html#TEC-03">TEC-03</a></p>
+          <p class="g-grundlagen-text g-grundlagen-gap">Zwei weitere Jobs sind entschieden: <b>Kategorie</b> für Inhalte, die du selbst einordnest (sechs gedämpfte Töne, nur als Punkt neben dem Wort), und <b>Markierung</b> für Textmarker und Suchtreffer (<a href="regeln.html#FAR-12">FAR-12</a>). Ihre Töne sind skizziert und warten auf die Wahl des Inhabers; bis dahin bleibt eine Kategorie ein graues Wort, und ein Suchtreffer trägt einen 1-px-Rahmen in <code>border-strong</code>.</p>
+          <p class="g-grundlagen-text">Zwei Farbfamilien haben einen örtlich begrenzten Job: Datenfarben trennen Reihen in einem Diagramm, Codefarben gliedern Code im Codeblock. Außerhalb davon gibt es sie nicht. Gezählt wird je Ansicht: Hauptaktions-Flächen 0 oder 1, andere Flächen hinter Text 0, Farben ohne Rolle 0.</p>
+          <p class="g-grundlagen-text">Die Farbfelder auf dieser Seite sind Muster zum Nachschlagen, keine Flächen einer Oberfläche: Sie heißen „Farbfeld“, tragen Namen und Rolle daneben und lassen sich nicht bedienen. Diese Ausnahme gilt nur für Nachschlageseiten, nie in Produkten (<a href="regeln.html#FAR-13">FAR-13</a>).</p>
+          <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#FAR-01">FAR-01</a>, <a href="regeln.html#FAR-02">FAR-02</a>, <a href="regeln.html#FAR-09">FAR-09</a>, <a href="regeln.html#FAR-12">FAR-12</a>, <a href="regeln.html#FAR-13">FAR-13</a>, <a href="regeln.html#TEC-03">TEC-03</a></p>
         </div>
 
         <div class="demo-group" id="farbe-grau">
@@ -272,73 +277,73 @@
           <p class="g-grundlagen-text">Jede Ansicht liegt auf <code>bg</code>. Ebenen trennt eine Linie, nicht ein anderer Grauton. Hover und Druck ändern nur die Füllung, eine Graustufe weg vom Grund.</p>
       <ul class="g-grundlagen-swatches">
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-bg)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-bg)" role="img" aria-label="Farbfeld bg"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-bg</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-bg"></p>
           <p class="g-grundlagen-swatch__use">Grund jeder Ansicht und jeder Ebene. Nachts leicht blau getönt (D40).</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-surface)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-surface)" role="img" aria-label="Farbfeld surface"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-surface</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-surface"></p>
           <p class="g-grundlagen-swatch__use">Nur noch Griff eines Reglers und Optionen einer Auswahlliste. Ebenen trennt die Tintenlinie, nicht dieser Ton.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-surface-raised)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-surface-raised)" role="img" aria-label="Farbfeld surface-raised"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-surface-raised</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-surface-raised"></p>
           <p class="g-grundlagen-swatch__use">Wie surface. Seit D46 kein Grund mehr für Dialog, Menü oder Kurzmeldung.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-surface-sunken)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-surface-sunken)" role="img" aria-label="Farbfeld surface-sunken"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-surface-sunken</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-surface-sunken"></p>
           <p class="g-grundlagen-swatch__use">Eingabefelder, Codeblöcke, die gesperrte Hauptaktion.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-text)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-text)" role="img" aria-label="Farbfeld text"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-text</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-text"></p>
           <p class="g-grundlagen-swatch__use">Jeder Text, das Wort jedes Links, Statuswörter, Fehlermeldungen.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-text-muted)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-text-muted)" role="img" aria-label="Farbfeld text-muted"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-text-muted</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-text-muted"></p>
           <p class="g-grundlagen-swatch__use">Nebentext: Datum, Zähler, Metazeilen, nicht gewählte Icons.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-text-subtle)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-text-subtle)" role="img" aria-label="Farbfeld text-subtle"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-text-subtle</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-text-subtle"></p>
           <p class="g-grundlagen-swatch__use">Nur großer Text (ab 24&nbsp;px) oder Unwichtiges: hell nur 3,40&nbsp;:&nbsp;1 auf bg.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-border)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-border)" role="img" aria-label="Farbfeld border"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-border</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-border"></p>
           <p class="g-grundlagen-swatch__use">1-px-Haarlinie zwischen Zeilen und Abschnitten. Nie die einzige Grenze eines Bedienelements.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-border-strong)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-border-strong)" role="img" aria-label="Farbfeld border-strong"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-border-strong</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-border-strong"></p>
           <p class="g-grundlagen-swatch__use">Grenze von Bedienelementen: Tags, Feldlinie, Radio-Ring, Schalter aus. Diagrammachsen. Nachts die Ebenenlinie.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-hover-fill)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-hover-fill)" role="img" aria-label="Farbfeld hover-fill"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-hover-fill</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-hover-fill"></p>
           <p class="g-grundlagen-swatch__use">Zeiger darauf: eine Graustufe weg vom Grund, nachts heller als bg.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-pressed-fill)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-pressed-fill)" role="img" aria-label="Farbfeld pressed-fill"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-pressed-fill</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-pressed-fill"></p>
           <p class="g-grundlagen-swatch__use">Gedrückt: noch eine Stufe weiter.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-scrim)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-scrim)" role="img" aria-label="Farbfeld scrim"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-scrim</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-scrim"></p>
           <p class="g-grundlagen-swatch__use">Nur hinter modalen Dialogen und Sheets. Hell 32&nbsp;%, damit Lindgrün darunter nicht oliv wirkt.</p>
@@ -352,37 +357,37 @@
           <p class="g-grundlagen-text">Kobalt ist immer eine Linie oder eine kleine Marke, nie eine Fläche. Der aktuelle Ort bekommt neben der Linie ein zweites Merkmal ohne Farbe: gefülltes Icon, Haken oder Titelgewicht.</p>
       <ul class="g-grundlagen-swatches">
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-accent)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-accent)" role="img" aria-label="Farbfeld accent"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-accent</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-accent"></p>
           <p class="g-grundlagen-swatch__use">3-px-Ortslinie, Schalter an, Radio-Punkt, Haken der Checkbox, gewählte Strecke, der aktuelle Balken im Diagramm, die Kachel der Dachmarke.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-on-accent)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-on-accent)" role="img" aria-label="Farbfeld on-accent"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-on-accent</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-on-accent"></p>
           <p class="g-grundlagen-swatch__use">Haken im Daumen eines eingeschalteten Schalters, Zeichen auf der Dachmarken-Kachel.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-link)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-link)" role="img" aria-label="Farbfeld link"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-link</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-link"></p>
           <p class="g-grundlagen-swatch__use">Die 2-px-Linie unter jedem Link, das Wort bei Zeiger und Druck, das aktuelle Label und Icon der Navigation.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-link-visited)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-link-visited)" role="img" aria-label="Farbfeld link-visited"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-link-visited</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-link-visited"></p>
           <p class="g-grundlagen-swatch__use">Linie besuchter Links, nur im Fließtext von Artikeln, nie in der Navigation.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-focus)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-focus)" role="img" aria-label="Farbfeld focus"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-focus</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-focus"></p>
           <p class="g-grundlagen-swatch__use">Der eine Fokusring im ganzen System: 2&nbsp;px breit, 2&nbsp;px Abstand.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-selection)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-selection)" role="img" aria-label="Farbfeld selection"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-selection</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-selection"></p>
           <p class="g-grundlagen-swatch__use">Hintergrund von markiertem Text.</p>
@@ -396,31 +401,31 @@
           <p class="g-grundlagen-text">Fünf Rollen für eine einzige Taste. Gesperrt verliert sie das Lindgrün ganz: Fläche <code>surface-sunken</code>, Rand <code>border-strong</code>, Beschriftung <code>text-muted</code>. Lindgrün hat zu jeder anderen Farbe des Systems einen Farbabstand von mindestens 0,08 (Delta&nbsp;E in OKLab).</p>
       <ul class="g-grundlagen-swatches">
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-primary-action)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-primary-action)" role="img" aria-label="Farbfeld primary-action"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-primary-action</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-primary-action"></p>
           <p class="g-grundlagen-swatch__use">Fläche der einen Hauptaktion einer Ansicht. Sonst nirgends: kein Chip, kein Diagramm, kein Icon.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-primary-action-hover)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-primary-action-hover)" role="img" aria-label="Farbfeld primary-action-hover"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-primary-action-hover</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-primary-action-hover"></p>
           <p class="g-grundlagen-swatch__use">Hauptaktion mit Zeiger darauf. Nur die Füllung ändert sich.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-primary-action-pressed)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-primary-action-pressed)" role="img" aria-label="Farbfeld primary-action-pressed"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-primary-action-pressed</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-primary-action-pressed"></p>
           <p class="g-grundlagen-swatch__use">Hauptaktion gedrückt.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-on-primary-action)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-on-primary-action)" role="img" aria-label="Farbfeld on-primary-action"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-on-primary-action</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-on-primary-action"></p>
           <p class="g-grundlagen-swatch__use">Beschriftung und Icon auf Lindgrün: Tinte, nie Kobalt.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-primary-action-outline)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-primary-action-outline)" role="img" aria-label="Farbfeld primary-action-outline"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-primary-action-outline</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-primary-action-outline"></p>
           <p class="g-grundlagen-swatch__use">2-px-Rand der Hauptaktion, immer gezeichnet: tags Tinte, weil Lindgrün auf bg nur 1,34&nbsp;:&nbsp;1 hat; nachts die Füllfarbe.</p>
@@ -434,25 +439,25 @@
           <p class="g-grundlagen-text">Statusfarbe steht nur auf Glyphen bis 20&nbsp;px, auf der 2-px-Fehlerlinie und am Wort einer Löschtaste. Die vier Prüfzustände unterscheiden sich auch in der Form, damit sie ohne Farbe lesbar bleiben.</p>
       <ul class="g-grundlagen-swatches">
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-success)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-success)" role="img" aria-label="Farbfeld success"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-success</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-success"></p>
           <p class="g-grundlagen-swatch__use">Glyphe für „erledigt“ und „bestanden“.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-warning)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-warning)" role="img" aria-label="Farbfeld warning"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-warning</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-warning"></p>
           <p class="g-grundlagen-swatch__use">Glyphe für „offen“ und „nicht belegt“.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-danger)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-danger)" role="img" aria-label="Farbfeld danger"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-danger</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-danger"></p>
           <p class="g-grundlagen-swatch__use">Glyphe für „Fehler“ und „nicht bestanden“, die 2-px-Fehlerlinie im Feld, das Wort einer Löschtaste.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-info)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-info)" role="img" aria-label="Farbfeld info"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-info</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-info"></p>
           <p class="g-grundlagen-swatch__use">Glyphe für „läuft“ und „übersprungen“.</p>
@@ -475,82 +480,82 @@
             <p>Der Token-Vertrag verlangt sie, darum stehen sie in <code>tokens.css</code>. Die sebaro-Oberfläche nutzt sie nicht: keine getönte Fläche hinter Text (<code>*-subtle</code>, <code>text-on-*-subtle</code>), keine drückbare Markenfläche (<code>accent-hover</code>, <code>accent-pressed</code>), keine Statusfläche mit Text (<code>on-success</code>, <code>on-warning</code>, <code>on-danger</code>, <code>on-info</code>). Regel <a href="regeln.html#FAR-02">FAR-02</a>.</p>
       <ul class="g-grundlagen-swatches g-grundlagen-swatches--compact">
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-accent-hover)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-accent-hover)" role="img" aria-label="Farbfeld accent-hover"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-accent-hover</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-accent-hover"></p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-accent-pressed)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-accent-pressed)" role="img" aria-label="Farbfeld accent-pressed"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-accent-pressed</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-accent-pressed"></p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-accent-subtle)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-accent-subtle)" role="img" aria-label="Farbfeld accent-subtle"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-accent-subtle</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-accent-subtle"></p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-text-on-accent-subtle)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-text-on-accent-subtle)" role="img" aria-label="Farbfeld text-on-accent-subtle"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-text-on-accent-subtle</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-text-on-accent-subtle"></p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-on-success)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-on-success)" role="img" aria-label="Farbfeld on-success"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-on-success</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-on-success"></p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-success-subtle)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-success-subtle)" role="img" aria-label="Farbfeld success-subtle"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-success-subtle</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-success-subtle"></p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-text-on-success-subtle)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-text-on-success-subtle)" role="img" aria-label="Farbfeld text-on-success-subtle"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-text-on-success-subtle</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-text-on-success-subtle"></p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-on-warning)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-on-warning)" role="img" aria-label="Farbfeld on-warning"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-on-warning</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-on-warning"></p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-warning-subtle)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-warning-subtle)" role="img" aria-label="Farbfeld warning-subtle"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-warning-subtle</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-warning-subtle"></p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-text-on-warning-subtle)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-text-on-warning-subtle)" role="img" aria-label="Farbfeld text-on-warning-subtle"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-text-on-warning-subtle</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-text-on-warning-subtle"></p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-on-danger)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-on-danger)" role="img" aria-label="Farbfeld on-danger"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-on-danger</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-on-danger"></p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-danger-subtle)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-danger-subtle)" role="img" aria-label="Farbfeld danger-subtle"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-danger-subtle</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-danger-subtle"></p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-text-on-danger-subtle)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-text-on-danger-subtle)" role="img" aria-label="Farbfeld text-on-danger-subtle"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-text-on-danger-subtle</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-text-on-danger-subtle"></p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-on-info)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-on-info)" role="img" aria-label="Farbfeld on-info"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-on-info</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-on-info"></p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-info-subtle)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-info-subtle)" role="img" aria-label="Farbfeld info-subtle"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-info-subtle</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-info-subtle"></p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-color-text-on-info-subtle)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-color-text-on-info-subtle)" role="img" aria-label="Farbfeld text-on-info-subtle"></span>
           <p class="g-grundlagen-swatch__name">--sb-color-text-on-info-subtle</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-color-text-on-info-subtle"></p>
         </li>
@@ -562,7 +567,7 @@
           <h3>Kachelfarben nach Zweckgruppe</h3>
           <p class="g-grundlagen-text">Acht feste Farben, eine je Zweckgruppe, in Hell und Dunkel gleich, immer mit weißem Zeichen von mindestens 3&nbsp;:&nbsp;1. Apps mit demselben Zweck teilen ihre Farbe; das Symbol unterscheidet sie. Drei Gruppen haben noch keine App, ihre Felder zeigen die Kachelform ohne Zeichen.</p>
           <div class="sb-table-wrap" role="region" aria-labelledby="kachel-cap" tabindex="0">
-            <table class="sb-table g-grundlagen-table">
+            <table class="sb-table g-table-stack">
               <caption id="kachel-cap">Kachelfarben (D50), gemessen mit dem Werkzeug der Werkstatt, auf zwei Stellen abgeschnitten</caption>
               <thead><tr><th scope="col">Gruppe</th><th scope="col">Farbe</th><th scope="col">Token und Wert</th><th scope="col">Apps</th><th scope="col" class="sb-num">Zeichen auf Kachel</th><th scope="col" class="sb-num">Kachel auf dunklem Grund</th></tr></thead>
               <tbody>
@@ -581,9 +586,9 @@
             <tr><th scope="row"><span class="g-grundlagen-tile-cell"><span class="sb-sign-tile sb-sign-tile--48" aria-hidden="true"><!-- guide:tile id="compass" size="48" -->
 <svg class="sb-app-sign" data-sb-product="compass" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" width="48" height="48" role="img" aria-label="Compass"><title>Compass</title><!-- generated by systems/sebaro/brand/gen/build_brand_src.py from signs.json, dist/tokens.json and sebaro Sans — do not edit. tile of compass for tiles of 48 px and more: symbol and code (D57); signTiles pair #D55C13 / #FFFFFF in every mode (the launcher's colours; D40: product colour only inside the sign tile) --><rect class="sb-app-sign__tile" width="72" height="72" rx="12.002" fill="#D55C13"/><g class="sb-app-sign__glyph" transform="translate(-18 -18)"><g transform="translate(36 27) scale(1.5)"><path d="M12 2 L17 12 L7 12 Z" fill="#FFFFFF"/><path d="M12 2 L17 12 L7 12 Z" fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 22 L7 12 L17 12 Z" fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g><g fill="#FFFFFF" transform="translate(40.8833 80.5) scale(0.016667)"><path d="M43 -252Q43 -338 78 -401Q113 -464 173 -498.5Q233 -533 309 -533Q355 -533 395.5 -519.5Q436 -506 468 -484L413 -381Q394 -398 367.5 -408Q341 -418 311 -418Q274 -418 243.5 -400Q213 -382 195 -346Q177 -310 177 -255Q177 -206 195 -172.5Q213 -139 244 -122Q275 -105 313 -105Q343 -105 370.5 -115Q398 -125 417 -140L471 -38Q439 -16 395 -2.5Q351 11 300 11Q224 11 166 -20Q108 -51 75.5 -110.5Q43 -170 43 -252Z"/><path d="M554 -522L680 -522L694 -450Q724 -488 764 -510.5Q804 -533 852 -533Q905 -533 949.5 -500Q994 -467 1021 -406Q1048 -345 1048 -261Q1048 -174 1019.5 -113Q991 -52 942 -20.5Q893 11 829 11Q792 11 758 -5.5Q724 -22 700 -54L700 180L569 200L569 -398Q569 -419 567.5 -435.5Q566 -452 562 -474L554 -522ZM700 -229Q700 -182 713 -152Q726 -122 748 -107.5Q770 -93 797 -93Q850 -93 883 -136.5Q916 -180 916 -255Q916 -308 902.5 -343Q889 -378 865 -396Q841 -414 810 -414Q782 -414 753.5 -400.5Q725 -387 700 -364L700 -229Z"/><path d="M1114 -43L1166 -144Q1196 -124 1236 -109.5Q1276 -95 1318 -95Q1361 -95 1378.5 -107.5Q1396 -120 1396 -139Q1396 -152 1388 -162.5Q1380 -173 1361.5 -182Q1343 -191 1312 -201Q1214 -234 1174 -275.5Q1134 -317 1134 -375Q1134 -419 1159 -455Q1184 -491 1230.5 -512Q1277 -533 1340 -533Q1387 -533 1433.5 -520.5Q1480 -508 1516 -486L1466 -387Q1438 -403 1402 -415Q1366 -427 1332 -427Q1297 -427 1279 -415.5Q1261 -404 1261 -386Q1261 -373 1269 -363Q1277 -353 1296.5 -344Q1316 -335 1351 -324Q1417 -302 1456.5 -276.5Q1496 -251 1513.5 -220Q1531 -189 1531 -149Q1531 -102 1503.5 -66Q1476 -30 1427 -9.5Q1378 11 1310 11Q1252 11 1201.5 -4.5Q1151 -20 1114 -43Z"/></g></g></svg>
 <!-- /guide:tile --></span><span>Werkzeuge</span></span></th><td data-label="Farbe">Orange</td><td data-label="Token und Wert"><span class="g-grundlagen-token">--sb-tile-tools</span><br><span class="g-grundlagen-mono g-grundlagen-muted" data-g-token="--sb-tile-tools"></span></td><td data-label="Apps">Compass, Tally</td><td class="sb-num" data-label="Zeichen auf Kachel">3,91</td><td class="sb-num" data-label="Kachel auf dunklem Grund">4,63</td></tr>
-            <tr><th scope="row"><span class="g-grundlagen-tile-cell"><span class="g-grundlagen-tile-spare" style="--g-chip: var(--sb-tile-media)" aria-hidden="true"></span><span>Medien &amp; Kreativ</span></span></th><td data-label="Farbe">Ziegel</td><td data-label="Token und Wert"><span class="g-grundlagen-token">--sb-tile-media</span><br><span class="g-grundlagen-mono g-grundlagen-muted" data-g-token="--sb-tile-media"></span></td><td data-label="Apps">noch frei</td><td class="sb-num" data-label="Zeichen auf Kachel">6,30</td><td class="sb-num" data-label="Kachel auf dunklem Grund">2,87</td></tr>
-            <tr><th scope="row"><span class="g-grundlagen-tile-cell"><span class="g-grundlagen-tile-spare" style="--g-chip: var(--sb-tile-money)" aria-hidden="true"></span><span>Geld &amp; Haushalt</span></span></th><td data-label="Farbe">Grün</td><td data-label="Token und Wert"><span class="g-grundlagen-token">--sb-tile-money</span><br><span class="g-grundlagen-mono g-grundlagen-muted" data-g-token="--sb-tile-money"></span></td><td data-label="Apps">noch frei</td><td class="sb-num" data-label="Zeichen auf Kachel">5,42</td><td class="sb-num" data-label="Kachel auf dunklem Grund">3,33</td></tr>
-            <tr><th scope="row"><span class="g-grundlagen-tile-cell"><span class="g-grundlagen-tile-spare" style="--g-chip: var(--sb-tile-system)" aria-hidden="true"></span><span>System &amp; Sicherheit</span></span></th><td data-label="Farbe">Azur</td><td data-label="Token und Wert"><span class="g-grundlagen-token">--sb-tile-system</span><br><span class="g-grundlagen-mono g-grundlagen-muted" data-g-token="--sb-tile-system"></span></td><td data-label="Apps">noch frei</td><td class="sb-num" data-label="Zeichen auf Kachel">3,86</td><td class="sb-num" data-label="Kachel auf dunklem Grund">4,68</td></tr>
+            <tr><th scope="row"><span class="g-grundlagen-tile-cell"><span class="g-swatch g-grundlagen-tile-spare" style="--g-swatch-color: var(--sb-tile-media)" role="img" aria-label="Farbfeld tile-media"></span><span>Medien &amp; Kreativ</span></span></th><td data-label="Farbe">Ziegel</td><td data-label="Token und Wert"><span class="g-grundlagen-token">--sb-tile-media</span><br><span class="g-grundlagen-mono g-grundlagen-muted" data-g-token="--sb-tile-media"></span></td><td data-label="Apps">noch frei</td><td class="sb-num" data-label="Zeichen auf Kachel">6,30</td><td class="sb-num" data-label="Kachel auf dunklem Grund">2,87</td></tr>
+            <tr><th scope="row"><span class="g-grundlagen-tile-cell"><span class="g-swatch g-grundlagen-tile-spare" style="--g-swatch-color: var(--sb-tile-money)" role="img" aria-label="Farbfeld tile-money"></span><span>Geld &amp; Haushalt</span></span></th><td data-label="Farbe">Grün</td><td data-label="Token und Wert"><span class="g-grundlagen-token">--sb-tile-money</span><br><span class="g-grundlagen-mono g-grundlagen-muted" data-g-token="--sb-tile-money"></span></td><td data-label="Apps">noch frei</td><td class="sb-num" data-label="Zeichen auf Kachel">5,42</td><td class="sb-num" data-label="Kachel auf dunklem Grund">3,33</td></tr>
+            <tr><th scope="row"><span class="g-grundlagen-tile-cell"><span class="g-swatch g-grundlagen-tile-spare" style="--g-swatch-color: var(--sb-tile-system)" role="img" aria-label="Farbfeld tile-system"></span><span>System &amp; Sicherheit</span></span></th><td data-label="Farbe">Azur</td><td data-label="Token und Wert"><span class="g-grundlagen-token">--sb-tile-system</span><br><span class="g-grundlagen-mono g-grundlagen-muted" data-g-token="--sb-tile-system"></span></td><td data-label="Apps">noch frei</td><td class="sb-num" data-label="Zeichen auf Kachel">3,86</td><td class="sb-num" data-label="Kachel auf dunklem Grund">4,68</td></tr>
               </tbody>
             </table>
           </div>
@@ -596,25 +601,25 @@
           <p class="g-grundlagen-text">Ein Diagramm ist zuerst neutral: beschriftete Balken in <code>border-strong</code>, nur die aktuelle Periode in Kobalt, Werte als Text. Farbe trennt Reihen erst, wenn Beschriftung allein nicht reicht, und trägt nie als Einziges den Unterschied. Lindgrün, Status- und Kachelfarben kommen in Diagrammen nie vor. Beispiele stehen unter <a href="daten.html">Daten</a>.</p>
       <ul class="g-grundlagen-swatches">
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-x-sebaro-chart-bar)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-x-sebaro-chart-bar)" role="img" aria-label="Farbfeld chart-bar"></span>
           <p class="g-grundlagen-swatch__name">--sb-x-sebaro-chart-bar</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-x-sebaro-chart-bar"></p>
           <p class="g-grundlagen-swatch__use">Jeder beschriftete Balken: neutral, wie border-strong.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-x-sebaro-chart-bar-current)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-x-sebaro-chart-bar-current)" role="img" aria-label="Farbfeld chart-bar-current"></span>
           <p class="g-grundlagen-swatch__name">--sb-x-sebaro-chart-bar-current</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-x-sebaro-chart-bar-current"></p>
           <p class="g-grundlagen-swatch__use">Nur der Balken der aktuellen Periode: ein Ort im Diagramm, keine Serie.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-x-sebaro-chart-grid)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-x-sebaro-chart-grid)" role="img" aria-label="Farbfeld chart-grid"></span>
           <p class="g-grundlagen-swatch__name">--sb-x-sebaro-chart-grid</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-x-sebaro-chart-grid"></p>
           <p class="g-grundlagen-swatch__use">1-px-Rasterlinien, wie border.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-x-sebaro-chart-axis)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-x-sebaro-chart-axis)" role="img" aria-label="Farbfeld chart-axis"></span>
           <p class="g-grundlagen-swatch__name">--sb-x-sebaro-chart-axis</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-x-sebaro-chart-axis"></p>
           <p class="g-grundlagen-swatch__use">1-px-Achse, wie border-strong.</p>
@@ -622,44 +627,44 @@
       </ul>
           <div class="g-grundlagen-gap">
             <h4 class="g-grundlagen-h4">Kategorisch: Reihen auseinanderhalten</h4>
-            <p class="g-grundlagen-text">Nur für Reihen, die sich überlagern und nicht einzeln beschriftet sind, etwa mehrere Linien in einem Verlauf. Immer zusammen mit Linienstil und Beschriftung direkt an der Reihe; nie für Balken, die schon ein Label tragen. Jede Kategoriefarbe hat zu Kobalt, Lindgrün und den Statusfarben einen Farbabstand von mindestens 0,08 (Delta&nbsp;E in OKLab).</p>
+            <p class="g-grundlagen-text">Nur für Reihen, die sich überlagern und nicht einzeln beschriftet sind, etwa mehrere Linien in einem Verlauf. Jede Reihe ist direkt an ihrer Linie beschriftet; ab drei Reihen kommt eine Legende dazu, und die Reihen unterscheiden sich auch in der Linienart (durchgezogen, gestrichelt, gepunktet). Nie für Balken, die schon ein Label tragen. Jede Kategoriefarbe hat zu Kobalt, Lindgrün und den Statusfarben einen Farbabstand von mindestens 0,08 (Delta&nbsp;E in OKLab).</p>
       <p class="g-grundlagen-type__meta">Tokens <span class="g-grundlagen-mono">--sb-dataviz-categorical-1</span> bis <span class="g-grundlagen-mono">--sb-dataviz-categorical-6</span></p>
       <ol class="g-grundlagen-ramp" aria-label="Kategorische Datenfarben 1 bis 6">
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-categorical-1)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">1</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-categorical-1"></span></li>
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-categorical-2)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">2</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-categorical-2"></span></li>
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-categorical-3)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">3</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-categorical-3"></span></li>
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-categorical-4)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">4</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-categorical-4"></span></li>
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-categorical-5)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">5</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-categorical-5"></span></li>
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-categorical-6)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">6</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-categorical-6"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-categorical-1)" role="img" aria-label="Farbfeld dataviz-categorical-1"></span><span class="g-grundlagen-ramp__step">1</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-categorical-1"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-categorical-2)" role="img" aria-label="Farbfeld dataviz-categorical-2"></span><span class="g-grundlagen-ramp__step">2</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-categorical-2"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-categorical-3)" role="img" aria-label="Farbfeld dataviz-categorical-3"></span><span class="g-grundlagen-ramp__step">3</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-categorical-3"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-categorical-4)" role="img" aria-label="Farbfeld dataviz-categorical-4"></span><span class="g-grundlagen-ramp__step">4</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-categorical-4"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-categorical-5)" role="img" aria-label="Farbfeld dataviz-categorical-5"></span><span class="g-grundlagen-ramp__step">5</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-categorical-5"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-categorical-6)" role="img" aria-label="Farbfeld dataviz-categorical-6"></span><span class="g-grundlagen-ramp__step">6</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-categorical-6"></span></li>
       </ol>
-            <p class="g-grundlagen-rules">Regel: <a href="regeln.html#DAT-04">DAT-04</a></p>
+            <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#DAT-04">DAT-04</a>, <a href="regeln.html#DAT-10">DAT-10</a></p>
           </div>
           <div class="g-grundlagen-gap">
-            <div class="g-grundlagen-head-row"><h4>Sequenziell: eine Menge, von wenig nach viel</h4><span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#flask--16"/></svg>Vorschlag, noch nicht im System</span></div>
-            <p class="g-grundlagen-text">Für eine geordnete Größe ohne sinnvolle Mitte, etwa Gläser je Tag in einer Kalenderansicht. Stufe 1 liegt immer am nächsten am Grund (nachts dunkel, tags hell), mehr heißt weiter weg vom Grund. Das System hat die Töne, aber noch keine Regel für ihren Einsatz; dieser Satz ist ein Vorschlag.</p>
+            <h4 class="g-grundlagen-h4">Fortlaufend: eine Menge, von wenig nach viel</h4>
+            <p class="g-grundlagen-text">Für fortlaufende Werte ohne bedeutsame Mitte, etwa Gläser je Tag: sieben Stufen in Kobalt (<a href="regeln.html#DAT-10">DAT-10</a>). Welche Diagramme die Skala nutzen (etwa eine Heatmap) und in welche Richtung sie im Dunkeln läuft, ist skizziert und wartet auf die Wahl des Inhabers.</p>
       <p class="g-grundlagen-type__meta">Tokens <span class="g-grundlagen-mono">--sb-dataviz-sequential-1</span> bis <span class="g-grundlagen-mono">--sb-dataviz-sequential-7</span></p>
       <ol class="g-grundlagen-ramp" aria-label="Sequenzielle Datenfarben, Stufe 1 bis 7">
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-sequential-1)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">1</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-1"></span></li>
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-sequential-2)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">2</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-2"></span></li>
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-sequential-3)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">3</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-3"></span></li>
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-sequential-4)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">4</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-4"></span></li>
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-sequential-5)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">5</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-5"></span></li>
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-sequential-6)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">6</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-6"></span></li>
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-sequential-7)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">7</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-7"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-sequential-1)" role="img" aria-label="Farbfeld dataviz-sequential-1"></span><span class="g-grundlagen-ramp__step">1</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-1"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-sequential-2)" role="img" aria-label="Farbfeld dataviz-sequential-2"></span><span class="g-grundlagen-ramp__step">2</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-2"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-sequential-3)" role="img" aria-label="Farbfeld dataviz-sequential-3"></span><span class="g-grundlagen-ramp__step">3</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-3"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-sequential-4)" role="img" aria-label="Farbfeld dataviz-sequential-4"></span><span class="g-grundlagen-ramp__step">4</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-4"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-sequential-5)" role="img" aria-label="Farbfeld dataviz-sequential-5"></span><span class="g-grundlagen-ramp__step">5</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-5"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-sequential-6)" role="img" aria-label="Farbfeld dataviz-sequential-6"></span><span class="g-grundlagen-ramp__step">6</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-6"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-sequential-7)" role="img" aria-label="Farbfeld dataviz-sequential-7"></span><span class="g-grundlagen-ramp__step">7</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-7"></span></li>
       </ol>
           </div>
           <div class="g-grundlagen-gap">
-            <div class="g-grundlagen-head-row"><h4>Divergierend: Abweichung von einer Mitte</h4><span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#flask--16"/></svg>Vorschlag, noch nicht im System</span></div>
-            <p class="g-grundlagen-text">Für Werte über und unter einem festen Bezug, etwa „über dem Tagesziel“ und „darunter“. Die Mitte ist grau und heißt „genau auf dem Bezug“; die Mitte und beide Richtungen werden immer beschriftet. Ebenfalls noch ohne Regel im System, also ein Vorschlag.</p>
+            <h4 class="g-grundlagen-h4">Zweiseitig: Abweichung von einer Mitte</h4>
+            <p class="g-grundlagen-text">Für Werte mit einer bedeutsamen Mitte, etwa „über dem Tagesziel“ und „darunter“: sieben Stufen, die Mitte neutral in <code>border</code> (<a href="regeln.html#DAT-10">DAT-10</a>). Die Mitte und beide Richtungen werden beschriftet. Das Diagramm dazu (Abweichung) ist skizziert und wartet auf die Wahl des Inhabers.</p>
       <p class="g-grundlagen-type__meta">Tokens <span class="g-grundlagen-mono">--sb-dataviz-diverging-1</span> bis <span class="g-grundlagen-mono">--sb-dataviz-diverging-7</span></p>
       <ol class="g-grundlagen-ramp" aria-label="Divergierende Datenfarben 1 bis 7, Mitte 4">
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-diverging-1)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">1</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-1"></span></li>
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-diverging-2)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">2</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-2"></span></li>
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-diverging-3)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">3</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-3"></span></li>
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-diverging-4)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">4</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-4"></span></li>
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-diverging-5)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">5</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-5"></span></li>
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-diverging-6)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">6</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-6"></span></li>
-        <li><span class="g-grundlagen-ramp__chip" style="--g-chip: var(--sb-dataviz-diverging-7)" aria-hidden="true"></span><span class="g-grundlagen-ramp__step">7</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-7"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-diverging-1)" role="img" aria-label="Farbfeld dataviz-diverging-1"></span><span class="g-grundlagen-ramp__step">1</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-1"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-diverging-2)" role="img" aria-label="Farbfeld dataviz-diverging-2"></span><span class="g-grundlagen-ramp__step">2</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-2"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-diverging-3)" role="img" aria-label="Farbfeld dataviz-diverging-3"></span><span class="g-grundlagen-ramp__step">3</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-3"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-diverging-4)" role="img" aria-label="Farbfeld dataviz-diverging-4"></span><span class="g-grundlagen-ramp__step">4</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-4"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-diverging-5)" role="img" aria-label="Farbfeld dataviz-diverging-5"></span><span class="g-grundlagen-ramp__step">5</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-5"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-diverging-6)" role="img" aria-label="Farbfeld dataviz-diverging-6"></span><span class="g-grundlagen-ramp__step">6</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-6"></span></li>
+        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-diverging-7)" role="img" aria-label="Farbfeld dataviz-diverging-7"></span><span class="g-grundlagen-ramp__step">7</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-7"></span></li>
       </ol>
           </div>
         </div>
@@ -669,19 +674,19 @@
           <p class="g-grundlagen-text">Code bekommt drei kräftige, gedämpfte Töne: Schlüsselwörter Indigo, Zeichenketten Waldgrün, Zahlen und Konstanten Himbeere (D69). Kommentare stehen in <code>text-muted</code>, alles andere in Textfarbe, auch Namen, Schlüssel, Operatoren und eingesetzte Werte wie <code>${name}</code>: fünf Looks, sonst nichts. Kein Kobalt, kein Lindgrün, keine Statusfarbe, kein Fett und kein Kursiv; Code bleibt auch ohne Farbe lesbar. Jeder Ton erreicht auf jedem Grund mindestens 4,5&nbsp;:&nbsp;1 (gemessen hell 6,82 bis 10,17&nbsp;:&nbsp;1, dunkel 6,55 bis 10,20&nbsp;:&nbsp;1). Das Highlighting gilt einmal für alle Projekte, auch für die Codeblöcke dieser Seite.</p>
       <ul class="g-grundlagen-swatches">
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-syntax-keyword)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-syntax-keyword)" role="img" aria-label="Farbfeld syntax-keyword"></span>
           <p class="g-grundlagen-swatch__name">--sb-syntax-keyword</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-syntax-keyword"></p>
           <p class="g-grundlagen-swatch__use">Indigo, nur in Code: Schlüsselwörter, Annotationen, Tag-Namen, CSS-At-Regeln.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-syntax-string)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-syntax-string)" role="img" aria-label="Farbfeld syntax-string"></span>
           <p class="g-grundlagen-swatch__name">--sb-syntax-string</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-syntax-string"></p>
           <p class="g-grundlagen-swatch__use">Waldgrün, nur in Code: Zeichenketten samt Anführungszeichen, Attributwerte, reguläre Ausdrücke.</p>
         </li>
         <li class="g-grundlagen-swatch">
-          <span class="g-grundlagen-swatch__chip" style="--g-chip: var(--sb-syntax-constant)" aria-hidden="true"></span>
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-syntax-constant)" role="img" aria-label="Farbfeld syntax-constant"></span>
           <p class="g-grundlagen-swatch__name">--sb-syntax-constant</p>
           <p class="g-grundlagen-swatch__value" data-g-token="--sb-syntax-constant"></p>
           <p class="g-grundlagen-swatch__use">Himbeere, nur in Code: Zahlen mit Einheit, <code>true</code>, <code>null</code>, Entities wie <code>&amp;nbsp;</code>.</p>
@@ -699,7 +704,7 @@
           <h3>Gemessene Kontraste</h3>
           <p class="g-grundlagen-text">Normaler Text braucht 4,5&nbsp;:&nbsp;1, großer Text sowie Grenzen und Marken von Bedienelementen 3&nbsp;:&nbsp;1 (WCAG&nbsp;2.2&nbsp;AA). Alle Werte sind auf zwei Stellen abgeschnitten, nie gerundet: Eine gerundete 4,50 könnte eine durchgefallene 4,496 verdecken.</p>
           <div class="sb-table-wrap" role="region" aria-labelledby="kontrast-cap" tabindex="0">
-            <table class="sb-table g-grundlagen-table">
+            <table class="sb-table g-table-stack">
               <caption id="kontrast-cap">Paare im Einsatz wie in Spezifikation 01 „Foundations“ §1.7 und §1.8 der Werkstatt, nachgerechnet nach WCAG&nbsp;2.x aus den heutigen Tokens dieses Guides</caption>
               <thead><tr><th scope="col">Paar (Vordergrund auf Grund)</th><th scope="col" class="sb-num">Mindestens</th><th scope="col" class="sb-num">Hell</th><th scope="col" class="sb-num">Dunkel</th><th scope="col">Wo</th></tr></thead>
               <tbody>
@@ -802,6 +807,30 @@
         </li>
           </ul>
           <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#SCH-04">SCH-04</a>, <a href="regeln.html#SCH-06">SCH-06</a></p>
+        </div>
+
+        <div class="demo-group" id="schrift-klassen">
+          <h3>Überschriften-Rollen als Klassen</h3>
+          <p class="g-grundlagen-text">Eine Überschrift sieht aus wie ihre Rolle, nicht wie ihre Ebene. Fünf Klassen setzen Schrift und Laufweite zusammen, ohne Rand und ohne Farbe: <code>sb-type-display</code>, <code>sb-type-headline</code>, <code>sb-type-title</code>, <code>sb-type-body-strong</code>, <code>sb-type-label</code>. Ohne Klasse gelten weiter <code>h1</code> bis <code>h3</code>. Alle Beispiele hier sind <code>h4</code> oder <code>h5</code>.</p>
+          <!-- g-src:typrollen -->
+          <div class="sb-stack sb-stack--group">
+            <div class="sb-stack"><p class="demo-label"><code>h4.sb-type-display</code> · 40/48&nbsp;px, auf Seiten unter 640&nbsp;px 32/40</p><h4 class="sb-type-display">Heute</h4></div>
+            <div class="sb-stack"><p class="demo-label"><code>h4.sb-type-headline</code> · 28/36&nbsp;px</p><h4 class="sb-type-headline">Erinnerungen</h4></div>
+            <div class="sb-stack"><p class="demo-label"><code>h4.sb-type-title</code> · 20/28&nbsp;px</p><h4 class="sb-type-title">Wasser trinken</h4></div>
+            <div class="sb-stack"><p class="demo-label"><code>h5.sb-type-body-strong</code> · 16/24&nbsp;px</p><h5 class="sb-type-body-strong">3 von 5 erledigt</h5></div>
+            <div class="sb-stack"><p class="demo-label"><code>h5.sb-type-label</code> · 14/20&nbsp;px</p><h5 class="sb-type-label">Tagesziel</h5></div>
+          </div>
+          <!-- /g-src:typrollen -->
+          <p class="g-grundlagen-text g-grundlagen-gap">Im Dunkeln kommen +30 Gewicht und +0,01&nbsp;em aus den Tokens, die Klassen brauchen keine eigene Regel. Nimm nie eine Rollenklasse und eine Titelklasse eines Bauteils (<code>sb-card__title</code>, <code>sb-section__title</code>) am selben Element.</p>
+          <!-- g-source:typrollen Überschriften-Rollen --><details class="g-source"><summary>Markup</summary><div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">HTML</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div>
+<pre tabindex="0" role="region" aria-label="Markup: Überschriften-Rollen"><code>&lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-stack sb-stack--group"</span>&gt;
+  &lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-stack"</span>&gt;&lt;<span class="sb-tok-keyword">p</span> class=<span class="sb-tok-string">"demo-label"</span>&gt;&lt;<span class="sb-tok-keyword">code</span>&gt;h4.sb-type-display&lt;/<span class="sb-tok-keyword">code</span>&gt; · 40/48<span class="sb-tok-constant">&amp;nbsp;</span>px, auf Seiten unter 640<span class="sb-tok-constant">&amp;nbsp;</span>px 32/40&lt;/<span class="sb-tok-keyword">p</span>&gt;&lt;<span class="sb-tok-keyword">h4</span> class=<span class="sb-tok-string">"sb-type-display"</span>&gt;Heute&lt;/<span class="sb-tok-keyword">h4</span>&gt;&lt;/<span class="sb-tok-keyword">div</span>&gt;
+  &lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-stack"</span>&gt;&lt;<span class="sb-tok-keyword">p</span> class=<span class="sb-tok-string">"demo-label"</span>&gt;&lt;<span class="sb-tok-keyword">code</span>&gt;h4.sb-type-headline&lt;/<span class="sb-tok-keyword">code</span>&gt; · 28/36<span class="sb-tok-constant">&amp;nbsp;</span>px&lt;/<span class="sb-tok-keyword">p</span>&gt;&lt;<span class="sb-tok-keyword">h4</span> class=<span class="sb-tok-string">"sb-type-headline"</span>&gt;Erinnerungen&lt;/<span class="sb-tok-keyword">h4</span>&gt;&lt;/<span class="sb-tok-keyword">div</span>&gt;
+  &lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-stack"</span>&gt;&lt;<span class="sb-tok-keyword">p</span> class=<span class="sb-tok-string">"demo-label"</span>&gt;&lt;<span class="sb-tok-keyword">code</span>&gt;h4.sb-type-title&lt;/<span class="sb-tok-keyword">code</span>&gt; · 20/28<span class="sb-tok-constant">&amp;nbsp;</span>px&lt;/<span class="sb-tok-keyword">p</span>&gt;&lt;<span class="sb-tok-keyword">h4</span> class=<span class="sb-tok-string">"sb-type-title"</span>&gt;Wasser trinken&lt;/<span class="sb-tok-keyword">h4</span>&gt;&lt;/<span class="sb-tok-keyword">div</span>&gt;
+  &lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-stack"</span>&gt;&lt;<span class="sb-tok-keyword">p</span> class=<span class="sb-tok-string">"demo-label"</span>&gt;&lt;<span class="sb-tok-keyword">code</span>&gt;h5.sb-type-body-strong&lt;/<span class="sb-tok-keyword">code</span>&gt; · 16/24<span class="sb-tok-constant">&amp;nbsp;</span>px&lt;/<span class="sb-tok-keyword">p</span>&gt;&lt;<span class="sb-tok-keyword">h5</span> class=<span class="sb-tok-string">"sb-type-body-strong"</span>&gt;3 von 5 erledigt&lt;/<span class="sb-tok-keyword">h5</span>&gt;&lt;/<span class="sb-tok-keyword">div</span>&gt;
+  &lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">"sb-stack"</span>&gt;&lt;<span class="sb-tok-keyword">p</span> class=<span class="sb-tok-string">"demo-label"</span>&gt;&lt;<span class="sb-tok-keyword">code</span>&gt;h5.sb-type-label&lt;/<span class="sb-tok-keyword">code</span>&gt; · 14/20<span class="sb-tok-constant">&amp;nbsp;</span>px&lt;/<span class="sb-tok-keyword">p</span>&gt;&lt;<span class="sb-tok-keyword">h5</span> class=<span class="sb-tok-string">"sb-type-label"</span>&gt;Tagesziel&lt;/<span class="sb-tok-keyword">h5</span>&gt;&lt;/<span class="sb-tok-keyword">div</span>&gt;
+&lt;/<span class="sb-tok-keyword">div</span>&gt;</code></pre></div></details><!-- /g-source:typrollen -->
+          <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#SCH-07">SCH-07</a>, <a href="regeln.html#SCH-05">SCH-05</a>, <a href="regeln.html#SCH-06">SCH-06</a></p>
         </div>
 
         <div class="demo-group" id="schrift-mobil">
@@ -952,7 +981,7 @@
         <div class="demo-group" id="raum-rollen">
           <h3>Abstandsrollen</h3>
           <div class="sb-table-wrap" role="region" aria-labelledby="rollen-cap" tabindex="0">
-            <table class="sb-table g-grundlagen-table">
+            <table class="sb-table g-table-stack">
               <caption id="rollen-cap">Rollen und ihre Werte</caption>
               <thead><tr><th scope="col">Rolle</th><th scope="col" class="sb-num">Wert</th><th scope="col">Token</th><th scope="col">Wofür</th></tr></thead>
               <tbody>
@@ -973,25 +1002,36 @@
 
         <div class="demo-group" id="raum-raster">
           <h3>Raster und Breakpoints</h3>
-          <p class="g-grundlagen-text">Unter 640&nbsp;px 4 Spalten, Rand und Spaltenabstand 16; von 640 bis 1023&nbsp;px 8 Spalten, Rand 16, Abstand 24; ab 1024&nbsp;px 12 Spalten, Rand 48, Abstand 24. Das Raster unten folgt der Breite deines Fensters.</p>
+          <p class="g-grundlagen-text">Die Seite kennt nur zwei Schwellen, 640 und 1024&nbsp;px. Unter 640&nbsp;px 4 Spalten, Rand und Spaltenabstand 16; von 640 bis 1023&nbsp;px 8 Spalten, Rand 16, Abstand 24; ab 1024&nbsp;px 12 Spalten, Rand 48, Abstand 24. Das Raster unten folgt der Breite deines Fensters.</p>
           <ol class="g-grundlagen-columns" aria-hidden="true">
             <li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li><li>11</li><li>12</li>
           </ol>
           <p class="g-grundlagen-columns__now">Bei deiner Fensterbreite: <span class="g-grundlagen-columns__4">4 Spalten (Handy)</span><span class="g-grundlagen-columns__8">8 Spalten (Tablet, kleines Fenster)</span><span class="g-grundlagen-columns__12">12 Spalten (Desktop)</span>.</p>
           <div class="sb-table-wrap g-grundlagen-gap" role="region" aria-labelledby="bp-cap" tabindex="0">
-            <table class="sb-table g-grundlagen-table">
-              <caption id="bp-cap">Vier Breakpoints, zwei Schwellen</caption>
+            <table class="sb-table g-table-stack">
+              <caption id="bp-cap">Zwei Breakpoints für die Seite</caption>
               <thead><tr><th scope="col">Token</th><th scope="col">Wert</th><th scope="col">Was ab hier gilt</th></tr></thead>
               <tbody>
-                <tr><th scope="row"><span class="g-grundlagen-token">--sb-breakpoint-sm</span></th><td data-label="Wert"><span class="g-grundlagen-mono" data-g-token="--sb-breakpoint-sm"></span></td><td data-label="Was ab hier gilt">Schwelle 1: darunter verhält sich jede Ansicht wie am Handy; ab hier gilt die breite Aktionszone mit Stand-Satz (<code>.sb-view--wide</code>).</td></tr>
-                <tr><th scope="row"><span class="g-grundlagen-token">--sb-breakpoint-md</span></th><td data-label="Wert"><span class="g-grundlagen-mono" data-g-token="--sb-breakpoint-md"></span></td><td data-label="Was ab hier gilt">frei für das Layout eines Produkts; <code>sebaro.css</code> nutzt ihn nicht.</td></tr>
+                <tr><th scope="row"><span class="g-grundlagen-token">--sb-breakpoint-sm</span></th><td data-label="Wert"><span class="g-grundlagen-mono" data-g-token="--sb-breakpoint-sm"></span></td><td data-label="Was ab hier gilt">Schwelle 1: darunter verhält sich jede Seite wie am Handy; 8 Spalten, Abschnitte und Kopf in voller Form.</td></tr>
                 <tr><th scope="row"><span class="g-grundlagen-token">--sb-breakpoint-lg</span></th><td data-label="Wert"><span class="g-grundlagen-mono" data-g-token="--sb-breakpoint-lg"></span></td><td data-label="Was ab hier gilt">Schwelle 2: Seitenleiste und Inhaltsverzeichnis als Spalte, Seitenrand 48, Fußnoten nur unter dem Abschnitt, Zeigerziele dürfen kleiner sein.</td></tr>
-                <tr><th scope="row"><span class="g-grundlagen-token">--sb-breakpoint-xl</span></th><td data-label="Wert"><span class="g-grundlagen-mono" data-g-token="--sb-breakpoint-xl"></span></td><td data-label="Was ab hier gilt">frei für das Layout eines Produkts; <code>sebaro.css</code> nutzt ihn nicht.</td></tr>
               </tbody>
             </table>
           </div>
-          <p class="g-grundlagen-text g-grundlagen-gap">CSS kann in Media Queries keine Variablen lesen. Schreib die Schwellen dort als Zahl und nimm für „darunter“ den Wert knapp davor, zum Beispiel <code>max-width: 639.98px</code>. Layouts sind anfangsbündig und asymmetrisch; Textblöcke stehen nie zentriert.</p>
-          <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#RAU-02">RAU-02</a>, <a href="regeln.html#RAU-03">RAU-03</a>, <a href="regeln.html#RAU-04">RAU-04</a></p>
+          <p class="g-grundlagen-text g-grundlagen-gap">Bauteile fragen nicht den Bildschirm, sondern ihren Platz (Container-Abfragen). Ein schmaler Bereich auf einem breiten Bildschirm verhält sich wie ein Handy, ein breites Fenster auf einem kleinen Bildschirm wie ein Fenster. Drei Container hat <code>sebaro.css</code> dafür, dazu das Fenster.</p>
+          <div class="sb-table-wrap" role="region" aria-labelledby="cq-cap" tabindex="0">
+            <table class="sb-table g-table-stack">
+              <caption id="cq-cap">Container und ihre Schwellen</caption>
+              <thead><tr><th scope="col">Container</th><th scope="col">Element</th><th scope="col">Schwellen</th><th scope="col">Wer fragt</th></tr></thead>
+              <tbody>
+                <tr><th scope="row"><code>sb-page</code></th><td data-label="Element"><code>body.sb-page</code>, jeder Rahmen, der eine Seite zeigt</td><td data-label="Schwellen">640 und 1024&nbsp;px</td><td data-label="Wer fragt">Website-Kopf, Fußzeile, Seitenrand, Abschnitte, <code>sb-type-display</code></td></tr>
+                <tr><th scope="row"><code>sb-content</code></th><td data-label="Element"><code>.sb-container</code></td><td data-label="Schwellen">608 und 928&nbsp;px</td><td data-label="Wer fragt">App-Raster, App-Karte, App-Liste</td></tr>
+                <tr><th scope="row"><code>sb-view</code></th><td data-label="Element"><code>.sb-view--wide</code></td><td data-label="Schwellen">640&nbsp;px</td><td data-label="Wer fragt">die breite Aktionszone mit Stand-Satz</td></tr>
+                <tr><th scope="row"><code>sb-window</code></th><td data-label="Element"><code>.sb-window</code></td><td data-label="Schwellen">480, 722 und 1004&nbsp;px</td><td data-label="Wer fragt">Seitenleiste und Inspektor legen sich als Überlagerung über den Inhalt, der mindestens 480&nbsp;px behält</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="g-grundlagen-text g-grundlagen-gap">CSS kann in Media Queries keine Variablen lesen. Schreib die Schwellen dort als Zahl und nimm für „darunter“ den Wert knapp davor, zum Beispiel <code>max-width: 639.98px</code>. Ein Container nimmt seine Breite vom Elternelement, nie vom Inhalt; steck ihn nicht in eine Box, die sich nach ihrem Inhalt richtet. Layouts sind anfangsbündig und asymmetrisch; Textblöcke stehen nie zentriert.</p>
+          <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#RAU-02">RAU-02</a>, <a href="regeln.html#RAU-03">RAU-03</a>, <a href="regeln.html#RAU-04">RAU-04</a>, <a href="regeln.html#DSK-04">DSK-04</a></p>
         </div>
 
         <div class="demo-group" id="raum-mass">
@@ -1005,7 +1045,7 @@
 
         <div class="demo-group" id="raum-ziele">
           <h3>Ziele und Höhen</h3>
-          <p class="g-grundlagen-text">Jede Bedienung hat 48&nbsp;px Höhe oder eine 48-px-Trefferfläche. Nur bei Zeigerbedienung ab 1024&nbsp;px dürfen Links im Text, Brotkrumen und Fußnotenziffern 24&nbsp;px haben und Desktop-Zeilen 32&nbsp;px; unter <code>(pointer: coarse)</code> werden sie wieder 48.</p>
+          <p class="g-grundlagen-text">Jede Bedienung hat 48&nbsp;px Höhe oder eine 48-px-Trefferfläche. Nur bei Zeigerbedienung dürfen Links im Text, Brotkrumen und Fußnotenziffern 24&nbsp;px haben, und in Fenstern sind Zeilen, Werkzeuge und kompakte Tasten 32&nbsp;px hoch; unter <code>(pointer: coarse)</code> werden sie wieder 48.</p>
           <ul class="g-grundlagen-targets">
             <li><span class="g-grundlagen-target" style="--g-size: var(--sb-size-target-touch)" aria-hidden="true"></span><p><b>Touch</b> <span class="g-grundlagen-mono g-grundlagen-muted" data-g-token="--sb-size-target-touch"></span></p></li>
             <li><span class="g-grundlagen-target" style="--g-size: var(--sb-size-control-lg)" aria-hidden="true"></span><p><b>Hauptaktion</b> <span class="g-grundlagen-mono g-grundlagen-muted" data-g-token="--sb-size-control-lg"></span></p></li>
@@ -1014,41 +1054,45 @@
             <li><span class="g-grundlagen-target" style="--g-size: var(--sb-size-target-pointer)" aria-hidden="true"></span><p><b>Zeiger</b> <span class="g-grundlagen-mono g-grundlagen-muted" data-g-token="--sb-size-target-pointer"></span></p></li>
           </ul>
           <div class="sb-table-wrap g-grundlagen-gap" role="region" aria-labelledby="hoehen-cap" tabindex="0">
-            <table class="sb-table g-grundlagen-table">
+            <table class="sb-table g-table-stack">
               <caption id="hoehen-cap">Feste Höhen</caption>
               <thead><tr><th scope="col">Element</th><th scope="col" class="sb-num">Höhe</th><th scope="col">Regel</th></tr></thead>
               <tbody>
                 <tr><th scope="row">Listenzeile, eine Zeile</th><td class="sb-num" data-label="Höhe">56&nbsp;px</td><td data-label="Regel">bedienbar</td></tr>
                 <tr><th scope="row">Listenzeile mit Metazeile</th><td class="sb-num" data-label="Höhe">64&nbsp;px</td><td data-label="Regel">Titel und Meta; Haarlinie dazwischen, 16 eingerückt</td></tr>
                 <tr><th scope="row">Listenzeile mit Meta und Text</th><td class="sb-num" data-label="Höhe">88&nbsp;px</td><td data-label="Regel"></td></tr>
-                <tr><th scope="row">Erledigtes</th><td class="sb-num" data-label="Höhe">40&nbsp;px</td><td data-label="Regel">tritt zurück: caption, <code>text-muted</code>, keine Haarlinie</td></tr>
+                <tr><th scope="row">Erledigtes</th><td class="sb-num" data-label="Höhe">40&nbsp;px</td><td data-label="Regel">tritt zurück: caption, <code>text-muted</code>, keine Haarlinie; im Fenster 32&nbsp;px</td></tr>
                 <tr><th scope="row">Aussage-Zeile</th><td class="sb-num" data-label="Höhe">ab 56&nbsp;px</td><td data-label="Regel">die ganze Zeile ist das Ziel</td></tr>
                 <tr><th scope="row">Obere Leiste, untere Navigation</th><td class="sb-num" data-label="Höhe">64&nbsp;px</td><td data-label="Regel">die Navigation plus Systemeinsatz</td></tr>
-                <tr><th scope="row">Zeile in Baum, Liste, Menü, Palette, Werkzeugtaste am Desktop</th><td class="sb-num" data-label="Höhe">32&nbsp;px</td><td data-label="Regel">bei Touch 48-px-Trefferfläche, die Zeile sieht gleich aus (D67)</td></tr>
+                <tr><th scope="row">Zeile im Fenster (Baum, Liste, Menü, Palette, Seitenleiste), Werkzeug</th><td class="sb-num" data-label="Höhe">32&nbsp;px</td><td data-label="Regel">eine Zeile; bei Touch 48-px-Trefferfläche, die Zeile sieht gleich aus</td></tr>
+                <tr><th scope="row">Zeile im Fenster, zwei Zeilen</th><td class="sb-num" data-label="Höhe">48&nbsp;px</td><td data-label="Regel">Name und Unterzeile</td></tr>
+                <tr><th scope="row">Zeile im Fenster, drei Zeilen</th><td class="sb-num" data-label="Höhe">64&nbsp;px</td><td data-label="Regel">Name, Unterzeile und Text</td></tr>
               </tbody>
             </table>
           </div>
-          <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#ZUG-03">ZUG-03</a>, <a href="regeln.html#RAU-05">RAU-05</a></p>
+          <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#ZUG-03">ZUG-03</a>, <a href="regeln.html#RAU-05">RAU-05</a>, <a href="regeln.html#RAU-06">RAU-06</a></p>
         </div>
 
         <div class="demo-group" id="raum-dichte">
-          <div class="g-grundlagen-head-row"><h3>Dichte am Desktop: 32-px-Zeilen</h3><span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#flask--16"/></svg>Vorschlag, noch nicht im System</span></div>
-          <p class="g-grundlagen-text">In Desktop-Apps und Web-Apps mit Fenster sind Zeilen in Bäumen, Listen, Menüs, Befehlspalette und Werkzeugtasten 32&nbsp;px hoch, so wie macOS und Windows bei Maus. Der Ort bleibt die 3-px-Linie in Kobalt plus Titelgewicht. Die Hauptaktion bleibt 56&nbsp;px. Die Entscheidung steht (D67), aber <code>sebaro.css</code> hat noch keine Klasse dafür; das Muster hier ist aus Tokens gebaut.</p>
-          <ul class="g-grundlagen-dense" aria-label="Muster: Notizen in einem Desktop-Fenster">
-            <li><a class="g-grundlagen-dense__row" href="#raum-dichte"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#chevron-down--16"/></svg>Notizen</a></li>
-            <li><a class="g-grundlagen-dense__row g-grundlagen-dense__row--child" href="#raum-dichte">Einkauf</a></li>
-            <li><a class="g-grundlagen-dense__row g-grundlagen-dense__row--child" href="#raum-dichte" aria-current="page">Ideen</a></li>
-            <li><a class="g-grundlagen-dense__row g-grundlagen-dense__row--child" href="#raum-dichte">Reise im Mai</a></li>
-            <li><a class="g-grundlagen-dense__row" href="#raum-dichte"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#chevron-right--16"/></svg>Archiv</a></li>
-          </ul>
-      <details class="g-source"><summary>Markup</summary>
-        <div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">HTML</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div>
-<pre tabindex="0" role="region" aria-label="Markup: Desktop-Zeilen 32&nbsp;px (Vorschlag)"><code><span class="sb-tok-comment">&lt;!-- Vorschlag, noch nicht im System: sebaro.css hat noch keine Klasse für 32-px-Zeilen (D67, RAU-06) --&gt;</span>
-&lt;<span class="sb-tok-keyword">ul</span> class=<span class="sb-tok-string">&quot;g-grundlagen-dense&quot;</span> aria-label=<span class="sb-tok-string">&quot;Notizen&quot;</span>&gt;
-  &lt;<span class="sb-tok-keyword">li</span>&gt;&lt;<span class="sb-tok-keyword">a</span> class=<span class="sb-tok-string">&quot;g-grundlagen-dense__row&quot;</span> href=<span class="sb-tok-string">&quot;#…&quot;</span>&gt;&lt;<span class="sb-tok-keyword">svg</span> class=<span class="sb-tok-string">&quot;sb-icon sb-icon--16&quot;</span> aria-hidden=<span class="sb-tok-string">&quot;true&quot;</span> focusable=<span class="sb-tok-string">&quot;false&quot;</span>&gt;&lt;<span class="sb-tok-keyword">use</span> href=<span class="sb-tok-string">&quot;#chevron-down--16&quot;</span>/&gt;&lt;/<span class="sb-tok-keyword">svg</span>&gt;Notizen&lt;/<span class="sb-tok-keyword">a</span>&gt;&lt;/<span class="sb-tok-keyword">li</span>&gt;
-  &lt;<span class="sb-tok-keyword">li</span>&gt;&lt;<span class="sb-tok-keyword">a</span> class=<span class="sb-tok-string">&quot;g-grundlagen-dense__row g-grundlagen-dense__row--child&quot;</span> href=<span class="sb-tok-string">&quot;#…&quot;</span> aria-current=<span class="sb-tok-string">&quot;page&quot;</span>&gt;Ideen&lt;/<span class="sb-tok-keyword">a</span>&gt;&lt;/<span class="sb-tok-keyword">li</span>&gt;
-&lt;/<span class="sb-tok-keyword">ul</span>&gt;</code></pre></div>
-      </details>
+          <h3>Dichte im Fenster: 32, 48, 64&nbsp;px</h3>
+          <p class="g-grundlagen-text">In Desktop-Apps und Web-Apps mit Fenster setzt <code>data-sb-density="window"</code> die Zeilenhöhen: eine Zeile 32&nbsp;px, zwei Zeilen 48, drei Zeilen 64, so wie macOS und Windows bei Maus. Das gilt für <code>sb-row</code>, Listenzeilen, Seitenleiste, Menüs und Eigenschaften im Fenster. Der Fließtext bleibt 16/24, die Hauptaktion 56&nbsp;px. Es gibt keinen Schalter für die Dichte; das Attribut gilt für Fenster, nicht als Einstellung.</p>
+          <div class="demo-cell demo-cell--fixed">
+            <p class="demo-label" id="g-rows-l">Drei Zeilen im Fenster, die erste gewählt</p>
+            <!-- g-src:fensterzeilen -->
+            <ul class="sb-listbox demo-box" role="listbox" aria-labelledby="g-rows-l" data-sb-density="window">
+              <li class="sb-row" role="option" id="g-rows-1" aria-selected="true" tabindex="0"><svg class="sb-icon sb-row__icon" aria-hidden="true" focusable="false"><use href="#file-text"/></svg><span class="sb-row__name">Eine Zeile, 32&nbsp;px</span><span class="sb-row__meta"><time datetime="2026-10-10">heute</time></span></li>
+              <li class="sb-row" role="option" id="g-rows-2" aria-selected="false" tabindex="-1"><svg class="sb-icon sb-row__icon" aria-hidden="true" focusable="false"><use href="#file-text"/></svg><span class="sb-row__main"><span class="sb-row__name">Zwei Zeilen, 48&nbsp;px</span><span class="sb-row__sub">Projekte · gestern</span></span></li>
+              <li class="sb-row" role="option" id="g-rows-3" aria-selected="false" tabindex="-1"><svg class="sb-icon sb-row__icon" aria-hidden="true" focusable="false"><use href="#file-text"/></svg><span class="sb-row__main"><span class="sb-row__name">Drei Zeilen, 64&nbsp;px</span><span class="sb-row__sub">Projekte · 02.10.2026</span><span class="sb-row__text">Zwei Termine stehen fest, der Rest ist frei.</span></span></li>
+            </ul>
+            <!-- /g-src:fensterzeilen -->
+          </div>
+          <!-- g-source:fensterzeilen Zeilen im Fenster --><details class="g-source"><summary>Markup</summary><div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">HTML</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div>
+<pre tabindex="0" role="region" aria-label="Markup: Zeilen im Fenster"><code>&lt;<span class="sb-tok-keyword">ul</span> class=<span class="sb-tok-string">"sb-listbox demo-box"</span> role=<span class="sb-tok-string">"listbox"</span> aria-labelledby=<span class="sb-tok-string">"g-rows-l"</span> data-sb-density=<span class="sb-tok-string">"window"</span>&gt;
+  &lt;<span class="sb-tok-keyword">li</span> class=<span class="sb-tok-string">"sb-row"</span> role=<span class="sb-tok-string">"option"</span> id=<span class="sb-tok-string">"g-rows-1"</span> aria-selected=<span class="sb-tok-string">"true"</span> tabindex=<span class="sb-tok-string">"0"</span>&gt;&lt;<span class="sb-tok-keyword">svg</span> class=<span class="sb-tok-string">"sb-icon sb-row__icon"</span> aria-hidden=<span class="sb-tok-string">"true"</span> focusable=<span class="sb-tok-string">"false"</span>&gt;&lt;<span class="sb-tok-keyword">use</span> href=<span class="sb-tok-string">"#file-text"</span>/&gt;&lt;/<span class="sb-tok-keyword">svg</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-row__name"</span>&gt;Eine Zeile, 32<span class="sb-tok-constant">&amp;nbsp;</span>px&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-row__meta"</span>&gt;&lt;<span class="sb-tok-keyword">time</span> datetime=<span class="sb-tok-string">"2026-10-10"</span>&gt;heute&lt;/<span class="sb-tok-keyword">time</span>&gt;&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;/<span class="sb-tok-keyword">li</span>&gt;
+  &lt;<span class="sb-tok-keyword">li</span> class=<span class="sb-tok-string">"sb-row"</span> role=<span class="sb-tok-string">"option"</span> id=<span class="sb-tok-string">"g-rows-2"</span> aria-selected=<span class="sb-tok-string">"false"</span> tabindex=<span class="sb-tok-string">"-1"</span>&gt;&lt;<span class="sb-tok-keyword">svg</span> class=<span class="sb-tok-string">"sb-icon sb-row__icon"</span> aria-hidden=<span class="sb-tok-string">"true"</span> focusable=<span class="sb-tok-string">"false"</span>&gt;&lt;<span class="sb-tok-keyword">use</span> href=<span class="sb-tok-string">"#file-text"</span>/&gt;&lt;/<span class="sb-tok-keyword">svg</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-row__main"</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-row__name"</span>&gt;Zwei Zeilen, 48<span class="sb-tok-constant">&amp;nbsp;</span>px&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-row__sub"</span>&gt;Projekte · gestern&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;/<span class="sb-tok-keyword">li</span>&gt;
+  &lt;<span class="sb-tok-keyword">li</span> class=<span class="sb-tok-string">"sb-row"</span> role=<span class="sb-tok-string">"option"</span> id=<span class="sb-tok-string">"g-rows-3"</span> aria-selected=<span class="sb-tok-string">"false"</span> tabindex=<span class="sb-tok-string">"-1"</span>&gt;&lt;<span class="sb-tok-keyword">svg</span> class=<span class="sb-tok-string">"sb-icon sb-row__icon"</span> aria-hidden=<span class="sb-tok-string">"true"</span> focusable=<span class="sb-tok-string">"false"</span>&gt;&lt;<span class="sb-tok-keyword">use</span> href=<span class="sb-tok-string">"#file-text"</span>/&gt;&lt;/<span class="sb-tok-keyword">svg</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-row__main"</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-row__name"</span>&gt;Drei Zeilen, 64<span class="sb-tok-constant">&amp;nbsp;</span>px&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-row__sub"</span>&gt;Projekte · 02.10.2026&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;<span class="sb-tok-keyword">span</span> class=<span class="sb-tok-string">"sb-row__text"</span>&gt;Zwei Termine stehen fest, der Rest ist frei.&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;/<span class="sb-tok-keyword">span</span>&gt;&lt;/<span class="sb-tok-keyword">li</span>&gt;
+&lt;/<span class="sb-tok-keyword">ul</span>&gt;</code></pre></div></details><!-- /g-source:fensterzeilen -->
+          <p class="g-grundlagen-text g-grundlagen-gap">Die Ortslinie bleibt die 3-px-Linie in Kobalt plus Titelgewicht. Alle Fensterbauteile mit dieser Dichte stehen unter <a href="bauteile.html#g-fenster">Bauteile, Fenster</a>.</p>
           <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#RAU-06">RAU-06</a>, <a href="regeln.html#NAV-04">NAV-04</a>, <a href="regeln.html#EBE-07">EBE-07</a>, <a href="regeln.html#ZUG-03">ZUG-03</a></p>
         </div>
       </section>
@@ -1063,14 +1107,14 @@
           <ul class="g-grundlagen-radii">
         <li><span class="g-grundlagen-radius" style="--g-radius: var(--sb-radius-small)" aria-hidden="true"></span><p class="g-grundlagen-mono">--sb-radius-small</p><p class="g-grundlagen-mono g-grundlagen-muted" data-g-token="--sb-radius-small"></p><p class="g-grundlagen-swatch__use">Tags, Marker „Beispieldaten“, Inline-Code, Checkbox</p></li>
         <li><span class="g-grundlagen-radius" style="--g-radius: var(--sb-radius-control)" aria-hidden="true"></span><p class="g-grundlagen-mono">--sb-radius-control</p><p class="g-grundlagen-mono g-grundlagen-muted" data-g-token="--sb-radius-control"></p><p class="g-grundlagen-swatch__use">Tasten, Felder (gefüllte Felder nur oben), Segmente, Chips, Tooltips, Ecke des Fokusrings</p></li>
-        <li><span class="g-grundlagen-radius" style="--g-radius: var(--sb-radius-container)" aria-hidden="true"></span><p class="g-grundlagen-mono">--sb-radius-container</p><p class="g-grundlagen-mono g-grundlagen-muted" data-g-token="--sb-radius-container"></p><p class="g-grundlagen-swatch__use">Karten, Hinweise, Codeblöcke, Kurzmeldungen, Menüs, Popover</p></li>
+        <li><span class="g-grundlagen-radius" style="--g-radius: var(--sb-radius-container)" aria-hidden="true"></span><p class="g-grundlagen-mono">--sb-radius-container</p><p class="g-grundlagen-mono g-grundlagen-muted" data-g-token="--sb-radius-container"></p><p class="g-grundlagen-swatch__use">Karten (beide Formen), Hinweise, Codeblöcke, Kurzmeldungen, Menüs, Befehlspalette, Popover</p></li>
         <li><span class="g-grundlagen-radius" style="--g-radius: var(--sb-radius-sheet)" aria-hidden="true"></span><p class="g-grundlagen-mono">--sb-radius-sheet</p><p class="g-grundlagen-mono g-grundlagen-muted" data-g-token="--sb-radius-sheet"></p><p class="g-grundlagen-swatch__use">Dialoge, Bottom Sheets, Handyrahmen in Mustern</p></li>
-        <li><span class="g-grundlagen-radius" style="--g-radius: var(--sb-radius-pill)" aria-hidden="true"></span><p class="g-grundlagen-mono">--sb-radius-pill</p><p class="g-grundlagen-mono g-grundlagen-muted" data-g-token="--sb-radius-pill"></p><p class="g-grundlagen-swatch__use">Schalter, Radio-Ring, Griff des Reglers, Avatar: Menschen sind Kreise</p></li>
+        <li><span class="g-grundlagen-radius" style="--g-radius: var(--sb-radius-pill)" aria-hidden="true"></span><p class="g-grundlagen-mono">--sb-radius-pill</p><p class="g-grundlagen-mono g-grundlagen-muted" data-g-token="--sb-radius-pill"></p><p class="g-grundlagen-swatch__use">Nur vier Dinge: Avatar, Schalter (Spur und Griff), Optionsfeld und der Griff des Schiebereglers. Schiene und Füllung des Reglers, Fortschrittsbalken und -ring haben gerade Enden; Tasten, Chips und Tags sind nie Pillen.</p></li>
             <li><span class="sb-sign-tile sb-sign-tile--64" aria-hidden="true"><!-- guide:tile id="studio" size="48" -->
 <svg class="sb-app-sign" data-sb-product="studio" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" width="48" height="48" role="img" aria-label="sebaro"><title>sebaro</title><!-- generated by systems/sebaro/brand/gen/build_brand_src.py from signs.json, dist/tokens.json and sebaro Sans — do not edit. tile of studio for tiles of 48 px and more: symbol and code (D57); signTiles pair #3057B1 / #FFFFFF in every mode (the launcher's colours; D40: product colour only inside the sign tile) --><rect class="sb-app-sign__tile" width="72" height="72" rx="12.002" fill="#3057B1"/><g class="sb-app-sign__glyph" transform="translate(-18 -18)"><g transform="translate(36 27) scale(1.5)"><path d="M1.6 11.5 L12 3 L22.4 11.5" fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 18.5 A2.5 2.5 0 1 1 7 18.5 A2.5 2.5 0 1 1 2 18.5 Z" fill="#FFFFFF"/><path d="M9.5 18.5 A2.5 2.5 0 1 1 14.5 18.5 A2.5 2.5 0 1 1 9.5 18.5 Z" fill="#FFFFFF"/><path d="M17 18.5 A2.5 2.5 0 1 1 22 18.5 A2.5 2.5 0 1 1 17 18.5 Z" fill="#FFFFFF"/></g><g fill="#FFFFFF" transform="translate(40.275 80.5) scale(0.016667)"><path d="M33 -43L85 -144Q115 -124 155 -109.5Q195 -95 237 -95Q280 -95 297.5 -107.5Q315 -120 315 -139Q315 -152 307 -162.5Q299 -173 280.5 -182Q262 -191 231 -201Q133 -234 93 -275.5Q53 -317 53 -375Q53 -419 78 -455Q103 -491 149.5 -512Q196 -533 259 -533Q306 -533 352.5 -520.5Q399 -508 435 -486L385 -387Q357 -403 321 -415Q285 -427 251 -427Q216 -427 198 -415.5Q180 -404 180 -386Q180 -373 188 -363Q196 -353 215.5 -344Q235 -335 270 -324Q336 -302 375.5 -276.5Q415 -251 432.5 -220Q450 -189 450 -149Q450 -102 422.5 -66Q395 -30 346 -9.5Q297 11 229 11Q171 11 120.5 -4.5Q70 -20 33 -43Z"/><path d="M545 0L553 -47Q557 -69 558.5 -86Q560 -103 560 -124L560 -715L691 -735L691 -457Q721 -492 759.5 -512.5Q798 -533 843 -533Q896 -533 940.5 -500Q985 -467 1012 -406Q1039 -345 1039 -261Q1039 -174 1010.5 -113Q982 -52 933 -20.5Q884 11 820 11Q780 11 744 -7Q708 -25 684 -62L671 0L545 0ZM691 -229Q691 -182 704 -152Q717 -122 739 -107.5Q761 -93 788 -93Q841 -93 874 -136.5Q907 -180 907 -255Q907 -308 893.5 -343Q880 -378 856 -396Q832 -414 801 -414Q774 -414 745 -401Q716 -388 691 -366L691 -229Z"/><path d="M1115 -260Q1115 -346 1147.5 -407Q1180 -468 1236 -500.5Q1292 -533 1365 -533Q1438 -533 1494 -500.5Q1550 -468 1582 -407Q1614 -346 1614 -260Q1614 -176 1582 -115Q1550 -54 1494 -21.5Q1438 11 1365 11Q1292 11 1236 -21.5Q1180 -54 1147.5 -115Q1115 -176 1115 -260ZM1249 -260Q1249 -205 1263 -168.5Q1277 -132 1303 -114.5Q1329 -97 1365 -97Q1400 -97 1426.5 -114.5Q1453 -132 1467 -168.5Q1481 -205 1481 -260Q1481 -316 1467 -352Q1453 -388 1426.5 -406.5Q1400 -425 1365 -425Q1329 -425 1303 -406.5Q1277 -388 1263 -352Q1249 -316 1249 -260Z"/></g></g></svg>
 <!-- /guide:tile --></span><p class="g-grundlagen-mono">--sb-x-sebaro-sign-tile-radius-ratio</p><p class="g-grundlagen-mono g-grundlagen-muted" data-g-token="--sb-x-sebaro-sign-tile-radius-ratio"></p><p class="g-grundlagen-swatch__use">App-Zeichen: abgerundetes Quadrat, Radius = Kante mal 0,1667 (8&nbsp;px bei 48&nbsp;px)</p></li>
           </ul>
-          <p class="g-grundlagen-rules">Regel: <a href="regeln.html#FOR-01">FOR-01</a></p>
+          <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#FOR-01">FOR-01</a>, <a href="regeln.html#FOR-06">FOR-06</a>, <a href="regeln.html#FOR-05">FOR-05</a></p>
         </div>
 
         <div class="demo-group" id="form-linien">
@@ -1084,7 +1128,7 @@
             <li><div class="g-grundlagen-line-stage"><span class="g-grundlagen-place">Heute</span></div><div><h4>Ortslinie</h4><p><span class="g-grundlagen-mono" data-g-token="--sb-border-width-strong"></span> in <code>accent</code>: „Du bist hier.“ Immer mit einem zweiten Merkmal wie Titelgewicht, gefülltem Icon oder Haken.</p></div></li>
             <li><div class="g-grundlagen-line-stage"><a href="#zustaende-hauptaktion">zur Hauptaktion</a></div><div><h4>Rand der Hauptaktion</h4><p><span class="g-grundlagen-mono" data-g-token="--sb-x-sebaro-primary-action-outline-width"></span> in <code>primary-action-outline</code>, immer gezeichnet, damit die Taste in beiden Modi gleich groß ist. Es gibt sie auf dieser Seite nur an der einen Taste je Abschnitt.</p></div></li>
             <li><div class="g-grundlagen-line-stage"><div class="sb-field"><label class="sb-field__label" for="g-line-error">Tagesziel</label><div class="sb-field__control"><input id="g-line-error" type="text" inputmode="numeric" value="80" autocomplete="off" aria-invalid="true" aria-describedby="g-line-error-msg"><span class="sb-field__suffix">Gläser</span></div><p class="sb-field__error" id="g-line-error-msg"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#error--filled-16"/></svg>Trag höchstens 20&nbsp;Gläser ein.</p></div></div><div><h4>Fehlerlinie</h4><p>2&nbsp;px in <code>danger</code> unter einem Feld mit Fehler, immer zusammen mit Glyphe und einem Satz, der sagt, was zu tun ist.</p></div></li>
-            <li><div class="g-grundlagen-line-stage"><button class="sb-secondary-action is-focus" type="button">Bearbeiten</button></div><div><h4>Fokusring</h4><p><span class="g-grundlagen-mono" data-g-token="--sb-focus-width"></span> in <code>focus</code>, <span class="g-grundlagen-mono" data-g-token="--sb-focus-offset"></span> Abstand, Ecke = Radius plus Abstand. Einer für alles, nie animiert, nie je App umgefärbt.</p></div></li>
+            <li><div class="g-grundlagen-line-stage"><button class="sb-secondary-action is-focus" type="button">Bearbeiten</button></div><div><h4>Fokusring</h4><p><span class="g-grundlagen-mono" data-g-token="--sb-focus-width"></span> in <code>focus</code>, <span class="g-grundlagen-mono" data-g-token="--sb-focus-offset"></span> Abstand, Ecke = Radius plus Abstand. Einer für alles, nie animiert, nie je App umgefärbt. Die Breite ist entschieden: 2&nbsp;px, nicht 3.</p></div></li>
           </ul>
           <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#FOR-02">FOR-02</a>, <a href="regeln.html#FOR-03">FOR-03</a>, <a href="regeln.html#FAR-07">FAR-07</a>, <a href="regeln.html#EBE-01">EBE-01</a>, <a href="regeln.html#LNK-01">LNK-01</a>, <a href="regeln.html#NAV-01">NAV-01</a>, <a href="regeln.html#ZUG-02">ZUG-02</a></p>
         </div>
@@ -1131,7 +1175,7 @@
         <div class="demo-group" id="ebenen-stufen">
           <h3>Stufen, wie gebaut</h3>
           <div class="sb-table-wrap" role="region" aria-labelledby="ebenen-cap" tabindex="0">
-            <table class="sb-table g-grundlagen-table">
+            <table class="sb-table g-table-stack">
               <caption id="ebenen-cap">Elevation: Grund, Rand und Schatten je Stufe, live aus den Tokens</caption>
               <thead><tr><th scope="col">Stufe</th><th scope="col">Grund</th><th scope="col">Rand</th><th scope="col">Schatten</th><th scope="col">Wofür</th></tr></thead>
               <tbody>
@@ -1170,7 +1214,7 @@
               <p class="demo-label">Overlay: Dialog über dem Scrim</p>
               <div class="demo-stage">
                 <div class="demo-stage__scrim"></div>
-                <div class="sb-dialog" role="dialog" aria-labelledby="g-static-dlg-title" aria-describedby="g-static-dlg-text">
+                <div class="sb-dialog demo-static" role="group" aria-labelledby="g-static-dlg-title" aria-describedby="g-static-dlg-text">
                   <h4 class="sb-dialog__title" id="g-static-dlg-title">Erinnerung ausschalten?</h4>
                   <p class="sb-dialog__text" id="g-static-dlg-text">Tagwerk erinnert dich dann nicht mehr an „Wasser trinken“. Du kannst es jederzeit wieder einschalten.</p>
                   <div class="sb-dialog__actions"><button class="sb-secondary-action" type="button">Abbrechen</button><button class="sb-secondary-action" type="button">Ausschalten</button></div>
@@ -1183,17 +1227,15 @@
 
         <div class="demo-group" id="ebenen-z">
           <h3>Stapelreihenfolge</h3>
-          <p class="g-grundlagen-text">Neun Stufen für <code>z-index</code>, mit Luft dazwischen. <code>sebaro.css</code> nutzt heute drei davon: <code>sticky</code> für die untere Aktionszone, <code>modal</code> für die Startkachel und <code>tooltip</code> für den Sprunglink „Zum Inhalt“. Native Dialoge und Popover liegen ohnehin in der obersten Schicht des Browsers.</p>
+          <p class="g-grundlagen-text">Sieben Stufen für <code>z-index</code>, mit Luft dazwischen; normaler Inhalt braucht keine. <code>sebaro.css</code> nutzt heute vier davon: <code>sticky</code> für die untere Aktionszone, <code>overlay</code> für Seitenleiste und Inspektor, wenn sie sich im schmalen Fenster über den Inhalt legen, <code>modal</code> für die Startkachel und <code>tooltip</code> für den Sprunglink „Zum Inhalt“. Native Dialoge, Menüs und Tooltips liegen ohnehin in der obersten Schicht des Browsers.</p>
           <div class="sb-table-wrap" role="region" aria-labelledby="z-cap" tabindex="0">
-            <table class="sb-table g-grundlagen-table">
+            <table class="sb-table g-table-stack">
               <caption id="z-cap">Ebenen für z-index, von unten nach oben</caption>
               <thead><tr><th scope="col">Token</th><th scope="col" class="sb-num">Wert</th><th scope="col">Gedacht für</th></tr></thead>
               <tbody>
-            <tr><th scope="row"><span class="g-grundlagen-token">--sb-layer-base</span></th><td class="sb-num" data-label="Wert"><span data-g-token="--sb-layer-base"></span></td><td data-label="Gedacht für">Inhalt</td></tr>
-            <tr><th scope="row"><span class="g-grundlagen-token">--sb-layer-raised</span></th><td class="sb-num" data-label="Wert"><span data-g-token="--sb-layer-raised"></span></td><td data-label="Gedacht für">erhöhter Bereich im Fluss</td></tr>
             <tr><th scope="row"><span class="g-grundlagen-token">--sb-layer-sticky</span></th><td class="sb-num" data-label="Wert"><span data-g-token="--sb-layer-sticky"></span></td><td data-label="Gedacht für">klebende Leisten: untere Aktionszone, Kopf</td></tr>
             <tr><th scope="row"><span class="g-grundlagen-token">--sb-layer-dropdown</span></th><td class="sb-num" data-label="Wert"><span data-g-token="--sb-layer-dropdown"></span></td><td data-label="Gedacht für">Auswahllisten und Menüs am Auslöser</td></tr>
-            <tr><th scope="row"><span class="g-grundlagen-token">--sb-layer-overlay</span></th><td class="sb-num" data-label="Wert"><span data-g-token="--sb-layer-overlay"></span></td><td data-label="Gedacht für">Scrim</td></tr>
+            <tr><th scope="row"><span class="g-grundlagen-token">--sb-layer-overlay</span></th><td class="sb-num" data-label="Wert"><span data-g-token="--sb-layer-overlay"></span></td><td data-label="Gedacht für">Scrim, Fensterteile als Überlagerung</td></tr>
             <tr><th scope="row"><span class="g-grundlagen-token">--sb-layer-modal</span></th><td class="sb-num" data-label="Wert"><span data-g-token="--sb-layer-modal"></span></td><td data-label="Gedacht für">Dialog, Bottom Sheet, Startkachel</td></tr>
             <tr><th scope="row"><span class="g-grundlagen-token">--sb-layer-popover</span></th><td class="sb-num" data-label="Wert"><span data-g-token="--sb-layer-popover"></span></td><td data-label="Gedacht für">Fußnoten-Popover</td></tr>
             <tr><th scope="row"><span class="g-grundlagen-token">--sb-layer-toast</span></th><td class="sb-num" data-label="Wert"><span data-g-token="--sb-layer-toast"></span></td><td data-label="Gedacht für">Kurzmeldung</td></tr>
@@ -1213,7 +1255,7 @@
         <div class="demo-group" id="bewegung-dauern">
           <h3>Drei Dauern, drei Kurven</h3>
           <div class="sb-table-wrap" role="region" aria-labelledby="dauer-cap" tabindex="0">
-            <table class="sb-table g-grundlagen-table">
+            <table class="sb-table g-table-stack">
               <caption id="dauer-cap">Dauern, Kurven und Weg, live aus den Tokens</caption>
               <thead><tr><th scope="col">Token</th><th scope="col">Wert</th><th scope="col">Wofür</th></tr></thead>
               <tbody>
@@ -1285,19 +1327,7 @@
 
         <div class="demo-group" id="bewegung-deckkraft">
           <h3>Deckkraft</h3>
-          <p class="g-grundlagen-text">Der Token-Vertrag bringt vier Deckkraftwerte mit. sebaro nutzt keinen davon: Zeiger und Druck wechseln die Füllung zu <code>hover-fill</code> und <code>pressed-fill</code>, und Gesperrtes bleibt voll lesbar in <code>text-muted</code>, weil abgesenkte Deckkraft den Kontrast unter die Grenze drückt. Durchscheinend sind nur zwei Farben: der Scrim und die Textauswahl.</p>
-          <div class="sb-table-wrap" role="region" aria-labelledby="deck-cap" tabindex="0">
-            <table class="sb-table g-grundlagen-table">
-              <caption id="deck-cap">Deckkraft-Tokens</caption>
-              <thead><tr><th scope="col">Token</th><th scope="col" class="sb-num">Wert</th><th scope="col">In sebaro</th></tr></thead>
-              <tbody>
-            <tr><th scope="row"><span class="g-grundlagen-token">--sb-opacity-state-hover</span></th><td class="sb-num" data-label="Wert"><span data-g-token="--sb-opacity-state-hover"></span></td><td data-label="In sebaro">nicht benutzt: Zeiger nimmt hover-fill (FAR-08)</td></tr>
-            <tr><th scope="row"><span class="g-grundlagen-token">--sb-opacity-state-pressed</span></th><td class="sb-num" data-label="Wert"><span data-g-token="--sb-opacity-state-pressed"></span></td><td data-label="In sebaro">nicht benutzt: Druck nimmt pressed-fill</td></tr>
-            <tr><th scope="row"><span class="g-grundlagen-token">--sb-opacity-disabled-content</span></th><td class="sb-num" data-label="Wert"><span data-g-token="--sb-opacity-disabled-content"></span></td><td data-label="In sebaro">nicht benutzt: Gesperrtes bleibt voll lesbar in text-muted (STA-03)</td></tr>
-            <tr><th scope="row"><span class="g-grundlagen-token">--sb-opacity-disabled-container</span></th><td class="sb-num" data-label="Wert"><span data-g-token="--sb-opacity-disabled-container"></span></td><td data-label="In sebaro">nicht benutzt: keine blasse Fläche</td></tr>
-              </tbody>
-            </table>
-          </div>
+          <p class="g-grundlagen-text">sebaro senkt nie die Deckkraft. Zeiger und Druck wechseln die Füllung zu <code>hover-fill</code> und <code>pressed-fill</code>; Gesperrtes wird eine Graustufe heller (<code>text-muted</code>, was schon grau ist <code>text-subtle</code>) und bleibt lesbar, weil abgesenkte Deckkraft den Kontrast unter die Grenze drückt. Die vier Deckkraft-Tokens des Vertrags sind deshalb seit Token-Vertrag 1.7 gestrichen. Durchscheinend sind nur zwei Farben: der Scrim und die Textauswahl.</p>
           <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#STA-03">STA-03</a>, <a href="regeln.html#FAR-08">FAR-08</a></p>
         </div>
       </section>
@@ -1310,7 +1340,7 @@
         <div class="demo-group" id="zustaende-tasten">
           <h3>Tasten</h3>
           <div class="demo-states-wrap g-grundlagen-states-wrap" role="region" aria-labelledby="tasten-cap" tabindex="0">
-            <table class="demo-states g-grundlagen-states">
+            <table class="demo-states g-grundlagen-states g-table-stack">
               <caption class="sb-visually-hidden" id="tasten-cap">Zustände von Nebenaktion, Icon-Schaltfläche und Filterchip</caption>
               <thead><tr><th scope="col"><span class="sb-visually-hidden">Zustand</span></th><th scope="col">Nebenaktion</th><th scope="col">Icon-Schaltfläche</th><th scope="col">Filterchip</th></tr></thead>
               <tbody>
@@ -1341,7 +1371,7 @@
               </tbody>
             </table>
           </div>
-          <p class="g-grundlagen-text">Die Chips und die gewählte Icon-Schaltfläche lassen sich drücken: Gewählt wird mit Haken und Kobalt markiert, nicht mit einer Fläche.</p>
+          <p class="g-grundlagen-text">Die Chips und die gewählte Icon-Schaltfläche lassen sich drücken: Gewählt wird mit Haken und Kobalt markiert, nicht mit einer Fläche. Gesperrt wird eine Graustufe heller: Was in Ruhe Text ist, wird <code>text-muted</code>; was schon grau ist (Icon der Icon-Schaltfläche), wird <code>text-subtle</code>.</p>
           <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#FAR-08">FAR-08</a>, <a href="regeln.html#AKT-06">AKT-06</a>, <a href="regeln.html#EIN-04">EIN-04</a>, <a href="regeln.html#STA-03">STA-03</a>, <a href="regeln.html#ZUG-02">ZUG-02</a></p>
         </div>
 
@@ -1376,7 +1406,7 @@
         <div class="demo-group" id="zustaende-zeilen">
           <h3>Zeilen</h3>
           <div class="demo-states-wrap g-grundlagen-states-wrap" role="region" aria-labelledby="zeilen-cap" tabindex="0">
-            <table class="demo-states g-grundlagen-states">
+            <table class="demo-states g-grundlagen-states g-table-stack">
               <caption class="sb-visually-hidden" id="zeilen-cap">Zustände einer Zeile in der Seitenleiste und einer Listenzeile</caption>
               <thead><tr><th scope="col"><span class="sb-visually-hidden">Zustand</span></th><th scope="col">Zeile der Seitenleiste</th><th scope="col">Listenzeile</th></tr></thead>
               <tbody>
@@ -1395,7 +1425,7 @@
               </tbody>
             </table>
           </div>
-          <p class="g-grundlagen-text">Der aktuelle Ort zeigt die 3-px-Linie in Kobalt, das gefüllte Icon und das Titelgewicht. Der Fokus liegt bei Zeilen innen, damit benachbarte Zeilen ihn nicht verdecken. Mehrere gewählte Zeilen am Desktop tragen je die Ortslinie und einen Haken statt ihres Icons (D67); dafür gibt es noch kein Bauteil.</p>
+          <p class="g-grundlagen-text">Der aktuelle Ort zeigt die 3-px-Linie in Kobalt, das gefüllte Icon und das Titelgewicht. Der Fokus liegt bei Zeilen innen, damit benachbarte Zeilen ihn nicht verdecken. Mehrere gewählte Zeilen im Fenster tragen je die Ortslinie und einen Haken statt ihres Icons, nie eine Fläche (<code>sb-listbox</code>, unter <a href="bauteile.html#b-listbox">Bauteile</a>).</p>
           <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#NAV-01">NAV-01</a>, <a href="regeln.html#NAV-04">NAV-04</a>, <a href="regeln.html#DAT-01">DAT-01</a>, <a href="regeln.html#DAT-08">DAT-08</a>, <a href="regeln.html#ZUG-02">ZUG-02</a></p>
         </div>
 
@@ -1422,7 +1452,7 @@
 </main>
 <!-- guide:footer -->
 <footer class="sb-site-footer g-footer">
-  <p>sebaro Guide <a href="https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md">Version 1.1.0<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a> · System sebaro, Token-Vertrag 1.6 · aus sebaroDesign <code class="sb-code-inline">65a8067</code></p>
+  <p>sebaro Guide <a href="https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md">Version 2.0.0<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a> · System sebaro, Token-Vertrag 1.7 · aus sebaroDesign <code class="sb-code-inline">f2510b0</code></p>
   <ul class="sb-site-footer__links">
     <li><a href="rules.json">rules.json</a></li>
     <li><a href="llms.txt">llms.txt</a></li>

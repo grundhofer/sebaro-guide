@@ -1,7 +1,8 @@
 /* web.css: page chrome of web.html, the example website. Guide chrome: never shipped in a product.
  * Same discipline as sebaro.css: only var(--sb-*) tokens, no colour literals, no shadows, no tinted card grounds.
- * Classes start with "g-web-". Patterns marked „Vorschlag“ on the page are built here from tokens and are not part of
- * the system yet (pagination, FAQ rows, screenshot slots, social preview, doc-nav groups, form action zone, sent line). */
+ * Classes start with "g-web-". Website patterns that the workshop has sketched and that wait for the owner's choice
+ * (W1-W8: form result, pagination, FAQ rows, doc-nav groups, screenshot slots, social preview, language switch, print)
+ * are built here from tokens as proposals; the page marks them „Skizziert, wartet auf die Wahl des Inhabers“. */
 
 /* ------------------------------------------------------------------ case sections */
 .g-web-case { scroll-margin-block-start: var(--sb-space-4); }
@@ -69,7 +70,7 @@
 .g-web-frame details.g-web-tech > summary { display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-touch); cursor: pointer; color: var(--sb-color-text); text-decoration: underline; text-decoration-color: var(--sb-color-link); text-decoration-thickness: var(--sb-x-sebaro-link-underline-width); text-underline-offset: 0.2em; }
 .g-web-frame details.g-web-tech > p { margin: 0 0 var(--sb-space-2); }
 /* the script hides these with the hidden attribute; the component display rules would otherwise win */
-.g-web-frame .sb-search > .sb-icon-button[hidden], .g-web-frame .sb-field__error[hidden],
+.g-web-frame .sb-field__error[hidden],
 .g-web-frame .sb-app-row[hidden], .g-web-frame .sb-app-list[hidden], .g-web-frame .sb-empty[hidden] { display: none; }
 
 /* page with a side column (article contents, documentation navigation) */

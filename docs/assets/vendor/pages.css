@@ -109,7 +109,7 @@
 .demo-product .sb-facts-line { max-inline-size: none; margin-block-end: var(--sb-space-8); }
 .demo-product .sb-claims-block { max-inline-size: none; }
 .demo-product .sb-check-list-block { max-inline-size: var(--sb-size-measure-prose); }
-.demo-closing { margin: 0; padding: var(--sb-space-3) var(--sb-spacing-gutter) 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.demo-closing { padding: var(--sb-space-3) var(--sb-spacing-gutter) 0; }   /* with sb-facts-closing: only the gutter of the phone stand-in */
 .demo-web-view { border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container); background: var(--sb-color-bg); overflow: hidden; }
 .demo-web-view .sb-claims-block { max-inline-size: none; }
 .demo-web-view__action { padding: var(--sb-space-4) var(--sb-spacing-gutter) var(--sb-space-4); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }

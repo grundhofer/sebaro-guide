@@ -1,9 +1,8 @@
 // web.js: behaviour of the example website on web.html (guide page only, never shipped). Classic script, loaded with
 // defer, CSP-safe (no inline handlers, no eval), no network. The system scripts (sb-controls.js, sb-notes.js,
-// sb-start.js) do the rest: chips, code copy, dialog, footnote popover, start replay.
-//   1) search fields in the frames: the clear button shows only while the field has text (sb-search has no script)
-//   2) project overview: filter chips, search and the order (segmented) narrow and sort the list; count + empty state
-//   3) forms with [data-g-web-send]: the fields are checked first (EIN-02, TXT-07), then the primary action shows its
+// sb-start.js, sb-search.js) do the rest: chips, code copy, dialog, footnote popover, start replay, „Suche leeren“.
+//   1) project overview: filter chips, search and the order (segmented) narrow and sort the list; count + empty state
+//   2) forms with [data-g-web-send]: the fields are checked first (EIN-02, TXT-07), then the primary action shows its
 //      own progress (AKT-05, D48): label says what runs, the ink bar grows, check + done word, then the sent line.
 //      No toast. The run is a stand-in for real network work; a product drives the same attributes from its request.
 (function () {
@@ -12,23 +11,7 @@
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   };
 
-  // 1) clear buttons of search fields
-  document.querySelectorAll(".g-web-frame .sb-search").forEach(function (control) {
-    var input = control.querySelector("input");
-    var clear = control.querySelector(".sb-icon-button");
-    if (!input || !clear) return;
-    function sync() { clear.hidden = !input.value; }
-    input.addEventListener("input", sync);
-    clear.addEventListener("click", function () {
-      input.value = "";
-      sync();
-      input.dispatchEvent(new Event("input", { bubbles: true }));
-      input.focus();
-    });
-    sync();
-  });
-
-  // 2) project overview
+  // 1) project overview
   var list = document.querySelector("[data-g-web-projects]");
   if (list) {
     var rows = Array.prototype.slice.call(list.querySelectorAll(".sb-app-row"));
@@ -75,7 +58,7 @@
     apply();
   }
 
-  // 3) forms that send
+  // 2) forms that send
   function icon(href, cls) {
     var NS = "http://www.w3.org/2000/svg", svg = document.createElementNS(NS, "svg"), use = document.createElementNS(NS, "use");
     svg.setAttribute("class", cls || "sb-icon"); svg.setAttribute("aria-hidden", "true"); svg.setAttribute("focusable", "false");

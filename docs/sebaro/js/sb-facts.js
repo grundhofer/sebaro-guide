@@ -1,4 +1,4 @@
-// sb-facts.js: the sebaro facts renderer for pages without a framework (spec/10 §5; FACTS-CONTRACT 1.1 §8).
+// sb-facts.js: the sebaro facts renderer for pages without a framework (spec/10 §5; FACTS-CONTRACT 1.2 §8).
 // Classic script, no modules, no fetch (pages open from file://), CSP-safe: it reads JSON data blocks, builds DOM
 // nodes with createElement (no innerHTML, no eval, no inline styles) and never invents text. Every sentence after a
 // claim comes from the note data of `python3 tools/check_facts.py <facts> --notes` (FACTS-CONTRACT §8.6); the claim
@@ -25,6 +25,12 @@
 // [data-sb-demo-marker="<id>"] gets the demo marker "Beispieldaten" when the file is demo data (f).
 // [data-sb-needs-note="<id>:1,2"]: the element (a sentence with digits) is removed unless every listed numbered note
 // may be stated (state "shown", or "unverified-disclosure" for a disclosure); D21, spec/10 §4.4.
+// Language (D87, spec/09 §6.1): each target renders in the language of its closest [lang] (else <html lang>; "de-AT"
+// falls back to "de", a language without a phrase table to German). The renderer's own words come from MESSAGES
+// below (German and English built in, the fixed words of FACTS-CONTRACT §6.3/§6.5 and the claims of spec/10 §3.2);
+// facts texts and note labels take that language and fall back to the file's meta.lang (FACTS-CONTRACT §5.1).
+// window.sbMessages = { "sb-facts": { fr: { … every key of MESSAGES.de … } } } before this script adds a language
+// (a missing key falls back to German); the note labels of check_facts.py carry only de and en.
 (function () {
   "use strict";
   var SVGNS = "http://www.w3.org/2000/svg";
@@ -41,32 +47,123 @@
     });
   }
 
-  // ------------------------------------------------------------------ words
-  // FACTS-CONTRACT §6.1, §6.2, §6.4 default labels (the renderer's wording; the enum value is the contract)
-  var DATA = { content: "deine Inhalte", settings: "Einstellungen", account: "Kontodaten", "ip-address": "IP-Adresse",
-    "device-info": "Geräte- und Browserangaben", usage: "Nutzungsdaten", "crash-report": "Absturzberichte",
-    contact: "Kontaktdaten", "search-terms": "Suchbegriffe" };
-  var TRIGGER = { automatic: "automatisch", "on-user-command": "nur auf deinen Befehl", never: "nie" };
-  var TRANSPORT = { tls: "verschlüsselt (TLS)", "end-to-end": "Ende-zu-Ende", none: "unverschlüsselt", local: "ohne Netz" };
+  // ------------------------------------------------------------------ words (D87: one table per language)
+  // FACTS-CONTRACT §6.1-§6.5 labels and fixed words, spec/10 §3.1-§3.4 claims, hints and links. {x} are placeholders;
+  // every language has every key (a missing key falls back to German). The check-state words and the §6.5 words are
+  // fixed (D24): the same in every sebaro product. NBSP (U+00A0) between a number and its unit (D22).
+  var MESSAGES = {
+    de: {
+      "data.content": "deine Inhalte", "data.settings": "Einstellungen", "data.account": "Kontodaten",
+      "data.ip-address": "IP-Adresse", "data.device-info": "Geräte- und Browserangaben", "data.usage": "Nutzungsdaten",
+      "data.crash-report": "Absturzberichte", "data.contact": "Kontaktdaten", "data.search-terms": "Suchbegriffe",
+      "trigger.automatic": "automatisch", "trigger.on-user-command": "nur auf deinen Befehl", "trigger.never": "nie",
+      "transport.tls": "verschlüsselt (TLS)", "transport.end-to-end": "Ende-zu-Ende", "transport.none": "unverschlüsselt",
+      "transport.local": "ohne Netz",
+      "retention.none": "nicht gespeichert", "retention.session": "bis zum Schließen", "retention.daysOne": "{n} Tag",
+      "retention.days": "{n} Tage", "retention.until-deleted": "bis du es löschst", "retention.user-controlled": "liegt bei dir",
+      "retention.processor-terms": "nach den Bedingungen von {operator}",
+      "state.passed": "bestanden", "state.open": "offen", "state.skipped": "übersprungen", "state.failed": "nicht bestanden",
+      "jurisdiction.EU": "Rechtsraum EU", "jurisdiction.EEA": "Rechtsraum EWR",
+      notVerified: "nicht belegt", placeNotVerified: "Ort nicht belegt", hiddenCount: "{n} nicht belegt",
+      onDevice: "Bleibt auf diesem Gerät.", howChecked: "Wie geprüft?", allChecks: "Alle Prüfungen",
+      backFirst: "Zurück zur Aussage {n}, erste Stelle", backMore: "Zurück zur Aussage {n}, weitere Stelle",
+      transferLine: "Übertragung: {value}", retentionLine: "Speicherdauer: {value}", reason: "Grund: {text}",
+      evidence: "Beleg: ", methodOpen: ", Methode noch offen",
+      noLimit: "Nicht geprüft: Der Umfang über die beschriebenen Schritte hinaus ist nicht angegeben.",
+      closing: "{product} {version} · Fakten geprüft am {date} · {nextDue}", hint: "{trigger}. Ziel: {to}.",
+      "net.none": "verbindet sich mit keinem Server", "net.on-user-command": "verbindet sich nur auf deinen Befehl",
+      "net.automatic": "verbindet sich selbst",
+      accountNone: "Kein Konto", accountOptional: "Konto freiwillig", accountRequired: "Konto nötig", accountLabel: "Konto",
+      trackersNone: "Keine Tracker", trackersSome: "{n} Tracker: {items}", trackersLabel: "Tracker",
+      analyticsNone: "Keine Analyse-Skripte", analyticsSome: "{n} Analyse-Dienste: {items}", analyticsLabel: "Analyse-Skripte",
+      adIdsNone: "Keine Werbe-ID", adIdsSome: "liest die Werbe-ID", adIdsLabel: "Werbe-ID",
+      cookiesNone: "Keine Cookies", cookiesSome: "{n} Cookies: {items}", cookiesLabel: "Cookies",
+      placeCity: "{label} in {loc}", placeNoCity: "{label} · {loc}", placeLabel: "Ort von {label}",
+      pathNever: "Nie: {purpose}", pathOnCommand: "„{action}“ nur auf deinen Befehl", pathAutomatic: "{data} an {to}: automatisch",
+      outflow: "{data} an {to}: {rest}",
+      backupOff: "Android-Sicherung: aus", backupOn: "Android-Sicherung: an", backupLabel: "Android-Sicherung",
+      permissionsNone: "Keine Berechtigungen", permissionsOne: "{n} Berechtigung", permissionsMany: "{n} Berechtigungen",
+      permissionsLabel: "Berechtigungen",
+      dependenciesNone: "Keine Bibliotheken mit Datenweg", dependenciesOne: "{n} Bibliothek von Belang",
+      dependenciesMany: "{n} Bibliotheken von Belang", dependenciesLabel: "Bibliotheken",
+      licence: "Lizenz: {spdx}", licenceContent: ", Texte {content}", licenceLabel: "Lizenz",
+      sourceOpen: "Quellcode offen", sourceClosed: "Quellcode nicht offen", sourceLabel: "Quellcode"
+    },
+    en: {
+      "data.content": "your content", "data.settings": "settings", "data.account": "account data",
+      "data.ip-address": "IP address", "data.device-info": "device and browser details", "data.usage": "usage data",
+      "data.crash-report": "crash reports", "data.contact": "contact details", "data.search-terms": "search terms",
+      "trigger.automatic": "automatically", "trigger.on-user-command": "only when you ask", "trigger.never": "never",
+      "transport.tls": "encrypted (TLS)", "transport.end-to-end": "end-to-end", "transport.none": "unencrypted",
+      "transport.local": "no network",
+      "retention.none": "not stored", "retention.session": "until closed", "retention.daysOne": "{n} day",
+      "retention.days": "{n} days", "retention.until-deleted": "until you delete it", "retention.user-controlled": "yours to keep",
+      "retention.processor-terms": "under {operator}'s terms",
+      "state.passed": "passed", "state.open": "open", "state.skipped": "skipped", "state.failed": "failed",
+      "jurisdiction.EU": "EU jurisdiction", "jurisdiction.EEA": "EEA jurisdiction",
+      notVerified: "not verified", placeNotVerified: "location not verified", hiddenCount: "{n} not verified",
+      onDevice: "Stays on this device.", howChecked: "How was this checked?", allChecks: "All checks",
+      backFirst: "Back to claim {n}, first mention", backMore: "Back to claim {n}, further mention",
+      transferLine: "Transfer: {value}", retentionLine: "Retention: {value}", reason: "Reason: {text}",
+      evidence: "Evidence: ", methodOpen: ", method still open",
+      noLimit: "Not checked: The scope beyond the steps described is not stated.",
+      closing: "{product} {version} · Facts checked on {date} · {nextDue}", hint: "{trigger}. Destination: {to}.",
+      "net.none": "connects to no server", "net.on-user-command": "connects only when you ask",
+      "net.automatic": "connects on its own",
+      accountNone: "No account", accountOptional: "Account optional", accountRequired: "Account required", accountLabel: "Account",
+      trackersNone: "No trackers", trackersSome: "{n} trackers: {items}", trackersLabel: "Trackers",
+      analyticsNone: "No analytics scripts", analyticsSome: "{n} analytics services: {items}", analyticsLabel: "Analytics scripts",
+      adIdsNone: "No advertising ID", adIdsSome: "reads the advertising ID", adIdsLabel: "Advertising ID",
+      cookiesNone: "No cookies", cookiesSome: "{n} cookies: {items}", cookiesLabel: "Cookies",
+      placeCity: "{label} in {loc}", placeNoCity: "{label} · {loc}", placeLabel: "Location of {label}",
+      pathNever: "Never: {purpose}", pathOnCommand: "“{action}” only when you ask", pathAutomatic: "{data} to {to}: automatically",
+      outflow: "{data} to {to}: {rest}",
+      backupOff: "Android backup: off", backupOn: "Android backup: on", backupLabel: "Android backup",
+      permissionsNone: "No permissions", permissionsOne: "{n} permission", permissionsMany: "{n} permissions",
+      permissionsLabel: "Permissions",
+      dependenciesNone: "No libraries with a data path", dependenciesOne: "{n} library of concern",
+      dependenciesMany: "{n} libraries of concern", dependenciesLabel: "Libraries",
+      licence: "Licence: {spdx}", licenceContent: ", texts {content}", licenceLabel: "Licence",
+      sourceOpen: "Open source", sourceClosed: "Source closed", sourceLabel: "Source code"
+    }
+  };
+  var extra = window.sbMessages && window.sbMessages["sb-facts"];
+  if (extra) Object.keys(extra).forEach(function (l) { MESSAGES[l.toLowerCase()] = extra[l]; });
   var STATE_GLYPH = { passed: "success--filled-16", open: "pending--16", skipped: "skipped--16", failed: "error--filled-16" };
   var STATE_STATUS = { passed: "success", open: "warning", skipped: "info", failed: "danger" };
-  var STATE_WORD = { passed: "bestanden", open: "offen", skipped: "übersprungen", failed: "nicht bestanden" };
-  var NBSP = " ";
 
+  // the language of the target being rendered (renderAll sets it per target) and the facts file's meta.lang
+  var lang = "de", fileLang = "de";
+  function langOf(node) {
+    var holder = node && node.closest ? node.closest("[lang]") : null;
+    var l = ((holder || document.documentElement).getAttribute("lang") || "de").toLowerCase();
+    return MESSAGES[l] ? l : (MESSAGES[l.split("-")[0]] ? l.split("-")[0] : "de");
+  }
+  function known(key) { return (MESSAGES[lang] || MESSAGES.de)[key] != null || MESSAGES.de[key] != null; }
+  function m(key, vars) {                    // a phrase of the current language with its {placeholders} filled
+    var table = MESSAGES[lang] || MESSAGES.de;
+    var s = table[key] != null ? table[key] : MESSAGES.de[key];
+    if (s == null) throw new Error("sb-facts: no phrase '" + key + "'");
+    return vars ? s.replace(/\{(\w+)\}/g, function (all, k) { return vars[k] != null ? String(vars[k]) : all; }) : s;
+  }
   function tx(value) {                       // facts texts are {lang: text}; the tool's labels carry de and en
     if (value == null) return "";
     if (typeof value === "string") return value;
+    if (value[lang] != null) return value[lang];
+    if (value[fileLang] != null) return value[fileLang];
     return value.de != null ? value.de : (value.en != null ? value.en : "");
   }
   function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
-  function dateDe(iso) { var p = String(iso || "").split("-"); return p.length === 3 ? p[2] + "." + p[1] + "." + p[0] : iso; }
-  function dataLabel(list) { return (list || []).map(function (d) { return DATA[d] || d; }).join(", "); }
+  function dateOut(iso) {                    // spec/01 §2.5 rule 4: „10.10.2026“ (de), „2026-10-10“ (en, as check_facts.py)
+    var p = String(iso || "").split("-");
+    return lang === "de" && p.length === 3 ? p[2] + "." + p[1] + "." + p[0] : iso;
+  }
+  function dataLabel(list) { return (list || []).map(function (d) { return known("data." + d) ? m("data." + d) : d; }).join(", "); }
   function retentionLabel(r, place) {
     if (!r) return "";
-    var base = r.policy === "none" ? "nicht gespeichert" : r.policy === "session" ? "bis zum Schließen" :
-      r.policy === "days" ? r.days + NBSP + "Tage" : r.policy === "until-deleted" ? "bis du es löschst" :
-      r.policy === "user-controlled" ? "liegt bei dir" :
-      r.policy === "processor-terms" ? "nach den Bedingungen von " + ((place && place.operator) || "…") : r.policy;
+    var base = r.policy === "days" ? m(r.days === 1 ? "retention.daysOne" : "retention.days", { n: r.days }) :
+      r.policy === "processor-terms" ? m("retention.processor-terms", { operator: (place && place.operator) || "…" }) :
+      known("retention." + r.policy) ? m("retention." + r.policy) : r.policy;
     return r.note ? base + " (" + tx(r.note) + ")" : base;
   }
 
@@ -96,6 +193,11 @@
     if (!F || !N) throw new Error("sb-facts: no facts or notes block for '" + id + "'");
     return { id: id, F: F, N: N, notes: N.notes };
   }
+  function inLanguage(target, P) {           // D87: render this target in its language; texts fall back to meta.lang
+    lang = langOf(target);
+    fileLang = (P.F.meta && P.F.meta.lang) || "de";
+    return P;
+  }
   function isStale(P, target) {
     var running = target && target.getAttribute("data-sb-running-version");
     if (running && running !== P.F.product.version) return true;          // R1 version rule
@@ -116,6 +218,14 @@
     for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i];
     return null;
   }
+  // jurisdictions: the MESSAGES keys "jurisdiction.EU" / "jurisdiction.EEA" (check_facts.py JURISDICTION_LABELS)
+  function placeLoc(pl) {                   // FACTS-CONTRACT 1.2 display: "City (CC)", "(CC)" or the jurisdiction (D90)
+    if (!pl) return "";
+    if (pl.city && pl.country) return pl.city + " (" + pl.country + ")";
+    if (pl.country) return "(" + pl.country + ")";
+    if (pl.jurisdiction) return known("jurisdiction." + pl.jurisdiction) ? m("jurisdiction." + pl.jurisdiction) : pl.jurisdiction;
+    return "";
+  }
   function isRemote(place) { return place && (place.kind === "server" || place.kind === "third-party"); }
   function toLabel(P, placeId) {            // display form of a destination (FACTS-CONTRACT §5.5, §8.1)
     // the tool's own label wins when a note lists this destination as an outflow
@@ -127,61 +237,55 @@
     var place = placeById(P, placeId);
     if (!place) return placeId;
     if (!isRemote(place)) return tx(place.label);
-    var verified = place.proof && place.proof.status === "verified" && place.city;
-    return tx(place.label) + " · " + (verified ? place.city + " (" + place.country + ")" : "Ort nicht belegt");
+    var loc = placeLoc(place), verified = place.proof && place.proof.status === "verified" && loc;
+    return tx(place.label) + " · " + (verified ? loc : m("placeNotVerified"));
   }
   function pathLine(P, path) {              // the rest of a path fact after its claim: transport and retention (§8.5 b)
     var parts = [];
-    if (path.transport) parts.push("Übertragung: " + (TRANSPORT[path.transport] || path.transport));
+    if (path.transport) parts.push(m("transferLine", { value: known("transport." + path.transport) ? m("transport." + path.transport) : path.transport }));
     var r = path.retention;
-    if (r) parts.push("Speicherdauer: " + (r.policy === "processor-terms" && r.note ? tx(r.note) : retentionLabel(r, placeById(P, path.to))));
+    if (r) parts.push(m("retentionLine", { value: r.policy === "processor-terms" && r.note ? tx(r.note) : retentionLabel(r, placeById(P, path.to)) }));
     return parts.join(" · ");
   }
 
-  // claim wording, spec/10 §3.2: {text: claim when stated, label: row label when hidden}
-  var TRACKING = {
-    trackers: { none: "Keine Tracker", some: function (n, items) { return n + " Tracker: " + items; }, label: "Tracker" },
-    analytics: { none: "Keine Analyse-Skripte", some: function (n, items) { return n + " Analyse-Dienste: " + items; }, label: "Analyse-Skripte" },
-    adIds: { none: "Keine Werbe-ID", some: function () { return "liest die Werbe-ID"; }, label: "Werbe-ID" },
-    cookies: { none: "Keine Cookies", some: function (n, items) { return n + " Cookies: " + items; }, label: "Cookies" }
-  };
+  // claim wording, spec/10 §3.2: {text: claim when stated, label: row label when hidden}; words from MESSAGES (D87)
   function itemNames(items) { return (items || []).map(function (i) { return typeof i === "string" ? i : (i.name || tx(i.label)); }).join(", "); }
   function wording(P, ref) {
     var F = P.F, head = ref.split(".")[0], key = ref.slice(head.length + 1);
     if (head === "accounts") {
       var a = F.accounts || {};
-      if (a.mode === "none") return { text: "Kein Konto", label: "Konto" };
-      return { text: (a.mode === "optional" ? "Konto freiwillig" : "Konto nötig") + (a.purpose ? ": " + tx(a.purpose) : ""), label: "Konto" };
+      if (a.mode === "none") return { text: m("accountNone"), label: m("accountLabel") };
+      return { text: m(a.mode === "optional" ? "accountOptional" : "accountRequired") + (a.purpose ? ": " + tx(a.purpose) : ""), label: m("accountLabel") };
     }
-    if (head === "tracking") {
-      var t = (F.tracking || {})[key] || {}, w = TRACKING[key];
-      return { text: t.count ? w.some(t.count, itemNames(t.items)) : w.none, label: w.label };
+    if (head === "tracking") {         // key: trackers, analytics, adIds, cookies
+      var t = (F.tracking || {})[key] || {};
+      return { text: t.count ? m(key + "Some", { n: t.count, items: itemNames(t.items) }) : m(key + "None"), label: m(key + "Label") };
     }
     if (head === "places") {
       var pl = placeById(P, key);
-      return { text: tx(pl.label) + " in " + pl.city + " (" + pl.country + ")", label: "Ort von " + tx(pl.label) };
+      return { text: m(pl.city ? "placeCity" : "placeNoCity", { label: tx(pl.label), loc: placeLoc(pl) }), label: m("placeLabel", { label: tx(pl.label) }) };
     }
     if (head === "paths") {
       var p = pathById(P, key), purpose = tx(p.purpose);
-      if (p.trigger === "never") return { text: "Nie: " + purpose, label: purpose };
-      if (p.trigger === "on-user-command") return { text: "„" + (tx(p.action) || purpose) + "“ nur auf deinen Befehl", label: purpose };
-      return { text: dataLabel(p.data) + " an " + toLabel(P, p.to) + ": automatisch", label: purpose };
+      if (p.trigger === "never") return { text: m("pathNever", { purpose: purpose }), label: purpose };
+      if (p.trigger === "on-user-command") return { text: m("pathOnCommand", { action: tx(p.action) || purpose }), label: purpose };
+      return { text: m("pathAutomatic", { data: dataLabel(p.data), to: toLabel(P, p.to) }), label: purpose };
     }
     if (head === "backup") {
       var b = (F.backup || {}).android || {}, cloud = b.cloudPath && pathById(P, b.cloudPath);
       var off = !b.allowBackup || (cloud && cloud.trigger === "never");
-      return { text: "Android-Sicherung: " + (off ? "aus" : "an"), label: "Android-Sicherung" };
+      return { text: m(off ? "backupOff" : "backupOn"), label: m("backupLabel") };
     }
     if (head === "permissions") {
       var n = ((F.permissions || {}).items || []).length;
-      return { text: n === 0 ? "Keine Berechtigungen" : n + (n === 1 ? " Berechtigung" : " Berechtigungen"), label: "Berechtigungen" };
+      return { text: m(n === 0 ? "permissionsNone" : n === 1 ? "permissionsOne" : "permissionsMany", { n: n }), label: m("permissionsLabel") };
     }
     if (head === "dependencies") {
       var d = ((F.dependencies || {}).items || []).length;
-      return { text: d === 0 ? "Keine Bibliotheken mit Datenweg" : d + (d === 1 ? " Bibliothek von Belang" : " Bibliotheken von Belang"), label: "Bibliotheken" };
+      return { text: m(d === 0 ? "dependenciesNone" : d === 1 ? "dependenciesOne" : "dependenciesMany", { n: d }), label: m("dependenciesLabel") };
     }
-    if (head === "licence") return { text: "Lizenz: " + F.licence.spdx + (F.licence.content ? ", Texte " + F.licence.content : ""), label: "Lizenz" };
-    if (head === "source") return { text: F.source.open ? "Quellcode offen" : "Quellcode nicht offen" + (F.source.reason ? ": " + tx(F.source.reason) : ""), label: "Quellcode" };
+    if (head === "licence") return { text: m("licence", { spdx: F.licence.spdx }) + (F.licence.content ? m("licenceContent", { content: F.licence.content }) : ""), label: m("licenceLabel") };
+    if (head === "source") return { text: F.source.open ? m("sourceOpen") : m("sourceClosed") + (F.source.reason ? ": " + tx(F.source.reason) : ""), label: m("sourceLabel") };
     return { text: ref, label: ref };
   }
 
@@ -192,7 +296,7 @@
     var L = note.labels, r = note.result;
     var line = (r === "open" || r === "skipped") ? tx(L.checkedOn) : tx(L.state) + " · " + tx(L.checkedOn);
     if (withVersion && L.forVersion) line += " " + tx(L.forVersion);
-    if (note.state !== "shown") line = tx(L.notVerified || { de: "nicht belegt" }) + " · " + line;
+    if (note.state !== "shown") line = (L.notVerified ? tx(L.notVerified) : m("notVerified")) + " · " + line;
     return line;
   }
   function resultGlyph(note) {
@@ -209,19 +313,19 @@
       return text ? text.replace(/[.!?]$/, "") + "." : "";
     }).filter(Boolean).join(" ");
     if (checkedText) lines.push(el("p", "sb-note__method", checkedText));
-    (note.reasons || []).forEach(function (r) { lines.push(el("p", "sb-note__proof", "Grund: " + tx(r.text))); });
+    (note.reasons || []).forEach(function (r) { lines.push(el("p", "sb-note__proof", m("reason", { text: tx(r.text) }))); });
     (note.disclosures || []).forEach(function (d) {
       var L = d.labels;
-      var line = tx(L.data) + " an " + tx(L.to) + ": " + [tx(L.trigger), tx(L.transport), tx(L.retention)].filter(Boolean).join(", ");
+      var line = m("outflow", { data: tx(L.data), to: tx(L.to), rest: [tx(L.trigger), tx(L.transport), tx(L.retention)].filter(Boolean).join(", ") });
       if (L.retentionNote) line += " (" + tx(L.retentionNote) + ")";
       if (L.notVerified) line += " · " + tx(L.notVerified);
       lines.push(el("p", "sb-note__outflow", line));
     });
     var limits = note.labels.limits || [];
     limits.forEach(function (l) { lines.push(el("p", "sb-note__limit", tx(l))); });
-    if (!limits.length) lines.push(el("p", "sb-note__limit", "Nicht geprüft: Der Umfang über die beschriebenen Schritte hinaus ist nicht angegeben."));
+    if (!limits.length) lines.push(el("p", "sb-note__limit", m("noLimit")));
     var byText = tx(note.labels.by);
-    if (note.by === "unknown") byText += ", Methode noch offen";
+    if (note.by === "unknown") byText += m("methodOpen");
     var byLine = el("p", "sb-note__by", byText + ". ");
     if (opts.checksHref) byLine.appendChild(link(opts.checksHref, "sb-note__checks", opts.checksText));
     lines.push(byLine);
@@ -257,7 +361,7 @@
       append(row, [
         el("p", null, tx(pl.label) + ": " + dataLabel(s.data)),
         el("p", null, how + (keep ? ", " + keep : "")),
-        el("p", null, "Bleibt auf diesem Gerät.")
+        el("p", null, m("onDevice"))
       ]);
       return row;
     });
@@ -285,7 +389,7 @@
     var head = ref.split(".")[0], path = head === "paths" ? pathById(P, ref.slice(6)) : null;
     noteBody(P, note, body, {
       pathLine: path && path.trigger !== "never" && !hidden ? pathLine(P, path) || null : null,
-      checksHref: opts.checksHref, checksText: "Wie geprüft?"
+      checksHref: opts.checksHref, checksText: m("howChecked")
     });
     return append(li, [btn, body]);
   }
@@ -322,18 +426,18 @@
     ["passed", "open", "skipped", "failed"].forEach(function (s) {
       if (!counts[s]) return;
       var p = el("p", "sb-status sb-status--" + STATE_STATUS[s]);
-      append(p, [icon(STATE_GLYPH[s]), document.createTextNode(counts[s] + " " + STATE_WORD[s])]);
+      append(p, [icon(STATE_GLYPH[s]), document.createTextNode(counts[s] + " " + m("state." + s))]);
       out.push(p);
     });
     var href = target.getAttribute("data-sb-checks-href");
-    if (href) { var p2 = el("p"); p2.appendChild(link(href, null, "Wie geprüft?")); out.push(p2); }
+    if (href) { var p2 = el("p"); p2.appendChild(link(href, null, m("howChecked"))); out.push(p2); }
     target.replaceChildren.apply(target, out);
   }
 
   function renderClosingLine(target, P) {
     var F = P.F;
-    target.textContent = F.product.name + " " + F.product.version + " · Fakten geprüft am " + dateDe(F.freshness.checkedOn) +
-      " · " + tx(P.notes.labels.nextDue);
+    target.textContent = m("closing", { product: F.product.name, version: F.product.version, date: dateOut(F.freshness.checkedOn),
+      nextDue: tx(P.notes.labels.nextDue) });
   }
 
   function renderCheckList(target, P) {
@@ -345,12 +449,12 @@
       var state = el("p", "sb-check-state sb-check-state--" + c.state);
       append(state, [icon(STATE_GLYPH[c.state]), document.createTextNode(tx(c.labels.state))]);
       var parts = [state, el("p", "sb-check-list__title", tx(c.title)),
-        el("p", "sb-check-list__meta", tx(c.labels.date) + " · " + tx(c.labels.by) + (c.by ? "" : ", Methode noch offen"))];
-      if (c.reason) parts.push(el("p", "sb-check-list__reason", "Grund: " + tx(c.reason)));
+        el("p", "sb-check-list__meta", tx(c.labels.date) + " · " + tx(c.labels.by) + (c.by ? "" : m("methodOpen")))];
+      if (c.reason) parts.push(el("p", "sb-check-list__reason", m("reason", { text: tx(c.reason) })));
       if (c.labels.limit) parts.push(el("p", "sb-check-list__limit", tx(c.labels.limit)));
       (c.evidence || []).forEach(function (ev) {
         var p = el("p", "sb-check-list__meta");
-        p.appendChild(document.createTextNode("Beleg: "));
+        p.appendChild(document.createTextNode(m("evidence")));
         if (/^https?:\/\//.test(ev.ref)) p.appendChild(link(ev.ref, null, ev.ref));
         else p.appendChild(el("code", null, ev.ref));                        // demo refs "demo:…" stay code
         parts.push(p);
@@ -380,10 +484,10 @@
       if (net === "none") {
         var neverShown = (F.paths || []).filter(function (p) { return p.trigger === "never" && isRemote(placeById(P, p.to)); })
           .every(function (p) { return stated(claimOf(P, "paths." + p.id)); });
-        netText = neverShown ? "verbindet sich mit keinem Server" : null;
+        netText = neverShown ? m("net.none") : null;
         if (!neverShown) hiddenCount++;
       } else {
-        netText = net === "on-user-command" ? "verbindet sich nur auf deinen Befehl" : "verbindet sich selbst";
+        netText = m(net === "on-user-command" ? "net.on-user-command" : "net.automatic");
       }
       if (netText) cells.push(cell(document.createTextNode(netText)));
       (P.notes.claims || []).forEach(function (c) {
@@ -391,11 +495,11 @@
         if (!/^places\./.test(ref) || c.refs.length !== 1) return;
         var pl = placeById(P, ref.slice(7));
         if (!isRemote(pl)) return;
-        if (c.state === "shown") cells.push(cell(document.createTextNode(pl.city + " (" + pl.country + ")"))); else hiddenCount++;
+        if (c.state === "shown") cells.push(cell(document.createTextNode(placeLoc(pl)))); else hiddenCount++;
       });
       if (hiddenCount) {
         var href = target.getAttribute("data-sb-full-href");
-        var label = hiddenCount + " nicht belegt";
+        var label = m("hiddenCount", { n: hiddenCount });
         cells.push(cell(href ? link(href, null, label) : document.createTextNode(label)));
       }
     }
@@ -420,14 +524,14 @@
       Array.prototype.forEach.call(citations, function (citation, index) {
         var back = link("#" + citation.id, "sb-note__back", index === 0 ? String(note.n) : String(note.n) + "b");
         back.setAttribute("role", "doc-backlink");
-        back.setAttribute("aria-label", "Zurück zur Aussage " + note.n + (index ? ", weitere Stelle" : ", erste Stelle"));
+        back.setAttribute("aria-label", m(index ? "backMore" : "backFirst", { n: note.n }));
         backlinks.appendChild(back);
       });
       var body = el("div", "sb-note__body");
       var result = el("p", "sb-note__result");
       append(result, [resultGlyph(note), document.createTextNode(resultLine(note, false))]);
       body.appendChild(result);
-      noteBody(P, note, body, { checksHref: href, checksText: "Alle Prüfungen" });
+      noteBody(P, note, body, { checksHref: href, checksText: m("allChecks") });
       ol.appendChild(append(li, [backlinks, body]));
     });
     if (ol !== target) target.replaceChildren(ol);
@@ -436,8 +540,9 @@
   // ------------------------------------------------------------------ (d) actions and their hints, spec/10 §3.4
   function hintText(P, path) {
     var place = placeById(P, path.to);
-    if (place && place.kind === "device") return "Bleibt auf diesem Gerät.";
-    return cap(TRIGGER[path.trigger] || path.trigger) + ". Ziel: " + toLabel(P, path.to) + ".";
+    if (place && place.kind === "device") return m("onDevice");
+    var trigger = known("trigger." + path.trigger) ? m("trigger." + path.trigger) : path.trigger;
+    return m("hint", { trigger: cap(trigger), to: toLabel(P, path.to) });
   }
   function renderAction(target, P) {
     var path = pathById(P, target.getAttribute("data-sb-path"));
@@ -462,11 +567,11 @@
     root.querySelectorAll("[data-sb-render]").forEach(function (t) {
       var fn = RENDER[t.getAttribute("data-sb-render")];
       if (!fn) throw new Error("sb-facts: unknown form '" + t.getAttribute("data-sb-render") + "'");
-      fn(t, product(t.getAttribute("data-sb-product")));
+      fn(t, inLanguage(t, product(t.getAttribute("data-sb-product"))));
     });
     root.querySelectorAll("[data-sb-demo-marker]").forEach(function (t) {
-      var m = demoMarker(product(t.getAttribute("data-sb-demo-marker")));
-      if (m) t.replaceChildren(m); else t.remove();
+      var marker = demoMarker(inLanguage(t, product(t.getAttribute("data-sb-demo-marker"))));
+      if (marker) t.replaceChildren(marker); else t.remove();
     });
     root.querySelectorAll("[data-sb-needs-note]").forEach(function (t) {
       var spec = t.getAttribute("data-sb-needs-note").split(":"), P = product(spec[0]);
@@ -478,7 +583,7 @@
   }
 
   readBlocks();
-  window.SbFacts = { data: store, render: renderAll, wording: function (id, ref) { return wording(product(id), ref); } };
+  window.SbFacts = { data: store, render: renderAll, wording: function (id, ref) { return wording(inLanguage(document.documentElement, product(id)), ref); } };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { renderAll(); });
   else renderAll();
 })();

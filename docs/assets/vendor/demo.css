@@ -31,6 +31,7 @@
 .demo-cell > * { max-inline-size: 100%; }
 .demo-start { justify-self: start; }
 .demo-cell--wide { flex: 1 1 320px; justify-items: stretch; }
+.demo-cell--full { flex-basis: 100%; }   /* a cell on a line of its own (the window specimen keeps its view at 640 px and more) */
 .demo-cell--fixed { inline-size: 320px; max-inline-size: 100%; justify-items: stretch; }
 .demo-label { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .demo-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--sb-space-8) var(--sb-spacing-group); align-items: start; }
@@ -41,6 +42,7 @@
 .demo-box { padding: var(--sb-space-2) 0; border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container); background: var(--sb-color-bg); }
 .demo-box--pad { padding: var(--sb-space-4); }
 .demo-stack { display: grid; gap: var(--sb-spacing-stack); }
+.demo-cards { margin: 0; padding: 0; list-style: none; }
 .demo-count { margin: var(--sb-space-2) 0 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant); max-inline-size: 390px; }
 
 /* state matrix: rows = components, columns = states */
@@ -63,7 +65,7 @@
 /* frames are stand-ins: the bottom block sits at the end of the frame, it does not stick to the page's viewport */
 .sb-phone .sb-bottom-block, .demo-window .sb-bottom-block { position: relative; }
 .demo-window {
-  display: flex; box-sizing: border-box; inline-size: 100%; max-inline-size: 880px; min-block-size: 420px; overflow: hidden;
+  display: flex; box-sizing: border-box; inline-size: 100%; max-inline-size: 920px; min-block-size: 420px; overflow: hidden;
   border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container);
   background: var(--sb-color-bg);
 }
@@ -72,7 +74,17 @@
 @media (max-width: 639px) {
   .demo-window { flex-direction: column; }
   .demo-window > .sb-side-nav { inline-size: auto; border-inline-end: 0; border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+  /* stacked, the view must not keep sb-view's 100 % height of the window: that pushed the action zone out of the
+     frame (D80, p-l-musterfenster). The view takes the height that is left and grows with its content */
+  .demo-window > .sb-view { min-block-size: 0; }
 }
+
+/* static specimens of overlays (D80; spec/02 §4.11): a dialog, sheet, menu, toast or footnote popover that stands
+   open in the page flow, with role="group" + a name instead of role="dialog" (it is not modal and traps nothing),
+   no entry motion, and the width of its column (a dialog at most its 560 px). Demo pages only; never shipped */
+.demo-static:is(.sb-dialog, .sb-sheet, .sb-menu, .sb-toast, .sb-note-popover) { position: relative; inset: auto; margin: 0; max-inline-size: 100%; box-sizing: border-box; }
+.demo-static.sb-dialog { inline-size: min(560px, 100%); }
+.demo-static.sb-sheet { inline-size: 100%; }
 
 /* overlays shown in place: a scrim stage for the dialog, static popover and sheet specimens */
 .demo-stage {
@@ -81,7 +93,6 @@
   border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container); background: var(--sb-color-bg);
 }
 .demo-stage__scrim { position: absolute; inset: 0; background: var(--sb-color-scrim); }
-.demo-stage > .sb-dialog { position: relative; inset: auto; margin: 0; inline-size: min(560px, 100%); }
 .demo-static.sb-note-popover { position: relative; inset: auto; display: block; max-block-size: none; overflow: visible; inline-size: 100%; max-inline-size: 390px; border: var(--sb-elevation-overlay-border-width) solid var(--sb-elevation-overlay-border-color); border-radius: var(--sb-radius-sheet) var(--sb-radius-sheet) 0 0; }
 .demo-sheet-host { position: relative; box-sizing: border-box; display: flex; flex-direction: column; justify-content: flex-end; inline-size: 390px; max-inline-size: 100%; min-block-size: 440px; overflow: hidden; border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-sheet); background: var(--sb-color-bg); }
 .demo-sheet-host > .sb-sheet { position: relative; }
@@ -99,3 +110,32 @@
 /* round 3 (D48, D52): a fixed progress share for the static state cell; the start replay frame */
 .demo-progress-60 { --sb-progress: 0.6; }
 .demo-start-frame { block-size: 520px; }
+
+/* ------------------------------------------------------------------ window frame (D80; the „Fenster“ specimens, spec/02 §4.17) */
+/* a window drawn inside a page: the frame stands in for the OS window edge (like .sb-phone) */
+.demo-window-frame {
+  box-sizing: border-box; inline-size: 100%; max-inline-size: 1100px;
+  border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container);
+  background: var(--sb-color-bg);
+}
+.demo-window-frame > .sb-window { border-radius: inherit; }
+.demo-window-frame--narrow { max-inline-size: 680px; }
+/* a row of tools */
+.demo-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-0-5); }
+
+/* ------------------------------------------------------------------ page and view frames (spec/02 §5.3) */
+/* a page frame: shows header, app grid or forms at a fixed width on any screen. It is the sb-page and sb-content
+   container for what is inside (spec/02 §5.3), so the components inside switch by the frame, not by the screen */
+.demo-page-frame {
+  container: sb-page sb-content / inline-size;
+  box-sizing: border-box; inline-size: 100%; overflow: hidden;
+  border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container);
+  background: var(--sb-color-bg);
+}
+.demo-page-frame--390 { max-inline-size: calc(390px + 2 * var(--sb-border-width-hairline)); }
+.demo-page-frame--720 { max-inline-size: 720px; }
+.demo-page-frame__pad { padding: var(--sb-space-4) var(--sb-spacing-gutter); }
+/* a wide app view at a fixed width (the bottom block sits at the frame's end, as in .demo-window) */
+.demo-view-frame { box-sizing: border-box; inline-size: 100%; overflow: hidden; border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container); }
+.demo-view-frame--520 { max-inline-size: 520px; }
+.demo-view-frame .sb-bottom-block { position: relative; }

@@ -100,5 +100,7 @@
 /* stacked demo-window below 640 px: .sb-view's min-block-size: 100% resolves against the window and clips the bottom
    block (vendored demo.css); the stand-in grows with its content instead */
 @media (max-width: 639px) { .g-app-wide .demo-window > .sb-view { min-block-size: 0; } }
-/* the class-to-Compose table reflows at phone width instead of scrolling sideways */
+/* the class-to-Compose table restacks at phone width (g-table-stack in guide.css); its code may wrap */
 #ueberblick .sb-table code { white-space: normal; overflow-wrap: anywhere; }
+/* the four fixed tasks (ZUG-08) */
+.g-app-tasks { margin: 0; padding-inline-start: var(--sb-space-6); display: grid; gap: var(--sb-space-2); }

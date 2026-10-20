@@ -1,7 +1,9 @@
 name: check
 on:
   push:
-    branches: [main]
+    # sync/** = branches pushed by sebaroDesign's guide-sync workflow; their pull requests are opened with the
+    # GITHUB_TOKEN, which starts no pull_request run, so the checks attach to the PR through this push run
+    branches: [main, "sync/**"]
   pull_request:
 permissions:
   contents: read

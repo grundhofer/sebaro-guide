@@ -8,10 +8,18 @@ what it took in docs/sebaro/sebaro-export.json (with sha256 per file) plus docs/
     python3 tools/sync_from_design.py                 # export + verify + copy
     python3 tools/sync_from_design.py --check         # exit 1 if docs/sebaro/ differs from a fresh export
     python3 tools/sync_from_design.py --verify-local  # exit 1 if a file in docs/sebaro/ no longer matches its sha256
+    python3 tools/sync_from_design.py --from-export DIR --exclude-from FILE --require-exclusions
+                                                      # CI: take a web export the workshop already built (it is
+                                                      # copied and verified, never changed), read exclusions from FILE
 
-The design repository is found via --design, $SEBARO_DESIGN, or ../sebaroDesign next to this repository.
-Products listed in the git-ignored tools/sync.local.json ({"excludeProducts": [...]}) are not published: their brand
-files are dropped and their manifest entries removed. Only their number is recorded, not their names.
+The design repository is found via --design, $SEBARO_DESIGN, or ../sebaroDesign next to this repository. It is
+needed for every mode except --verify-local (export --verify and the demo specimens come from it).
+Products to leave out are not published: their brand files are dropped and their manifest entries removed. Only their
+number is recorded, never their names. The list is the union of the git-ignored tools/sync.local.json
+({"excludeProducts": [...]}), every --exclude-from FILE (the same JSON, or one id per line, # comments allowed) and the
+environment variable SEBARO_EXCLUDE_PRODUCTS (ids separated by commas or white space); the workshop's CI passes it from
+a secret, so the names never enter this public repository. --require-exclusions refuses to run with an empty list.
+Before anything is written, every text file of the result is scanned for the excluded ids; a hit refuses the sync.
 Standard library only.
 """
 from __future__ import annotations
@@ -21,6 +29,7 @@ import filecmp
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -35,16 +44,42 @@ CONFIG = ROOT / "tools" / "sync.config.json"
 
 
 LOCAL = ROOT / "tools" / "sync.local.json"
+EXCLUDE_ENV = "SEBARO_EXCLUDE_PRODUCTS"
+TEXT_SUFFIXES = {".css", ".js", ".json", ".md", ".svg", ".txt", ".html", ".webmanifest"}
 
 
-def load_config() -> dict:
+def read_exclusions(path: Path) -> list[str]:
+    text = path.read_text(encoding="utf-8")
+    if text.lstrip().startswith("{"):
+        return list(json.loads(text).get("excludeProducts", []))
+    return [ln.split("#", 1)[0].strip() for ln in text.splitlines() if ln.split("#", 1)[0].strip()]
+
+
+def load_config(exclude_from: list[Path] | None = None) -> dict:
     cfg = json.loads(CONFIG.read_text(encoding="utf-8"))
-    # excludeProducts lives in the git-ignored sync.local.json: the names of unreleased products stay private
+    # the names of unreleased products stay private: git-ignored sync.local.json, a file outside the repo, or the env
+    names: list[str] = []
     if LOCAL.is_file():
-        cfg.update(json.loads(LOCAL.read_text(encoding="utf-8")))
-    else:
-        print(f"note: {LOCAL.name} not found, no products excluded", file=sys.stderr)
+        names += json.loads(LOCAL.read_text(encoding="utf-8")).get("excludeProducts", [])
+    for path in exclude_from or []:
+        names += read_exclusions(path)
+    names += os.environ.get(EXCLUDE_ENV, "").replace(",", " ").split()
+    cfg["excludeProducts"] = sorted({n.strip() for n in names if n.strip()})
+    if not cfg["excludeProducts"]:
+        print(f"note: no products excluded ({LOCAL.name}, --exclude-from and ${EXCLUDE_ENV} are empty)",
+              file=sys.stderr)
     return cfg
+
+
+def leaks(base: Path, names: list[str]) -> list[str]:
+    """Relative paths of files whose path or text still names an excluded product (case-insensitive)."""
+    hits = []
+    for rel, p in sorted(tree_files(base).items()):
+        low = rel.lower()
+        text = p.read_text(encoding="utf-8", errors="replace").lower() if p.suffix in TEXT_SUFFIXES else ""
+        if any(n.lower() in low or n.lower() in text for n in names):
+            hits.append(rel)
+    return hits
 
 
 def find_design(arg: str | None) -> Path:
@@ -58,11 +93,20 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def export(design: Path, cfg: dict, out: Path) -> dict:
-    """Run export_system.py + --verify into out, then drop excluded products. Returns the guide sync record."""
-    cmd = [sys.executable, "tools/export_system.py", cfg["system"], "--target", "web", "--out", str(out),
-           "--product", cfg["product"]]
-    subprocess.run(cmd, cwd=design, check=True, stdout=subprocess.DEVNULL)
+def export(design: Path, cfg: dict, out: Path, from_export: Path | None = None) -> dict:
+    """Run export_system.py (or copy the given export) + --verify into out, then drop excluded products.
+    Returns the guide sync record."""
+    if from_export is None:
+        cmd = [sys.executable, "tools/export_system.py", cfg["system"], "--target", "web", "--out", str(out),
+               "--product", cfg["product"]]
+        subprocess.run(cmd, cwd=design, check=True, stdout=subprocess.DEVNULL)
+    else:
+        rec = json.loads((from_export / "sebaro-export.json").read_text(encoding="utf-8"))
+        got = (rec.get("system", {}).get("slug"), rec.get("target"), rec.get("product"))
+        want = (cfg["system"], "web", cfg["product"])
+        if got != want:
+            sys.exit(f"{from_export} is a {got} export; the guide needs (system, target, product) = {want}")
+        shutil.copytree(from_export, out)
     subprocess.run([sys.executable, "tools/export_system.py", "--verify", str(out)], cwd=design, check=True,
                    stdout=subprocess.DEVNULL)
 
@@ -141,16 +185,39 @@ def main() -> int:
     ap.add_argument("--design")
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--verify-local", action="store_true")
+    ap.add_argument("--from-export", type=Path, metavar="DIR",
+                    help="use this web export (built with the product of sync.config.json) instead of running one")
+    ap.add_argument("--exclude-from", type=Path, action="append", default=[], metavar="FILE",
+                    help="more product ids to leave out (JSON like sync.local.json, or one id per line)")
+    ap.add_argument("--require-exclusions", action="store_true",
+                    help="exit 2 when no product is excluded (CI: a missing secret must not publish unreleased files)")
     args = ap.parse_args()
 
     if args.verify_local:
         return verify_local()
 
-    cfg = load_config()
+    cfg = load_config(args.exclude_from)
+    if args.require_exclusions and not cfg["excludeProducts"]:
+        print("error: --require-exclusions: no products to exclude; refusing to sync", file=sys.stderr)
+        return 2
+    if args.from_export is not None and not (args.from_export / "sebaro-export.json").is_file():
+        print(f"error: {args.from_export} has no sebaro-export.json", file=sys.stderr)
+        return 2
     design = find_design(args.design)
     with tempfile.TemporaryDirectory() as tmp:
         out = Path(tmp) / "sebaro"
-        record = export(design, cfg, out)
+        record = export(design, cfg, out, args.from_export.resolve() if args.from_export else None)
+        leaked = leaks(out, cfg["excludeProducts"])
+        specimens = design / "systems" / cfg["system"] / "demo" / "assets"
+        leaked += [f"vendor specimen {rel}" for rel in leaks(specimens, cfg["excludeProducts"])
+                   if rel in cfg.get("vendorSpecimens", [])]
+        if leaked:
+            print(f"error: {len(leaked)} file(s) still name an excluded product; nothing was written:", file=sys.stderr)
+            for rel in leaked:
+                for n in cfg["excludeProducts"]:
+                    rel = re.sub(re.escape(n), "<excluded>", rel, flags=re.I)
+                print(f"    {rel}", file=sys.stderr)
+            return 1
         if args.check:
             # date stamps differ between runs; compare everything else
             diffs = compare(out, TARGET, ignore={"sebaro-export.json", "GUIDE-SYNC.json"})

@@ -16,11 +16,15 @@
  * direction in both modes; fix stage AD14).
  * Round-3 signature (D46, D48, D52; spec/03 §10-§18): 2 px ink layer lines instead of tone or shadow, the 45° cut on
  * destructive actions only, the bottom action zone, one entry motion from below (with the app setting
- * html[data-sb-motion="reduce"]), progress inside the primary action, the start with the tile moving into the header,
- * and one link style (text-coloured word, 2 px cobalt underline).
+ * html[data-sb-motion="reduce"], or data-sb-motion="reduce" on any container, D80), progress inside the primary
+ * action, the start with the tile moving into the header, and one link style (text-coloured word, 2 px cobalt
+ * underline).
+ * Layout follows its place, not the screen (D80, spec/02 §5.1-§5.3): sb-stack, sb-cluster, sb-form-grid; the
+ * containers sb-page, sb-content, sb-view and sb-window. Windows are denser: data-sb-density="window" (section 7a).
  * Static state hooks for the component sheet and screenshot tests: .is-hover, .is-pressed, .is-focus, .is-visited.
  * State itself is carried by ARIA (aria-current, aria-expanded, aria-pressed, aria-checked, aria-selected,
- * aria-invalid, aria-busy, :disabled) wherever ARIA has it. Anatomy and states: spec/02.
+ * aria-invalid, aria-busy, :disabled) wherever ARIA has it; the one data attribute for states ARIA has no word for is
+ * data-sb-state (D85: "done", "retry"; data-state on progress steps is a deprecated alias). Anatomy and states: spec/02.
  */
 
 /* ===================================================================== 1 base */
@@ -36,9 +40,23 @@ h2 { font: var(--sb-type-headline); letter-spacing: var(--sb-type-headline-track
 h3 { font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
 h1, h2, h3 { margin: 0; text-wrap: balance; hyphens: manual; }
 h1 code, h2 code, h3 code { hyphens: none; font-size: 0.875em; }
+
+/* type roles as classes (spec/02 §5.2, D80): the look of a heading independent of its level (an h2 inside a card that
+   should read as a title, an h4 or h5 in a nested page); the element rules h1-h3 stay the default. Each class pairs the
+   font with its tracking, so dark mode gets its +30 weight and +0.01 em from the tokens (D40, D44). The heading roles
+   wrap balanced and hyphenate by hand only (SCH-06). A role class sets no margin (spacing comes from sb-stack or the
+   component) and no colour. On a page narrower than 640 px .sb-type-display takes the mobile display role like h1 (§2).
+   One look per element: a component title class (sb-section__title, sb-card__title …) and a role class are not combined */
+.sb-type-display { font: var(--sb-type-display); letter-spacing: var(--sb-type-display-tracking); }
+.sb-type-headline { font: var(--sb-type-headline); letter-spacing: var(--sb-type-headline-tracking); }
+.sb-type-title { font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
+.sb-type-body-strong { font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
+.sb-type-label { font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
+.sb-type-display, .sb-type-headline, .sb-type-title { text-wrap: balance; hyphens: manual; }
+.sb-type-display code, .sb-type-headline code, .sb-type-title code { hyphens: none; font-size: 0.875em; }
 p { max-inline-size: var(--sb-size-measure-prose); }
-/* one link style everywhere (D52): the word in text colour, a 2 px cobalt underline; pointer/press turn the word cobalt.
-   Running text marks visited links by the underline colour. An external link ends in the external-link icon */
+/* one link style everywhere (D52): the word in text colour, a 2 px cobalt underline; pointer/press turn the word
+   cobalt. Running text marks visited links by the underline colour. An external link ends in the external-link icon */
 a { color: var(--sb-color-text); text-decoration: underline var(--sb-color-link) var(--sb-x-sebaro-link-underline-width); text-underline-offset: 0.2em; }
 a:hover, a.is-hover, a:active { color: var(--sb-color-link); }
 .sb-prose a:visited, a.is-visited { text-decoration-color: var(--sb-color-link-visited); }
@@ -69,6 +87,16 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
   box-sizing: border-box; inline-size: 100%; max-inline-size: var(--sb-size-container-max); margin-inline: auto;
   padding-inline: var(--sb-spacing-gutter);
 }
+/* containers (spec/02 §5.3, D80): components switch by the width of their place, not of the screen. sb-page = the page
+   (body.sb-page, or a frame that shows a page at another width); sb-content = the content column a component sits in
+   (.sb-container, falling back to the page); sb-view = a wide app view. A container takes its width from its parent and
+   never from its content: do not put body-level frames, .sb-container or .sb-view--wide into a shrink-to-fit box
+   (inline-block, float, fit-content, a grid cell with justify-items: start) without giving them a width. Position:
+   fixed and sticky are not affected. Every @container rule keeps the viewport rule it replaced inside @supports not
+   (container-type: inline-size) as its fallback */
+body.sb-page { container: sb-page sb-content / inline-size; }
+.sb-container { container: sb-content / inline-size; }
+.sb-view--wide { container: sb-view / inline-size; }
 .sb-section { padding-block: var(--sb-spacing-section); }
 .sb-section + .sb-section { border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
 .sb-section__title { margin: 0 0 var(--sb-spacing-group); font: var(--sb-type-headline); letter-spacing: var(--sb-type-headline-tracking); }
@@ -76,12 +104,25 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 .sb-page-lead__title { margin: 0 0 var(--sb-space-4); font: var(--sb-type-display); letter-spacing: var(--sb-type-display-tracking); }
 .sb-page-lead__text { margin: 0; font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); }
 /* phones: the 40 px display role wraps a page title into three lines at 390 px; use the mobile display role (32/40) */
-@media (max-width: 639.98px) {
-  h1, .sb-page-lead__title { font: var(--sb-type-mobile-display); letter-spacing: var(--sb-type-mobile-display-tracking); }
+@supports not (container-type: inline-size) {
+  @media (max-width: 639.98px) {
+    h1, .sb-page-lead__title, .sb-type-display { font: var(--sb-type-mobile-display); letter-spacing: var(--sb-type-mobile-display-tracking); }
+  }
+}
+@container sb-page (width < 640px) {
+  h1, .sb-page-lead__title, .sb-type-display { font: var(--sb-type-mobile-display); letter-spacing: var(--sb-type-mobile-display-tracking); }
 }
 /* the lead keeps one text column with the rest of the page (fix stage AD20): about 68 characters at 20 px */
 .sb-page-lead__text { max-inline-size: 34em; }
-@media (min-width: 1024px) {
+/* from 1024 px of the page: wide gutters and sections, the lead in the title size */
+@supports not (container-type: inline-size) {
+  @media (min-width: 1024px) {
+    .sb-container { padding-inline: var(--sb-spacing-gutter-wide); }
+    .sb-section { padding-block: var(--sb-spacing-section-wide); }
+    .sb-page-lead__text { font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); font-weight: var(--sb-type-body-weight); }
+  }
+}
+@container sb-page (width >= 1024px) {
   .sb-container { padding-inline: var(--sb-spacing-gutter-wide); }
   .sb-section { padding-block: var(--sb-spacing-section-wide); }
   .sb-page-lead__text { font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); font-weight: var(--sb-type-body-weight); }
@@ -96,6 +137,53 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 .sb-prose li + li { margin-block-start: var(--sb-space-1); }
 .sb-prose figure { margin-inline: 0; }
 .sb-prose figcaption { margin-block-start: var(--sb-space-2); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+
+/* layout building blocks (spec/02 §5.1, D80). stack: children one below the other, the gap from a spacing role (spec/01
+   §3.1): stack 12 between the elements of one group (field to field, paragraph to note), --group 24 between groups,
+   --section 48 (64 on a page from 1024 px) between sections. The stack owns the spacing: its children keep no block
+   margins of their own. Children take the stack's width; --start keeps each child at its own width (buttons, links,
+   tags) */
+.sb-stack { display: flex; flex-direction: column; gap: var(--sb-spacing-stack); min-inline-size: 0; }
+.sb-stack > * { margin-block: 0; min-inline-size: 0; }
+.sb-stack--group { gap: var(--sb-spacing-group); }
+.sb-stack--section { gap: var(--sb-spacing-section); }
+.sb-stack--start { align-items: flex-start; }
+.sb-stack--start > * { max-inline-size: 100%; }
+@supports not (container-type: inline-size) {
+  @media (min-width: 1024px) { .sb-stack--section { gap: var(--sb-spacing-section-wide); } }
+}
+@container sb-page (width >= 1024px) { .sb-stack--section { gap: var(--sb-spacing-section-wide); } }
+
+/* cluster: items side by side that wrap (tags, meta words, a toolbar group, filters beside a sort choice): 8 px
+   (inline) between items, 12 px (stack) between wrapped lines; --group puts 24 px between the items. Visual order
+   is DOM order (no `order`, no row-reverse; D83 (5)). Action groups use their own containers: sb-section__actions
+   on pages, sb-form-grid__actions in forms, sb-primary-action-bar in app views */
+.sb-cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-spacing-stack) var(--sb-spacing-inline); min-inline-size: 0; }
+.sb-cluster > * { margin: 0; }
+.sb-cluster--group { column-gap: var(--sb-spacing-group); }
+
+/* form grid: labels above the fields (sb-field), one column; two columns as soon as the grid itself is
+   2 × 16 rem + 24 px wide (536 px), never three. Fields fill the rows in DOM order (reading order = visual order).
+   Row gap stack 12 (field to field), column gap group 24 (the web grid gutter, spec/01 §3.2). __wide spans both
+   columns (a textarea, a choice row with long options, a callout); __actions always spans both and ends the form as
+   its own group (24 px above it): secondary actions first, the primary action last in DOM order and visually at the
+   end (D83 (5)). While the actions row is narrower than 30 rem (480 px), every action takes the full width, so the
+   primary action is the lowest line, as on a phone. In app views the primary action belongs to the bottom block,
+   not into __actions (spec/03 §2) */
+.sb-form-grid {
+  display: grid; align-items: start; gap: var(--sb-spacing-stack) var(--sb-spacing-group); min-inline-size: 0;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, max(16rem, calc((100% - var(--sb-spacing-group)) / 2))), 1fr));
+}
+.sb-form-grid > * { margin: 0; min-inline-size: 0; }
+.sb-form-grid__wide, .sb-form-grid__actions { grid-column: 1 / -1; }
+.sb-form-grid__actions {
+  container: sb-actions / inline-size;
+  display: flex; flex-wrap: wrap; gap: var(--sb-spacing-stack);
+  margin-block-start: calc(var(--sb-spacing-group) - var(--sb-spacing-stack));
+}
+@container sb-actions (width < 30rem) {
+  .sb-form-grid__actions > * { flex: 1 1 100%; }
+}
 
 /* table of contents: a list beside the article from 1024 px, a <details> row below */
 .sb-toc { font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
@@ -117,7 +205,7 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
   color: var(--sb-color-text); text-decoration: none;
 }
 .sb-toc a:hover, .sb-toc a.is-hover { text-decoration: underline; }
-.sb-toc a[aria-current="true"], .sb-toc a[aria-current="location"] { border-inline-start-color: var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
+.sb-toc a:is([aria-current="true"], [aria-current="location"], [aria-current="page"]) { border-inline-start-color: var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
 @media (min-width: 1024px) {
   .sb-toc summary { display: none; }
   .sb-toc__title { display: block; }
@@ -154,17 +242,35 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 .sb-primary-action-bar { padding: var(--sb-space-3) var(--sb-spacing-gutter); }
 .sb-primary-action-bar .sb-primary-action { inline-size: 100%; min-block-size: var(--sb-size-control-lg); }
 /* the zone's sentence: the state of the view in caption text-muted („Noch 2 offen.“) or, after a failure, the reason
-   in danger with the error glyph (D48), which replaces the state sentence; on phones it stands above the button */
+   as a sentence in text colour with the error glyph in danger before it (D48 as refined by D83 (2)), which replaces
+   the state sentence; on phones it stands above the button */
 .sb-primary-action-bar__status, .sb-primary-action-bar__message {
   display: flex; align-items: flex-start; gap: var(--sb-space-1); margin: 0 0 var(--sb-space-2);
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
 }
 .sb-primary-action-bar__status { display: none; }
-.sb-primary-action-bar__message { color: var(--sb-color-danger); font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); }
+.sb-primary-action-bar__message { color: var(--sb-color-text); font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); }
 .sb-primary-action-bar__message:empty { display: none; }
-.sb-primary-action-bar__message .sb-icon { flex: none; margin-block-start: 2px; }
-/* wide views (web app, Tauri window; D46 (3)): the action at the end of the bar, the state sentence at its start */
-@media (min-width: 640px) {
+.sb-primary-action-bar__message .sb-icon { flex: none; margin-block-start: 4px; color: var(--sb-color-danger); }
+/* wide views (web app, Tauri window; D46 (3)): from 640 px of the view itself the action at the end of the bar, the
+   state sentence at its start (RAU-03's threshold, now measured on the view: a narrow pane on a wide screen acts
+   like a phone, a wide window on a small screen like a window) */
+@supports not (container-type: inline-size) {
+  @media (min-width: 640px) {
+    .sb-view--wide .sb-primary-action-bar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-2) var(--sb-space-4); }
+    .sb-view--wide .sb-primary-action-bar .sb-primary-action { inline-size: auto; min-inline-size: 200px; margin-inline-start: auto; }
+    .sb-view--wide .sb-primary-action-bar__status { display: flex; margin: 0; }
+    .sb-view--wide .sb-primary-action-bar__message { flex: 1 1 260px; margin: 0; }
+    .sb-view--wide .sb-primary-action-bar:has(.sb-primary-action-bar__message:not(:empty)) .sb-primary-action-bar__status { display: none; }
+  }
+}
+/* D72: a wide view is a window, and a window states its total exactly once, in the zone. So a
+   --wide view keeps the state sentence below 640 px too: above the full-width button, where a phone puts the failure
+   reason (before, the sentence vanished in a narrow window). Phone views (without --wide) keep hiding it: their top of
+   the list says it (sb-day-summary). Without this block a narrow --wide view shows no total */
+.sb-view--wide .sb-primary-action-bar__status { display: flex; }
+.sb-view--wide .sb-primary-action-bar:has(.sb-primary-action-bar__message:not(:empty)) .sb-primary-action-bar__status { display: none; }
+@container sb-view (width >= 640px) {
   .sb-view--wide .sb-primary-action-bar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-2) var(--sb-space-4); }
   .sb-view--wide .sb-primary-action-bar .sb-primary-action { inline-size: auto; min-inline-size: 200px; margin-inline-start: auto; }
   .sb-view--wide .sb-primary-action-bar__status { display: flex; margin: 0; }
@@ -184,7 +290,9 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 .sb-lockup { grid-area: lockup; display: inline-flex; align-items: center; gap: var(--sb-space-2); min-block-size: var(--sb-size-target-touch); color: var(--sb-color-text); text-decoration: none; }
 .sb-lockup:hover .sb-wordmark, .sb-lockup.is-hover .sb-wordmark { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
 .sb-wordmark { font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
-.sb-site-header__links { grid-area: links; display: flex; flex-wrap: wrap; align-items: center; column-gap: var(--sb-space-2); }
+/* below 640 px row 2 holds the four words and DE / EN: 4 px between the groups and no gap inside the language
+   switch (each link keeps its 48 px target) keep it at 348 (light) / 352 (dark) of 358 px at 390 px (D83 (4), spec/03 §6.5) */
+.sb-site-header__links { grid-area: links; display: flex; flex-wrap: wrap; align-items: center; column-gap: var(--sb-space-1); }
 .sb-site-nav { display: flex; flex-wrap: wrap; align-items: center; column-gap: 0; }
 .sb-site-nav a, .sb-language-switch a {
   display: inline-flex; align-items: center; justify-content: center;
@@ -195,7 +303,7 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 }
 .sb-site-nav a:hover, .sb-language-switch a:hover, .sb-site-nav a.is-hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
 .sb-site-nav a[aria-current="page"], .sb-language-switch a[aria-current="true"] { border-block-end-color: var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-body-strong-weight); }
-.sb-language-switch { display: inline-flex; align-items: center; gap: var(--sb-space-1); color: var(--sb-color-text-muted); }
+.sb-language-switch { display: inline-flex; align-items: center; gap: 0; color: var(--sb-color-text-muted); }
 .sb-theme-button {
   grid-area: theme; display: inline-flex; align-items: center; justify-content: center; flex: none;
   min-block-size: var(--sb-size-target-touch); padding: 0 var(--sb-space-4); box-sizing: border-box;
@@ -206,14 +314,29 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 }
 .sb-theme-button:hover, .sb-theme-button.is-hover { background: var(--sb-color-hover-fill); }
 .sb-theme-button:active, .sb-theme-button.is-pressed { background: var(--sb-color-pressed-fill); }
-@media (min-width: 640px) {
+/* the header follows the width of its page (NAV-07), so a header in a 390 px frame on a wide screen keeps its phone
+   rows (D83 (4) measured at 390 px) */
+@supports not (container-type: inline-size) {
+  @media (min-width: 640px) {
+    .sb-site-header { grid-template-columns: auto minmax(0, 1fr) auto auto; grid-template-areas: "lockup . lang theme" "nav nav nav nav"; }
+    .sb-site-header__links { display: contents; }
+    .sb-site-nav { grid-area: nav; column-gap: var(--sb-space-1); }
+    .sb-language-switch { grid-area: lang; gap: var(--sb-space-1); }
+    .sb-site-nav a { padding: 0 var(--sb-space-2); }
+  }
+  @media (min-width: 1024px) {
+    .sb-site-header { padding-inline: var(--sb-spacing-gutter-wide); grid-template-columns: auto auto minmax(0, 1fr) auto auto; grid-template-areas: "lockup nav . lang theme"; }
+    .sb-site-nav { margin-inline-start: var(--sb-space-10); }
+  }
+}
+@container sb-page (width >= 640px) {
   .sb-site-header { grid-template-columns: auto minmax(0, 1fr) auto auto; grid-template-areas: "lockup . lang theme" "nav nav nav nav"; }
   .sb-site-header__links { display: contents; }
   .sb-site-nav { grid-area: nav; column-gap: var(--sb-space-1); }
-  .sb-language-switch { grid-area: lang; }
+  .sb-language-switch { grid-area: lang; gap: var(--sb-space-1); }
   .sb-site-nav a { padding: 0 var(--sb-space-2); }
 }
-@media (min-width: 1024px) {
+@container sb-page (width >= 1024px) {
   .sb-site-header { padding-inline: var(--sb-spacing-gutter-wide); grid-template-columns: auto auto minmax(0, 1fr) auto auto; grid-template-areas: "lockup nav . lang theme"; }
   .sb-site-nav { margin-inline-start: var(--sb-space-10); }
 }
@@ -227,11 +350,14 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 .sb-site-footer p { margin: 0; }
 .sb-site-footer__links { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--sb-space-4); margin: 0; padding: 0; list-style: none; }
 .sb-site-footer__links a { display: inline-flex; align-items: center; gap: var(--sb-space-1); min-block-size: var(--sb-size-target-touch); }
-@media (min-width: 1024px) { .sb-site-footer { padding-inline: var(--sb-spacing-gutter-wide); } }
+@supports not (container-type: inline-size) {
+  @media (min-width: 1024px) { .sb-site-footer { padding-inline: var(--sb-spacing-gutter-wide); } }
+}
+@container sb-page (width >= 1024px) { .sb-site-footer { padding-inline: var(--sb-spacing-gutter-wide); } }
 
 /* ===================================================================== 4 actions (only the primary action is filled) */
 
-.sb-primary-action, .sb-secondary-action, .sb-text-action, .sb-danger-action {
+.sb-primary-action, .sb-secondary-action, .sb-text-action, .sb-toast__action, .sb-danger-action {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--sb-spacing-inline);
   min-block-size: var(--sb-size-control-md); box-sizing: border-box; margin: 0;
   font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking);
@@ -239,9 +365,10 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
   transition: background-color var(--sb-motion-duration-short) var(--sb-motion-easing-standard);
 }
 
-/* the one primary action per view (spec/03 §2): lime, 2 px outline (ink by day, the fill by night), radius 8 */
+/* the one primary action per view (spec/03 §2): lime, 2 px outline (ink by day, the fill by night), radius 8;
+   56 px high everywhere, in the bottom zone of apps and on websites alike (D46, D83 (7)) */
 .sb-primary-action {
-  padding: 0 var(--sb-space-6);
+  min-block-size: var(--sb-size-control-lg); padding: 0 var(--sb-space-6);
   border: var(--sb-x-sebaro-primary-action-outline-width) solid var(--sb-color-primary-action-outline);
   border-radius: var(--sb-radius-control);
   background: var(--sb-color-primary-action); color: var(--sb-color-on-primary-action);
@@ -271,7 +398,7 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 .sb-primary-action[data-sb-state] > .sb-icon { display: none; }   /* done: the label brings its check icon; retry: „Noch mal versuchen“ alone */
 .sb-primary-action[data-sb-progress="indeterminate"] .sb-primary-action__bar { transform: none; opacity: 0.4; transition: none; }
 @media (prefers-reduced-motion: no-preference) {
-  :root:not([data-sb-motion="reduce"]) .sb-primary-action[data-sb-progress="indeterminate"] .sb-primary-action__bar {
+  .sb-primary-action[data-sb-progress="indeterminate"]:not([data-sb-motion="reduce"] *) .sb-primary-action__bar {
     inset-inline-end: auto; inline-size: 34%; opacity: 1;
     animation: sb-sweep var(--sb-x-sebaro-primary-action-progress-period) var(--sb-motion-easing-standard) infinite;
   }
@@ -287,13 +414,14 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 .sb-secondary-action:hover, .sb-secondary-action.is-hover { background: var(--sb-color-hover-fill); }
 .sb-secondary-action:active, .sb-secondary-action.is-pressed { background: var(--sb-color-pressed-fill); }
 
-/* text action: the underlined word in the link style (D52) with a 48 px target ("Wie geprüft?", "Rückgängig") */
-.sb-text-action {
+/* text action: the underlined word in the link style (D52) with a 48 px target ("Wie geprüft?"); the toast's action
+   („Rückgängig“) is the same word as .sb-toast__action (D78) */
+.sb-text-action, .sb-toast__action {
   padding: 0 var(--sb-space-2); border: 0; border-radius: var(--sb-radius-control); background: transparent;
   color: var(--sb-color-text); text-decoration: underline var(--sb-color-link) var(--sb-x-sebaro-link-underline-width); text-underline-offset: 0.2em;
 }
-.sb-text-action:hover, .sb-text-action.is-hover { color: var(--sb-color-link); }
-.sb-text-action:active, .sb-text-action.is-pressed { background: var(--sb-color-pressed-fill); }
+.sb-text-action:hover, .sb-text-action.is-hover, .sb-toast__action:hover, .sb-toast__action.is-hover { color: var(--sb-color-link); }
+.sb-text-action:active, .sb-text-action.is-pressed, .sb-toast__action:active, .sb-toast__action.is-pressed { background: var(--sb-color-pressed-fill); }
 
 /* destructive action: the danger word + trash icon in a 1 px danger outline, never filled, and the only element with
    the 45° cut at its top end corner (D46: lime = next step, the cut = final). --outlined is kept as the name of the
@@ -323,9 +451,9 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 
 /* disabled non-primary actions: grey, no fill change; prefer an enabled action that explains (spec/01 §1.4) */
 .sb-secondary-action:disabled, .sb-secondary-action[aria-disabled="true"],
-.sb-text-action:disabled, .sb-text-action[aria-disabled="true"],
+.sb-text-action:disabled, .sb-text-action[aria-disabled="true"], .sb-toast__action:disabled,
 .sb-danger-action:disabled, .sb-danger-action[aria-disabled="true"],
-.sb-theme-button:disabled, .sb-icon-button:disabled, .sb-icon-button[aria-disabled="true"] {
+.sb-theme-button:disabled {
   background: transparent; border-color: var(--sb-color-border); color: var(--sb-color-text-muted); text-decoration: none; cursor: not-allowed;
 }
 .sb-secondary-action[aria-busy="true"], .sb-text-action[aria-busy="true"] { cursor: progress; }
@@ -341,10 +469,19 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 .sb-icon-button:active, .sb-icon-button.is-pressed { background: var(--sb-color-pressed-fill); color: var(--sb-color-text); }
 .sb-icon-button[aria-pressed="true"] { color: var(--sb-color-link); }
 
+/* disabled icon button (STA-03, D80; spec/02 §1.5): the icon one grey step lighter than at rest (text-muted →
+   text-subtle, the palette role for inactive controls, PALETTE-CONTRACT §5; 3.40:1 light / 4.22:1 dark on bg, against
+   5.05 / 6.76 at rest), no hover or pressed fill, cursor not-allowed; a disabled toggle loses its link colour too.
+   Never opacity */
+.sb-icon-button:is(:disabled, [aria-disabled="true"]),
+.sb-icon-button:is(:disabled, [aria-disabled="true"]):is(:hover, :active, .is-hover, .is-pressed, [aria-pressed="true"]) {
+  background: transparent; color: var(--sb-color-text-subtle); cursor: not-allowed;
+}
+
 /* spinner for remote work over 1 s (loader icon); turns only when motion is wanted */
 .sb-spinner { flex: none; }
 @media (prefers-reduced-motion: no-preference) {
-  :root:not([data-sb-motion="reduce"]) .sb-spinner { animation: sb-spin 1s linear infinite; }
+  .sb-spinner:not([data-sb-motion="reduce"] *) { animation: sb-spin 1s linear infinite; }
 }
 @keyframes sb-spin { to { transform: rotate(360deg); } }
 
@@ -476,13 +613,25 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 .sb-segmented__option > input:checked + .sb-segmented__face .sb-icon { display: block; }
 .sb-segmented__option > input:focus-visible + .sb-segmented__face, .sb-segmented__option > input.is-focus + .sb-segmented__face { outline: var(--sb-focus-ring); outline-offset: -4px; }
 
+/* disabled segments (EIN-04, STA-03, D80; spec/02 §2.7): a disabled option shows its word in text-muted, no hover fill,
+   cursor not-allowed. A chosen option that is disabled keeps its check, its weight and its 3 px bottom edge, the edge
+   in border-strong and the word in text-muted (cobalt marks what can be acted on). A wholly disabled control
+   (`<fieldset class="sb-segmented" disabled>`, or every input disabled) draws frame, separators and legend grey */
+.sb-segmented__option:has(> input:disabled), .sb-segmented__option > input:disabled { cursor: not-allowed; }
+.sb-segmented__option > input:disabled + .sb-segmented__face { background: transparent; color: var(--sb-color-text-muted); }
+.sb-segmented__option > input:checked:disabled + .sb-segmented__face { border-block-end-color: var(--sb-color-border-strong); }
+.sb-segmented:disabled .sb-segmented__options, .sb-segmented__options:not(:has(input:enabled)) { border-color: var(--sb-color-border); }
+.sb-segmented:disabled .sb-segmented__option + .sb-segmented__option,
+.sb-segmented__options:not(:has(input:enabled)) > .sb-segmented__option + .sb-segmented__option { border-inline-start-color: var(--sb-color-border); }
+.sb-segmented:disabled > legend, .sb-segmented:not(:has(input:enabled)) > legend { color: var(--sb-color-text-muted); }
+
 /* range (slider): rail in border-strong, chosen range in accent, ring handles; the script keeps the fill in step */
 .sb-range { display: grid; gap: var(--sb-space-1); min-inline-size: 0; }
 .sb-range__head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--sb-space-3); }
 .sb-range__label { font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
 .sb-range__value { font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); font-weight: var(--sb-type-caption-weight); font-variant-numeric: var(--sb-type-numeric-variant); color: var(--sb-color-text-muted); }
 .sb-range__track { position: relative; block-size: var(--sb-size-target-touch); --sb-range-from: 0; --sb-range-to: 0.5; }
-.sb-range__rail, .sb-range__fill { position: absolute; inset-block-start: 22px; block-size: 4px; border-radius: 2px; pointer-events: none; }
+.sb-range__rail, .sb-range__fill { position: absolute; inset-block-start: 22px; block-size: 4px; pointer-events: none; }   /* square ends: the pill radius belongs to the thumb only (D85) */
 .sb-range__rail { inset-inline: 12px; background: var(--sb-color-border-strong); }
 .sb-range__fill {
   background: var(--sb-color-accent);
@@ -596,15 +745,21 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 .sb-list-row:has(.sb-list-row__link:focus-visible) { outline: var(--sb-focus-ring); outline-offset: calc(-1 * var(--sb-focus-width)); }
 .sb-list-row:has(.sb-list-row__link:hover), .sb-list-row.is-hover { background: var(--sb-color-hover-fill); }
 .sb-list-row:has(.sb-list-row__link:hover)::before, .sb-list-row:has(.sb-list-row__link:hover) + .sb-list-row::before { border-color: transparent; }
-/* finished items recede: 40 px, caption, text-muted, no hairline (spec/01 §4) */
-.sb-list-row--done { min-block-size: 40px; padding-block: 0; color: var(--sb-color-text-muted); }
+/* finished items recede (DAT-02, D83 (1)): 40 px, caption, text-muted, the success glyph at the start, the time at
+   the end, no hairline. The status word stands once in the group header („Erledigt 3“); each row carries it only for
+   screen readers (<span class="sb-visually-hidden">erledigt: </span> in the title). Two class selectors, so the
+   40 px win over the content heights of :has(__meta) / :has(__text) above */
+.sb-list-row.sb-list-row--done { min-block-size: 40px; padding-block: 0; color: var(--sb-color-text-muted); }
 .sb-list-row--done .sb-list-row__title { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
-.sb-list-row--done::before, .sb-list-row--done + .sb-list-row--done::before { content: none; }
+.sb-list-row.sb-list-row--done::before, .sb-list-row + .sb-list-row.sb-list-row--done::before { content: none; }
 .sb-list-row--done .sb-list-row__lead .sb-icon { color: var(--sb-color-success); }
 .sb-list-end { margin: 0; padding: var(--sb-space-3) var(--sb-spacing-gutter) 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .sb-day-summary { margin: 0; padding: var(--sb-space-2) var(--sb-spacing-gutter) var(--sb-space-3); font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); font-variant-numeric: var(--sb-type-numeric-variant); }
 
-/* card: grouped content at elevation level 1 (bg + 2 px ink layer line, no tone, no shadow; D46); never tinted */
+/* card: grouped content at elevation level 1 (bg + 2 px ink layer line, no tone, no shadow; D46); never tinted.
+   The 2 px ink line is for cards that group settings or figures; many cards of one kind in a window (board,
+   collections) take --item: a 1 px border-strong edge, the 3 px place line only on the current card (D83 (3),
+   FOR-05). Radius 12 for both */
 .sb-card {
   position: relative; display: grid; gap: var(--sb-space-2); align-content: start;
   padding: var(--sb-spacing-inset-container); box-sizing: border-box;
@@ -618,6 +773,11 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 .sb-card:has(.sb-card__link:hover), .sb-card.is-hover { background: var(--sb-color-hover-fill); }
 .sb-card__link:focus-visible { outline: 0; }
 .sb-card:has(.sb-card__link:focus-visible) { outline: var(--sb-focus-ring); outline-offset: var(--sb-focus-offset); }
+.sb-card--item { border: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); }
+.sb-card--item[aria-current="true"] {
+  border-inline-start: var(--sb-border-width-strong) solid var(--sb-color-accent);
+  padding-inline-start: calc(var(--sb-spacing-inset-container) - var(--sb-border-width-strong) + var(--sb-border-width-hairline));
+}
 
 /* app grid (bild-1 layout): no card fill, no frame; columns separated by hairlines; tile, name, one-liner, tags + "Fakten" */
 .sb-app-grid { display: grid; grid-template-columns: minmax(0, 1fr); margin: 0; padding: 0; list-style: none; }
@@ -627,21 +787,44 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 .sb-app-card__text { margin: calc(-1 * var(--sb-space-2)) 0 0; color: var(--sb-color-text-muted); }
 .sb-app-card__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--sb-space-2); margin-block-start: auto; }
 .sb-app-card__meta a, .sb-app-row__meta a { display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-pointer); }
-/* phones: the bild-1 card becomes the bild-2 row (tile at the start, text beside it), about 100 px per app (AD19) */
-@media (max-width: 639.98px) {
+/* the app grid and the app list follow the content column they sit
+   in. Thresholds are content-box widths: 608 = 640 − 2 × gutter 16 and 928 = 1024 − 2 × gutter-wide 48, so on a full
+   page inside .sb-container the switches fall where RAU-03 puts them; because the page gutter grows at 1024, the
+   four-column grid now also shows at 960-1023 px (content 928-991 px, the same card width as at 1024) */
+@supports not (container-type: inline-size) {
+  @media (max-width: 639.98px) {
+    .sb-app-card { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--sb-space-4); row-gap: var(--sb-space-1); align-items: start; padding-block: var(--sb-space-4); }
+    .sb-app-card > .sb-sign-tile { grid-row: 1 / span 3; }
+    .sb-app-card > :not(.sb-sign-tile) { grid-column: 2; }
+    .sb-app-card__text { margin: 0; }
+    .sb-app-card__meta { margin-block-start: 0; }
+  }
+  @media (min-width: 640px) {
+    .sb-app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--sb-spacing-group); }
+    .sb-app-card { padding: 0 var(--sb-space-6); border-inline-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+    .sb-app-card + .sb-app-card { border-block-start: 0; }
+    .sb-app-card:nth-child(2n+1) { padding-inline-start: 0; border-inline-start: 0; }
+  }
+  @media (min-width: 1024px) {
+    .sb-app-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .sb-app-card:nth-child(2n+1) { padding-inline-start: var(--sb-space-6); border-inline-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+    .sb-app-card:nth-child(4n+1) { padding-inline-start: 0; border-inline-start: 0; }
+  }
+}
+@container sb-content (width < 608px) {
   .sb-app-card { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--sb-space-4); row-gap: var(--sb-space-1); align-items: start; padding-block: var(--sb-space-4); }
   .sb-app-card > .sb-sign-tile { grid-row: 1 / span 3; }
   .sb-app-card > :not(.sb-sign-tile) { grid-column: 2; }
   .sb-app-card__text { margin: 0; }
   .sb-app-card__meta { margin-block-start: 0; }
 }
-@media (min-width: 640px) {
+@container sb-content (width >= 608px) {
   .sb-app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--sb-spacing-group); }
   .sb-app-card { padding: 0 var(--sb-space-6); border-inline-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
   .sb-app-card + .sb-app-card { border-block-start: 0; }
   .sb-app-card:nth-child(2n+1) { padding-inline-start: 0; border-inline-start: 0; }
 }
-@media (min-width: 1024px) {
+@container sb-content (width >= 928px) {
   .sb-app-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .sb-app-card:nth-child(2n+1) { padding-inline-start: var(--sb-space-6); border-inline-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
   .sb-app-card:nth-child(4n+1) { padding-inline-start: 0; border-inline-start: 0; }
@@ -656,7 +839,10 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 .sb-app-row__name { margin: 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
 .sb-app-row__text { margin: 0; }
 .sb-app-row__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--sb-space-2); margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
-@media (min-width: 1024px) { .sb-app-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@supports not (container-type: inline-size) {
+  @media (min-width: 1024px) { .sb-app-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+}
+@container sb-content (width >= 928px) { .sb-app-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* app-sign tile: the inlined brand snippet (brand/inline/tile-<id>[-small].svg) inside this box. The product scope
    attribute sits on the snippet's own root and nowhere else, so the family colour shows only in the tile (D40).
@@ -696,7 +882,7 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 .sb-chart__label--current { fill: var(--sb-color-text); font-weight: var(--sb-type-title-weight); }
 .sb-chart__value { fill: var(--sb-color-text); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: var(--sb-type-numeric-variant); }
 .sb-chart__value--current { font-weight: var(--sb-type-title-weight); }
-.sb-chart figcaption, .sb-chart__caption { margin-block-start: var(--sb-space-2); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.sb-chart figcaption { margin-block-start: var(--sb-space-2); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .sb-chart__rows { display: grid; gap: var(--sb-space-2); margin: 0; padding: 0; list-style: none; }
 .sb-chart__row { display: grid; grid-template-columns: 8rem minmax(0, 1fr); align-items: center; column-gap: var(--sb-space-3); }
 .sb-chart__name { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
@@ -721,6 +907,11 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 .sb-meta-list > div:first-child { border-block-start: 0; }
 .sb-meta-list dt { color: var(--sb-color-text-muted); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
 .sb-meta-list dd { margin: 0; font-variant-numeric: var(--sb-type-numeric-variant); }
+/* --labels: a fixed label column (10 rem) for long values (paths, versions, sentences); rows grow with the value */
+.sb-meta-list--labels > div { grid-template-columns: minmax(0, 10rem) minmax(0, 1fr); align-items: baseline; padding-block: var(--sb-space-3); box-sizing: border-box; }
+
+/* an identifier (rule number, version, build id) never breaks at its hyphen or dot */
+.sb-id { white-space: nowrap; hyphens: none; }
 
 /* table: hairline rows, tabular figures, numbers end-aligned; wrap in .sb-table-wrap to scroll on phones */
 .sb-table-wrap { max-inline-size: 100%; overflow-x: auto; }
@@ -728,10 +919,14 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 .sb-table caption { padding-block-end: var(--sb-space-2); text-align: start; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .sb-table th, .sb-table td { padding: var(--sb-space-3) var(--sb-space-3) var(--sb-space-3) 0; text-align: start; vertical-align: top; border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
 .sb-table th { font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); border-block-end-color: var(--sb-color-border-strong); }
+/* row headers in the body keep the row's hairline (the border-strong line belongs to the column heads only) */
+.sb-table tbody th { font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); border-block-end-color: var(--sb-color-border); }
 .sb-table th:last-child, .sb-table td:last-child { padding-inline-end: 0; }
 .sb-table .sb-num { text-align: end; font-variant-numeric: var(--sb-type-numeric-variant); }
 
-/* code: block on surface-sunken (radius 12) with a copy button; inline code; keys */
+/* code: block on surface-sunken (radius 12) with a copy button; inline code; keys. The one form is the wrapper
+   div.sb-code > .sb-code__bar + pre (spec/02 §3.10); a bare pre.sb-code (generated Markdown, no bar) gets the same
+   padding and scroll so it is never broken, but it has no copy button */
 .sb-code { margin: 0; border-radius: var(--sb-radius-container); background: var(--sb-color-surface-sunken); color: var(--sb-color-text); overflow: hidden; }
 .sb-code__bar { display: flex; align-items: center; justify-content: space-between; gap: var(--sb-space-2); padding: 0 var(--sb-space-1) 0 var(--sb-space-4); border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
 .sb-code__lang { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
@@ -742,7 +937,7 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
 }
 .sb-code__copy .sb-icon { color: var(--sb-color-text-muted); }
 .sb-code__copy:hover, .sb-code__copy.is-hover { background: var(--sb-color-pressed-fill); }
-.sb-code pre { margin: 0; padding: var(--sb-space-4); overflow-x: auto; font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); tab-size: 4; }
+.sb-code pre, pre.sb-code { margin: 0; padding: var(--sb-space-4); overflow-x: auto; font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); tab-size: 4; }
 .sb-code pre:focus-visible { outline-offset: calc(-1 * var(--sb-focus-width)); }
 .sb-code code { font: inherit; letter-spacing: inherit; }
 .sb-code-inline { padding: 0 var(--sb-space-1); border-radius: var(--sb-radius-small); background: var(--sb-color-surface-sunken); color: var(--sb-color-text); font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); }
@@ -785,25 +980,26 @@ kbd, .sb-kbd {
 .sb-progress__head span:last-child { color: var(--sb-color-text-muted); }
 .sb-progress progress, progress.sb-progress__bar {
   -webkit-appearance: none; appearance: none; display: block; inline-size: 100%; block-size: 4px; margin: 0;
-  border: 0; border-radius: 2px; background: var(--sb-color-border); overflow: hidden;
+  border: 0; border-radius: 0; background: var(--sb-color-border); overflow: hidden;   /* square ends (D85: no pill outside avatar, switch, radio, thumb) */
 }
-.sb-progress progress::-webkit-progress-bar, progress.sb-progress__bar::-webkit-progress-bar { background: var(--sb-color-border); border-radius: 2px; }
-.sb-progress progress::-webkit-progress-value, progress.sb-progress__bar::-webkit-progress-value { background: var(--sb-color-text); border-radius: 2px; }
-.sb-progress progress::-moz-progress-bar, progress.sb-progress__bar::-moz-progress-bar { background: var(--sb-color-text); border-radius: 2px; }
-/* steps: segments in a row; done = ink, current = 3 px accent edge (the current place) + weight, next = grey */
+.sb-progress progress::-webkit-progress-bar, progress.sb-progress__bar::-webkit-progress-bar { background: var(--sb-color-border); }
+.sb-progress progress::-webkit-progress-value, progress.sb-progress__bar::-webkit-progress-value { background: var(--sb-color-text); }
+.sb-progress progress::-moz-progress-bar, progress.sb-progress__bar::-moz-progress-bar { background: var(--sb-color-text); }
+/* steps: segments in a row; done = ink (data-sb-state="done"; data-state="done" is a deprecated alias kept for one
+   version, D85), current = aria-current="step": 3 px accent edge (the current place) + weight, next = grey */
 .sb-progress__steps { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: var(--sb-space-1); margin: 0; padding: 0; list-style: none; }
 .sb-progress__step {
   display: flex; align-items: center; gap: var(--sb-space-1); padding-block-start: var(--sb-space-2);
   border-block-start: var(--sb-border-width-strong) solid var(--sb-color-border);
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
 }
-.sb-progress__step[data-state="done"] { border-block-start-color: var(--sb-color-text); color: var(--sb-color-text); }
+.sb-progress__step:is([data-sb-state="done"], [data-state="done"]) { border-block-start-color: var(--sb-color-text); color: var(--sb-color-text); }
 .sb-progress__step[aria-current="step"] { border-block-start-color: var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
 /* circular, determinate: SVG ring (pathLength 100) with the value in the middle */
 .sb-progress-ring { position: relative; display: inline-grid; place-items: center; inline-size: 48px; block-size: 48px; }
 .sb-progress-ring svg { display: block; inline-size: 100%; block-size: 100%; overflow: visible; }
 .sb-progress-ring__track { fill: none; stroke: var(--sb-color-border); stroke-width: 4; }
-.sb-progress-ring__value { fill: none; stroke: var(--sb-color-text); stroke-width: 4; stroke-linecap: round; }
+.sb-progress-ring__value { fill: none; stroke: var(--sb-color-text); stroke-width: 4; }   /* butt caps, like the linear bar (D85) */
 .sb-progress-ring__text { fill: var(--sb-color-text); font: var(--sb-type-mobile-label-small); letter-spacing: var(--sb-type-mobile-label-small-tracking); font-variant-numeric: var(--sb-type-numeric-variant); }
 .sb-loading { display: inline-flex; align-items: center; gap: var(--sb-space-2); margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .sb-loading .sb-icon { color: var(--sb-color-text); }
@@ -898,6 +1094,12 @@ kbd, .sb-kbd {
 .sb-tabs__tab[aria-selected="true"] { border-block-end-color: var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
 .sb-tabs__tab:focus-visible { outline-offset: calc(-1 * var(--sb-focus-width)); }
 
+/* disabled tab (D80; spec/02 §4.4): the word one grey step lighter than an unselected tab (text-muted → text-subtle),
+   no hover change, cursor not-allowed. Markup: the native disabled attribute (out of the tab order, no click). A
+   selected tab is never disabled alone; a tab list that is disabled as a whole is not shown at all */
+.sb-tabs__tab:is(:disabled, [aria-disabled="true"]),
+.sb-tabs__tab:is(:disabled, [aria-disabled="true"]):is(:hover, .is-hover) { color: var(--sb-color-text-subtle); cursor: not-allowed; }
+
 /* confirmation dialog (spec/03 §7): overlay elevation, radius 16, 24 padding; never a primary action inside */
 .sb-dialog {
   box-sizing: border-box; inline-size: min(560px, calc(100vw - 2 * var(--sb-spacing-gutter))); max-inline-size: none; padding: var(--sb-space-6);
@@ -910,14 +1112,17 @@ kbd, .sb-kbd {
 .sb-dialog__text { margin: 0; font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); }
 .sb-dialog__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--sb-space-3); margin-block-start: var(--sb-space-6); }
 /* one motion rule (D46 (4)): whatever is new enters from below, 8 px in 200 ms with the emphasized easing, transform
-   and opacity only. Reduced motion (the system setting, or the app setting „Bewegung immer reduzieren“ =
-   html[data-sb-motion="reduce"], stored by theme-init.js) keeps only the fade. .sb-enter marks content an app has just
-   added (a new row, a result); remove it after animationend if the element is re-used */
-:is(.sb-dialog[open], .sb-sheet, .sb-toast, .sb-menu, .sb-note-popover:popover-open, .sb-enter) {
+   and opacity only. Only as the answer to an action (BEW-01, D80): a dialog or sheet opened with showModal() (:modal),
+   a popover shown (:popover-open), or anything a script has just inserted or shown and marked with .sb-enter (a new
+   row, a result, a toast, a menu, a sheet built as a <div>; remove it after animationend if the element is re-used).
+   Overlays that stand open in the markup do not move on load. Reduced motion (the system setting, or the app setting
+   „Bewegung immer reduzieren“ = html[data-sb-motion="reduce"], stored by theme-init.js, or data-sb-motion="reduce" on
+   any container for its part of the page) keeps only the fade */
+:is(.sb-dialog:modal, .sb-sheet:modal, .sb-command-palette:modal, .sb-note-popover:popover-open, .sb-menu:popover-open, .sb-enter) {
   animation: sb-fade-in var(--sb-motion-duration-long) var(--sb-motion-easing-standard) both;
 }
 @media (prefers-reduced-motion: no-preference) {
-  :root:not([data-sb-motion="reduce"]) :is(.sb-dialog[open], .sb-sheet, .sb-toast, .sb-menu, .sb-note-popover:popover-open, .sb-enter) {
+  :is(.sb-dialog:modal, .sb-sheet:modal, .sb-command-palette:modal, .sb-note-popover:popover-open, .sb-menu:popover-open, .sb-enter):not([data-sb-motion="reduce"], [data-sb-motion="reduce"] *) {
     animation-name: sb-enter; animation-timing-function: var(--sb-motion-easing-emphasized);
   }
 }
@@ -948,7 +1153,9 @@ html.sb-starting > body > .sb-start, .sb-starting > .sb-start {
 .sb-sheet__head { display: flex; align-items: center; justify-content: space-between; gap: var(--sb-space-2); min-block-size: var(--sb-size-target-touch); }
 .sb-sheet__title { margin: 0; font: var(--sb-type-mobile-title); letter-spacing: var(--sb-type-mobile-title-tracking); }
 
-/* toast: the result of a reversible action + optional "Rückgängig"; never instead of the delete dialog */
+/* toast (D78): the result of a reversible action outside the primary action + optional .sb-toast__action
+   („Rückgängig“); never for errors, never instead of the delete dialog. Lifetime (6 s, paused under the pointer or
+   while focus is inside) and entry: sbToast.show() in sb-controls.js; a toast in the markup without it stays put */
 .sb-toast {
   display: flex; align-items: center; justify-content: space-between; gap: var(--sb-space-3);
   max-inline-size: 560px; min-block-size: var(--sb-size-target-touch); padding: var(--sb-space-1) var(--sb-space-1) var(--sb-space-1) var(--sb-space-4); box-sizing: border-box;
@@ -956,7 +1163,9 @@ html.sb-starting > body > .sb-start, .sb-starting > .sb-start {
   background: var(--sb-elevation-overlay-surface); color: var(--sb-color-text); box-shadow: var(--sb-elevation-overlay-shadow);
   font-variant-numeric: var(--sb-type-numeric-variant);
 }
-.sb-toast p { margin: 0; }
+.sb-toast p { margin: 0; flex: 1 1 auto; min-inline-size: 0; }
+.sb-toast[hidden] { display: none; }
+.sb-toast__action { flex: none; }
 
 /* tooltip: pointer only, never the only place of information */
 .sb-tooltip {
@@ -983,6 +1192,321 @@ html.sb-starting > body > .sb-start, .sb-starting > .sb-start {
 .sb-menu__item:focus-visible { outline-offset: calc(-1 * var(--sb-focus-width)); }
 .sb-menu__item--danger, .sb-menu__item--danger .sb-icon { color: var(--sb-color-danger); }
 .sb-menu__sep { block-size: 0; margin: var(--sb-space-1) 0; border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+
+/* behaviour scripts: open and closed states (D80; spec/02 §2.2, §4.4, §4.7, §4.9, §4.10, §7; demo/assets/sb-menu.js,
+   sb-tabs.js, sb-tooltip.js, sb-sheet.js, sb-search.js). No motion of their own: the menu and the sheet enter through
+   the entry rule above (.sb-menu:popover-open, .sb-sheet:modal), the tooltip and the clear button appear in place.
+   The open state is the browser's own (:popover-open, :modal, [hidden]); these rules only undo the components' own
+   display where the UA would hide them and put the top-layer forms where they belong */
+/* menu as a popover (popover on .sb-menu, popovertarget on its button): hidden until open; sb-menu.js sets top/left
+   (or bottom/right) under the button. In the top layer, so z-index does not apply */
+.sb-menu[popover] { position: fixed; inset: auto; margin: 0; overflow: auto; max-block-size: calc(100dvh - 2 * var(--sb-space-2)); }
+.sb-menu[popover]:not(:popover-open) { display: none; }
+
+/* tooltip as a manual popover (popover="manual"): hidden until sb-tooltip.js shows it; no pointer events of its own
+   are needed beyond staying hoverable (WCAG 1.4.13) */
+.sb-tooltip[popover] { position: fixed; inset: auto; margin: 0; overflow: visible; }
+.sb-tooltip[popover]:not(:popover-open) { display: none; }
+
+/* bottom sheet as a modal <dialog class="sb-sheet">: docked to the bottom edge over the full width, at most 85 % of
+   the window high (the content scrolls inside), the safe area below the last row, the palette scrim behind it.
+   The page behind does not scroll while it is open */
+dialog.sb-sheet:modal {
+  position: fixed; inset: auto 0 0 0; margin: 0; inline-size: 100%; max-inline-size: none;
+  max-block-size: 85dvh; overflow: auto; overscroll-behavior: contain;
+  padding-block-end: calc(var(--sb-space-4) + env(safe-area-inset-bottom));
+}
+dialog.sb-sheet::backdrop { background: var(--sb-color-scrim); }
+dialog.sb-sheet > form { margin: 0; }
+:root:has(dialog.sb-sheet:modal) { overflow: hidden; }
+
+/* search: „Suche leeren“ only while the field has text (sb-search.js sets hidden); the field keeps its end padding
+   while the button is hidden */
+.sb-search > .sb-icon-button[hidden] { display: none; }
+.sb-search:has(> .sb-icon-button[hidden]) { padding-inline-end: var(--sb-space-3); }
+
+/* ===================================================================== 7a desktop windows (spec/02 §4.12-§4.18) */
+
+/* Spec: spec/02 §4.12–§4.18 (window density, sb-row, sb-tree, sb-listbox, sb-command-palette, sb-window, tools and
+ * compact actions, check items in menus), spec/01 §4 (desktop rows), spec/11 §1a (window rules), spec/09 §4.5
+ * (inventory). Behaviour: demo/assets/sb-tree.js and demo/assets/sb-window.js.
+ * Decisions: D67 (1) action zone over the whole window, (2) 32 px rows with 48 px under touch, (4) palette with group
+ * heads, check at the start, keys at the end and the keys at the bottom, (6) icon-only tools with tooltip „Name Kürzel“
+ * and a set name, (7)/D72 glyph + word in rows and the total once as the state sentence of the action zone, (8) chosen
+ * rows carry the place line and a check instead of their icon, never a fill, (9) long names cut at the end; D74 primary
+ * action at the end of the zone; D75 „Darstellung“ in the window menu; D80 the parts built in the system; D81 sidebar
+ * and inspector can be hidden and the content keeps a minimum width; D83 (5) primary action last, (9) 32 / 48 / 64 px;
+ * D84 ⌘K / Strg+K; D46 layers by the 2 px ink line, no shadow, no tinted ground. Tool tooltips are the system
+ * tooltip (sb-tooltip.js, .sb-tooltip[popover] in section 7). The palette enters through the entry rule of section 7.
+ * Only var(--sb-*) (and the icon stroke variables --sb-icon-* of sprite.css): no raw colours, no shadows.
+ * Numbers that are not tokens: 240 px sidebar (as .sb-side-nav), 280 px inspector, 480 px content minimum, 560 px
+ * palette (as .sb-dialog); the container breakpoints derive from them (722 = 240 + 2 + 480,
+ * 1004 = 722 + 2 + 280). */
+
+/* density scope: rows of 32 / 48 / 64 (D67 (2), D83 (9))
+   data-sb-density="window" on the window (or on any ancestor of the rows, e.g. a menu that opens outside the window).
+   Rows that already exist in the system get the window heights here; .sb-row (below) is always a window row. */
+[data-sb-density="window"] .sb-side-nav__item { min-block-size: var(--sb-size-control-sm); gap: var(--sb-space-2); }
+[data-sb-density="window"] .sb-side-nav__item > .sb-icon { inline-size: var(--sb-size-icon-md); block-size: var(--sb-size-icon-md); --sb-icon-stroke: var(--sb-icon-w20); }
+[data-sb-density="window"] .sb-menu__item {
+  min-block-size: var(--sb-size-control-sm); gap: var(--sb-space-2); padding-inline: var(--sb-space-3);
+  font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); font-weight: var(--sb-type-body-weight);
+}
+[data-sb-density="window"] .sb-menu__item > .sb-icon { inline-size: var(--sb-size-icon-md); block-size: var(--sb-size-icon-md); --sb-icon-stroke: var(--sb-icon-w20); }
+.sb-menu[data-sb-density="window"], [data-sb-density="window"] .sb-menu { min-inline-size: 240px; }
+[data-sb-density="window"] .sb-list-row { min-block-size: var(--sb-size-control-sm); padding-block: 0; }
+[data-sb-density="window"] .sb-list-row:has(.sb-list-row__meta) { min-block-size: var(--sb-size-control-md); }
+[data-sb-density="window"] .sb-list-row:has(.sb-list-row__text) { min-block-size: var(--sb-space-16); }
+[data-sb-density="window"] .sb-list-row.sb-list-row--done { min-block-size: var(--sb-size-control-sm); }
+[data-sb-density="window"] .sb-meta-list > div { min-block-size: var(--sb-size-control-sm); }
+
+/* sb-row: the window row of trees, lists, the palette
+   One line 32, two lines 48 (__main with __name + __sub), three lines 64 (+ __text). The name is cut at the end and
+   never wraps (TXT-09, D67 (9); the full name goes into the row's title); __meta (status glyph + word, numbers, dates)
+   and .sb-keys never shrink. Current place = 3 px accent start edge + link colour + title weight (aria-current or, in a
+   single-select tree or list, aria-selected) */
+.sb-row {
+  position: relative; display: flex; align-items: center; gap: var(--sb-space-2);
+  box-sizing: border-box; inline-size: 100%; min-inline-size: 0; min-block-size: var(--sb-size-control-sm); margin: 0;
+  padding-block: 0; padding-inline: calc(var(--sb-space-4) - var(--sb-border-width-strong)) var(--sb-space-3);
+  border: 0; border-inline-start: var(--sb-border-width-strong) solid transparent; background: transparent;
+  color: var(--sb-color-text); text-align: start; text-decoration: none;
+  font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); font-weight: var(--sb-type-body-weight);
+  transition: background-color var(--sb-motion-duration-short) var(--sb-motion-easing-standard);
+}
+.sb-row[hidden] { display: none; }
+.sb-row:visited { color: var(--sb-color-text); }
+.sb-row:has(.sb-row__sub) { min-block-size: var(--sb-size-control-md); }
+.sb-row:has(.sb-row__text) { min-block-size: var(--sb-space-16); }
+.sb-row__icon { flex: none; inline-size: var(--sb-size-icon-md); block-size: var(--sb-size-icon-md); --sb-icon-stroke: var(--sb-icon-w20); color: var(--sb-color-text-muted); }
+.sb-row__check { flex: none; display: inline-grid; place-items: center; inline-size: var(--sb-size-icon-sm); block-size: var(--sb-size-icon-sm); color: var(--sb-color-accent); }
+.sb-row__check > .sb-icon { visibility: hidden; }
+.sb-row[aria-checked="true"] > .sb-row__check > .sb-icon { visibility: visible; }   /* a setting that is on (palette) */
+.sb-row__main { flex: 1 1 auto; min-inline-size: 0; display: grid; }
+.sb-row__name { flex: 0 1 auto; min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sb-row__sub, .sb-row__text {
+  min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: var(--sb-type-numeric-variant);
+}
+.sb-row__sub { color: var(--sb-color-text-muted); }
+.sb-row__text { color: var(--sb-color-text); }
+.sb-row__meta {
+  flex: none; display: inline-flex; align-items: center; gap: var(--sb-space-1); margin-inline-start: auto; padding-inline-start: var(--sb-space-2);
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: var(--sb-type-numeric-variant);
+  color: var(--sb-color-text-muted); white-space: nowrap;
+}
+.sb-row__meta > .sb-status { color: var(--sb-color-text); }
+.sb-row:is(a, button, [role="option"], [role="treeitem"]) { cursor: pointer; }
+.sb-row:is(a, button, [role="option"], [role="treeitem"]):hover, .sb-row.is-hover { background: var(--sb-color-hover-fill); }
+.sb-row:is(a, button, [role="option"], [role="treeitem"]):active, .sb-row.is-pressed { background: var(--sb-color-pressed-fill); }
+.sb-row:focus-visible, .sb-row.is-focus { outline: var(--sb-focus-ring); outline-offset: calc(-1 * var(--sb-focus-width)); }
+.sb-row:is([aria-current]:not([aria-current="false"]), [aria-selected="true"]) {
+  border-inline-start-color: var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-title-weight);
+}
+.sb-row:is([aria-current]:not([aria-current="false"]), [aria-selected="true"]) > .sb-row__icon { color: var(--sb-color-link); }
+
+/* sb-tree (ARIA tree; sb-tree.js)
+   ul.sb-tree[role=tree] > li[role=none] > .sb-row.sb-tree__row[role=treeitem][aria-level][aria-expanded][aria-owns]
+   + ul.sb-tree__group[role=group][hidden while collapsed]. 16 px indent per level, the place line stays at the pane
+   edge; the twist (chevron-right--16, turned 90° when open) sits in a 24 px slot; a leaf keeps the empty slot */
+.sb-tree, .sb-tree__group { margin: 0; padding: 0; list-style: none; }
+.sb-tree__group[hidden] { display: none; }
+.sb-tree__row {
+  --sb-tree-indent: 0;
+  padding-inline-start: calc(var(--sb-space-4) - var(--sb-border-width-strong) - var(--sb-space-1) + var(--sb-space-4) * var(--sb-tree-indent));
+}
+.sb-tree__row[aria-level="2"] { --sb-tree-indent: 1; }
+.sb-tree__row[aria-level="3"] { --sb-tree-indent: 2; }
+.sb-tree__row[aria-level="4"] { --sb-tree-indent: 3; }
+.sb-tree__row[aria-level="5"] { --sb-tree-indent: 4; }
+.sb-tree__row[aria-level="6"] { --sb-tree-indent: 5; }
+.sb-tree__row[aria-level="7"] { --sb-tree-indent: 6; }
+.sb-tree__row[aria-level="8"] { --sb-tree-indent: 7; }
+.sb-tree__twist {
+  flex: none; display: inline-grid; place-items: center; inline-size: var(--sb-size-target-pointer); block-size: var(--sb-size-control-sm);
+  margin-inline-end: calc(-1 * var(--sb-space-1)); color: var(--sb-color-text-muted);
+}
+.sb-tree__twist > .sb-icon { transition: transform var(--sb-motion-duration-short) var(--sb-motion-easing-standard); }
+.sb-tree__row[aria-expanded="true"] > .sb-tree__twist > .sb-icon { transform: rotate(90deg); }
+.sb-tree:dir(rtl) .sb-tree__twist > .sb-icon { scale: -1 1; }
+[data-sb-motion="reduce"] .sb-tree__twist > .sb-icon { transition: none; }
+
+/* sb-listbox: a window list with selection (sb-window.js)
+   ul.sb-listbox[role=listbox] > li.sb-row[role=option][aria-selected]. Single select: the chosen row is the current
+   place. aria-multiselectable="true" and two or more chosen (D67 (8)): every chosen row keeps the place line and shows
+   the check (__check) instead of its icon, in text colour, never a fill; the current one (aria-current="true") keeps
+   the title weight. The count („3 ausgewählt“) is the state sentence of the action zone (data-sb-selection-status) */
+.sb-listbox { margin: 0; padding: 0; list-style: none; }
+.sb-listbox .sb-row__check { display: none; inline-size: var(--sb-size-icon-md); }   /* as wide as the icon it replaces: names stay aligned */
+.sb-listbox[aria-multiselectable="true"]:has(.sb-row[aria-selected="true"] ~ .sb-row[aria-selected="true"]) .sb-row[aria-selected="true"] {
+  color: var(--sb-color-text); font-weight: var(--sb-type-body-weight);
+}
+.sb-listbox[aria-multiselectable="true"]:has(.sb-row[aria-selected="true"] ~ .sb-row[aria-selected="true"]) .sb-row[aria-selected="true"][aria-current="true"] {
+  font-weight: var(--sb-type-title-weight);
+}
+.sb-listbox[aria-multiselectable="true"]:has(.sb-row[aria-selected="true"] ~ .sb-row[aria-selected="true"]) .sb-row[aria-selected="true"] > .sb-row__icon { display: none; }
+.sb-listbox[aria-multiselectable="true"]:has(.sb-row[aria-selected="true"] ~ .sb-row[aria-selected="true"]) .sb-row[aria-selected="true"] > .sb-row__check { display: inline-grid; }
+.sb-listbox[aria-multiselectable="true"]:has(.sb-row[aria-selected="true"] ~ .sb-row[aria-selected="true"]) .sb-row[aria-selected="true"] > .sb-row__check > .sb-icon { visibility: visible; }
+
+/* keys: shortcuts as text in the font's key glyphs
+   (D68, spec/01 §2.1): grey, at the end, no frame. data-sb-keys="Mod+K" lets sb-window.js write „⌘K“ on macOS and
+   „Strg+K“ / „Ctrl+K“ elsewhere (D84); <kbd> keycaps stay for help texts that describe a key */
+.sb-keys {
+  flex: none; display: inline-flex; align-items: center; gap: var(--sb-space-0-5); white-space: nowrap;
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
+}
+:is(.sb-row, .sb-menu__item) > .sb-keys { margin-inline-start: auto; padding-inline-start: var(--sb-space-3); }
+
+/* check items in a menu (D75 „Darstellung“)
+   role="menuitemradio" / "menuitemcheckbox" with aria-checked; the 16 px slot stays when off, so the words align */
+.sb-menu__group { display: grid; margin: 0; padding: 0; list-style: none; }
+.sb-menu__check { flex: none; display: inline-grid; place-items: center; inline-size: var(--sb-size-icon-sm); block-size: var(--sb-size-icon-sm); color: var(--sb-color-accent); }
+.sb-menu__item > .sb-menu__check > .sb-icon { visibility: hidden; color: var(--sb-color-accent); }
+.sb-menu__item[aria-checked="true"] > .sb-menu__check > .sb-icon { visibility: visible; }
+
+/* tools and compact actions (D67 (6), spec/01 §4)
+   .sb-icon-button--compact: 32 px, icon 20; aria-label = the name, aria-keyshortcuts = the shortcut. Its tooltip
+   „Name Kürzel“ is the system tooltip of spec/02 §4.9 (sb-tooltip.js: aria-describedby + popover="manual"); the name
+   inside it is aria-hidden, so the description a screen reader adds is only the spoken shortcut („Befehl Z“). A place
+   (Einstellungen, Heute, Suche) is never a tool: icon and word (D67 (6)). .sb-secondary-action--compact: 32 px,
+   label type. Under touch both return to 48 */
+.sb-icon-button--compact { inline-size: var(--sb-size-control-sm); block-size: var(--sb-size-control-sm); }
+.sb-icon-button--compact > .sb-icon { inline-size: var(--sb-size-icon-md); block-size: var(--sb-size-icon-md); --sb-icon-stroke: var(--sb-icon-w20); }
+.sb-secondary-action--compact {
+  min-block-size: var(--sb-size-control-sm); padding-inline: var(--sb-space-3); gap: var(--sb-space-1);
+  font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking);
+}
+.sb-secondary-action--compact > .sb-icon { inline-size: var(--sb-size-icon-md); block-size: var(--sb-size-icon-md); --sb-icon-stroke: var(--sb-icon-w20); }
+.sb-tooltip > .sb-keys { margin-inline-start: var(--sb-space-2); vertical-align: bottom; }
+
+/* sb-command-palette (D67 (4), D84; sb-window.js)
+   <dialog> opened by ⌘K / Strg+K or [data-sb-palette-open]; overlay surface with the 2 px ink line, radius 12 like a
+   menu, no shadow. Search row (combobox), listbox of group sections (head + role=group of .sb-row options: __check
+   slot, name, .sb-keys), the empty sentence (role=status), the key hints at the bottom. The active option carries the
+   place line and the link colour (no weight change while the arrows move); hover is the fill */
+.sb-command-palette {
+  box-sizing: border-box; inline-size: min(560px, calc(100vw - 2 * var(--sb-spacing-gutter))); max-inline-size: 100%; padding: 0;
+  border: var(--sb-elevation-overlay-border-width) solid var(--sb-elevation-overlay-border-color); border-radius: var(--sb-radius-container);
+  background: var(--sb-elevation-overlay-surface); color: var(--sb-color-text); box-shadow: var(--sb-elevation-overlay-shadow);
+  overflow: hidden;
+}
+dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: min(560px, calc(100vh - 2 * min(12vh, 96px))); }
+.sb-command-palette:not(dialog), dialog.sb-command-palette[open] { display: flex; flex-direction: column; }
+.sb-command-palette::backdrop { background: var(--sb-color-scrim); }
+.sb-command-palette__search {
+  display: flex; align-items: center; gap: var(--sb-space-2); flex: none;
+  min-block-size: var(--sb-size-control-md); padding: 0 var(--sb-space-3) 0 var(--sb-space-4); box-sizing: border-box;
+  border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border);
+}
+.sb-command-palette__search > .sb-icon { flex: none; inline-size: var(--sb-size-icon-md); block-size: var(--sb-size-icon-md); --sb-icon-stroke: var(--sb-icon-w20); color: var(--sb-color-text-muted); }
+.sb-command-palette__search > input {
+  flex: 1 1 auto; min-inline-size: 0; block-size: 46px; margin: 0; padding: 0; border: 0; background: transparent; outline: none;
+  color: var(--sb-color-text); font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking);
+}
+.sb-command-palette__search > input::placeholder { color: var(--sb-color-text-muted); opacity: 1; }
+.sb-command-palette__search:focus-within { outline: var(--sb-focus-ring); outline-offset: calc(-1 * var(--sb-focus-width)); }
+.sb-command-palette__list { flex: 1 1 auto; min-block-size: 0; overflow-y: auto; margin: 0; padding: var(--sb-space-1) 0; }
+.sb-command-palette__section[hidden] { display: none; }
+.sb-command-palette__group {
+  margin: 0; padding: var(--sb-space-2) var(--sb-space-3) var(--sb-space-1) var(--sb-space-10);
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
+}
+.sb-command-palette .sb-row[aria-selected="true"] { font-weight: var(--sb-type-body-weight); }
+.sb-command-palette__empty {
+  margin: 0; padding: var(--sb-space-3) var(--sb-space-4) var(--sb-space-3) var(--sb-space-10);
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
+}
+.sb-command-palette__empty:empty { display: none; }
+.sb-command-palette__foot {
+  display: flex; flex-wrap: wrap; gap: var(--sb-space-1) var(--sb-space-4); flex: none; margin: 0; padding: var(--sb-space-2) var(--sb-space-4);
+  border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border);
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
+}
+.sb-command-palette__foot > span { display: inline-flex; align-items: center; gap: var(--sb-space-1); }
+.sb-command-palette__foot .sb-keys { color: var(--sb-color-text); }
+
+/* sb-window: the window scaffold (D67 (1), D72, D74, D81)
+   Title bar (tile 32, name, path, tools) / body: sidebar | content | inspector / action zone over the full width.
+   The parts are layers, so a 2 px ink line separates them (D46); hairlines only inside a part. The window is a size
+   container: it adapts to its own width (D80), not to the screen. Content keeps 480 px; when the window is too narrow
+   for a docked pane, the pane becomes an overlay over the content edge and sb-window.js closes it (the side parts go
+   first, D81); its toggle (aria-expanded + aria-controls) opens it again over the content */
+.sb-window {
+  container: sb-window / inline-size;
+  display: grid; grid-template-rows: auto minmax(0, 1fr) auto; box-sizing: border-box; min-inline-size: 0;
+  background: var(--sb-color-bg); color: var(--sb-color-text);
+}
+.sb-window--fill { block-size: 100vh; block-size: 100dvh; }
+.sb-window__titlebar {
+  display: flex; align-items: center; gap: var(--sb-space-3); min-inline-size: 0;
+  min-block-size: var(--sb-size-control-md); padding: var(--sb-space-1) var(--sb-space-2) var(--sb-space-1) var(--sb-space-4); box-sizing: border-box;
+  border-block-end: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color);
+}
+.sb-window__titlebar > .sb-sign-tile { flex: none; }
+.sb-window__name { flex: none; margin: 0; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
+.sb-window__path {
+  display: flex; align-items: center; gap: var(--sb-space-1); min-inline-size: 0; margin: 0; overflow: hidden; white-space: nowrap;
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
+}
+.sb-window__path > span { flex: 0 10 auto; min-inline-size: 2em; overflow: hidden; text-overflow: ellipsis; }
+.sb-window__path > span:last-child { flex: 0 1 auto; color: var(--sb-color-text); font-weight: var(--sb-type-label-weight); }
+.sb-window__path > .sb-icon { flex: none; }
+.sb-window__tools { display: flex; align-items: center; gap: var(--sb-space-0-5); flex: none; margin-inline-start: auto; }
+.sb-window__body { position: relative; display: grid; grid-template-columns: auto minmax(min(480px, 100%), 1fr) auto; min-block-size: 0; }
+.sb-window__sidebar {
+  grid-column: 1; display: flex; flex-direction: column; min-block-size: 0; overflow-y: auto; padding-block: var(--sb-space-2);
+  background: var(--sb-color-bg);
+}
+.sb-window__content { grid-column: 2; min-inline-size: 0; min-block-size: 0; overflow: auto; padding: var(--sb-space-6) var(--sb-space-8); }
+.sb-window__inspector {
+  grid-column: 3; display: grid; align-content: start; gap: var(--sb-space-4); inline-size: 280px; min-block-size: 0; overflow-y: auto;
+  padding: var(--sb-space-4); box-sizing: border-box; background: var(--sb-color-bg);
+  border-inline-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color);
+}
+.sb-window__sidebar[hidden], .sb-window__inspector[hidden] { display: none; }
+.sb-window__inspector-title { margin: 0; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
+.sb-window__heading { margin: 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); overflow-wrap: anywhere; }
+.sb-window__meta { margin: var(--sb-space-1) 0 var(--sb-space-4); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.sb-side-nav__head {
+  margin: var(--sb-space-4) 0 var(--sb-space-1); padding-inline: var(--sb-space-4);
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
+}
+/* the action zone: the state sentence at the start, the one primary action last and at the end (D72, D74, D83 (5)) */
+.sb-window > .sb-bottom-block { position: static; }
+.sb-window .sb-primary-action-bar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-2) var(--sb-space-4); padding: var(--sb-space-3) var(--sb-space-4); }
+.sb-window .sb-primary-action-bar__status { display: flex; flex: 1 1 auto; min-inline-size: 0; margin: 0; }
+.sb-window .sb-primary-action-bar__message { flex: 1 1 260px; margin: 0; }
+.sb-window .sb-primary-action-bar:has(.sb-primary-action-bar__message:not(:empty)) .sb-primary-action-bar__status { display: none; }
+.sb-window .sb-primary-action-bar .sb-primary-action { inline-size: auto; min-inline-size: 200px; margin-inline-start: auto; }
+/* overlay panes: out of the grid, over the content edge, the ink line on their inner edge stays the layer line */
+@container sb-window (max-width: 1003.98px) {
+  .sb-window__inspector {
+    position: absolute; grid-column: auto; inset-block: 0; inset-inline-end: 0; z-index: var(--sb-layer-overlay);
+    max-inline-size: calc(100% - var(--sb-space-12));
+  }
+}
+@container sb-window (max-width: 721.98px) {
+  .sb-window__sidebar {
+    position: absolute; grid-column: auto; inset-block: 0; inset-inline-start: 0; z-index: var(--sb-layer-overlay);
+    max-inline-size: calc(100% - var(--sb-space-12));
+  }
+  .sb-window__content { padding: var(--sb-space-4); }
+}
+@container sb-window (max-width: 479.98px) {
+  .sb-window__name {   /* the tile and the path name the window; the name stays for screen readers */
+    position: absolute; inline-size: 1px; block-size: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+  }
+  .sb-window__path > :not(:last-child, .sb-visually-hidden) { display: none; }   /* only the current place is left */
+  .sb-window .sb-primary-action-bar { flex-direction: column; align-items: stretch; }
+  .sb-window .sb-primary-action-bar .sb-primary-action { inline-size: 100%; min-inline-size: 0; margin-inline-start: 0; }
+}
+
+/* touch: every window row and tool keeps a 48 px target */
+@media (pointer: coarse) {
+  [data-sb-density="window"] :is(.sb-side-nav__item, .sb-menu__item, .sb-list-row), .sb-row { min-block-size: var(--sb-size-target-touch); }
+  .sb-icon-button--compact { inline-size: var(--sb-size-target-touch); block-size: var(--sb-size-target-touch); }
+  .sb-secondary-action--compact { min-block-size: var(--sb-size-target-touch); }
+}
 
 /* ===================================================================== 8 evidence ("Belege") and facts (spec/03 §5, spec/10) */
 
@@ -1015,8 +1539,17 @@ html.sb-starting > body > .sb-start, .sb-starting > .sb-start {
 }
 .sb-note__body { max-inline-size: 60ch; }   /* about 68 characters at 14 px (fix stage AD16) */
 .sb-note__body > p, .sb-claim-row__note > p, .sb-note-popover__body p { margin: 0 0 var(--sb-space-1); }
-.sb-note__result { display: flex; align-items: flex-start; gap: var(--sb-space-1); font-weight: var(--sb-type-label-weight); }
-.sb-note__result .sb-icon, .sb-claim-row__result .sb-icon, .sb-check-state .sb-icon, .sb-stale-notice .sb-icon { flex: none; margin-block-start: 2px; }
+/* result lines (note result, claim-row result, stale notice; D80): the glyph hangs in its own 16 + 4 px column at
+   the start and the text after it flows as one line of running text, so a <time>, <code> or <b> inside it stays in
+   the sentence and a wrapped line starts under the text, not under the glyph. Works with and without an inner span */
+.sb-note__result { font-weight: var(--sb-type-label-weight); }
+.sb-note__result, .sb-claim-row__result, .sb-stale-notice {
+  display: block; position: relative; padding-inline-start: calc(var(--sb-size-icon-sm) + var(--sb-space-1));
+}
+:is(.sb-note__result, .sb-claim-row__result, .sb-stale-notice) > .sb-icon:first-child {
+  position: absolute; inset-inline-start: 0; inset-block-start: 2px;
+}
+.sb-check-state .sb-icon { flex: none; margin-block-start: 2px; }
 .sb-note__by { color: var(--sb-color-text-muted); }
 .sb-note__checks { display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-pointer); }
 .sb-claim-row__note .sb-note__checks { min-block-size: var(--sb-size-target-touch); }
@@ -1067,7 +1600,7 @@ html.sb-starting > body > .sb-start, .sb-starting > .sb-start {
 .sb-claim-row__toggle:hover, .sb-claim-row__toggle.is-hover { background: var(--sb-color-hover-fill); }
 .sb-claim-row__toggle:focus-visible { outline-offset: calc(-1 * var(--sb-focus-width)); }
 .sb-claim-row__claim { grid-column: 1; font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
-.sb-claim-row__result { grid-column: 1; display: flex; align-items: flex-start; gap: var(--sb-space-1); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text); }
+.sb-claim-row__result { grid-column: 1; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text); }
 .sb-claim-row__chevron { grid-column: 2; grid-row: 1 / span 2; color: var(--sb-color-text-muted); transition: transform var(--sb-motion-duration-short) var(--sb-motion-easing-standard); }
 .sb-claim-row__toggle[aria-expanded="true"] .sb-claim-row__chevron { transform: rotate(180deg); }
 .sb-claim-row__note {
@@ -1107,7 +1640,6 @@ html.sb-starting > body > .sb-start, .sb-starting > .sb-start {
 .sb-facts-line__cell { display: inline-flex; align-items: center; gap: var(--sb-space-1); white-space: nowrap; }
 .sb-facts-line__sep { color: var(--sb-color-text-muted); }
 .sb-facts-line__cell:has(> .sb-stale-notice) { white-space: normal; }   /* stale form: the notice wraps (spec/10 §4.1) */
-.sb-facts { display: grid; gap: var(--sb-space-2); }
 .sb-facts__device { margin: 0; padding: var(--sb-space-2) var(--sb-spacing-gutter); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
 /* device row as the facts renderer writes it (spec/10 §4.2): place and data in body-strong like a claim, then how it
    is kept and "Bleibt auf diesem Gerät."; no toggle, no note. A hairline separates it from the claim rows below */
@@ -1119,15 +1651,20 @@ html.sb-starting > body > .sb-start, .sb-starting > .sb-start {
 }
 .sb-action-hint { margin: var(--sb-space-2) 0 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .sb-primary-action-bar .sb-action-hint { text-align: center; max-inline-size: none; }
-.sb-stale-notice { display: flex; align-items: flex-start; gap: var(--sb-space-1); margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text); }
+.sb-stale-notice { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text); }
 .sb-stale-notice .sb-icon { color: var(--sb-color-warning); }
 
 /* ===================================================================== 9 forced colours and print */
 
 @media (forced-colors: active) {
+  .sb-menu[popover], .sb-tooltip[popover], dialog.sb-sheet { border-color: CanvasText; }
+  .sb-row:is([aria-current]:not([aria-current="false"]), [aria-selected="true"]) { border-inline-start-color: CanvasText; }
+  .sb-command-palette__search:focus-within { outline-color: Highlight; }
+  .sb-icon-button[aria-disabled="true"], .sb-tabs__tab[aria-disabled="true"] { color: GrayText; }
   .sb-primary-action { border-color: ButtonText; }
   .sb-site-nav a[aria-current="page"], .sb-language-switch a[aria-current="true"], .sb-bottom-nav__item[aria-current="page"],
-  .sb-side-nav__item[aria-current="page"], .sb-tabs__tab[aria-selected="true"], .sb-toc a[aria-current="true"],
+  .sb-side-nav__item[aria-current="page"], .sb-tabs__tab[aria-selected="true"], .sb-toc a[aria-current],
+  .sb-card--item[aria-current="true"],
   .sb-segmented__option > input:checked + .sb-segmented__face, .sb-progress__step[aria-current="step"],
   .sb-note:target, .sb-note.is-active, .sb-claim-row:has(> .sb-claim-row__toggle[aria-expanded="true"]) { border-color: CanvasText; }
   .sb-chip[aria-pressed="true"]::before { border-color: CanvasText; }

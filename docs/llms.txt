@@ -6,7 +6,7 @@ Machine-readable rules: https://grundhofer.github.io/sebaro-guide/rules.json · 
 
 ## Pages
 
-- [Start](https://grundhofer.github.io/sebaro-guide/index.html): Einstieg: was sebaro ist, die Kernregeln in sieben Sätzen, Wege durch den Guide
+- [Start](https://grundhofer.github.io/sebaro-guide/index.html): Einstieg: was sebaro ist, der Kern in neun Sätzen, Wege durch den Guide
 - [Regeln](https://grundhofer.github.io/sebaro-guide/regeln.html): Alle Gestaltungsregeln mit ID, Begründung, Prüfung und Live-Beispiel (richtig/falsch)
 - [Grundlagen](https://grundhofer.github.io/sebaro-guide/grundlagen.html): Farben, Schrift, Raum, Form, Linien, Ebenen, Bewegung: alle Tokens mit Werten
 - [Bauteile](https://grundhofer.github.io/sebaro-guide/bauteile.html): Alle Komponenten mit Zuständen und Markup
@@ -15,7 +15,7 @@ Machine-readable rules: https://grundhofer.github.io/sebaro-guide/rules.json · 
 - [App](https://grundhofer.github.io/sebaro-guide/app.html): Beispiel-App am Handy: alle typischen Bildschirme und Zustände
 - [Desktop](https://grundhofer.github.io/sebaro-guide/desktop.html): Beispiel-Desktop-App (Tauri/macOS): Fenster, Seitenleiste, Tabellen, Menüs, Tastatur
 - [Gedanken](https://grundhofer.github.io/sebaro-guide/gedanken.html): Die Gedanken dahinter: Haltung, Geschichte, Entscheidungen, Abwägungen
-- [Ausblick](https://grundhofer.github.io/sebaro-guide/ausblick.html): Vorschläge zur Weiterentwicklung und offene Fragen
+- [Ausblick](https://grundhofer.github.io/sebaro-guide/ausblick.html): Was auf eine Wahl des Inhabers wartet, was offen ist, später kommt oder erledigt ist
 
 ## System files (generated, never edit)
 

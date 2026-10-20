@@ -4,6 +4,7 @@
 //   node tools/check_a11y.mjs                 # all docs/*.html
 //   node tools/check_a11y.mjs docs/app.html   # some pages
 //
+// Inside a .g-ex--dont specimen (not its label or note) axe color-contrast is skipped; every other rule runs there.
 // Waivers live in tools/a11y-waivers.json: {"waivers": [{"page", "rule", "target", "reason"}]}; "target" is a
 // substring of the axe node target. A waiver without a reason is an error. Deliberate "Nicht so" specimens that axe
 // cannot judge go there with their rule id, never as a blanket waiver.
@@ -18,6 +19,9 @@ const DOCS = join(ROOT, "docs");
 const require = createRequire(import.meta.url);
 const AXE = readFileSync(require.resolve("axe-core/axe.min.js"), "utf8");
 const TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
+// deliberate "Nicht so" specimens: only axe color-contrast skips them (their label and note stay checked); names,
+// roles, keyboard and every other rule still run there (guide.css, section "deliberate Nicht so specimens")
+const DONT = ".g-ex--dont > :not(.g-ex__label):not(.g-ex__note)";
 const RUNS = [
   { width: 1440, height: 900, scheme: "light" }, { width: 1440, height: 900, scheme: "dark" },
   { width: 390, height: 844, scheme: "light" }, { width: 390, height: 844, scheme: "dark" },
@@ -60,11 +64,16 @@ for (const file of pages) {
     await tab.goto(BASE + page, { waitUntil: "load" });
     await tab.waitForTimeout(300);
     await tab.addScriptTag({ content: AXE });
-    const result = await tab.evaluate(async (tags) => {
+    const result = await tab.evaluate(async ({ tags, dont }) => {
+      const map = (r) => r.violations.map((v) => ({ id: v.id, help: v.help, nodes: v.nodes.map((n) => n.target.join(" ")) }));
+      // every rule except color-contrast on the whole page, then color-contrast without the deliberate specimens
       // eslint-disable-next-line no-undef
-      const r = await axe.run(document, { runOnly: { type: "tag", values: tags }, resultTypes: ["violations"] });
-      return r.violations.map((v) => ({ id: v.id, help: v.help, nodes: v.nodes.map((n) => n.target.join(" ")) }));
-    }, TAGS);
+      const all = await axe.run(document, { runOnly: { type: "tag", values: tags }, rules: { "color-contrast": { enabled: false } }, resultTypes: ["violations"] });
+      const ctx = document.querySelector(dont) ? { include: [document], exclude: [[dont]] } : document;
+      // eslint-disable-next-line no-undef
+      const contrast = await axe.run(ctx, { runOnly: { type: "rule", values: ["color-contrast"] }, resultTypes: ["violations"] });
+      return map(all).concat(map(contrast));
+    }, { tags: TAGS, dont: DONT });
     const overflow = await tab.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     const label = `${page} ${run.width}/${run.scheme}`;
     for (const v of result) {

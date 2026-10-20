@@ -13,4 +13,15 @@ This product uses the sebaro design system. Before building or changing any UI:
 4. Product id: `<id>`; its tile colour appears only in the sign tile.
 5. Before calling a screen done, walk https://github.com/grundhofer/sebaro-guide/blob/main/templates/screen-checklist.md
    in light and dark, at 390 px and 1440 px.
-6. If a rule does not fit, cite its id (e.g. `AKT-01`) and ask the owner; do not work around it.
+6. Light or dark per product kind (D75): a website has the labelled button „Hell oder Dunkel“ in its header; a phone
+   app offers System, Hell, Dunkel in its settings; a desktop app in the menu „Darstellung“ and in its settings view.
+7. The one primary action sits at the bottom of the area it acts on and comes last in every action group (D74, D83).
+   Desktop: command palette on ⌘K / Ctrl+K (D84); sidebar and inspector can be hidden, the content keeps ≥ 480 px
+   (D81). Focus ring 2 px (D85).
+8. Plan for several languages (D87): no UI string built into code; script messages follow `lang`.
+9. Components the owner has not chosen yet (category/mark colours, warm palette, board, calendar, timeline, table
+   sort/sum, quote, media, map, onboarding, website patterns, charts beyond bars, iOS, remaining window questions) are
+   not part of sebaro: ask before building one.
+10. Ship the export's `LICENSE.md` unchanged (D76). If a rule does not fit, cite its id (e.g. `AKT-01`) and ask the
+    owner; do not work around it. Rule changes are listed by id in
+    https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md.

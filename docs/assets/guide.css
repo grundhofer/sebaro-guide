@@ -6,6 +6,12 @@
 .g-header__suffix { font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); color: var(--sb-color-text-muted); }
 .g-nav { row-gap: 0; }
 .g-footer code { font-size: 0.875em; }
+/* NAV-07 order is lockup, navigation, theme button (no language switch: the guide is German only). Lockup plus
+ * "Guide" (168 px) and the button (160 px) need 368 px with the gutters; on narrower pages the button label wraps
+ * onto two lines instead of pushing the page sideways (measured at 320 px). */
+@container sb-page (width < 384px) {
+  .g-header .sb-theme-button { white-space: normal; max-inline-size: 7.5rem; padding-inline: var(--sb-space-3); text-align: center; }
+}
 
 /* ------------------------------------------------------------------ page lead and long-page layout */
 .g-lead { padding-block: var(--sb-spacing-section) var(--sb-space-6); }
@@ -51,6 +57,38 @@
 .g-source > summary { display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-pointer); cursor: pointer; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .g-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: var(--sb-space-6) var(--sb-spacing-group); align-items: start; }
 .g-mark-proposal { display: inline-flex; align-items: center; gap: var(--sb-space-1); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+
+/* ------------------------------------------------------------------ deliberate "Nicht so" specimens
+ * .g-ex--dont marks a wrong example. Inside it (except its .g-ex__label and .g-ex__note) check_site.py lets colour
+ * literals and box-shadow pass in CSS rules whose every selector is scoped by .g-ex--dont and in inline styles, and
+ * check_a11y.mjs skips only axe color-contrast. Names, roles, keyboard and every other axe rule stay checked. */
+
+/* ------------------------------------------------------------------ reference swatches (FAR-13, vorläufig)
+ * Markup: <span class="g-swatch" role="img" aria-label="Farbfeld Lindgrün" style="--g-swatch-color: var(--sb-color-primary-action)"></span>
+ * followed by visible text that starts with "Farbfeld", e.g. "Farbfeld · Lindgrün · primary-action". Only on reference
+ * pages (Grundlagen, Regeln, Start); never a control, never in a product. check_site.py (SWATCH) checks the name. */
+.g-swatch { display: inline-block; flex: none; vertical-align: middle; inline-size: var(--sb-space-8); block-size: var(--sb-space-8); box-sizing: border-box; border: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-control); background: var(--g-swatch-color, transparent); }
+.g-swatch-item { display: inline-flex; align-items: center; gap: var(--sb-space-2); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
+
+/* ------------------------------------------------------------------ tables that restack per row (shared guide pattern)
+ * Markup: <div class="sb-table-wrap" role="region" aria-labelledby="…" tabindex="0"><table class="sb-table g-table-stack">.
+ * Below 560 px of the table's own place (a container, not the screen) each row becomes a block: the row header
+ * (th scope="row", else the first cell) is its title, every other cell shows its data-label before the value.
+ * Give every td a data-label equal to its column header. guide.js adds the explicit table roles a display change would
+ * otherwise drop, if the markup lacks them. */
+:has(> .g-table-stack) { container: g-table / inline-size; }
+@container g-table (width < 560px) {
+  .g-table-stack, .g-table-stack > :is(tbody, tfoot), .g-table-stack > caption { display: block; }
+  .g-table-stack > thead { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .g-table-stack tr { display: grid; gap: var(--sb-space-1); padding-block: var(--sb-space-3); border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+  .g-table-stack :is(td, th) { display: block; padding: 0; border: 0; min-inline-size: 0; text-align: start; overflow-wrap: anywhere; }
+  .g-table-stack :is(td, th).sb-num { text-align: start; } /* sb-num right-aligns numbers in columns; a stacked row has no column */
+  .g-table-stack tr > th[scope="row"], .g-table-stack tr > td:first-child { font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
+  .g-table-stack tr > :is(td, th)[data-label]:not(:first-child)::before { content: attr(data-label) ": "; color: var(--sb-color-text-muted); font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); }
+}
+
+/* long names in inline code break instead of pushing a column or the page sideways (code blocks keep their lines) */
+main :is(code, .sb-code-inline):not(pre code) { overflow-wrap: anywhere; }
 
 /* ------------------------------------------------------------------ filter bar on regeln.html */
 .g-filter { display: flex; flex-wrap: wrap; align-items: end; gap: var(--sb-space-4) var(--sb-space-6); margin-block: var(--sb-space-6) 0; }

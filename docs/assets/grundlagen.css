@@ -1,7 +1,7 @@
 /* grundlagen.css: page chrome of grundlagen.html (swatches, type specimens, scale bars, line and radius samples).
  * Guide chrome, never part of a product. Only var(--sb-*) tokens, no colour literals, no shadows.
- * Every class starts with "g-grundlagen-". The one UI pattern the system does not have yet (desktop rows of 32 px,
- * D67) is marked on the page as „Vorschlag, noch nicht im System“. */
+ * Every class starts with "g-grundlagen-". Colour reference swatches also carry the chrome marker class g-swatch (FAR-13);
+ * page tables restack per row with the chrome class g-table-stack (guide.css). */
 
 /* ------------------------------------------------------------------ shared bits */
 .g-grundlagen-rules { margin: var(--sb-space-3) 0 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
@@ -29,9 +29,9 @@
 .g-grundlagen-swatches--compact { grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); gap: var(--sb-space-4) var(--sb-space-4); }
 .g-grundlagen-swatch { display: grid; align-content: start; gap: var(--sb-space-1); min-inline-size: 0; }
 .g-grundlagen-swatch__chip {
-  display: block; block-size: var(--sb-space-12); margin-block-end: var(--sb-space-1);
+  display: block; inline-size: auto; block-size: var(--sb-space-12); margin-block-end: var(--sb-space-1);
   border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-small);
-  background: var(--g-chip);
+  background: var(--g-swatch-color);
 }
 .g-grundlagen-swatches--compact .g-grundlagen-swatch__chip { block-size: var(--sb-space-8); }
 .g-grundlagen-swatch__name, .g-grundlagen-swatch__value { margin: 0; font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); overflow-wrap: anywhere; }
@@ -46,7 +46,7 @@
 /* ramps of the dataviz palettes: the chips touch and form one strip; step and live value below each chip */
 .g-grundlagen-ramp { display: grid; grid-template-columns: repeat(auto-fit, minmax(4.75rem, 1fr)); row-gap: var(--sb-space-4); margin: var(--sb-space-2) 0 0; padding: 0; list-style: none; }
 .g-grundlagen-ramp > li { display: grid; gap: var(--sb-space-1); align-content: start; min-inline-size: 0; }
-.g-grundlagen-ramp__chip { display: block; block-size: var(--sb-space-8); margin-block-end: var(--sb-space-1); border-block: var(--sb-border-width-hairline) solid var(--sb-color-border); background: var(--g-chip); }
+.g-grundlagen-ramp__chip { display: block; inline-size: auto; block-size: var(--sb-space-8); margin-block-end: var(--sb-space-1); border: 0; border-block: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: 0; background: var(--g-swatch-color); }
 .g-grundlagen-ramp > li:first-child .g-grundlagen-ramp__chip { border-inline-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
 .g-grundlagen-ramp > li:last-child .g-grundlagen-ramp__chip { border-inline-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
 .g-grundlagen-ramp__step { font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); font-variant-numeric: var(--sb-type-numeric-variant); }
@@ -54,7 +54,7 @@
 .g-grundlagen-token { font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); white-space: nowrap; }
 
 /* tile colours: spare groups have no product yet, so the colour is shown as an empty tile of the sign-tile shape */
-.g-grundlagen-tile-spare { display: inline-block; vertical-align: middle; inline-size: var(--sb-x-sebaro-sign-tile-size); block-size: var(--sb-x-sebaro-sign-tile-size); border-radius: calc(var(--sb-x-sebaro-sign-tile-size) * var(--sb-x-sebaro-sign-tile-radius-ratio)); background: var(--g-chip); }
+.g-grundlagen-tile-spare { display: inline-block; vertical-align: middle; inline-size: var(--sb-x-sebaro-sign-tile-size); block-size: var(--sb-x-sebaro-sign-tile-size); border: 0; border-radius: calc(var(--sb-x-sebaro-sign-tile-size) * var(--sb-x-sebaro-sign-tile-radius-ratio)); background: var(--g-swatch-color); }
 .g-grundlagen-tile-cell { display: flex; align-items: center; gap: var(--sb-space-3); }
 
 /* ------------------------------------------------------------------ type */
@@ -135,23 +135,6 @@
 .g-grundlagen-targets p { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
 .g-grundlagen-target { display: block; box-sizing: border-box; inline-size: var(--g-size); block-size: var(--g-size); border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-control); }
 
-/* Vorschlag: desktop rows of 32 px (D67, RAU-06); the system has no class for it yet */
-.g-grundlagen-dense { margin: 0; padding: var(--sb-space-2) 0; list-style: none; inline-size: min(100%, 280px); box-sizing: border-box; border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container); }
-.g-grundlagen-dense__row {
-  position: relative; display: flex; align-items: center; gap: var(--sb-space-2); box-sizing: border-box;
-  block-size: var(--sb-size-control-sm); padding-inline: calc(var(--sb-space-3) - var(--sb-border-width-strong)) var(--sb-space-3);
-  border-inline-start: var(--sb-border-width-strong) solid transparent;
-  color: var(--sb-color-text); text-decoration: none; font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); white-space: nowrap;
-}
-.g-grundlagen-dense__row--child { padding-inline-start: calc(var(--sb-space-3) + var(--sb-space-10) - var(--sb-border-width-strong)); }
-.g-grundlagen-dense__row .sb-icon { flex: none; color: var(--sb-color-text-muted); }
-.g-grundlagen-dense__row:visited { color: var(--sb-color-text); }
-.g-grundlagen-dense__row:hover { background: var(--sb-color-hover-fill); color: var(--sb-color-text); }
-.g-grundlagen-dense__row:active { background: var(--sb-color-pressed-fill); }
-.g-grundlagen-dense__row[aria-current="page"] { border-inline-start-color: var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
-.g-grundlagen-dense__row:focus-visible { outline-offset: calc(-1 * var(--sb-focus-width)); }
-@media (pointer: coarse) { .g-grundlagen-dense__row::after { content: ""; position: absolute; inset: calc((var(--sb-size-control-sm) - var(--sb-size-target-touch)) / 2) 0; } }
-
 /* ------------------------------------------------------------------ shape */
 .g-grundlagen-radii { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: var(--sb-space-6) var(--sb-spacing-group); }
 .g-grundlagen-radii > li { display: grid; gap: var(--sb-space-1); align-content: start; }
@@ -212,28 +195,10 @@
 /* last, so it wins over the margin: 0 of the lists above */
 .g-grundlagen-gap { margin-block-start: var(--sb-space-6); }
 
-/* page tables: a real table from 640 px; below that every row becomes a block and each cell shows its column name
- * (data-label, written from the column headers), so nothing scrolls sideways on a phone */
-@media (min-width: 640px) { .g-grundlagen-table { min-inline-size: 40rem; } }
+/* page tables restack per row below 640 px with the shared chrome class g-table-stack (guide.css); what stays here is
+ * only what the state matrices and the token cells need on top of it */
 @media (max-width: 639.98px) {
-  .g-grundlagen-table, .g-grundlagen-states,
-  .g-grundlagen-table > tbody, .g-grundlagen-states > tbody,
-  .g-grundlagen-table > tbody > tr, .g-grundlagen-states > tbody > tr,
-  .g-grundlagen-table > tbody > tr > *, .g-grundlagen-states > tbody > tr > * { display: block; }
-  .g-grundlagen-table > caption, .g-grundlagen-states > caption:not(.sb-visually-hidden) { display: block; }
-  .g-grundlagen-table > thead, .g-grundlagen-states > thead { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  .g-grundlagen-table > tbody > tr, .g-grundlagen-states > tbody > tr { display: grid; gap: var(--sb-space-2); padding-block: var(--sb-space-3); border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
-  .g-grundlagen-states > tbody > tr:first-child { border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
-  .g-grundlagen-table > tbody > tr > *, .g-grundlagen-states.demo-states > tbody > tr > * { padding: 0; border: 0; text-align: start; white-space: normal; min-inline-size: 0; }
   .g-grundlagen-states .sb-list { min-inline-size: 0; }
-  /* the column name sits in the first 40 % of the line, the cell content after it, whatever that content is */
-  .g-grundlagen-table > tbody > tr > td[data-label], .g-grundlagen-states.demo-states > tbody > tr > td[data-label] { position: relative; padding-inline-start: calc(40% + var(--sb-space-3)); }
-  .g-grundlagen-table td[data-label]::before, .g-grundlagen-states td[data-label]::before {
-    content: attr(data-label); position: absolute; inset-block-start: 0; inset-inline-start: 0; inline-size: 40%;
-    font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
-  }
-  .g-grundlagen-states td[data-label]::before { inset-block: 0; display: flex; align-items: center; }
-  .g-grundlagen-table .sb-num { text-align: start; }
+  .g-grundlagen-states > tbody > tr > td.demo-label { display: none; }
   .g-grundlagen-token { white-space: normal; overflow-wrap: anywhere; }
-  .g-grundlagen-table > tbody > tr > td:empty, .g-grundlagen-states.demo-states > tbody > tr > td.demo-label { display: none; }
 }
