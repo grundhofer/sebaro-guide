@@ -160,7 +160,8 @@ def block_footer(_attrs: dict) -> str:
     contracts = st.get("contracts") or {}
     return "\n".join([
         '<footer class="sb-site-footer g-footer">',
-        f'  <p>sebaro Guide · System sebaro, Token-Vertrag {esc(str(contracts.get("tokens", "?")))} · '
+        f'  <p>sebaro Guide <a href="{REPO_URL}/blob/main/CHANGELOG.md">Version {esc(rules_data().get("version", "?"))}{icon("external-link--16")}</a> · '
+        f'System sebaro, Token-Vertrag {esc(str(contracts.get("tokens", "?")))} · '
         f'aus sebaroDesign <code class="sb-code-inline">{esc(commit)}</code></p>',
         '  <ul class="sb-site-footer__links">',
         '    <li><a href="rules.json">rules.json</a></li>',
@@ -207,6 +208,7 @@ def render_rule(r: dict, area_title: str) -> str:
     parts += [
         f'      <div><dt>Prüfung</dt><dd>{text(r.get("check", ""))}</dd></div>',
         f'      <div><dt>Entscheidung</dt><dd>{esc(decisions)}</dd></div>',
+        f'      <div><dt>Geändert</dt><dd>{esc(r.get("changed", ""))}</dd></div>',
         f'      <div><dt>Quelle</dt><dd><code class="sb-code-inline">{esc(r.get("source", ""))}</code></dd></div>',
         f'      <div><dt lang="en">Agent</dt><dd lang="en">{text(r.get("rule_en", ""), "en")}</dd></div>',
         '    </dl>',

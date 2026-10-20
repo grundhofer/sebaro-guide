@@ -13,6 +13,8 @@ Groups
   RULES  rules/rules.json: unique ids, required fields, known areas/status; every rule rendered in regeln.html;
          missing example fragments in src/rule-examples/ are warnings
   TEXT   U+202F / U+2009 are not used in page text (D22: U+00A0 between number and unit)
+  CHANGE every rule that differs from the last snapshot in rules/releases/ (new, changed, removed) is named under
+         "Unveröffentlicht" in CHANGELOG.md and carries a newer "changed" date; the version is the last release's
   TERM   retired names do not appear in pages, fragments, rules or docs (D71: only "sebaro Sans" and "sebaro Mono");
          the font licence files in docs/sebaro/ keep the authors' copyright as the OFL requires
 """
@@ -31,7 +33,7 @@ DOCS = ROOT / "docs"
 RULES = ROOT / "rules" / "rules.json"
 EXAMPLES = ROOT / "src" / "rule-examples"
 REQUIRED_RULE_FIELDS = ["id", "area", "title", "rule", "rule_en", "why", "do", "dont", "decisions", "source",
-                        "platforms", "status", "check"]
+                        "platforms", "status", "check", "changed"]
 COLOUR_LITERAL = re.compile(r"#[0-9a-fA-F]{3,8}\b|\b(?:rgb|rgba|hsl|hsla|oklch|oklab|lab|lch|color)\(", re.I)
 
 
@@ -172,6 +174,28 @@ def main() -> int:
         for ch, label in ((" ", "U+202F"), (" ", "U+2009")):
             if ch in text:
                 errors.append(f"TEXT {name}: {label} in text (D22: use U+00A0)")
+
+    # CHANGE
+    releases = sorted((ROOT / "rules" / "releases").glob("*.json"), key=lambda p: tuple(int(x) for x in p.stem.split(".")))
+    if RULES.is_file() and releases:
+        cur = json.loads(RULES.read_text(encoding="utf-8"))
+        last = json.loads(releases[-1].read_text(encoding="utf-8"))
+        log = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8") if (ROOT / "CHANGELOG.md").is_file() else ""
+        m = re.search(r"## Unveröffentlicht\n(.*?)(?=\n## )", log, re.S)
+        pending = m.group(1) if m else ""
+        if cur.get("version") != releases[-1].stem:
+            errors.append(f"CHANGE rules.json version {cur.get('version')} != last release {releases[-1].stem} (use tools/release.py)")
+        old = {r["id"]: r for r in last.get("rules", [])}
+        new = {r["id"]: r for r in cur.get("rules", [])}
+        strip = lambda r: {k: v for k, v in r.items() if k != "changed"}
+        for rid in sorted(set(old) | set(new)):
+            if rid in old and rid in new and strip(old[rid]) == strip(new[rid]):
+                continue
+            if not re.search(rf"\b{re.escape(rid)}\b", pending):
+                kind = "new" if rid not in old else "removed" if rid not in new else "changed"
+                errors.append(f"CHANGE {rid} is {kind} since {releases[-1].stem} but not listed under 'Unveröffentlicht' in CHANGELOG.md")
+            if rid in old and rid in new and new[rid].get("changed", "") <= old[rid].get("changed", ""):
+                errors.append(f"CHANGE {rid} changed but its 'changed' date was not moved forward")
 
     # TERM
     retired = re.compile(r"radio[\s_-]*canada", re.I)

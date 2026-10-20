@@ -277,6 +277,7 @@
       <div><dt>Werte</dt><dd>Metaphern-Test: 6 Prüfpunkte (spec/03 §9); Punkte 4 und 5 brauchen menschlichen Blick</dd></div>
       <div><dt>Prüfung</dt><dd>Metaphern-Test spec/03 §9 je Produkt; Test 4 (Graustufen-Vergleich der Screenshots) und 5 (Fehllesen bei 16/24/32 px) von Hand.</dd></div>
       <div><dt>Entscheidung</dt><dd>D27, D29, D32, D41, D58</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D29, D32, D58; systems/sebaro/spec/03-signature.md §9; research/09-grundlagen-ohne-metapher.md §1.3, §4.1</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Never build the system around a shared object metaphor; identity comes from rules (colour jobs, lines, action zone, type, signs); a single app symbol may pragmatically reference its app.</dd></div>
     </dl>
@@ -324,6 +325,7 @@
       <div><dt>Werte</dt><dd>Icon-Set: 75 Namen (62 kanonisch + 9 Extras + 4 Spots), 118 Quelldateien; tags.de Pflicht</dd></div>
       <div><dt>Prüfung</dt><dd>grep -rniE &#x27;typenschild|flag|bordbuch|gestirn|werkstatt|nameplate|logbook&#x27; über CSS, Spec, Strings (spec/07 §7); icons.py lint (ICN409).</dd></div>
       <div><dt>Entscheidung</dt><dd>D32, D41, D3</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D32, D41; systems/sebaro/spec/02-components.md §0.1; spec/04-icons.md §4; spec/07-voice.md §5, §6.1</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Name components, classes (sb-&lt;block&gt;__&lt;part&gt;--&lt;variant&gt;), tokens, icons (&lt;object&gt;[-&lt;modifier&gt;]) and UI words by function; any name that needs a story is banned.</dd></div>
     </dl>
@@ -375,6 +377,7 @@
       <div><dt>Nicht so</dt><dd>„zertifiziert“, „unabhängig geprüft“, „TÜV“, „garantiert“, Siegel-Grafiken, Schild-Symbole als Beruhigung, geschätzte Fakten.</dd></div>
       <div><dt>Prüfung</dt><dd>grep nach Siegelwörtern (spec/07 §7); Review: jede beruhigende Aussage hat einen Beleg mit „Eigene Prüfung“ und Datum.</dd></div>
       <div><dt>Entscheidung</dt><dd>D40, D21, D14</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D40, D21; research/04-sebaro-profil.md §3; research/12-belege-als-fussnoten.md §5.5; systems/sebaro/spec/07-voice.md §1, §6.3</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Never claim more than the evidence shows; no seals, borrowed authority or unverified reassurance.</dd></div>
     </dl>
@@ -421,6 +424,7 @@
       <div><dt>Werte</dt><dd>4 Prüfzustände; Glyphe 16 px</dd></div>
       <div><dt>Prüfung</dt><dd>Zählung der Prüfliste = Zählung in facts.json; check_facts.py erlaubt nur die vier Wörter; CHECKS.md listet jede übersprungene Prüfung mit Grund.</dd></div>
       <div><dt>Entscheidung</dt><dd>D15, D24</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D15, D24; BRIEF.md „Arbeitsregeln“; systems/sebaro/spec/10-facts.md §3.1; spec/02-components.md §6; css/sebaro.css Z. 1073-1089</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Show every check in one of four fixed states (bestanden, offen, übersprungen with reason, nicht bestanden); never smooth over or silently drop failures.</dd></div>
     </dl>
@@ -505,6 +509,7 @@
       <div><dt>Werte</dt><dd>höchstens 1 Hauptaktion je Ansicht; 0 Zähl-Badges</dd></div>
       <div><dt>Prüfung</dt><dd>grep -rn &#x27;!&#x27; in Strings; Bannwort-grep spec/07 §7; Review je Ansicht: höchstens eine lindgrüne Fläche, keine Badge-Zahl.</dd></div>
       <div><dt>Entscheidung</dt><dd>D39, D48</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D39, D48; systems/sebaro/SYSTEM.md §5; spec/07-voice.md §1, §4.9, §6.4; research/09-grundlagen-ohne-metapher.md §3 G5</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Calm views and copy: at most one loud element (the lime primary action), no count badges or red dots, no exclamation marks, hype, pressure or guilt; reminders only when turned on.</dd></div>
     </dl>
@@ -563,6 +568,7 @@
       <div><dt>Nicht so</dt><dd>Deko-Illustrationen als Leitbild, Tagbogen ohne Information, Schmucklinien ohne Bedeutung.</dd></div>
       <div><dt>Prüfung</dt><dd>Vergleichsbogen ohne Heldenfeld und Faktenseite: ist sebaro noch erkennbar? (research/09 §4.1 Punkt 4)</dd></div>
       <div><dt>Entscheidung</dt><dd>D46, D48</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">concepts/runde-2/BRIEF.md §2.1; research/09-grundlagen-ohne-metapher.md §1.2, §4.1 Punkte 3–4</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Every recurring design element carries a real value or function; identity must show on everyday screens, not only in hero images.</dd></div>
     </dl>
@@ -629,6 +635,7 @@
       <div><dt>Nicht so</dt><dd>„Best of“ aus Runde-1-Entwürfen; zwei Farbquellen für eine App; generierte Dateien von Hand ändern.</dd></div>
       <div><dt>Prüfung</dt><dd>export_system.py --verify &lt;Mappe&gt;; Start und Links je Plattform gegen spec/03 §14–§15.</dd></div>
       <div><dt>Entscheidung</dt><dd>D49, D52, D54, D66</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">BRIEF.md „Auftrag“; DECISIONS.md D49, D54, D66; sebaroDesign AGENTS.md §2, §7</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Every product uses exactly one system (sebaro) with the same start and link style everywhere; take values only from the export, never mix in other drafts or copy by hand.</dd></div>
     </dl>
@@ -681,6 +688,7 @@
       <div><dt>Nicht so</dt><dd>Komplette Systeme vor einer Wahl bauen; I-Zeilen selbst schreiben; offene Inhaberfragen selbst beantworten.</dd></div>
       <div><dt>Prüfung</dt><dd>Jede Regel im Guide hat eine D-Nummer; ohne I-Zeile trägt sie den Status vorläufig oder offen.</dd></div>
       <div><dt>Entscheidung</dt><dd>D35, D45, D56</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D35, D45, D56; concepts/runde-5-desktop/skizze.html (Einleitung)</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Before any build, show the owner a rendered sketch page (two ways per question, one marked as proposal); build only what he picked and record his words as an I-row.</dd></div>
     </dl>
@@ -732,6 +740,7 @@
       <div><dt>Werte</dt><dd>0 fremde Anfragen</dd></div>
       <div><dt>Prüfung</dt><dd>check_demo.py Netzwerk-Gate: 0 Anfragen an fremde Hosts.</dd></div>
       <div><dt>Entscheidung</dt><dd>D18, D28, D38, D66</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">BRIEF.md „Harte Anforderungen“; DECISIONS.md D18, D28; systems/sebaro/spec/09-platform-web.md §1</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Zero third-party requests: no Google Fonts, CDN or analytics; fonts, icons and images are self-hosted under free licences allowing commercial use.</dd></div>
     </dl>
@@ -817,6 +826,7 @@
       <div><dt>Werte</dt><dd>Ort: accent, link, link-visited, focus, selection, on-accent; nächster Schritt: primary-action, -hover, -pressed, on-primary-action, primary-action-outline; Zustand: success, warning, danger, info; Produkt: 8 signTiles (--sb-tile-&lt;group&gt;); Grau: bg, surface, surface-raised, surface-sunken, text, text-muted, text-subtle, border, border-strong, scrim</dd></div>
       <div><dt>Prüfung</dt><dd>Jede Farbe einer Rolle aus spec/01 §1.1 zuordnen; Farblint L1–L8 (spec/03 §1.4); Graustufen-Screenshot bleibt lesbar.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36, D37, D40, D50, D67</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §1.1; spec/03-signature.md §1.1, §1.3; palettes/sebaro.json meta.concept; DECISIONS.md D36, D37</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Every colour has exactly one job: place = cobalt, next step = lime (primary action only), state = status colours (with glyph + word), product = tile colour (inside the app tile only), everything else grey; dataviz colours only inside charts, code tones only inside code blocks (FAR-11).</dd></div>
     </dl>
@@ -861,6 +871,7 @@
       <div><dt>Werte</dt><dd>je Ansicht: Hauptaktions-Flächen 0 oder 1; weitere Flächen hinter Text 0; Farben ohne Rolle 0</dd></div>
       <div><dt>Prüfung</dt><dd>Lint L2 (grep -subtle / text-on-), L4 (Hintergrund in accent/status nur in .sb-switch/.sb-radio/.sb-range), L1 (primary-action nur in .sb-primary-action); Farbprüfung „Text auf Farbfläche 0“.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36, D37</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §1.1, §2.5 Regel 6; spec/03-signature.md §1.1, §1.2, §1.4 L1, L2, L4; AGENTS.md §6</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">No coloured fill behind text except the primary action; coloured text only for links and the danger word; no gradients, glow, textures or second lime element; never use *-subtle, text-on-*, accent-hover/-pressed or on-&lt;status&gt; roles.</dd></div>
     </dl>
@@ -910,6 +921,7 @@
       <div><dt>Werte</dt><dd>--sb-color-accent #3057B1 / #89B1FA (6.16 / 8.39 auf bg); --sb-color-on-accent #FFFFFF / #101114; --sb-color-link #254BA4 / #8FB7FF; --sb-color-link-visited #4A6076 / #A8C1DA; --sb-color-focus #3057B1 / #89B1FA; --sb-color-selection #3057B140 / #89B1FA59</dd></div>
       <div><dt>Prüfung</dt><dd>Jede Nutzung von --sb-color-accent/link/focus/selection liegt in der Liste spec/01 §1.1; keine background-color in accent hinter Text.</dd></div>
       <div><dt>Entscheidung</dt><dd>D37, D5, D52</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §1.1, §1.3, §1.7, §8; spec/03-signature.md §1.1, §1.4 L4</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Cobalt (accent family) only for place edge, link/footnote underline, current nav, focus ring, switch/radio/checkbox/range marks, text selection, the current chart bar and the umbrella tile; never fill behind text, button fill, decoration or a chart series.</dd></div>
     </dl>
@@ -956,6 +968,7 @@
       <div><dt>Werte</dt><dd>--sb-color-primary-action #A9E773 / #A9E277; Delta-E OK ab 0.08 normal, ab 0.04 je CVD; nächste Rolle hell warning 0.346, dunkel info 0.178</dd></div>
       <div><dt>Prüfung</dt><dd>python3 tools/check_palette.py palettes/sebaro.json (Exit 0) im Quellrepo.</dd></div>
       <div><dt>Entscheidung</dt><dd>D16, D37</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §1.4 (Measured); palettes/sebaro.json extras.checks</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Primary-action lime stays at least 0.08 Delta-E OK (normal) and at least 0.04 (each CVD) from every other system colour.</dd></div>
     </dl>
@@ -993,6 +1006,7 @@
       <div><dt>Werte</dt><dd>--sb-color-bg #F4F5F8 / #13161C; --sb-color-surface #FBFCFE / #1B1E24; --sb-color-surface-raised #FFFFFF / #212429; --sb-color-surface-sunken #E9EBEE / #090C11 (hell / dunkel)</dd></div>
       <div><dt>Prüfung</dt><dd>Computed background der Seite = --sb-color-bg in beiden Modi; keine Hex-Werte im Code.</dd></div>
       <div><dt>Entscheidung</dt><dd>D40, D46</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §1.2, §6; palettes/sebaro.json modes</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Every view sits on bg; surface-sunken for input fills, code blocks and the disabled primary action; surface/surface-raised only for range thumbs and select options; dark grounds are slightly blue-tinted.</dd></div>
     </dl>
@@ -1035,6 +1049,7 @@
       <div><dt>Werte</dt><dd>--sb-color-text #1C1E22 / #EBEDEF; --sb-color-text-muted #66696E / #9D9EA1 (5.05 / 6.76 auf bg); --sb-color-text-subtle #828589 / #797A7D (3.40 / 4.22 auf bg)</dd></div>
       <div><dt>Prüfung</dt><dd>tools/color.py contrast je genutztem Paar; text-subtle nur an Elementen ab 24 px oder ab 18.66 px/700 bzw. dekorativ.</dd></div>
       <div><dt>Entscheidung</dt><dd>D6</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §1.2, §1.7; palettes/sebaro.json rules.textSubtleNonEssential</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">text for content, text-muted for secondary text (at least 4.5:1), text-subtle only for large (at least 24 px / at least 18.66 px bold) or non-essential text.</dd></div>
     </dl>
@@ -1073,6 +1088,7 @@
       <div><dt>Hinweis</dt><dd>Dunkle Werte aus Palette/Tokens (#32353C, #707379); spec/01 §1.2 nennt veraltet #343539/#707275.</dd></div>
       <div><dt>Prüfung</dt><dd>Kontrast border-strong gegen den Grund jedes Bedienelements ab 3 : 1; kein Bedienelement, dessen einzige Kante --sb-color-border ist.</dd></div>
       <div><dt>Entscheidung</dt><dd>D6</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">palettes/sebaro.json modes + meta.notes (Fix-Stufe 2026-10-16); systems/sebaro/spec/01-foundations.md §1.2, §1.7, §5.2 (Dunkelwerte dort veraltet)</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">border = decorative 1 px hairline; border-strong = control boundaries and chart axes (at least 3:1); a hairline is never a control&#x27;s only boundary.</dd></div>
     </dl>
@@ -1124,6 +1140,7 @@
       <div><dt>Hinweis</dt><dd>spec/02 §1.5, §2.7, §3.3, §3.15, §4.3, §4.10 nennen noch surface-sunken; CSS (Fix-Stufe AD14) gilt.</dd></div>
       <div><dt>Prüfung</dt><dd>Hover-Regeln nutzen hover-fill; Texte darauf ab 4,5 : 1; grep box-shadow zeigt nur Danger-Inset und forced-colors.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §0.2; spec/01-foundations.md §11; css/sebaro.css Z. 15-16, 287-288</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Hover = --sb-color-hover-fill, pressed = --sb-color-pressed-fill (lighter than bg in dark mode); never tint, shadow, ripple or motion as state.</dd></div>
     </dl>
@@ -1175,6 +1192,7 @@
       <div><dt>Werte</dt><dd>Dunkler Grund --sb-color-bg #13161C</dd></div>
       <div><dt>Prüfung</dt><dd>shot.py --scheme both; check_palette.py; axe/CTR1 in beiden Modi.</dd></div>
       <div><dt>Entscheidung</dt><dd>D40, D44</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">BRIEF.md „Auftrag“; DECISIONS.md D40; systems/sebaro/spec/01-foundations.md §9; SYSTEM.md §5</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Light and dark are one system of equal rank with the same roles; only token values, the D40 type adjustment and the primary-action outline colour differ; every view is checked in both modes.</dd></div>
     </dl>
@@ -1203,6 +1221,7 @@
       <div><dt>Werte</dt><dd>Ziel ab 0.02 Delta-E OK; gemessen 0.011–0.013 (bg 0.013 zu Tailwind zinc-900 #18181B)</dd></div>
       <div><dt>Prüfung</dt><dd>tools/check_palette_set.py bzw. palettes/SET-REPORT.md.</dd></div>
       <div><dt>Entscheidung</dt><dd>D26, D40</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §1.2; palettes/sebaro.json meta.notes; DECISIONS.md D26; SYSTEM.md (offene Inhaberfrage)</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Target: dark grounds at least 0.02 Delta-E OK from well-known product grounds; currently 0.011–0.013, not reached (open owner question).</dd></div>
     </dl>
@@ -1263,6 +1282,7 @@
       <div><dt>Hinweis</dt><dd>Entschieden mit D69, gebaut als --sb-syntax-keyword, --sb-syntax-string, --sb-syntax-constant (Tailwind text-syntax-*, Compose SebaroTheme.syntax.*, SwiftUI SebaroSyntax.*); css/sebaro.css färbt highlight.js, Prism und eigene sb-tok-*-Spans, Shiki und CodeMirror siehe TEC-08. spec/03 §1.2 („never … violet“) ist älter; D67 (12) gilt für Code.</dd></div>
       <div><dt>Prüfung</dt><dd>check_palette.py 2.4.0 palettes/sebaro.json: Y1 (ab 4,5 auf bg, surface, surface-raised, surface-sunken), Y2/Y2-cvd (untereinander und gegen text, text-muted ab 0,08 / ab 0,04), Y3 (gegen accent, link, Status, primary-action ab 0,08) mit Exit 0; Farbprüfung je Ansicht lässt die Codetöne nur in Code zu.</dd></div>
       <div><dt>Entscheidung</dt><dd>D67, D69, D51</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-20</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D67 (12), D69; systems/sebaro/spec/01-foundations.md §1.8; palettes/sebaro.json syntax; shared/PALETTE-CONTRACT.md 2.4 §7.2b, §8.4; shared/TOKEN-CONTRACT.md 1.6 §10.3</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Code gets three syntax tones from their own palette section (syntax), used only in code: keywords indigo, strings forest green, numbers/constants raspberry; comments text-muted, everything else text; no cobalt, lime or status colours; one highlighting for all projects.</dd></div>
     </dl>
@@ -1308,6 +1328,7 @@
       <div><dt>Hinweis</dt><dd>sebaro Sans ist sebaros UI-Schrift: eine abgeleitete Schrift unter der SIL Open Font License 1.1 mit eigener Quelle (systems/sebaro/fonts/sebaro-sans/src/), Lizenztext in docs/sebaro/fonts/web/sebaro-sans-OFL.txt (D71). Der Copyright-Vermerk der Urheber bleibt in Datei und Lizenztext, wie die OFL es verlangt.</dd></div>
       <div><dt>Prüfung</dt><dd>Computed font-family aller Textelemente: sebaro Sans außer code/kbd/IDs.</dd></div>
       <div><dt>Entscheidung</dt><dd>D28, D38, D66, D68, D70, D71</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-20</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D28, D38, D66, D68, D70, D71; systems/sebaro/spec/01-foundations.md §2.1; shared/FONTS-GUIDE.md (Kopf, §3.12); research/08-schriften.md §0, §8</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">sebaro Sans (D68, D71) for everything; sebaro Mono (renamed IBM Plex Mono, Medium 500, D70) only for code, IDs, versions, commands; these are the only two families and both stay in every project; legibility before character.</dd></div>
     </dl>
@@ -1367,6 +1388,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>Konflikt D43/spec/09 §13 (gehintete TTF für Tauri, Export mit font-display: swap) gegen D66 aufgelöst: D66 gilt. Windows/Linux-Tauri ist von D66 nicht gedeckt (offen).</dd></div>
       <div><dt>Prüfung</dt><dd>Netzwerk-Panel: Fontdateien nur aus eigenem Pfad; Tauri-Bundle enthält fonts/web/*.woff2; fonts.py verify sebaro (Android).</dd></div>
       <div><dt>Entscheidung</dt><dd>D18, D43, D66, D38, D68, D70, D71</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-20</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D43, D66, D68, D70, D71; systems/sebaro/spec/01-foundations.md §2.1; spec/08-platform-android.md §2.1; spec/09-platform-web.md §1, §13 (veraltet); fonts/fonts.lock.json</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Self-host fonts: websites and Tauri on macOS load the variable WOFF2 from fonts/web/ (~62 KB); Android ships 7 static TTFs in res/font (six autohinted sebaro Sans cuts, sebaro Mono Medium 500 with foundry hints), no variable font; OFL texts next to the files.</dd></div>
     </dl>
@@ -1418,6 +1440,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>numeric 16/24, 400 / 430, tnum</dd></div>
       <div><dt>Prüfung</dt><dd>Zahlenspalten haben font-variant-numeric: tabular-nums; grep sb-mono in Statistik-Komponenten = 0.</dd></div>
       <div><dt>Entscheidung</dt><dd>D38</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §2.1, §2.2; spec/02-components.md §3.6, §3.10</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Numbers in tables, counters, timers, stats and dates use sebaro Sans tabular figures (numeric role, .sb-num), never mono.</dd></div>
     </dl>
@@ -1462,6 +1485,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>Web: display 40/48 670/700; headline 28/36 670/700; title 20/28 670/700; body 16/24 400/430; body-strong 16/24 570/600; label 14/20 570/600; caption 14/20 400/430; code 14/20 500/500; numeric 16/24 400/430. Mobile: --sb-type-mobile-display 32/40, -headline 24/32, -label-small 12/16 400/430</dd></div>
       <div><dt>Prüfung</dt><dd>Alle font-size-Werte ∈ {12 nur Bottom-Nav, 14, 16, 20, 24, 28, 32, 40} px; font-style: italic nur an &lt;cite&gt;/&lt;i&gt; in Artikeln.</dd></div>
       <div><dt>Entscheidung</dt><dd>D38, D40</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §2.2, §2.3, §2.5 Regel 3; systems/sebaro/AGENTS.md §10</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Type roles only: web display 40/48, headline 28/36, title 20/28, body/body-strong 16/24, label/caption/code 14/20, numeric 16/24; mobile display 32/40, headline 24/32; 12/16 label-small only for bottom nav; one weight step per level; no italic in UI.</dd></div>
     </dl>
@@ -1505,6 +1529,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>+30 wght; +0.01 em (0.16px bei 16 px, 0.4px bei 40 px); Mono 500</dd></div>
       <div><dt>Prüfung</dt><dd>Jede font:-Zeile hat letter-spacing derselben Rolle; computed font-weight/letter-spacing dunkel = Tokenwerte.</dd></div>
       <div><dt>Entscheidung</dt><dd>D40, D44, D70</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-20</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §2.4, §11; spec/02-components.md §0.3; spec/09-platform-web.md §3; systems/sebaro/AGENTS.md (Dark typography)</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Dark mode: sebaro Sans +30 weight (400<svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg>430, 570<svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg>600, 670<svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg>700), all roles +0.01 em; always pair font: var(--sb-type-&lt;role&gt;) with letter-spacing: var(--sb-type-&lt;role&gt;-tracking); Compose SebaroTheme.typography, SwiftUI .sbTextStyle.</dd></div>
     </dl>
@@ -1537,6 +1562,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>spec/09 §3 und spec/01 §2.5 nennen hyphens: auto; die gebaute CSS (manual) gilt.</dd></div>
       <div><dt>Prüfung</dt><dd>Keine ellipsis an h1–h6; Review bei 390 px.</dd></div>
       <div><dt>Entscheidung</dt><dd>D28</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">css/sebaro.css Z. 37-38, 79-81; systems/sebaro/spec/02-components.md §10; spec/01-foundations.md §2.5 Regel 1</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Headings wrap with manual hyphenation (&amp;shy;), never auto-hyphenate or ellipsis; identifiers never break; below 640 px h1 uses mobile display 32/40.</dd></div>
     </dl>
@@ -1584,6 +1610,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>--sb-space-0 0, -0-5 2, -1 4, -2 8, -3 12, -4 16, -5 20, -6 24, -8 32, -10 40, -12 48, -16 64 px; --sb-spacing-inline 8, -stack 12, -group 24, -inset-control 16, -inset-container 16, -gutter 16, -gutter-wide 48, -section 48, -section-wide 64</dd></div>
       <div><dt>Prüfung</dt><dd>Alle margin/padding/gap-Werte sind var(--sb-space-*) oder var(--sb-spacing-*).</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §3.1</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Spacing only from the scale 0/2/4/8/12/16/20/24/32/40/48/64 px, chosen by role: inline 8, stack 12, group 24, inset 16, gutter 16/48, section 48/64.</dd></div>
     </dl>
@@ -1623,6 +1650,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>--sb-size-container-max 1440px; Ränder 16/16/48; Gutter 16/24/24; Spalten 4/8/12; --sb-spacing-section 48 / -wide 64</dd></div>
       <div><dt>Prüfung</dt><dd>Layout bei 390, 800 und 1280 px; check_demo OVF1: kein horizontales Scrollen.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §3.2; spec/02-components.md §5; css/sebaro.css Z. 68-88</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Grid: &lt;640 4 cols/16/16; 640–1023 8 cols/16/24; at least1024 12 cols/48/24; page max 1440 incl. margins; sections padded 48/64 with hairlines.</dd></div>
     </dl>
@@ -1671,6 +1699,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>--sb-breakpoint-sm 640px; -md 768px; -lg 1024px; -xl 1280px; Tablet-Seitenleiste ab 840 dp</dd></div>
       <div><dt>Prüfung</dt><dd>Alle Media-Queries nutzen 640/768/1024/1280; Fenster auf 600, 900, 1280 px ziehen.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36, D46</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §3.2; spec/03-signature.md §2.1, §3.1, §5, §12; spec/02-components.md §4.3</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Breakpoints 640/768/1024/1280 only; &lt;640 phone-like, at least640 wide action zone, at least1024 side nav, TOC sidebar and footnote list only (popover below).</dd></div>
     </dl>
@@ -1727,6 +1756,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Nicht so</dt><dd>Zentrierte Absätze im Hero oder im Leerzustand.</dd></div>
       <div><dt>Prüfung</dt><dd>text-align: center nur am Aktionshinweis.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §3.2</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Layout start-aligned and asymmetric; never centre text blocks except a single hint line under a full-width button.</dd></div>
     </dl>
@@ -1780,6 +1810,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>56 / 64 / 88 / 40 / ab 56 / 64 / 64 px; --sb-size-control-sm 32, -md 48, -lg 56</dd></div>
       <div><dt>Prüfung</dt><dd>Zeilenhöhen im Layout messen; keine Dichte-Einstellung.</dd></div>
       <div><dt>Entscheidung</dt><dd>D67</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §4; DECISIONS.md D67 (2)</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Fixed heights, one density, no density switch: rows 56/64/88, done rows 40, claim row at least 56, top bar 64, bottom nav 64 + inset; desktop apps and windowed web apps use 32 px rows for trees, lists, menus, palette and tool buttons (RAU-06, D67).</dd></div>
     </dl>
@@ -1828,6 +1859,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>Ersetzt für Desktop und Web-Apps mit Fenster die 48-px-Zeilen aus spec/02 §4.3 (Seitenleiste) und §4.10 (Menü); spec/01 §4 und spec/02 sind noch nicht nachgezogen. Ob Listenzeilen mit Meta-Zeile (64/88) auf dem Desktop auch 32 px werden, sagt D67 nicht; die Skizze zeigt nur einzeilige Zeilen.</dd></div>
       <div><dt>Prüfung</dt><dd>Zeilenhöhen im Fenster messen; mit pointer: coarse emulieren (48 px Trefferfläche).</dd></div>
       <div><dt>Entscheidung</dt><dd>D67</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D67 (2); concepts/runde-5-desktop/skizze.html §2; systems/sebaro/spec/01-foundations.md §4</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Desktop apps and windowed web apps: rows in trees, lists, menus, command palette and tool buttons are 32 px; on touch the hit area stays 48 px; the primary action keeps its size.</dd></div>
     </dl>
@@ -1879,6 +1911,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>spec/02 §0.3 nennt Avatar als einzige Pille neben Schalter und Radio; die CSS nutzt die Pille auch für Regler-Griffe.</dd></div>
       <div><dt>Prüfung</dt><dd>grep border-radius: nur var(--sb-radius-*).</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §5.1; spec/02-components.md §0.3, §3.13; css/sebaro.css Z. 500, 504</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">One radius per class: small 4, control 8, container 12, sheet 16, pill for switch/radio/range thumb/avatar; sign tile edge × 0.1667.</dd></div>
     </dl>
@@ -1927,6 +1960,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>--sb-border-width-hairline 1px; --sb-x-sebaro-layer-line-width 2px; --sb-x-sebaro-link-underline-width 2px; --sb-border-width-control 1px; --sb-border-width-strong 3px; --sb-x-sebaro-primary-action-outline-width 2px; Fehlerlinie 2px; --sb-focus-width 2px; --sb-focus-offset 2px</dd></div>
       <div><dt>Prüfung</dt><dd>Jede border/outline im CSS einem Linientyp aus spec/01 §5.2 zuordnen.</dd></div>
       <div><dt>Entscheidung</dt><dd>D46, D48, D52</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §5.2</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Each line type has one meaning: hairline 1 px border, layer 2 px ink, link 2 px link, control 1 px border-strong, place 3 px accent, primary outline 2 px, error 2 px danger, focus 2 + 2 px.</dd></div>
     </dl>
@@ -1963,6 +1997,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Nicht so</dt><dd>Gestrichelte Upload-Box, Verlaufs-Hero, Glow um den Fokus.</dd></div>
       <div><dt>Prüfung</dt><dd>grep border-style: dashed, linear-gradient, Glow-Schatten <svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg> nur erlaubte Stellen (225°-Verlauf im Kanten-Fallback der Gefahrtaste).</dd></div>
       <div><dt>Entscheidung</dt><dd>D46</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §5.2</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">No dashed lines except the pending glyph and the chart target line; no gradients, glow or textures.</dd></div>
     </dl>
@@ -2010,6 +2045,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>--sb-x-sebaro-danger-bevel-size 12px (tokens.x.dangerBevelSize)</dd></div>
       <div><dt>Prüfung</dt><dd>grep corner-shape/clip-path: nur .sb-danger-action; Fallback in Chromium durch Umbenennen des @supports prüfen (echtes WebKit/Tauri ungeprüft).</dd></div>
       <div><dt>Entscheidung</dt><dd>D46, D56</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D46 (1), D56 (1); systems/sebaro/spec/03-signature.md §11; spec/02-components.md §1.4, §4.10</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">The 45° cut (12 px legs, top end corner) only on destructive actions and their dialog confirm; everything else stays round, menu rows included.</dd></div>
     </dl>
@@ -2055,6 +2091,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>D67 nennt weder Randfarbe noch Radius; die Skizze nutzt border-strong und Radius 8 (spec/01 §5.1 gibt Karten 12). Der 1-px-Rand weicht von der 2-px-Tintenlinie für Karten ab (EBE-02, D46 (2)); D67 ist neuer und gilt für Desktop und Web-Apps mit Fenster, gezeigt sind Board-Karten.</dd></div>
       <div><dt>Prüfung</dt><dd>Board mit der Tastatur durchgehen: nur die fokussierte Karte trägt die Ortslinie; auf Touch ist „Mehr“ erreichbar.</dd></div>
       <div><dt>Entscheidung</dt><dd>D67, D48</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D67 (11); concepts/runde-5-desktop/skizze.html §11 (.card); concepts/runde-4-novalis/novalis-sebaro.css .card</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Cards in desktop/windowed web apps: 1 px border, place line only on the focused card; only the grey „more“ glyph is always visible, everything else in its menu; edit by double-click or key.</dd></div>
     </dl>
@@ -2105,6 +2142,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>spec/03 §6.1/§6.5 (1-px-Haarlinie unter dem Site-Kopf) und spec/01 §1.2 (surface als Ebene 1) sind veraltet; D46 gilt.</dd></div>
       <div><dt>Prüfung</dt><dd>grep -n &#x27;box-shadow&#x27; css/sebaro.css zeigt nur das gedrückte Inset der Gefahrtaste und forced-colors; Compose shadowElevation 0 dp; Dunkelrahmen nicht heller als Text.</dd></div>
       <div><dt>Entscheidung</dt><dd>D46</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D46 (2); systems/sebaro/spec/03-signature.md §10.1, §10.2; spec/01-foundations.md §5.2, §6</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Layers are separated by a 2 px ink line on bg (text by day, border-strong by night), never by ground tone or shadow; inside a layer only the 1 px border hairline.</dd></div>
     </dl>
@@ -2144,6 +2182,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>Demo-Text components.html Z. 574 („Zeiger verstärkt den Rand“) ist veraltet; CSS Z. 618 (hover-fill) gilt. D67 (11, Inhaber, neuer): Karten in Desktop-Apps und Web-Apps mit Fenster haben einen 1-px-Rand, die Ortslinie nur bei Fokus (FOR-05). Gezeigt waren Board-Karten; ob gruppierende Karten dort auch 1 px bekommen, sagt D67 nicht.</dd></div>
       <div><dt>Prüfung</dt><dd>Keine box-shadow an .sb-card; keine .sb-card in Listen.</dd></div>
       <div><dt>Entscheidung</dt><dd>D46, D67</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §3.4; spec/03-signature.md §10; css/sebaro.css Z. 607-620</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Cards only for grouped settings/dashboards: bg + 2 px ink line, radius 12, padding 16, never tinted or shadowed; list items are not cards; card link in the title, focus ring on the card.</dd></div>
     </dl>
@@ -2208,6 +2247,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>spec/01 §1.2 nennt veraltet hellen Scrim #1C1E2273 (45 %); Palette und Tokens (#1C1E2252) gelten. Ausblenddauer 120 ms ist Agentenspezifikation.</dd></div>
       <div><dt>Prüfung</dt><dd>Farbprüfung des Dialogs „Hauptaktion 0“; Fokus kehrt nach Escape zum Auslöser zurück; --sb-color-scrim nur in Dialog/Sheet.</dd></div>
       <div><dt>Entscheidung</dt><dd>D39, D46</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §4.6; spec/03-signature.md §7.3–§7.5; spec/08-platform-android.md §8; palettes/sebaro.json modes.light.scrim</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Confirm dialogs: native &lt;dialog&gt; showModal over the scrim, bg + 2 px ink, radius 16, padding 24, max 560 px; question title; actions end-aligned; Escape/back/scrim cancel; never a primary action; scrim only behind modal dialogs and sheets.</dd></div>
     </dl>
@@ -2262,6 +2302,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>Radius 16px oben; Linie 2px</dd></div>
       <div><dt>Prüfung</dt><dd>Review; Fokusfalle und Schließen sind in den Demos noch nicht geskriptet.</dd></div>
       <div><dt>Entscheidung</dt><dd>D46, D40</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §4.7; css/sebaro.css Z. 928-936</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Bottom sheets for pickers only: top ink line, top radius 16, head with title + close, no drag handle; never for evidence.</dd></div>
     </dl>
@@ -2305,6 +2346,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>spec/03 §7.2/§8 (M5) und spec/07 §4.3 zeigen „Glas eingetragen · 6 / 8“ als Toast nach der Hauptaktion; D48 gilt.</dd></div>
       <div><dt>Prüfung</dt><dd>Review aller Toast-Auslöser: keiner ist Hauptaktion oder Löschen.</dd></div>
       <div><dt>Entscheidung</dt><dd>D39, D48</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §4.8; spec/03-signature.md §7.2; spec/07-voice.md §4.3; css/sebaro.css Z. 938-946</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Toast only for reversible results outside the primary action (role=status, optional „Rückgängig“); never instead of the delete dialog, never for what is visible, never for the primary action&#x27;s result.</dd></div>
     </dl>
@@ -2346,6 +2388,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>Radius 8px; Padding 4 8; max. 240px</dd></div>
       <div><dt>Prüfung</dt><dd>Tooltip-Text ist nur Zusatz; Ein-/Ausblenden ist in den Demos noch nicht geskriptet.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §4.9; spec/09-platform-web.md §4.2, §14; css/sebaro.css Z. 948-954</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Tooltip: pointer only, never the only place of information; bg + 2 px ink, radius 8, caption, role=tooltip via aria-describedby; icon buttons still need aria-label.</dd></div>
     </dl>
@@ -2396,6 +2439,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>D67 (2): Menüzeilen in Desktop-Fenstern 32 px; D67 (10): Seltenes und Löschen eines Bereichs im „Mehr“-Menü, Löschen ganz unten nach einer Trennlinie (AKT-10). spec/02 §4.10 ist noch nicht nachgezogen.</dd></div>
       <div><dt>Prüfung</dt><dd>axe; Tastaturtest (Pfeile, Escape fehlen im Demo-Skript sb-controls.js).</dd></div>
       <div><dt>Entscheidung</dt><dd>D39, D46, D67</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §4.10; spec/03-signature.md §11.2; css/sebaro.css Z. 956-972</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Menus: role=menu/menuitem, trigger aria-haspopup + aria-expanded, 48 px rows (32 px in desktop/windowed web apps, D67), bg + 2 px ink, radius 12, 200–320 px; danger row = danger word + icon, still opens the dialog, never the 45° cut.</dd></div>
     </dl>
@@ -2461,6 +2505,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>D67 gilt für alle sebaro-Desktop-Apps und Web-Apps mit Fenster. spec/03 §12 in sebaroDesign ist zum Stand 2026-10-19 noch nicht nachgezogen.</dd></div>
       <div><dt>Prüfung</dt><dd>Fenster-Screenshot mit offener und geschlossener Seitenleiste: Taste und Linie stehen an derselben Stelle.</dd></div>
       <div><dt>Entscheidung</dt><dd>D67, D46, D39</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D67 (1); concepts/runde-5-desktop/skizze.html §1; systems/sebaro/spec/03-signature.md §12</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Desktop apps and windowed web apps: the bottom action zone spans the full window width under sidebar and content (one continuous ink line, state sentence at the start, primary action at the end).</dd></div>
     </dl>
@@ -2506,6 +2551,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Nicht so</dt><dd>Einflug-Animationen beim Scrollen oder Laden; pulsierende Knöpfe.</dd></div>
       <div><dt>Prüfung</dt><dd>Seite ohne Interaktion laden: keine Animation außer dem Start.</dd></div>
       <div><dt>Entscheidung</dt><dd>D46, D52</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §7; spec/03-signature.md §13, §14</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Motion only answers an action; nothing moves on load except the start sequence.</dd></div>
     </dl>
@@ -2545,6 +2591,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>--sb-x-sebaro-enter-distance 8px; --sb-motion-duration-long 200ms; --sb-motion-easing-emphasized cubic-bezier(0.05, 0.7, 0.1, 1)</dd></div>
       <div><dt>Prüfung</dt><dd>check_demo.py MOT1/MOT2; keine Animation außer @keyframes sb-enter/sb-fade-in/sb-spin/sb-sweep.</dd></div>
       <div><dt>Entscheidung</dt><dd>D46</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D46 (4); systems/sebaro/spec/03-signature.md §13.1, §13.2; spec/02-components.md §0.4; css/sebaro.css Z. 899-913</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Whatever is new enters from below: 8 px, 200 ms, emphasized easing, transform and opacity only.</dd></div>
     </dl>
@@ -2582,6 +2629,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>--sb-motion-duration-short 120ms; -medium 160ms; -long 200ms; --sb-motion-easing-standard cubic-bezier(0.2, 0, 0, 1); -emphasized cubic-bezier(0.05, 0.7, 0.1, 1); -exit cubic-bezier(0.3, 0, 1, 1)</dd></div>
       <div><dt>Prüfung</dt><dd>Alle transition/animation-duration bis 200 ms und aus Tokens.</dd></div>
       <div><dt>Entscheidung</dt><dd>D55</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §7</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Durations 120/160/200 ms (200 = max); easings standard (0.2,0,0,1), emphasized (0.05,0.7,0.1,1), exit (0.3,0,1,1).</dd></div>
     </dl>
@@ -2636,6 +2684,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>Fade 200 ms, --sb-motion-easing-standard; CSS-Dauern 1 ms, Compose 0 ms</dd></div>
       <div><dt>Prüfung</dt><dd>MOT1/MOT2 unter prefers-reduced-motion: reduce; mit data-sb-motion=&#x27;reduce&#x27; blenden Menü und Toast nur ein; Neuladen behält die Einstellung.</dd></div>
       <div><dt>Entscheidung</dt><dd>D46, D48, D65</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D46 (4), D65 (2); systems/sebaro/spec/03-signature.md §13.1; spec/01-foundations.md §7; demo/mobile.html Z. 540-541</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Reduced motion = system setting OR app setting „Bewegung immer reduzieren“ (localStorage sb-motion=reduce <svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg> html[data-sb-motion=reduce]): fade only, spinner and bar stand still; guard every moving rule with @media (prefers-reduced-motion: no-preference) { :root:not([data-sb-motion=&#x27;reduce&#x27;]) … }.</dd></div>
     </dl>
@@ -2688,6 +2737,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>D30 „genau eine“ durch D39 „höchstens eine“ ersetzt.</dd></div>
       <div><dt>Prüfung</dt><dd>Farbprüfung „Hauptaktion 1“ bzw. 0 mit data-sb-primary-expected=&#x27;0&#x27;; Android A3, A4, A8; Screenshot-Reihe bei 390 px: Taste überall an derselben Stelle.</dd></div>
       <div><dt>Entscheidung</dt><dd>D39, D30, D31, D46</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D39; systems/sebaro/spec/03-signature.md §2, §2.2; spec/01-foundations.md §1.4 Regel 1–2; spec/02-components.md §1.1, §1.7</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">At most one lime primary action per view, always at the fixed bottom place; none when there is no clear next step; never in dialogs/sheets, never destructive, no FAB.</dd></div>
     </dl>
@@ -2747,6 +2797,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>D46 (3) sagt „überall gleich: 56 px“; spec/03 §2.1 gibt im Website-Abschnitt 48 px (keine untere Leiste). Offen, ob D46 dort gilt; novalis baut 48 px und muss auf 56 px. D67 (1): In Desktop-Apps und Web-Apps mit Fenster reicht die Zone über die ganze Fensterbreite (EBE-08).</dd></div>
       <div><dt>Prüfung</dt><dd>Screenshots bei 390 und 1440 px: genau eine Taste unten, breit rechts mit Stand-Satz links; Farbprüfung je Ansicht.</dd></div>
       <div><dt>Entscheidung</dt><dd>D39, D46, D48, D67</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D46 (3); systems/sebaro/spec/03-signature.md §2.1, §2.5, §12; css/sebaro.css Z. 154-173 (.sb-view--wide)</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Bottom action zone everywhere: 56 px button, 2 px ink line above, verb + thing; phones full width −2×16 above nav/keyboard; at least 640 px natural width (at least 200 px) at the end with the state sentence at the start; websites: last in the section before „Belege“.</dd></div>
     </dl>
@@ -2786,6 +2837,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>--sb-color-primary-action #A9E773 / #A9E277; -hover #9DD966 / #B6ED88; -pressed #90CC59 / #99D267; --sb-color-on-primary-action #1C1E22 / #101114 (Label hell 11.41/9.97/8.71, dunkel 12.43/13.89/10.58); --sb-color-primary-action-outline #1C1E22 / #A9E277; --sb-x-sebaro-primary-action-outline-width 2px; Radius 8; Icon 24; Übergang 120 ms</dd></div>
       <div><dt>Prüfung</dt><dd>Computed outline 2px in beiden Modi; Tastengröße hell = dunkel; keine box-shadow/Indication; Lint L1.</dd></div>
       <div><dt>Entscheidung</dt><dd>D40, D37, D46</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D40; systems/sebaro/spec/01-foundations.md §1.4 Regel 3, 4, 6; spec/03-signature.md §2.1, §2.5; css/sebaro.css Z. 243-258</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Primary action: lime fill, 2 px outline (ink by day, fill colour by night), radius 8, body-strong label in on-primary-action, optional 24 px icon + 8 px gap, 24 px side padding; hover/pressed change only the fill; no ripple, shadow or glow.</dd></div>
     </dl>
@@ -2824,6 +2876,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Nicht so</dt><dd>„OK“, „Los“, „Weiter“ ohne Ziel, nur ein Plus-Icon.</dd></div>
       <div><dt>Prüfung</dt><dd>Review aller Tastentexte; jede sb-primary-action hat sichtbaren Text mit Verb und Ding.</dd></div>
       <div><dt>Entscheidung</dt><dd>D46, D39</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D46 (3); systems/sebaro/spec/07-voice.md §3.1, §3.2; spec/01-foundations.md §1.4 Regel 4; spec/02-components.md §1.1</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Button labels are verb + object; the primary action carries the most specific verb; never bare OK/Ja/Bestätigen/Weiter, never an icon-only primary action.</dd></div>
     </dl>
@@ -2875,6 +2928,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>--sb-x-sebaro-primary-action-progress-height 6px; -progress-period 1100ms; -done-dwell 1500ms; Schwelle ≈ 1 s; reduzierte Bewegung: Balken steht still, volle Breite, 40 % deckend</dd></div>
       <div><dt>Prüfung</dt><dd>aria-busy während der Arbeit; bei data-sb-state=&#x27;retry&#x27; ist __status aus und __message gefüllt; kein role=dialog/Toast entsteht; Review unter reduzierter Bewegung.</dd></div>
       <div><dt>Entscheidung</dt><dd>D48</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D48 (1); systems/sebaro/spec/03-signature.md §16; spec/02-components.md §1.1; css/sebaro.css Z. 259-279; spec/08-platform-android.md §5</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Busy primary action stays in place: label says what runs, 6 px ink bar (determinate --sb-progress or 1.1 s sweep), then check + word for 1.5 s; failure = danger sentence + „Noch mal versuchen“; no spinner overlay, toast or modal; only for work &gt; ~1 s.</dd></div>
     </dl>
@@ -2917,6 +2971,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>Rand 1px (--sb-border-width-control); Höhe 48px; Padding 0 24px; Textaktion Linie 2px, Abstand 0.2em, Padding 0 8px</dd></div>
       <div><dt>Prüfung</dt><dd>Farbprüfung: Nebenaktionen tragen keine Farbe mit Rolle; sb-text-action nur auf &lt;button&gt;.</dd></div>
       <div><dt>Entscheidung</dt><dd>D52, D46</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §1, §1.2, §1.3; spec/08-platform-android.md §6; css/sebaro.css Z. 281-296</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Only the primary action is filled: secondary = 1 px border-strong outline, 48 px; text action = &lt;button&gt; in link style (48 px target); navigation uses &lt;a&gt;.</dd></div>
     </dl>
@@ -2958,6 +3013,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>„Nie gefüllt“ ist Agentenspezifikation (spec/03 §7.1); spec/03 §11.2 schreibt es fälschlich D39 zu.</dd></div>
       <div><dt>Prüfung</dt><dd>Komponentenblatt „Weitere Aktionen“ in beiden Modi; nur destruktive Elemente tragen color danger und die Kante.</dd></div>
       <div><dt>Entscheidung</dt><dd>D56, D46, D39</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D56 (1); systems/sebaro/spec/03-signature.md §7.1, §11.1, §11.2; spec/02-components.md §1.4; css/sebaro.css Z. 302-322</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Destructive action: danger word + 24 px trash icon in a 1 px danger outline with the 45° cut, never filled, at the end of the form content, never next to the primary action bar.</dd></div>
     </dl>
@@ -3013,6 +3069,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>Beim Papierkorb ist der Text „Das lässt sich nicht rückgängig machen.“ falsch; spec/03 §7.2 („kein Dialog für umkehrbare Aktionen“) braucht eine ausdrückliche Ausnahme. Wortlaut für den Papierkorb ist offen.</dd></div>
       <div><dt>Prüfung</dt><dd>Jede destruktive Aktion öffnet sb-dialog/SbConfirmDialog; Strings „Gewohnheit löschen?“, „Abbrechen“, „Löschen“; Fokus startet auf „Abbrechen“.</dd></div>
       <div><dt>Entscheidung</dt><dd>D39, D46, D56</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D39; systems/sebaro/spec/03-signature.md §7.1–§7.5; spec/07-voice.md §4.4; concepts/runde-5-desktop/skizze.html „Am Rand gefunden“</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Every destructive action, including move-to-trash, confirms first with a dialog (no undo instead): question title with object, what is lost, „Abbrechen“ first with initial focus, the repeated verb last as danger button.</dd></div>
     </dl>
@@ -3055,6 +3112,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>spec/02 §1.6 (label 14/20, Padding 12) ist veraltet; spec/03 §6.1 und css Z. 199-208 gelten.</dd></div>
       <div><dt>Prüfung</dt><dd>Kein sun/moon im Kopf; Label konstant; Bannwort-grep „nachtmodus|dark mode“.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D36; systems/sebaro/spec/03-signature.md §6.1–§6.3; spec/04-icons.md §7.5; spec/07-voice.md §4.7</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">The theme choice is always called „Hell oder Dunkel“: a labelled outlined button on the web (label never changes), a settings choice in apps; never sun/moon, „Dark Mode“ or „Nachtmodus“.</dd></div>
     </dl>
@@ -3095,6 +3153,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>D56 (1) verlangt Rahmen und Kante an jeder destruktiven Aktion; in Menüzeilen tragen nach spec/03 §11.2 und D67 (10) nur Wort und Icon die Gefahr, die Kante trägt die Dialogtaste.</dd></div>
       <div><dt>Prüfung</dt><dd>Jede destruktive Menüzeile öffnet den Dialog; Menüzeile ohne Kante (FOR-04, EBE-07).</dd></div>
       <div><dt>Entscheidung</dt><dd>D67, D39, D46, D56</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D67 (10); concepts/runde-5-desktop/skizze.html §10; systems/sebaro/spec/03-signature.md §11.2</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Rare and destructive actions of an area go into the „Mehr“ menu, delete last after a separator (danger + trash, no cut, „…“ in the label), then the confirmation dialog whose button carries the cut; context menus alike.</dd></div>
     </dl>
@@ -3148,6 +3207,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>--sb-border-width-strong 3px; --sb-color-accent; Titelgewicht 670 hell / 700 dunkel</dd></div>
       <div><dt>Prüfung</dt><dd>Graustufen-Screenshot: Ort bleibt erkennbar; jedes Muster hat 3-px-accent-Kante und ein zweites Merkmal, keine background-color.</dd></div>
       <div><dt>Entscheidung</dt><dd>D48, D37, D36</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D48 (2); systems/sebaro/spec/03-signature.md §17; spec/01-foundations.md §1.3, §5.2; spec/02-components.md §0.2, §4.2-4.5</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Current place = 3 px accent line on every platform plus a non-colour cue (filled icon, check, title weight); never a fill, pill, tint or bold alone.</dd></div>
     </dl>
@@ -3204,6 +3264,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>spec/08 §10 nennt für Heute das Icon today; 08 §7, 04 §7.1 (AD11) und AGENTS nennen home (gilt). D36 betrifft die App-Navigation; der Website-Kopf bleibt aus Wörtern (NAV-06).</dd></div>
       <div><dt>Prüfung</dt><dd>Jedes sb-bottom-nav__item/sb-side-nav__item hat sichtbaren Text; Android-Lint A9; Heute nutzt home.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36, D48</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D36; systems/sebaro/spec/03-signature.md §3.1–§3.4; spec/04-icons.md §7.1; spec/02-components.md §4.2-4.3</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">App navigation always shows icon + word; words always visible; unselected text-muted; current = place line + filled icon + link colour + title weight.</dd></div>
     </dl>
@@ -3258,6 +3319,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>3–5 Ziele; 64px; Icon 24; Label 12/16; Abstand 2px; Kante 3px</dd></div>
       <div><dt>Prüfung</dt><dd>Review der Bildschirmhierarchie; Android A4, A9.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36, D48, D46</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/03-signature.md §3.2; spec/02-components.md §4.2; spec/08-platform-android.md §7; css/sebaro.css Z. 842-858</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Bottom nav only on top-level screens (sub-screens get back/close), 3–5 equal items, 64 px, inside the sticky sb-bottom-block; no hamburger on phones.</dd></div>
     </dl>
@@ -3308,6 +3370,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>novalis nutzt 256 px. D67 (2) setzt die Zeilen in Desktop-Fenstern auf 32 px (RAU-06); spec/02 §4.3 nennt noch 48 px.</dd></div>
       <div><dt>Prüfung</dt><dd>Breitfenster-Screenshot; Graustufen: aktueller Eintrag an Linie, Füllung und Gewicht erkennbar.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36, D48, D46, D67</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/03-signature.md §3.1, §10.1; spec/02-components.md §4.3; spec/09-platform-web.md §13; css/sebaro.css Z. 860-873</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Side nav from 840 dp (tablet) / 1024 px (desktop, Tauri): 240 px, 48 px rows (32 px in desktop/windowed web apps, D67), icon 24 + 12 + label 14/20, 3 px start edge on current, 2 px ink line at its end edge.</dd></div>
     </dl>
@@ -3349,6 +3412,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>Höhe 64px; Titel 24/32 bzw. 20/28; Kachel 32; Zurück-Taste 48</dd></div>
       <div><dt>Prüfung</dt><dd>Farbprüfung der Ansicht; keine sb-primary-action im Kopf.</dd></div>
       <div><dt>Entscheidung</dt><dd>D39</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §4.1; spec/08-platform-android.md §4; css/sebaro.css Z. 134-146</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Top bar 64 px on bg, no fill/shadow/elevation; top level = 32 px tile + headline, sub-screens = back/close + title; never a primary action or „Sichern“ in it.</dd></div>
     </dl>
@@ -3394,6 +3458,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>Die untere Kante des Kopfs ist die 2-px-Tintenlinie (D46), nicht die 1-px-Haarlinie aus spec/03 §6.1.</dd></div>
       <div><dt>Prüfung</dt><dd>check_demo.py-Strings „Apps“, „Projekte“, „Über“, „Kontakt“, „DE / EN“, „Hell oder Dunkel“; OVF1 bei 390 px kein Überlauf.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36, D39, D32</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D36, D39; systems/sebaro/spec/03-signature.md §3.1, §6.1, §6.5; spec/07-voice.md §4.8, §5</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Website header: 32 px umbrella tile + 8 px + wordmark, words „Apps“, „Projekte“, „Über“, „Kontakt“ (48 px targets, all visible at 390 px, no menu button), „DE / EN“, „Hell oder Dunkel“; web apps may drop the words.</dd></div>
     </dl>
@@ -3443,6 +3508,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>spec/03 §3.1 und das Rezept §6.5 nennen label 14/20; §6.1 und spec/01 §11 (body 16/24) gelten. Der Kopf ist standardmäßig nicht klebend (§6.1).</dd></div>
       <div><dt>Prüfung</dt><dd>Screenshots bei 390, 800, 1280 px; computed font der Kopf-Links.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36, D48</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/03-signature.md §6.1, §6.3, §6.5; spec/01-foundations.md §11</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Header: one row at least 1024, two rows 640–1023 and below 640; DOM order lockup, nav, language, theme; header links body 16/24, current destination and theme button body-strong; website lead 20/28 at body weight.</dd></div>
     </dl>
@@ -3487,6 +3553,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>spec/02 §3.15 (gerahmter Pager) ist veraltet; spec/02 §10 und CSS (Haarlinie, AD26) gelten.</dd></div>
       <div><dt>Prüfung</dt><dd>axe; Tastatur (Pfeiltasten in Reitern fehlen im Demo-Skript); Review bei 390 und 1280 px.</dd></div>
       <div><dt>Entscheidung</dt><dd>D48, D38</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §3.15, §4.4, §4.5, §10; css/sebaro.css Z. 100-126, 819-838, 875-886</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Tabs: tablist/tab/tabpanel, 48 px, roving tabindex, selected = 3 px bottom edge; TOC sidebar at least 1024 (32 px rows), &lt;details open&gt; below, aria-current=location; breadcrumbs nav+ol with chevron-right--16, aria-current=page; pager with one top hairline.</dd></div>
     </dl>
@@ -3527,6 +3594,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Hinweis</dt><dd>Tastenkürzel stehen als echte Zeichen aus sebaro Sans/Mono am Zeilenende (D68, ICO-08).</dd></div>
       <div><dt>Prüfung</dt><dd>Tastaturtest (Pfeile, Enter, Escape); Graustufen-Screenshot: Haken und Ortslinie ohne Farbe lesbar.</dd></div>
       <div><dt>Entscheidung</dt><dd>D67, D48</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D67 (4); concepts/runde-5-desktop/skizze.html §4</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Command palette in every desktop/windowed web app: group headers, setting state as a check mark at the row start, shortcut at the end, key hints in the footer; selected row = place line, hover = hover fill.</dd></div>
     </dl>
@@ -3570,6 +3638,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Werte</dt><dd>Werkzeugtaste 32 × 32 px (D67 (2)); bei Touch 48 px Trefferfläche</dd></div>
       <div><dt>Prüfung</dt><dd>axe button-name; Tooltip mit Name und Kürzel bei Zeiger und Fokus; jeder Ort hat ein sichtbares Wort.</dd></div>
       <div><dt>Entscheidung</dt><dd>D67, D36</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D67 (6); concepts/runde-5-desktop/skizze.html §6</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Anything that opens a place (Settings, Today, Search) always shows icon + word; in-place tools may be icon-only with a tooltip (name + shortcut) and an accessible name.</dd></div>
     </dl>
@@ -3621,6 +3690,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>spec/09 §3 (Link-Farbe, 1 px, 0.15em) ist veraltet; D52 und die CSS gelten.</dd></div>
       <div><dt>Prüfung</dt><dd>Komponentenblatt „Links und Fokusring“ (Standard, Zeigen, besucht, Fokus, extern) in beiden Modi; alle &lt;a&gt; haben die 2-px-Linie.</dd></div>
       <div><dt>Entscheidung</dt><dd>D49, D52, D56</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D49, D52; systems/sebaro/spec/03-signature.md §15.1–§15.3; css/sebaro.css Z. 40-45</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">One link style: word in text colour, 2 px link-coloured underline (0.2 em offset); hover/press turns the word link; visited (prose only) turns the underline link-visited; always underlined.</dd></div>
     </dl>
@@ -3662,6 +3732,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>D52 nannte U+2197 (Wortlaut unsicher); D56 (neuer, I) gilt.</dd></div>
       <div><dt>Prüfung</dt><dd>grep &#x27;U+2197&#x27; in Seiten = 0; Komponentenblatt „Links und Fokusring“ (extern).</dd></div>
       <div><dt>Entscheidung</dt><dd>D56, D52, D38</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D56 (2); systems/sebaro/spec/03-signature.md §15.1; spec/04-icons.md §7.4</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Links leaving the app/site end in the external-link icon (16 px, 2 px gap), never a U+2197 character.</dd></div>
     </dl>
@@ -3707,6 +3778,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>--sb-color-success #07662E / #439C5B; --sb-color-warning #BE5A0A / #F59258; --sb-color-danger #AF2A27 / #E66761; --sb-color-info #33485D / #C8DDF5; Glyphe 20 px in Listen, 16 px in Belegen und Aussage-Zeilen; Abstand 4 px; Wort caption 14/20</dd></div>
       <div><dt>Prüfung</dt><dd>Graustufen-Screenshot: alle Zustände unterscheidbar; computed color des Worts = --sb-color-text.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36, D15</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §1.1, §1.5; spec/03-signature.md §1.1, §1.2; spec/02-components.md §3.1; css/sebaro.css Z. 546-555</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Status = glyph in status colour (at most 20 px) + word in text colour; never colour alone, never a fill or coloured status word; glyph aria-hidden, the word carries the meaning.</dd></div>
     </dl>
@@ -3746,6 +3818,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>Formen: gefüllte Scheibe mit Haken, Ring aus 8 Strichen, Ring mit Schrägstrich, Achteck mit „!“ (spec/04 §7.2)</dd></div>
       <div><dt>Prüfung</dt><dd>Wortliste gegen spec/01 §1.5; Icons aus shared/icon-set.json; Kontaktbogen in Graustufen.</dd></div>
       <div><dt>Entscheidung</dt><dd>D15, D24</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §1.5; spec/04-icons.md §7.2; shared/FACTS-CONTRACT.md §6.3, §6.5</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Fixed state words with fixed glyphs and colours (läuft, geplant, erledigt, Fehler; bestanden, offen, übersprungen, nicht bestanden; nicht belegt); no triangle for läuft; error is the only octagon.</dd></div>
     </dl>
@@ -3786,6 +3859,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>Die Vertragstokens opacity.disabled-content 0.38 / disabled-container 0.12 widersprechen dieser Regel; sie werden in sebaro nicht benutzt.</dd></div>
       <div><dt>Prüfung</dt><dd>grep opacity: nicht für disabled; Farbprüfung zählt gesperrte Taste nicht als Hauptaktion.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §1.4 Regel 5; spec/02-components.md §0.2, §1.1; css/sebaro.css Z. 253-256, 325-330</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Disabled = text-muted label, border boundary, not-allowed cursor; disabled primary action = surface-sunken fill, border-strong outline, text-muted label, no lime; never opacity; prefer an enabled button that explains on press.</dd></div>
     </dl>
@@ -3832,6 +3906,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>spec/02 §3.2 und spec/09 §4.4 nennen label 14/20; CSS (caption 400, AD15) gilt.</dd></div>
       <div><dt>Prüfung</dt><dd>Review; keine Statusfarbe in .sb-tag.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §3.2, §10; css/sebaro.css Z. 558-565</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Tags: outlined word (1 px border-strong, radius 4, padding 1 8, caption weight), not interactive, never a status colour; „Beta“ is a tag.</dd></div>
     </dl>
@@ -3872,6 +3947,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>Glyphe 20px (info--filled, warning--filled, error--filled, success--filled); Rahmen 1px; Radius 12px; Padding 12 16</dd></div>
       <div><dt>Prüfung</dt><dd>grep background/border-inline-start in .sb-callout = 0.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §3.11; spec/09-platform-web.md §4.4; css/sebaro.css Z. 755-767</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Callouts: 20 px filled status glyph + body-strong title + text in a 1 px hairline frame, radius 12, role=note; no fill, no coloured edge.</dd></div>
     </dl>
@@ -3917,6 +3993,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>Schwellen 1 s und 10 s; Balken 4px (11.80 / 10.43 : 1); Ring 48px; Schrittkante 3px; höchstens 1 Freude-Moment je Ablauf</dd></div>
       <div><dt>Prüfung</dt><dd>Jeder Ladezustand hängt an einem Netzaufruf über 1 s; keine @keyframes für Skelette.</dd></div>
       <div><dt>Entscheidung</dt><dd>D48</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §0.2, §1.7, §3.12; spec/07-voice.md §4.5; spec/01-foundations.md §7; css/sebaro.css Z. 769-802</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Local work: no spinner; remote &gt; 1 s: „Wird geladen …“ + indicator, &gt; 10 s say what happens; progress = native &lt;progress&gt; ink on border track, 48 px ring role=progressbar, steps with 3 px top edge and aria-current=step; static skeletons with words, no shimmer or confetti.</dd></div>
     </dl>
@@ -3969,6 +4046,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>Kritik 2026-10-19: Wortlaut „7a“ und Zeilentext von D67 widersprechen sich; nicht aufgelöst, weil beides aus derselben Antwort stammt. Der feste Teil steht in STA-08.</dd></div>
       <div><dt>Prüfung</dt><dd>Rückfrage an den Inhaber: gilt „7a“ (Summe in der Aktionszone) oder der Zeilentext von D67 (Summe am Fuß der Seitenleiste)?</dd></div>
       <div><dt>Entscheidung</dt><dd>D67, D46</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D67 (7); concepts/runde-5-desktop/skizze.html §7</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">OPEN (conflict in D67 (7)): the owner answered „7a“ = totals only in the action zone (sketch), but the D67 row records totals at the sidebar foot (= option B); either way the total appears exactly once.</dd></div>
     </dl>
@@ -4013,6 +4091,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>Welches Token das graue Zeichen trägt (text-muted oder info), sagen D67 und die Skizze nicht. Wo die Summe steht, ist offen (STA-07).</dd></div>
       <div><dt>Prüfung</dt><dd>Graustufen-Screenshot: jeder Status ohne Farbe lesbar; Statuswörter zählen (höchstens zwei).</dd></div>
       <div><dt>Entscheidung</dt><dd>D67</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D67 (7); concepts/runde-5-desktop/skizze.html §7</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Row status in lists and trees: glyph + word in the row; status words at most two words, never abbreviated; an informational status gets a grey glyph, one that needs action the warning glyph.</dd></div>
     </dl>
@@ -4057,6 +4136,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>Höhe 48px (Input 46px); Padding 0 12px; Grundlinie 1px; Radius 8px oben; Hilfe caption 14/20 text-muted</dd></div>
       <div><dt>Prüfung</dt><dd>axe label; jede __help/__error-ID wird von aria-describedby referenziert.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §2.1; css/sebaro.css Z. 354-381; demo/mobile.html Z. 343</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Visible &lt;label for&gt; above; field = surface-sunken area with 1 px border-strong baseline, top radius 8, min 48 px, no frame; help and error linked via aria-describedby; counters end-aligned tabular.</dd></div>
     </dl>
@@ -4102,6 +4182,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>Grundlinie 2px; Glyphe 16px; danger auf surface-sunken 5.52 / 6.04; dunkel danger auf pressed-fill 4.55</dd></div>
       <div><dt>Prüfung</dt><dd>Fehlerfall: aria-invalid und aria-describedby gesetzt; Meldung in text-Farbe.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §1.7, §5.2; spec/02-components.md §0.2, §2.1; css/sebaro.css Z. 375-377</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Field error: aria-invalid=true, 2 px danger baseline, error glyph in danger, message in text colour via aria-describedby saying what is wrong and how to fix it; no red text or fill.</dd></div>
     </dl>
@@ -4142,6 +4223,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>spec/01 §1.1 nennt Checkbox-Kante in accent, §1.2/§5.2 border-strong; aufgelöst nach CSS: aus = border-strong, an = accent. Maße außer der Kobalt-Marke sind vorläufig.</dd></div>
       <div><dt>Prüfung</dt><dd>Farbprüfung: Lindgrün nur in der Hauptaktion (Lint L1); sb-controls.js schaltet aria-checked, ohne Skript stimmt der Anfangszustand.</dd></div>
       <div><dt>Entscheidung</dt><dd>D37</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §0.2, §2.4–§2.6, §2.8; css/sebaro.css Z. 396-455, 479-511</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">On-state of checkbox/radio/switch/range is an accent mark (edge + check, 10 px dot, thumb + track edge, fill); never lime, never a fill behind text; 48 px label rows, 20 px box; switch = &lt;button role=switch aria-checked&gt;; range shows its value as text.</dd></div>
     </dl>
@@ -4182,6 +4264,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>Segmente 2–4, Höhe 48px, Rand 1px; Chip-Rahmen 36px, Ziel 48px; Kante 3px</dd></div>
       <div><dt>Prüfung</dt><dd>Keine background-Farbe für :checked/aria-pressed; axe button-name an sb-chip__remove.</dd></div>
       <div><dt>Entscheidung</dt><dd>D48</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §2.7, §2.9; spec/08-platform-android.md §14; css/sebaro.css Z. 457-477, 513-541</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Segmented control for 2–4 short options; filter chips &lt;button aria-pressed&gt;, 36 px frame in 48 px target; chosen = 3 px accent bottom edge + check + weight; never filled.</dd></div>
     </dl>
@@ -4223,6 +4306,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>Icon 24px text-muted</dd></div>
       <div><dt>Prüfung</dt><dd>Label existiert (ggf. sb-visually-hidden); Leeren-Knopf nur gefüllt sichtbar (Skript fehlt in den Demos).</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §2.2, §2.3; demo/components.html Z. 389-391</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Search: leading search icon, type=search, native clear hidden, „Suche leeren“ icon button when filled, label may be visually hidden; select = native &lt;select&gt; with chevron-down; long app lists as a sheet with radio rows.</dd></div>
     </dl>
@@ -4272,6 +4356,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>D67 (2): In Desktop-Apps und Web-Apps mit Fenster sind Zeilen in Listen und Bäumen 32 px hoch (RAU-06); offen ist, ob das auch für zwei- und dreizeilige Zeilen gilt.</dd></div>
       <div><dt>Prüfung</dt><dd>Liste hat sb-list-end; keine sb-card in Listen; keine Badge-Komponenten.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36, D46, D67</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §3.3; spec/01-foundations.md §4; css/sebaro.css Z. 567-605</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Lists are flat rows (hairline inset 16, stretched title link + chevron), end with a closing sentence or nothing; no infinite scroll, no count badges.</dd></div>
     </dl>
@@ -4312,6 +4397,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>Ungelöst: spec/02 §3.3 will success--filled 20 px + versteckt „erledigt:“; Demos nutzen success--16 und sichtbares „erledigt“. Muss der Guide festlegen.</dd></div>
       <div><dt>Prüfung</dt><dd>Graustufen-Screenshot liest sich gleich geordnet; Screenreader hört „erledigt“ je Zeile.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36, D22</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/03-signature.md §1.2; spec/02-components.md §3.3, §10; css/sebaro.css Z. 599-603; demo/mobile.html Z. 176-185</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Grey carries structure; state as a body-strong sentence; done rows recede (40 px, caption, text-muted, success glyph, time at end, no hairline), status word once in the group header.</dd></div>
     </dl>
@@ -4355,6 +4441,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>Stat Padding-inline 12px; Spaltenmin. 96px; Meta-Zeilen 48px, Spalten 2fr/3fr</dd></div>
       <div><dt>Prüfung</dt><dd>Review: keine Fläche oder Radius an .sb-stat.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §3.6, §3.8, §10; css/sebaro.css Z. 674-682, 715-723</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Stats as flat columns with start hairlines (no fill/frame/radius), label caption muted, value title tabular; properties as dl.sb-meta-list, one div per pair, 48 px rows.</dd></div>
     </dl>
@@ -4400,6 +4487,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>spec/02 §3.7 nennt sb-chart__fill--1…6 für Balken; CSS/Demo (AD07) gelten. Legende plus Direktbeschriftung (spec/01 §8) gegen nur Direktbeschriftung (Palettennotiz) ist ungeklärt; sequential/diverging haben keine Nutzungsregel, der dunkle Diverging-Mittelwert #343539 ist veraltet.</dd></div>
       <div><dt>Prüfung</dt><dd>Farbprüfung: Dataviz-Farben nur in .sb-chart, genau ein Balken accent; aria-label nennt alle Werte; Diagramm in Graustufen lesbar.</dd></div>
       <div><dt>Entscheidung</dt><dd>D37</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §1.1, §8; spec/02-components.md §3.7; css/sebaro.css Z. 684-713; palettes/sebaro.json dataviz</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Labelled bars neutral (border-strong), only the current period accent; dashed text-muted target with label; values as text; role=img + aria-label with all values; several series as labelled rows with neutral bars; categorical colours only for unlabelled overlapping series, with line styles and direct labels.</dd></div>
     </dl>
@@ -4446,6 +4534,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>Zellen-Padding 12px</dd></div>
       <div><dt>Prüfung</dt><dd>axe scrollable-region-focusable; jede Tabelle hat caption.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §3.9; css/sebaro.css Z. 725-732</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Tables in a focusable role=region wrap; th label with border-strong rule, hairline rows, .sb-num end-aligned, caption; no zebra stripes.</dd></div>
     </dl>
@@ -4488,6 +4577,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>40px / 32px; Ring 1px</dd></div>
       <div><dt>Prüfung</dt><dd>axe; Review.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §3.13; css/sebaro.css Z. 804-811</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Avatar: initials in a 40 (32) px circle, 1 px ring, no fill; aria-label with the name, initials aria-hidden.</dd></div>
     </dl>
@@ -4541,6 +4631,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>Spot 128 × 96px</dd></div>
       <div><dt>Prüfung</dt><dd>Keine sb-primary-action innerhalb .sb-empty.</dd></div>
       <div><dt>Entscheidung</dt><dd>D39</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §3.14; spec/07-voice.md §4.2; css/sebaro.css Z. 813-817</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Empty state: start-aligned optional 128×96 spot, title „Noch keine &lt;thing&gt;“ + one sentence how it fills; the primary action goes to the bottom bar; no mascots or jokes.</dd></div>
     </dl>
@@ -4586,6 +4677,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>Ortslinie 3 px (--sb-border-width-strong, --sb-color-accent); Zeile 32 px (D67 (2))</dd></div>
       <div><dt>Prüfung</dt><dd>Graustufen-Screenshot: gewählt (Linie und Haken) und aktuell (zusätzlich fett) ohne Farbe unterscheidbar.</dd></div>
       <div><dt>Entscheidung</dt><dd>D67, D48</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D67 (8); concepts/runde-5-desktop/skizze.html §8</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Multi-select: every selected row gets the place line and a check mark replacing its icon, never a fill; the current row is also bold; a counter says „3 ausgewählt“.</dd></div>
     </dl>
@@ -4621,6 +4713,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>Für die Erzählstimme der Guide-Seite selbst („unser Designsystem“) gibt es keine Regel; das entscheidet der Inhaber.</dd></div>
       <div><dt>Prüfung</dt><dd>grep in Strings nach „ Sie “, „ Ihr“, „ wir “.</dd></div>
       <div><dt>Entscheidung</dt><dd>D11</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D11; systems/sebaro/spec/07-voice.md §2; research/04-sebaro-profil.md §1, §3</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Address users as „du“ (lower case); the studio website speaks as „ich“ (one person); never „Sie“ or „wir“; no English UI words in German UI.</dd></div>
     </dl>
@@ -4651,6 +4744,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Nicht so</dt><dd>„ohne Tracking“, „trackingfrei“, „100 % privat“, „anonym“ ohne Erklärung, „DSGVO-konform“, „EU-Server“, „in der Cloud“.</dd></div>
       <div><dt>Prüfung</dt><dd>grep -rniE &#x27;tracking|100 ?% privat|dsgvo-konform|eu-server|in der cloud&#x27; (erlaubt nur „Tracker“ als gezählter Fakt).</dd></div>
       <div><dt>Entscheidung</dt><dd>D40</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D40; systems/sebaro/spec/03-signature.md §5.1 (5), §5.5; spec/07-voice.md §4.6, §6.2</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Write privacy claims as concrete, countable facts („ohne Analyse-Skripte, ohne Werbe-IDs, ohne Cookies“, named server city), never vague terms like „ohne Tracking“.</dd></div>
     </dl>
@@ -4685,6 +4779,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Nicht so</dt><dd>„Dein Dashboard“; Themen-Namen.</dd></div>
       <div><dt>Prüfung</dt><dd>Review der Bildschirmtitel.</dd></div>
       <div><dt>Entscheidung</dt><dd>D32</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/07-voice.md §3.3</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Screen titles are short nouns; sentence headings only on websites.</dd></div>
     </dl>
@@ -4716,6 +4811,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>U+00A0; verboten U+202F, U+2009</dd></div>
       <div><dt>Prüfung</dt><dd>grep U+202F/U+2009 = 0; grep -nE &#x27;[0-9] (%|Tage|Gläser|Min\.|Std\.)&#x27; findet fehlende U+00A0 (check_site.py TEXT).</dd></div>
       <div><dt>Entscheidung</dt><dd>D22, D11</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D22; systems/sebaro/spec/01-foundations.md §2.5 Regel 4; spec/07-voice.md §3.4, §3.5; spec/08-platform-android.md §16; spec/09-platform-web.md §3</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">U+00A0 between number and unit (never U+202F/U+2009); thousands 10.000 / 10,000; ranges 08:00–22:00; fractions 5 / 8; dates „Samstag, 10. Oktober“, 10.10.2026 (en 2026-10-10); 24 h times; never relative dates alone.</dd></div>
     </dl>
@@ -4746,6 +4842,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Nicht so</dt><dd>&quot;…&quot; gerade Anführungszeichen, text-transform: uppercase, „NEU“, „Nutzer*innen“.</dd></div>
       <div><dt>Prüfung</dt><dd>grep text-transform: uppercase und gerade Anführungszeichen in UI-Texten; grep * und : in Personenbezeichnungen.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §2.5 Regel 5; spec/07-voice.md §3.6–§3.11</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">German quotes „…“ ‚…‘, en dash for ranges and as dash; no all-caps or eyebrow labels; inclusive neutral forms without gender star/colon; abbreviations only Std./Min.</dd></div>
     </dl>
@@ -4777,6 +4874,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>--sb-size-measure-prose 70ch; Stapel 12px; H2 40px; H3 32px</dd></div>
       <div><dt>Prüfung</dt><dd>Absätze haben max-inline-size bis 70ch.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §2.5 Regel 2; spec/02-components.md §5; css/sebaro.css Z. 39, 90-98</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Running text at most 70 ch (--sb-size-measure-prose); list rows stay full width; .sb-prose stack 12 px, H2 40 px, H3 32 px; visited links only in prose.</dd></div>
     </dl>
@@ -4807,6 +4905,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Nicht so</dt><dd>„Ungültige Eingabe“, „Leider ist ein Fehler aufgetreten“, „Fehler 0x80…“, „Ups“.</dd></div>
       <div><dt>Prüfung</dt><dd>Review aller Fehlertexte.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/07-voice.md §4.1; spec/02-components.md §2.1; spec/08-platform-android.md §14</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Errors say what is wrong and what to do (with numbers where a limit exists); no blame, no codes in the main line; technical details in „Details“.</dd></div>
     </dl>
@@ -4848,6 +4947,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>Radius 12px; code 14/20, wght 500; „Kopiert“ 2 s</dd></div>
       <div><dt>Prüfung</dt><dd>axe scrollable-region-focusable; im Code nur die Codetöne aus FAR-11.</dd></div>
       <div><dt>Entscheidung</dt><dd>D38, D36, D67, D70</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-20</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §3.10; spec/01-foundations.md §1.8; css/sebaro.css Z. 735-761; DECISIONS.md D67 (12), D70</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Code blocks: surface-sunken, radius 12, bar with language + „Kopieren“ (2 s „Kopiert“), focusable &lt;pre&gt;, sebaro Mono 500 14/20; highlighted code only in the five looks (TXT-10, tones FAR-11), no bold or italic; unhighlighted code is text; inline code only for machine values; keys as &lt;kbd&gt;.</dd></div>
     </dl>
@@ -4878,6 +4978,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Nicht so</dt><dd>In der Mitte kürzen; ein gekürzter Status oder eine gekürzte Zahl; ein gekürzter Name ohne Tooltip.</dd></div>
       <div><dt>Prüfung</dt><dd>Lange Namen in 32-px-Zeilen und schmaler Seitenleiste: Status und Zahl bleiben ganz sichtbar, der Tooltip zeigt den vollen Namen.</dd></div>
       <div><dt>Entscheidung</dt><dd>D67</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D67 (9); concepts/runde-5-desktop/skizze.html §9; systems/sebaro/spec/01-foundations.md §2.5 Regel 1</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Truncate overlong names in lists and trees at the end with an ellipsis, full name always in the tooltip; never truncate status or numbers; headings never truncate.</dd></div>
     </dl>
@@ -4918,6 +5019,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>Die Töne sind entschieden (FAR-11, D69); die Zuordnung der Code-Arten ist eine Ausarbeitung der Agenten auf D67 (12) und gilt, bis der Inhaber sie ändert.</dd></div>
       <div><dt>Prüfung</dt><dd>Computed style in .sb-code: font-weight 500, font-style normal, Farben nur --sb-syntax-*, text, text-muted; Graustufen-Screenshot bleibt lesbar.</dd></div>
       <div><dt>Entscheidung</dt><dd>D67, D69, D70, D38</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-20</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D67 (12), D69, D70; systems/sebaro/spec/01-foundations.md §1.8 (Five looks, Markup languages), §1.8.1; spec/02-components.md §3.10</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Map every kind of code to one of five looks: keyword, string, constant (the three syntax tones), comment (text-muted), plain (text: identifiers, functions, types, keys, operators, punctuation, interpolation); a name no mapping lists is plain; code is sebaro Mono Medium 500 only, no bold or italic, readable without colour.</dd></div>
     </dl>
@@ -4949,6 +5051,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>Unterlinie 2 px wavy, danger; Randzeichen + / U+2212; Flächen success-subtle / danger-subtle</dd></div>
       <div><dt>Prüfung</dt><dd>Graustufen-Screenshot: Fehler an der Wellenlinie, Änderungen an + und − erkennbar.</dd></div>
       <div><dt>Entscheidung</dt><dd>D67, D36</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-20</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §1.8 (Where marks are not colour, Diff); css/sebaro.css .sb-tok-invalid; spec/09-platform-web.md §17</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Code errors: 2 px wavy danger underline plus the message in the problem line, the text keeps its look; diffs: gutter + / − (U+2212) plus a success-subtle / danger-subtle line fill, code keeps its five looks, hunk headers text-muted; never colour alone.</dd></div>
     </dl>
@@ -4983,6 +5086,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Nicht so</dt><dd>Unbelegtes „Keine Tracker“; ungeprüften Abfluss weglassen; fehlende Fakten schätzen.</dd></div>
       <div><dt>Prüfung</dt><dd>Jede Aussage-Zeile/Ziffer hat eine Notiz mit showsClaim = true; check_facts.py.</dd></div>
       <div><dt>Entscheidung</dt><dd>D21, D14, D30, D40</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D21; systems/sebaro/spec/10-facts.md (Drei Regeln), §2; spec/03-signature.md §5.1 (1)</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Claims about data, privacy or licence carry evidence; reassuring claims only with a passed, current check; outflows always visible, with „nicht belegt“ when unverified.</dd></div>
     </dl>
@@ -5021,6 +5125,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>spec/03 §5.2/§5.7 (Ziffer in link, 1 px, 0.15em) ist veraltet; D56 (3) und css .sb-note-ref gelten.</dd></div>
       <div><dt>Prüfung</dt><dd>check_demo.py TXT5 (Note neben vorheriger), TXT6 (Nummern nicht 1..n), TXT7; Lint L7; jede Ziffer verlinkt hin und zurück.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36, D30, D56, D52</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D36, D56 (3); systems/sebaro/spec/03-signature.md §5.1 (2), §5.2, §15.1; spec/02-components.md §6; css/sebaro.css Z. 976-1017</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Websites: real-text footnote digit after the claim in link style (text-coloured digit, 2 px cobalt underline); notes in one column „Belege“, 1..n by first appearance, at every width, never hidden; one backlink per citation.</dd></div>
     </dl>
@@ -5060,6 +5165,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>spec/04 §7.3 nennt ab 48 dp; spec/01 §4, spec/03 §5.4 und spec/08 §13 nennen ab 56 (gilt).</dd></div>
       <div><dt>Prüfung</dt><dd>Keine Ziffern in App-Bildschirmen; sb-controls.js schaltet aria-expanded + hidden, ohne Skript stimmt der Zustand.</dd></div>
       <div><dt>Entscheidung</dt><dd>D40</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D40; systems/sebaro/spec/03-signature.md §5.1 (3), §5.4; spec/02-components.md §6; spec/08-platform-android.md §13; css/sebaro.css Z. 1038-1064</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Apps: no digits; each claim is a toggle row (at least 56 px, &lt;button aria-expanded aria-controls&gt;) that opens to its note with a 3 px accent start edge.</dd></div>
     </dl>
@@ -5090,6 +5196,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Nicht so</dt><dd>„Geprüft“ ohne Absender; „zertifiziert“, „verifiziert“, „unabhängig geprüft“.</dd></div>
       <div><dt>Prüfung</dt><dd>check_demo.py-Strings „Eigene Prüfung, automatisch“, „Eigene Prüfung, von Hand“, „Nicht geprüft:“.</dd></div>
       <div><dt>Entscheidung</dt><dd>D40</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D40; systems/sebaro/spec/03-signature.md §5.1 (4); spec/10-facts.md §9</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Every note names the checker („Eigene Prüfung, automatisch / von Hand / automatisch und von Hand“) and what was not checked („Nicht geprüft: …“).</dd></div>
     </dl>
@@ -5121,6 +5228,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>caption 14; Datum TT.MM.JJJJ; Prüfliste mit 1-px-Haarlinie; Zusammenfassung „4 bestanden · 1 übersprungen · 1 offen“</dd></div>
       <div><dt>Prüfung</dt><dd>check_demo.py --system sebaro (facts.html).</dd></div>
       <div><dt>Entscheidung</dt><dd>D40, D15, D21</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/10-facts.md §1, §3.3, §4.1–§4.3; spec/03-signature.md §5.3</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Note order: result, method, proof/reasons, outflows, limits, sender, link (text / text-muted / link, caption 14, never smaller, no internal IDs); three forms: compact line, full form, check list.</dd></div>
     </dl>
@@ -5156,6 +5264,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Nicht so</dt><dd>Methode oder Datum in den Code schreiben; Aussage größer als der Wert („komplett privat“); doppelte Nummern.</dd></div>
       <div><dt>Prüfung</dt><dd>Notes neu erzeugen und gegen die ausgelieferte Datei diffen; check_demo.py TXT6.</dd></div>
       <div><dt>Entscheidung</dt><dd>D14, D36</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/10-facts.md §1, §3.2, §9; spec/03-signature.md §5.1 (6); spec/09-platform-web.md §10-§11</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Note text is generated by check_facts.py --notes, never typed; one numbering per page by first appearance; same facts keep their number; the claim states exactly the fact value.</dd></div>
     </dl>
@@ -5187,6 +5296,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>&lt; 1024 px (Skript 63.99rem); max-block-size 60dvh; „Schließen“ 48 px</dd></div>
       <div><dt>Prüfung</dt><dd>Playwright bei 390 px: Popover öffnet, Escape schließt, Fokus zurück auf die Ziffer.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/03-signature.md §5.3; spec/09-platform-web.md §9; spec/02-components.md §6; demo/assets/sb-notes.js</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Below 1024 px a digit may open a non-modal bottom popover (claim, cloned note, „Schließen“); focus returns to the digit; without JS the link jumps; the list stays visible; off in print.</dd></div>
     </dl>
@@ -5220,6 +5330,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Nicht so</dt><dd>Renderer ohne laufende Prüfung ausliefern; shared/facts-Demodaten ausliefern.</dd></div>
       <div><dt>Prüfung</dt><dd>python3 tools/check_facts.py &lt;facts.json&gt; Exit 0 in der Produkt-CI.</dd></div>
       <div><dt>Entscheidung</dt><dd>D40, D14</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D40; systems/sebaro/spec/03-signature.md §5.1 (7); spec/11-checklist.md §2</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">The facts tooling is optional for product repos; if used, its contract (own facts.json, check_facts.py before rendering) is mandatory; never ship the invented demo facts.</dd></div>
     </dl>
@@ -5251,6 +5362,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>Marker 1 px border-strong, Radius 4, caption</dd></div>
       <div><dt>Prüfung</dt><dd>Negativtest mit data-sb-running-version; jeder Demo-Faktenblock enthält „Beispieldaten“.</dd></div>
       <div><dt>Entscheidung</dt><dd>D21, D24</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/10-facts.md §2, §4.4; spec/02-components.md §3.2; spec/11-checklist.md §2</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Stale facts: a notice replaces every claim (web: digits and sentences not rendered); demo data carries the „Beispieldaten“ marker (1 px border-strong, radius 4, caption).</dd></div>
     </dl>
@@ -5289,6 +5401,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>8 px unter der Hauptaktion</dd></div>
       <div><dt>Prüfung</dt><dd>Review aller Aktionen mit Datenweg.</dd></div>
       <div><dt>Entscheidung</dt><dd>D21</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/10-facts.md §3.4; spec/08-platform-android.md §5</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Under each action with a data path: hint „&lt;Trigger&gt;. Ziel: &lt;to&gt;.“ (caption, text-muted); local only: „Bleibt auf diesem Gerät.“; never in a tooltip.</dd></div>
     </dl>
@@ -5329,6 +5442,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>BRIEF („Jede App bekommt eine eigene Akzentfarbe“, D34) und spec/08 §11 („family accent“) sind durch D54/D63 ersetzt.</dd></div>
       <div><dt>Prüfung</dt><dd>Lint L3 (kein data-product auf Seitenelementen); Android A1, A2; Farbprüfung zählt Kacheln als „App-Zeichen“.</dd></div>
       <div><dt>Entscheidung</dt><dd>D40, D54, D50, D51, D53, D63, D65</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D40, D54, D65; systems/sebaro/spec/01-foundations.md §1.6; spec/03-signature.md §4.1, §4.3; spec/05-brand.md §0, §11; AGENTS.md §1, §4</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Product (tile) colour appears only inside the app-sign tile; screens stay on cobalt/lime; no product theme, accents or [data-product] scopes; each app only names its product id.</dd></div>
     </dl>
@@ -5375,6 +5489,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>BRIEF „Violett ausgeschlossen“ gilt nur für die Oberfläche; D50 (I) setzt Violett als Kachelfarbe für Lernen &amp; Entwickeln.</dd></div>
       <div><dt>Prüfung</dt><dd>check_palette.py (signTiles); BA34 Zeichenkontrast; tools/color.py.</dd></div>
       <div><dt>Entscheidung</dt><dd>D50, D51, D53, D54</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D50, D51; palettes/sebaro.json signTiles; systems/sebaro/spec/01-foundations.md §1.6; spec/05-brand.md §2.6</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Tile colour by purpose group (8 fixed colours), same in light and dark, white sign at least 3:1; tile tokens only for signs.</dd></div>
     </dl>
@@ -5431,6 +5546,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>D45 „immer 2“ Buchstaben und „ein Symbol je Gruppe“ sind durch D50 und D47 ersetzt.</dd></div>
       <div><dt>Prüfung</dt><dd>signs.py check sebaro Exit 0 (keine doppelte aktive Zuweisung); brand_assets.py check sebaro.</dd></div>
       <div><dt>Entscheidung</dt><dd>D45, D47, D50, D40, D59, D60</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D45, D47, D50, D60; systems/sebaro/spec/05-brand.md §2, §2.1, §2.3, §2.5, §5</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Each published app and variant gets its own symbol + three-letter lowercase code below; full name beside the tile on the web; umbrella sign = roof over three dots, code sbo, cobalt; retired signs blocked 365 days.</dd></div>
     </dl>
@@ -5470,6 +5586,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>spec/04 §1.3 zitiert noch die Runde-2-Grammatik (Strich 3 auf 24, Buchstabe oder freies Zeichen); spec/05 §2.1 gilt.</dd></div>
       <div><dt>Prüfung</dt><dd>signs.py (pictorial screen); der Inhaber sieht jedes neue Symbol.</dd></div>
       <div><dt>Entscheidung</dt><dd>D58, D29, D32, D40</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D58; systems/sebaro/spec/05-brand.md §1, §2, §2.5</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">An app symbol pictures name or purpose where a plain, unconfusable picture exists; otherwise abstract; no shared object metaphor across apps.</dd></div>
     </dl>
@@ -5512,6 +5629,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Werte</dt><dd>Kanten 32/48/64 px; --sb-x-sebaro-sign-tile-radius-ratio 0.1667 (8 px bei 48); -glyph-ratio 0.5; -glyph-ratio-small 0.6; Strich Basis 3.2, 24–40 px 3.4, 16–24 px 5.0</dd></div>
       <div><dt>Prüfung</dt><dd>signs.py check/sheet sebaro (signs-sheet.png, signs-16px-zoom.png); nur 32/48/64 auf Seiten.</dd></div>
       <div><dt>Entscheidung</dt><dd>D57, D47, D50, D62</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D57; systems/sebaro/spec/03-signature.md §4.1, §4.3, §4.4; spec/05-brand.md §2.1, §2.2, §2.6</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Tile edges only 32/48/64 px, radius edge × 0.1667; at least 48 symbol at 0.5 with code below; 32 symbol alone at 0.6; below 32 px symbol without tile in text colour; exception: 96 px start tile.</dd></div>
     </dl>
@@ -5565,6 +5683,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>Der Teil „internes Werkzeug ohne Zeichen“ ist vorläufig (D40 Grund: „Nicht gefragt und deshalb Vorschlag“).</dd></div>
       <div><dt>Prüfung</dt><dd>axe; Review von App-Raster, Über- und Faktenseite.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36, D40, D45, D34</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/03-signature.md §4.2; spec/05-brand.md §9, §10; spec/01-foundations.md §1.6; AGENTS.md §7</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Use the tile to identify an app (header 32, grid/list 48, about 64, facts block 48), always beside its visible name (tile aria-hidden then); internal tools get no sign.</dd></div>
     </dl>
@@ -5604,6 +5723,7 @@ a:hover, a:active { color: var(--sb-color-link); }
       <div><dt>Hinweis</dt><dd>spec/03 §4.3 sagt „nie eine Kachel mit Text“; gemeint sind Wörter, das Kürzel ab 48 px (D57) ist erlaubt.</dd></div>
       <div><dt>Prüfung</dt><dd>python3 tools/inline_assets.py --check; signs.py check.</dd></div>
       <div><dt>Entscheidung</dt><dd>D10, D40</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/03-signature.md §4.3, §4.6; spec/05-brand.md §10, §11</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Never recolour, rotate, stretch or outline a sign, put it on a photo or add text; tiles are generated from brand/signs.json and inlined unchanged.</dd></div>
     </dl>
@@ -5637,6 +5757,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Hinweis</dt><dd>Die Kürzel folgen der Regel aus spec/05 §2.5 (z. B. sebaro <svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg> sbo, Android Coden <svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg> acd). D33-Kapazität für Runde-3-Symbole nicht neu gemessen.</dd></div>
       <div><dt>Prüfung</dt><dd>.venv/bin/python tools/signs.py check sebaro Exit 0; brand_assets.py check Exit 0; SG90 (menschliche Sichtprüfung) bleibt offen; keine Markenrecherche.</dd></div>
       <div><dt>Entscheidung</dt><dd>D33, D42, D61, D63, D47, D50, D58</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/05-brand.md §2.4, §2.5; spec/11-checklist.md §3; DECISIONS.md D33, D61</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">New sign: pick group, form the code by rule, draw in signs_r3.py, review at 64/24/16 px, signs.py check (d16 at least 0.10 in both masters, no strict-reference hit), rebuild and look at outputs; the owner chooses.</dd></div>
     </dl>
@@ -5670,6 +5791,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Werte</dt><dd>Hell #1C1E22 / dunkel #EBEDEF (15.31 / 15.43); Kachel 1.2 F, Abstand 0.4 F, Kachelmitte 0.345 F über Grundlinie; gestapelt 1.6 F; Schutzraum 0.524 F / 0.25 × Kante; Minimum In-App-Kachel 32 px, Wortmarke 16 px Tintenhöhe, gestapeltes Lockup 48 px</dd></div>
       <div><dt>Prüfung</dt><dd>brand_assets.py check; Konstruktionszeichnungen wordmark-light-cut.svg / -dark-cut.svg und Lockup-Schutzraum.</dd></div>
       <div><dt>Entscheidung</dt><dd>D38, D40, D44, D36, D68, D71</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-20</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/05-brand.md §3 (Quelle fonts/sebaro-sans/src/sebaroSans[wdth,wght].ttf), §4, §11</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Wordmark = sebaro Sans outlines, unchanged letters (light 670 / tracking 0, dark 700 / +0.01 em); lockup tile 1.2 F, gap 0.4 F, clear space one x-height; respect minimum sizes.</dd></div>
     </dl>
@@ -5704,6 +5826,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Hinweis</dt><dd>Die Skizze zu D57 nennt für Orange 3,05–3,37 : 1, spec/05 §2.6 3,20–6,46 : 1 (BA13); beide ab 3 : 1, verschiedene Messstände.</dd></div>
       <div><dt>Prüfung</dt><dd>brand_assets.py check (BA13, BA25, BA36).</dd></div>
       <div><dt>Entscheidung</dt><dd>D53, D57</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/05-brand.md §2.2, §7; shared/BRAND-ASSETS.md §4.4</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Favicon: symbol alone on a full-bleed group tile, radius 0.1667, stroke 5.0, glyphSmall where set; at least 3:1 at 16 px.</dd></div>
     </dl>
@@ -5738,6 +5861,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Hinweis</dt><dd>spec/08 §11 („family accent in signs.iconMode“) ist veraltet; signTiles gilt (D53/D54).</dd></div>
       <div><dt>Prüfung</dt><dd>brand_assets.py check sebaro; src-tauri/icons enthält icon.icns, icon.ico; Launcher-Masken auf Gerät nicht verifiziert.</dd></div>
       <div><dt>Entscheidung</dt><dd>D10, D53, D57</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/05-brand.md §6; spec/04-icons.md §13; spec/08-platform-android.md §11; shared/ADOPTION.md §5 Schritt 3</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">App icons are generated from signs.json (adaptive: symbol 36 dp from 27 dp, code baseline 80.5 dp on 108 dp, inside the 66 dp safe circle); Tauri via cargo tauri icon from icon-1024.png (delete generated android/ios); notification icon = 16 px sign, alpha only.</dd></div>
     </dl>
@@ -5774,6 +5898,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Nicht so</dt><dd>Icon per image_gen; icons/dist/sprite.svg von Hand ändern.</dd></div>
       <div><dt>Prüfung</dt><dd>Keine Rasterdateien in Icon-/Zeichen-Slots; icons.py build --check Exit 0 (0 drifted).</dd></div>
       <div><dt>Entscheidung</dt><dd>D10</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D10; systems/sebaro/spec/04-icons.md Kopf, §9</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Icons, logos and app icons are code-drawn SVG, never image-generated; edit sources, never dist/.</dd></div>
     </dl>
@@ -5805,6 +5930,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Werte</dt><dd>Strich 24: 1.75, 16: 1.5, Spot: 2; Arbeitsbereich 24: 2–22, 16: 1–15, Spot Rand 4; Raster 0.125 (Spots 0.25); Kreis-Keyline r 9.125 bei (12,12); Quadrat 3.875–20.125; Teile bis 5; Lücke 2.25 / 2.0 / 2.5; Radius 2 (ab 8) / 1, 1.25 (ab 6) / 0.75, 3 (ab 12) / 1.5</dd></div>
       <div><dt>Prüfung</dt><dd>python3 tools/icons.py lint sebaro --strict Exit 0 (ICN304–308; 6 begründete Waiver in §15); Kontaktbogen hell/dunkel bei 100 % und 3×.</dd></div>
       <div><dt>Entscheidung</dt><dd>D10, D38, D40, D44</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-20</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/04-icons.md §0, §1.1 (gemessen an fonts/desktop/sebaroSans-*.ttf), §1.4, §1.5, §2</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">One-weight outline strokes, round caps/joins: 1.75 on 24, 1.5 on 16, 2 on spots; live area 2–22 / 1–15; grid 0.125; angles 0/30/45/60/90/120/135/150 (±0.5); circular arcs; at most 5 parts; gaps 2.25/2.0/2.5; container radius 2/1.25/3.</dd></div>
     </dl>
@@ -5839,6 +5965,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Hinweis</dt><dd>Kontrast und Trennung von App-Zeichen sind Agentenspezifikation (spec/04 §1.3, §11); der Kern „kein Schmuck, keine zweite Farbe“ folgt aus D36.</dd></div>
       <div><dt>Prüfung</dt><dd>Review-Checkliste spec/04 §10; tools/color.py contrast; keine Hex-Literale in Komponenten.</dd></div>
       <div><dt>Entscheidung</dt><dd>D29, D32, D36, D40, D58, D6</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/04-icons.md §1, §1.3, §1.4, §10, §11, §14; spec/05-brand.md §11</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Icons name a function only: no metaphor object, ornament or second colour; currentColor from a role token, at least 3:1 when informative; icons and app signs are separate families.</dd></div>
     </dl>
@@ -5870,6 +5997,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Werte</dt><dd>--sb-size-icon-sm 16, -md 20, -lg 24; stroke-width viewBox: 16 Master 1.5, 16 aus 24 2.25, 20: 1.8, 24: 1.75, 32: 1.5, 48: 1.125, Spot 2; 25 Namen mit 16er-Master; Spot 128 × 96</dd></div>
       <div><dt>Prüfung</dt><dd>Größenklassen im Markup; 16-px-Zoom im Kontaktbogen.</dd></div>
       <div><dt>Entscheidung</dt><dd>D38, D56</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/04-icons.md §3, §6; spec/09-platform-web.md §14; icons/dist/sprite.css</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Icons from the inline sprite (&lt;svg class=sb-icon aria-hidden focusable=false&gt;&lt;use href=#id/&gt;) at 16/20/24; 16 px uses the redrawn 16 master (#name--16); per-size stroke; spots above 48.</dd></div>
     </dl>
@@ -5901,6 +6029,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Werte</dt><dd>Gefüllt 24: 14 Icons; gefüllt 16: info, warning, error, success; Box ±0.25 (ICN308); ein &lt;path&gt; je Datei</dd></div>
       <div><dt>Prüfung</dt><dd>Umschalten Umriss/gefüllt ohne Versatz; ICN308.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36, D48</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/04-icons.md §5</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Filled variants only for the current nav item, an on toggle and the four 16 px status glyphs; filled box = outline box ±0.25, one &lt;path&gt;.</dd></div>
     </dl>
@@ -5933,6 +6062,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Hinweis</dt><dd>Tastenzeichen (⌘ ⇧ ⌥ ⌃ ↩) sind keine Icons: sie kommen nach D68 als echte Zeichen aus sebaro Sans und sebaro Mono (ICO-08).</dd></div>
       <div><dt>Prüfung</dt><dd>grep -n &#x27;[<svg class="sb-icon sb-icon--16" role="img" aria-label="links" focusable="false"><use href="#arrow-left--16"/></svg><svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg>›U+2197]&#x27; in Seiten und UI-Texten = 0; RTL-Spiegelung (autoMirror).</dd></div>
       <div><dt>Entscheidung</dt><dd>D38, D56, D52, D68</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-20</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D38, D56 (2), D68; systems/sebaro/spec/01-foundations.md §2.1; spec/04-icons.md §7.4; spec/08-platform-android.md §10</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Arrows, chevrons and external-link are icons, never characters (in prose; the font arrows <svg class="sb-icon sb-icon--16" role="img" aria-label="links" focusable="false"><use href="#arrow-left--16"/></svg> <svg class="sb-icon sb-icon--16" role="img" aria-label="hoch" focusable="false"><use href="#arrow-up--16"/></svg> <svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg> <svg class="sb-icon sb-icon--16" role="img" aria-label="runter" focusable="false"><use href="#arrow-down--16"/></svg> exist only for shortcuts, D68); chevrons = disclosure/rows, arrows = go there; mirrored in RTL.</dd></div>
     </dl>
@@ -5964,6 +6094,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Werte</dt><dd>viewBox 128 × 96; Strich 2; Rand 4; Raster 0.25; Lücke 2.5; Radius 3 (ab 12) / 1.5; text-muted auf bg 5.05 / 6.76</dd></div>
       <div><dt>Prüfung</dt><dd>aria-hidden=&#x27;true&#x27;; Ton im Dunkelmodus sichtbar; Überschrift und Satz tragen die Bedeutung.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/04-icons.md §8</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Spots (128×96, stroke 2) illustrate one state, one per empty state; ink text-muted + tone border only; aria-hidden; nothing reassuring, no scene or figure.</dd></div>
     </dl>
@@ -5996,6 +6127,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Hinweis</dt><dd>Seit D68 im Export: sebaro Sans und sebaro Mono enthalten ⌘ ⇧ ⌥ ⌃ ↩ ⎋ ⌫ ⇥ und die vier Pfeile als echte Zeichen.</dd></div>
       <div><dt>Prüfung</dt><dd>fonts.py verify sebaro; im Browser keine Ersatzschrift für ⌘ ⇧ ⌥ ⌃ ↩ (Schriftprüfung FNT3).</dd></div>
       <div><dt>Entscheidung</dt><dd>D67, D68, D38</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-20</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D67 (3), D68; systems/sebaro/spec/01-foundations.md §2.1; shared/FONTS-GUIDE.md §3.12 (addGlyphs); systems/sebaro/fonts/glyphs/draw_keys.py</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Shortcuts use the own key glyphs drawn into sebaro Sans and sebaro Mono (D68) as real characters: grey, end of row, no frame; keycaps only in help text; words on Windows/Linux.</dd></div>
     </dl>
@@ -6030,6 +6162,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Nicht so</dt><dd>Datenschutzaussagen oder Schrift ins Rasterbild backen.</dd></div>
       <div><dt>Prüfung</dt><dd>QA-Rubrik spec/06 §7; abgelehnte Versuche in images/rejected/ mit Grund.</dd></div>
       <div><dt>Entscheidung</dt><dd>D9</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D9; systems/sebaro/spec/06-imagery.md §3, §7; spec/05-brand.md §8, §11</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">No text, digits, pseudo-writing, logos, watermarks or UI in generated images; titles and wordmarks are set by code.</dd></div>
     </dl>
@@ -6060,6 +6193,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Nicht so</dt><dd>Hero-Bild im W1; Wasserglas als Tagwerk-Identität; generiertes Bild, wo ein Spot den Zustand genauer zeigt.</dd></div>
       <div><dt>Prüfung</dt><dd>Review: hat jedes Bild einen Inhaltszweck?</dd></div>
       <div><dt>Entscheidung</dt><dd>D9, D10, D29, D32</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/06-imagery.md §1, §7, §9; AGENTS.md §6</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Images are optional and only illustrate content; W1 first screen stays typography; apps use SVG spots; never AI raster in sign or icon slots.</dd></div>
     </dl>
@@ -6091,6 +6225,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Werte</dt><dd>Linie 0,3 mm (Prompt); WebP &lt; 300 KB; Artikel 672 CSS px; Studio ≈ 480 CSS px; Master 1536 × 1024; MaxFilter(5) Studio / MaxFilter(3) Artikel</dd></div>
       <div><dt>Prüfung</dt><dd>images/pipeline/verify.py; Ansicht bei 1× und 2× in beiden Modi.</dd></div>
       <div><dt>Entscheidung</dt><dd>D9, D20</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/06-imagery.md §2–§6</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Generated images use the verbatim style blocks sebaro-line-v1 or sebaro-steps-v1 (uniform outline, no fills/colour/shadow/faces), tinted afterwards to text / text-muted over bg for both schemes; WebP &lt; 300 KB; never upscale.</dd></div>
     </dl>
@@ -6125,6 +6260,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Nicht so</dt><dd>Rohbild löschen; Versuch ohne Grund verwerfen; alt=&#x27;Bild&#x27;.</dd></div>
       <div><dt>Prüfung</dt><dd>verify.py; Sidecar vorhanden; axe image-alt.</dd></div>
       <div><dt>Entscheidung</dt><dd>D9, D15</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/06-imagery.md §4, §6, §7</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Keep raw, sidecar and IPTC trainedAlgorithmicMedia provenance; keep rejected attempts with reasons; caption „KI-generiert, nachbearbeitet“; decorative alt=&quot;&quot;, content images concise alt, identical for both schemes.</dd></div>
     </dl>
@@ -6160,6 +6296,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Werte</dt><dd>4.5 / 3 / 3; 2 Dezimalstellen, abgeschnitten</dd></div>
       <div><dt>Prüfung</dt><dd>check_palette.py; check_demo.py (axe, Kontrast) hell und dunkel.</dd></div>
       <div><dt>Entscheidung</dt><dd>D6, D20</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D6, D20; systems/sebaro/spec/01-foundations.md Einleitung, §1.7; shared/ACCESSIBILITY-STATEMENT.md §2</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">WCAG 2.2 AA by default: text at least 4.5:1, large text and functional shapes at least 3:1 (WCAG 2.x gate, APCA reported only); quote ratios truncated to two decimals.</dd></div>
     </dl>
@@ -6191,6 +6328,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Werte</dt><dd>--sb-focus-width 2px; --sb-focus-offset 2px; --sb-color-focus #3057B1 / #89B1FA; Forced Colors: Highlight</dd></div>
       <div><dt>Prüfung</dt><dd>Tab durch die Seite: jedes Element zeigt den Ring; grep outline: none.</dd></div>
       <div><dt>Entscheidung</dt><dd>D5, D46</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §1.3, §5.3; spec/02-components.md §0.2, §8; spec/08-platform-android.md §3; css/sebaro.css Z. 50, 371, 451, 532</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">One focus ring system-wide: :focus-visible { outline: var(--sb-focus-ring); outline-offset: var(--sb-focus-offset); } — 2 px focus colour, 2 px offset, not animated; never removed.</dd></div>
     </dl>
@@ -6222,6 +6360,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Werte</dt><dd>--sb-size-target-touch 48px; --sb-size-target-pointer 24px; --sb-size-control-sm 32; -md 48; -lg 56; Grenze 1023.98px / (pointer: coarse)</dd></div>
       <div><dt>Prüfung</dt><dd>check_demo.py targets; axe target-size; mit pointer: coarse emulieren.</dd></div>
       <div><dt>Entscheidung</dt><dd>D67</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §4; spec/02-components.md §0.3, §10; css/sebaro.css Z. 1010-1016; DECISIONS.md D67 (2)</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Targets at least 48 px; 24 px pointer exceptions for inline/breadcrumb/note links and 32 px compact desktop controls and rows (D67), back to 48 px on coarse pointers and below 1024 px.</dd></div>
     </dl>
@@ -6257,6 +6396,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Werte</dt><dd>48 × 48 px; Icon 24 px</dd></div>
       <div><dt>Prüfung</dt><dd>axe button-name in beiden Modi; grep sb-icon-button ohne aria-label = 0; TalkBack/VoiceOver nicht verifiziert.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §1.5, §8; spec/04-icons.md §11; spec/07-voice.md §4.8; css/sebaro.css Z. 334-342</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Every control has a visible label or a German action aria-label; icon buttons 48×48 with 24 px text-muted icon, toggles via aria-pressed; decorative icons aria-hidden + focusable=false; focus order = DOM order.</dd></div>
     </dl>
@@ -6291,6 +6431,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Nicht so</dt><dd>Ortsmarkierung nur als background-color oder box-shadow.</dd></div>
       <div><dt>Prüfung</dt><dd>Chromium-Emulation forced-colors (laut spec/02 §9 nicht verifiziert).</dd></div>
       <div><dt>Entscheidung</dt><dd>D7</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §5.3, §9; spec/02-components.md §8; spec/09-platform-web.md §5; css/sebaro.css Z. 1114-1123</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Forced colours: meaning-carrying edges become CanvasText, primary outline ButtonText, focus Highlight; fields get a CanvasText frame; links stay underlined; status glyphs keep shape.</dd></div>
     </dl>
@@ -6329,6 +6470,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Werte</dt><dd>Sprunglink 48px; Breiten 390 und 1440 px</dd></div>
       <div><dt>Prüfung</dt><dd>Tab nach dem Laden zeigt den Sprunglink; manueller Durchlauf mit Screenshots beider Modi.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §5; spec/11-checklist.md §1; css/sebaro.css Z. 56-64</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">First focusable element: „Zum Inhalt“ skip link (visible on focus as a 48 px chip); per screen check keyboard open/close, Escape, focus return, backlinks, theme persistence, claim expansion at 390 and 1440 px.</dd></div>
     </dl>
@@ -6360,6 +6502,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Werte</dt><dd>BFSG seit 28.06.2025; Kleinstunternehmen &lt; 10 Personen und bis 2 Mio. €; Bußgeld bis 100.000 €; EN 301 549 V3.2.1 (WCAG 2.1 AA), V4.1.1 (WCAG 2.2 AA) Zitierung voraussichtlich Dezember 2026</dd></div>
       <div><dt>Prüfung</dt><dd>check_demo.py &lt;Seite&gt; 0 Fehler hell/dunkel bei 1440 und 390 px.</dd></div>
       <div><dt>Entscheidung</dt><dd>D15</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">shared/ACCESSIBILITY-STATEMENT.md §1–§3 (Stand 2026-10-12, Teile UNVERIFIED)</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Accessibility statement page/screen with the Anlage-3 fields; never claim conformance without a run check; ask the owner before claiming for a client.</dd></div>
     </dl>
@@ -6414,6 +6557,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Hinweis</dt><dd>„Nur beim ersten Aufruf“ als „erster Aufruf je Tab-Sitzung“ (sessionStorage) ist Agenten-Auslegung.</dd></div>
       <div><dt>Prüfung</dt><dd>Komponentenblatt „Start und Bewegung“ (sbStart.play(frame)) hell und dunkel; zweiter Seitenaufruf ohne Start; ungeprüft: WebKit/Tauri, Android-Splash-Übergabe (bis 160-dp-Icon vor der 96-dp-Kachel), iOS.</dd></div>
       <div><dt>Entscheidung</dt><dd>D49, D52, D55, D62</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D49, D52, D55; systems/sebaro/spec/03-signature.md §14.1, §14.2; spec/09-platform-web.md §1, §13; demo/assets/sb-start.js</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Same start everywhere: 96 px tile centred on bg while really loading, then flies to the 32 px header/title-bar tile in 200 ms (emphasized), content enters from below; web only on the first call of a tab session (sessionStorage sb-started) until load; none without JS/storage; reduced motion = fade in place.</dd></div>
     </dl>
@@ -6459,6 +6603,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Werte</dt><dd>96 px <svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg> 32 px</dd></div>
       <div><dt>Prüfung</dt><dd>Replay im Komponentenblatt: gleiches Bild vor und nach dem Flug.</dd></div>
       <div><dt>Entscheidung</dt><dd>D62, D57, D52</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D62; systems/sebaro/spec/03-signature.md §14.1; spec/08-platform-android.md §9</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">The start tile shows the symbol alone (no code), matching the 32 px header tile it moves into.</dd></div>
     </dl>
@@ -6518,6 +6663,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Hinweis</dt><dd>systems/sebaro/AGENTS.md §3 (Quickstart: theme-button.js mit defer im head, data-sb-theme-button, ohne sprite.css; Tailwind mit layer(components)) weicht ab; spec/09 und die Demo-Seiten gelten.</dd></div>
       <div><dt>Prüfung</dt><dd>Seite mit gespeichertem &#x27;dark&#x27; laden: kein heller Blitz.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/09-platform-web.md §1, §2; demo/components.html Z. 7-14</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Load order: theme-init.js, (sb-start.js), fonts.css, tokens.css, sprite.css, sebaro.css; inline sprite.svg at the top of body; behaviour scripts at the end of body.</dd></div>
     </dl>
@@ -6550,6 +6696,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Hinweis</dt><dd>theme-button.js schreibt nur deutsche Ansagen; spec/09 §6 verlangt englisch „Dark is on.“ auf englischen Seiten (fehlt).</dd></div>
       <div><dt>Prüfung</dt><dd>check_demo THM1–THM3; zweimal drücken: data-theme weg, sb-theme leer; grep prefers-color-scheme in Komponenten-CSS = 0.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/03-signature.md §6.2; spec/09-platform-web.md §2, §6; spec/01-foundations.md §9; shared/TOKEN-CONTRACT.md §9; demo/assets/theme-button.js</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Follow the system on first visit; a press toggles and stores sb-theme, matching the system clears it (two presses return to system); announce via hidden role=status; never hard-code data-theme; dark rules exist for @media (prefers-color-scheme: dark) :root:not([data-theme=&#x27;light&#x27;]) and [data-theme=&#x27;dark&#x27;].</dd></div>
     </dl>
@@ -6588,6 +6735,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Nicht so</dt><dd>Impressum nur im Menü; Fußzeile mit grauem Grund.</dd></div>
       <div><dt>Prüfung</dt><dd>Review jeder Seite.</dd></div>
       <div><dt>Entscheidung</dt><dd>D56, D46</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §5; spec/07-voice.md §5; css/sebaro.css Z. 221-230</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Site footer: ink line on top, caption copyright, links Impressum, Datenschutz, Barrierefreiheit, GitHub (+ external-link icon).</dd></div>
     </dl>
@@ -6625,6 +6773,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Nicht so</dt><dd>Gedruckte Bedienknöpfe.</dd></div>
       <div><dt>Prüfung</dt><dd>Druckvorschau.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">css/sebaro.css Z. 1124-1127; systems/sebaro/spec/03-signature.md §5.3</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Print hides popover, theme button, skip link and bottom block; external links in notes and prose print their URL.</dd></div>
     </dl>
@@ -6676,6 +6825,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Werte</dt><dd>Linie 2 dp; Hauptaktion 56 dp</dd></div>
       <div><dt>Prüfung</dt><dd>Lint A1, A8; extract_compose.py --compile (BOM 2024.12.01 und 2026.08.00).</dd></div>
       <div><dt>Entscheidung</dt><dd>D40, D46, D54, D39</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/08-platform-android.md §2.2, §4; AGENTS.md §3</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Every Compose screen under SebaroAppTheme (no product) and built with SbScreen (at most 1 primary action fixed at the bottom, 2 dp line on top); dynamic colour off; edge-to-edge on; mode and reduceMotion from app settings.</dd></div>
     </dl>
@@ -6708,6 +6858,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Hinweis</dt><dd>spec/08 §14 erlaubt Snackbar mit overlay shadow, ModalBottomSheet auf surfaceRaised und OutlinedCard; D46 (Linien statt Flächen und Schatten) gilt.</dd></div>
       <div><dt>Prüfung</dt><dd>lint-sebaro-android.sh A1–A9 Exit 0 (Grep, an einer echten App nicht geprüft).</dd></div>
       <div><dt>Entscheidung</dt><dd>D39, D40, D46, D36</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/08-platform-android.md §14, §15; spec/01-foundations.md §6</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">No stock M3 Button/FAB/NavigationBar/TopAppBar/Badge/AlertDialog; neutralise tonal elevation (surfaceTint = bg, shadowElevation 0 dp); controls in sebaro colours (on = accent); chips 3 dp edge; progress only for remote work &gt; 1 s; lint A1–A9.</dd></div>
     </dl>
@@ -6740,6 +6891,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Hinweis</dt><dd>Der Wortlaut „bis auf 2.“ ist ohne die Skizze nicht eindeutig; die konkreten Konstanten sind Agentenarbeit.</dd></div>
       <div><dt>Prüfung</dt><dd>Code-Review; kein Audio-/Vibrationsaufruf im Desktop-Code; auf Gerät nicht verifiziert.</dd></div>
       <div><dt>Entscheidung</dt><dd>D48</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D48 (3); systems/sebaro/spec/03-signature.md §18; spec/08-platform-android.md §5, §8</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Haptics on phones only: primary action succeeded = one short light pulse; delete confirmed = stronger double pulse; follow the system setting; no substitute on web/desktop.</dd></div>
     </dl>
@@ -6771,6 +6923,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Werte</dt><dd>Zeile 56 dp; Ring 20 dp; Punkt 10 dp; Rand 2 dp</dd></div>
       <div><dt>Prüfung</dt><dd>Einstellung vorhanden; Neustart behält die Wahl.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/08-platform-android.md §12; spec/03-signature.md §6.2; concepts/runde-4-novalis/skizze.html §3</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Apps follow the system by default; settings group „Hell oder Dunkel“ with three 56 dp radio rows „Wie das System“, „Hell“, „Dunkel“; never an icon toggle.</dd></div>
     </dl>
@@ -6810,6 +6963,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Hinweis</dt><dd>Fehlende Regeln: Inspector, Titelleistenhöhe, native vs. eigene Titelleiste, Fensterknöpfe Windows/Linux, Mindestgröße, Splitter, Menüleiste, Kürzelsatz, F6-Fokusreihenfolge, Drag-and-drop, Mehrfenster, Benachrichtigungen. shared/ADOPTION.md (Stand 2026-10-12) ist veraltet.</dd></div>
       <div><dt>Prüfung</dt><dd>check_demo.py --csp &quot;default-src &#x27;self&#x27;; style-src &#x27;self&#x27;; script-src &#x27;self&#x27;&quot;; in echter Tauri-Webview nicht verifiziert (spec/09 §15).</dd></div>
       <div><dt>Entscheidung</dt><dd>D52, D39, D46, D65</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/09-platform-web.md §13; shared/ADOPTION.md §5 Schritt 4</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Tauri views: sb-view sb-view--wide + sb-bottom-block + sb-side-nav, regions separated by ink lines, product colour only in the title-bar tile; CSP script-src &#x27;self&#x27;; window backgroundColor = bg.</dd></div>
     </dl>
@@ -6842,6 +6996,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Hinweis</dt><dd>novalis nutzt heute die Palette als Einstellungsseite (ADR-0004); nach D67 braucht der Punkt dort eine ADR mit dem Wortlaut des Inhabers.</dd></div>
       <div><dt>Prüfung</dt><dd>⌘, öffnet die Ansicht; Menü und Palette führen dorthin.</dd></div>
       <div><dt>Entscheidung</dt><dd>D67, D46</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D67 (5); concepts/runde-5-desktop/skizze.html §5; concepts/runde-4-novalis/skizze.html §3</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Every desktop app has its own Settings view (Cmd+,) with a help sentence per setting; the native menu and the command palette stay and also lead there.</dd></div>
     </dl>
@@ -6874,6 +7029,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
       <div><dt>Hinweis</dt><dd>Der CodeMirror-Teil ist nur gelesen, nicht ausgeführt (spec/09 §17).</dd></div>
       <div><dt>Prüfung</dt><dd>Editor in beiden Modi gegen spec/09 §17; Caret, aktuelle Zeile und Suchtreffer im Graustufen-Screenshot erkennbar.</dd></div>
       <div><dt>Entscheidung</dt><dd>D67, D52, D65</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-20</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md §1.8 (Markdown source in an editor, Around the code); spec/09-platform-web.md §17 (CodeMirror, Editor chrome)</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Markdown source in an editor is sebaro Sans: markup characters text-muted, heading text in heading weight, real italic/bold, links in link style, inline code mono on surface-sunken. Around code: ground bg (editor) / surface-sunken (block), selection, 2 px accent caret, current line hover-fill, line numbers text-muted (current text), matches and bracket pair 1 px border-strong frame, indent guides border, fold chevrons text-muted.</dd></div>
     </dl>
@@ -6915,6 +7071,7 @@ css/app.css:12:  .hint { color: #66696E; }</code></pre></div>
       <div><dt>Werte</dt><dd>grep -nE &#x27;#[0-9A-Fa-f]{3,8}\b&#x27; auf Komponenten-CSS <svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg> 0 Treffer; Color(0x nur in dist/SebaroTheme.kt</dd></div>
       <div><dt>Prüfung</dt><dd>sh lint-colour.sh &lt;css&gt; &lt;pages&gt; Exit 0 (L5); check_site.py CSS.</dd></div>
       <div><dt>Entscheidung</dt><dd>D4</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/01-foundations.md Einleitung, §10; spec/09-platform-web.md §5; css/sebaro.css Z. 3-4</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Only tokens (var(--sb-*), SebaroTheme, Color.sb*); no raw hex/rgb/hsl/named colours; one source per fact (palette <svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg> tokens <svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg> dist).</dd></div>
     </dl>
@@ -6948,6 +7105,7 @@ css/app.css:12:  .hint { color: #66696E; }</code></pre></div>
       <div><dt>Hinweis</dt><dd>Inkonsistenz: Hauptaktion nutzt data-sb-state=&#x27;done|retry&#x27;, Schritte data-state=&#x27;done&#x27; (css Z. 787), beides nicht ARIA.</dd></div>
       <div><dt>Prüfung</dt><dd>check_demo.py --csp ohne Fehler; kein --selected/--active/--open-Selektor; grep fetch( in Skripten = 0.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §0.1, §7; spec/09-platform-web.md §4, §10; css/sebaro.css Z. 21-23; demo/assets/sb-controls.js Z. 1-4</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">State lives in ARIA/native state, never a parallel class; markup is correct without JS; scripts only add interaction (classic scripts, no modules, inline handlers, eval or fetch; data embedded as JSON script blocks).</dd></div>
     </dl>
@@ -6987,6 +7145,7 @@ css/app.css:12:  .hint { color: #66696E; }</code></pre></div>
       <div><dt>Werte</dt><dd>Standard-Erwartung Hauptaktion 1; Kacheln zählen als „App-Zeichen“; Dataviz-Farben nur in .sb-chart</dd></div>
       <div><dt>Prüfung</dt><dd>sbColourCount(view).pass === true; Lücken: Pseudo-Elemente und Fokus-Outlines werden nicht gelesen.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/03-signature.md §1.4 (Colour count); demo/assets/sb-colour-count.js</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Every view root carries data-sb-view (and data-sb-primary-expected=&quot;0&quot; without a primary action); the colour count must pass (expected primary fills, 0 roleless colours, 0 text on colour).</dd></div>
     </dl>
@@ -7018,6 +7177,7 @@ app.innerHTML = <span class="sb-tok-string">'&lt;div class="sb-phone"&gt;…&lt;
       <div><dt>Nicht so</dt><dd>&lt;div class=&#x27;sb-phone&#x27;&gt; in einer echten App; is-active per JS setzen; Demo-Ordner kopieren.</dd></div>
       <div><dt>Prüfung</dt><dd>grep -rn &#x27;demo-\|sb-phone\|is-hover\|is-pressed\|is-focus&#x27; src/ im Produkt = 0.</dd></div>
       <div><dt>Entscheidung</dt><dd>–</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §0.1, §7; spec/09-platform-web.md §4.1, §16; systems/sebaro/AGENTS.md §2</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Never ship demo.css, pages.css, sb-colour-count.js, demo-* classes, sb-phone or the frozen-state hooks .is-*; data-sb-follow / data-sb-demo-progress are demo hooks.</dd></div>
     </dl>
@@ -7057,6 +7217,7 @@ app.innerHTML = <span class="sb-tok-string">'&lt;div class="sb-phone"&gt;…&lt;
       <div><dt>Werte</dt><dd>Breakpoints sm 640, md 768, lg 1024, xl 1280</dd></div>
       <div><dt>Prüfung</dt><dd>grep -rnE &#x27;bg-(accent|link|success|warning|danger|info)|-subtle&#x27; src/ = 0 außerhalb Schalter, Radio, Regler.</dd></div>
       <div><dt>Entscheidung</dt><dd>D36</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/09-platform-web.md §8</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Tailwind v4: sebaro classes for signature components, utilities for layout only; no bg-accent/status/subtle behind text; never re-add Tailwind defaults.</dd></div>
     </dl>
@@ -7089,6 +7250,7 @@ app.innerHTML = <span class="sb-tok-string">'&lt;div class="sb-phone"&gt;…&lt;
       <div><dt>Hinweis</dt><dd>README.md (726 Tests, 0 ausgelassen) und AGENTS.md (763 Tests, 1 übersprungen) widersprechen sich.</dd></div>
       <div><dt>Prüfung</dt><dd>CHECKS.md mit Befehl, Datum, Exit, Ergebnis.</dd></div>
       <div><dt>Entscheidung</dt><dd>D15, D23</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/11-checklist.md §4; AGENTS.md §9</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Done only when every gate exits 0 and all screenshots were looked at in both modes; record warnings, waivers, skips and unavailable checks with reasons in CHECKS.md.</dd></div>
     </dl>
@@ -7122,6 +7284,7 @@ app.innerHTML = <span class="sb-tok-string">'&lt;div class="sb-phone"&gt;…&lt;
       <div><dt>Hinweis</dt><dd>shared/ADOPTION.md (Stand 2026-10-12) und der frühere Vorschlag A sind überholt. Die Umbenennung geschieht im novalis-Repo, nicht in sebaroDesign.</dd></div>
       <div><dt>Prüfung</dt><dd>Im App-Repo nach der Umbenennung: grep -rn -- &#x27;--ds-&#x27; <svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg> 0 Treffer; tokens.css kommt aus export_system.py.</dd></div>
       <div><dt>Entscheidung</dt><dd>D67, D4, D3</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-19</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D67 (13), D4; concepts/runde-5-desktop/skizze.html §13</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Apps use sebaro tokens under their --sb-* names; apps with their own names (e.g. novalis --ds-*) rename to --sb-*; the export never writes foreign names; new apps start with --sb-*.</dd></div>
     </dl>
@@ -7345,6 +7508,7 @@ HighlightStyle.define([
       <div><dt>Hinweis</dt><dd>Geprüft ist nur Shiki 1.29.2 auf einer Prüfseite mit 14 Sprachen; highlight.js und Prism nur nach ihren Klassenlisten, CodeMirror nur gelesen, Monaco und Sublime ungeprüft (spec/09 §17).</dd></div>
       <div><dt>Prüfung</dt><dd>Kein Theme-Stylesheet eines Highlighters im Bundle; Shiki-Ausgabe enthält nur var(--sb-…)-Farben.</dd></div>
       <div><dt>Entscheidung</dt><dd>D67, D69</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-20</dd></div>
       <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/09-platform-web.md §17; spec/01-foundations.md §1.8.1; css/sebaro.css Z. 749-761; shared/TOKEN-CONTRACT.md §10.3</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Wire highlighters only through sebaro&#x27;s pieces: hljs, Prism and sb-tok-* are coloured by css/sebaro.css (no theme stylesheet); Shiki/Astro/VS Code/Monaco/Sublime use the TextMate theme „sebaro“, CodeMirror 6 sebaroHighlight (spec/09 §17); Compose SebaroTheme.syntax.*, SwiftUI SebaroSyntax.*.</dd></div>
     </dl>
@@ -7357,7 +7521,7 @@ HighlightStyle.define([
 </main>
 <!-- guide:footer -->
 <footer class="sb-site-footer g-footer">
-  <p>sebaro Guide · System sebaro, Token-Vertrag 1.6 · aus sebaroDesign <code class="sb-code-inline">65a8067</code></p>
+  <p>sebaro Guide <a href="https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md">Version 1.1.0<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a> · System sebaro, Token-Vertrag 1.6 · aus sebaroDesign <code class="sb-code-inline">65a8067</code></p>
   <ul class="sb-site-footer__links">
     <li><a href="rules.json">rules.json</a></li>
     <li><a href="llms.txt">llms.txt</a></li>

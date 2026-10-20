@@ -1,0 +1,13 @@
+{
+  "name": "sebaro-guide-checks",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Browser checks of the sebaro Guide (axe-core in Chromium). Not a package; never published.",
+  "license": "UNLICENSED",
+  "engines": { "node": ">=20" },
+  "scripts": { "a11y": "node tools/check_a11y.mjs" },
+  "devDependencies": {
+    "axe-core": "4.13.0",
+    "playwright": "1.63.0"
+  }
+}

@@ -1,0 +1,1 @@
+{ "$comment": "Documented exceptions for tools/check_a11y.mjs. Each entry: page, axe rule id, a substring of the node target, and why it is not a real barrier.", "waivers": [] }

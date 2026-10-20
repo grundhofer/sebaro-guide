@@ -1,7 +1,7 @@
 {
  "$schema": "./rules.schema.json",
  "version": "1.1.0",
- "date": "2026-10-19",
+ "date": "2026-10-20",
  "source": {
   "repo": "sebaroDesign",
   "system": "sebaro",
@@ -177,7 +177,8 @@
    ],
    "status": "entschieden",
    "check": "Metaphern-Test spec/03 §9 je Produkt; Test 4 (Graustufen-Vergleich der Screenshots) und 5 (Fehllesen bei 16/24/32 px) von Hand.",
-   "example_hint": "Zwei Faktenblöcke mit sb-claim-row: richtig als schlichte Liste mit Statusglyphe und Tintenlinie (sb-card); falsch als gerahmtes „Typenschild“ mit Gravur-Optik und Kennband."
+   "example_hint": "Zwei Faktenblöcke mit sb-claim-row: richtig als schlichte Liste mit Statusglyphe und Tintenlinie (sb-card); falsch als gerahmtes „Typenschild“ mit Gravur-Optik und Kennband.",
+   "changed": "2026-10-19"
   },
   {
    "id": "HAL-02",
@@ -200,7 +201,8 @@
    ],
    "status": "entschieden",
    "check": "grep -rniE 'typenschild|flag|bordbuch|gestirn|werkstatt|nameplate|logbook' über CSS, Spec, Strings (spec/07 §7); icons.py lint (ICN409).",
-   "example_hint": "Zwei Code-Kärtchen (sb-code): richtig .sb-primary-action-bar__status, falsch .sb-harbour-light; daneben Theme-Taste richtig „Hell oder Dunkel“, falsch Mond-Icon „Nacht“."
+   "example_hint": "Zwei Code-Kärtchen (sb-code): richtig .sb-primary-action-bar__status, falsch .sb-harbour-light; daneben Theme-Taste richtig „Hell oder Dunkel“, falsch Mond-Icon „Nacht“.",
+   "changed": "2026-10-19"
   },
   {
    "id": "HAL-03",
@@ -223,7 +225,8 @@
    ],
    "status": "entschieden",
    "check": "grep nach Siegelwörtern (spec/07 §7); Review: jede beruhigende Aussage hat einen Beleg mit „Eigene Prüfung“ und Datum.",
-   "example_hint": "Richtig: sb-claim-row „Keine Werbe-ID“ mit „bestanden · geprüft am 10.10.2026 für 1.4.0“; falsch: grünes Schild-Badge „100 % privat – zertifiziert“."
+   "example_hint": "Richtig: sb-claim-row „Keine Werbe-ID“ mit „bestanden · geprüft am 10.10.2026 für 1.4.0“; falsch: grünes Schild-Badge „100 % privat – zertifiziert“.",
+   "changed": "2026-10-19"
   },
   {
    "id": "HAL-04",
@@ -245,7 +248,8 @@
    ],
    "status": "vorläufig",
    "check": "Zählung der Prüfliste = Zählung in facts.json; check_facts.py erlaubt nur die vier Wörter; CHECKS.md listet jede übersprungene Prüfung mit Grund.",
-   "example_hint": "Prüfliste (sb-check-list) mit vier Zeilen bestanden/offen/übersprungen mit „Grund: …“/nicht bestanden; falsch: dieselbe Liste nur mit den bestandenen Zeilen."
+   "example_hint": "Prüfliste (sb-check-list) mit vier Zeilen bestanden/offen/übersprungen mit „Grund: …“/nicht bestanden; falsch: dieselbe Liste nur mit den bestandenen Zeilen.",
+   "changed": "2026-10-19"
   },
   {
    "id": "HAL-05",
@@ -267,7 +271,8 @@
    ],
    "status": "vorläufig",
    "check": "grep -rn '!' in Strings; Bannwort-grep spec/07 §7; Review je Ansicht: höchstens eine lindgrüne Fläche, keine Badge-Zahl.",
-   "example_hint": "Heute-Liste mit sb-day-summary „3 von 5 erledigt, 60 %. Noch 2 offen.“ und einer sb-primary-action; falsch: rote Badge „3“ am Reiter und „Du hast 3 verpasst!“."
+   "example_hint": "Heute-Liste mit sb-day-summary „3 von 5 erledigt, 60 %. Noch 2 offen.“ und einer sb-primary-action; falsch: rote Badge „3“ am Reiter und „Du hast 3 verpasst!“.",
+   "changed": "2026-10-19"
   },
   {
    "id": "HAL-06",
@@ -289,7 +294,8 @@
    ],
    "status": "vorläufig",
    "check": "Vergleichsbogen ohne Heldenfeld und Faktenseite: ist sebaro noch erkennbar? (research/09 §4.1 Punkt 4)",
-   "example_hint": "Formular mit sb-field, Tintenlinie über sb-bottom-block und lindgrüner sb-primary-action (erkennbar sebaro) gegen dasselbe Formular als graues Standardformular mit Deko-Bild oben."
+   "example_hint": "Formular mit sb-field, Tintenlinie über sb-bottom-block und lindgrüner sb-primary-action (erkennbar sebaro) gegen dasselbe Formular als graues Standardformular mit Deko-Bild oben.",
+   "changed": "2026-10-19"
   },
   {
    "id": "HAL-07",
@@ -313,7 +319,8 @@
    ],
    "status": "entschieden",
    "check": "export_system.py --verify <Mappe>; Start und Links je Plattform gegen spec/03 §14–§15.",
-   "example_hint": "Drei Rahmen (sb-phone, Web-Abschnitt, Fenster) mit identischem Link-Stil und identischer 32-px-Kopfkachel; falsch: Web mit blauem Link, App mit fettem Petrol-Link."
+   "example_hint": "Drei Rahmen (sb-phone, Web-Abschnitt, Fenster) mit identischem Link-Stil und identischer 32-px-Kopfkachel; falsch: Web mit blauem Link, App mit fettem Petrol-Link.",
+   "changed": "2026-10-19"
   },
   {
    "id": "HAL-08",
@@ -336,7 +343,8 @@
    ],
    "status": "vorläufig",
    "check": "Jede Regel im Guide hat eine D-Nummer; ohne I-Zeile trägt sie den Status vorläufig oder offen.",
-   "example_hint": "Skizzenblock „Dichte“: Weg A 32 px (Vorschlag) neben Weg B 40 px mit Antwortformat „2a“."
+   "example_hint": "Skizzenblock „Dichte“: Weg A 32 px (Vorschlag) neben Weg B 40 px mit Antwortformat „2a“.",
+   "changed": "2026-10-19"
   },
   {
    "id": "HAL-09",
@@ -360,7 +368,8 @@
    ],
    "status": "vorläufig",
    "check": "check_demo.py Netzwerk-Gate: 0 Anfragen an fremde Hosts.",
-   "example_hint": "Netzwerk-Tabelle (sb-table) einer Seite: richtig nur eigene Dateien; falsch: Zeilen mit fonts.gstatic.com und einem Analyse-Skript."
+   "example_hint": "Netzwerk-Tabelle (sb-table) einer Seite: richtig nur eigene Dateien; falsch: Zeilen mit fonts.gstatic.com und einem Analyse-Skript.",
+   "changed": "2026-10-19"
   },
   {
    "id": "FAR-01",
@@ -385,7 +394,8 @@
    ],
    "status": "entschieden",
    "check": "Jede Farbe einer Rolle aus spec/01 §1.1 zuordnen; Farblint L1–L8 (spec/03 §1.4); Graustufen-Screenshot bleibt lesbar.",
-   "example_hint": "Zwei sb-phone nebeneinander: richtig graue Liste, 3-px-Ortslinie, eine sb-primary-action unten, sb-status mit Glyphe+Wort; falsch blauer Kopf, getönte Karten, grüner Chip, rote Zählpunkte."
+   "example_hint": "Zwei sb-phone nebeneinander: richtig graue Liste, 3-px-Ortslinie, eine sb-primary-action unten, sb-status mit Glyphe+Wort; falsch blauer Kopf, getönte Karten, grüner Chip, rote Zählpunkte.",
+   "changed": "2026-10-19"
   },
   {
    "id": "FAR-02",
@@ -407,7 +417,8 @@
    ],
    "status": "entschieden",
    "check": "Lint L2 (grep -subtle / text-on-), L4 (Hintergrund in accent/status nur in .sb-switch/.sb-radio/.sb-range), L1 (primary-action nur in .sb-primary-action); Farbprüfung „Text auf Farbfläche 0“.",
-   "example_hint": "Richtig: Fehlermeldung als sb-field__error (Linie + Glyphe + Satz); falsch: rosa hinterlegter Fehlerkasten mit rotem Text und Verlaufsrand."
+   "example_hint": "Richtig: Fehlermeldung als sb-field__error (Linie + Glyphe + Satz); falsch: rosa hinterlegter Fehlerkasten mit rotem Text und Verlaufsrand.",
+   "changed": "2026-10-19"
   },
   {
    "id": "FAR-03",
@@ -430,7 +441,8 @@
    ],
    "status": "entschieden",
    "check": "Jede Nutzung von --sb-color-accent/link/focus/selection liegt in der Liste spec/01 §1.1; keine background-color in accent hinter Text.",
-   "example_hint": "Einstellungsliste mit sb-switch an und sb-tabs mit Ortslinie; falsch: kobaltblaue Pille als aktiver Reiter."
+   "example_hint": "Einstellungsliste mit sb-switch an und sb-tabs mit Ortslinie; falsch: kobaltblaue Pille als aktiver Reiter.",
+   "changed": "2026-10-19"
   },
   {
    "id": "FAR-04",
@@ -452,7 +464,8 @@
    ],
    "status": "vorläufig",
    "check": "python3 tools/check_palette.py palettes/sebaro.json (Exit 0) im Quellrepo.",
-   "example_hint": "Farbfelder Lindgrün neben success, warning, danger, info mit ΔE-Werten in einer sb-table."
+   "example_hint": "Farbfelder Lindgrün neben success, warning, danger, info mit ΔE-Werten in einer sb-table.",
+   "changed": "2026-10-19"
   },
   {
    "id": "FAR-05",
@@ -474,7 +487,8 @@
    ],
    "status": "entschieden",
    "check": "Computed background der Seite = --sb-color-bg in beiden Modi; keine Hex-Werte im Code.",
-   "example_hint": "Formular mit sb-field auf bg; falsch: dasselbe Formular in einem surface-sunken-Kasten (engstes Paar 3,05 : 1)."
+   "example_hint": "Formular mit sb-field auf bg; falsch: dasselbe Formular in einem surface-sunken-Kasten (engstes Paar 3,05 : 1).",
+   "changed": "2026-10-19"
   },
   {
    "id": "FAR-06",
@@ -495,7 +509,8 @@
    ],
    "status": "vorläufig",
    "check": "tools/color.py contrast je genutztem Paar; text-subtle nur an Elementen ≥ 24 px oder ≥ 18.66 px/700 bzw. dekorativ.",
-   "example_hint": "Listenzeile mit Meta „Gestern, 3 Einträge“ in text-muted; falsch: dieselbe Meta in 14 px text-subtle."
+   "example_hint": "Listenzeile mit Meta „Gestern, 3 Einträge“ in text-muted; falsch: dieselbe Meta in 14 px text-subtle.",
+   "changed": "2026-10-19"
   },
   {
    "id": "FAR-07",
@@ -517,7 +532,8 @@
    "status": "vorläufig",
    "check": "Kontrast border-strong gegen den Grund jedes Bedienelements ≥ 3 : 1; kein Bedienelement, dessen einzige Kante --sb-color-border ist.",
    "example_hint": "sb-secondary-action mit border-strong-Rand; falsch: gleiche Taste mit hellgrauer Haarlinie, die im Hellmodus kaum sichtbar ist.",
-   "note": "Dunkle Werte aus Palette/Tokens (#32353C, #707379); spec/01 §1.2 nennt veraltet #343539/#707275."
+   "note": "Dunkle Werte aus Palette/Tokens (#32353C, #707379); spec/01 §1.2 nennt veraltet #343539/#707275.",
+   "changed": "2026-10-19"
   },
   {
    "id": "FAR-08",
@@ -537,7 +553,8 @@
    "status": "vorläufig",
    "check": "Hover-Regeln nutzen hover-fill; Texte darauf ≥ 4,5 : 1; grep box-shadow zeigt nur Danger-Inset und forced-colors.",
    "example_hint": "sb-list-row und sb-secondary-action in Ruhe/Zeiger/Gedrückt (is-hover, is-pressed) in beiden Modi; falsch: Schatten und Blautönung beim Hover.",
-   "note": "spec/02 §1.5, §2.7, §3.3, §3.15, §4.3, §4.10 nennen noch surface-sunken; CSS (Fix-Stufe AD14) gilt."
+   "note": "spec/02 §1.5, §2.7, §3.3, §3.15, §4.3, §4.10 nennen noch surface-sunken; CSS (Fix-Stufe AD14) gilt.",
+   "changed": "2026-10-19"
   },
   {
    "id": "FAR-09",
@@ -559,7 +576,8 @@
    ],
    "status": "entschieden",
    "check": "shot.py --scheme both; check_palette.py; axe/CTR1 in beiden Modi.",
-   "example_hint": "Dieselbe sb-card hell und dunkel nebeneinander mit gemessenen Kontrasten; falsch: Dunkelmodus mit unleserlicher heller Akzentfarbe."
+   "example_hint": "Dieselbe sb-card hell und dunkel nebeneinander mit gemessenen Kontrasten; falsch: Dunkelmodus mit unleserlicher heller Akzentfarbe.",
+   "changed": "2026-10-19"
   },
   {
    "id": "FAR-10",
@@ -581,7 +599,8 @@
    ],
    "status": "offen",
    "check": "tools/check_palette_set.py bzw. palettes/SET-REPORT.md.",
-   "example_hint": "Infokasten (sb-callout--info) mit den gemessenen Abständen; kein interaktives Beispiel."
+   "example_hint": "Infokasten (sb-callout--info) mit den gemessenen Abständen; kein interaktives Beispiel.",
+   "changed": "2026-10-19"
   },
   {
    "id": "FAR-11",
@@ -605,7 +624,8 @@
    "status": "entschieden",
    "check": "check_palette.py 2.4.0 palettes/sebaro.json: Y1 (≥ 4,5 auf bg, surface, surface-raised, surface-sunken), Y2/Y2-cvd (untereinander und gegen text, text-muted ≥ 0,08 / ≥ 0,04), Y3 (gegen accent, link, Status, primary-action ≥ 0,08) mit Exit 0; Farbprüfung je Ansicht lässt die Codetöne nur in Code zu.",
    "example_hint": "Derselbe sb-code-Block hell und dunkel mit den drei Tönen; falsch: Code in Kobalt und Lindgrün.",
-   "note": "Entschieden mit D69, gebaut als --sb-syntax-keyword, --sb-syntax-string, --sb-syntax-constant (Tailwind text-syntax-*, Compose SebaroTheme.syntax.*, SwiftUI SebaroSyntax.*); css/sebaro.css färbt highlight.js, Prism und eigene sb-tok-*-Spans, Shiki und CodeMirror siehe TEC-08. spec/03 §1.2 („never … violet“) ist älter; D67 (12) gilt für Code."
+   "note": "Entschieden mit D69, gebaut als --sb-syntax-keyword, --sb-syntax-string, --sb-syntax-constant (Tailwind text-syntax-*, Compose SebaroTheme.syntax.*, SwiftUI SebaroSyntax.*); css/sebaro.css färbt highlight.js, Prism und eigene sb-tok-*-Spans, Shiki und CodeMirror siehe TEC-08. spec/03 §1.2 („never … violet“) ist älter; D67 (12) gilt für Code.",
+   "changed": "2026-10-20"
   },
   {
    "id": "SCH-01",
@@ -632,7 +652,8 @@
    "status": "entschieden",
    "check": "Computed font-family aller Textelemente: sebaro Sans außer code/kbd/IDs.",
    "example_hint": "Absatz mit „Il1 0O“, Inline-Code (sb-code-inline) und Versionsnummer in Mono; falsch: Zahlenspalte oder ganze Überschrift in Mono.",
-   "note": "sebaro Sans ist sebaros UI-Schrift: eine abgeleitete Schrift unter der SIL Open Font License 1.1 mit eigener Quelle (systems/sebaro/fonts/sebaro-sans/src/), Lizenztext in docs/sebaro/fonts/web/sebaro-sans-OFL.txt (D71). Der Copyright-Vermerk der Urheber bleibt in Datei und Lizenztext, wie die OFL es verlangt."
+   "note": "sebaro Sans ist sebaros UI-Schrift: eine abgeleitete Schrift unter der SIL Open Font License 1.1 mit eigener Quelle (systems/sebaro/fonts/sebaro-sans/src/), Lizenztext in docs/sebaro/fonts/web/sebaro-sans-OFL.txt (D71). Der Copyright-Vermerk der Urheber bleibt in Datei und Lizenztext, wie die OFL es verlangt.",
+   "changed": "2026-10-20"
   },
   {
    "id": "SCH-02",
@@ -660,7 +681,8 @@
    "status": "entschieden",
    "check": "Netzwerk-Panel: Fontdateien nur aus eigenem Pfad; Tauri-Bundle enthält fonts/web/*.woff2; fonts.py verify sebaro (Android).",
    "example_hint": "Tabelle (sb-table) Plattform → Schriftdatei mit Zeile „Tauri Windows/Linux: offen“.",
-   "note": "Konflikt D43/spec/09 §13 (gehintete TTF für Tauri, Export mit font-display: swap) gegen D66 aufgelöst: D66 gilt. Windows/Linux-Tauri ist von D66 nicht gedeckt (offen)."
+   "note": "Konflikt D43/spec/09 §13 (gehintete TTF für Tauri, Export mit font-display: swap) gegen D66 aufgelöst: D66 gilt. Windows/Linux-Tauri ist von D66 nicht gedeckt (offen).",
+   "changed": "2026-10-20"
   },
   {
    "id": "SCH-03",
@@ -681,7 +703,8 @@
    ],
    "status": "entschieden",
    "check": "Zahlenspalten haben font-variant-numeric: tabular-nums; grep sb-mono in Statistik-Komponenten = 0.",
-   "example_hint": "sb-table mit Zahlen in sebaro Sans tnum neben einer Code-Zelle in Mono; falsch: springende proportionale Ziffern."
+   "example_hint": "sb-table mit Zahlen in sebaro Sans tnum neben einer Code-Zelle in Mono; falsch: springende proportionale Ziffern.",
+   "changed": "2026-10-19"
   },
   {
    "id": "SCH-04",
@@ -703,7 +726,8 @@
    ],
    "status": "vorläufig",
    "check": "Alle font-size-Werte ∈ {12 nur Bottom-Nav, 14, 16, 20, 24, 28, 32, 40} px; font-style: italic nur an <cite>/<i> in Artikeln.",
-   "example_hint": "Typo-Leiter aller Rollen hell und dunkel; falsch: 18-px-Kursivhinweis."
+   "example_hint": "Typo-Leiter aller Rollen hell und dunkel; falsch: 18-px-Kursivhinweis.",
+   "changed": "2026-10-19"
   },
   {
    "id": "SCH-05",
@@ -726,7 +750,8 @@
    ],
    "status": "entschieden",
    "check": "Jede font:-Zeile hat letter-spacing derselben Rolle; computed font-weight/letter-spacing dunkel = Tokenwerte.",
-   "example_hint": "Gleicher Absatz hell und dunkel nebeneinander mit Messwerten; falsch: Dunkelvariante ohne Tracking."
+   "example_hint": "Gleicher Absatz hell und dunkel nebeneinander mit Messwerten; falsch: Dunkelvariante ohne Tracking.",
+   "changed": "2026-10-20"
   },
   {
    "id": "SCH-06",
@@ -748,7 +773,8 @@
    "status": "vorläufig",
    "check": "Keine ellipsis an h1–h6; Review bei 390 px.",
    "example_hint": "Langer deutscher Titel mit &shy; auf 320 px Breite getrennt; falsch: „Gewohnheitsstatisti…“.",
-   "note": "spec/09 §3 und spec/01 §2.5 nennen hyphens: auto; die gebaute CSS (manual) gilt."
+   "note": "spec/09 §3 und spec/01 §2.5 nennen hyphens: auto; die gebaute CSS (manual) gilt.",
+   "changed": "2026-10-19"
   },
   {
    "id": "RAU-01",
@@ -767,7 +793,8 @@
    ],
    "status": "vorläufig",
    "check": "Alle margin/padding/gap-Werte sind var(--sb-space-*) oder var(--sb-spacing-*).",
-   "example_hint": "Formular mit eingezeichneten Abständen stack/group/section; falsch: ungleichmäßige 10/18-px-Abstände."
+   "example_hint": "Formular mit eingezeichneten Abständen stack/group/section; falsch: ungleichmäßige 10/18-px-Abstände.",
+   "changed": "2026-10-19"
   },
   {
    "id": "RAU-02",
@@ -786,7 +813,8 @@
    ],
    "status": "vorläufig",
    "check": "Layout bei 390, 800 und 1280 px; check_demo OVF1: kein horizontales Scrollen.",
-   "example_hint": "Rasterüberlagerung in drei Breiten über einer sb-container-Seite."
+   "example_hint": "Rasterüberlagerung in drei Breiten über einer sb-container-Seite.",
+   "changed": "2026-10-19"
   },
   {
    "id": "RAU-03",
@@ -809,7 +837,8 @@
    ],
    "status": "vorläufig",
    "check": "Alle Media-Queries nutzen 640/768/1024/1280; Fenster auf 600, 900, 1280 px ziehen.",
-   "example_hint": "Dieselbe Ansicht bei 600, 900 und 1280 px: Handy-Leiste, breite Zone, Seitenleiste."
+   "example_hint": "Dieselbe Ansicht bei 600, 900 und 1280 px: Handy-Leiste, breite Zone, Seitenleiste.",
+   "changed": "2026-10-19"
   },
   {
    "id": "RAU-04",
@@ -828,7 +857,8 @@
    ],
    "status": "vorläufig",
    "check": "text-align: center nur am Aktionshinweis.",
-   "example_hint": "Hero-Abschnitt linksbündig gegen dieselbe Fläche zentriert."
+   "example_hint": "Hero-Abschnitt linksbündig gegen dieselbe Fläche zentriert.",
+   "changed": "2026-10-19"
   },
   {
    "id": "RAU-05",
@@ -849,7 +879,8 @@
    ],
    "status": "vorläufig",
    "check": "Zeilenhöhen im Layout messen; keine Dichte-Einstellung.",
-   "example_hint": "Liste mit 56/64/88-Zeilen und 40-px-Erledigtzeilen mit Maßlinien."
+   "example_hint": "Liste mit 56/64/88-Zeilen und 40-px-Erledigtzeilen mit Maßlinien.",
+   "changed": "2026-10-19"
   },
   {
    "id": "RAU-06",
@@ -872,7 +903,8 @@
    "status": "entschieden",
    "check": "Zeilenhöhen im Fenster messen; mit pointer: coarse emulieren (48 px Trefferfläche).",
    "example_hint": "Baum mit 32-px-Zeilen und markierter 48-px-Trefferfläche für Touch; falsch: 40-px-Zeilen.",
-   "note": "Ersetzt für Desktop und Web-Apps mit Fenster die 48-px-Zeilen aus spec/02 §4.3 (Seitenleiste) und §4.10 (Menü); spec/01 §4 und spec/02 sind noch nicht nachgezogen. Ob Listenzeilen mit Meta-Zeile (64/88) auf dem Desktop auch 32 px werden, sagt D67 nicht; die Skizze zeigt nur einzeilige Zeilen."
+   "note": "Ersetzt für Desktop und Web-Apps mit Fenster die 48-px-Zeilen aus spec/02 §4.3 (Seitenleiste) und §4.10 (Menü); spec/01 §4 und spec/02 sind noch nicht nachgezogen. Ob Listenzeilen mit Meta-Zeile (64/88) auf dem Desktop auch 32 px werden, sagt D67 nicht; die Skizze zeigt nur einzeilige Zeilen.",
+   "changed": "2026-10-19"
   },
   {
    "id": "FOR-01",
@@ -892,7 +924,8 @@
    "status": "vorläufig",
    "check": "grep border-radius: nur var(--sb-radius-*).",
    "example_hint": "Reihe sb-tag, Taste, sb-card, Dialog, sb-switch, sb-avatar, Kachel mit Radius-Beschriftung.",
-   "note": "spec/02 §0.3 nennt Avatar als einzige Pille neben Schalter und Radio; die CSS nutzt die Pille auch für Regler-Griffe."
+   "note": "spec/02 §0.3 nennt Avatar als einzige Pille neben Schalter und Radio; die CSS nutzt die Pille auch für Regler-Griffe.",
+   "changed": "2026-10-19"
   },
   {
    "id": "FOR-02",
@@ -915,7 +948,8 @@
    ],
    "status": "entschieden",
    "check": "Jede border/outline im CSS einem Linientyp aus spec/01 §5.2 zuordnen.",
-   "example_hint": "Legende aller acht Linientypen mit je einem Mini-Beispiel."
+   "example_hint": "Legende aller acht Linientypen mit je einem Mini-Beispiel.",
+   "changed": "2026-10-19"
   },
   {
    "id": "FOR-03",
@@ -936,7 +970,8 @@
    ],
    "status": "vorläufig",
    "check": "grep border-style: dashed, linear-gradient, Glow-Schatten → nur erlaubte Stellen (225°-Verlauf im Kanten-Fallback der Gefahrtaste).",
-   "example_hint": "sb-chart mit gestrichelter Ziellinie; falsch: Verlaufsfläche und gestrichelte Dropzone."
+   "example_hint": "sb-chart mit gestrichelter Ziellinie; falsch: Verlaufsfläche und gestrichelte Dropzone.",
+   "changed": "2026-10-19"
   },
   {
    "id": "FOR-04",
@@ -958,7 +993,8 @@
    ],
    "status": "entschieden",
    "check": "grep corner-shape/clip-path: nur .sb-danger-action; Fallback in Chromium durch Umbenennen des @supports prüfen (echtes WebKit/Tauri ungeprüft).",
-   "example_hint": "Tastenreihe, in der nur sb-danger-action die abgeschnittene Ecke trägt; falsch: sb-card mit Kante."
+   "example_hint": "Tastenreihe, in der nur sb-danger-action die abgeschnittene Ecke trägt; falsch: sb-card mit Kante.",
+   "changed": "2026-10-19"
   },
   {
    "id": "FOR-05",
@@ -982,7 +1018,8 @@
    "status": "entschieden",
    "check": "Board mit der Tastatur durchgehen: nur die fokussierte Karte trägt die Ortslinie; auf Touch ist „Mehr“ erreichbar.",
    "example_hint": "Board-Spalte mit fokussierter Karte und sichtbarem Mehr-Zeichen; falsch: Grauleiste an jeder Karte.",
-   "note": "D67 nennt weder Randfarbe noch Radius; die Skizze nutzt border-strong und Radius 8 (spec/01 §5.1 gibt Karten 12). Der 1-px-Rand weicht von der 2-px-Tintenlinie für Karten ab (EBE-02, D46 (2)); D67 ist neuer und gilt für Desktop und Web-Apps mit Fenster, gezeigt sind Board-Karten."
+   "note": "D67 nennt weder Randfarbe noch Radius; die Skizze nutzt border-strong und Radius 8 (spec/01 §5.1 gibt Karten 12). Der 1-px-Rand weicht von der 2-px-Tintenlinie für Karten ab (EBE-02, D46 (2)); D67 ist neuer und gilt für Desktop und Web-Apps mit Fenster, gezeigt sind Board-Karten.",
+   "changed": "2026-10-19"
   },
   {
    "id": "EBE-01",
@@ -1004,7 +1041,8 @@
    "status": "entschieden",
    "check": "grep -n 'box-shadow' css/sebaro.css zeigt nur das gedrückte Inset der Gefahrtaste und forced-colors; Compose shadowElevation 0 dp; Dunkelrahmen nicht heller als Text.",
    "example_hint": "sb-card und sb-menu mit Tintenlinie, darin Zeilen mit Haarlinie; falsch: weiße Karte mit Schatten auf grauem Grund.",
-   "note": "spec/03 §6.1/§6.5 (1-px-Haarlinie unter dem Site-Kopf) und spec/01 §1.2 (surface als Ebene 1) sind veraltet; D46 gilt."
+   "note": "spec/03 §6.1/§6.5 (1-px-Haarlinie unter dem Site-Kopf) und spec/01 §1.2 (surface als Ebene 1) sind veraltet; D46 gilt.",
+   "changed": "2026-10-19"
   },
   {
    "id": "EBE-02",
@@ -1027,7 +1065,8 @@
    "status": "entschieden",
    "check": "Keine box-shadow an .sb-card; keine .sb-card in Listen.",
    "example_hint": "Karte „Erinnerungen“ und Link-Karte „Datenschutz“; falsch: getönte Schattenkarte je Listeneintrag.",
-   "note": "Demo-Text components.html Z. 574 („Zeiger verstärkt den Rand“) ist veraltet; CSS Z. 618 (hover-fill) gilt. D67 (11, Inhaber, neuer): Karten in Desktop-Apps und Web-Apps mit Fenster haben einen 1-px-Rand, die Ortslinie nur bei Fokus (FOR-05). Gezeigt waren Board-Karten; ob gruppierende Karten dort auch 1 px bekommen, sagt D67 nicht."
+   "note": "Demo-Text components.html Z. 574 („Zeiger verstärkt den Rand“) ist veraltet; CSS Z. 618 (hover-fill) gilt. D67 (11, Inhaber, neuer): Karten in Desktop-Apps und Web-Apps mit Fenster haben einen 1-px-Rand, die Ortslinie nur bei Fokus (FOR-05). Gezeigt waren Board-Karten; ob gruppierende Karten dort auch 1 px bekommen, sagt D67 nicht.",
+   "changed": "2026-10-19"
   },
   {
    "id": "EBE-03",
@@ -1050,7 +1089,8 @@
    "status": "entschieden",
    "check": "Farbprüfung des Dialogs „Hauptaktion 0“; Fokus kehrt nach Escape zum Auslöser zurück; --sb-color-scrim nur in Dialog/Sheet.",
    "example_hint": "Echter sb-dialog hinter „Gewohnheit löschen“ über abgedunkeltem Formular; falsch: Schattenkasten mit lindgrüner „OK“-Taste.",
-   "note": "spec/01 §1.2 nennt veraltet hellen Scrim #1C1E2273 (45 %); Palette und Tokens (#1C1E2252) gelten. Ausblenddauer 120 ms ist Agentenspezifikation."
+   "note": "spec/01 §1.2 nennt veraltet hellen Scrim #1C1E2273 (45 %); Palette und Tokens (#1C1E2252) gelten. Ausblenddauer 120 ms ist Agentenspezifikation.",
+   "changed": "2026-10-19"
   },
   {
    "id": "EBE-04",
@@ -1072,7 +1112,8 @@
    ],
    "status": "vorläufig",
    "check": "Review; Fokusfalle und Schließen sind in den Demos noch nicht geskriptet.",
-   "example_hint": "Sheet „Kategorie wählen“ mit sb-radio-Zeilen; falsch: Sheet mit Ziehgriff, das einen Beleg zeigt."
+   "example_hint": "Sheet „Kategorie wählen“ mit sb-radio-Zeilen; falsch: Sheet mit Ziehgriff, das einen Beleg zeigt.",
+   "changed": "2026-10-19"
   },
   {
    "id": "EBE-05",
@@ -1095,7 +1136,8 @@
    "status": "entschieden",
    "check": "Review aller Toast-Auslöser: keiner ist Hauptaktion oder Löschen.",
    "example_hint": "Toast nach einer umkehrbaren Nebenaktion richtig; falsch: Toast „Gelöscht – Rückgängig“ ohne Dialog.",
-   "note": "spec/03 §7.2/§8 (M5) und spec/07 §4.3 zeigen „Glas eingetragen · 6 / 8“ als Toast nach der Hauptaktion; D48 gilt."
+   "note": "spec/03 §7.2/§8 (M5) und spec/07 §4.3 zeigen „Glas eingetragen · 6 / 8“ als Toast nach der Hauptaktion; D48 gilt.",
+   "changed": "2026-10-19"
   },
   {
    "id": "EBE-06",
@@ -1115,7 +1157,8 @@
    ],
    "status": "vorläufig",
    "check": "Tooltip-Text ist nur Zusatz; Ein-/Ausblenden ist in den Demos noch nicht geskriptet.",
-   "example_hint": "Kalender-Icon-Taste mit Tooltip; falsch: Konfliktstatus nur im Tooltip einer Baumzeile."
+   "example_hint": "Kalender-Icon-Taste mit Tooltip; falsch: Konfliktstatus nur im Tooltip einer Baumzeile.",
+   "changed": "2026-10-19"
   },
   {
    "id": "EBE-07",
@@ -1139,7 +1182,8 @@
    "status": "vorläufig",
    "check": "axe; Tastaturtest (Pfeile, Escape fehlen im Demo-Skript sb-controls.js).",
    "example_hint": "Menü „Mehr“ mit Bearbeiten, Teilen, Trennlinie, Löschen; falsch: Löschzeile mit 45°-Kante, die sofort löscht.",
-   "note": "D67 (2): Menüzeilen in Desktop-Fenstern 32 px; D67 (10): Seltenes und Löschen eines Bereichs im „Mehr“-Menü, Löschen ganz unten nach einer Trennlinie (AKT-10). spec/02 §4.10 ist noch nicht nachgezogen."
+   "note": "D67 (2): Menüzeilen in Desktop-Fenstern 32 px; D67 (10): Seltenes und Löschen eines Bereichs im „Mehr“-Menü, Löschen ganz unten nach einer Trennlinie (AKT-10). spec/02 §4.10 ist noch nicht nachgezogen.",
+   "changed": "2026-10-19"
   },
   {
    "id": "EBE-08",
@@ -1164,7 +1208,8 @@
    "status": "entschieden",
    "check": "Fenster-Screenshot mit offener und geschlossener Seitenleiste: Taste und Linie stehen an derselben Stelle.",
    "example_hint": "Zwei Fenster-Mocks (Seitenleiste offen und zu) mit durchgehender Zone; falsch: Seitenleiste bis zum Boden, Zone nur unter dem Inhalt.",
-   "note": "D67 gilt für alle sebaro-Desktop-Apps und Web-Apps mit Fenster. spec/03 §12 in sebaroDesign ist zum Stand 2026-10-19 noch nicht nachgezogen."
+   "note": "D67 gilt für alle sebaro-Desktop-Apps und Web-Apps mit Fenster. spec/03 §12 in sebaroDesign ist zum Stand 2026-10-19 noch nicht nachgezogen.",
+   "changed": "2026-10-19"
   },
   {
    "id": "BEW-01",
@@ -1186,7 +1231,8 @@
    ],
    "status": "entschieden",
    "check": "Seite ohne Interaktion laden: keine Animation außer dem Start.",
-   "example_hint": "Taste „Zeile hinzufügen“, deren Zeile von unten kommt; falsch: Abschnitte, die beim Scrollen einfliegen."
+   "example_hint": "Taste „Zeile hinzufügen“, deren Zeile von unten kommt; falsch: Abschnitte, die beim Scrollen einfliegen.",
+   "changed": "2026-10-19"
   },
   {
    "id": "BEW-02",
@@ -1207,7 +1253,8 @@
    ],
    "status": "entschieden",
    "check": "check_demo.py MOT1/MOT2; keine Animation außer @keyframes sb-enter/sb-fade-in/sb-spin/sb-sweep.",
-   "example_hint": "Knopf „Toast zeigen“: Toast gleitet 8 px von unten; falsch: von rechts mit Bounce."
+   "example_hint": "Knopf „Toast zeigen“: Toast gleitet 8 px von unten; falsch: von rechts mit Bounce.",
+   "changed": "2026-10-19"
   },
   {
    "id": "BEW-03",
@@ -1228,7 +1275,8 @@
    ],
    "status": "vorläufig",
    "check": "Alle transition/animation-duration ≤ 200 ms und aus Tokens.",
-   "example_hint": "Drei Demo-Tasten mit 120/160/200 ms; falsch: 500-ms-Übergang."
+   "example_hint": "Drei Demo-Tasten mit 120/160/200 ms; falsch: 500-ms-Übergang.",
+   "changed": "2026-10-19"
   },
   {
    "id": "BEW-04",
@@ -1251,7 +1299,8 @@
    ],
    "status": "entschieden",
    "check": "MOT1/MOT2 unter prefers-reduced-motion: reduce; mit data-sb-motion='reduce' blenden Menü und Toast nur ein; Neuladen behält die Einstellung.",
-   "example_hint": "sb-switch „Bewegung immer reduzieren“ mit data-sb-motion-setting, darunter ein Toast, der gleitet oder nur einblendet; falsch: Toast gleitet trotz Einstellung."
+   "example_hint": "sb-switch „Bewegung immer reduzieren“ mit data-sb-motion-setting, darunter ein Toast, der gleitet oder nur einblendet; falsch: Toast gleitet trotz Einstellung.",
+   "changed": "2026-10-19"
   },
   {
    "id": "AKT-01",
@@ -1276,7 +1325,8 @@
    "status": "entschieden",
    "check": "Farbprüfung „Hauptaktion 1“ bzw. 0 mit data-sb-primary-expected='0'; Android A3, A4, A8; Screenshot-Reihe bei 390 px: Taste überall an derselben Stelle.",
    "example_hint": "sb-phone M4 mit „Sichern“ unten in der Leiste; falsch: „Sichern“ als Textaktion oben rechts plus FAB.",
-   "note": "D30 „genau eine“ durch D39 „höchstens eine“ ersetzt."
+   "note": "D30 „genau eine“ durch D39 „höchstens eine“ ersetzt.",
+   "changed": "2026-10-19"
   },
   {
    "id": "AKT-02",
@@ -1301,7 +1351,8 @@
    "status": "entschieden",
    "check": "Screenshots bei 390 und 1440 px: genau eine Taste unten, breit rechts mit Stand-Satz links; Farbprüfung je Ansicht.",
    "example_hint": "Drei Rahmen: sb-phone (volle Breite), breites Fenster („60 Wörter · gesichert“ links, Taste rechts), Website-Abschnitt (48 px vor der Belegliste); falsch: schmale zentrierte Taste ohne Linie.",
-   "note": "D46 (3) sagt „überall gleich: 56 px“; spec/03 §2.1 gibt im Website-Abschnitt 48 px (keine untere Leiste). Offen, ob D46 dort gilt; novalis baut 48 px und muss auf 56 px. D67 (1): In Desktop-Apps und Web-Apps mit Fenster reicht die Zone über die ganze Fensterbreite (EBE-08)."
+   "note": "D46 (3) sagt „überall gleich: 56 px“; spec/03 §2.1 gibt im Website-Abschnitt 48 px (keine untere Leiste). Offen, ob D46 dort gilt; novalis baut 48 px und muss auf 56 px. D67 (1): In Desktop-Apps und Web-Apps mit Fenster reicht die Zone über die ganze Fensterbreite (EBE-08).",
+   "changed": "2026-10-19"
   },
   {
    "id": "AKT-03",
@@ -1324,7 +1375,8 @@
    ],
    "status": "entschieden",
    "check": "Computed outline 2px in beiden Modi; Tastengröße hell = dunkel; keine box-shadow/Indication; Lint L1.",
-   "example_hint": "Taste hell (Tintenrand) und dunkel (Rand = Füllung) mit Hover/Gedrückt; falsch: helle Taste ohne Rand, die fast verschwindet."
+   "example_hint": "Taste hell (Tintenrand) und dunkel (Rand = Füllung) mit Hover/Gedrückt; falsch: helle Taste ohne Rand, die fast verschwindet.",
+   "changed": "2026-10-19"
   },
   {
    "id": "AKT-04",
@@ -1346,7 +1398,8 @@
    ],
    "status": "entschieden",
    "check": "Review aller Tastentexte; jede sb-primary-action hat sichtbaren Text mit Verb und Ding.",
-   "example_hint": "Aktionszone mit „Glas eintragen“; falsch: „OK“ und eine Plus-Icon-Taste."
+   "example_hint": "Aktionszone mit „Glas eintragen“; falsch: „OK“ und eine Plus-Icon-Taste.",
+   "changed": "2026-10-19"
   },
   {
    "id": "AKT-05",
@@ -1367,7 +1420,8 @@
    ],
    "status": "entschieden",
    "check": "aria-busy während der Arbeit; bei data-sb-state='retry' ist __status aus und __message gefüllt; kein role=dialog/Toast entsteht; Review unter reduzierter Bewegung.",
-   "example_hint": "Klickbare Taste mit data-sb-demo-progress='ok' (bereit → „Wird angelegt …“ → „✓ Angelegt“) und eine mit 'fail' im breiten Fenster; falsch: Vollbild-Spinner + Toast."
+   "example_hint": "Klickbare Taste mit data-sb-demo-progress='ok' (bereit → „Wird angelegt …“ → „✓ Angelegt“) und eine mit 'fail' im breiten Fenster; falsch: Vollbild-Spinner + Toast.",
+   "changed": "2026-10-19"
   },
   {
    "id": "AKT-06",
@@ -1389,7 +1443,8 @@
    ],
    "status": "vorläufig",
    "check": "Farbprüfung: Nebenaktionen tragen keine Farbe mit Rolle; sb-text-action nur auf <button>.",
-   "example_hint": "„Bearbeiten“ (Nebenaktion) und „Rückgängig“ (Textaktion) neben einer Hauptaktion; falsch: drei gefüllte Tasten."
+   "example_hint": "„Bearbeiten“ (Nebenaktion) und „Rückgängig“ (Textaktion) neben einer Hauptaktion; falsch: drei gefüllte Tasten.",
+   "changed": "2026-10-19"
   },
   {
    "id": "AKT-07",
@@ -1413,7 +1468,8 @@
    "status": "entschieden",
    "check": "Komponentenblatt „Weitere Aktionen“ in beiden Modi; nur destruktive Elemente tragen color danger und die Kante.",
    "example_hint": "Formular-Ende mit umrandeter sb-danger-action (Kante); falsch: rot gefüllte Taste neben der Hauptaktion.",
-   "note": "„Nie gefüllt“ ist Agentenspezifikation (spec/03 §7.1); spec/03 §11.2 schreibt es fälschlich D39 zu."
+   "note": "„Nie gefüllt“ ist Agentenspezifikation (spec/03 §7.1); spec/03 §11.2 schreibt es fälschlich D39 zu.",
+   "changed": "2026-10-19"
   },
   {
    "id": "AKT-08",
@@ -1437,7 +1493,8 @@
    "status": "entschieden",
    "check": "Jede destruktive Aktion öffnet sb-dialog/SbConfirmDialog; Strings „Gewohnheit löschen?“, „Abbrechen“, „Löschen“; Fokus startet auf „Abbrechen“.",
    "example_hint": "Löschtaste öffnet den Dialog mit Abbrechen und Gefahrtaste; falsch: Klick löscht sofort und zeigt „Rückgängig“.",
-   "note": "Beim Papierkorb ist der Text „Das lässt sich nicht rückgängig machen.“ falsch; spec/03 §7.2 („kein Dialog für umkehrbare Aktionen“) braucht eine ausdrückliche Ausnahme. Wortlaut für den Papierkorb ist offen."
+   "note": "Beim Papierkorb ist der Text „Das lässt sich nicht rückgängig machen.“ falsch; spec/03 §7.2 („kein Dialog für umkehrbare Aktionen“) braucht eine ausdrückliche Ausnahme. Wortlaut für den Papierkorb ist offen.",
+   "changed": "2026-10-19"
   },
   {
    "id": "AKT-09",
@@ -1459,7 +1516,8 @@
    "status": "entschieden",
    "check": "Kein sun/moon im Kopf; Label konstant; Bannwort-grep „nachtmodus|dark mode“.",
    "example_hint": "Echte Taste, die die Guide-Seite umschaltet; falsch: Mond-Icon allein.",
-   "note": "spec/02 §1.6 (label 14/20, Padding 12) ist veraltet; spec/03 §6.1 und css Z. 199-208 gelten."
+   "note": "spec/02 §1.6 (label 14/20, Padding 12) ist veraltet; spec/03 §6.1 und css Z. 199-208 gelten.",
+   "changed": "2026-10-19"
   },
   {
    "id": "AKT-10",
@@ -1485,7 +1543,8 @@
    "status": "entschieden",
    "check": "Jede destruktive Menüzeile öffnet den Dialog; Menüzeile ohne Kante (FOR-04, EBE-07).",
    "example_hint": "Board-Kopf mit Mehr-Menü, Löschen unten nach der Trennlinie; falsch: sichtbare rote Löschtaste neben „Spalte hinzufügen“.",
-   "note": "D56 (1) verlangt Rahmen und Kante an jeder destruktiven Aktion; in Menüzeilen tragen nach spec/03 §11.2 und D67 (10) nur Wort und Icon die Gefahr, die Kante trägt die Dialogtaste."
+   "note": "D56 (1) verlangt Rahmen und Kante an jeder destruktiven Aktion; in Menüzeilen tragen nach spec/03 §11.2 und D67 (10) nur Wort und Icon die Gefahr, die Kante trägt die Dialogtaste.",
+   "changed": "2026-10-19"
   },
   {
    "id": "NAV-01",
@@ -1508,7 +1567,8 @@
    ],
    "status": "entschieden",
    "check": "Graustufen-Screenshot: Ort bleibt erkennbar; jedes Muster hat 3-px-accent-Kante und ein zweites Merkmal, keine background-color.",
-   "example_hint": "sb-bottom-nav, sb-side-nav und sb-tabs nebeneinander mit Ortslinie; falsch: gefüllte Pille hinter dem aktiven Eintrag."
+   "example_hint": "sb-bottom-nav, sb-side-nav und sb-tabs nebeneinander mit Ortslinie; falsch: gefüllte Pille hinter dem aktiven Eintrag.",
+   "changed": "2026-10-19"
   },
   {
    "id": "NAV-02",
@@ -1533,7 +1593,8 @@
    "status": "entschieden",
    "check": "Jedes sb-bottom-nav__item/sb-side-nav__item hat sichtbaren Text; Android-Lint A9; Heute nutzt home.",
    "example_hint": "Untere Leiste mit vier Icon+Wort-Einträgen; falsch: nur Icons mit Material-Pille.",
-   "note": "spec/08 §10 nennt für Heute das Icon today; 08 §7, 04 §7.1 (AD11) und AGENTS nennen home (gilt). D36 betrifft die App-Navigation; der Website-Kopf bleibt aus Wörtern (NAV-06)."
+   "note": "spec/08 §10 nennt für Heute das Icon today; 08 §7, 04 §7.1 (AD11) und AGENTS nennen home (gilt). D36 betrifft die App-Navigation; der Website-Kopf bleibt aus Wörtern (NAV-06).",
+   "changed": "2026-10-19"
   },
   {
    "id": "NAV-03",
@@ -1556,7 +1617,8 @@
    ],
    "status": "entschieden",
    "check": "Review der Bildschirmhierarchie; Android A4, A9.",
-   "example_hint": "Oberste Ebene mit Leiste, Unterseite M4 mit Schließen-Icon ohne Leiste; falsch: Hamburger-Menü."
+   "example_hint": "Oberste Ebene mit Leiste, Unterseite M4 mit Schließen-Icon ohne Leiste; falsch: Hamburger-Menü.",
+   "changed": "2026-10-19"
   },
   {
    "id": "NAV-04",
@@ -1581,7 +1643,8 @@
    "status": "vorläufig",
    "check": "Breitfenster-Screenshot; Graustufen: aktueller Eintrag an Linie, Füllung und Gewicht erkennbar.",
    "example_hint": "Fenster mit Seitenleiste und breiter Aktionszone; falsch: Icon-Rail ohne Wörter mit blauer Fläche.",
-   "note": "novalis nutzt 256 px. D67 (2) setzt die Zeilen in Desktop-Fenstern auf 32 px (RAU-06); spec/02 §4.3 nennt noch 48 px."
+   "note": "novalis nutzt 256 px. D67 (2) setzt die Zeilen in Desktop-Fenstern auf 32 px (RAU-06); spec/02 §4.3 nennt noch 48 px.",
+   "changed": "2026-10-19"
   },
   {
    "id": "NAV-05",
@@ -1602,7 +1665,8 @@
    ],
    "status": "entschieden",
    "check": "Farbprüfung der Ansicht; keine sb-primary-action im Kopf.",
-   "example_hint": "Drei Kopfleisten: oberste Ebene, Unterseite, Bearbeiten; falsch: Bearbeiten mit „Sichern“ oben."
+   "example_hint": "Drei Kopfleisten: oberste Ebene, Unterseite, Bearbeiten; falsch: Bearbeiten mit „Sichern“ oben.",
+   "changed": "2026-10-19"
   },
   {
    "id": "NAV-06",
@@ -1626,7 +1690,8 @@
    "status": "entschieden",
    "check": "check_demo.py-Strings „Apps“, „Projekte“, „Über“, „Kontakt“, „DE / EN“, „Hell oder Dunkel“; OVF1 bei 390 px kein Überlauf.",
    "example_hint": "Kopf der Guide-Seite bei 390 px mit allen vier Wörtern; falsch: Hamburger und Mond-Icon.",
-   "note": "Die untere Kante des Kopfs ist die 2-px-Tintenlinie (D46), nicht die 1-px-Haarlinie aus spec/03 §6.1."
+   "note": "Die untere Kante des Kopfs ist die 2-px-Tintenlinie (D46), nicht die 1-px-Haarlinie aus spec/03 §6.1.",
+   "changed": "2026-10-19"
   },
   {
    "id": "NAV-07",
@@ -1649,7 +1714,8 @@
    "status": "vorläufig",
    "check": "Screenshots bei 390, 800, 1280 px; computed font der Kopf-Links.",
    "example_hint": "Derselbe Kopf in drei Breiten untereinander.",
-   "note": "spec/03 §3.1 und das Rezept §6.5 nennen label 14/20; §6.1 und spec/01 §11 (body 16/24) gelten. Der Kopf ist standardmäßig nicht klebend (§6.1)."
+   "note": "spec/03 §3.1 und das Rezept §6.5 nennen label 14/20; §6.1 und spec/01 §11 (body 16/24) gelten. Der Kopf ist standardmäßig nicht klebend (§6.1).",
+   "changed": "2026-10-19"
   },
   {
    "id": "NAV-08",
@@ -1672,7 +1738,8 @@
    "status": "vorläufig",
    "check": "axe; Tastatur (Pfeiltasten in Reitern fehlen im Demo-Skript); Review bei 390 und 1280 px.",
    "example_hint": "Reiter „Übersicht · Einträge · Notizen“ und Artikelkopf mit Brotkrumen; falsch: Pille als aktiver Reiter.",
-   "note": "spec/02 §3.15 (gerahmter Pager) ist veraltet; spec/02 §10 und CSS (Haarlinie, AD26) gelten."
+   "note": "spec/02 §3.15 (gerahmter Pager) ist veraltet; spec/02 §10 und CSS (Haarlinie, AD26) gelten.",
+   "changed": "2026-10-19"
   },
   {
    "id": "NAV-09",
@@ -1696,7 +1763,8 @@
    "status": "entschieden",
    "check": "Tastaturtest (Pfeile, Enter, Escape); Graustufen-Screenshot: Haken und Ortslinie ohne Farbe lesbar.",
    "example_hint": "Palette mit zwei Gruppen, Haken und Kürzeln; falsch: Schalter am Zeilenende.",
-   "note": "Tastenkürzel stehen als echte Zeichen aus sebaro Sans/Mono am Zeilenende (D68, ICO-08)."
+   "note": "Tastenkürzel stehen als echte Zeichen aus sebaro Sans/Mono am Zeilenende (D68, ICO-08).",
+   "changed": "2026-10-19"
   },
   {
    "id": "NAV-10",
@@ -1719,7 +1787,8 @@
    ],
    "status": "entschieden",
    "check": "axe button-name; Tooltip mit Name und Kürzel bei Zeiger und Fokus; jeder Ort hat ein sichtbares Wort.",
-   "example_hint": "Seitenleistenkopf mit drei Icon-Werkzeugen samt Tooltip und „Einstellungen“ mit Wort; falsch: Zahnrad ohne Wort."
+   "example_hint": "Seitenleistenkopf mit drei Icon-Werkzeugen samt Tooltip und „Einstellungen“ mit Wort; falsch: Zahnrad ohne Wort.",
+   "changed": "2026-10-19"
   },
   {
    "id": "LNK-01",
@@ -1743,7 +1812,8 @@
    "status": "entschieden",
    "check": "Komponentenblatt „Links und Fokusring“ (Standard, Zeigen, besucht, Fokus, extern) in beiden Modi; alle <a> haben die 2-px-Linie.",
    "example_hint": "Absatz mit Link in Ruhe, Zeiger (is-hover), besucht (is-visited) und Fokus; falsch: blauer Link ohne Linie.",
-   "note": "spec/09 §3 (Link-Farbe, 1 px, 0.15em) ist veraltet; D52 und die CSS gelten."
+   "note": "spec/09 §3 (Link-Farbe, 1 px, 0.15em) ist veraltet; D52 und die CSS gelten.",
+   "changed": "2026-10-19"
   },
   {
    "id": "LNK-02",
@@ -1767,7 +1837,8 @@
    "status": "entschieden",
    "check": "grep '↗' in Seiten = 0; Komponentenblatt „Links und Fokusring“ (extern).",
    "example_hint": "„Quellcode“ mit external-link--16 richtig; „Quellcode ↗“ in Ersatzschrift falsch.",
-   "note": "D52 nannte ↗ (Wortlaut unsicher); D56 (neuer, I) gilt."
+   "note": "D52 nannte ↗ (Wortlaut unsicher); D56 (neuer, I) gilt.",
+   "changed": "2026-10-19"
   },
   {
    "id": "STA-01",
@@ -1789,7 +1860,8 @@
    ],
    "status": "entschieden",
    "check": "Graustufen-Screenshot: alle Zustände unterscheidbar; computed color des Worts = --sb-color-text.",
-   "example_hint": "Liste mit läuft/geplant/erledigt/Fehler als sb-status in 20 und 16 px; falsch: nur farbige Punkte."
+   "example_hint": "Liste mit läuft/geplant/erledigt/Fehler als sb-status in 20 und 16 px; falsch: nur farbige Punkte.",
+   "changed": "2026-10-19"
   },
   {
    "id": "STA-02",
@@ -1811,7 +1883,8 @@
    ],
    "status": "vorläufig",
    "check": "Wortliste gegen spec/01 §1.5; Icons aus shared/icon-set.json; Kontaktbogen in Graustufen.",
-   "example_hint": "Alle Zustände mit Glyphe und Wort, einmal farbig und einmal in Graustufen."
+   "example_hint": "Alle Zustände mit Glyphe und Wort, einmal farbig und einmal in Graustufen.",
+   "changed": "2026-10-19"
   },
   {
    "id": "STA-03",
@@ -1831,7 +1904,8 @@
    "status": "vorläufig",
    "check": "grep opacity: nicht für disabled; Farbprüfung zählt gesperrte Taste nicht als Hauptaktion.",
    "example_hint": "Haupt-, Neben-, Gefahr- und Icon-Taste jeweils aktiv und gesperrt; falsch: halbtransparente lindgrüne Taste.",
-   "note": "Die Vertragstokens opacity.disabled-content 0.38 / disabled-container 0.12 widersprechen dieser Regel; sie werden in sebaro nicht benutzt."
+   "note": "Die Vertragstokens opacity.disabled-content 0.38 / disabled-container 0.12 widersprechen dieser Regel; sie werden in sebaro nicht benutzt.",
+   "changed": "2026-10-19"
   },
   {
    "id": "STA-04",
@@ -1851,7 +1925,8 @@
    "status": "vorläufig",
    "check": "Review; keine Statusfarbe in .sb-tag.",
    "example_hint": "App-Karte mit Tags „Android“ „Verfügbar“ „Beta“; falsch: orange Beta-Pille.",
-   "note": "spec/02 §3.2 und spec/09 §4.4 nennen label 14/20; CSS (caption 400, AD15) gilt."
+   "note": "spec/02 §3.2 und spec/09 §4.4 nennen label 14/20; CSS (caption 400, AD15) gilt.",
+   "changed": "2026-10-19"
   },
   {
    "id": "STA-05",
@@ -1870,7 +1945,8 @@
    ],
    "status": "vorläufig",
    "check": "grep background/border-inline-start in .sb-callout = 0.",
-   "example_hint": "Vier Hinweisarten untereinander; falsch: farbige Leiste links und getönte Fläche."
+   "example_hint": "Vier Hinweisarten untereinander; falsch: farbige Leiste links und getönte Fläche.",
+   "changed": "2026-10-19"
   },
   {
    "id": "STA-06",
@@ -1891,7 +1967,8 @@
    ],
    "status": "vorläufig",
    "check": "Jeder Ladezustand hängt an einem Netzaufruf über 1 s; keine @keyframes für Skelette.",
-   "example_hint": "Linearer Balken, Ring, Schritte „Schritt 2 von 3“ und Skelett mit „Wird geladen …“; falsch: Vollbild-Spinner beim Speichern."
+   "example_hint": "Linearer Balken, Ring, Schritte „Schritt 2 von 3“ und Skelett mit „Wird geladen …“; falsch: Vollbild-Spinner beim Speichern.",
+   "changed": "2026-10-19"
   },
   {
    "id": "STA-07",
@@ -1915,7 +1992,8 @@
    "status": "offen",
    "check": "Rückfrage an den Inhaber: gilt „7a“ (Summe in der Aktionszone) oder der Zeilentext von D67 (Summe am Fuß der Seitenleiste)?",
    "example_hint": "Baum mit zwei Statuszeilen, Summe in der Aktionszone (A) gegen Summe am Fuß der Seitenleiste (B).",
-   "note": "Kritik 2026-10-19: Wortlaut „7a“ und Zeilentext von D67 widersprechen sich; nicht aufgelöst, weil beides aus derselben Antwort stammt. Der feste Teil steht in STA-08."
+   "note": "Kritik 2026-10-19: Wortlaut „7a“ und Zeilentext von D67 widersprechen sich; nicht aufgelöst, weil beides aus derselben Antwort stammt. Der feste Teil steht in STA-08.",
+   "changed": "2026-10-19"
   },
   {
    "id": "STA-08",
@@ -1938,7 +2016,8 @@
    "status": "entschieden",
    "check": "Graustufen-Screenshot: jeder Status ohne Farbe lesbar; Statuswörter zählen (höchstens zwei).",
    "example_hint": "Baum mit „nur online“ (graues Zeichen) und „Konflikt“ (Warnzeichen); falsch: abgekürztes „Konfl.“ in Orange ohne Zeichen.",
-   "note": "Welches Token das graue Zeichen trägt (text-muted oder info), sagen D67 und die Skizze nicht. Wo die Summe steht, ist offen (STA-07)."
+   "note": "Welches Token das graue Zeichen trägt (text-muted oder info), sagen D67 und die Skizze nicht. Wo die Summe steht, ist offen (STA-07).",
+   "changed": "2026-10-19"
   },
   {
    "id": "EIN-01",
@@ -1957,7 +2036,8 @@
    ],
    "status": "vorläufig",
    "check": "axe label; jede __help/__error-ID wird von aria-describedby referenziert.",
-   "example_hint": "Formular M4: Name, Tagesziel, Notiz mit Zähler „0 / 120“; falsch: nur Platzhalter in umrandeten Feldern."
+   "example_hint": "Formular M4: Name, Tagesziel, Notiz mit Zähler „0 / 120“; falsch: nur Platzhalter in umrandeten Feldern.",
+   "changed": "2026-10-19"
   },
   {
    "id": "EIN-02",
@@ -1976,7 +2056,8 @@
    ],
    "status": "vorläufig",
    "check": "Fehlerfall: aria-invalid und aria-describedby gesetzt; Meldung in text-Farbe.",
-   "example_hint": "Textfeld im Fehler mit „Notiz ist zu lang (134 / 120).“; falsch: rote Schrift ohne Glyphe."
+   "example_hint": "Textfeld im Fehler mit „Notiz ist zu lang (134 / 120).“; falsch: rote Schrift ohne Glyphe.",
+   "changed": "2026-10-19"
   },
   {
    "id": "EIN-03",
@@ -1998,7 +2079,8 @@
    "status": "entschieden",
    "check": "Farbprüfung: Lindgrün nur in der Hauptaktion (Lint L1); sb-controls.js schaltet aria-checked, ohne Skript stimmt der Anfangszustand.",
    "example_hint": "Einstellungsgruppe mit Checkbox, Radiozeile „Erinnerung“, Schalter an/aus und Regler 08:00–22:00; falsch: lindgrüner Schalter.",
-   "note": "spec/01 §1.1 nennt Checkbox-Kante in accent, §1.2/§5.2 border-strong; aufgelöst nach CSS: aus = border-strong, an = accent. Maße außer der Kobalt-Marke sind vorläufig."
+   "note": "spec/01 §1.1 nennt Checkbox-Kante in accent, §1.2/§5.2 border-strong; aufgelöst nach CSS: aus = border-strong, an = accent. Maße außer der Kobalt-Marke sind vorläufig.",
+   "changed": "2026-10-19"
   },
   {
    "id": "EIN-04",
@@ -2019,7 +2101,8 @@
    ],
    "status": "vorläufig",
    "check": "Keine background-Farbe für :checked/aria-pressed; axe button-name an sb-chip__remove.",
-   "example_hint": "Filter „Alle · Gesundheit · Lernen“ und Segmente „Woche · Monat · Jahr“; falsch: gefülltes aktives Segment."
+   "example_hint": "Filter „Alle · Gesundheit · Lernen“ und Segmente „Woche · Monat · Jahr“; falsch: gefülltes aktives Segment.",
+   "changed": "2026-10-19"
   },
   {
    "id": "EIN-05",
@@ -2038,7 +2121,8 @@
    ],
    "status": "vorläufig",
    "check": "Label existiert (ggf. sb-visually-hidden); Leeren-Knopf nur gefüllt sichtbar (Skript fehlt in den Demos).",
-   "example_hint": "Suchfeld leer und gefüllt, Kategorie-Select; falsch: div-Dropdown ohne Label."
+   "example_hint": "Suchfeld leer und gefüllt, Kategorie-Select; falsch: div-Dropdown ohne Label.",
+   "changed": "2026-10-19"
   },
   {
    "id": "DAT-01",
@@ -2062,7 +2146,8 @@
    "status": "vorläufig",
    "check": "Liste hat sb-list-end; keine sb-card in Listen; keine Badge-Komponenten.",
    "example_hint": "Heute-Liste mit Kopf, Zeilen und Ende-Satz; falsch: Kartenstapel mit Endlos-Loader.",
-   "note": "D67 (2): In Desktop-Apps und Web-Apps mit Fenster sind Zeilen in Listen und Bäumen 32 px hoch (RAU-06); offen ist, ob das auch für zwei- und dreizeilige Zeilen gilt."
+   "note": "D67 (2): In Desktop-Apps und Web-Apps mit Fenster sind Zeilen in Listen und Bäumen 32 px hoch (RAU-06); offen ist, ob das auch für zwei- und dreizeilige Zeilen gilt.",
+   "changed": "2026-10-19"
   },
   {
    "id": "DAT-02",
@@ -2085,7 +2170,8 @@
    "status": "vorläufig",
    "check": "Graustufen-Screenshot liest sich gleich geordnet; Screenreader hört „erledigt“ je Zeile.",
    "example_hint": "M1-Kopf mit Satz, darunter Gruppe „Erledigt 3“ mit drei leisen Zeilen; falsch: grüne Scheiben in voller Größe.",
-   "note": "Ungelöst: spec/02 §3.3 will success--filled 20 px + versteckt „erledigt:“; Demos nutzen success--16 und sichtbares „erledigt“. Muss der Guide festlegen."
+   "note": "Ungelöst: spec/02 §3.3 will success--filled 20 px + versteckt „erledigt:“; Demos nutzen success--16 und sichtbares „erledigt“. Muss der Guide festlegen.",
+   "changed": "2026-10-19"
   },
   {
    "id": "DAT-03",
@@ -2106,7 +2192,8 @@
    ],
    "status": "vorläufig",
    "check": "Review: keine Fläche oder Radius an .sb-stat.",
-   "example_hint": "Serie · Quote · Bestwert und Meta-Liste Erinnerung/Kategorie/Seit; falsch: drei graue Dashboard-Kacheln."
+   "example_hint": "Serie · Quote · Bestwert und Meta-Liste Erinnerung/Kategorie/Seit; falsch: drei graue Dashboard-Kacheln.",
+   "changed": "2026-10-19"
   },
   {
    "id": "DAT-04",
@@ -2128,7 +2215,8 @@
    "status": "vorläufig",
    "check": "Farbprüfung: Dataviz-Farben nur in .sb-chart, genau ein Balken accent; aria-label nennt alle Werte; Diagramm in Graustufen lesbar.",
    "example_hint": "7-Tage-Balken „Gläser je Tag“ mit den Referenzdaten und Kategorien als Zeilenbalken; falsch: bunte Balken in Kachelfarben ohne Werte.",
-   "note": "spec/02 §3.7 nennt sb-chart__fill--1…6 für Balken; CSS/Demo (AD07) gelten. Legende plus Direktbeschriftung (spec/01 §8) gegen nur Direktbeschriftung (Palettennotiz) ist ungeklärt; sequential/diverging haben keine Nutzungsregel, der dunkle Diverging-Mittelwert #343539 ist veraltet."
+   "note": "spec/02 §3.7 nennt sb-chart__fill--1…6 für Balken; CSS/Demo (AD07) gelten. Legende plus Direktbeschriftung (spec/01 §8) gegen nur Direktbeschriftung (Palettennotiz) ist ungeklärt; sequential/diverging haben keine Nutzungsregel, der dunkle Diverging-Mittelwert #343539 ist veraltet.",
+   "changed": "2026-10-19"
   },
   {
    "id": "DAT-05",
@@ -2147,7 +2235,8 @@
    ],
    "status": "vorläufig",
    "check": "axe scrollable-region-focusable; jede Tabelle hat caption.",
-   "example_hint": "Wochentabelle mit Zahlen bei 390 px scrollbar; falsch: gestreifte Tabelle ohne caption."
+   "example_hint": "Wochentabelle mit Zahlen bei 390 px scrollbar; falsch: gestreifte Tabelle ohne caption.",
+   "changed": "2026-10-19"
   },
   {
    "id": "DAT-06",
@@ -2166,7 +2255,8 @@
    ],
    "status": "vorläufig",
    "check": "axe; Review.",
-   "example_hint": "Avatar-Reihe „Im Board“; falsch: bunte Kreise mit weißen Initialen."
+   "example_hint": "Avatar-Reihe „Im Board“; falsch: bunte Kreise mit weißen Initialen.",
+   "changed": "2026-10-19"
   },
   {
    "id": "DAT-07",
@@ -2187,7 +2277,8 @@
    ],
    "status": "vorläufig",
    "check": "Keine sb-primary-action innerhalb .sb-empty.",
-   "example_hint": "M5 Statistik ohne Daten mit Aktion unten; falsch: zentrierter Knopf und Maskottchen."
+   "example_hint": "M5 Statistik ohne Daten mit Aktion unten; falsch: zentrierter Knopf und Maskottchen.",
+   "changed": "2026-10-19"
   },
   {
    "id": "DAT-08",
@@ -2210,7 +2301,8 @@
    ],
    "status": "entschieden",
    "check": "Graustufen-Screenshot: gewählt (Linie und Haken) und aktuell (zusätzlich fett) ohne Farbe unterscheidbar.",
-   "example_hint": "Liste mit drei gewählten Zeilen und Zähler; falsch: hellblaue Auswahlfläche."
+   "example_hint": "Liste mit drei gewählten Zeilen und Zähler; falsch: hellblaue Auswahlfläche.",
+   "changed": "2026-10-19"
   },
   {
    "id": "TXT-01",
@@ -2232,7 +2324,8 @@
    "status": "vorläufig",
    "check": "grep in Strings nach „ Sie “, „ Ihr“, „ wir “.",
    "example_hint": "Dialog „Gewohnheit löschen?“ in du-Form; falsch: „Sind Sie sicher?“ mit „OK“.",
-   "note": "Für die Erzählstimme der Guide-Seite selbst („unser Designsystem“) gibt es keine Regel; das entscheidet der Inhaber."
+   "note": "Für die Erzählstimme der Guide-Seite selbst („unser Designsystem“) gibt es keine Regel; das entscheidet der Inhaber.",
+   "changed": "2026-10-19"
   },
   {
    "id": "TXT-02",
@@ -2253,7 +2346,8 @@
    ],
    "status": "entschieden",
    "check": "grep -rniE 'tracking|100 ?% privat|dsgvo-konform|eu-server|in der cloud' (erlaubt nur „Tracker“ als gezählter Fakt).",
-   "example_hint": "Hero-Satz richtig „ohne Analyse-Skripte, ohne Werbe-IDs, ohne Cookies¹“; falsch „100 % privat, ohne Tracking, Daten in der EU“."
+   "example_hint": "Hero-Satz richtig „ohne Analyse-Skripte, ohne Werbe-IDs, ohne Cookies¹“; falsch „100 % privat, ohne Tracking, Daten in der EU“.",
+   "changed": "2026-10-19"
   },
   {
    "id": "TXT-03",
@@ -2274,7 +2368,8 @@
    ],
    "status": "vorläufig",
    "check": "Review der Bildschirmtitel.",
-   "example_hint": "App-Kopf „Statistik“ neben Website-Überschrift in Satzform; falsch: App-Titel „Deine tolle Woche!“."
+   "example_hint": "App-Kopf „Statistik“ neben Website-Überschrift in Satzform; falsch: App-Titel „Deine tolle Woche!“.",
+   "changed": "2026-10-19"
   },
   {
    "id": "TXT-04",
@@ -2296,7 +2391,8 @@
    ],
    "status": "vorläufig",
    "check": "grep U+202F/U+2009 = 0; grep -nE '[0-9] (%|Tage|Gläser|Min\\.|Std\\.)' findet fehlende U+00A0 (check_site.py TEXT).",
-   "example_hint": "Schmale Spalte, in der „60 %“ nicht umbricht; falsch: „60“ am Zeilenende und „%“ in der nächsten Zeile."
+   "example_hint": "Schmale Spalte, in der „60 %“ nicht umbricht; falsch: „60“ am Zeilenende und „%“ in der nächsten Zeile.",
+   "changed": "2026-10-19"
   },
   {
    "id": "TXT-05",
@@ -2315,7 +2411,8 @@
    ],
    "status": "vorläufig",
    "check": "grep text-transform: uppercase und gerade Anführungszeichen in UI-Texten; grep * und : in Personenbezeichnungen.",
-   "example_hint": "Abschnitt ohne Eyebrow richtig; falsch: Versal-Eyebrow „NEU“ über der Überschrift."
+   "example_hint": "Abschnitt ohne Eyebrow richtig; falsch: Versal-Eyebrow „NEU“ über der Überschrift.",
+   "changed": "2026-10-19"
   },
   {
    "id": "TXT-06",
@@ -2334,7 +2431,8 @@
    ],
    "status": "vorläufig",
    "check": "Absätze haben max-inline-size ≤ 70ch.",
-   "example_hint": "Absatz mit 70 ch gegen denselben Absatz über volle Breite."
+   "example_hint": "Absatz mit 70 ch gegen denselben Absatz über volle Breite.",
+   "changed": "2026-10-19"
   },
   {
    "id": "TXT-07",
@@ -2353,7 +2451,8 @@
    ],
    "status": "vorläufig",
    "check": "Review aller Fehlertexte.",
-   "example_hint": "Zwei Meldungen nebeneinander: konkret mit Ausweg gegen „Ungültige Eingabe“."
+   "example_hint": "Zwei Meldungen nebeneinander: konkret mit Ausweg gegen „Ungültige Eingabe“.",
+   "changed": "2026-10-19"
   },
   {
    "id": "TXT-08",
@@ -2377,7 +2476,8 @@
    ],
    "status": "entschieden",
    "check": "axe scrollable-region-focusable; im Code nur die Codetöne aus FAR-11.",
-   "example_hint": "Kotlin-Block mit Kopieren-Knopf; falsch: Code in Kobalt, Lindgrün oder Statusfarben."
+   "example_hint": "Kotlin-Block mit Kopieren-Knopf; falsch: Code in Kobalt, Lindgrün oder Statusfarben.",
+   "changed": "2026-10-20"
   },
   {
    "id": "TXT-09",
@@ -2399,7 +2499,8 @@
    ],
    "status": "entschieden",
    "check": "Lange Namen in 32-px-Zeilen und schmaler Seitenleiste: Status und Zahl bleiben ganz sichtbar, der Tooltip zeigt den vollen Namen.",
-   "example_hint": "Zwei ähnliche lange Namen, am Ende gekürzt, mit Tooltip; falsch: gekürztes Statuswort."
+   "example_hint": "Zwei ähnliche lange Namen, am Ende gekürzt, mit Tooltip; falsch: gekürztes Statuswort.",
+   "changed": "2026-10-19"
   },
   {
    "id": "TXT-10",
@@ -2424,7 +2525,8 @@
    "status": "vorläufig",
    "check": "Computed style in .sb-code: font-weight 500, font-style normal, Farben nur --sb-syntax-*, text, text-muted; Graustufen-Screenshot bleibt lesbar.",
    "example_hint": "TypeScript-Zeilen mit Schlüsselwort, Zeichenkette mit ${…}, Zahl und Kommentar in den fünf Looks; falsch: farbige Funktionsnamen, kursiver Kommentar, fettes Schlüsselwort.",
-   "note": "Die Töne sind entschieden (FAR-11, D69); die Zuordnung der Code-Arten ist eine Ausarbeitung der Agenten auf D67 (12) und gilt, bis der Inhaber sie ändert."
+   "note": "Die Töne sind entschieden (FAR-11, D69); die Zuordnung der Code-Arten ist eine Ausarbeitung der Agenten auf D67 (12) und gilt, bis der Inhaber sie ändert.",
+   "changed": "2026-10-20"
   },
   {
    "id": "TXT-11",
@@ -2446,7 +2548,8 @@
    ],
    "status": "vorläufig",
    "check": "Graustufen-Screenshot: Fehler an der Wellenlinie, Änderungen an + und − erkennbar.",
-   "example_hint": "Diff mit einer entfernten und einer neuen Zeile, darunter eine Zeile mit Wellenlinie und Meldung; falsch: Diff nur als rote und grüne Flächen, Fehler nur rot gefärbt."
+   "example_hint": "Diff mit einer entfernten und einer neuen Zeile, darunter eine Zeile mit Wellenlinie und Meldung; falsch: Diff nur als rote und grüne Flächen, Fehler nur rot gefärbt.",
+   "changed": "2026-10-20"
   },
   {
    "id": "BEL-01",
@@ -2470,7 +2573,8 @@
    ],
    "status": "vorläufig",
    "check": "Jede Aussage-Zeile/Ziffer hat eine Notiz mit showsClaim = true; check_facts.py.",
-   "example_hint": "Aussage-Zeilen in den Zuständen gezeigt / Abfluss „nicht belegt“ / ausgeblendet; falsch: „Kein Tracking“ ohne Beleg."
+   "example_hint": "Aussage-Zeilen in den Zuständen gezeigt / Abfluss „nicht belegt“ / ausgeblendet; falsch: „Kein Tracking“ ohne Beleg.",
+   "changed": "2026-10-19"
   },
   {
    "id": "BEL-02",
@@ -2496,7 +2600,8 @@
    "status": "entschieden",
    "check": "check_demo.py TXT5 (Note neben vorheriger), TXT6 (Nummern nicht 1..n), TXT7; Lint L7; jede Ziffer verlinkt hin und zurück.",
    "example_hint": "Absatz mit Ziffern 1, 2 und einspaltiger Belegliste; falsch: zweispaltige Belegliste mit blauen Ziffern.",
-   "note": "spec/03 §5.2/§5.7 (Ziffer in link, 1 px, 0.15em) ist veraltet; D56 (3) und css .sb-note-ref gelten."
+   "note": "spec/03 §5.2/§5.7 (Ziffer in link, 1 px, 0.15em) ist veraltet; D56 (3) und css .sb-note-ref gelten.",
+   "changed": "2026-10-19"
   },
   {
    "id": "BEL-03",
@@ -2518,7 +2623,8 @@
    "status": "entschieden",
    "check": "Keine Ziffern in App-Bildschirmen; sb-controls.js schaltet aria-expanded + hidden, ohne Skript stimmt der Zustand.",
    "example_hint": "Datenschutz-Ansicht mit drei Aussage-Zeilen, erste offen; falsch: Ziffer ¹ in der App.",
-   "note": "spec/04 §7.3 nennt ≥ 48 dp; spec/01 §4, spec/03 §5.4 und spec/08 §13 nennen ≥ 56 (gilt)."
+   "note": "spec/04 §7.3 nennt ≥ 48 dp; spec/01 §4, spec/03 §5.4 und spec/08 §13 nennen ≥ 56 (gilt).",
+   "changed": "2026-10-19"
   },
   {
    "id": "BEL-04",
@@ -2539,7 +2645,8 @@
    ],
    "status": "entschieden",
    "check": "check_demo.py-Strings „Eigene Prüfung, automatisch“, „Eigene Prüfung, von Hand“, „Nicht geprüft:“.",
-   "example_hint": "Aufgeklappte Notiz mit Absenderzeile; falsch: „Geprüft ✓“ ohne Absender."
+   "example_hint": "Aufgeklappte Notiz mit Absenderzeile; falsch: „Geprüft ✓“ ohne Absender.",
+   "changed": "2026-10-19"
   },
   {
    "id": "BEL-05",
@@ -2562,7 +2669,8 @@
    ],
    "status": "vorläufig",
    "check": "check_demo.py --system sebaro (facts.html).",
-   "example_hint": "Annotierte Notiz mit sieben Teilen und darunter die Kompaktzeile; falsch: Notiz ohne „Nicht geprüft“."
+   "example_hint": "Annotierte Notiz mit sieben Teilen und darunter die Kompaktzeile; falsch: Notiz ohne „Nicht geprüft“.",
+   "changed": "2026-10-19"
   },
   {
    "id": "BEL-06",
@@ -2584,7 +2692,8 @@
    ],
    "status": "vorläufig",
    "check": "Notes neu erzeugen und gegen die ausgelieferte Datei diffen; check_demo.py TXT6.",
-   "example_hint": "Seite, auf der Ziffer 1 zweimal vorkommt und zwei Rücksprünge hat; falsch: getippte Note mit erfundenem Datum."
+   "example_hint": "Seite, auf der Ziffer 1 zweimal vorkommt und zwei Rücksprünge hat; falsch: getippte Note mit erfundenem Datum.",
+   "changed": "2026-10-19"
   },
   {
    "id": "BEL-07",
@@ -2606,7 +2715,8 @@
    ],
    "status": "vorläufig",
    "check": "Playwright bei 390 px: Popover öffnet, Escape schließt, Fokus zurück auf die Ziffer.",
-   "example_hint": "Schmale Seite mit geöffnetem Popover und sichtbarer Liste darunter; falsch: Beleg im modalen Dialog."
+   "example_hint": "Schmale Seite mit geöffnetem Popover und sichtbarer Liste darunter; falsch: Beleg im modalen Dialog.",
+   "changed": "2026-10-19"
   },
   {
    "id": "BEL-08",
@@ -2628,7 +2738,8 @@
    ],
    "status": "entschieden",
    "check": "python3 tools/check_facts.py <facts.json> Exit 0 in der Produkt-CI.",
-   "example_hint": "Hinweisblock (sb-callout--info) mit CI-Zeile; falsch: Faktenblock mit Demo-Daten ohne Marker in einem Produkt."
+   "example_hint": "Hinweisblock (sb-callout--info) mit CI-Zeile; falsch: Faktenblock mit Demo-Daten ohne Marker in einem Produkt.",
+   "changed": "2026-10-19"
   },
   {
    "id": "BEL-09",
@@ -2650,7 +2761,8 @@
    ],
    "status": "vorläufig",
    "check": "Negativtest mit data-sb-running-version; jeder Demo-Faktenblock enthält „Beispieldaten“.",
-   "example_hint": "Datenschutz-Ansicht normal und veraltet, Belegliste mit Marker; falsch: Demo-Belege ohne Marker."
+   "example_hint": "Datenschutz-Ansicht normal und veraltet, Belegliste mit Marker; falsch: Demo-Belege ohne Marker.",
+   "changed": "2026-10-19"
   },
   {
    "id": "BEL-10",
@@ -2671,7 +2783,8 @@
    ],
    "status": "vorläufig",
    "check": "Review aller Aktionen mit Datenweg.",
-   "example_hint": "Aktionszone „Als CSV exportieren“ mit Hinweis darunter; falsch: Hinweis nur im Tooltip."
+   "example_hint": "Aktionszone „Als CSV exportieren“ mit Hinweis darunter; falsch: Hinweis nur im Tooltip.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ZEI-01",
@@ -2699,7 +2812,8 @@
    "status": "entschieden",
    "check": "Lint L3 (kein data-product auf Seitenelementen); Android A1, A2; Farbprüfung zählt Kacheln als „App-Zeichen“.",
    "example_hint": "Tagwerk-Ansicht mit Magenta nur in der 32-px-Kachel; falsch: dieselbe Ansicht mit Magenta-Kopf und Magenta-Taste.",
-   "note": "BRIEF („Jede App bekommt eine eigene Akzentfarbe“, D34) und spec/08 §11 („family accent“) sind durch D54/D63 ersetzt."
+   "note": "BRIEF („Jede App bekommt eine eigene Akzentfarbe“, D34) und spec/08 §11 („family accent“) sind durch D54/D63 ersetzt.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ZEI-02",
@@ -2724,7 +2838,8 @@
    "status": "entschieden",
    "check": "check_palette.py (signTiles); BA34 Zeichenkontrast; tools/color.py.",
    "example_hint": "Acht Kacheln mit weißem Symbol und Kontrastwert darunter; falsch: Kachel in einer erfundenen Farbe.",
-   "note": "BRIEF „Violett ausgeschlossen“ gilt nur für die Oberfläche; D50 (I) setzt Violett als Kachelfarbe für Lernen & Entwickeln."
+   "note": "BRIEF „Violett ausgeschlossen“ gilt nur für die Oberfläche; D50 (I) setzt Violett als Kachelfarbe für Lernen & Entwickeln.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ZEI-03",
@@ -2751,7 +2866,8 @@
    "status": "entschieden",
    "check": "signs.py check sebaro Exit 0 (keine doppelte aktive Zuweisung); brand_assets.py check sebaro.",
    "example_hint": "Raster der zehn veröffentlichten Kacheln mit Symbol und Kürzel, darunter Web-Zeile Kachel + Name; falsch: Kachel „tg“ mit zwei Buchstaben.",
-   "note": "D45 „immer 2“ Buchstaben und „ein Symbol je Gruppe“ sind durch D50 und D47 ersetzt."
+   "note": "D45 „immer 2“ Buchstaben und „ein Symbol je Gruppe“ sind durch D50 und D47 ersetzt.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ZEI-04",
@@ -2776,7 +2892,8 @@
    "status": "entschieden",
    "check": "signs.py (pictorial screen); der Inhaber sieht jedes neue Symbol.",
    "example_hint": "Paare richtig/falsch: freie Kompassnadel gegen Nadel im Ring.",
-   "note": "spec/04 §1.3 zitiert noch die Runde-2-Grammatik (Strich 3 auf 24, Buchstabe oder freies Zeichen); spec/05 §2.1 gilt."
+   "note": "spec/04 §1.3 zitiert noch die Runde-2-Grammatik (Strich 3 auf 24, Buchstabe oder freies Zeichen); spec/05 §2.1 gilt.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ZEI-05",
@@ -2800,7 +2917,8 @@
    ],
    "status": "entschieden",
    "check": "signs.py check/sheet sebaro (signs-sheet.png, signs-16px-zoom.png); nur 32/48/64 auf Seiten.",
-   "example_hint": "Eine App in 64, 48, 32 px und als Symbol in 16 px; falsch: 40-px-Kachel mit Kürzel."
+   "example_hint": "Eine App in 64, 48, 32 px und als Symbol in 16 px; falsch: 40-px-Kachel mit Kürzel.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ZEI-06",
@@ -2825,7 +2943,8 @@
    "status": "entschieden",
    "check": "axe; Review von App-Raster, Über- und Faktenseite.",
    "example_hint": "App-Raster mit Kachel + Name je Karte; falsch: Kachelreihe ohne Namen.",
-   "note": "Der Teil „internes Werkzeug ohne Zeichen“ ist vorläufig (D40 Grund: „Nicht gefragt und deshalb Vorschlag“)."
+   "note": "Der Teil „internes Werkzeug ohne Zeichen“ ist vorläufig (D40 Grund: „Nicht gefragt und deshalb Vorschlag“).",
+   "changed": "2026-10-19"
   },
   {
    "id": "ZEI-07",
@@ -2848,7 +2967,8 @@
    "status": "entschieden",
    "check": "python3 tools/inline_assets.py --check; signs.py check.",
    "example_hint": "Kachel unverändert; falsch: gedrehte, umrandete Kachel auf einem Foto.",
-   "note": "spec/03 §4.3 sagt „nie eine Kachel mit Text“; gemeint sind Wörter, das Kürzel ab 48 px (D57) ist erlaubt."
+   "note": "spec/03 §4.3 sagt „nie eine Kachel mit Text“; gemeint sind Wörter, das Kürzel ab 48 px (D57) ist erlaubt.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ZEI-08",
@@ -2876,7 +2996,8 @@
    "status": "vorläufig",
    "check": ".venv/bin/python tools/signs.py check sebaro Exit 0; brand_assets.py check Exit 0; SG90 (menschliche Sichtprüfung) bleibt offen; keine Markenrecherche.",
    "example_hint": "Tabelle Name → Kürzel mit markierten Buchstaben und Vorher/nachher der umgezeichneten Symbole.",
-   "note": "Die Kürzel folgen der Regel aus spec/05 §2.5 (z. B. sebaro → sbo, Android Coden → acd). D33-Kapazität für Runde-3-Symbole nicht neu gemessen."
+   "note": "Die Kürzel folgen der Regel aus spec/05 §2.5 (z. B. sebaro → sbo, Android Coden → acd). D33-Kapazität für Runde-3-Symbole nicht neu gemessen.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ZEI-09",
@@ -2902,7 +3023,8 @@
    ],
    "status": "vorläufig",
    "check": "brand_assets.py check; Konstruktionszeichnungen wordmark-light-cut.svg / -dark-cut.svg und Lockup-Schutzraum.",
-   "example_hint": "Lockup hell und dunkel mit eingezeichnetem Schutzraum; falsch: gesperrte, gestreckte Wortmarke mit Glow."
+   "example_hint": "Lockup hell und dunkel mit eingezeichnetem Schutzraum; falsch: gesperrte, gestreckte Wortmarke mit Glow.",
+   "changed": "2026-10-20"
   },
   {
    "id": "ZEI-10",
@@ -2926,7 +3048,8 @@
    "status": "entschieden",
    "check": "brand_assets.py check (BA13, BA25, BA36).",
    "example_hint": "Browser-Tab-Mock hell und dunkel mit 16-px-Favicons; falsch: Favicon mit Kürzel.",
-   "note": "Die Skizze zu D57 nennt für Orange 3,05–3,37 : 1, spec/05 §2.6 3,20–6,46 : 1 (BA13); beide ≥ 3 : 1, verschiedene Messstände."
+   "note": "Die Skizze zu D57 nennt für Orange 3,05–3,37 : 1, spec/05 §2.6 3,20–6,46 : 1 (BA13); beide ≥ 3 : 1, verschiedene Messstände.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ZEI-11",
@@ -2950,7 +3073,8 @@
    "status": "vorläufig",
    "check": "brand_assets.py check sebaro; src-tauri/icons enthält icon.icns, icon.ico; Launcher-Masken auf Gerät nicht verifiziert.",
    "example_hint": "Adaptive-Icon-Fläche mit Sicherheitskreis und Kürzel-Grundlinie; falsch: Glocken-Icon als Benachrichtigung.",
-   "note": "spec/08 §11 („family accent in signs.iconMode“) ist veraltet; signTiles gilt (D53/D54)."
+   "note": "spec/08 §11 („family accent in signs.iconMode“) ist veraltet; signTiles gilt (D53/D54).",
+   "changed": "2026-10-19"
   },
   {
    "id": "ICO-01",
@@ -2971,7 +3095,8 @@
    ],
    "status": "vorläufig",
    "check": "Keine Rasterdateien in Icon-/Zeichen-Slots; icons.py build --check Exit 0 (0 drifted).",
-   "example_hint": "Inline-SVG-Icon mit stroke=currentColor; falsch: PNG-Icon mit unsauberem Strich und Pseudo-Text."
+   "example_hint": "Inline-SVG-Icon mit stroke=currentColor; falsch: PNG-Icon mit unsauberem Strich und Pseudo-Text.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ICO-02",
@@ -2995,7 +3120,8 @@
    ],
    "status": "vorläufig",
    "check": "python3 tools/icons.py lint sebaro --strict Exit 0 (ICN304–308; 6 begründete Waiver in §15); Kontaktbogen hell/dunkel bei 100 % und 3×.",
-   "example_hint": "Konstruktionsraster 24 mit Keylines und einem richtigen Icon; falsch: 2,5-px-Icon neben dünnem Text."
+   "example_hint": "Konstruktionsraster 24 mit Keylines und einem richtigen Icon; falsch: 2,5-px-Icon neben dünnem Text.",
+   "changed": "2026-10-20"
   },
   {
    "id": "ICO-03",
@@ -3022,7 +3148,8 @@
    "status": "entschieden",
    "check": "Review-Checkliste spec/04 §10; tools/color.py contrast; keine Hex-Literale in Komponenten.",
    "example_hint": "Neutrales Icon neben einer App-Kachel mit Symbol; falsch: UI-Icon mit Glanz auf farbiger Kachel.",
-   "note": "Kontrast und Trennung von App-Zeichen sind Agentenspezifikation (spec/04 §1.3, §11); der Kern „kein Schmuck, keine zweite Farbe“ folgt aus D36."
+   "note": "Kontrast und Trennung von App-Zeichen sind Agentenspezifikation (spec/04 §1.3, §11); der Kern „kein Schmuck, keine zweite Farbe“ folgt aus D36.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ICO-04",
@@ -3044,7 +3171,8 @@
    ],
    "status": "vorläufig",
    "check": "Größenklassen im Markup; 16-px-Zoom im Kontaktbogen.",
-   "example_hint": "Dasselbe Icon in 16/20/24/32/48 px; Pfeil nach Linktext bei 16 px scharf (Master) gegen matschig (skaliert)."
+   "example_hint": "Dasselbe Icon in 16/20/24/32/48 px; Pfeil nach Linktext bei 16 px scharf (Master) gegen matschig (skaliert).",
+   "changed": "2026-10-19"
   },
   {
    "id": "ICO-05",
@@ -3066,7 +3194,8 @@
    ],
    "status": "vorläufig",
    "check": "Umschalten Umriss/gefüllt ohne Versatz; ICN308.",
-   "example_hint": "Untere Navigation: aktives Ziel gefüllt, andere Umriss; falsch: alle gefüllt."
+   "example_hint": "Untere Navigation: aktives Ziel gefüllt, andere Umriss; falsch: alle gefüllt.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ICO-06",
@@ -3091,7 +3220,8 @@
    "status": "entschieden",
    "check": "grep -n '[←→›↗]' in Seiten und UI-Texten = 0; RTL-Spiegelung (autoMirror).",
    "example_hint": "Link „Mehr“ mit Chevron-Icon; falsch: Textpfeil in Fallback-Schrift.",
-   "note": "Tastenzeichen (⌘ ⇧ ⌥ ⌃ ↩) sind keine Icons: sie kommen nach D68 als echte Zeichen aus sebaro Sans und sebaro Mono (ICO-08)."
+   "note": "Tastenzeichen (⌘ ⇧ ⌥ ⌃ ↩) sind keine Icons: sie kommen nach D68 als echte Zeichen aus sebaro Sans und sebaro Mono (ICO-08).",
+   "changed": "2026-10-20"
   },
   {
    "id": "ICO-07",
@@ -3112,7 +3242,8 @@
    ],
    "status": "vorläufig",
    "check": "aria-hidden='true'; Ton im Dunkelmodus sichtbar; Überschrift und Satz tragen die Bedeutung.",
-   "example_hint": "Leerzustand mit empty-stats-Spot; falsch: bunte Szene mit Figur."
+   "example_hint": "Leerzustand mit empty-stats-Spot; falsch: bunte Szene mit Figur.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ICO-08",
@@ -3137,7 +3268,8 @@
    "status": "entschieden",
    "check": "fonts.py verify sebaro; im Browser keine Ersatzschrift für ⌘ ⇧ ⌥ ⌃ ↩ (Schriftprüfung FNT3).",
    "example_hint": "Menü mit ⇧⌘P und ⌘S als echte Zeichen, grau am Zeilenende; falsch: gerahmte Tastenkappen im Menü.",
-   "note": "Seit D68 im Export: sebaro Sans und sebaro Mono enthalten ⌘ ⇧ ⌥ ⌃ ↩ ⎋ ⌫ ⇥ und die vier Pfeile als echte Zeichen."
+   "note": "Seit D68 im Export: sebaro Sans und sebaro Mono enthalten ⌘ ⇧ ⌥ ⌃ ↩ ⎋ ⌫ ⇥ und die vier Pfeile als echte Zeichen.",
+   "changed": "2026-10-20"
   },
   {
    "id": "BIL-01",
@@ -3158,7 +3290,8 @@
    ],
    "status": "vorläufig",
    "check": "QA-Rubrik spec/06 §7; abgelehnte Versuche in images/rejected/ mit Grund.",
-   "example_hint": "<figure> mit Linienbild und HTML-Caption; falsch: Bild mit eingebackenem Pseudo-Text."
+   "example_hint": "<figure> mit Linienbild und HTML-Caption; falsch: Bild mit eingebackenem Pseudo-Text.",
+   "changed": "2026-10-19"
   },
   {
    "id": "BIL-02",
@@ -3182,7 +3315,8 @@
    ],
    "status": "vorläufig",
    "check": "Review: hat jedes Bild einen Inhaltszweck?",
-   "example_hint": "Dieselbe Seite mit und ohne Bild, beide vollständig; falsch: W1 mit großem Heldenbild."
+   "example_hint": "Dieselbe Seite mit und ohne Bild, beide vollständig; falsch: W1 mit großem Heldenbild.",
+   "changed": "2026-10-19"
   },
   {
    "id": "BIL-03",
@@ -3204,7 +3338,8 @@
    ],
    "status": "vorläufig",
    "check": "images/pipeline/verify.py; Ansicht bei 1× und 2× in beiden Modi.",
-   "example_hint": "Linienillustration hell und dunkel getönt; falsch: farbige Illustration mit Schatten."
+   "example_hint": "Linienillustration hell und dunkel getönt; falsch: farbige Illustration mit Schatten.",
+   "changed": "2026-10-19"
   },
   {
    "id": "BIL-04",
@@ -3226,7 +3361,8 @@
    ],
    "status": "vorläufig",
    "check": "verify.py; Sidecar vorhanden; axe image-alt.",
-   "example_hint": "Zwei <figure>: dekorativ mit alt='' und Inhaltsbild mit Alt-Text und Kennzeichnung; falsch: alt='Bild' ohne Kennzeichnung."
+   "example_hint": "Zwei <figure>: dekorativ mit alt='' und Inhaltsbild mit Alt-Text und Kennzeichnung; falsch: alt='Bild' ohne Kennzeichnung.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ZUG-01",
@@ -3248,7 +3384,8 @@
    ],
    "status": "vorläufig",
    "check": "check_palette.py; check_demo.py (axe, Kontrast) hell und dunkel.",
-   "example_hint": "Tabelle gemessener Paare mit Min-Spalte; daneben 4,496 abgeschnitten (4,49) gegen gerundet (4,50)."
+   "example_hint": "Tabelle gemessener Paare mit Min-Spalte; daneben 4,496 abgeschnitten (4,49) gegen gerundet (4,50).",
+   "changed": "2026-10-19"
   },
   {
    "id": "ZUG-02",
@@ -3270,7 +3407,8 @@
    ],
    "status": "vorläufig",
    "check": "Tab durch die Seite: jedes Element zeigt den Ring; grep outline: none.",
-   "example_hint": "Taste, Link, Feld, Schalter, Chip und Gefahrtaste mit Tastaturfokus; falsch: Taste mit outline: none."
+   "example_hint": "Taste, Link, Feld, Schalter, Chip und Gefahrtaste mit Tastaturfokus; falsch: Taste mit outline: none.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ZUG-03",
@@ -3291,7 +3429,8 @@
    ],
    "status": "vorläufig",
    "check": "check_demo.py targets; axe target-size; mit pointer: coarse emulieren.",
-   "example_hint": "Chip mit sichtbarem 36-px-Rahmen und gestrichelt markierter 48-px-Trefferfläche; falsch: 32-px-Icon-Taste auf dem Handy."
+   "example_hint": "Chip mit sichtbarem 36-px-Rahmen und gestrichelt markierter 48-px-Trefferfläche; falsch: 32-px-Icon-Taste auf dem Handy.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ZUG-04",
@@ -3310,7 +3449,8 @@
    ],
    "status": "vorläufig",
    "check": "axe button-name in beiden Modi; grep sb-icon-button ohne aria-label = 0; TalkBack/VoiceOver nicht verifiziert.",
-   "example_hint": "Obere Leiste mit Zurück- und Mehr-Taste mit aria-label; falsch: dieselben Tasten ohne Namen."
+   "example_hint": "Obere Leiste mit Zurück- und Mehr-Taste mit aria-label; falsch: dieselben Tasten ohne Namen.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ZUG-05",
@@ -3332,7 +3472,8 @@
    ],
    "status": "vorläufig",
    "check": "Chromium-Emulation forced-colors (laut spec/02 §9 nicht verifiziert).",
-   "example_hint": "Screenshot-Paar Navigation und Hauptaktion normal und in forced colors; falsch: Ortsmarkierung verschwindet."
+   "example_hint": "Screenshot-Paar Navigation und Hauptaktion normal und in forced colors; falsch: Ortsmarkierung verschwindet.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ZUG-06",
@@ -3351,7 +3492,8 @@
    ],
    "status": "vorläufig",
    "check": "Tab nach dem Laden zeigt den Sprunglink; manueller Durchlauf mit Screenshots beider Modi.",
-   "example_hint": "Seitenanfang mit Sprunglink im Fokus; falsch: erster Tab landet im Logo."
+   "example_hint": "Seitenanfang mit Sprunglink im Fokus; falsch: erster Tab landet im Logo.",
+   "changed": "2026-10-19"
   },
   {
    "id": "ZUG-07",
@@ -3372,7 +3514,8 @@
    ],
    "status": "vorläufig",
    "check": "check_demo.py <Seite> 0 Fehler hell/dunkel bei 1440 und 390 px.",
-   "example_hint": "Gliederung der Erklärungsseite als sb-prose mit Abschnitt „Bekannte Einschränkungen“; falsch: „vollständig barrierefrei“ ohne Prüfung."
+   "example_hint": "Gliederung der Erklärungsseite als sb-prose mit Abschnitt „Bekannte Einschränkungen“; falsch: „vollständig barrierefrei“ ohne Prüfung.",
+   "changed": "2026-10-19"
   },
   {
    "id": "STR-01",
@@ -3397,7 +3540,8 @@
    "status": "entschieden",
    "check": "Komponentenblatt „Start und Bewegung“ (sbStart.play(frame)) hell und dunkel; zweiter Seitenaufruf ohne Start; ungeprüft: WebKit/Tauri, Android-Splash-Übergabe (bis 160-dp-Icon vor der 96-dp-Kachel), iOS.",
    "example_hint": "Rahmen mit Taste „Start zeigen“: Kachel fliegt in den Kopf, Inhalt gleitet von unten; falsch: Startbild mit Spinner und Logo-Animation.",
-   "note": "„Nur beim ersten Aufruf“ als „erster Aufruf je Tab-Sitzung“ (sessionStorage) ist Agenten-Auslegung."
+   "note": "„Nur beim ersten Aufruf“ als „erster Aufruf je Tab-Sitzung“ (sessionStorage) ist Agenten-Auslegung.",
+   "changed": "2026-10-19"
   },
   {
    "id": "STR-02",
@@ -3420,7 +3564,8 @@
    ],
    "status": "entschieden",
    "check": "Replay im Komponentenblatt: gleiches Bild vor und nach dem Flug.",
-   "example_hint": "Startkachel ohne Kürzel richtig; falsch: Startkachel mit Kürzel."
+   "example_hint": "Startkachel ohne Kürzel richtig; falsch: Startkachel mit Kürzel.",
+   "changed": "2026-10-19"
   },
   {
    "id": "WEB-01",
@@ -3441,7 +3586,8 @@
    "status": "vorläufig",
    "check": "Seite mit gespeichertem 'dark' laden: kein heller Blitz.",
    "example_hint": "Kopf-Snippet zum Kopieren in sb-code; falsch-Variante mit theme-init am Ende.",
-   "note": "systems/sebaro/AGENTS.md §3 (Quickstart: theme-button.js mit defer im head, data-sb-theme-button, ohne sprite.css; Tailwind mit layer(components)) weicht ab; spec/09 und die Demo-Seiten gelten."
+   "note": "systems/sebaro/AGENTS.md §3 (Quickstart: theme-button.js mit defer im head, data-sb-theme-button, ohne sprite.css; Tailwind mit layer(components)) weicht ab; spec/09 und die Demo-Seiten gelten.",
+   "changed": "2026-10-19"
   },
   {
    "id": "WEB-02",
@@ -3464,7 +3610,8 @@
    "status": "vorläufig",
    "check": "check_demo THM1–THM3; zweimal drücken: data-theme weg, sb-theme leer; grep prefers-color-scheme in Komponenten-CSS = 0.",
    "example_hint": "Taste mit Live-Anzeige des gespeicherten Werts und der Statusansage; falsch: Taste, die ihre Beschriftung auf „Dunkel“ ändert.",
-   "note": "theme-button.js schreibt nur deutsche Ansagen; spec/09 §6 verlangt englisch „Dark is on.“ auf englischen Seiten (fehlt)."
+   "note": "theme-button.js schreibt nur deutsche Ansagen; spec/09 §6 verlangt englisch „Dark is on.“ auf englischen Seiten (fehlt).",
+   "changed": "2026-10-19"
   },
   {
    "id": "WEB-03",
@@ -3486,7 +3633,8 @@
    ],
    "status": "vorläufig",
    "check": "Review jeder Seite.",
-   "example_hint": "Fußzeile der Guide-Seite; falsch: graue Fußfläche ohne Barrierefreiheit-Link."
+   "example_hint": "Fußzeile der Guide-Seite; falsch: graue Fußfläche ohne Barrierefreiheit-Link.",
+   "changed": "2026-10-19"
   },
   {
    "id": "WEB-04",
@@ -3505,7 +3653,8 @@
    ],
    "status": "vorläufig",
    "check": "Druckvorschau.",
-   "example_hint": "Hinweis auf die Druckvorschau der Regelseite; falsch: gedruckte Taste „Hell oder Dunkel“."
+   "example_hint": "Hinweis auf die Druckvorschau der Regelseite; falsch: gedruckte Taste „Hell oder Dunkel“.",
+   "changed": "2026-10-19"
   },
   {
    "id": "MOB-01",
@@ -3529,7 +3678,8 @@
    ],
    "status": "entschieden",
    "check": "Lint A1, A8; extract_compose.py --compile (BOM 2024.12.01 und 2026.08.00).",
-   "example_hint": "Kotlin-Snippet SebaroAppTheme { SbScreen(…) } neben sb-phone-Mock; falsch: Scaffold mit FloatingActionButton."
+   "example_hint": "Kotlin-Snippet SebaroAppTheme { SbScreen(…) } neben sb-phone-Mock; falsch: Scaffold mit FloatingActionButton.",
+   "changed": "2026-10-19"
   },
   {
    "id": "MOB-02",
@@ -3554,7 +3704,8 @@
    "status": "vorläufig",
    "check": "lint-sebaro-android.sh A1–A9 Exit 0 (Grep, an einer echten App nicht geprüft).",
    "example_hint": "Tabelle M3-Komponente → sebaro-Ersatz; falsch: Screen mit BadgedBox und ElevatedCard.",
-   "note": "spec/08 §14 erlaubt Snackbar mit overlay shadow, ModalBottomSheet auf surfaceRaised und OutlinedCard; D46 (Linien statt Flächen und Schatten) gilt."
+   "note": "spec/08 §14 erlaubt Snackbar mit overlay shadow, ModalBottomSheet auf surfaceRaised und OutlinedCard; D46 (Linien statt Flächen und Schatten) gilt.",
+   "changed": "2026-10-19"
   },
   {
    "id": "MOB-03",
@@ -3576,7 +3727,8 @@
    "status": "entschieden",
    "check": "Code-Review; kein Audio-/Vibrationsaufruf im Desktop-Code; auf Gerät nicht verifiziert.",
    "example_hint": "Kein Live-Beispiel möglich: Tabelle Ereignis → Impuls (richtig) neben Liste „jede Taste vibriert“ (falsch).",
-   "note": "Der Wortlaut „bis auf 2.“ ist ohne die Skizze nicht eindeutig; die konkreten Konstanten sind Agentenarbeit."
+   "note": "Der Wortlaut „bis auf 2.“ ist ohne die Skizze nicht eindeutig; die konkreten Konstanten sind Agentenarbeit.",
+   "changed": "2026-10-19"
   },
   {
    "id": "MOB-04",
@@ -3598,7 +3750,8 @@
    ],
    "status": "vorläufig",
    "check": "Einstellung vorhanden; Neustart behält die Wahl.",
-   "example_hint": "Einstellungsgruppe mit drei sb-radio-Zeilen; falsch: Mond-Icon-Schalter."
+   "example_hint": "Einstellungsgruppe mit drei sb-radio-Zeilen; falsch: Mond-Icon-Schalter.",
+   "changed": "2026-10-19"
   },
   {
    "id": "DSK-01",
@@ -3623,7 +3776,8 @@
    "status": "vorläufig",
    "check": "check_demo.py --csp \"default-src 'self'; style-src 'self'; script-src 'self'\"; in echter Tauri-Webview nicht verifiziert (spec/09 §15).",
    "example_hint": "Fenster-Mock mit Titelleiste, Seitenleiste, Inhalt und Aktionszone; falsch: getönte Seitenleiste mit Schatten und petrolfarbenen Reitern.",
-   "note": "Fehlende Regeln: Inspector, Titelleistenhöhe, native vs. eigene Titelleiste, Fensterknöpfe Windows/Linux, Mindestgröße, Splitter, Menüleiste, Kürzelsatz, F6-Fokusreihenfolge, Drag-and-drop, Mehrfenster, Benachrichtigungen. shared/ADOPTION.md (Stand 2026-10-12) ist veraltet."
+   "note": "Fehlende Regeln: Inspector, Titelleistenhöhe, native vs. eigene Titelleiste, Fensterknöpfe Windows/Linux, Mindestgröße, Splitter, Menüleiste, Kürzelsatz, F6-Fokusreihenfolge, Drag-and-drop, Mehrfenster, Benachrichtigungen. shared/ADOPTION.md (Stand 2026-10-12) ist veraltet.",
+   "changed": "2026-10-19"
   },
   {
    "id": "DSK-02",
@@ -3646,7 +3800,8 @@
    "status": "entschieden",
    "check": "⌘, öffnet die Ansicht; Menü und Palette führen dorthin.",
    "example_hint": "Einstellungsansicht mit Gruppen und Hilfesätzen; falsch: Einstellungen nur als Haken im nativen Menü.",
-   "note": "novalis nutzt heute die Palette als Einstellungsseite (ADR-0004); nach D67 braucht der Punkt dort eine ADR mit dem Wortlaut des Inhabers."
+   "note": "novalis nutzt heute die Palette als Einstellungsseite (ADR-0004); nach D67 braucht der Punkt dort eine ADR mit dem Wortlaut des Inhabers.",
+   "changed": "2026-10-19"
   },
   {
    "id": "DSK-03",
@@ -3671,7 +3826,8 @@
    "status": "vorläufig",
    "check": "Editor in beiden Modi gegen spec/09 §17; Caret, aktuelle Zeile und Suchtreffer im Graustufen-Screenshot erkennbar.",
    "example_hint": "Editor-Ausschnitt mit Markdown-Zeilen, Zeilennummern, aktueller Zeile und Suchtreffer; falsch: Markdown in Mono mit farbigen #-Zeichen und gelb gefüllten Treffern.",
-   "note": "Der CodeMirror-Teil ist nur gelesen, nicht ausgeführt (spec/09 §17)."
+   "note": "Der CodeMirror-Teil ist nur gelesen, nicht ausgeführt (spec/09 §17).",
+   "changed": "2026-10-20"
   },
   {
    "id": "TEC-01",
@@ -3692,7 +3848,8 @@
    ],
    "status": "vorläufig",
    "check": "sh lint-colour.sh <css> <pages> Exit 0 (L5); check_site.py CSS.",
-   "example_hint": "Codeblock richtig/falsch mit Lint-Ausgabe vorher/nachher."
+   "example_hint": "Codeblock richtig/falsch mit Lint-Ausgabe vorher/nachher.",
+   "changed": "2026-10-19"
   },
   {
    "id": "TEC-02",
@@ -3713,7 +3870,8 @@
    "status": "vorläufig",
    "check": "check_demo.py --csp ohne Fehler; kein --selected/--active/--open-Selektor; grep fetch( in Skripten = 0.",
    "example_hint": "Chip-Gruppe per aria-pressed gestylt, Aussage-Zeile ohne JS korrekt; falsch: Klasse --selected, die der Screenreader nicht ansagt.",
-   "note": "Inkonsistenz: Hauptaktion nutzt data-sb-state='done|retry', Schritte data-state='done' (css Z. 787), beides nicht ARIA."
+   "note": "Inkonsistenz: Hauptaktion nutzt data-sb-state='done|retry', Schritte data-state='done' (css Z. 787), beides nicht ARIA.",
+   "changed": "2026-10-19"
   },
   {
    "id": "TEC-03",
@@ -3735,7 +3893,8 @@
    ],
    "status": "vorläufig",
    "check": "sbColourCount(view).pass === true; Lücken: Pseudo-Elemente und Fokus-Outlines werden nicht gelesen.",
-   "example_hint": "Live-Ansicht mit Prüfzeile; Umschalter fügt eine zweite lindgrüne Fläche ein und zeigt „nicht bestanden“."
+   "example_hint": "Live-Ansicht mit Prüfzeile; Umschalter fügt eine zweite lindgrüne Fläche ein und zeigt „nicht bestanden“.",
+   "changed": "2026-10-19"
   },
   {
    "id": "TEC-04",
@@ -3754,7 +3913,8 @@
    ],
    "status": "vorläufig",
    "check": "grep -rn 'demo-\\|sb-phone\\|is-hover\\|is-pressed\\|is-focus' src/ im Produkt = 0.",
-   "example_hint": "Zustandsmatrix einer Nebenaktion mit eingefrorenen is-Klassen (nur im Guide); falsch: is-active im Produktcode."
+   "example_hint": "Zustandsmatrix einer Nebenaktion mit eingefrorenen is-Klassen (nur im Guide); falsch: is-active im Produktcode.",
+   "changed": "2026-10-19"
   },
   {
    "id": "TEC-05",
@@ -3776,7 +3936,8 @@
    ],
    "status": "vorläufig",
    "check": "grep -rnE 'bg-(accent|link|success|warning|danger|info)|-subtle' src/ = 0 außerhalb Schalter, Radio, Regler.",
-   "example_hint": "Tailwind-Snippet richtig/falsch in sb-code."
+   "example_hint": "Tailwind-Snippet richtig/falsch in sb-code.",
+   "changed": "2026-10-19"
   },
   {
    "id": "TEC-06",
@@ -3799,7 +3960,8 @@
    "status": "vorläufig",
    "check": "CHECKS.md mit Befehl, Datum, Exit, Ergebnis.",
    "example_hint": "Prüfliste als sb-check-list mit einer übersprungenen Zeile und Grund; falsch: „alles grün“ ohne Liste.",
-   "note": "README.md (726 Tests, 0 ausgelassen) und AGENTS.md (763 Tests, 1 übersprungen) widersprechen sich."
+   "note": "README.md (726 Tests, 0 ausgelassen) und AGENTS.md (763 Tests, 1 übersprungen) widersprechen sich.",
+   "changed": "2026-10-19"
   },
   {
    "id": "TEC-07",
@@ -3824,7 +3986,8 @@
    "status": "entschieden",
    "check": "Im App-Repo nach der Umbenennung: grep -rn -- '--ds-' → 0 Treffer; tokens.css kommt aus export_system.py.",
    "example_hint": "Fluss tokens.json → export_system.py → tokens.css mit --sb-*-Namen; falsch: Zuordnungsdatei, die --ds-* schreibt.",
-   "note": "shared/ADOPTION.md (Stand 2026-10-12) und der frühere Vorschlag A sind überholt. Die Umbenennung geschieht im novalis-Repo, nicht in sebaroDesign."
+   "note": "shared/ADOPTION.md (Stand 2026-10-12) und der frühere Vorschlag A sind überholt. Die Umbenennung geschieht im novalis-Repo, nicht in sebaroDesign.",
+   "changed": "2026-10-19"
   },
   {
    "id": "TEC-08",
@@ -3847,7 +4010,8 @@
    "status": "vorläufig",
    "check": "Kein Theme-Stylesheet eines Highlighters im Bundle; Shiki-Ausgabe enthält nur var(--sb-…)-Farben.",
    "example_hint": "Drei Snippets zum Kopieren (Astro-Konfiguration, CodeMirror-HighlightStyle, Compose-SpanStyle); falsch: <link> auf ein highlight.js-Theme.",
-   "note": "Geprüft ist nur Shiki 1.29.2 auf einer Prüfseite mit 14 Sprachen; highlight.js und Prism nur nach ihren Klassenlisten, CodeMirror nur gelesen, Monaco und Sublime ungeprüft (spec/09 §17)."
+   "note": "Geprüft ist nur Shiki 1.29.2 auf einer Prüfseite mit 14 Sprachen; highlight.js und Prism nur nach ihren Klassenlisten, CodeMirror nur gelesen, Monaco und Sublime ungeprüft (spec/09 §17).",
+   "changed": "2026-10-20"
   }
  ]
 }

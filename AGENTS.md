@@ -86,7 +86,15 @@ python3 tools/build.py                 # fill the marker blocks of all pages, wr
 python3 tools/check_site.py            # PAGE, LINK, NET, CSS, STYLE, TEXT, RULES groups; exit 0 required
 python3 tools/build.py --check         # freshness gate (CI runs this and check_site.py)
 python3 tools/sync_from_design.py --verify-local   # docs/sebaro/ untouched since the export
+npm ci && node tools/check_a11y.mjs    # axe WCAG 2.2 AA, overflow, console errors; light/dark, 390/1440 (CI runs it)
+python3 tools/release.py 1.2.0         # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot
 ```
+
+- **Every rule change is versioned (D88):** a new, changed or removed rule must be named under „Unveröffentlicht“ in
+  `CHANGELOG.md` and get a newer `"changed"` date, otherwise `check_site.py` (CHANGE) fails. Major = a rule is
+  dropped or reversed, minor = new rules/values/pages, patch = wording and examples.
+- **Accessibility exceptions** go into `tools/a11y-waivers.json` with page, axe rule, target and a reason; never a
+  blanket waiver.
 
 - **Never edit** `docs/sebaro/`, `docs/assets/vendor/`, `docs/rules.json`, `guide/RULES.md`, `docs/llms.txt`, or
   anything between `<!-- guide:… -->` and `<!-- /guide:… -->` markers. Change the source and rebuild.
