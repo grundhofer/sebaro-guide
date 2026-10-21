@@ -10,6 +10,10 @@
 .g-daten-item > h3 { margin: 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
 .g-daten-item > .g-mark-proposal { margin-block-start: calc(-1 * var(--sb-space-2)); }
 .g-daten-specimen { min-inline-size: 0; max-inline-size: 100%; padding-block: var(--sb-space-2); overflow-x: auto; }
+/* the heatmap reaches 6 px past its box on both sides (sb-heatmap's negative margin, the cell gap since D92) and the
+   focus ring sits 4 px outside a cell: room at the end keeps the box from scrolling and the ring of the last column
+   whole at 320 and 390 px. The start needs none: the row names stand there, flush with the text */
+.g-daten-specimen--heatmap { padding-inline-end: calc(var(--sb-space-1) + var(--sb-space-0-5)); }
 .g-daten-rule { margin: 0; max-inline-size: var(--sb-size-measure-prose); }
 .g-daten-refs { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .g-daten-refs a { font-family: var(--sb-font-family-mono); font-weight: var(--sb-type-code-weight); color: var(--sb-color-text); }

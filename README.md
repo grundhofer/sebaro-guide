@@ -12,8 +12,9 @@ Verhalten, Funktion und die Gedanken dahinter, jede Regel mit Beispiel.
 | [Grundlagen](https://grundhofer.github.io/sebaro-guide/grundlagen.html) | Farben, Schrift, Raum, Form, Ebenen, Bewegung mit den echten Token-Werten |
 | [Bauteile](https://grundhofer.github.io/sebaro-guide/bauteile.html) | jede Komponente mit allen Zuständen und Markup |
 | [Daten](https://grundhofer.github.io/sebaro-guide/daten.html) | jede Datenart einmal dargestellt |
+| [Plattformen](https://grundhofer.github.io/sebaro-guide/plattformen.html) | die vier Plattformseiten auf einen Blick und was je Plattform anders ist; im Kopf stehen sie unter „Plattformen“ (D92) |
 | [Web](https://grundhofer.github.io/sebaro-guide/web.html) · [App](https://grundhofer.github.io/sebaro-guide/app.html) · [iOS](https://grundhofer.github.io/sebaro-guide/ios.html) · [Desktop](https://grundhofer.github.io/sebaro-guide/desktop.html) | Beispielseiten mit allen typischen Fällen je Plattform |
-| [Gedanken](https://grundhofer.github.io/sebaro-guide/gedanken.html) | Haltung, Geschichte in sechs Runden, die Entscheidungen D72–D91, Abwägungen |
+| [Gedanken](https://grundhofer.github.io/sebaro-guide/gedanken.html) | Haltung, Geschichte in sechs Runden, die Entscheidungen D72–D92, Abwägungen |
 | [Ausblick](https://grundhofer.github.io/sebaro-guide/ausblick.html) | was auf eine Wahl des Inhabers wartet, was offen ist, später kommt oder erledigt ist |
 
 ## Für Agenten
@@ -25,7 +26,7 @@ Produkts.
 
 ## Woher die Werte kommen
 
-Die Quellen von sebaro (Paletten, Verträge, Generatoren, Prüfungen und das Entscheidungsprotokoll D1–D91) liegen in
+Die Quellen von sebaro (Paletten, Verträge, Generatoren, Prüfungen und das Entscheidungsprotokoll D1–D92) liegen in
 der Werkstatt **sebaroDesign**, einem privaten Repository. Dieser Guide schreibt keine Farbe, Schrift und kein Icon ab:
 `docs/sebaro/` ist ein geprüfter Web-Export (`tools/sync_from_design.py`), jede Datei mit Prüfsumme. Regeln ändern sich
 nur in `rules/rules.json`; `tools/build.py` erzeugt daraus die Regelseite, `guide/RULES.md` und `docs/llms.txt`.
@@ -71,5 +72,5 @@ Geräte, Windows, WebKit und Screenreader kommen später (D79). Was auf eine Wah
 [LICENSE.md](LICENSE.md) ist dieselbe Datei wie in der Werkstatt und in jedem Export (D76): Icons, CSS und
 Token-Dateien, Komponenten-Code, Regeln, Spezifikationen und Werkzeuge unter MIT; die Schriften sebaro Sans und
 sebaro Mono unter der SIL Open Font License 1.1; der Name sebaro, Produktnamen, Wortmarke, Logo, App-Zeichen und
-App-Icons sind vorbehalten. Dass Token-Dateien, Compose- und Swift-Code und Skripte unter MIT fallen, ist die Lesart
-der Werkstatt; die Bestätigung des Inhabers steht aus. `check_site.py` prüft, dass beide Dateien gleich sind.
+App-Icons sind vorbehalten. Auch Token-Dateien, Compose- und Swift-Code und Skripte fallen unter MIT, erzeugte Bilder
+bleiben vorbehalten; diese Lesart hat der Inhaber bestätigt (D92). `check_site.py` prüft, dass beide Dateien gleich sind.

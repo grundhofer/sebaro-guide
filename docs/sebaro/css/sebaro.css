@@ -1110,13 +1110,16 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
 .sb-chart__diverging-head {
   grid-column: 2; display: grid; grid-template-columns: minmax(0, 1fr) max-content minmax(0, 1fr); column-gap: var(--sb-space-2);
   margin: 0 0 var(--sb-space-1); color: var(--sb-color-text-muted);
+  max-inline-size: none; /* a <p>: the prose measure would stop it short of the bars, so the midpoint left the zero line */
 }
 .sb-chart__diverging-head > :first-child { justify-self: start; }
 .sb-chart__diverging-head > :last-child { justify-self: end; }
 .sb-chart__rows--diverging { grid-column: 1 / -1; grid-template-columns: subgrid; row-gap: 0; }
 .sb-chart__rows--diverging > .sb-chart__row { grid-column: 1 / -1; grid-template-columns: subgrid; align-items: stretch; min-block-size: var(--sb-size-control-sm); }
 .sb-chart__rows--diverging .sb-chart__name { align-self: center; }
-.sb-chart .sb-chart__rows--diverging .sb-chart__row > svg { block-size: 100%; }
+/* the bar keeps the row's 32 px at any width: without a fixed height the SVG takes its viewBox ratio (200 : 24), so a
+   bar 1000 px wide was 120 px high */
+.sb-chart .sb-chart__rows--diverging .sb-chart__row > svg { block-size: var(--sb-size-control-sm); align-self: center; }
 .sb-chart__fill--less { fill: var(--sb-dataviz-diverging-2); }
 .sb-chart__fill--more { fill: var(--sb-dataviz-diverging-4); }
 .sb-chart__delta { display: inline-flex; align-items: center; justify-self: end; align-self: center; gap: var(--sb-space-1); color: var(--sb-color-text); }
@@ -1126,12 +1129,15 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
    spec/01 §8.1: ground = class 0, neighbours ≥ 1.6 : 1, more is farther from the ground in both modes, G10a).
    The legend above names the range of every class. Each cell holds its value as text for assistive technology
    (.sb-visually-hidden); sb-chart.js turns the table into one Tab stop with arrow keys and shows the focused or
-   pointed cell in .sb-chart__readout. A day without data is the framed empty cell, never class 1. Today is the place
-   in time: the 3 px place line in accent at the foot of the cell, 2 px under its fill (spec/02 §0.2, like the
-   calendar's chosen day), a shape the focus ring never takes: focus is the 2 px frame all round, outside the cell */
+   pointed cell in .sb-chart__readout. A day without data is the framed empty cell, never class 1. Today (D92) is a
+   cobalt frame that is part of the cell: 3 px accent on the cell's own edge, directly on the fill, rounded like the
+   cell. Focus is the standard ring OUTSIDE the cell (2 px focus, offset 2 px, square) with ground between ring and
+   cell, which the frame never has: attached against detached, 3 against 2 px, rounded against square. The 6 px
+   between cells keeps 2 px of ground between a focus ring and its neighbour */
 .sb-heatmap {
-  inline-size: calc(100% + 2 * var(--sb-space-1)); max-inline-size: 26rem; margin: 0 calc(-1 * var(--sb-space-1));
-  table-layout: fixed; border-collapse: separate; border-spacing: var(--sb-space-1);
+  inline-size: calc(100% + 2 * (var(--sb-space-1) + var(--sb-space-0-5))); max-inline-size: 26rem;
+  margin: 0 calc(-1 * (var(--sb-space-1) + var(--sb-space-0-5)));
+  table-layout: fixed; border-collapse: separate; border-spacing: calc(var(--sb-space-1) + var(--sb-space-0-5));
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: var(--sb-type-numeric-variant);
 }
 .sb-heatmap th { padding: 0; font: inherit; color: var(--sb-color-text-muted); text-align: center; }
@@ -1141,8 +1147,7 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
 .sb-heatmap td > .sb-scale-cell { display: block; inline-size: 100%; block-size: auto; aspect-ratio: 1; }
 .sb-heatmap td[aria-current="date"] > .sb-scale-cell,
 .sb-heatmap__today-key {
-  border-block-end: var(--sb-border-width-strong) solid var(--sb-color-accent); padding-block-end: var(--sb-space-0-5);
-  background-clip: content-box; border-end-start-radius: 0; border-end-end-radius: 0;
+  border: var(--sb-border-width-strong) solid var(--sb-color-accent);
 }
 .sb-heatmap__today-key { background: none; }
 .sb-chart__readout {
@@ -1460,13 +1465,16 @@ kbd, .sb-kbd {
 
 /* about head (D91 B10a; spec/02 §3.24): the 64 px sign tile at the start, name, one-liner and version beside it; the
    text wraps under the tile when its place is narrower than tile + 12 rem (no query needed: flex-wrap) */
-.sb-about-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-3) var(--sb-space-4); margin: 0; padding: var(--sb-space-4) var(--sb-spacing-gutter); }
+.sb-about-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-3) var(--sb-space-4); margin: 0; padding-block: var(--sb-space-4); }
 .sb-about-head > .sb-sign-tile { flex: none; }
 .sb-about-head__text { display: grid; gap: var(--sb-space-0-5); flex: 1 1 12rem; min-inline-size: 0; }
 .sb-about-head__name { margin: 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
 .sb-about-head__line { margin: 0; }
 .sb-about-head__meta { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
-.sb-about-head + .sb-facts-line { padding: 0 var(--sb-spacing-gutter) var(--sb-space-4); }
+.sb-about-head + .sb-facts-line { padding-block-end: var(--sb-space-4); }
+/* the side gutter only in a phone view, whose content has none (like .sb-view > .sb-progress); a website section
+   (.sb-container) and a window's content already bring their own */
+.sb-view .sb-about-head, .sb-view .sb-about-head + .sb-facts-line { padding-inline: var(--sb-spacing-gutter); }
 
 /* audio row (D91 B11b; spec/02 §3.25): the name and the time as text on top, below it the play / pause icon button
    (48 px) and the system slider (sb-range, fill and thumb in accent like every slider) to jump in the recording; a
@@ -2696,7 +2704,7 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
   /* the class colours of a scale are the data (every value is text as well): heatmap cells and legends keep them,
      framed (D91 G6a); lines and bars follow the system colours */
   .sb-scale-cell { forced-color-adjust: none; border: 1px solid CanvasText; }
-  .sb-heatmap td[aria-current="date"] > .sb-scale-cell, .sb-heatmap__today-key { border-block-end: var(--sb-border-width-strong) solid CanvasText; }
+  .sb-heatmap td[aria-current="date"] > .sb-scale-cell, .sb-heatmap__today-key { border: var(--sb-border-width-strong) solid CanvasText; }
   .sb-calendar__day[aria-current="date"] .sb-calendar__date { border-color: CanvasText; }
   .sb-calendar__day[aria-selected="true"] .sb-calendar__date { border-block-end-color: CanvasText; }
   .sb-calendar__day[data-sb-entry] .sb-calendar__date::after { background: CanvasText; }

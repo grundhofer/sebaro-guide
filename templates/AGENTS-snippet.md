@@ -25,10 +25,11 @@ This product uses the sebaro design system. Before building or changing any UI:
    category and mark (`sb-category--1…6`, `sb-mark`), signed numbers (`sb-signed`), board (`sb-board`), sticky group
    head, timeline, table sort and sum row (`sb-table__sort`, `tfoot`), calendar, quote, intro step, about head, audio,
    video, place map, website patterns (form result, page numbers, FAQ, docs groups, screenshots, share image, language
-   switch, print), charts (`sb-chart`, heatmap with classed scales, at most 5 steps), iOS (SwiftUI package) and the
+   switch, print), charts (`sb-chart`, heatmap with classed scales: at most 4 sequential steps, 5 diverging), iOS (SwiftUI package) and the
    desktop window parts. Count partial states („2 offen“), never „teils offen“ (STA-09). Compose versions of the new
-   web parts and charts do not exist yet: ask before building one. Still with the owner: the heatmap „heute“ marker,
-   the „Konflikt“ glyph and the licence reading (see the guide's „Ausblick“).
+   web parts and charts do not exist yet: ask before building one. Settled with D92: the heatmap „heute“ is a 3 px
+   cobalt frame on the cell (legend „Rahmen: heute“), „Konflikt“ always carries the warning glyph, sortable tables
+   scroll sideways inside `sb-table-wrap` on phones and never stack (DAT-11, STA-08, DAT-14).
 10. Ship the export's `LICENSE.md` unchanged (D76). If a rule does not fit, cite its id (e.g. `AKT-01`) and ask the
     owner; do not work around it. Rule changes are listed by id in
     https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md.

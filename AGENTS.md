@@ -18,6 +18,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 | correct markup of every component | `docs/bauteile.html` (each entry has a "Markup" block) |
 | how to show any kind of data | `docs/daten.html` |
 | full example: website / phone app / desktop app | `docs/web.html`, `docs/app.html`, `docs/desktop.html` |
+| the four platform pages at a glance, what differs per platform | `docs/plattformen.html` (the header entry „Plattformen“) |
 | iOS (SwiftUI): what differs on the iPhone | `docs/ios.html`; the SwiftUI package comes with the workshop export (`--target ios`, §4), its spec is sebaroDesign `systems/sebaro/spec/12-platform-ios.md` (private) |
 | why it is the way it is | `docs/gedanken.html` |
 | what waits for the owner's choice, is open, comes later or is done | `docs/ausblick.html` |
@@ -27,7 +28,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 
 Rule status: **entschieden** = owner decision, binding. **vorläufig** = an agent's decision, valid until the owner
 changes it. **offen** = proposal only, do not build it as a rule. `D<n>` refers to row n of the decision log in the
-workshop repository sebaroDesign (private; the guide covers D1–D91). A rule id (e.g. `AKT-01`) is stable; cite it
+workshop repository sebaroDesign (private; the guide covers D1–D92). A rule id (e.g. `AKT-01`) is stable; cite it
 in code reviews, commit messages and ADRs.
 
 ## 2 The ten rules most often broken
@@ -96,12 +97,19 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
      shortcuts, F6, document tabs, drop target, several windows, notifications, update word, window ground, compact
      inspector (DSK-06 to DSK-15).
 
-   Still open, do not present as decided: the heatmap „heute“ marker (built as the 3 px place line under the cell; the
-   sketch note said a cobalt frame) and the step thresholds of DAT-11 (agent's, vorläufig); the „Konflikt“ glyph
-   in rows and in the timeline (STA-08, DAT-15); the licence reading (TEC-09); FAR-13; the `pin` and `star` icons and
-   five sign near cases (D86); the share-image generator and a generated print block in `tokens.css` (tool work);
-   Compose versions of the new web parts and charts (not built: ask before building one in Compose). Nothing of this is tested on real iOS devices,
-   WebKit, Firefox, screen readers or real Tauri windows. See `docs/ausblick.html#entscheidung`.
+   Settled by the owner with D92 (2026-10-21): „Konflikt“ always carries the warning glyph, in rows, trees and the
+   timeline (STA-08, DAT-15); the heatmap „heute“ is a 3 px cobalt frame on the cell, rounded like it, while focus
+   stays the square 2 px ring with a 2 px gap outside (cells 6 px apart, legend „Rahmen: heute“); the scale
+   thresholds stand, sequential at most 4 steps and diverging 5 (DAT-11, entschieden; `check_palette.py` allows 5
+   sequential, the 4 is checked by review); the licence reading (TEC-09); FAR-13; sortable tables scroll sideways
+   inside their `sb-table-wrap` on phones, never the page, and never stack (DAT-14); the `pin` and `star` icons and
+   the five D86 sign near cases (DAT-09, DAT-17, ZEI-12). The marking of generated images stays open until the first
+   product publication with generated images, then a legal check (BIL-04, vorläufig).
+   Still open, do not present as decided: the agents' readings of D75 (where phone and desktop apps choose light or
+   dark) and D84 (⌘K), the limits of the brand figure (BIL-05) and the agents' additions to D91; the share-image
+   generator and a generated print block in `tokens.css` (tool work); Compose versions of the new web parts and
+   charts (not built: ask before building one in Compose). Nothing of this is tested on real iOS devices, WebKit,
+   Firefox, screen readers or real Tauri windows. See `docs/ausblick.html#entscheidung`.
 
 ## 4 Where the system files come from
 
@@ -132,7 +140,7 @@ python3 tools/check_site.py --strict   # all groups (list below); exit 0 require
 python3 tools/build.py --check         # freshness gate (CI runs this and check_site.py)
 python3 tools/sync_from_design.py --verify-local   # docs/sebaro/ untouched since the export
 npm ci && node tools/check_a11y.mjs    # axe WCAG 2.2 AA, overflow, console errors; light/dark, 390/1440 (CI runs it)
-python3 tools/release.py 2.0.0         # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot
+python3 tools/release.py 2.3.0         # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.2.0 is the last release)
 ```
 
 `check_site.py` groups: PAGE, LINK, NET, CSS, TOKEN (every `var(--sb-*)` exists in `tokens.css` / `sebaro.css`), STYLE,
@@ -157,14 +165,20 @@ hand with `tools/sync_from_design.py`.
     `g-ex__stage`, `g-ex__note`). Inside it, except label and note, `check_site.py` accepts colour literals and
     `box-shadow` in CSS rules whose every selector contains `.g-ex--dont` and in inline styles, and `check_a11y.mjs`
     skips only axe `color-contrast`. Every other check (names, roles, keyboard, links) still runs there.
-  - `g-swatch` is a reference colour swatch (FAR-13, vorläufig), only on index, grundlagen and regeln:
+  - `g-swatch` is a reference colour swatch (FAR-13, entschieden with D92), only on index, grundlagen and regeln:
     `<span class="g-swatch" role="img" aria-label="Farbfeld Lindgrün" style="--g-swatch-color: var(--sb-color-primary-action)"></span>`
     with visible text next to it that starts with „Farbfeld“. `check_site.py` (SWATCH) checks page, role and name.
   - `g-table-stack` on an `sb-table` inside `sb-table-wrap`: below 560 px of its own place (container query, not the
     screen) every row becomes a block; `th scope="row"` (else the first cell) is the title and every other cell shows
     its `data-label`. Give each `td` a `data-label` equal to its column header; `guide.js` adds missing table roles.
-    The wrapper must take its width from its parent (not a shrink-to-fit grid or flex item).
+    The wrapper must take its width from its parent (not a shrink-to-fit grid or flex item). Never on a sortable
+    table (DAT-14, D92 (7): it scrolls sideways inside its `sb-table-wrap`) and never in markup meant to be copied.
   - Inline code in `main` breaks with `overflow-wrap: anywhere`; code blocks keep their lines.
+- **Header and footer from `build.py`** (`guide:header`, `guide:footer`, D92 (6)): the header shows `PAGES` except
+  web, app, ios and desktop, which stand under one entry „Plattformen“ (`plattformen.html`, an overview page; no menu
+  button, spec/03 §6.1). On a platform page that entry carries `aria-current="true"` with the place line from
+  `guide.css`. The footer lists every page (`g-footer__pages`), `llms.txt` too. Measured: the navigation needs two
+  rows at 390 px, three at 320 px, one at 1440 px; no page scrolls sideways.
 - **Every page gets from `build.py`** (`guide:head`, `guide:footer`): `sebaro/js/sb-tone.js` and `sebaro/js/sb-print.js`
   in the head, and the footer section „Darstellung“ with the „Farbton“ radios (`name="sb-tone"`, inside a `<form>`
   so they never join the radio group of a rule example) and a `data-sb-tone-status` element. A page never loads
@@ -193,6 +207,6 @@ hand with `tools/sync_from_design.py`.
 
 The guide shows sebaro as built and checked in sebaroDesign; Chromium screenshots do not verify real Android/iOS
 devices, Windows rendering, WebKit/Tauri webviews or screen readers. All example data on the pages is invented.
-The owner answered the round-6 sketch (63 questions, private, never linked from here) with D91; what still waits for
-the owner, and what is built but untested (real iOS devices, real Tauri windows), is collected on
-`docs/ausblick.html`.
+The owner answered the round-6 sketch (63 questions, private, never linked from here) with D91 and the open readings
+after it with D92; what still waits for the owner, and what is built but untested (real iOS devices, real Tauri
+windows), is collected on `docs/ausblick.html`.

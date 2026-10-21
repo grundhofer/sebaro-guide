@@ -5,6 +5,12 @@
 /* ------------------------------------------------------------------ header and footer */
 .g-header__suffix { font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); color: var(--sb-color-text-muted); }
 .g-nav { row-gap: 0; }
+/* D92 (6): „Plattformen“ stands for web, app, ios and desktop. On one of those pages it carries aria-current="true"
+ * (an item of the set, not the page) and the same place line as aria-current="page" in sebaro.css (NAV-01). */
+.g-nav a[aria-current="true"] { border-block-end-color: var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-body-strong-weight); }
+@media (forced-colors: active) { .g-nav a[aria-current="true"] { border-color: CanvasText; } }
+/* every page listed in the footer, on a line of its own above the version line */
+.g-footer__pages { flex-basis: 100%; }
 .g-footer code { font-size: 0.875em; }
 /* NAV-07 order is lockup, navigation, theme button (no language switch: the guide is German only). Lockup plus
  * "Guide" (168 px) and the button (160 px) need 368 px with the gutters; on narrower pages the button label wraps

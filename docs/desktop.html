@@ -36,7 +36,7 @@
 <body class="sb-page" id="top">
 <!-- guide:sprite -->
 <svg xmlns="http://www.w3.org/2000/svg" class="sb-sprite" width="0" height="0" aria-hidden="true" focusable="false">
-<!-- generated — do not edit. tools/icons.py 1.1.0 · system "sebaro" · grammar "Line 1.75 round" · source c3518d76b9da3b04 · use with sprite.css (shared/ICONS-GUIDE.md §9.1) -->
+<!-- generated — do not edit. tools/icons.py 1.1.0 · system "sebaro" · grammar "Line 1.75 round" · source edeb7542ded76240 · use with sprite.css (shared/ICONS-GUIDE.md §9.1) -->
 <symbol id="arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><path d="M12 4.5 V19.5"/><path d="M6.5 14 L12 19.5 L17.5 14"/></symbol>
 <symbol id="arrow-down--16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="sb-sym-16"><path d="M8 3 V13"/><path d="M4 9 L8 13 L12 9"/></symbol>
 <symbol id="arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="sb-sym-24"><path d="M4.5 12 H19.5"/><path d="M10 6.5 L4.5 12 L10 17.5"/></symbol>
@@ -169,7 +169,7 @@
   </a>
   <div class="sb-site-header__links">
     <nav class="sb-site-nav g-nav" aria-label="Hauptmenü">
-      <a href="index.html">Start</a> <a href="regeln.html">Regeln</a> <a href="grundlagen.html">Grundlagen</a> <a href="bauteile.html">Bauteile</a> <a href="daten.html">Daten</a> <a href="web.html">Web</a> <a href="app.html">App</a> <a href="ios.html">iOS</a> <a href="desktop.html" aria-current="page">Desktop</a> <a href="gedanken.html">Gedanken</a> <a href="ausblick.html">Ausblick</a>
+      <a href="index.html">Start</a> <a href="regeln.html">Regeln</a> <a href="grundlagen.html">Grundlagen</a> <a href="bauteile.html">Bauteile</a> <a href="daten.html">Daten</a> <a href="plattformen.html" aria-current="true">Plattformen</a> <a href="gedanken.html">Gedanken</a> <a href="ausblick.html">Ausblick</a>
     </nav>
   </div>
   <button class="sb-theme-button" type="button" data-sb-theme-button>Hell oder Dunkel</button>
@@ -1323,7 +1323,7 @@
   </div>
 </div>
 </div>
-<p class="g-desktop-built">Ob „Konflikt“ nur informiert (graues Zeichen) oder etwas verlangt (Warnzeichen), ist zwischen Werkstatt und Skizze noch verschieden; die Regel gilt für beide, darum stehen hier „nur online“ und „nicht gesichert“.</p>
+<p class="g-desktop-built">Das graue Zeichen informiert („nur online“), das Warnzeichen verlangt etwas („nicht gesichert“). „Konflikt“ verlangt eine Wahl und trägt deshalb immer das Warnzeichen, in Zeile, Baum und Zeitleiste gleich (D92).</p>
 <dl class="sb-meta-list g-desktop-facts"><div><dt>Regeln</dt><dd><ul class="g-desktop-rulelist"><li><a href="regeln.html#STA-07">STA-07</a> Statussumme einmal, in der Aktionszone <span class="g-desktop-status g-desktop-status--entschieden"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>Entschieden</span></li><li><a href="regeln.html#STA-08">STA-08</a> Status in Listen und Bäumen: Zeichen und Wort, kurz <span class="g-desktop-status g-desktop-status--entschieden"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>Entschieden</span></li><li><a href="regeln.html#STA-01">STA-01</a> Zustand immer als Glyphe plus Wort <span class="g-desktop-status g-desktop-status--entschieden"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>Entschieden</span></li><li><a href="regeln.html#STA-02">STA-02</a> Feste Zustandswörter und Glyphenformen <span class="g-desktop-status g-desktop-status--vorläufig"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#clock--16"/></svg>Vorläufig</span></li><li><a href="regeln.html#EBE-08">EBE-08</a> Aktionszone über die ganze Fensterbreite <span class="g-desktop-status g-desktop-status--entschieden"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>Entschieden</span></li><li><a href="regeln.html#AKT-02">AKT-02</a> Die untere Aktionszone <span class="g-desktop-status g-desktop-status--entschieden"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>Entschieden</span></li></ul></dd></div><div><dt>Tauri und macOS</dt><dd>Der Stand-Satz ist <code class="sb-code-inline">sb-primary-action-bar__status</code> mit <code class="sb-code-inline">role="status"</code>. Er spricht leise (caption, grau) und zählt mit Tabellenziffern. Während zwei oder mehr Zeilen gewählt sind, ersetzt „3 ausgewählt“ ihn (siehe <a href="#auswahl">Mehrfachauswahl</a>).</dd></div></dl>
 <details class="g-source"><summary>Markup</summary><pre class="sb-code" tabindex="0"><code>&lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">&quot;sb-bottom-block&quot;</span>&gt;
   &lt;<span class="sb-tok-keyword">div</span> class=<span class="sb-tok-string">&quot;sb-primary-action-bar&quot;</span>&gt;
@@ -1845,7 +1845,6 @@ cargo tauri icon &lt;ui&gt;/src/sebaro/tauri/icon-1024.png -o src-tauri/icons</c
 <h2 class="sb-section__title" id="offen-h">Was offen ist</h2>
 <p class="demo-section-text">Entschieden und gebaut sind das Fenster mit ausblendbaren Teilen und ziehbaren Trennlinien, die Dichte, Baum, Palette, Mehrfachauswahl, Werkzeuge mit Tooltip, die Taste „Menü“, die 14 Kürzel und F6, Dokument-Reiter, Ziehen und Ablegen, mehrere Fenster, Einstellungen als Ansicht, Mitteilung und Update, Fenstergrund und der kompakte Inspektor. Offen oder ungeprüft ist noch:</p>
 <ul class="g-desktop-list-plain">
-<li><strong>Noch verschieden:</strong> ob „Konflikt“ nur informiert (graues Zeichen) oder etwas verlangt (Warnzeichen) (<a href="regeln.html#STA-08">STA-08</a>).</li>
 <li><strong>Werkzeug:</strong> Die Prüfung, dass keine App die 14 festen Kürzel für etwas anderes nimmt, ist noch kein Werkzeug der Werkstatt.</li>
 <li><strong>Vorschläge dieser Seite:</strong> der Dialog „Ungesicherte Änderungen“; die CodeMirror-Schnipsel des Editors sind gelesen, aber nicht ausgeführt (<a href="regeln.html#TEC-08">TEC-08</a>).</li>
 <li><strong>Ungeprüft:</strong> Titelleiste, Menü des Systems, Mitteilung, Update und Fenstergrund in einem echten Tauri-Fenster; Alt und F10 unter Windows und Linux; WebKit und WebView2; Bildschirmleser; die Darstellung unter Windows und Linux.</li>
@@ -1895,7 +1894,23 @@ cargo tauri icon &lt;ui&gt;/src/sebaro/tauri/icon-1024.png -o src-tauri/icons</c
 </main>
 <!-- guide:footer -->
 <footer class="sb-site-footer g-footer">
-  <p>sebaro Guide <a href="https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md">Version 2.1.0<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a> · System sebaro, Token-Vertrag 1.8 · aus sebaroDesign <code class="sb-code-inline">6c9c222</code></p>
+  <nav class="g-footer__pages" aria-label="Alle Seiten">
+  <ul class="sb-site-footer__links">
+    <li><a href="index.html">Start</a></li>
+    <li><a href="regeln.html">Regeln</a></li>
+    <li><a href="grundlagen.html">Grundlagen</a></li>
+    <li><a href="bauteile.html">Bauteile</a></li>
+    <li><a href="daten.html">Daten</a></li>
+    <li><a href="plattformen.html">Plattformen</a></li>
+    <li><a href="web.html">Web</a></li>
+    <li><a href="app.html">App</a></li>
+    <li><a href="ios.html">iOS</a></li>
+    <li><a href="desktop.html">Desktop</a></li>
+    <li><a href="gedanken.html">Gedanken</a></li>
+    <li><a href="ausblick.html">Ausblick</a></li>
+  </ul>
+  </nav>
+  <p>sebaro Guide <a href="https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md">Version 2.2.0<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a> · System sebaro, Token-Vertrag 1.8 · aus sebaroDesign <code class="sb-code-inline">4858029</code></p>
   <ul class="sb-site-footer__links">
     <li><a href="rules.json">rules.json</a></li>
     <li><a href="llms.txt">llms.txt</a></li>

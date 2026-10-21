@@ -47,6 +47,7 @@ PAGES = [
     ("grundlagen.html", "Grundlagen", "board", "Farben, Schrift, Raum, Form, Linien, Ebenen, Bewegung: alle Tokens mit Werten"),
     ("bauteile.html", "Bauteile", "copy", "Alle Komponenten mit Zuständen und Markup"),
     ("daten.html", "Daten", "chart-bar", "Jede Datenart einmal dargestellt: Text, Zahlen, Zeit, Status, Listen, Tabellen, Diagramme, Code …"),
+    ("plattformen.html", "Plattformen", "smartphone", "Übersicht der vier Plattformseiten Web, App, iOS und Desktop und was je Plattform anders ist"),
     ("web.html", "Web", "globe", "Beispiel-Website mit allen typischen Seiten und Fällen"),
     ("app.html", "App", "file", "Beispiel-App am Handy: alle typischen Bildschirme und Zustände"),
     ("ios.html", "iOS", "smartphone", "Dieselbe App auf dem iPhone: SwiftUI-Bausteine, Systemleisten, Sheet, Dynamic Type"),
@@ -54,6 +55,12 @@ PAGES = [
     ("gedanken.html", "Gedanken", "book", "Die Gedanken dahinter: Haltung, Geschichte, Entscheidungen, Abwägungen"),
     ("ausblick.html", "Ausblick", "arrow-right", "Was auf eine Wahl des Inhabers wartet, was offen ist, später kommt oder erledigt ist"),
 ]
+
+# D92 (6): the header groups the four platform pages under „Plattformen“ (a link to the overview page, no menu
+# button: spec/03 §6.1 keeps every header word visible at 390 px). On a platform page „Plattformen“ carries
+# aria-current="true" (current item of the set, not the page itself). Footer and llms.txt keep listing every page.
+PLATFORM_GROUP = "plattformen.html"
+PLATFORM_PAGES = ("web.html", "app.html", "ios.html", "desktop.html")
 
 STATUS_LABEL = {"entschieden": ("check--16", "Entschieden"), "vorläufig": ("clock--16", "Vorläufig"),
                 "offen": ("help", "Offen")}
@@ -142,7 +149,11 @@ def block_header(attrs: dict) -> str:
     current = attrs.get("page", "")
     links = []
     for file, label, _icon, _desc in PAGES:
+        if file in PLATFORM_PAGES:
+            continue
         cur = ' aria-current="page"' if file == current else ""
+        if file == PLATFORM_GROUP and current in PLATFORM_PAGES:
+            cur = ' aria-current="true"'
         links.append(f'<a href="{file}"{cur}>{esc(label)}</a>')
     return "\n".join([
         '<a class="sb-skip-link" href="#inhalt">Zum Inhalt</a>',
@@ -167,8 +178,15 @@ def block_footer(_attrs: dict) -> str:
     st = sync_state()
     commit = (st.get("sebaroDesignCommit") or "")[:7]
     contracts = st.get("contracts") or {}
+    pages = [f'    <li><a href="{file}">{esc(label)}</a></li>' for file, label, _icon, _desc in PAGES]
     return "\n".join([
         '<footer class="sb-site-footer g-footer">',
+        # D92 (6): the header groups the platform pages, so the footer lists every page directly
+        '  <nav class="g-footer__pages" aria-label="Alle Seiten">',
+        '  <ul class="sb-site-footer__links">',
+        *pages,
+        '  </ul>',
+        '  </nav>',
         f'  <p>sebaro Guide <a href="{REPO_URL}/blob/main/CHANGELOG.md">Version {esc(rules_data().get("version", "?"))}{icon("external-link--16")}</a> · '
         f'System sebaro, Token-Vertrag {esc(str(contracts.get("tokens", "?")))} · '
         f'aus sebaroDesign <code class="sb-code-inline">{esc(commit)}</code></p>',

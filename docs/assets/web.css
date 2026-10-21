@@ -146,7 +146,5 @@
 .sb-site-footer__display > h4 { margin: 0; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); color: var(--sb-color-text); }
 /* the Farbton choice sits in its own form, so its radio group stays apart from the other tone choices on this page */
 .g-web-tone { display: contents; }
-/* the about head brings the app gutter (spec/02 §3.24); inside a website section the container already has it */
-.g-web-frame .sb-section > .sb-about-head { padding-inline: 0; }
 .g-web-frame .sb-form-grid, .g-web-frame .sb-form-result, .g-web-frame .sb-place { margin-block-start: var(--sb-space-6); }
 .g-web-druck { max-inline-size: 52em; }

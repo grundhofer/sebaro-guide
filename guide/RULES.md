@@ -294,17 +294,17 @@ Biete in jedem Produkt neben „Hell oder Dunkel“ die Wahl „Farbton: Kühl �
 - **Prüfung:** check_palette.py mit der Variante Exit 0; Screenshots hell und dunkel, kühl und warm: nur Gründe, Text und Linien ändern sich; ohne Skript bleibt die Wahl verborgen.
 - **Entscheidung:** D75, D90, D91 · **Quelle:** `DECISIONS.md D90, D91 (C4c, Z3a); systems/sebaro/spec/01-foundations.md §9; spec/09-platform-web.md §6.2; spec/02-components.md §4.24; spec/12-platform-ios.md §9`
 
-### FAR-13 Farbfelder auf Nachschlageseiten  ·  vorläufig  ·  web
+### FAR-13 Farbfelder auf Nachschlageseiten  ·  entschieden  ·  web
 
 Zeig Farben zum Nachschlagen (Lindgrün, Statusfarben, Kachelfarben ohne App) nur auf Nachschlageseiten (Grundlagen, Regeln, Start des Guides) als beschriftetes Farbfeld: Fläche ohne Bedienung, mit Namen und Rolle daneben. Das ist eine feste Ausnahme von FAR-01, STA-01 und ZEI-01; in Produkten gibt es keine Farbfelder.
 
 *EN:* Reference swatches: on reference pages only (foundations, rules, guide start), a colour may show as a labelled swatch (no control, name and role next to it, marker class g-swatch); a fixed exception to FAR-01, STA-01, ZEI-01; never in products.
 
-- **Warum:** Wer eine Farbe nachschlägt, muss sie sehen; ohne Ausnahme stünden die Grundlagen in Spannung zu FAR-01 (Lindgrün nur in der Hauptaktion), STA-01 (Statusfarbe nur auf Glyphen) und ZEI-01 (Kachelfarbe nur in der Kachel). Vorschlag aus dem Ausblick des Guides.
+- **Warum:** Wer eine Farbe nachschlägt, muss sie sehen; ohne Ausnahme stünden die Grundlagen in Spannung zu FAR-01 (Lindgrün nur in der Hauptaktion), STA-01 (Statusfarbe nur auf Glyphen) und ZEI-01 (Kachelfarbe nur in der Kachel). Inhaber D92 (5), Antwort „Bestätigen (Empfohlen)“: Farbfelder auf Nachschlageseiten bestätigt, in Produkten nie. Der Vorschlag kam aus dem Ausblick des Guides.
 - **So:** <span class='g-swatch' role='img' aria-label='Farbfeld Lindgrün, primary-action'></span> mit „Lindgrün · primary-action“ daneben.
 - **Nicht so:** Farbfeld als Taste oder Link; Farbfeld ohne Beschriftung; Farbfelder in einer Produktansicht; ein „Farbfeld“, das Zustand meldet.
 - **Prüfung:** Jedes Farbfeld trägt die Klasse g-swatch und einen Namen mit „Farbfeld“; die Farbprüfung nimmt g-swatch aus, sonst nichts.
-- **Entscheidung:** – · **Quelle:** `sebaro Guide: docs/ausblick.html „Farbfelder auf Nachschlageseiten“; Guide-Chrome-Klasse g-swatch`
+- **Entscheidung:** D92 · **Quelle:** `DECISIONS.md D92 (5); sebaro Guide: docs/ausblick.html „Farbfelder auf Nachschlageseiten“; Guide-Chrome-Klasse g-swatch`
 
 ## Schrift (SCH)
 
@@ -1159,16 +1159,16 @@ Nenn in Desktop-Apps und Web-Apps mit Fenster die Summe der Zustände genau einm
 
 ### STA-08 Status in Listen und Bäumen: Zeichen und Wort, kurz  ·  entschieden  ·  desktop, web
 
-Zeig den Status einer Zeile in Listen und Bäumen in der Zeile selbst als Zeichen und Wort (sb-row__meta mit sb-status). Statuswörter haben höchstens zwei Wörter und werden nie abgekürzt. Ein Status, der nur informiert, hat das graue Zeichen (sb-status--neutral); einer, der etwas verlangt, das Warnzeichen. Die Summe steht nicht in der Zeile, sondern einmal in der Aktionszone (STA-07).
+Zeig den Status einer Zeile in Listen und Bäumen in der Zeile selbst als Zeichen und Wort (sb-row__meta mit sb-status). Statuswörter haben höchstens zwei Wörter und werden nie abgekürzt. Ein Status, der nur informiert, hat das graue Zeichen (sb-status--neutral); einer, der etwas verlangt, das Warnzeichen. „Konflikt“ verlangt eine Wahl und trägt deshalb immer das Warnzeichen, in Zeilen, Bäumen und in der Zeitleiste gleich (DAT-15). Die Summe steht nicht in der Zeile, sondern einmal in der Aktionszone (STA-07).
 
-*EN:* Row status in lists and trees: glyph + word in the row (sb-row__meta + sb-status); status words at most two words, never abbreviated; an informational status uses the grey glyph (sb-status--neutral, text-muted), one that needs action the warning glyph; the total goes once into the action zone (STA-07).
+*EN:* Row status in lists and trees: glyph + word in the row (sb-row__meta + sb-status); status words at most two words, never abbreviated; an informational status uses the grey glyph (sb-status--neutral, text-muted), one that needs action the warning glyph; „Konflikt“ asks for a choice and always carries the warning glyph, in rows, trees and the timeline alike (DAT-15); the total goes once into the action zone (STA-07).
 
-- **Warum:** Inhaber D67 (7): „in der Zeile stehen Zeichen und Wort“. Die Skizze legt für beide Wege fest (§7, „In beiden Fällen“): „Statuswörter höchstens zwei Wörter, nie abgekürzt … Ein Status, der nur informiert, hat ein graues Zeichen; einer, der etwas verlangt, das Warnzeichen.“ Ergänzt STA-01.
-- **So:** „Einkauf“ mit grauem Zeichen und „nur online“ (sb-status--neutral); eine Zeile, die eine Antwort braucht, mit Warnzeichen und Wort.
-- **Nicht so:** „Konfl.“ oder „n. ges.“; Status nur als Farbe oder nur als Zeichen; Statuswort in Warnfarbe.
+- **Warum:** Inhaber D67 (7): „in der Zeile stehen Zeichen und Wort“. Die Skizze legt für beide Wege fest (§7, „In beiden Fällen“): „Statuswörter höchstens zwei Wörter, nie abgekürzt … Ein Status, der nur informiert, hat ein graues Zeichen; einer, der etwas verlangt, das Warnzeichen.“ Ergänzt STA-01. D92 (1), Antwort „Warnzeichen (Empfohlen)“: „Konflikt“ trägt überall das Warnzeichen, weil er eine Wahl verlangt; Zeile und Zeitleiste gleich.
+- **So:** „Einkauf“ mit grauem Zeichen und „nur online“ (sb-status--neutral); eine Zeile, die eine Antwort braucht, mit Warnzeichen und Wort; „Wochenplan (Kopie)“ mit Warnzeichen und „Konflikt“.
+- **Nicht so:** „Konfl.“ oder „n. ges.“; Status nur als Farbe oder nur als Zeichen; Statuswort in Warnfarbe; „Konflikt“ mit dem grauen Zeichen.
 - **Werte:** Statuswort ≤ 2 Wörter; graues Zeichen --sb-color-text-muted (5,05 : 1 hell, 6,76 : 1 dunkel auf bg)
 - **Prüfung:** Graustufen-Screenshot: jeder Status ohne Farbe lesbar; Statuswörter zählen (höchstens zwei).
-- **Entscheidung:** D67, D72, D80 · **Quelle:** `DECISIONS.md D67 (7), D72; systems/sebaro/spec/02-components.md §3.1, §4.13, §4.14`
+- **Entscheidung:** D67, D72, D80, D92 · **Quelle:** `DECISIONS.md D67 (7), D72, D92 (1); systems/sebaro/spec/02-components.md §3.1, §3.18, §4.13, §4.14`
 
 ### STA-09 Teilweise erledigt: zählen statt benennen  ·  entschieden  ·  alle
 
@@ -1366,12 +1366,12 @@ Zeig eine Bewertung als ein Stern-Icon in Textfarbe, dann den Wert mit Bezug und
 
 *EN:* A rating is one star icon in text colour, then value with reference and count (sb-rating: „4,2 von 5 · 38 Bewertungen“); a distribution as labelled rows (sb-chart__rows); never five stars as the value, half stars, a yellow star or a star without a number.
 
-- **Warum:** Inhaber D82, Wortlaut „Vorschlag machen mit stern Regeln fehlen für einige Datenarten“ (Lesart: Bewertung mit Stern). Eine Zahl sagt genau, was fünf halb gefüllte Sterne nur ungefähr zeigen; Gelb hat keinen Job (FAR-01).
+- **Warum:** Inhaber D82, Wortlaut „Vorschlag machen mit stern Regeln fehlen für einige Datenarten“ (Lesart: Bewertung mit Stern). Eine Zahl sagt genau, was fünf halb gefüllte Sterne nur ungefähr zeigen; Gelb hat keinen Job (FAR-01). D92 (9): Das Icon star (Umriss und gefüllt) ist freigegeben.
 - **So:** <p class='sb-rating'><svg class='sb-icon' aria-hidden='true'><use href='#star--filled'/></svg><span class='sb-visually-hidden'>Bewertung: </span><span class='sb-rating__value'>4,2 von 5</span> <span class='sb-rating__count'>· 38 Bewertungen</span></p>; Verteilung als <ul class='sb-chart__rows'>.
 - **Nicht so:** Fünf Sternzeichen als Wert; halbe Sterne; gelber Stern; „4,2“ ohne „von 5“; Stern als Bild ohne Text.
 - **Werte:** 1 Stern-Icon star--filled (20 px, currentColor); Wert mit einer Nachkommastelle und „von 5“
 - **Prüfung:** Jede Bewertung hat Zahl, Bezug und Anzahl als Text; kein Stern in Status- oder Akzentfarbe.
-- **Entscheidung:** D82 · **Quelle:** `DECISIONS.md D82; systems/sebaro/spec/02-components.md §3.20; spec/07-voice.md §3.1 (rating); spec/04-icons.md §7.6`
+- **Entscheidung:** D82, D92 · **Quelle:** `DECISIONS.md D82, D92 (9); systems/sebaro/spec/02-components.md §3.20; spec/07-voice.md §3.1 (rating); spec/04-icons.md §7.6`
 
 ### DAT-10 Mehrere Reihen und Skalen im Diagramm  ·  entschieden  ·  alle
 
@@ -1386,18 +1386,18 @@ Beschrifte jede Reihe direkt am Ende ihrer Linie. Ab drei Reihen steht zusätzli
 - **Prüfung:** Graustufen-Screenshot: jede Reihe an Beschriftung und Linienart erkennbar; Legende genau ab drei Reihen und über dem Diagramm; jede Stufe der Legende nennt ihren Zahlenbereich.
 - **Entscheidung:** D83, D91 · **Quelle:** `DECISIONS.md D83 (10), D91 (G6a, G9a, G10a); systems/sebaro/spec/01-foundations.md §8, §8.1; spec/02-components.md §3.7`
 
-### DAT-11 Stufen einer Farbskala bleiben unterscheidbar  ·  vorläufig  ·  alle
+### DAT-11 Stufen einer Farbskala bleiben unterscheidbar  ·  entschieden  ·  alle
 
-Gib einer Farbskala höchstens fünf Stufen (fortlaufend 4, zweiseitig 5), nie einen Verlauf; mehr Werte fasst du in diese Stufen. Die erste Stufe (bei der zweiseitigen Skala jede Stufe eines Arms) hebt sich mit mindestens 3 : 1 von jedem Grund ab; Nachbarstufen liegen mindestens 1,6 : 1 und ΔE OK 0,10 auseinander, auch unter jeder Farbsehschwäche; jede Stufe liegt mindestens ΔE OK 0,08 von accent und primary-action. „keine Angabe“ ist die leere Zelle mit Rahmen, nie Stufe 1. In der Heatmap steht der Wert jedes Tages als Text für Screenreader, bei Fokus und beim Zeigen; heute trägt die 3-px-Ortslinie am Fuß der Zelle.
+Gib einer fortlaufenden Farbskala höchstens vier Stufen, einer zweiseitigen höchstens fünf, nie einen Verlauf; mehr Werte fasst du in diese Stufen. Die erste Stufe (bei der zweiseitigen Skala jede Stufe eines Arms) hebt sich mit mindestens 3 : 1 von jedem Grund ab; Nachbarstufen liegen mindestens 1,6 : 1 und ΔE OK 0,10 auseinander, auch unter jeder Farbsehschwäche; jede Stufe liegt mindestens ΔE OK 0,08 von accent und primary-action. „keine Angabe“ ist die leere Zelle mit Rahmen, nie Stufe 1. In der Heatmap steht der Wert jedes Tages als Text für Screenreader, bei Fokus und beim Zeigen. Heute trägt einen Rahmen in Kobalt, der zur Zelle gehört: 3 px accent auf ihrer Kante, direkt auf der Farbe, rund wie die Zelle. Der Fokusring liegt davon abgesetzt außen (2 px, 2 px Abstand, eckig); die Zellen stehen 6 px auseinander.
 
-*EN:* A colour scale has at most 5 classes (sequential 4, diverging 5), never a gradient; class 1 (every class of a diverging arm) ≥ 3:1 against every ground; neighbours ≥ 1.6:1 and ≥ ΔE OK 0.10 apart, also under protanopia, deuteranopia and tritanopia; every class ≥ ΔE OK 0.08 from accent and primary-action; „keine Angabe“ is the empty framed cell, never class 1; heatmap values as text for assistive technology, on focus and pointing; today is the 3 px place line at the foot of the cell.
+*EN:* A sequential scale has at most 4 classes, a diverging one 5, never a gradient; class 1 (every class of a diverging arm) ≥ 3:1 against every ground; neighbours ≥ 1.6:1 and ≥ ΔE OK 0.10 apart, also under protanopia, deuteranopia and tritanopia; every class ≥ ΔE OK 0.08 from accent and primary-action; „keine Angabe“ is the empty framed cell, never class 1; heatmap values as text for assistive technology, on focus and pointing; today is a cobalt frame that is part of the cell (3 px accent on the cell's edge, directly on the fill, rounded like the cell), unlike the focus ring detached outside it (2 px, offset 2 px, square); cells 6 px apart.
 
-- **Warum:** Der Inhaber hat zur Heatmap (D91 G6a) eine messbare Regel verlangt: „die färben der legende müssen unterscheidbar bleiben. Bitte eine sinnvolle Regel aufstellen, die unterschiede im beispiel Funktionieren nicht.“ In der Skizze lagen sieben Stufen nur 1,37 bis 1,55 : 1 auseinander und die erste nur 1,06 bis 1,31 : 1 über dem Grund. Mit vier Stufen gemessen: Nachbarn 1,61 bis 1,65 : 1, die erste Stufe mindestens 3,03 : 1 auf jedem Grund, auch mit dem warmen Farbton.
-- **So:** <ul class='sb-scale-legend'><li><span class='sb-scale-cell sb-scale-cell--seq-1' aria-hidden='true'></span>0–2</li>…<li><span class='sb-scale-cell sb-scale-cell--none' aria-hidden='true'></span>keine Angabe</li></ul>; Zelle <td><span class='sb-scale-cell sb-scale-cell--seq-3'></span><span class='sb-visually-hidden'>Dienstag, 29.09.: 6 Gläser</span></td>; sb-chart.js für Pfeiltasten und Anzeige.
-- **Nicht so:** Sieben feine Stufen oder ein Verlauf; eine erste Stufe fast wie der Grund; ein Tag ohne Daten in Stufe 1; Zahlen auf der Farbfläche; ein Kobaltrahmen für heute, der wie der Fokusring aussieht.
-- **Werte:** höchstens 5 Stufen; Stufe 1 ab 3,0 : 1 zu bg, surface, surface-raised und surface-sunken; Nachbarn ab 1,6 : 1 und ΔE OK 0,10 (normal, Protanopie, Deuteranopie, Tritanopie); zu accent und primary-action ab ΔE OK 0,08; gemessen fortlaufend hell 1,61–1,64 : 1, dunkel 1,64–1,65 : 1, zweiseitig Arme 1,62–1,64 : 1
-- **Prüfung:** python3 tools/check_palette.py palettes/sebaro.json mit Exit 0 (die fünf Punkte sind Fehler, keine Warnungen); Heatmap mit Tab und Pfeiltasten: die Anzeige nennt Tag und Wert.
-- **Entscheidung:** D91 · **Quelle:** `DECISIONS.md D91 (G6a, G7a, G10a); systems/sebaro/spec/01-foundations.md §8.1; spec/02-components.md §3.7 (Heatmap); palettes/sebaro.json dataviz; tools/check_palette.py`
+- **Warum:** Der Inhaber hat zur Heatmap (D91 G6a) eine messbare Regel verlangt: „die färben der legende müssen unterscheidbar bleiben. Bitte eine sinnvolle Regel aufstellen, die unterschiede im beispiel Funktionieren nicht.“ In der Skizze lagen sieben Stufen nur 1,37 bis 1,55 : 1 auseinander und die erste nur 1,06 bis 1,31 : 1 über dem Grund. Mit vier Stufen gemessen: Nachbarn 1,61 bis 1,65 : 1, die erste Stufe mindestens 3,03 : 1 auf jedem Grund, auch mit dem warmen Farbton. D92 (3), Antwort „Bestätigen (Empfohlen)“: Die Schwellen sind bestätigt, sebaro höchstens 4 Stufen, zweiseitig 5. D92 (2), Antwort „Kobalt-Rahmen“: „heute“ ist ein Rahmen in Kobalt wie in der Skizze, statt der gebauten Ortslinie; „er muss sich sichtbar vom Fokusring unterscheiden“.
+- **So:** <ul class='sb-scale-legend'><li><span class='sb-scale-cell sb-scale-cell--seq-1' aria-hidden='true'></span>0–2</li>…<li><span class='sb-scale-cell sb-scale-cell--none' aria-hidden='true'></span>keine Angabe</li><li><span class='sb-scale-cell sb-heatmap__today-key' aria-hidden='true'></span>Rahmen: heute</li></ul>; Zelle <td><span class='sb-scale-cell sb-scale-cell--seq-3'></span><span class='sb-visually-hidden'>Dienstag, 29.09.: 6 Gläser</span></td>; heute <td aria-current='date'><span class='sb-scale-cell sb-scale-cell--seq-2'></span><span class='sb-visually-hidden'>Samstag, 10.10., heute: 4 Gläser</span></td>; sb-chart.js für Pfeiltasten und Anzeige.
+- **Nicht so:** Sieben feine Stufen oder ein Verlauf; eine erste Stufe fast wie der Grund; ein Tag ohne Daten in Stufe 1; Zahlen auf der Farbfläche; heute als abgesetzter 2-px-Ring, der wie der Fokusring aussieht; heute als Linie unter der Zelle.
+- **Werte:** fortlaufend höchstens 4 Stufen, zweiseitig 5; Stufe 1 ab 3,0 : 1 zu bg, surface, surface-raised und surface-sunken; Nachbarn ab 1,6 : 1 und ΔE OK 0,10 (normal, Protanopie, Deuteranopie, Tritanopie); zu accent und primary-action ab ΔE OK 0,08; gemessen fortlaufend hell 1,61–1,64 : 1, dunkel 1,64–1,65 : 1, zweiseitig Arme 1,62–1,64 : 1; heute: Rahmen 3 px accent (border-width-strong) auf der Zellkante, in Zwangsfarben CanvasText; Fokus 2 px focus, 2 px außen; Zellabstand 6 px; Legende „Rahmen: heute“
+- **Prüfung:** python3 tools/check_palette.py palettes/sebaro.json mit Exit 0 (die fünf Punkte sind Fehler, keine Warnungen; das Werkzeug lässt fortlaufend 5 Stufen zu, die 4 von sebaro prüft das Review); Heatmap mit Tab und Pfeiltasten: die Anzeige nennt Tag und Wert. Fokus auf heute und auf den Nachbartag: Rahmen auf der Zelle, Ring abgesetzt außen.
+- **Entscheidung:** D91, D92 · **Quelle:** `DECISIONS.md D91 (G6a, G7a, G10a), D92 (2), (3); systems/sebaro/spec/01-foundations.md §8, §8.1; spec/02-components.md §3.7 (Heatmap); palettes/sebaro.json dataviz; tools/check_palette.py`
 
 ### DAT-12 Diagrammform nach der Frage  ·  entschieden  ·  alle
 
@@ -1408,7 +1408,7 @@ Wähle die Form nach dem, was die Daten sagen: Anteile am Ganzen als beschriftet
 - **Warum:** Inhaber D91: Anteile als beschriftete Zeilen mit Spur (G4b), Histogramm dicht (G5a), Abweichung mit zwei Tönen der zweiseitigen Skala (G7a), Zielring aus Teilen (G8a). Eine Zeile je Teil liest man, ohne Flächen zu vergleichen; die Töne einer Abweichung heißen nie gut oder schlecht; ein Ring aus Teilen zeigt die Zahl, keinen ungefähren Bogen.
 - **So:** <ul class='sb-chart__rows'><li class='sb-chart__row'><span class='sb-chart__name'>Gesundheit <b>42</b></span><svg …><rect class='sb-chart__track'/><rect class='sb-chart__fill'/></svg></li>…</ul>; sb-chart__bars--dense; sb-chart__diverging mit Kopf „weniger · 0 = 7 Std. · mehr“; figure.sb-goal-ring mit „5<br>von 8“.
 - **Nicht so:** Torte oder Ring für Anteile; Stapel aus mehr als drei Teilen; Histogramm mit Lücken zwischen den Klassen; Abweichung in Grün und Rot; Zielring als durchgehender Bogen oder in Lindgrün; Teile nach Größe umsortiert.
-- **Werte:** Zeilenbalken 12 px; Histogramm 2 px zwischen den Säulen; Abweichung diverging-2 („weniger“) und -4 („mehr“), je ab 3,0 : 1 zum Grund; Zielring 112 px, bis 12 Teile, 9° Lücke, erledigt text 8 px, offen border-strong 2 px
+- **Werte:** Zeilenbalken 12 px; Histogramm 2 px zwischen den Säulen; Abweichung diverging-2 („weniger“) und -4 („mehr“), je ab 3,0 : 1 zum Grund, Balken 32 px hoch bei jeder Breite; Zielring 112 px, bis 12 Teile, 9° Lücke, erledigt text 8 px, offen border-strong 2 px
 - **Prüfung:** Jede Form hat ihre Werte als Text (Zeilen, Zahlen auf den Säulen oder „Werte als Tabelle“); Graustufen-Screenshot: die Abweichung bleibt an Vorzeichen und Pfeil erkennbar.
 - **Entscheidung:** D83, D91 · **Quelle:** `DECISIONS.md D91 (G4b, G5a, G7a, G8a); systems/sebaro/spec/01-foundations.md §8; spec/02-components.md §3.7`
 
@@ -1427,29 +1427,29 @@ Trenne die Spalten eines Boards nur durch 1-px-Haarlinien, ohne Rahmen und Grund
 
 ### DAT-14 Tabellen: Pfeil nur an der sortierten Spalte, Summe im Fuß  ·  entschieden  ·  alle
 
-Mach einen sortierbaren Spaltenkopf zur Taste (sb-table__sort). Nur die Spalte, nach der sortiert ist, trägt aria-sort, Titelgewicht und den Pfeil arrow-up--16 oder arrow-down--16; die anderen zeigen nur ihr Wort. Der erste Druck sortiert Zahlen und Daten absteigend, Wörter aufsteigend, der nächste kehrt um. Eine Summe steht im Tabellenfuß (tfoot) unter ihrer Spalte, getrennt durch die Linie in border-strong, in body-strong; fehlt ein Wert, heißt die Zeile „Summe der bekannten …“ und die Lücke bleibt „keine Angabe“, nie 0.
+Mach einen sortierbaren Spaltenkopf zur Taste (sb-table__sort). Nur die Spalte, nach der sortiert ist, trägt aria-sort, Titelgewicht und den Pfeil arrow-up--16 oder arrow-down--16; die anderen zeigen nur ihr Wort. Der erste Druck sortiert Zahlen und Daten absteigend, Wörter aufsteigend, der nächste kehrt um. Eine Summe steht im Tabellenfuß (tfoot) unter ihrer Spalte, getrennt durch die Linie in border-strong, in body-strong; fehlt ein Wert, heißt die Zeile „Summe der bekannten …“ und die Lücke bleibt „keine Angabe“, nie 0. Am Handy scrollt eine sortierbare Tabelle in ihrem eigenen Kasten (sb-table-wrap) seitlich, nie die Seite; sie stapelt ihre Zeilen nicht zu Blöcken.
 
-*EN:* Sortable heads are buttons (sb-table__sort); only the sorted column carries aria-sort, title weight and the arrow icon; the first press sorts numbers and dates descending, words ascending, the next reverses; totals in tfoot below their column (border-strong line, body-strong); with a missing value the row reads „Summe der bekannten …“ and the gap stays „keine Angabe“, never 0.
+*EN:* Sortable heads are buttons (sb-table__sort); only the sorted column carries aria-sort, title weight and the arrow icon; the first press sorts numbers and dates descending, words ascending, the next reverses; totals in tfoot below their column (border-strong line, body-strong); with a missing value the row reads „Summe der bekannten …“ and the gap stays „keine Angabe“, never 0. On phones a sortable table scrolls sideways inside its own box (sb-table-wrap), never the page; it does not stack its rows into blocks.
 
-- **Warum:** Inhaber D91: Sortierpfeil nur an der sortierten Spalte (B5a), Summenzeile im Tabellenfuß (B6a). Doppelpfeile an jeder Spalte wären Lärm; ein Pfeil sagt, wonach sortiert ist. Eine fehlende Zahl als 0 zu zählen, wäre falsch (D82, TXT-14).
+- **Warum:** Inhaber D91: Sortierpfeil nur an der sortierten Spalte (B5a), Summenzeile im Tabellenfuß (B6a). Doppelpfeile an jeder Spalte wären Lärm; ein Pfeil sagt, wonach sortiert ist. Eine fehlende Zahl als 0 zu zählen, wäre falsch (D82, TXT-14). D92 (7), Antwort „Seitlich scrollen (Empfohlen)“: Sortierbare Tabellen scrollen am Handy in ihrem eigenen Kasten seitlich statt sich zu stapeln; nie die Seite.
 - **So:** <th scope='col' class='sb-num' aria-sort='descending'><button class='sb-table__sort' type='button'><svg …arrow-down--16/>Betrag</button></th>; <tfoot><tr><th scope='row' colspan='2'>Summe</th><td class='sb-num'>1.797,20 €</td></tr></tfoot>; sb-table.js sagt „Sortiert nach Betrag, absteigend“.
-- **Nicht so:** Doppelpfeile an jeder sortierbaren Spalte; aria-sort an mehreren Spalten; Summe als Kennzahl unter der Tabelle; ein fehlender Wert als 0 in der Summe; Summenzeile mit grauer Fläche; Summenzeile, die beim Sortieren mitwandert.
+- **Nicht so:** Doppelpfeile an jeder sortierbaren Spalte; aria-sort an mehreren Spalten; Summe als Kennzahl unter der Tabelle; ein fehlender Wert als 0 in der Summe; Summenzeile mit grauer Fläche; Summenzeile, die beim Sortieren mitwandert; sortierbare Tabelle, die sich am Handy zu Blöcken stapelt; eine Tabelle, die die ganze Seite seitlich scrollen lässt.
 - **Werte:** Sortierkopf 48 px auf Seiten und Handys, 32 px nur im Fenster (data-sb-density='window'), bei Touch wieder 48 px; Pfeil 16 px; Linie über dem Fuß border-strong
-- **Prüfung:** axe; genau ein th mit aria-sort je Tabelle; die Summenzeile bleibt beim Sortieren unten; Tab auf den Kopf, Eingabe sortiert.
-- **Entscheidung:** D82, D91 · **Quelle:** `DECISIONS.md D91 (B5a, B6a), D82; systems/sebaro/spec/02-components.md §3.9, §7 (sb-table.js)`
+- **Prüfung:** axe; genau ein th mit aria-sort je Tabelle; die Summenzeile bleibt beim Sortieren unten; Tab auf den Kopf, Eingabe sortiert. Bei 390 px: die Tabelle scrollt im Kasten, die Seite hat keinen seitlichen Bildlauf.
+- **Entscheidung:** D82, D91, D92 · **Quelle:** `DECISIONS.md D91 (B5a, B6a), D82, D92 (7); systems/sebaro/spec/02-components.md §3.9, §7 (sb-table.js)`
 
 ### DAT-15 Verläufe: stehender Gruppenkopf und Zeitleiste ohne Strich  ·  entschieden  ·  alle
 
-Lass in Listen nach Tagen oder Gruppen den Kopf der aktuellen Gruppe oben stehen (sb-list-header--sticky, Grund bg); nur solange er steht, trägt er die 2-px-Linie in Tinte darunter, an seinem Platz hat er keine. Zeig den Verlauf einer Sache als Zeitleiste (sb-timeline): das Datum grau in einer festen Spalte, das Zeichen grau und 16 px, der Titel als Link auf die Fassung, Haarlinien zwischen den Einträgen, kein senkrechter Strich. Nur ein Ereignis, das etwas verlangt, trägt das Warnzeichen, immer mit seinem Wort. Das Neueste steht oben; lange Verläufe enden mit „Ältere zeigen“.
+Lass in Listen nach Tagen oder Gruppen den Kopf der aktuellen Gruppe oben stehen (sb-list-header--sticky, Grund bg); nur solange er steht, trägt er die 2-px-Linie in Tinte darunter, an seinem Platz hat er keine. Zeig den Verlauf einer Sache als Zeitleiste (sb-timeline): das Datum grau in einer festen Spalte, das Zeichen grau und 16 px, der Titel als Link auf die Fassung, Haarlinien zwischen den Einträgen, kein senkrechter Strich. Nur ein Ereignis, das etwas verlangt, trägt das Warnzeichen, immer mit seinem Wort, so auch „Konflikt“ (STA-08). Das Neueste steht oben; lange Verläufe enden mit „Ältere zeigen“.
 
-*EN:* Grouped lists keep the current group's head at the top (sb-list-header--sticky, ground bg) with the 2 px ink line below it only while it is stuck; a history is a timeline (sb-timeline): grey date in a fixed column, grey 16 px glyph, the title links to the version, hairlines, no vertical stroke; only an event that asks for something gets the warning glyph with its word; newest first, „Ältere zeigen“ instead of endless scrolling.
+*EN:* Grouped lists keep the current group's head at the top (sb-list-header--sticky, ground bg) with the 2 px ink line below it only while it is stuck; a history is a timeline (sb-timeline): grey date in a fixed column, grey 16 px glyph, the title links to the version, hairlines, no vertical stroke; only an event that asks for something gets the warning glyph with its word, „Konflikt“ too (STA-08); newest first, „Ältere zeigen“ instead of endless scrolling.
 
-- **Warum:** Inhaber D91: Tintenlinie 2 px nur, solange der Kopf steht (B3b); Zeitleiste mit Datumsspalte ohne Strich (B4b). Steht der Kopf, liegt er über Inhalt und ist damit eine Ebene (D46); ein senkrechter Strich wäre ein Linientyp ohne Bedeutung (FOR-02).
+- **Warum:** Inhaber D91: Tintenlinie 2 px nur, solange der Kopf steht (B3b); Zeitleiste mit Datumsspalte ohne Strich (B4b). Steht der Kopf, liegt er über Inhalt und ist damit eine Ebene (D46); ein senkrechter Strich wäre ein Linientyp ohne Bedeutung (FOR-02). D92 (1): „Konflikt“ trägt in der Zeitleiste dasselbe Warnzeichen wie in der Zeile.
 - **So:** <h3 class='sb-list-header sb-list-header--sticky' id='g2'>Gestern <span class='sb-list-header__count'>4</span></h3><ul class='sb-list' aria-labelledby='g2'>…; <ol class='sb-timeline'><li class='sb-timeline__item'><time class='sb-timeline__date'>Heute, 14:32</time><span class='sb-timeline__mark'>…</span><div class='sb-timeline__main'><p class='sb-timeline__title'><a class='sb-timeline__link'>…
 - **Nicht so:** Linie unter dem Kopf auch an seinem Platz; getönter Grund für den stehenden Kopf; Zeitleiste mit Strich und Punkten darauf; farbige Zeichen für jedes Ereignis; endloses Nachladen.
 - **Werte:** Linie 2 px Tinte (--sb-x-sebaro-layer-line-*) nur bei scroll-state(stuck: top) oder data-sb-state='stuck' (sb-sticky.js); Datumsspalte 7 rem; Einträge 48 px am Handy, im Fenster 32 / 48 px
 - **Prüfung:** In einer scrollenden Liste: Linie nur am stehenden Kopf; ohne Skript und ohne scroll-state steht der Kopf ohne Linie; die Zeitleiste hat keine senkrechte Linie.
-- **Entscheidung:** D46, D80, D91 · **Quelle:** `DECISIONS.md D91 (B3b, B4b); systems/sebaro/spec/02-components.md §3.17, §3.18, §7 (sb-sticky.js)`
+- **Entscheidung:** D46, D80, D91, D92 · **Quelle:** `DECISIONS.md D91 (B3b, B4b), D92 (1); systems/sebaro/spec/02-components.md §3.17, §3.18, §7 (sb-sticky.js)`
 
 ### DAT-16 Kalender: Monat oben, Tagesliste darunter  ·  entschieden  ·  alle
 
@@ -1470,12 +1470,12 @@ Schreib einen Ort zuerst als Text mit der Ortsnadel pin in Textfarbe, nie in Kob
 
 *EN:* A place is text first: the pin icon in text colour (never cobalt) with the address and the external link „In Karten öffnen“; below it may stand a small static map (at most 360 px, 1 px border-strong, radius 12) as a local image or a code-drawn grey SVG with a description; never tiles or scripts of a map service.
 
-- **Warum:** Inhaber D91: Text, darunter eine kleine statische Karte (B13a). Kobalt heißt „hier in der App“ (D37); Kacheln eines Kartendienstes wären Anfragen an einen fremden Server (D18, HAL-09).
+- **Warum:** Inhaber D91: Text, darunter eine kleine statische Karte (B13a). Kobalt heißt „hier in der App“ (D37); Kacheln eines Kartendienstes wären Anfragen an einen fremden Server (D18, HAL-09). D92 (9): Das Icon pin ist freigegeben.
 - **So:** <div class='sb-place'><div class='sb-place__address'><svg class='sb-icon sb-icon--20'><use href='#pin'/></svg>…<a class='sb-place__link' href='geo:…'>In Karten öffnen<svg …external-link--16/></a></div><svg class='sb-place__map' role='img' aria-label='Kartenausschnitt, gezeichnet: …'>…</svg></div>
 - **Nicht so:** Eingebettete Karte eines Kartendienstes; Nadel in Kobalt oder Rot; Karte ohne Beschreibung; nur die Karte ohne Adresse als Text; farbige Kartenarten.
 - **Werte:** Karte höchstens 360 px breit; Rahmen 1 px border-strong; Radius 12; Nadel 20 px in text; Link-Ziel 24 px, unter 1024 px und bei Touch 48 px
 - **Prüfung:** Netzwerk-Log: keine Anfrage an einen Kartendienst; die Karte hat role='img' mit aria-label oder alt.
-- **Entscheidung:** D18, D37, D82, D91 · **Quelle:** `DECISIONS.md D91 (B13a), D82; systems/sebaro/spec/02-components.md §3.27`
+- **Entscheidung:** D18, D37, D82, D91, D92 · **Quelle:** `DECISIONS.md D91 (B13a), D82, D92 (9); systems/sebaro/spec/02-components.md §3.27`
 
 ## Text (TXT)
 
@@ -1975,12 +1975,12 @@ Prüf Bildsymbole gegen gezeichnete Formen, Symbolzeichen und alle strengen Refe
 
 *EN:* Check pictorial symbols against drawn shapes, symbol characters and every strict reference, not against letters of other scripts; a strict hit is forbidden without exception, an ordinary near only with a written reason and the owner's look.
 
-- **Warum:** Inhaber D86 auf die Rückfrage: „Annehmen (Empfohlen)“; macht D61 (1) zur Inhaber-Entscheidung. Die Prüfung war für Buchstaben-Zeichen kalibriert: ein Tropfen traf einen georgischen Buchstaben, ohne eine Bedeutung zu tragen.
+- **Warum:** Inhaber D86 auf die Rückfrage: „Annehmen (Empfohlen)“; macht D61 (1) zur Inhaber-Entscheidung. Die Prüfung war für Buchstaben-Zeichen kalibriert: ein Tropfen traf einen georgischen Buchstaben, ohne eine Bedeutung zu tragen. D92 (10), Antwort „Alle fünf freigeben (Empfohlen)“: Die fünf normalen Nähen der Zeichenprüfung sind freigegeben.
 - **So:** signs.py check mit grammar.screen 'pictorial'; NEAR zu einem Bedien-Icon mit Notiz in signs.json und Vorlage beim Inhaber.
 - **Nicht so:** Strenge Treffer per Ausnahme freigeben; eine Nähe ohne Notiz annehmen; Bildsymbole weiter gegen fremde Alphabete prüfen und deshalb umzeichnen.
 - **Werte:** strenger Treffer ab 0.53; Prüfliste u. a. RSS, WLAN, Ein-Aus-Knopf
-- **Prüfung:** tools/signs.py check sebaro Exit 0; jede NEAR hat eine Notiz; fünf begründete Nähen warten auf den Blick des Inhabers.
-- **Entscheidung:** D86, D61 · **Quelle:** `DECISIONS.md D86, D61; systems/sebaro/spec/05-brand.md §2.4; shared/SIGNS-GUIDE.md §6.7`
+- **Prüfung:** tools/signs.py check sebaro Exit 0; jede NEAR hat eine Notiz; die fünf begründeten Nähen aus D86 (vier bei Tagwerk und novalis, eine bei einem weiteren Zeichen) hat der Inhaber freigegeben (D92); jede neue Nähe braucht wieder Notiz und Blick.
+- **Entscheidung:** D86, D61, D92 · **Quelle:** `DECISIONS.md D86, D61, D92 (10); systems/sebaro/spec/05-brand.md §2.4, §2.6; shared/SIGNS-GUIDE.md §6.7`
 
 ### ZEI-13 Kopf der Seite „Über“: Kachel links, Text daneben  ·  entschieden  ·  alle
 
@@ -2153,7 +2153,7 @@ Leg neben jedes generierte Bild Rohbild, Sidecar (Prompt, Backend, Datum, Nachbe
 - **So:** images/<name>.png + <name>.json; alt='Drei Schritte: Der Rahmen ändert sich, die drei Perlen bleiben.'
 - **Nicht so:** Rohbild löschen; Versuch ohne Grund verwerfen; alt='Bild'.
 - **Prüfung:** verify.py; Sidecar vorhanden; axe image-alt.
-- **Entscheidung:** D9, D15, D85, D90 · **Quelle:** `systems/sebaro/spec/06-imagery.md §4, §6, §7; DECISIONS.md D90`
+- **Entscheidung:** D9, D15, D85, D90, D92 · **Quelle:** `systems/sebaro/spec/06-imagery.md §4, §6, §7; DECISIONS.md D90, D92 (8)`
 
 ### BIL-05 Eine Markenfigur ist erlaubt  ·  entschieden  ·  alle
 
@@ -2898,16 +2898,16 @@ Bind jeden Highlighter über sebaros fertige Teile an, nie mit eigenem Farbschem
 
 ### TEC-09 Lizenz: MIT, Schriften OFL, Marke vorbehalten  ·  entschieden  ·  alle
 
-Übernimm die Lizenzdatei des Systems unverändert in jedes Produkt: Icons, CSS und Token-Dateien, Komponenten-Code, Regeln, Spezifikationen und Werkzeuge stehen unter MIT; die Schriften unter SIL OFL 1.1; der Name sebaro, Produktnamen, Wortmarke, Logo, App-Zeichen, App-Icons und alles daraus Abgeleitete sind ausdrücklich ausgenommen (alle Rechte vorbehalten).
+Übernimm die Lizenzdatei des Systems unverändert in jedes Produkt: Icons, CSS und Token-Dateien (auch für Compose und Swift), Komponenten-Code und Skripte, Regeln, Spezifikationen und Werkzeuge stehen unter MIT; die Schriften unter SIL OFL 1.1; der Name sebaro, Produktnamen, Wortmarke, Logo, App-Zeichen, App-Icons, erzeugte Bilder und alles daraus Abgeleitete sind ausdrücklich ausgenommen (alle Rechte vorbehalten).
 
-*EN:* Ship the system's LICENSE.md unchanged: icons, CSS and token files, component code, rules, specs and tools are MIT; fonts SIL OFL 1.1; the name sebaro, product names, wordmark, logo, app signs, app icons and everything derived from them are all rights reserved.
+*EN:* Ship the system's LICENSE.md unchanged: icons, CSS and token files (Compose and Swift included), component code and scripts, rules, specs and tools are MIT; fonts SIL OFL 1.1; the name sebaro, product names, wordmark, logo, app signs, app icons, generated images and everything derived from them are all rights reserved.
 
-- **Warum:** Inhaber D76, Wortlaut „Ja, wie vorschlag Lizenz der eigenen Dateien“: dieselbe Lizenzdatei im Guide und im Export. Die MIT-Teile geben kein Recht an Namen und Zeichen.
+- **Warum:** Inhaber D76, Wortlaut „Ja, wie vorschlag Lizenz der eigenen Dateien“: dieselbe Lizenzdatei im Guide und im Export. Die MIT-Teile geben kein Recht an Namen und Zeichen. D92 (4), Antwort „Ja, so (Empfohlen)“: Token-Dateien, Compose- und Swift-Code und Skripte stehen unter MIT; erzeugte Bilder, Name, Logo und App-Zeichen bleiben vorbehalten.
 - **So:** docs/sebaro/LICENSE.md bzw. LICENSE.md des Exports neben den Dateien; OFL-Texte neben den Schriften.
-- **Nicht so:** App-Zeichen oder Wortmarke als „MIT“ weitergeben; Lizenzdatei kürzen; Schriften unter MIT stellen.
+- **Nicht so:** App-Zeichen, Wortmarke oder erzeugte Bilder als „MIT“ weitergeben; Lizenzdatei kürzen; Schriften unter MIT stellen.
 - **Werte:** MIT; SIL OFL 1.1; Marke: alle Rechte vorbehalten
 - **Prüfung:** export_system.py --verify: LICENSE.md im Export und unverändert.
-- **Entscheidung:** D76 · **Quelle:** `DECISIONS.md D76; LICENSE.md (sebaroDesign, Guide, jeder Export)`
+- **Entscheidung:** D76, D92 · **Quelle:** `DECISIONS.md D76, D92 (4); LICENSE.md (sebaroDesign, Guide, jeder Export)`
 
 ### TEC-10 Für mehrere Sprachen planen  ·  entschieden  ·  alle
 

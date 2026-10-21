@@ -15,7 +15,7 @@
   "kotlinNamespace": null,
   "launcherOnly": false,
   "sebaroDesign": {
-    "commit": "6c9c2220af4f0eb4f5c72caa107d121a3d27fc60",
+    "commit": "48580299c5c911cf2601f217e6ac005fbd8ef1d6",
     "uncommittedChanges": false
   },
   "contracts": {
@@ -96,9 +96,9 @@
     {
       "path": "css/sebaro.css",
       "source": "systems/sebaro/css/sebaro.css",
-      "sourceSha256": "a3f36e828809e0cf81d595e4cc2852697f9458a53e000a420c970b54b8cb6c34",
-      "sha256": "a3f36e828809e0cf81d595e4cc2852697f9458a53e000a420c970b54b8cb6c34",
-      "bytes": 224966
+      "sourceSha256": "dbbe2f28d13a1cba813a9152e8a1137f63020c041baa47c88d5332c1a81240c6",
+      "sha256": "dbbe2f28d13a1cba813a9152e8a1137f63020c041baa47c88d5332c1a81240c6",
+      "bytes": 225673
     },
     {
       "path": "fonts/fonts.css",
@@ -145,22 +145,22 @@
     {
       "path": "icons/sprite.svg",
       "source": "systems/sebaro/icons/dist/sprite.svg",
-      "sourceSha256": "7445087ac3ad226e4aab3cbbbeb2efce052d46b7d76241864cfd0fcdffd4a705",
-      "sha256": "7445087ac3ad226e4aab3cbbbeb2efce052d46b7d76241864cfd0fcdffd4a705",
+      "sourceSha256": "390e6a3996da1976bf52803b85bb1365d85a2859d91ee553db085830b3fc6500",
+      "sha256": "390e6a3996da1976bf52803b85bb1365d85a2859d91ee553db085830b3fc6500",
       "bytes": 38069
     },
     {
       "path": "icons/sprite.css",
       "source": "systems/sebaro/icons/dist/sprite.css",
-      "sourceSha256": "e92c86440631c0588e362bca567b774ddffa2c90b8f6b0078d09835c4ce5cc38",
-      "sha256": "e92c86440631c0588e362bca567b774ddffa2c90b8f6b0078d09835c4ce5cc38",
+      "sourceSha256": "1489a117f476737b284ffbb1a2348a1b3161341773f14c93d9b18764eaa39b32",
+      "sha256": "1489a117f476737b284ffbb1a2348a1b3161341773f14c93d9b18764eaa39b32",
       "bytes": 1831
     },
     {
       "path": "icons/icons.json",
       "source": "systems/sebaro/icons/dist/icons.json",
-      "sourceSha256": "181ec6af250238e97b793ff859ab54759ef225d57370d5e75dca97cf674d6438",
-      "sha256": "181ec6af250238e97b793ff859ab54759ef225d57370d5e75dca97cf674d6438",
+      "sourceSha256": "cd75219f52e64ab32edd69c45bd8ed4afc6d9a3df1a7fbc71439f15541b1c9ed",
+      "sha256": "cd75219f52e64ab32edd69c45bd8ed4afc6d9a3df1a7fbc71439f15541b1c9ed",
       "bytes": 69026
     },
     {
