@@ -1,11 +1,11 @@
 {
  "$schema": "./rules.schema.json",
- "version": "2.2.0",
+ "version": "2.3.0",
  "date": "2026-10-21",
  "source": {
   "repo": "sebaroDesign",
   "system": "sebaro",
-  "decisions": "D1-D92"
+  "decisions": "D1-D93"
  },
  "areas": [
   {
@@ -1679,15 +1679,16 @@
    "title": "„Hell oder Dunkel“: ein Name, der Ort je Produktart",
    "rule": "Nenne die Farbschema-Wahl immer „Hell oder Dunkel“ (englisch „Light or dark“). Wo sie steht, hängt von der Produktart ab: Websites haben die beschriftete Taste im Kopf (WEB-02), Handy-Apps die Wahl „Wie das System · Hell · Dunkel“ in den Einstellungen (MOB-04), Desktop-Apps und Web-Apps mit Fenster das Menü „Darstellung“ und die Ansicht Einstellungen (DSK-05). Nie Mond oder Sonne, nie „Dark Mode“ oder „Nachtmodus“.",
    "rule_en": "The theme choice is always called „Hell oder Dunkel“ („Light or dark“); by kind of product: websites a labelled header button (WEB-02), phone apps a settings choice (MOB-04), desktop apps and windowed web apps the menu „Darstellung“ plus the settings view (DSK-05); never sun/moon, „Dark Mode“ or „Nachtmodus“.",
-   "why": "Inhaber D36: „header vonn a ist toll, nur das darkmode icon könnte auch diesen hell/dunkel switch von hier haben“. D75 (ändert D36 für Apps): „ja, zwischen app und desktop unterscheiden wegen hell dunkel taste“; die Taste bleibt den Websites. Lesart des Orchestrators: Handy = Einstellungen, Desktop = Menü + Einstellungen; vom Inhaber änderbar.",
+   "why": "Inhaber D36: „header vonn a ist toll, nur das darkmode icon könnte auch diesen hell/dunkel switch von hier haben“. D75 (ändert D36 für Apps): „ja, zwischen app und desktop unterscheiden wegen hell dunkel taste“; die Taste bleibt den Websites. Die Aufteilung Handy = Einstellungen, Desktop = Menü + Einstellungen war eine Lesart des Orchestrators; der Inhaber hat sie mit D93 bestätigt („Ja, bestätigen (Empfohlen)“).",
    "do": "Website: <button class='sb-theme-button' type='button'>Hell oder Dunkel</button>; Handy: Einstellungsgruppe „Hell oder Dunkel“; Desktop: Menü „Darstellung“ mit „Wie das System“, „Hell“, „Dunkel“.",
    "dont": "Mond-Icon; die Kopf-Taste in einer Handy- oder Desktop-App; „Tag/Nacht“; Beschriftung wechselt auf „Dunkel“.",
    "numbers": "Website-Taste 48px hoch; Padding 16 (--sb-space-4); Radius 8; body-strong",
    "decisions": [
     "D36",
-    "D75"
+    "D75",
+    "D93"
    ],
-   "source": "DECISIONS.md D36, D75; systems/sebaro/spec/01-foundations.md §9; spec/03-signature.md §6.1–§6.3; spec/07-voice.md §4.7; spec/02-components.md §4.18",
+   "source": "DECISIONS.md D36, D75, D93 (2); systems/sebaro/spec/01-foundations.md §9; spec/03-signature.md §6.1–§6.3; spec/07-voice.md §4.7; spec/02-components.md §4.18",
    "platforms": [
     "alle"
    ],
@@ -1695,7 +1696,7 @@
    "check": "Kein sun/moon im Kopf; Website-Label konstant; Apps ohne Kopf-Taste; Bannwort-grep „nachtmodus|dark mode“.",
    "example_hint": "Drei Orte nebeneinander: Website-Taste, Einstellungsgruppe am Handy, Menü „Darstellung“; falsch: Mond-Icon und Kopf-Taste in einer App.",
    "note": "Bis D75 stand die Taste nach D36 auch in Apps zur Wahl; seit D75 gehört sie nur den Websites. spec/03 §6.3 nennt Web-Apps mit Taste im Kopf; für Web-Apps mit Fenster gilt spec/11 §1a und spec/02 §4.18 (Menü), der neuere Stand.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-21"
   },
   {
    "id": "AKT-10",
@@ -1954,7 +1955,7 @@
    "title": "Befehlspalette mit ⌘K, Gruppen und Haken",
    "rule": "Bau die Befehlspalette jeder Desktop-App und Web-App mit Fenster gleich (sb-command-palette): sie öffnet in allen sebaro-Apps mit ⌘K, unter Windows und Linux mit Strg+K; Gruppenköpfe statt „Befehl:“ in jeder Zeile, der Zustand einer Einstellung als Haken am Anfang der Zeile, das Kürzel am Ende, unten die Tasten („wechseln · ausführen · schließen“). Die aktive Zeile trägt die Ortslinie, Darüberfahren die leichte Fläche wie überall. Ein älteres Kürzel darf als zweites bleiben.",
    "rule_en": "Command palette in every desktop/windowed web app (sb-command-palette): opens with ⌘K (Ctrl+K on Windows/Linux) in every sebaro app; group headers, setting state as a check at the row start, shortcut at the end, key hints in the footer; active row = place line, hover = hover fill; an older shortcut may stay as a second one.",
-   "why": "Inhaber D67 (4), Wortlaut „4a“: „Der Haken steht dort, wo ihn auch das native Menü zeigt.“ D84, Wortlaut „für alle festlegen Kürzel der Befehlspalette“: ⌘K / Strg+K in allen Apps; die Wahl ⌘K traf der Orchestrator nach der Desktop-Skizze, vom Inhaber änderbar. Verworfen: Schalter am Zeilenende (zwei Zeichen für „an“).",
+   "why": "Inhaber D67 (4), Wortlaut „4a“: „Der Haken steht dort, wo ihn auch das native Menü zeigt.“ D84, Wortlaut „für alle festlegen Kürzel der Befehlspalette“: ⌘K / Strg+K in allen Apps; die Wahl ⌘K traf der Orchestrator nach der Desktop-Skizze; der Inhaber hat ⌘K / Strg+K in allen Apps mit D93 bestätigt („Ja, bestätigen (Empfohlen)“). Verworfen: Schalter am Zeilenende (zwei Zeichen für „an“).",
    "do": "<dialog class='sb-command-palette' data-sb-density='window'> mit sb-command-palette__group „Ansicht“ und einer sb-row mit aria-checked='true' für „Seitenleiste“; Kürzel als <span class='sb-keys' data-sb-keys='Mod+N'>; novalis behält ⇧⌘P als zweites Kürzel.",
    "dont": "Schalter in Palettenzeilen; „Befehl:“ vor jedem Eintrag; aktive Zeile als Kobaltfläche; ein eigenes Palettenkürzel je App.",
    "numbers": "Kürzel ⌘K / Strg+K; Zeilen 32 px (sb-row); Breite höchstens 560 px; Radius 12; Ortslinie 3 px accent",
@@ -1962,9 +1963,10 @@
     "D67",
     "D84",
     "D48",
-    "D80"
+    "D80",
+    "D93"
    ],
-   "source": "DECISIONS.md D67 (4), D84; systems/sebaro/spec/02-components.md §4.16; demo/assets/sb-window.js",
+   "source": "DECISIONS.md D67 (4), D84, D93 (3); systems/sebaro/spec/02-components.md §4.16; demo/assets/sb-window.js",
    "platforms": [
     "desktop",
     "web"
@@ -1973,7 +1975,7 @@
    "check": "⌘K bzw. Strg+K öffnet die Palette; Tastaturtest (Pfeile, Enter, Escape, Fokus zurück); Graustufen-Screenshot: Haken und Ortslinie ohne Farbe lesbar.",
    "example_hint": "Statische sb-command-palette mit Gruppen, Haken und Kürzeln; falsch: „Befehl:“ in jeder Zeile, Schalter, Kobaltfläche.",
    "note": "Tastenkürzel stehen als echte Zeichen aus sebaro Sans/Mono (D68, ICO-08); sb-window.js schreibt sie unter Windows und Linux als Wörter.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-21"
   },
   {
    "id": "NAV-10",
@@ -2624,24 +2626,25 @@
    "id": "DAT-11",
    "area": "daten",
    "title": "Stufen einer Farbskala bleiben unterscheidbar",
-   "rule": "Gib einer fortlaufenden Farbskala höchstens vier Stufen, einer zweiseitigen höchstens fünf, nie einen Verlauf; mehr Werte fasst du in diese Stufen. Die erste Stufe (bei der zweiseitigen Skala jede Stufe eines Arms) hebt sich mit mindestens 3 : 1 von jedem Grund ab; Nachbarstufen liegen mindestens 1,6 : 1 und ΔE OK 0,10 auseinander, auch unter jeder Farbsehschwäche; jede Stufe liegt mindestens ΔE OK 0,08 von accent und primary-action. „keine Angabe“ ist die leere Zelle mit Rahmen, nie Stufe 1. In der Heatmap steht der Wert jedes Tages als Text für Screenreader, bei Fokus und beim Zeigen. Heute trägt einen Rahmen in Kobalt, der zur Zelle gehört: 3 px accent auf ihrer Kante, direkt auf der Farbe, rund wie die Zelle. Der Fokusring liegt davon abgesetzt außen (2 px, 2 px Abstand, eckig); die Zellen stehen 6 px auseinander.",
-   "rule_en": "A sequential scale has at most 4 classes, a diverging one 5, never a gradient; class 1 (every class of a diverging arm) ≥ 3:1 against every ground; neighbours ≥ 1.6:1 and ≥ ΔE OK 0.10 apart, also under protanopia, deuteranopia and tritanopia; every class ≥ ΔE OK 0.08 from accent and primary-action; „keine Angabe“ is the empty framed cell, never class 1; heatmap values as text for assistive technology, on focus and pointing; today is a cobalt frame that is part of the cell (3 px accent on the cell's edge, directly on the fill, rounded like the cell), unlike the focus ring detached outside it (2 px, offset 2 px, square); cells 6 px apart.",
-   "why": "Der Inhaber hat zur Heatmap (D91 G6a) eine messbare Regel verlangt: „die färben der legende müssen unterscheidbar bleiben. Bitte eine sinnvolle Regel aufstellen, die unterschiede im beispiel Funktionieren nicht.“ In der Skizze lagen sieben Stufen nur 1,37 bis 1,55 : 1 auseinander und die erste nur 1,06 bis 1,31 : 1 über dem Grund. Mit vier Stufen gemessen: Nachbarn 1,61 bis 1,65 : 1, die erste Stufe mindestens 3,03 : 1 auf jedem Grund, auch mit dem warmen Farbton. D92 (3), Antwort „Bestätigen (Empfohlen)“: Die Schwellen sind bestätigt, sebaro höchstens 4 Stufen, zweiseitig 5. D92 (2), Antwort „Kobalt-Rahmen“: „heute“ ist ein Rahmen in Kobalt wie in der Skizze, statt der gebauten Ortslinie; „er muss sich sichtbar vom Fokusring unterscheiden“.",
-   "do": "<ul class='sb-scale-legend'><li><span class='sb-scale-cell sb-scale-cell--seq-1' aria-hidden='true'></span>0–2</li>…<li><span class='sb-scale-cell sb-scale-cell--none' aria-hidden='true'></span>keine Angabe</li><li><span class='sb-scale-cell sb-heatmap__today-key' aria-hidden='true'></span>Rahmen: heute</li></ul>; Zelle <td><span class='sb-scale-cell sb-scale-cell--seq-3'></span><span class='sb-visually-hidden'>Dienstag, 29.09.: 6 Gläser</span></td>; heute <td aria-current='date'><span class='sb-scale-cell sb-scale-cell--seq-2'></span><span class='sb-visually-hidden'>Samstag, 10.10., heute: 4 Gläser</span></td>; sb-chart.js für Pfeiltasten und Anzeige.",
-   "dont": "Sieben feine Stufen oder ein Verlauf; eine erste Stufe fast wie der Grund; ein Tag ohne Daten in Stufe 1; Zahlen auf der Farbfläche; heute als abgesetzter 2-px-Ring, der wie der Fokusring aussieht; heute als Linie unter der Zelle.",
-   "numbers": "fortlaufend höchstens 4 Stufen, zweiseitig 5; Stufe 1 ab 3,0 : 1 zu bg, surface, surface-raised und surface-sunken; Nachbarn ab 1,6 : 1 und ΔE OK 0,10 (normal, Protanopie, Deuteranopie, Tritanopie); zu accent und primary-action ab ΔE OK 0,08; gemessen fortlaufend hell 1,61–1,64 : 1, dunkel 1,64–1,65 : 1, zweiseitig Arme 1,62–1,64 : 1; heute: Rahmen 3 px accent (border-width-strong) auf der Zellkante, in Zwangsfarben CanvasText; Fokus 2 px focus, 2 px außen; Zellabstand 6 px; Legende „Rahmen: heute“",
+   "rule": "Gib einer fortlaufenden Farbskala höchstens vier Stufen, einer zweiseitigen höchstens fünf, nie einen Verlauf; mehr Werte fasst du in diese Stufen. Die erste Stufe (bei der zweiseitigen Skala jede Stufe eines Arms) hebt sich mit mindestens 3 : 1 von jedem Grund ab; Nachbarstufen liegen mindestens 1,6 : 1 und ΔE OK 0,10 auseinander, auch unter jeder Farbsehschwäche; jede Stufe liegt mindestens ΔE OK 0,08 von accent und primary-action. „keine Angabe“ ist die leere Zelle mit Rahmen, nie Stufe 1. In der Heatmap steht der Wert jedes Tages als Text für Screenreader, bei Fokus und beim Zeigen. Heute trägt einen Rahmen in Kobalt, der zur Zelle gehört: 4 px accent auf ihrer Kante, rund wie die Zelle, und innen eine 1-px-Fuge in bg zwischen Rahmen und Füllung, damit er sich auf jeder Stufe mit mindestens 3 : 1 abhebt. Der Fokusring liegt davon abgesetzt außen (2 px, 2 px Abstand, eckig); die Zellen stehen 6 px auseinander.",
+   "rule_en": "A sequential scale has at most 4 classes, a diverging one 5, never a gradient; class 1 (every class of a diverging arm) ≥ 3:1 against every ground; neighbours ≥ 1.6:1 and ≥ ΔE OK 0.10 apart, also under protanopia, deuteranopia and tritanopia; every class ≥ ΔE OK 0.08 from accent and primary-action; „keine Angabe“ is the empty framed cell, never class 1; heatmap values as text for assistive technology, on focus and pointing; today is a cobalt frame that is part of the cell (4 px accent on the cell's edge, rounded like the cell, with a 1 px bg joint inside between frame and fill, ≥ 3:1 on every class), unlike the focus ring detached outside it (2 px, offset 2 px, square); cells 6 px apart.",
+   "why": "Der Inhaber hat zur Heatmap (D91 G6a) eine messbare Regel verlangt: „die färben der legende müssen unterscheidbar bleiben. Bitte eine sinnvolle Regel aufstellen, die unterschiede im beispiel Funktionieren nicht.“ In der Skizze lagen sieben Stufen nur 1,37 bis 1,55 : 1 auseinander und die erste nur 1,06 bis 1,31 : 1 über dem Grund. Mit vier Stufen gemessen: Nachbarn 1,61 bis 1,65 : 1, die erste Stufe mindestens 3,03 : 1 auf jedem Grund, auch mit dem warmen Farbton. D92 (3), Antwort „Bestätigen (Empfohlen)“: Die Schwellen sind bestätigt, sebaro höchstens 4 Stufen, zweiseitig 5. D92 (2), Antwort „Kobalt-Rahmen“: „heute“ ist ein Rahmen in Kobalt wie in der Skizze, statt der gebauten Ortslinie; „er muss sich sichtbar vom Fokusring unterscheiden“. D93 (1), auf „mir ist der rahmen etwas zu schwach“ nach dem Vergleichsbild „B · breiter Rahmen (Empfohlen)“: Kobalt direkt auf der Füllung hob sich nur 1,1 bis 2,4 : 1 von ihr ab, unter WCAG 1.4.11. Mit der Fuge in Grundfarbe hat die Markierung auf jeder Stufe mindestens 3 : 1 (Fuge gegen Füllung ab 3,34 : 1, Kobalt gegen den Grund ab 6 : 1), hell, dunkel und warm.",
+   "do": "<ul class='sb-scale-legend'><li><span class='sb-scale-cell sb-scale-cell--seq-1' aria-hidden='true'></span>0–2</li>…<li><span class='sb-scale-cell sb-scale-cell--none' aria-hidden='true'></span>keine Angabe</li><li><span class='sb-scale-cell sb-heatmap__today-key' aria-hidden='true'></span>Rahmen: heute</li></ul>; Zelle <td><span class='sb-scale-cell sb-scale-cell--seq-3'></span><span class='sb-visually-hidden'>Dienstag, 29.09.: 6 Gläser</span></td>; heute <td aria-current='date'><span class='sb-scale-cell sb-scale-cell--seq-2'></span><span class='sb-visually-hidden'>Samstag, 10.10., heute: 4 Gläser</span></td>; Rahmen und Fuge für heute zeichnet sebaro.css (border: calc(var(--sb-border-width-strong) + var(--sb-border-width-hairline)) solid var(--sb-color-accent) und innen 1 px var(--sb-color-bg)), nie eigenes CSS; sb-chart.js für Pfeiltasten und Anzeige.",
+   "dont": "Sieben feine Stufen oder ein Verlauf; eine erste Stufe fast wie der Grund; ein Tag ohne Daten in Stufe 1; Zahlen auf der Farbfläche; Kobaltrahmen direkt auf der Farbe (1,1 : 1); heute als abgesetzter 2-px-Ring, der wie der Fokusring aussieht; heute als Linie unter der Zelle.",
+   "numbers": "fortlaufend höchstens 4 Stufen, zweiseitig 5; Stufe 1 ab 3,0 : 1 zu bg, surface, surface-raised und surface-sunken; Nachbarn ab 1,6 : 1 und ΔE OK 0,10 (normal, Protanopie, Deuteranopie, Tritanopie); zu accent und primary-action ab ΔE OK 0,08; gemessen fortlaufend hell 1,61–1,64 : 1, dunkel 1,64–1,65 : 1, zweiseitig Arme 1,62–1,64 : 1; heute: Rahmen 4 px accent (border-width-strong + border-width-hairline) auf der Zellkante, innen 1 px Fuge in bg; Fuge gegen Füllung gemessen hell 3,35–14,70 : 1, dunkel 3,53–15,76 : 1, warm hell 3,34–14,68 : 1, warm dunkel 3,54–15,84 : 1 (Stufe 1 bis 4); Kobalt gegen bg und surface ab 6,15 : 1; vorher Kobalt direkt auf der Füllung 1,11–2,38 : 1; in Zwangsfarben Rahmen CanvasText, Fuge Canvas; Fokus 2 px focus, 2 px außen; Zellabstand 6 px; Legende „Rahmen: heute“",
    "decisions": [
     "D91",
-    "D92"
+    "D92",
+    "D93"
    ],
-   "source": "DECISIONS.md D91 (G6a, G7a, G10a), D92 (2), (3); systems/sebaro/spec/01-foundations.md §8, §8.1; spec/02-components.md §3.7 (Heatmap); palettes/sebaro.json dataviz; tools/check_palette.py",
+   "source": "DECISIONS.md D91 (G6a, G7a, G10a), D92 (2), (3), D93 (1); systems/sebaro/spec/01-foundations.md §8, §8.1; spec/02-components.md §3.7 (Heatmap); spec/03-signature.md §10.2, §10.3; palettes/sebaro.json dataviz; tools/check_palette.py",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
-   "check": "python3 tools/check_palette.py palettes/sebaro.json mit Exit 0 (die fünf Punkte sind Fehler, keine Warnungen; das Werkzeug lässt fortlaufend 5 Stufen zu, die 4 von sebaro prüft das Review); Heatmap mit Tab und Pfeiltasten: die Anzeige nennt Tag und Wert. Fokus auf heute und auf den Nachbartag: Rahmen auf der Zelle, Ring abgesetzt außen.",
-   "example_hint": "Heatmap mit vier Stufen, einer Legende mit Zahlen und dem Kobaltrahmen für heute; falsch: sieben feine Stufen ohne Zahlen und heute als abgesetzter Ring wie der Fokus.",
-   "note": "Das Werkzeug check_palette.py lässt fortlaufend 5 Stufen zu; dass sebaro höchstens 4 nimmt, prüft das Review. Auf den mittleren Stufen hebt sich der Rahmen nur im Farbton von der Füllung ab (hell Stufe 2 1,11 : 1, dunkel Stufe 3 1,14 : 1), zum Grund mindestens 6 : 1.",
+   "check": "python3 tools/check_palette.py palettes/sebaro.json mit Exit 0 (die fünf Punkte sind Fehler, keine Warnungen; das Werkzeug lässt fortlaufend 5 Stufen zu, die 4 von sebaro prüft das Review); Heatmap mit Tab und Pfeiltasten: die Anzeige nennt Tag und Wert. Fokus auf heute und auf den Nachbartag: Rahmen mit Fuge auf der Zelle, Ring abgesetzt außen; heute auf jeder Stufe in hell, dunkel und warm: Fuge gegen Füllung ab 3 : 1.",
+   "example_hint": "Heatmap mit vier Stufen, einer Legende mit Zahlen und dem Kobaltrahmen mit Fuge für heute; falsch: sieben feine Stufen ohne Zahlen, heute als abgesetzter Ring wie der Fokus und ein Kobaltrahmen direkt auf der Farbe.",
+   "note": "Das Werkzeug check_palette.py lässt fortlaufend 5 Stufen zu; dass sebaro höchstens 4 nimmt, prüft das Review. Die Fuge ist eine harte 1-px-Linie nach innen in einer flachen Farbe, kein Schatten (EBE-01). Gemessen ist nur der Kontrast nach WCAG 2 in Chromium; APCA und eine Simulation der Farbsehschwächen für die Fuge fehlen.",
    "changed": "2026-10-21"
   },
   {
@@ -4067,25 +4070,26 @@
   {
    "id": "BIL-05",
    "area": "bilder",
-   "title": "Eine Markenfigur ist erlaubt",
-   "rule": "Eine Figur aus den Bildkatalogen darf sebaro als Markenfigur vertreten. Sie ist ein Bild nach BIL-01 bis BIL-04 (ohne Text, mit Herkunft, gekennzeichnet), nie ein Bedienelement, Icon, App-Zeichen oder Ersatz für die Wortmarke. Leere Zustände zeigen weiter Spots, keine Figur (DAT-07).",
-   "rule_en": "A figure from the image catalogues may represent sebaro as a brand figure (D90); it is an image under BIL-01–04, never a control, icon, app sign or wordmark substitute; empty states keep their spots (DAT-07).",
-   "why": "Inhaber D90 auf die Frage, ob eine Figur aus den Bildkatalogen Markenfigur werden darf: „ja darf“. Mehrere Produkte legen „keine Maskottchen“ fest; die Figur steht für die Marke, nicht für Witze in der Oberfläche. Die Grenzen zu Icons, Zeichen und leeren Zuständen sind Lesart des Agenten.",
+   "title": "Eine Markenfigur nur als Bild",
+   "rule": "Eine Figur aus den Bildkatalogen darf sebaro als Markenfigur vertreten, aber nur als Bild: auf der Website, der Über-Seite, in der Einführung und in der Kommunikation. Sie ist ein Bild nach BIL-01 bis BIL-04 (ohne Text, mit Herkunft, gekennzeichnet), nie ein Bedienelement, Icon, App-Zeichen, Favicon oder Ersatz für die Wortmarke und nie im leeren Zustand: Leere Zustände zeigen weiter Spots (DAT-07).",
+   "rule_en": "A figure from the image catalogues may represent sebaro as a brand figure (D90), only ever as an image (website, about page, introduction, communication; D93); it is an image under BIL-01–04, never a control, icon, app sign, favicon or wordmark substitute, and never in an empty state (spots stay, DAT-07).",
+   "why": "Inhaber D90 auf die Frage, ob eine Figur aus den Bildkatalogen Markenfigur werden darf: „ja darf“. Mehrere Produkte legen „keine Maskottchen“ fest; die Figur steht für die Marke, nicht für Witze in der Oberfläche. Die Grenzen zu Icons, Zeichen und leeren Zuständen hatte ein Agent gesetzt; D93, nach dem Bild „Figur als Icon in echten Größen“: „Nur als Bild (Empfohlen)“. Seitdem sind es die Grenzen des Inhabers.",
    "do": "Die Figur als Linienbild auf der Über-Seite mit HTML-Bildunterschrift.",
    "dont": "Die Figur als App-Zeichen oder Favicon; Figur mit Sprechblase und Text im Bild; Figur im leeren Zustand mit Witz.",
    "numbers": "",
    "decisions": [
-    "D90"
+    "D90",
+    "D93"
    ],
-   "source": "DECISIONS.md D90; systems/sebaro/spec/06-imagery.md",
+   "source": "DECISIONS.md D90, D93 (4); systems/sebaro/spec/06-imagery.md §1",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
-   "check": "Review: Die Figur erscheint nur als Bild mit Kennzeichnung, nie in Icon-, Zeichen- oder Bedien-Slots.",
+   "check": "Review: Die Figur erscheint nur als Bild mit Kennzeichnung (Website, Über-Seite, Einführung, Kommunikation), nie in Icon-, Zeichen-, Favicon- oder Bedien-Slots, nie statt der Wortmarke und nie im leeren Zustand.",
    "example_hint": "Über-Seite mit Figur als Bild und Bildunterschrift; falsch: Figur als App-Kachel.",
-   "note": "Welche Figur es wird, ist nicht entschieden; die Grenzen (kein Icon, kein Zeichen, nicht im leeren Zustand) sind vorläufige Lesart.",
-   "changed": "2026-10-20"
+   "note": "Welche Figur es wird, ist nicht entschieden (D93); bis der Inhaber eine wählt, wird keine erzeugt.",
+   "changed": "2026-10-21"
   },
   {
    "id": "BIL-06",
@@ -4735,16 +4739,17 @@
    "title": "Hell oder Dunkel in den Einstellungen der Handy-App",
    "rule": "Folge in Handy-Apps standardmäßig dem System und biete in den Einstellungen die Gruppe „Hell oder Dunkel“ mit drei Zeilen „Wie das System“, „Hell“, „Dunkel“, daneben „Farbton: Kühl · Warm“ (FAR-15). Android zeigt sie als Radiozeilen, iOS als flache Zeilen mit Haken am Ende in accent. In der App-Leiste gibt es keine Taste und kein Icon dafür.",
    "rule_en": "Phone apps follow the system by default; settings group „Hell oder Dunkel“ with three rows „Wie das System“, „Hell“, „Dunkel“, plus „Farbton: Kühl · Warm“ (FAR-15); Android as radio rows, iOS as flat rows with an accent check mark at the end; no button or icon toggle in the app bar.",
-   "why": "Inhaber D75, Wortlaut „ja, zwischen app und desktop unterscheiden wegen hell dunkel taste“: Handy-Apps wählen in den Einstellungen (Lesart des Orchestrators, vom Inhaber änderbar). Beschriftete Wahl statt Icon (D36). D91: auf iOS Hell und Dunkel mit Haken wie im System (I8a); der Farbton steht in den Einstellungen (C4c).",
+   "why": "Inhaber D75, Wortlaut „ja, zwischen app und desktop unterscheiden wegen hell dunkel taste“: Handy-Apps wählen in den Einstellungen (zuerst Lesart des Orchestrators, mit D93 vom Inhaber bestätigt: „Ja, bestätigen (Empfohlen)“). Beschriftete Wahl statt Icon (D36). D91: auf iOS Hell und Dunkel mit Haken wie im System (I8a); der Farbton steht in den Einstellungen (C4c).",
    "do": "Android: Zeile 56 dp, Radio-Ring 20 dp (2 dp border-strong), gewählt Ring + 10-dp-Punkt in accent; Compose SbThemeChoice. iOS: SbThemeChoice und SbToneChoice, flache 56-pt-Zeilen mit Haarlinien, die gewählte mit check in accent und Wort in body-strong, VoiceOver liest „ausgewählt“.",
    "dont": "Mond-Icon oder die Taste „Hell oder Dunkel“ in der Kopfleiste der App; gefüllte Gruppen von iOS; ein Schalter statt drei Zeilen.",
    "numbers": "Zeile 56 dp / pt; Ring 20 dp; Punkt 10 dp; Rand 2 dp; iOS-Haken in accent",
    "decisions": [
     "D75",
     "D36",
-    "D91"
+    "D91",
+    "D93"
    ],
-   "source": "DECISIONS.md D75, D91 (I8a, C4c); systems/sebaro/spec/08-platform-android.md §12; spec/12-platform-ios.md §9; spec/07-voice.md §4.7; demo/mobile.html M6",
+   "source": "DECISIONS.md D75, D91 (I8a, C4c), D93 (2); systems/sebaro/spec/08-platform-android.md §12; spec/12-platform-ios.md §9; spec/07-voice.md §4.7; demo/mobile.html M6",
    "platforms": [
     "mobile"
    ],
@@ -4967,15 +4972,16 @@
    "title": "Hell oder Dunkel im Menü „Darstellung“",
    "rule": "Gib Desktop-Apps und Web-Apps mit Fenster die Wahl „Wie das System · Hell · Dunkel“ im Menü „Darstellung“ und in der Ansicht Einstellungen, als Optionsfelder mit Haken am Anfang. Die Wahl gilt sofort und bleibt gespeichert; im Kopf oder in der Titelleiste steht keine Taste dafür.",
    "rule_en": "Desktop apps and windowed web apps offer „Wie das System · Hell · Dunkel“ in the menu „Darstellung“ and in the settings view, as menuitemradio items with a leading check (data-sb-theme-choice); the choice applies at once and is stored; no button in the header or title bar.",
-   "why": "Inhaber D75: „ja, zwischen app und desktop unterscheiden wegen hell dunkel taste“, Lesart des Orchestrators: Desktop = Menü + Einstellungen, vom Inhaber änderbar. So erwartet man es auf macOS und Windows; die beschriftete Taste bleibt den Websites (WEB-02).",
+   "why": "Inhaber D75: „ja, zwischen app und desktop unterscheiden wegen hell dunkel taste“, Desktop = Menü + Einstellungen war die Lesart des Orchestrators; der Inhaber hat sie mit D93 bestätigt („Ja, bestätigen (Empfohlen)“). So erwartet man es auf macOS und Windows; die beschriftete Taste bleibt den Websites (WEB-02).",
    "do": "<ul class='sb-menu' role='menu' aria-label='Darstellung' data-sb-density='window'><li role='none'><ul class='sb-menu__group' role='group' aria-label='Hell oder Dunkel'>… role='menuitemradio' aria-checked='true' data-sb-theme-choice='system' …",
    "dont": "Die Taste „Hell oder Dunkel“ in der Titelleiste; Mond-Icon in der Werkzeugleiste; die Wahl nur in der Befehlspalette.",
    "numbers": "3 Optionen; Menüzeilen 32 px; Haken check--16 in accent",
    "decisions": [
     "D75",
-    "D67"
+    "D67",
+    "D93"
    ],
-   "source": "DECISIONS.md D75, D67 (5); systems/sebaro/spec/02-components.md §4.18; spec/07-voice.md §4.7; spec/11-checklist.md §1a",
+   "source": "DECISIONS.md D75, D67 (5), D93 (2); systems/sebaro/spec/02-components.md §4.18; spec/07-voice.md §4.7; spec/11-checklist.md §1a",
    "platforms": [
     "desktop",
     "web"
@@ -4983,7 +4989,7 @@
    "status": "entschieden",
    "check": "Menü „Darstellung“ und Einstellungen bieten die drei Optionen; Neustart behält die Wahl; keine Kopf-Taste im Fenster.",
    "example_hint": "Menü „Darstellung“ mit Haken vor „Wie das System“; falsch: Taste „Hell oder Dunkel“ in der Titelleiste.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-21"
   },
   {
    "id": "DSK-06",

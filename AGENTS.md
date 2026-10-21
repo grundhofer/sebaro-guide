@@ -28,7 +28,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 
 Rule status: **entschieden** = owner decision, binding. **vorläufig** = an agent's decision, valid until the owner
 changes it. **offen** = proposal only, do not build it as a rule. `D<n>` refers to row n of the decision log in the
-workshop repository sebaroDesign (private; the guide covers D1–D92). A rule id (e.g. `AKT-01`) is stable; cite it
+workshop repository sebaroDesign (private; the guide covers D1–D93). A rule id (e.g. `AKT-01`) is stable; cite it
 in code reviews, commit messages and ADRs.
 
 ## 2 The ten rules most often broken
@@ -98,18 +98,25 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
      inspector (DSK-06 to DSK-15).
 
    Settled by the owner with D92 (2026-10-21): „Konflikt“ always carries the warning glyph, in rows, trees and the
-   timeline (STA-08, DAT-15); the heatmap „heute“ is a 3 px cobalt frame on the cell, rounded like it, while focus
+   timeline (STA-08, DAT-15); the heatmap „heute“ is a cobalt frame on the cell, rounded like it, while focus
    stays the square 2 px ring with a 2 px gap outside (cells 6 px apart, legend „Rahmen: heute“); the scale
    thresholds stand, sequential at most 4 steps and diverging 5 (DAT-11, entschieden; `check_palette.py` allows 5
    sequential, the 4 is checked by review); the licence reading (TEC-09); FAR-13; sortable tables scroll sideways
    inside their `sb-table-wrap` on phones, never the page, and never stack (DAT-14); the `pin` and `star` icons and
    the five D86 sign near cases (DAT-09, DAT-17, ZEI-12). The marking of generated images stays open until the first
    product publication with generated images, then a legal check (BIL-04, vorläufig).
-   Still open, do not present as decided: the agents' readings of D75 (where phone and desktop apps choose light or
-   dark) and D84 (⌘K), the limits of the brand figure (BIL-05) and the agents' additions to D91; the share-image
+   Settled by the owner with D93 (2026-10-21): the heatmap „heute“ frame is 4 px `accent` (border-width-strong +
+   hairline) on the cell's edge with a 1 px `bg` joint inside before the fill, so it has ≥ 3 : 1 on every class
+   (the D92 frame directly on the fill had 1.1–2.4 : 1); `sebaro.css` draws it, never write your own (DAT-11). The
+   D75 reading is confirmed: phone apps choose light or dark in settings, desktop apps in the menu „Darstellung“ and
+   in settings (AKT-09, MOB-04, DSK-05); ⌘K / Ctrl+K in every app is confirmed (D84, NAV-09). The brand figure is
+   only ever an image (website, about page, introduction, communication), never a control, icon, app sign, favicon,
+   wordmark substitute or empty-state picture (BIL-05); which figure is still open.
+   Still open, do not present as decided: which brand figure (BIL-05) and the agents' additions to D91; the share-image
    generator and a generated print block in `tokens.css` (tool work); Compose versions of the new web parts and
    charts (not built: ask before building one in Compose). Nothing of this is tested on real iOS devices, WebKit,
-   Firefox, screen readers or real Tauri windows. See `docs/ausblick.html#entscheidung`.
+   Firefox, screen readers or real Tauri windows. See `docs/ausblick.html#entscheidung`; the open brand figure is
+   tracked as „Noch offen“ under `docs/ausblick.html#p-lesarten`.
 
 ## 4 Where the system files come from
 
@@ -140,7 +147,7 @@ python3 tools/check_site.py --strict   # all groups (list below); exit 0 require
 python3 tools/build.py --check         # freshness gate (CI runs this and check_site.py)
 python3 tools/sync_from_design.py --verify-local   # docs/sebaro/ untouched since the export
 npm ci && node tools/check_a11y.mjs    # axe WCAG 2.2 AA, overflow, console errors; light/dark, 390/1440 (CI runs it)
-python3 tools/release.py 2.3.0         # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.2.0 is the last release)
+python3 tools/release.py 2.4.0         # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.3.0 is the last release)
 ```
 
 `check_site.py` groups: PAGE, LINK, NET, CSS, TOKEN (every `var(--sb-*)` exists in `tokens.css` / `sebaro.css`), STYLE,
@@ -208,5 +215,5 @@ hand with `tools/sync_from_design.py`.
 The guide shows sebaro as built and checked in sebaroDesign; Chromium screenshots do not verify real Android/iOS
 devices, Windows rendering, WebKit/Tauri webviews or screen readers. All example data on the pages is invented.
 The owner answered the round-6 sketch (63 questions, private, never linked from here) with D91 and the open readings
-after it with D92; what still waits for the owner, and what is built but untested (real iOS devices, real Tauri
+after it with D92 and D93; what still waits for the owner, and what is built but untested (real iOS devices, real Tauri
 windows), is collected on `docs/ausblick.html`.

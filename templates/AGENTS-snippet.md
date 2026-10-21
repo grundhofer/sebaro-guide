@@ -27,9 +27,10 @@ This product uses the sebaro design system. Before building or changing any UI:
    video, place map, website patterns (form result, page numbers, FAQ, docs groups, screenshots, share image, language
    switch, print), charts (`sb-chart`, heatmap with classed scales: at most 4 sequential steps, 5 diverging), iOS (SwiftUI package) and the
    desktop window parts. Count partial states („2 offen“), never „teils offen“ (STA-09). Compose versions of the new
-   web parts and charts do not exist yet: ask before building one. Settled with D92: the heatmap „heute“ is a 3 px
-   cobalt frame on the cell (legend „Rahmen: heute“), „Konflikt“ always carries the warning glyph, sortable tables
-   scroll sideways inside `sb-table-wrap` on phones and never stack (DAT-11, STA-08, DAT-14).
+   web parts and charts do not exist yet: ask before building one. Settled with D92 and D93: the heatmap „heute“ is
+   a 4 px cobalt frame with a 1 px ground joint inside, drawn by `sebaro.css` (legend „Rahmen: heute“), „Konflikt“
+   always carries the warning glyph, sortable tables scroll sideways inside `sb-table-wrap` on phones and never stack
+   (DAT-11, STA-08, DAT-14). Confirmed with D93: the light/dark places of item 6 and ⌘K / Ctrl+K of item 7.
 10. Ship the export's `LICENSE.md` unchanged (D76). If a rule does not fit, cite its id (e.g. `AKT-01`) and ask the
     owner; do not work around it. Rule changes are listed by id in
     https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md.

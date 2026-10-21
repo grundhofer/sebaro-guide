@@ -1,7 +1,7 @@
 # Screen checklist
 
 Walk this for every screen in **light and dark**, at **390 px and 1440 px** (desktop apps: smallest and a wide window).
-Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D92.
+Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D93.
 
 ## Colour and hierarchy
 - [ ] Cobalt only for current place, links and focus; lime only for the one primary action (FAR, AKT)
@@ -13,9 +13,9 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
 - [ ] Layers end in the 2 px ink line; no tinted card grounds, no shadows (EBE)
 - [ ] Lists and stats flat with hairlines; directly labelled bars neutral (DAT)
 - [ ] Colour scales in classes, at most 4 sequential or 5 diverging, each step tellable from its neighbours and from
-      the ground; the legend above the chart names the numbers of every class; a heatmap marks today with the 3 px
-      cobalt frame on the cell („Rahmen: heute“), never like the focus ring; with three or more series the legend
-      shows line styles (DAT-10, DAT-11)
+      the ground; the legend above the chart names the numbers of every class; a heatmap marks today with the 4 px
+      cobalt frame and its 1 px ground joint from `sebaro.css` („Rahmen: heute“), never like the focus ring; with
+      three or more series the legend shows line styles (DAT-10, DAT-11)
 - [ ] Partially done is counted („2 offen“, „3 von 5 beantwortet“), never „teils offen“ (STA-09)
 - [ ] Sortable tables: the arrow and title weight only on the sorted column, `aria-sort` on its header; a sum row
       in `tfoot` under its column, „Summe der bekannten …“ when a value is missing, never 0; on phones the table

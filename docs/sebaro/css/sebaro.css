@@ -1129,11 +1129,13 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
    spec/01 §8.1: ground = class 0, neighbours ≥ 1.6 : 1, more is farther from the ground in both modes, G10a).
    The legend above names the range of every class. Each cell holds its value as text for assistive technology
    (.sb-visually-hidden); sb-chart.js turns the table into one Tab stop with arrow keys and shows the focused or
-   pointed cell in .sb-chart__readout. A day without data is the framed empty cell, never class 1. Today (D92) is a
-   cobalt frame that is part of the cell: 3 px accent on the cell's own edge, directly on the fill, rounded like the
-   cell. Focus is the standard ring OUTSIDE the cell (2 px focus, offset 2 px, square) with ground between ring and
-   cell, which the frame never has: attached against detached, 3 against 2 px, rounded against square. The 6 px
-   between cells keeps 2 px of ground between a focus ring and its neighbour */
+   pointed cell in .sb-chart__readout. A day without data is the framed empty cell, never class 1. Today (D93, the
+   form of D92's cobalt frame) is part of the cell: 4 px accent on the cell's own edge (border-width-strong +
+   hairline), rounded like the cell, then INSIDE a 1 px joint in bg between frame and fill (inset shadow), so the
+   marker has >= 3 : 1 on every class (joint against fill; cobalt against the grounds >= 6 : 1); cobalt directly on
+   the fill was only 1.1-2.4 : 1. Focus is the standard ring OUTSIDE the cell (2 px focus, offset 2 px, square) with
+   ground between ring and cell: attached against detached, 4 against 2 px, rounded against square. The 6 px between
+   cells keeps 2 px of ground between a focus ring and its neighbour */
 .sb-heatmap {
   inline-size: calc(100% + 2 * (var(--sb-space-1) + var(--sb-space-0-5))); max-inline-size: 26rem;
   margin: 0 calc(-1 * (var(--sb-space-1) + var(--sb-space-0-5)));
@@ -1147,7 +1149,8 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
 .sb-heatmap td > .sb-scale-cell { display: block; inline-size: 100%; block-size: auto; aspect-ratio: 1; }
 .sb-heatmap td[aria-current="date"] > .sb-scale-cell,
 .sb-heatmap__today-key {
-  border: var(--sb-border-width-strong) solid var(--sb-color-accent);
+  border: calc(var(--sb-border-width-strong) + var(--sb-border-width-hairline)) solid var(--sb-color-accent);
+  box-shadow: inset 0 0 0 var(--sb-border-width-hairline) var(--sb-color-bg);
 }
 .sb-heatmap__today-key { background: none; }
 .sb-chart__readout {
@@ -2704,7 +2707,10 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
   /* the class colours of a scale are the data (every value is text as well): heatmap cells and legends keep them,
      framed (D91 G6a); lines and bars follow the system colours */
   .sb-scale-cell { forced-color-adjust: none; border: 1px solid CanvasText; }
-  .sb-heatmap td[aria-current="date"] > .sb-scale-cell, .sb-heatmap__today-key { border: var(--sb-border-width-strong) solid CanvasText; }
+  .sb-heatmap td[aria-current="date"] > .sb-scale-cell, .sb-heatmap__today-key {   /* today (D93): frame CanvasText, joint Canvas */
+    border: calc(var(--sb-border-width-strong) + var(--sb-border-width-hairline)) solid CanvasText;
+    box-shadow: inset 0 0 0 var(--sb-border-width-hairline) Canvas;
+  }
   .sb-calendar__day[aria-current="date"] .sb-calendar__date { border-color: CanvasText; }
   .sb-calendar__day[aria-selected="true"] .sb-calendar__date { border-block-end-color: CanvasText; }
   .sb-calendar__day[data-sb-entry] .sb-calendar__date::after { background: CanvasText; }

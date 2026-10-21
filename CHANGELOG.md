@@ -11,6 +11,20 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+## 2.3.0 · 2026-10-21
+
+Übernahme von D93 aus der Werkstatt: die Antworten des Inhabers vom 2026-10-21 auf die Rückfrage nach D92
+(Werkstatt-Commit `b46fb76`). Keine Regel entfällt oder kehrt sich um; „heute“ in der Heatmap bekommt neue Werte, und
+Lesarten der Agenten werden Entscheidungen des Inhabers. Deshalb eine Nebenversion.
+
+- Geändert: DAT-11 („heute“ in der Heatmap ist ein 4 px breiter Rahmen in Kobalt auf der Zellkante, `border-width-strong` + `border-width-hairline`, rund wie die Zelle, mit einer 1-px-Fuge in `bg` innen zwischen Rahmen und Füllung; so hat die Markierung auf jeder Stufe mindestens 3 : 1, Fuge gegen Füllung ab 3,34 : 1 und Kobalt gegen den Grund ab 6 : 1, hell, dunkel und warm; der Kobaltrahmen direkt auf der Farbe aus D92 hatte nur 1,1 bis 2,4 : 1 und steht jetzt unter „Nicht so“; in Zwangsfarben Rahmen `CanvasText`, Fuge `Canvas`; der Fokusring bleibt 2 px, 2 px außen und eckig, D93 (1)), BIL-05 („Eine Markenfigur nur als Bild“: Website, Über-Seite, Einführung und Kommunikation, nie Bedienelement, Icon, App-Zeichen, Favicon, Ersatz für die Wortmarke oder im leeren Zustand; die Grenzen sind jetzt die des Inhabers, welche Figur es wird, bleibt offen, D93 (4)).
+- Lesart → Entscheidung des Inhabers (Status bleibt entschieden): AKT-09, MOB-04, DSK-05 (Handy-Apps wählen Hell oder Dunkel in den Einstellungen, Desktop-Apps im Menü „Darstellung“ und in den Einstellungen; „vom Inhaber änderbar“ entfällt, D93 (2)), NAV-09 (⌘K / Strg+K in allen Apps bestätigt, D93 (3)).
+- Beispiele: DAT-11 nennt unter „So“ den Rahmen mit Fuge und zeigt unter „Nicht so“ zusätzlich den Kobaltrahmen direkt auf der Farbe (auf den mittleren Stufen 1,1 bis 1,5 : 1); BIL-05 führt Website, Über-Seite, Einführung und Kommunikation als erlaubte Orte und Bedienelement und Wortmarke als verbotene.
+- Regelkatalog: `source.decisions` steht auf D1–D93.
+- Seiten: Daten und Bauteile beschreiben „heute“ mit 4 px und Fuge. Start, Gedanken, README und AGENTS stehen auf D1–D93; Gedanken erzählt D93 in der Geschichte und unter „Ein stärkerer Rahmen und zwei bestätigte Lesarten“, die Zeilen D75, D84 und D90 nennen die Bestätigung. Der Ausblick führt die Lesarten zu Hell oder Dunkel, ⌘K und Markenfigur nicht mehr unter „Wartet auf deine Wahl“, sondern unter „Am 21.10.2026 entschieden und bestätigt (D93)“ mit dem neuen Rahmen; unter „Wartet auf deine Wahl“ steht nur noch, was die Agenten zu D91 ergänzt haben, und ein Hinweis, dass offen bleibt, welche Figur die Markenfigur wird. Der ältere Eintrag „Markenfigur“ nennt die Grenze „nur als Bild“. Gedanken nennt D75 und D84 auch unter „Konflikte zeigen, nicht mitteln“ als mit D93 bestätigt. Die Vorlagen nennen den Rahmen mit Fuge und D93.
+- System: `docs/sebaro/` ist aus dem Werkstatt-Commit `b46fb76` exportiert: `sb-heatmap` zeichnet „heute“ und den Legendeneintrag `sb-heatmap__today-key` mit 4 px Kobalt und 1 px Fuge in `bg`, in Zwangsfarben `CanvasText` und `Canvas`.
+- Offen und deshalb nicht als entschieden geführt: welche Figur die Markenfigur wird (BIL-05), die Ergänzungen der Agenten zu D91, die Kennzeichnung erzeugter Bilder (BIL-04, bis zur ersten Veröffentlichung), Compose-Fassungen der neuen Bausteine und Diagramme. Die Fuge ist nur als Kontrast nach WCAG 2 in Chromium gemessen (kein APCA, keine Simulation der Farbsehschwächen); nichts davon ist auf echten Geräten, in WebKit, Firefox, mit Screenreadern oder in echten Tauri-Fenstern geprüft.
+
 ## 2.2.0 · 2026-10-21
 
 Übernahme von D92 aus der Werkstatt: die Antworten des Inhabers vom 2026-10-21 auf die offenen Lesarten nach D91

@@ -78,6 +78,10 @@
 .g-ex--dont .g-rx-d-badheat { border-collapse: separate; border-spacing: 2px; }
 .g-ex--dont .g-rx-d-badheat td { inline-size: 32px; block-size: 32px; text-align: center; font: var(--sb-type-caption); color: #FFFFFF; }
 .g-ex--dont .g-rx-d-today { outline: 2px solid var(--sb-color-accent); outline-offset: 2px; }
+/* DAT-11: today as the D92 frame, cobalt directly on the fill without the D93 joint (only 1.1 to 1.5 : 1 on the middle classes; the class-2 cell shown: 1.1 light, 1.4 dark) */
+.g-ex--dont .g-rx-d-flatrow { display: flex; gap: 6px; margin: 12px 0 0; padding: 0; list-style: none; }
+.g-ex--dont .g-rx-d-flatcell { display: block; inline-size: 32px; block-size: 32px; }
+.g-ex--dont .g-rx-d-flattoday { border: var(--sb-border-width-strong) solid var(--sb-color-accent); }
 
 .g-ex--dont .g-rx-d-pie__a { fill: #A80C5D; }
 .g-ex--dont .g-rx-d-pie__b { fill: #0F8186; }
