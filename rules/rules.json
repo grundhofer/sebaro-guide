@@ -1,11 +1,11 @@
 {
  "$schema": "./rules.schema.json",
- "version": "2.3.0",
- "date": "2026-10-21",
+ "version": "2.4.0",
+ "date": "2026-10-22",
  "source": {
   "repo": "sebaroDesign",
   "system": "sebaro",
-  "decisions": "D1-D93"
+  "decisions": "D1-D94"
  },
  "areas": [
   {
@@ -1328,8 +1328,8 @@
    "id": "EBE-07",
    "area": "ebenen",
    "title": "Menü nach ARIA-Muster",
-   "rule": "Bau Überlauf- und Kontextmenüs mit role='menu' und menuitem-Zeilen (48 px, in Desktop-Apps und Web-Apps mit Fenster 32 px), Icon in text-muted + Wort; Auslöser mit aria-haspopup='menu', aria-expanded und popovertarget; bg mit 2-px-Tinte, Radius 12, 200–320 px breit; Pfeiltasten, Pos1/Ende, Buchstaben, Escape und Fokusrückgabe über sb-menu.js. Ein Untermenü hängt an einer Zeile mit Chevron, öffnet mit →, Eingabe oder Druck, nie beim Darüberfahren, und schließt mit ← oder Escape. Die Löschzeile zeigt Wort und Icon in danger, öffnet trotzdem den Dialog und trägt keine Kante.",
-   "rule_en": "Menus: role=menu with menuitem rows (48 px, 32 px in windows), trigger with aria-haspopup, aria-expanded and popovertarget; bg + 2 px ink, radius 12, 200–320 px; keys and focus return by sb-menu.js; submenus hang on a row with a chevron, open with →, Enter or a press (never on hover), close with ← or Escape; the delete row is danger word + icon, opens the dialog, no cut.",
+   "rule": "Bau Überlauf- und Kontextmenüs mit role='menu' und menuitem-Zeilen (48 px, in Desktop-Apps und Web-Apps mit Fenster 32 px), Icon in text-muted + Wort; Auslöser mit aria-haspopup='menu', aria-expanded und popovertarget; bg mit 2-px-Tinte, Radius 12, 200–320 px breit; Pfeiltasten, Pos1/Ende, Buchstaben, Escape und Fokusrückgabe über sb-menu.js. Ein Untermenü hängt an einer Zeile mit Chevron, öffnet mit →, Eingabe oder Druck, nie beim Darüberfahren, und schließt mit ← oder Escape. Es steht neben seinem Elternmenü, sein erster Eintrag auf der Höhe seiner Zeile: ein Untermenü des Hauptmenüs zur Leserichtung, sonst zur anderen Seite, ein tieferes in die Richtung seines Elternmenüs. Es verdeckt nie einen noch sichtbaren Teil einer Ebene weiter oben und seinen eigenen Eintrag nur, wenn das Fenster in beiden Richtungen zu niedrig ist; ohne Platz zur Seite liegt es über seinem Elternmenü, vom Eintrag eingerückt, so weit das Fenster es zulässt, unter seinem Eintrag oder nahe dem unteren Rand darüber. Jede Ebene bleibt im Fenster. Die Löschzeile zeigt Wort und Icon in danger, öffnet trotzdem den Dialog und trägt keine Kante.",
+   "rule_en": "Menus: role=menu with menuitem rows (48 px, 32 px in windows), trigger with aria-haspopup, aria-expanded and popovertarget; bg + 2 px ink, radius 12, 200–320 px; keys and focus return by sb-menu.js; submenus hang on a row with a chevron, open with →, Enter or a press (never on hover), close with ← or Escape; a submenu stands beside its parent (the top menu's on the reading side, else the other; deeper ones keep their parent's direction), never covers a still visible upper level, covers its own item only when the window is too short either way, and without room lies over its parent, moved in from its item as far as the window allows, below or (near the bottom edge) above its item; every level stays inside the window; the delete row is danger word + icon, opens the dialog, no cut.",
    "why": "Standard-Muster; destruktiv bleibt destruktiv, die Kante gehört der Taste im Dialog (D46 (1)).",
    "do": "<ul class='sb-menu' role='menu'><li role='none'><button class='sb-menu__item' role='menuitem'>",
    "dont": "Löschen direkt aus dem Menü ohne Rückfrage; Kante oder Rahmen an der Menüzeile; Schatten unter dem Menü.",
@@ -1341,15 +1341,15 @@
     "D80",
     "D91"
    ],
-   "source": "systems/sebaro/spec/02-components.md §4.10, §4.12, §4.18, §4.24; demo/assets/sb-menu.js",
+   "source": "systems/sebaro/spec/02-components.md §4.10, §4.12, §4.18, §4.24; spec/11-checklist.md §1a; demo/assets/sb-menu.js",
    "platforms": [
     "alle"
    ],
    "status": "vorläufig",
-   "check": "axe; Tastaturtest mit sb-menu.js: Pfeile, Pos1/Ende, → und ← im Untermenü, Escape mit Fokusrückgabe.",
+   "check": "axe; Tastaturtest mit sb-menu.js: Pfeile, Pos1/Ende, → und ← im Untermenü, Escape mit Fokusrückgabe. Lage der Untermenüs bei 1440 und 390 px, auch mit „Menü“ nahe dem unteren Rand: kein Untermenü verdeckt seinen eigenen Eintrag oder einen noch sichtbaren Teil einer Ebene weiter oben, jede Ebene bleibt im Fenster.",
    "example_hint": "Menü „Mehr“ mit Bearbeiten, Teilen, Trennlinie, Löschen; falsch: Löschzeile mit 45°-Kante, die sofort löscht.",
    "note": "D67 (10): Seltenes und Löschen eines Bereichs im „Mehr“-Menü, Löschen ganz unten nach einer Trennlinie (AKT-10). Prüfelemente im Menü (menuitemradio, menuitemcheckbox mit sb-menu__check) zeigt DSK-05. D91 F4b wählt nur die Taste „Menü“ in der eigenen Leiste (DSK-08); Untermenüs und der Rest des Menümusters sind Spezifikation ohne eigene I-Zeile, deshalb bleibt die Regel vorläufig.",
-   "changed": "2026-10-21"
+   "changed": "2026-10-22"
   },
   {
    "id": "EBE-08",
@@ -2677,24 +2677,25 @@
    "title": "Board: Haarlinien zwischen Spalten, am Handy wischen",
    "rule": "Trenne die Spalten eines Boards nur durch 1-px-Haarlinien, ohne Rahmen und Grund je Spalte; die Karten (sb-card--item) sind die einzigen Kästen. Jede Spalte ist ein benannter Bereich mit Wort und Anzahl im Kopf. Unter 640 px eigener Breite stehen die Spalten nebeneinander und werden seitlich gewischt: Der Anfang der nächsten Spalte bleibt im Bild, die Leiste „Spalte 2 von 3: Verbessern“ mit „Vorige Spalte“ und „Nächste Spalte“ führt ohne Wischen hin, die Hauptaktion nennt die Spalte („Neue Karte in „Verbessern““), und die Seite scrollt nie seitlich. Verschieben geht immer auch ohne Ziehen.",
    "rule_en": "Board columns are divided by 1 px hairlines only (no frame or ground per column), cards are the only boxes; each column is a named region with word and count. Below 640 px of its own width the columns are swiped: the next column's start stays visible, the bar „Spalte 2 von 3: …“ with previous/next buttons reaches each column without swiping, the primary action names the column, the page never scrolls sideways; moving never needs dragging (sb-board, sb-board.js).",
-   "why": "Inhaber D91: Haarlinien zwischen den Spalten (B1b), am Handy Spalten seitlich wischen (B2b, statt der empfohlenen Reiter). Die Skizze nannte die Schwächen des Wischens: Wo bin ich, Konflikt mit der Zurück-Geste des Systems, wohin kommt „Neue Karte“, die Tastatur. Die Leiste mit Tasten, die sichtbare Kante der nächsten Spalte und die Hauptaktion mit dem Spaltennamen beantworten sie; die Tasten kollidieren nie mit einer Geste.",
+   "why": "Inhaber D91: Haarlinien zwischen den Spalten (B1b), am Handy Spalten seitlich wischen (B2b, statt der empfohlenen Reiter). Die Skizze nannte die Schwächen des Wischens: Wo bin ich, Konflikt mit der Zurück-Geste des Systems, wohin kommt „Neue Karte“, die Tastatur. Die Leiste mit Tasten, die sichtbare Kante der nächsten Spalte und die Hauptaktion mit dem Spaltennamen beantworten sie; die Tasten kollidieren nie mit einer Geste. D94 (3), Antwort „3 wie vorgeschlagen“: Leiste, Spaltenname in der Hauptaktion und der sichtbare Anfang der nächsten Spalte gelten so, wie sie gebaut sind.",
    "do": "<div class='sb-board' id='b'><div class='sb-board__columns'><section class='sb-board__column' aria-labelledby='c1'><div class='sb-board__head'><h3 class='sb-board__title' id='c1'><span class='sb-board__name'>Verbessern</span> <span class='sb-board__count'>2<span class='sb-visually-hidden'> Karten</span></span></h3>…; Hauptaktion „Neue Karte in „<span data-sb-board-name='b'>…</span>““; sb-board.js.",
    "dont": "Jede Spalte in einem Rahmen oder auf grauem Grund; Spalten am Handy untereinander; Wischen ohne Positionsleiste; „Neue Karte“ ohne Spalte; Karten nur durch Ziehen verschiebbar; die ganze Seite scrollt seitlich.",
    "numbers": "Haarlinie 1 px border; Spaltenkopf 32 px (48 px mit 48-px-Taste); Karte 1 px border-strong, Radius 12; schmal unter 640 px eigener Breite: Spalte = Breite minus 48 px, scroll-snap je Spalte",
    "decisions": [
     "D80",
     "D83",
-    "D91"
+    "D91",
+    "D94"
    ],
-   "source": "DECISIONS.md D91 (B1b, B2b); systems/sebaro/spec/02-components.md §3.16, §7 (sb-board.js); spec/07-voice.md §4.8",
+   "source": "DECISIONS.md D91 (B1b, B2b), D94 (3); systems/sebaro/spec/02-components.md §3.16, §7 (sb-board.js); spec/07-voice.md §4.8",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Bei 390 px: Positionsleiste da, Tab erreicht jede Spalte, die Seite ist nicht breiter als das Fenster; im Fenster schmaler als 640 px nennt „Neue Karte“ die Spalte.",
    "example_hint": "Board in 390 px mit Positionsleiste und „Neue Karte in …“; falsch: gerahmte Spalten auf grauem Grund.",
-   "note": "Leiste, sichtbare Kante der nächsten Spalte und Spaltenname in der Hauptaktion sind die Antwort des Agenten auf die Schwächen aus der Skizze. Die Compose-Fassung fehlt noch; auf echten Geräten nicht geprüft.",
-   "changed": "2026-10-21"
+   "note": "Leiste, sichtbare Kante der nächsten Spalte und Spaltenname in der Hauptaktion waren die Antwort der Agenten auf die Schwächen aus der Skizze; der Inhaber hat sie mit D94 angenommen. Die Compose-Fassung fehlt noch; auf echten Geräten nicht geprüft.",
+   "changed": "2026-10-22"
   },
   {
    "id": "DAT-14",
@@ -2702,24 +2703,25 @@
    "title": "Tabellen: Pfeil nur an der sortierten Spalte, Summe im Fuß",
    "rule": "Mach einen sortierbaren Spaltenkopf zur Taste (sb-table__sort). Nur die Spalte, nach der sortiert ist, trägt aria-sort, Titelgewicht und den Pfeil arrow-up--16 oder arrow-down--16; die anderen zeigen nur ihr Wort. Der erste Druck sortiert Zahlen und Daten absteigend, Wörter aufsteigend, der nächste kehrt um. Eine Summe steht im Tabellenfuß (tfoot) unter ihrer Spalte, getrennt durch die Linie in border-strong, in body-strong; fehlt ein Wert, heißt die Zeile „Summe der bekannten …“ und die Lücke bleibt „keine Angabe“, nie 0. Am Handy scrollt eine sortierbare Tabelle in ihrem eigenen Kasten (sb-table-wrap) seitlich, nie die Seite; sie stapelt ihre Zeilen nicht zu Blöcken.",
    "rule_en": "Sortable heads are buttons (sb-table__sort); only the sorted column carries aria-sort, title weight and the arrow icon; the first press sorts numbers and dates descending, words ascending, the next reverses; totals in tfoot below their column (border-strong line, body-strong); with a missing value the row reads „Summe der bekannten …“ and the gap stays „keine Angabe“, never 0. On phones a sortable table scrolls sideways inside its own box (sb-table-wrap), never the page; it does not stack its rows into blocks.",
-   "why": "Inhaber D91: Sortierpfeil nur an der sortierten Spalte (B5a), Summenzeile im Tabellenfuß (B6a). Doppelpfeile an jeder Spalte wären Lärm; ein Pfeil sagt, wonach sortiert ist. Eine fehlende Zahl als 0 zu zählen, wäre falsch (D82, TXT-14). D92 (7), Antwort „Seitlich scrollen (Empfohlen)“: Sortierbare Tabellen scrollen am Handy in ihrem eigenen Kasten seitlich statt sich zu stapeln; nie die Seite.",
+   "why": "Inhaber D91: Sortierpfeil nur an der sortierten Spalte (B5a), Summenzeile im Tabellenfuß (B6a). Doppelpfeile an jeder Spalte wären Lärm; ein Pfeil sagt, wonach sortiert ist. Eine fehlende Zahl als 0 zu zählen, wäre falsch (D82, TXT-14). D92 (7), Antwort „Seitlich scrollen (Empfohlen)“: Sortierbare Tabellen scrollen am Handy in ihrem eigenen Kasten seitlich statt sich zu stapeln; nie die Seite. D94 (2), Antwort „2 wie vorgeschlagen“: Sortierköpfe 48 px auf Seiten und am Handy, 32 px nur im Fenster, dort bei Touch wieder 48 px.",
    "do": "<th scope='col' class='sb-num' aria-sort='descending'><button class='sb-table__sort' type='button'><svg …arrow-down--16/>Betrag</button></th>; <tfoot><tr><th scope='row' colspan='2'>Summe</th><td class='sb-num'>1.797,20 €</td></tr></tfoot>; sb-table.js sagt „Sortiert nach Betrag, absteigend“.",
    "dont": "Doppelpfeile an jeder sortierbaren Spalte; aria-sort an mehreren Spalten; Summe als Kennzahl unter der Tabelle; ein fehlender Wert als 0 in der Summe; Summenzeile mit grauer Fläche; Summenzeile, die beim Sortieren mitwandert; sortierbare Tabelle, die sich am Handy zu Blöcken stapelt; eine Tabelle, die die ganze Seite seitlich scrollen lässt.",
    "numbers": "Sortierkopf 48 px auf Seiten und Handys, 32 px nur im Fenster (data-sb-density='window'), bei Touch wieder 48 px; Pfeil 16 px; Linie über dem Fuß border-strong",
    "decisions": [
     "D82",
     "D91",
-    "D92"
+    "D92",
+    "D94"
    ],
-   "source": "DECISIONS.md D91 (B5a, B6a), D82, D92 (7); systems/sebaro/spec/02-components.md §3.9, §7 (sb-table.js)",
+   "source": "DECISIONS.md D91 (B5a, B6a), D82, D92 (7), D94 (2); systems/sebaro/spec/02-components.md §3.9, §7 (sb-table.js)",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "axe; genau ein th mit aria-sort je Tabelle; die Summenzeile bleibt beim Sortieren unten; Tab auf den Kopf, Eingabe sortiert. Bei 390 px: die Tabelle scrollt im Kasten, die Seite hat keinen seitlichen Bildlauf.",
    "example_hint": "Ausgaben nach Betrag sortiert mit Summe im Fuß; falsch: Doppelpfeile überall und eine Lücke als 0.",
-   "note": "48 px außerhalb von Fenstern ist eine Korrektur nach der Prüfung des Baus (Agentenarbeit). Die Compose-Fassung fehlt noch.",
-   "changed": "2026-10-21"
+   "note": "Die Höhen außerhalb von Fenstern waren eine Korrektur der Agenten nach der Prüfung des Baus; der Inhaber hat sie mit D94 angenommen. Die Compose-Fassung fehlt noch.",
+   "changed": "2026-10-22"
   },
   {
    "id": "DAT-15",
@@ -4071,25 +4073,26 @@
    "id": "BIL-05",
    "area": "bilder",
    "title": "Eine Markenfigur nur als Bild",
-   "rule": "Eine Figur aus den Bildkatalogen darf sebaro als Markenfigur vertreten, aber nur als Bild: auf der Website, der Über-Seite, in der Einführung und in der Kommunikation. Sie ist ein Bild nach BIL-01 bis BIL-04 (ohne Text, mit Herkunft, gekennzeichnet), nie ein Bedienelement, Icon, App-Zeichen, Favicon oder Ersatz für die Wortmarke und nie im leeren Zustand: Leere Zustände zeigen weiter Spots (DAT-07).",
-   "rule_en": "A figure from the image catalogues may represent sebaro as a brand figure (D90), only ever as an image (website, about page, introduction, communication; D93); it is an image under BIL-01–04, never a control, icon, app sign, favicon or wordmark substitute, and never in an empty state (spots stay, DAT-07).",
-   "why": "Inhaber D90 auf die Frage, ob eine Figur aus den Bildkatalogen Markenfigur werden darf: „ja darf“. Mehrere Produkte legen „keine Maskottchen“ fest; die Figur steht für die Marke, nicht für Witze in der Oberfläche. Die Grenzen zu Icons, Zeichen und leeren Zuständen hatte ein Agent gesetzt; D93, nach dem Bild „Figur als Icon in echten Größen“: „Nur als Bild (Empfohlen)“. Seitdem sind es die Grenzen des Inhabers.",
-   "do": "Die Figur als Linienbild auf der Über-Seite mit HTML-Bildunterschrift.",
-   "dont": "Die Figur als App-Zeichen oder Favicon; Figur mit Sprechblase und Text im Bild; Figur im leeren Zustand mit Witz.",
+   "rule": "Eine Figur aus den Bildkatalogen darf sebaro als Markenfigur vertreten, aber nur als Bild: auf der Website, der Über-Seite, in der Einführung und in der Kommunikation. Sie ist ein Bild nach BIL-01 bis BIL-04 (ohne Text, mit Herkunft, gekennzeichnet), nie ein Bedienelement, Icon, App-Zeichen, Favicon oder Ersatz für die Wortmarke und nie im leeren Zustand: Leere Zustände zeigen weiter Spots (DAT-07). Zurzeit gibt es keine Markenfigur (D94): Die Marke entsteht aus Schrift, Farbe und App-Zeichen, und es wird keine Figur erzeugt, bis eine neue Entscheidung eine wählt.",
+   "rule_en": "A figure from the image catalogues may represent sebaro as a brand figure (D90), only ever as an image (website, about page, introduction, communication; D93); it is an image under BIL-01–04, never a control, icon, app sign, favicon or wordmark substitute, and never in an empty state (spots stay, DAT-07). For now there is none (D94): the brand comes from type, colour and app signs, and no figure is generated until a new decision row picks one.",
+   "why": "Inhaber D90 auf die Frage, ob eine Figur aus den Bildkatalogen Markenfigur werden darf: „ja darf“. Mehrere Produkte legen „keine Maskottchen“ fest; die Figur steht für die Marke, nicht für Witze in der Oberfläche. Die Grenzen zu Icons, Zeichen und leeren Zuständen hatte ein Agent gesetzt; D93, nach dem Bild „Figur als Icon in echten Größen“: „Nur als Bild (Empfohlen)“. Seitdem sind es die Grenzen des Inhabers. D94, nach dem Bild mit den Figuren A bis E auf einer Über-Seite und F „Keine Figur (vorerst)“: „keine figur aktuell bei f“, also F. Vorerst gibt es keine Markenfigur; D90 erlaubt eine weiter, in den Grenzen von D93, aber nur mit einer neuen Zeile im Protokoll.",
+   "do": "Zurzeit keine Figur: Die Über-Seite zeigt Wortmarke, App-Zeichen und Text. Wählt eine neue Entscheidung eine Figur, dann als Linienbild auf der Über-Seite mit HTML-Bildunterschrift.",
+   "dont": "Eine Figur erzeugen oder zeigen, bevor eine Entscheidung sie wählt; die Figur als App-Zeichen oder Favicon; Figur mit Sprechblase und Text im Bild; Figur im leeren Zustand mit Witz.",
    "numbers": "",
    "decisions": [
     "D90",
-    "D93"
+    "D93",
+    "D94"
    ],
-   "source": "DECISIONS.md D90, D93 (4); systems/sebaro/spec/06-imagery.md §1",
+   "source": "DECISIONS.md D90, D93 (4), D94 (7); systems/sebaro/spec/06-imagery.md §1; spec/05-brand.md",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
-   "check": "Review: Die Figur erscheint nur als Bild mit Kennzeichnung (Website, Über-Seite, Einführung, Kommunikation), nie in Icon-, Zeichen-, Favicon- oder Bedien-Slots, nie statt der Wortmarke und nie im leeren Zustand.",
-   "example_hint": "Über-Seite mit Figur als Bild und Bildunterschrift; falsch: Figur als App-Kachel.",
-   "note": "Welche Figur es wird, ist nicht entschieden (D93); bis der Inhaber eine wählt, wird keine erzeugt.",
-   "changed": "2026-10-21"
+   "check": "Review: Zurzeit erscheint keine Figur (D94). Kommt eine mit einer neuen Entscheidung, erscheint sie nur als Bild mit Kennzeichnung (Website, Über-Seite, Einführung, Kommunikation), nie in Icon-, Zeichen-, Favicon- oder Bedien-Slots, nie statt der Wortmarke und nie im leeren Zustand.",
+   "example_hint": "Wo eine Figur stehen dürfte, und dass zurzeit keine gewählt ist; falsch: Figur als App-Kachel.",
+   "note": "Zurzeit gibt es keine Markenfigur (D94); eine Figur kommt nur mit einer neuen Zeile im Protokoll, und bis dahin wird keine erzeugt.",
+   "changed": "2026-10-22"
   },
   {
    "id": "BIL-06",
@@ -4120,26 +4123,27 @@
    "id": "BIL-07",
    "area": "bilder",
    "title": "Video mit Vorschaubild und Abspieltaste",
-   "rule": "Zeig ein Video als natives <video> mit Vorschaubild vom eigenen Server und einer echten Taste „Abspielen“ in der Mitte (sb-video, sb-media.js): 48 px hoch, auf eigenem Grund bg mit 2-px-Tintenlinie, play--filled und Wort; ihr Name beginnt mit dem sichtbaren Wort („Abspielen: <Titel>, Video, 3 Minuten 42 Sekunden“). Das Vorschaubild lädt mit der Seite, das Video erst nach dem Druck. Das Vorschaubild hat eine Beschreibung in einem Satz, die per aria-describedby an Taste und Video hängt. Titel, Länge und Untertitelsprachen stehen als Text darunter, Untertitel als <track>. Nie Autoplay, nie ein fremder Player.",
-   "rule_en": "Video: native <video> with a poster from the own server and a real centred button „Abspielen“ (sb-video, sb-media.js; 48 px, own bg ground with 2 px ink line, play--filled + word, its name starts with the visible word); the poster loads with the page, the video only after the press; the poster has a one-sentence description wired by aria-describedby; title, length and caption languages as text below, captions as <track>; never autoplay or a foreign player.",
-   "why": "Inhaber D91: Video mit Vorschaubild und Abspieltaste (B12b, statt des empfohlenen Rahmens ohne Bild). Die Skizze nannte die Schwächen: eine Anfrage mehr, das Vorschaubild braucht einen Alt-Text, die Taste muss auf jedem Bild lesbar bleiben. Das Vorschaubild kommt vom eigenen Server (im Dunkeln ein zweites), das Video erst nach dem Druck; die Beschreibung ersetzt den Alt-Text, den poster nicht hat; die Taste hat ihren eigenen Grund.",
+   "rule": "Zeig ein Video als natives <video> mit Vorschaubild vom eigenen Server und einer echten Taste „Abspielen“ in der Mitte (sb-video, sb-media.js): 48 px hoch, auf eigenem Grund bg mit 2-px-Tintenlinie, play--filled und Wort; ihr Name beginnt mit dem sichtbaren Wort („Abspielen: <Titel>, Video, 3 Minuten 42 Sekunden“). Das Vorschaubild lädt mit der Seite, das Video erst nach dem Druck. Das Vorschaubild hat eine Beschreibung in einem Satz, die nur der Screenreader liest und die per aria-describedby an Taste und Video hängt; nach dem Druck fällt sie am Video weg. Titel, Länge und Untertitelsprachen stehen als Text darunter, Untertitel als <track>. Nie Autoplay, nie ein fremder Player.",
+   "rule_en": "Video: native <video> with a poster from the own server and a real centred button „Abspielen“ (sb-video, sb-media.js; 48 px, own bg ground with 2 px ink line, play--filled + word, its name starts with the visible word); the poster loads with the page, the video only after the press; the poster has a one-sentence description for screen readers only, wired by aria-describedby to button and video and dropped from the video after the press; title, length and caption languages as text below, captions as <track>; never autoplay or a foreign player.",
+   "why": "Inhaber D91: Video mit Vorschaubild und Abspieltaste (B12b, statt des empfohlenen Rahmens ohne Bild). Die Skizze nannte die Schwächen: eine Anfrage mehr, das Vorschaubild braucht einen Alt-Text, die Taste muss auf jedem Bild lesbar bleiben. Das Vorschaubild kommt vom eigenen Server (im Dunkeln ein zweites), das Video erst nach dem Druck; die Beschreibung ersetzt den Alt-Text, den poster nicht hat; die Taste hat ihren eigenen Grund. D94 (4), Antwort „4 wie vorgeschlagen“: der Satz zum Vorschaubild nur für Screenreader, an Taste und Video, nach dem Abspielen am Video weg.",
    "do": "<figure class='sb-video' data-sb-video><div class='sb-video__frame'><video class='sb-video__media' poster='…-light.webp' data-sb-poster-dark='…-dark.webp' preload='none' playsinline controls aria-describedby='p'>…<track kind='captions' srclang='de' label='Deutsch' default></video><button class='sb-video__play' type='button' aria-label='Abspielen: …' aria-describedby='p' hidden>…</button></div><figcaption class='sb-video__caption'>…</figcaption><p class='sb-visually-hidden' id='p'>Vorschaubild: …</p></figure>",
    "dont": "Autoplay; der eingebettete Player einer Plattform; ein Video, das vor dem Druck lädt; ein Play-Icon ohne Wort; ein Vorschaubild mit Schrift; ein Vorschaubild ohne Beschreibung.",
    "numbers": "Rahmen 16 : 9, 1 px border-strong, Radius 12; Taste 48 px, Linie 2 px, Radius 8; preload='none'",
    "decisions": [
     "D9",
     "D18",
-    "D91"
+    "D91",
+    "D94"
    ],
-   "source": "DECISIONS.md D91 (B12b); systems/sebaro/spec/02-components.md §3.26, §7 (sb-media.js); spec/06-imagery.md; spec/07-voice.md §4.11",
+   "source": "DECISIONS.md D91 (B12b), D94 (4); systems/sebaro/spec/02-components.md §3.26, §7 (sb-media.js); spec/06-imagery.md; spec/07-voice.md §4.11",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Netzwerk-Log: vor dem Druck nur das Vorschaubild (im Dunkeln zwei), das Video danach; axe video-caption; nach dem Druck liegt der Fokus auf dem Video.",
    "example_hint": "Video mit hellem und dunklem Vorschaubild und der Taste „Abspielen“; falsch: Play-Dreieck ohne Wort direkt auf dem Bild.",
-   "note": "Beschreibung des Vorschaubilds, eigene Tastenfläche und die genannte Zahl der Anfragen sind die Antwort des Agenten auf die Schwächen aus der Skizze. Compose-Fassung fehlt noch.",
-   "changed": "2026-10-21"
+   "note": "Der Satz zum Vorschaubild war die Antwort der Agenten auf „braucht einen Alt-Text“; der Inhaber hat ihn mit D94 angenommen. Die eigene Tastenfläche und die genannte Zahl der Anfragen beantworten die übrigen Schwächen aus der Skizze. Compose-Fassung fehlt noch.",
+   "changed": "2026-10-22"
   },
   {
    "id": "ZUG-01",
@@ -4546,23 +4550,24 @@
    "title": "Aufklappen mit details: häufige Fragen und Doku-Gruppen",
    "rule": "Bau häufige Fragen und die Gruppen einer Doku-Navigation aus nativen <details>. Eine Frage ist eine Zeile von mindestens 56 px mit der Frage in body-strong und dem Chevron am Ende; die Antwort hat höchstens drei Sätze mit „du“ und dann einen Link. In einer Doku-Navigation ab etwa acht Seiten steht „Übersicht“ zuerst und führt zu allen Seiten, jeder Gruppenkopf nennt die Zahl seiner Seiten („3 Seiten“), und die Gruppe der aktuellen Seite ist offen.",
    "rule_en": "Frequent questions and docs-nav groups are native <details>: a question row ≥ 56 px (body-strong + chevron), answers of at most three sentences with „du“ then a link (sb-faq); a docs nav from about eight pages has „Übersicht“ first, every group head names its page count, the current page's group is open (sb-toc__group).",
-   "why": "Inhaber D91: häufige Fragen mit details (W3a), Doku-Navigation mit aufklappbaren Gruppen (W4b, statt alles offen). Die Skizze nannte die Schwächen des Zuklappens: Man sieht nicht mehr, was es gibt, und jeder Kopf wird eine Taste mit Zustand. Die Seitenzahl je Kopf und „Übersicht“ zeigen, was es gibt; das native <summary> bringt Zustand, Eingabe und Leertaste ohne Skript.",
+   "why": "Inhaber D91: häufige Fragen mit details (W3a), Doku-Navigation mit aufklappbaren Gruppen (W4b, statt alles offen). Die Skizze nannte die Schwächen des Zuklappens: Man sieht nicht mehr, was es gibt, und jeder Kopf wird eine Taste mit Zustand. Die Seitenzahl je Kopf und „Übersicht“ zeigen, was es gibt; das native <summary> bringt Zustand, Eingabe und Leertaste ohne Skript. D94 (5), Antwort „5 wie vorgschlagen“: „Übersicht“ zuerst, die Zahl der Seiten in jedem Gruppenkopf und die offene Gruppe der aktuellen Seite gelten so, wie sie gebaut sind.",
    "do": "<details class='sb-faq__item'><summary class='sb-faq__question'><span>Brauche ich ein Konto?</span><svg class='sb-icon sb-icon--20 sb-faq__chevron' …/></summary><div class='sb-faq__answer'><p>Nein. …</p></div></details>; <details class='sb-toc__group' open><summary class='sb-toc__group-head'>…<span class='sb-toc__group-name'>Deine Daten</span><span class='sb-toc__group-count'>3 Seiten</span></summary><ol>…",
    "dont": "Aufklappen mit eigenen Tasten und Skript; eine Antwort mit „Sie“ oder fünf Absätzen; ein zugeklappter Gruppenkopf ohne Seitenzahl; die Gruppe der aktuellen Seite zu; interne Begriffe als Gruppenwörter; mehr als zwei Ebenen.",
    "numbers": "Fragezeile ab 56 px; Chevron 20 px, dreht 180° in 120 ms nur bei einer Handlung; Antwort höchstens 70 ch; Doku-Zeilen 48 px, ab 1024 px 32 px; höchstens 2 Ebenen",
    "decisions": [
     "D80",
-    "D91"
+    "D91",
+    "D94"
    ],
-   "source": "DECISIONS.md D91 (W3a, W4b); systems/sebaro/spec/02-components.md §5.4.3, §5.4.4; spec/07-voice.md §4.10",
+   "source": "DECISIONS.md D91 (W3a, W4b), D94 (5); systems/sebaro/spec/02-components.md §5.4.3, §5.4.4; spec/07-voice.md §4.10",
    "platforms": [
     "web"
    ],
    "status": "entschieden",
    "check": "Ohne Skript öffnen Eingabe und Leertaste; die Browsersuche öffnet eine zugeklappte Antwort (Chromium; WebKit und Firefox ungeprüft).",
    "example_hint": "Drei Fragen, eine offen, und eine Doku-Navigation mit Gruppen und Seitenzahlen; falsch: Fragen als Karten mit Plus-Zeichen und Gruppen ohne Zahl.",
-   "note": "Seitenzahl je Kopf und „Übersicht“ sind die Antwort des Agenten auf die Schwächen von W4b.",
-   "changed": "2026-10-21"
+   "note": "Seitenzahl je Kopf, „Übersicht“ und die offene Gruppe der aktuellen Seite waren die Antwort der Agenten auf die Schwächen von W4b; der Inhaber hat sie mit D94 angenommen.",
+   "changed": "2026-10-22"
   },
   {
    "id": "WEB-08",
@@ -5021,15 +5026,16 @@
    "title": "Kleines Fenster erlaubt, ziehbare Trennlinien",
    "rule": "Erlaube Fenster ab 480 × 400 px; die Seitenteile weichen, der Inhalt behält 480 px (DSK-04). Die Tintenlinien zwischen Seitenteil und Inhalt lassen sich ziehen: Seitenleiste 200–360 px, Inspektor 240–400 px; unter die kleinste Breite gezogen klappt der Teil zu, ein Doppelklick gibt die Startbreite zurück. Mit der Tastatur bewegen ← und → die Linie um 8 px (mit ⇧ 32 px), Pos1 und Ende springen an die Grenzen, Eingabe klappt zu und auf. Ohne Ziehen wählt das Menü „Darstellung“ „Schmal · Normal · Breit“. Die Breiten bleiben je Fenster gespeichert.",
    "rule_en": "Windows from 480 × 400 px; side parts give way, content keeps 480 px (DSK-04); the ink lines between a pane and the content are draggable (sidebar 200–360, inspector 240–400 px; below the minimum the pane collapses, double click = start width), keyboard ← → 8 px (⇧ 32 px), Home/End, Enter collapses; without dragging the menu „Darstellung“ offers „Schmal · Normal · Breit“; widths stored per window (sb-window__divider).",
-   "why": "Inhaber D91: kleines Fenster erlaubt, Seitenteile weichen (F2a); ziehbare Trennlinien mit Grenzen und Tastatur (F3a). WCAG 2.5.7 verlangt einen Weg ohne Ziehen; „Schmal · Normal · Breit“ ist dieser Weg.",
+   "why": "Inhaber D91: kleines Fenster erlaubt, Seitenteile weichen (F2a); ziehbare Trennlinien mit Grenzen und Tastatur (F3a). WCAG 2.5.7 verlangt einen Weg ohne Ziehen; „Schmal · Normal · Breit“ ist dieser Weg. D94 (1), Antwort „1 wie vorgeschlagen“: „Schmal · Normal · Breit“ im Menü „Darstellung“ gilt so, wie es gebaut ist.",
    "do": "<div class='sb-window__divider' role='separator' aria-orientation='vertical' aria-controls='sidebar' aria-label='Breite der Seitenleiste' aria-valuemin='200' aria-valuemax='360' aria-valuenow='240'></div>; Tauri minWidth 480, minHeight 400; sb-window.js.",
    "dont": "Ein großes Mindestfenster; eine Trennlinie ohne Tastatur oder ohne Weg ohne Ziehen; eine dickere oder farbige Linie zum Greifen; Inhalt unter 480 px gezogen.",
    "numbers": "Fenster ab 480 × 400 px; Seitenleiste 200–360 px (Start 240), Inspektor 240–400 px (Start 280); Greiffläche 24 px, bei Touch 48 px; Schritte 8 / 32 px; aria-valuetext „264 Pixel“, „zugeklappt“",
    "decisions": [
     "D81",
-    "D91"
+    "D91",
+    "D94"
    ],
-   "source": "DECISIONS.md D91 (F2a, F3a), D81; systems/sebaro/spec/02-components.md §4.17, §4.23; spec/09-platform-web.md §13.1",
+   "source": "DECISIONS.md D91 (F2a, F3a), D81, D94 (1); systems/sebaro/spec/02-components.md §4.17, §4.23; spec/09-platform-web.md §13.1",
    "platforms": [
     "desktop",
     "web"
@@ -5037,8 +5043,8 @@
    "status": "entschieden",
    "check": "Fenster auf 480 × 400 px; Trennlinie mit Tab erreichen und mit Pfeilen bewegen; „Schmal · Normal · Breit“ im Menü; neu laden behält die Breite.",
    "example_hint": "Fenster mit fokussierter Trennlinie und Breitenwahl im Menü; falsch: dicker farbiger Griff ohne Tastatur.",
-   "note": "„Schmal · Normal · Breit“ ist eine Ergänzung nach der Prüfung des Baus für WCAG 2.5.7 (Agentenarbeit).",
-   "changed": "2026-10-21"
+   "note": "„Schmal · Normal · Breit“ war eine Ergänzung der Agenten nach der Prüfung des Baus (WCAG 2.5.7); der Inhaber hat sie mit D94 angenommen.",
+   "changed": "2026-10-22"
   },
   {
    "id": "DSK-08",
@@ -5096,18 +5102,19 @@
    "id": "DSK-10",
    "area": "plattform-desktop",
    "title": "Dokument-Reiter 32 px, Kreuz am aktuellen",
-   "rule": "Zeig mehrere offene Dokumente als Dokument-Reiter (sb-doc-tabs) oben im Inhalt: 32 px, label, eine Haarlinie darunter, der aktuelle Reiter wie die Systemreiter mit 3-px-Ortslinie und Titelgewicht. Das Kreuz steht immer am aktuellen Reiter, an den anderen beim Zeigen oder Fokus, bei Touch an allen. Tastatur und Screenreader schließen mit Entf oder ⌘W; vor dem Schließen eines geänderten Dokuments fragt die App. Lange Namen werden am Ende gekürzt, der volle Name steht im title. Ist keins offen, sagt ein Satz, wie man eins öffnet.",
-   "rule_en": "Several open documents as document tabs (sb-doc-tabs) at the top of the content: 32 px, label, hairline below, the current tab with the 3 px place line and title weight; the cross always on the current tab, on others on hover or focus, under touch on all; keyboard and screen readers close with Delete or ⌘W; a changed document asks first; long names cut at the end with the full name as title; with none open a sentence says how to open one.",
-   "why": "Inhaber D91 F7a: Dokument-Reiter, 32 px, Kreuz am aktuellen Reiter. Die Systemreiter (NAV-08) wechseln Ansichten einer Sache, Dokument-Reiter öffnen und schließen. Das Kreuz ist nur ein Zeigerkürzel, weil ARIA in einer Reiterliste keine Taste erlaubt.",
+   "rule": "Zeig mehrere offene Dokumente als Dokument-Reiter (sb-doc-tabs) oben im Inhalt: 32 px, label, eine Haarlinie darunter, der aktuelle Reiter wie die Systemreiter mit 3-px-Ortslinie und Titelgewicht. Das Kreuz steht immer am aktuellen Reiter, an den anderen beim Zeigen oder Fokus, bei Touch an allen. Das Kreuz ist nur für den Zeiger und hat keinen eigenen Tab-Halt; Tastatur und Screenreader schließen mit Entf oder ⌘W, aria-keyshortcuts sagt das Kürzel an; vor dem Schließen eines geänderten Dokuments fragt die App. Lange Namen werden am Ende gekürzt, der volle Name steht im title. Ist keins offen, sagt ein Satz, wie man eins öffnet.",
+   "rule_en": "Several open documents as document tabs (sb-doc-tabs) at the top of the content: 32 px, label, hairline below, the current tab with the 3 px place line and title weight; the cross always on the current tab, on others on hover or focus, under touch on all; the cross is for the pointer only, with no tab stop of its own; keyboard and screen readers close with Delete or ⌘W, announced by aria-keyshortcuts; a changed document asks first; long names cut at the end with the full name as title; with none open a sentence says how to open one.",
+   "why": "Inhaber D91 F7a: Dokument-Reiter, 32 px, Kreuz am aktuellen Reiter. Die Systemreiter (NAV-08) wechseln Ansichten einer Sache, Dokument-Reiter öffnen und schließen. Das Kreuz ist nur ein Zeigerkürzel, weil ARIA in einer Reiterliste keine Taste erlaubt. D94 (6), Antwort „6 wie vorgeschlagen“: das Kreuz nur für den Zeiger, kein eigener Tab-Halt, Entf oder ⌘W mit angesagtem Kürzel.",
    "do": "<div class='sb-doc-tabs' role='tablist' aria-label='Offene Notizen'><span class='sb-doc-tabs__item' role='presentation'><button class='sb-doc-tabs__tab' role='tab' aria-selected='true' aria-keyshortcuts='Meta+W Delete'>Wochenplan</button><span class='sb-doc-tabs__close' aria-hidden='true' title='Schließen'>…</span></span>…</div>; <p class='sb-doc-tabs__none' hidden>Keine Notiz offen. Wähle eine im Ordner links.</p>",
    "dont": "Das Kreuz als Taste in der Reiterliste; das Kreuz nur beim Zeigen; eine ungesicherte Änderung still schließen; ein gefüllter Reiter; 48-px-Reiter im Fenster.",
    "numbers": "Reiter 32 px, 8–15 rem breit; Kreuz 16 px mit 24-px-Ziel, bei Touch 48 px; Ortslinie 3 px",
    "decisions": [
     "D67",
     "D83",
-    "D91"
+    "D91",
+    "D94"
    ],
-   "source": "DECISIONS.md D91 (F7a); systems/sebaro/spec/02-components.md §4.21",
+   "source": "DECISIONS.md D91 (F7a), D94 (6); systems/sebaro/spec/02-components.md §4.21",
    "platforms": [
     "desktop",
     "web"
@@ -5115,7 +5122,8 @@
    "status": "entschieden",
    "check": "axe (aria-required-children); Entf und ⌘W schließen; nach dem letzten Reiter steht der Satz und bekommt den Fokus.",
    "example_hint": "Zwei Reiter, der aktuelle mit Kreuz und Ortslinie; falsch: gefüllte Reiter mit Kreuz-Tasten an allen.",
-   "changed": "2026-10-21"
+   "changed": "2026-10-22",
+   "note": "Das Kreuz nur für den Zeiger war die Antwort der Agenten auf den Befund von axe (aria-required-children); der Inhaber hat es mit D94 angenommen."
   },
   {
    "id": "DSK-11",

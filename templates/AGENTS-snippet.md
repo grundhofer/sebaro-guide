@@ -31,6 +31,9 @@ This product uses the sebaro design system. Before building or changing any UI:
    a 4 px cobalt frame with a 1 px ground joint inside, drawn by `sebaro.css` (legend „Rahmen: heute“), „Konflikt“
    always carries the warning glyph, sortable tables scroll sideways inside `sb-table-wrap` on phones and never stack
    (DAT-11, STA-08, DAT-14). Confirmed with D93: the light/dark places of item 6 and ⌘K / Ctrl+K of item 7.
+   Decided with D94: the six agent additions to D91 as built (pane widths „Schmal · Normal · Breit“, sort heads 48 px
+   with 32 px only in windows, the narrow board's position bar, the poster sentence, docs nav with „Übersicht“ and page
+   counts, the pointer-only tab cross); for now no brand figure (BIL-05; a figure needs a new decision row).
 10. Ship the export's `LICENSE.md` unchanged (D76). If a rule does not fit, cite its id (e.g. `AKT-01`) and ask the
     owner; do not work around it. Rule changes are listed by id in
     https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md.

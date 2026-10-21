@@ -28,7 +28,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 
 Rule status: **entschieden** = owner decision, binding. **vorläufig** = an agent's decision, valid until the owner
 changes it. **offen** = proposal only, do not build it as a rule. `D<n>` refers to row n of the decision log in the
-workshop repository sebaroDesign (private; the guide covers D1–D93). A rule id (e.g. `AKT-01`) is stable; cite it
+workshop repository sebaroDesign (private; the guide covers D1–D94). A rule id (e.g. `AKT-01`) is stable; cite it
 in code reviews, commit messages and ADRs.
 
 ## 2 The ten rules most often broken
@@ -111,12 +111,22 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
    D75 reading is confirmed: phone apps choose light or dark in settings, desktop apps in the menu „Darstellung“ and
    in settings (AKT-09, MOB-04, DSK-05); ⌘K / Ctrl+K in every app is confirmed (D84, NAV-09). The brand figure is
    only ever an image (website, about page, introduction, communication), never a control, icon, app sign, favicon,
-   wordmark substitute or empty-state picture (BIL-05); which figure is still open.
-   Still open, do not present as decided: which brand figure (BIL-05) and the agents' additions to D91; the share-image
-   generator and a generated print block in `tokens.css` (tool work); Compose versions of the new web parts and
-   charts (not built: ask before building one in Compose). Nothing of this is tested on real iOS devices, WebKit,
-   Firefox, screen readers or real Tauri windows. See `docs/ausblick.html#entscheidung`; the open brand figure is
-   tracked as „Noch offen“ under `docs/ausblick.html#p-lesarten`.
+   wordmark substitute or empty-state picture (BIL-05).
+   Settled by the owner with D94 (2026-10-21): the six agent additions to D91 stand as built: pane widths „Schmal ·
+   Normal · Breit“ in the menu „Darstellung“ (DSK-07), sort heads 48 px on pages and phones, 32 px only in windows and
+   48 px there under touch (DAT-14), the narrow board's bar „Spalte 2 von 3: …“ with step buttons and the column in the
+   primary action (DAT-13), the poster sentence for screen readers only (BIL-07), the docs nav with „Übersicht“ first,
+   page counts and the current group open (WEB-07), the pointer-only tab cross with Entf / ⌘W (DSK-10). For now there
+   is **no brand figure** (BIL-05): the brand comes from type, colour and app signs; D90 still allows one within the
+   D93 limits, but only with a new decision row, so never generate or show one. Submenus (`sb-menu.js`, synced from the
+   workshop with D94) open on the side their parent went (the top menu's: reading side, else the other), never cover
+   their own item or a still visible part of a level further up, and without room lie over their parent, moved in from
+   the item as far as the window allows, or open above the item near the bottom edge (EBE-07).
+   Nothing waits for the owner's choice now (`docs/ausblick.html#entscheidung` has no entries; a „vorläufig“ rule is
+   not an entry there). The five rules D91 decided only in part (EBE-04, EBE-07, WEB-03, WEB-04, DSK-01) stay
+   vorläufig; never present them as decided. Still open, do not present as decided: the share-image generator and a generated print block in `tokens.css` (tool work); Compose versions of
+   the new web parts and charts (not built: ask before building one in Compose). Nothing of this is tested on real iOS
+   devices, WebKit, Firefox, screen readers or real Tauri windows. See `docs/ausblick.html#offen`.
 
 ## 4 Where the system files come from
 
@@ -147,7 +157,7 @@ python3 tools/check_site.py --strict   # all groups (list below); exit 0 require
 python3 tools/build.py --check         # freshness gate (CI runs this and check_site.py)
 python3 tools/sync_from_design.py --verify-local   # docs/sebaro/ untouched since the export
 npm ci && node tools/check_a11y.mjs    # axe WCAG 2.2 AA, overflow, console errors; light/dark, 390/1440 (CI runs it)
-python3 tools/release.py 2.4.0         # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.3.0 is the last release)
+python3 tools/release.py 2.5.0         # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.4.0 is the last release)
 ```
 
 `check_site.py` groups: PAGE, LINK, NET, CSS, TOKEN (every `var(--sb-*)` exists in `tokens.css` / `sebaro.css`), STYLE,
@@ -215,5 +225,5 @@ hand with `tools/sync_from_design.py`.
 The guide shows sebaro as built and checked in sebaroDesign; Chromium screenshots do not verify real Android/iOS
 devices, Windows rendering, WebKit/Tauri webviews or screen readers. All example data on the pages is invented.
 The owner answered the round-6 sketch (63 questions, private, never linked from here) with D91 and the open readings
-after it with D92 and D93; what still waits for the owner, and what is built but untested (real iOS devices, real Tauri
-windows), is collected on `docs/ausblick.html`.
+after it with D92 to D94; what is still open, and what is built but untested (real iOS devices, real Tauri windows),
+is collected on `docs/ausblick.html`.

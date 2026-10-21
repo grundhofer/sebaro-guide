@@ -1,7 +1,7 @@
 # Screen checklist
 
 Walk this for every screen in **light and dark**, at **390 px and 1440 px** (desktop apps: smallest and a wide window).
-Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D93.
+Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D94.
 
 ## Colour and hierarchy
 - [ ] Cobalt only for current place, links and focus; lime only for the one primary action (FAR, AKT)
@@ -44,6 +44,8 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
 - [ ] Command palette opens with ⌘K / Ctrl+K (NAV-09)
 - [ ] Sidebar and inspector can be hidden (tool with aria-expanded, menu „Darstellung“); content keeps ≥ 480 px (DSK-04)
 - [ ] Rows 32 / 48 / 64 px for one / two / three lines with a pointer, 48 px with touch (RAU)
+- [ ] Submenus of „Menü“ at 1440 and 390 px, also with „Menü“ near the bottom edge: none covers its own item or a
+      still visible part of a level further up, every level stays inside the window (EBE-07)
 
 ## Navigation and links
 - [ ] Current place: 3 px cobalt line + weight; app navigation with icon + word (NAV)

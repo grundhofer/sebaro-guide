@@ -17,7 +17,8 @@
 // Without this script the browser already opens and closes the menu (click, Escape, click outside). The script adds:
 //   - aria-expanded on the button follows the menu; the menu sits under the button, its end on the button's end
 //     (above it when there is no room below), and follows on scroll and resize; a submenu stands beside its parent
-//     menu at the height of its item (the other side when there is no room, over the parent in a narrow window);
+//     menu at the height of its item, on the side its parent went to (the top menu's submenus: the reading side,
+//     else the other side; never over a visible part of a menu further up), over the parent in a narrow window;
 //   - opening by click, Enter or Space focuses the first item, ArrowDown the first, ArrowUp the last;
 //   - ArrowDown / ArrowUp move through the items of one menu and wrap, Home / End jump, typing letters jumps to the
 //     next item that starts with them (typeahead, 500 ms);
@@ -38,7 +39,7 @@
   if (typeof HTMLElement.prototype.showPopover !== "function") return;   // the menu stays a static list
   var ITEM = "[role='menuitem'], [role='menuitemcheckbox'], [role='menuitemradio']";
   var TYPEAHEAD_MS = 500;
-  var state = new WeakMap();                                              // menu -> { focus, noReturn, focusInside, returnTo, typed, typedAt }
+  var state = new WeakMap();                                              // menu -> { focus, noReturn, focusInside, returnTo, typed, typedAt, side }
 
   function menuOf(button) {
     var id = button.getAttribute("aria-controls") || button.getAttribute("popovertarget");
@@ -53,7 +54,7 @@
   function parentMenu(menu) { return menu.parentElement ? menu.parentElement.closest(".sb-menu") : null; }
   function rootOf(menu) { var m = menu, p; while ((p = parentMenu(m))) m = p; return m; }
   function opensSub(item) { return item.getAttribute("aria-haspopup") === "menu" && !!menuOf(item); }
-  function s(menu) { var x = state.get(menu); if (!x) { x = { focus: "first", noReturn: false, focusInside: false, returnTo: null, typed: "", typedAt: 0 }; state.set(menu, x); } return x; }
+  function s(menu) { var x = state.get(menu); if (!x) { x = { focus: "first", noReturn: false, focusInside: false, returnTo: null, typed: "", typedAt: 0, side: null }; state.set(menu, x); } return x; }
   // the items of this menu, not those of its submenus
   function items(menu) {
     return Array.prototype.filter.call(menu.querySelectorAll(ITEM), function (i) {
@@ -109,8 +110,14 @@
     menu.style.left = Math.round(Math.min(Math.max(edge, start), Math.max(edge, vw - w - edge))) + "px";
   }
   // A submenu: beside its parent menu, its first item level with the item that opened it; the two layer lines lie
-  // on each other. No room on the reading side: the other side; no room on either (a narrow window): over the parent,
-  // under its item and moved in by 16 px, so the item stays readable.
+  // on each other. A submenu of a submenu keeps the direction its parent went (a parent that had to open to the left
+  // has all its submenus open to the left too, as the menus of macOS and Windows do) and never turns back; a submenu
+  // of the top menu tries the reading side, then the other side. A side counts only when the submenu fits into the
+  // window there and covers no visible part of a menu further up. No such side (a narrow window, or the parent's
+  // direction runs out of room): over the parent, moved in by 16 px from the item's start, or from its end when the
+  // parent went the other way, so every submenu of one parent lies the same way; under its item, or above it when
+  // the room below is too small or the menus further up stay readable only there. The item is never covered, unless
+  // the window is too short for the submenu either way (then it stays inside the window).
   function placeSub(menu, item, estimate) {
     var parent = parentMenu(menu), p = parent.getBoundingClientRect(), it = item.getBoundingClientRect();
     var edge = 8, inset = 16;
@@ -120,17 +127,38 @@
     var w = estimate ? (parseFloat(cs.minWidth) || 240) : menu.getBoundingClientRect().width;
     var h = estimate ? items(menu).length * it.height + 2 * (pad + line) : menu.getBoundingClientRect().height;
     var rtl = getComputedStyle(item).direction === "rtl";
-    var after = rtl ? p.left - w + line : p.right - line;                  // the reading side
-    var before = rtl ? p.right - line : p.left - w + line;
-    var top = it.top - pad - line, left;
-    if (after >= edge && after + w <= vw - edge) left = after;
-    else if (before >= edge && before + w <= vw - edge) left = before;
-    else {
-      left = rtl ? it.right - inset - w : it.left + inset;
-      top = it.bottom;
+    var x = { right: p.right - line, left: p.left - w + line };            // left edge on either side of the parent
+    var reading = rtl ? "left" : "right", other = rtl ? "right" : "left";
+    var went = s(parent).side;
+    var order = went ? [went] : [reading, other];
+    var above = [];                                                        // the menus above the parent stay readable
+    for (var m = parentMenu(parent); m; m = parentMenu(m)) above.push(m.getBoundingClientRect());
+    function clampY(t) { return Math.min(Math.max(edge, t), Math.max(edge, vh - h - edge)); }
+    function cut(a, b) {
+      return { left: Math.max(a.left, b.left), right: Math.min(a.right, b.right), top: Math.max(a.top, b.top), bottom: Math.min(a.bottom, b.bottom) };
     }
+    function area(r) { return Math.max(0, r.right - r.left) * Math.max(0, r.bottom - r.top); }
+    function covers(left, top) {                                           // what the parent already covers does not count
+      var box = { left: left, right: left + w, top: top, bottom: top + h };
+      return above.some(function (r) {
+        var seen = cut(box, { left: r.left + line, right: r.right - line, top: r.top + line, bottom: r.bottom - line });
+        return area(seen) - area(cut(seen, p)) > 0;
+      });
+    }
+    var top = clampY(it.top - pad - line), left, side = null;
+    for (var k = 0; k < order.length && side === null; k++) {
+      var at = x[order[k]];
+      if (at >= edge && at + w <= vw - edge && !covers(at, top)) { side = order[k]; left = at; }
+    }
+    if (side === null) {
+      var toward = went || reading;                                        // the fallback leans the way the parent went
+      left = Math.min(Math.max(edge, toward === "right" ? it.left + inset : it.right - inset - w), Math.max(edge, vw - w - edge));
+      var fit = [it.bottom, it.top - h].filter(function (t) { return t >= edge && t + h <= vh - edge; });
+      var free = fit.filter(function (t) { return !covers(left, t); });  // under the item, else above it, whichever
+      top = free.length ? free[0] : fit.length ? fit[0] : clampY(it.bottom);  // keeps the menus further up readable
+    }
+    s(menu).side = side;
     left = Math.min(Math.max(edge, left), Math.max(edge, vw - w - edge));
-    top = Math.min(Math.max(edge, top), Math.max(edge, vh - h - edge));
     menu.style.right = ""; menu.style.bottom = "";
     menu.style.left = Math.round(left) + "px";
     menu.style.top = Math.round(top) + "px";

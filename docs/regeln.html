@@ -2657,7 +2657,7 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
     <h3 class="g-rule__title" id="EBE-07-h">Menü nach ARIA-Muster</h3>
     <p class="g-rule__meta"><span class="g-rule__status g-rule__status--vorläufig"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#clock--16"/></svg>Vorläufig</span> <span class="sb-tag">Alle Plattformen</span></p>
   </header>
-  <p class="g-rule__text">Bau Überlauf- und Kontextmenüs mit role=&#x27;menu&#x27; und menuitem-Zeilen (48 px, in Desktop-Apps und Web-Apps mit Fenster 32 px), Icon in text-muted + Wort; Auslöser mit aria-haspopup=&#x27;menu&#x27;, aria-expanded und popovertarget; bg mit 2-px-Tinte, Radius 12, 200–320 px breit; Pfeiltasten, Pos1/Ende, Buchstaben, Escape und Fokusrückgabe über sb-menu.js. Ein Untermenü hängt an einer Zeile mit Chevron, öffnet mit <svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg>, Eingabe oder Druck, nie beim Darüberfahren, und schließt mit <svg class="sb-icon sb-icon--16" role="img" aria-label="links" focusable="false"><use href="#arrow-left--16"/></svg> oder Escape. Die Löschzeile zeigt Wort und Icon in danger, öffnet trotzdem den Dialog und trägt keine Kante.</p>
+  <p class="g-rule__text">Bau Überlauf- und Kontextmenüs mit role=&#x27;menu&#x27; und menuitem-Zeilen (48 px, in Desktop-Apps und Web-Apps mit Fenster 32 px), Icon in text-muted + Wort; Auslöser mit aria-haspopup=&#x27;menu&#x27;, aria-expanded und popovertarget; bg mit 2-px-Tinte, Radius 12, 200–320 px breit; Pfeiltasten, Pos1/Ende, Buchstaben, Escape und Fokusrückgabe über sb-menu.js. Ein Untermenü hängt an einer Zeile mit Chevron, öffnet mit <svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg>, Eingabe oder Druck, nie beim Darüberfahren, und schließt mit <svg class="sb-icon sb-icon--16" role="img" aria-label="links" focusable="false"><use href="#arrow-left--16"/></svg> oder Escape. Es steht neben seinem Elternmenü, sein erster Eintrag auf der Höhe seiner Zeile: ein Untermenü des Hauptmenüs zur Leserichtung, sonst zur anderen Seite, ein tieferes in die Richtung seines Elternmenüs. Es verdeckt nie einen noch sichtbaren Teil einer Ebene weiter oben und seinen eigenen Eintrag nur, wenn das Fenster in beiden Richtungen zu niedrig ist; ohne Platz zur Seite liegt es über seinem Elternmenü, vom Eintrag eingerückt, so weit das Fenster es zulässt, unter seinem Eintrag oder nahe dem unteren Rand darüber. Jede Ebene bleibt im Fenster. Die Löschzeile zeigt Wort und Icon in danger, öffnet trotzdem den Dialog und trägt keine Kante.</p>
   <div class="g-rule__example">
 <div class="g-examples">
   <div class="g-ex g-ex--do"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p><div class="g-ex__stage">
@@ -2694,11 +2694,11 @@ font-weight: bold;                           <span class="sb-tok-comment">/* syn
       <div><dt>Nicht so</dt><dd>Löschen direkt aus dem Menü ohne Rückfrage; Kante oder Rahmen an der Menüzeile; Schatten unter dem Menü.</dd></div>
       <div><dt>Werte</dt><dd>Zeilen 48px (Fenster 32 px, data-sb-density=&quot;window&quot;); Breite 200–320px (Fenster ab 240 px); Radius 12px; Padding 4 0</dd></div>
       <div><dt>Hinweis</dt><dd>D67 (10): Seltenes und Löschen eines Bereichs im „Mehr“-Menü, Löschen ganz unten nach einer Trennlinie (AKT-10). Prüfelemente im Menü (menuitemradio, menuitemcheckbox mit sb-menu__check) zeigt DSK-05. D91 F4b wählt nur die Taste „Menü“ in der eigenen Leiste (DSK-08); Untermenüs und der Rest des Menümusters sind Spezifikation ohne eigene I-Zeile, deshalb bleibt die Regel vorläufig.</dd></div>
-      <div><dt>Prüfung</dt><dd>axe; Tastaturtest mit sb-menu.js: Pfeile, Pos1/Ende, <svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg> und <svg class="sb-icon sb-icon--16" role="img" aria-label="links" focusable="false"><use href="#arrow-left--16"/></svg> im Untermenü, Escape mit Fokusrückgabe.</dd></div>
+      <div><dt>Prüfung</dt><dd>axe; Tastaturtest mit sb-menu.js: Pfeile, Pos1/Ende, <svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg> und <svg class="sb-icon sb-icon--16" role="img" aria-label="links" focusable="false"><use href="#arrow-left--16"/></svg> im Untermenü, Escape mit Fokusrückgabe. Lage der Untermenüs bei 1440 und 390 px, auch mit „Menü“ nahe dem unteren Rand: kein Untermenü verdeckt seinen eigenen Eintrag oder einen noch sichtbaren Teil einer Ebene weiter oben, jede Ebene bleibt im Fenster.</dd></div>
       <div><dt>Entscheidung</dt><dd>D39, D46, D67, D80, D91</dd></div>
-      <div><dt>Geändert</dt><dd>2026-10-21</dd></div>
-      <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §4.10, §4.12, §4.18, §4.24; demo/assets/sb-menu.js</code></dd></div>
-      <div><dt lang="en">Agent</dt><dd lang="en">Menus: role=menu with menuitem rows (48 px, 32 px in windows), trigger with aria-haspopup, aria-expanded and popovertarget; bg + 2 px ink, radius 12, 200–320 px; keys and focus return by sb-menu.js; submenus hang on a row with a chevron, open with <svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg>, Enter or a press (never on hover), close with <svg class="sb-icon sb-icon--16" role="img" aria-label="links" focusable="false"><use href="#arrow-left--16"/></svg> or Escape; the delete row is danger word + icon, opens the dialog, no cut.</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-22</dd></div>
+      <div><dt>Quelle</dt><dd><code class="sb-code-inline">systems/sebaro/spec/02-components.md §4.10, §4.12, §4.18, §4.24; spec/11-checklist.md §1a; demo/assets/sb-menu.js</code></dd></div>
+      <div><dt lang="en">Agent</dt><dd lang="en">Menus: role=menu with menuitem rows (48 px, 32 px in windows), trigger with aria-haspopup, aria-expanded and popovertarget; bg + 2 px ink, radius 12, 200–320 px; keys and focus return by sb-menu.js; submenus hang on a row with a chevron, open with <svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg>, Enter or a press (never on hover), close with <svg class="sb-icon sb-icon--16" role="img" aria-label="links" focusable="false"><use href="#arrow-left--16"/></svg> or Escape; a submenu stands beside its parent (the top menu&#x27;s on the reading side, else the other; deeper ones keep their parent&#x27;s direction), never covers a still visible upper level, covers its own item only when the window is too short either way, and without room lies over its parent, moved in from its item as far as the window allows, below or (near the bottom edge) above its item; every level stays inside the window; the delete row is danger word + icon, opens the dialog, no cut.</dd></div>
     </dl>
   </details>
 </article>
@@ -5218,15 +5218,15 @@ a:hover, a:active { color: var(--sb-color-link); }
   <details class="g-rule__more">
     <summary>Warum, Werte und Prüfung</summary>
     <dl class="sb-meta-list g-rule__facts">
-      <div><dt>Warum</dt><dd>Inhaber D91: Haarlinien zwischen den Spalten (B1b), am Handy Spalten seitlich wischen (B2b, statt der empfohlenen Reiter). Die Skizze nannte die Schwächen des Wischens: Wo bin ich, Konflikt mit der Zurück-Geste des Systems, wohin kommt „Neue Karte“, die Tastatur. Die Leiste mit Tasten, die sichtbare Kante der nächsten Spalte und die Hauptaktion mit dem Spaltennamen beantworten sie; die Tasten kollidieren nie mit einer Geste.</dd></div>
+      <div><dt>Warum</dt><dd>Inhaber D91: Haarlinien zwischen den Spalten (B1b), am Handy Spalten seitlich wischen (B2b, statt der empfohlenen Reiter). Die Skizze nannte die Schwächen des Wischens: Wo bin ich, Konflikt mit der Zurück-Geste des Systems, wohin kommt „Neue Karte“, die Tastatur. Die Leiste mit Tasten, die sichtbare Kante der nächsten Spalte und die Hauptaktion mit dem Spaltennamen beantworten sie; die Tasten kollidieren nie mit einer Geste. D94 (3), Antwort „3 wie vorgeschlagen“: Leiste, Spaltenname in der Hauptaktion und der sichtbare Anfang der nächsten Spalte gelten so, wie sie gebaut sind.</dd></div>
       <div><dt>So</dt><dd>&lt;div class=&#x27;sb-board&#x27; id=&#x27;b&#x27;&gt;&lt;div class=&#x27;sb-board__columns&#x27;&gt;&lt;section class=&#x27;sb-board__column&#x27; aria-labelledby=&#x27;c1&#x27;&gt;&lt;div class=&#x27;sb-board__head&#x27;&gt;&lt;h3 class=&#x27;sb-board__title&#x27; id=&#x27;c1&#x27;&gt;&lt;span class=&#x27;sb-board__name&#x27;&gt;Verbessern&lt;/span&gt; &lt;span class=&#x27;sb-board__count&#x27;&gt;2&lt;span class=&#x27;sb-visually-hidden&#x27;&gt; Karten&lt;/span&gt;&lt;/span&gt;&lt;/h3&gt;…; Hauptaktion „Neue Karte in „&lt;span data-sb-board-name=&#x27;b&#x27;&gt;…&lt;/span&gt;““; sb-board.js.</dd></div>
       <div><dt>Nicht so</dt><dd>Jede Spalte in einem Rahmen oder auf grauem Grund; Spalten am Handy untereinander; Wischen ohne Positionsleiste; „Neue Karte“ ohne Spalte; Karten nur durch Ziehen verschiebbar; die ganze Seite scrollt seitlich.</dd></div>
       <div><dt>Werte</dt><dd>Haarlinie 1 px border; Spaltenkopf 32 px (48 px mit 48-px-Taste); Karte 1 px border-strong, Radius 12; schmal unter 640 px eigener Breite: Spalte = Breite minus 48 px, scroll-snap je Spalte</dd></div>
-      <div><dt>Hinweis</dt><dd>Leiste, sichtbare Kante der nächsten Spalte und Spaltenname in der Hauptaktion sind die Antwort des Agenten auf die Schwächen aus der Skizze. Die Compose-Fassung fehlt noch; auf echten Geräten nicht geprüft.</dd></div>
+      <div><dt>Hinweis</dt><dd>Leiste, sichtbare Kante der nächsten Spalte und Spaltenname in der Hauptaktion waren die Antwort der Agenten auf die Schwächen aus der Skizze; der Inhaber hat sie mit D94 angenommen. Die Compose-Fassung fehlt noch; auf echten Geräten nicht geprüft.</dd></div>
       <div><dt>Prüfung</dt><dd>Bei 390 px: Positionsleiste da, Tab erreicht jede Spalte, die Seite ist nicht breiter als das Fenster; im Fenster schmaler als 640 px nennt „Neue Karte“ die Spalte.</dd></div>
-      <div><dt>Entscheidung</dt><dd>D80, D83, D91</dd></div>
-      <div><dt>Geändert</dt><dd>2026-10-21</dd></div>
-      <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D91 (B1b, B2b); systems/sebaro/spec/02-components.md §3.16, §7 (sb-board.js); spec/07-voice.md §4.8</code></dd></div>
+      <div><dt>Entscheidung</dt><dd>D80, D83, D91, D94</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-22</dd></div>
+      <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D91 (B1b, B2b), D94 (3); systems/sebaro/spec/02-components.md §3.16, §7 (sb-board.js); spec/07-voice.md §4.8</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Board columns are divided by 1 px hairlines only (no frame or ground per column), cards are the only boxes; each column is a named region with word and count. Below 640 px of its own width the columns are swiped: the next column&#x27;s start stays visible, the bar „Spalte 2 von 3: …“ with previous/next buttons reaches each column without swiping, the primary action names the column, the page never scrolls sideways; moving never needs dragging (sb-board, sb-board.js).</dd></div>
     </dl>
   </details>
@@ -5259,15 +5259,15 @@ a:hover, a:active { color: var(--sb-color-link); }
   <details class="g-rule__more">
     <summary>Warum, Werte und Prüfung</summary>
     <dl class="sb-meta-list g-rule__facts">
-      <div><dt>Warum</dt><dd>Inhaber D91: Sortierpfeil nur an der sortierten Spalte (B5a), Summenzeile im Tabellenfuß (B6a). Doppelpfeile an jeder Spalte wären Lärm; ein Pfeil sagt, wonach sortiert ist. Eine fehlende Zahl als 0 zu zählen, wäre falsch (D82, TXT-14). D92 (7), Antwort „Seitlich scrollen (Empfohlen)“: Sortierbare Tabellen scrollen am Handy in ihrem eigenen Kasten seitlich statt sich zu stapeln; nie die Seite.</dd></div>
+      <div><dt>Warum</dt><dd>Inhaber D91: Sortierpfeil nur an der sortierten Spalte (B5a), Summenzeile im Tabellenfuß (B6a). Doppelpfeile an jeder Spalte wären Lärm; ein Pfeil sagt, wonach sortiert ist. Eine fehlende Zahl als 0 zu zählen, wäre falsch (D82, TXT-14). D92 (7), Antwort „Seitlich scrollen (Empfohlen)“: Sortierbare Tabellen scrollen am Handy in ihrem eigenen Kasten seitlich statt sich zu stapeln; nie die Seite. D94 (2), Antwort „2 wie vorgeschlagen“: Sortierköpfe 48 px auf Seiten und am Handy, 32 px nur im Fenster, dort bei Touch wieder 48 px.</dd></div>
       <div><dt>So</dt><dd>&lt;th scope=&#x27;col&#x27; class=&#x27;sb-num&#x27; aria-sort=&#x27;descending&#x27;&gt;&lt;button class=&#x27;sb-table__sort&#x27; type=&#x27;button&#x27;&gt;&lt;svg …arrow-down--16/&gt;Betrag&lt;/button&gt;&lt;/th&gt;; &lt;tfoot&gt;&lt;tr&gt;&lt;th scope=&#x27;row&#x27; colspan=&#x27;2&#x27;&gt;Summe&lt;/th&gt;&lt;td class=&#x27;sb-num&#x27;&gt;1.797,20 €&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;; sb-table.js sagt „Sortiert nach Betrag, absteigend“.</dd></div>
       <div><dt>Nicht so</dt><dd>Doppelpfeile an jeder sortierbaren Spalte; aria-sort an mehreren Spalten; Summe als Kennzahl unter der Tabelle; ein fehlender Wert als 0 in der Summe; Summenzeile mit grauer Fläche; Summenzeile, die beim Sortieren mitwandert; sortierbare Tabelle, die sich am Handy zu Blöcken stapelt; eine Tabelle, die die ganze Seite seitlich scrollen lässt.</dd></div>
       <div><dt>Werte</dt><dd>Sortierkopf 48 px auf Seiten und Handys, 32 px nur im Fenster (data-sb-density=&#x27;window&#x27;), bei Touch wieder 48 px; Pfeil 16 px; Linie über dem Fuß border-strong</dd></div>
-      <div><dt>Hinweis</dt><dd>48 px außerhalb von Fenstern ist eine Korrektur nach der Prüfung des Baus (Agentenarbeit). Die Compose-Fassung fehlt noch.</dd></div>
+      <div><dt>Hinweis</dt><dd>Die Höhen außerhalb von Fenstern waren eine Korrektur der Agenten nach der Prüfung des Baus; der Inhaber hat sie mit D94 angenommen. Die Compose-Fassung fehlt noch.</dd></div>
       <div><dt>Prüfung</dt><dd>axe; genau ein th mit aria-sort je Tabelle; die Summenzeile bleibt beim Sortieren unten; Tab auf den Kopf, Eingabe sortiert. Bei 390 px: die Tabelle scrollt im Kasten, die Seite hat keinen seitlichen Bildlauf.</dd></div>
-      <div><dt>Entscheidung</dt><dd>D82, D91, D92</dd></div>
-      <div><dt>Geändert</dt><dd>2026-10-21</dd></div>
-      <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D91 (B5a, B6a), D82, D92 (7); systems/sebaro/spec/02-components.md §3.9, §7 (sb-table.js)</code></dd></div>
+      <div><dt>Entscheidung</dt><dd>D82, D91, D92, D94</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-22</dd></div>
+      <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D91 (B5a, B6a), D82, D92 (7), D94 (2); systems/sebaro/spec/02-components.md §3.9, §7 (sb-table.js)</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Sortable heads are buttons (sb-table__sort); only the sorted column carries aria-sort, title weight and the arrow icon; the first press sorts numbers and dates descending, words ascending, the next reverses; totals in tfoot below their column (border-strong line, body-strong); with a missing value the row reads „Summe der bekannten …“ and the gap stays „keine Angabe“, never 0. On phones a sortable table scrolls sideways inside its own box (sb-table-wrap), never the page; it does not stack its rows into blocks.</dd></div>
     </dl>
   </details>
@@ -7313,37 +7313,37 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
     <h3 class="g-rule__title" id="BIL-05-h">Eine Markenfigur nur als Bild</h3>
     <p class="g-rule__meta"><span class="g-rule__status g-rule__status--entschieden"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>Entschieden</span> <span class="sb-tag">Alle Plattformen</span></p>
   </header>
-  <p class="g-rule__text">Eine Figur aus den Bildkatalogen darf sebaro als Markenfigur vertreten, aber nur als Bild: auf der Website, der Über-Seite, in der Einführung und in der Kommunikation. Sie ist ein Bild nach BIL-01 bis BIL-04 (ohne Text, mit Herkunft, gekennzeichnet), nie ein Bedienelement, Icon, App-Zeichen, Favicon oder Ersatz für die Wortmarke und nie im leeren Zustand: Leere Zustände zeigen weiter Spots (DAT-07).</p>
+  <p class="g-rule__text">Eine Figur aus den Bildkatalogen darf sebaro als Markenfigur vertreten, aber nur als Bild: auf der Website, der Über-Seite, in der Einführung und in der Kommunikation. Sie ist ein Bild nach BIL-01 bis BIL-04 (ohne Text, mit Herkunft, gekennzeichnet), nie ein Bedienelement, Icon, App-Zeichen, Favicon oder Ersatz für die Wortmarke und nie im leeren Zustand: Leere Zustände zeigen weiter Spots (DAT-07). Zurzeit gibt es keine Markenfigur (D94): Die Marke entsteht aus Schrift, Farbe und App-Zeichen, und es wird keine Figur erzeugt, bis eine neue Entscheidung eine wählt.</p>
   <div class="g-rule__example">
 <div class="g-examples">
 <div class="g-ex g-ex--do">
   <p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p>
   <div class="g-ex__stage">
-<div class="sb-table-wrap" role="region" aria-labelledby="BIL-05-cap" tabindex="0"><table class="sb-table"><caption id="BIL-05-cap">Wo die Markenfigur stehen darf</caption><thead><tr><th scope="col">Ort</th><th scope="col">Figur</th></tr></thead><tbody><tr><th scope="row">Website, Über-Seite, Einführung, Kommunikation</th><td>ja, als Linienbild mit Bildunterschrift „KI-generiert, nachbearbeitet“</td></tr><tr><th scope="row">App-Zeichen, Favicon, Icon</th><td>nein: dort stehen Symbol und Kürzel</td></tr><tr><th scope="row">Bedienelement, Wortmarke</th><td>nein: Bedienelemente tragen Icons und Wörter, der Name steht als gesetzte Wortmarke</td></tr><tr><th scope="row">Leerer Zustand</th><td>nein: dort steht ein Spot</td></tr></tbody></table></div>
+<div class="sb-table-wrap" role="region" aria-labelledby="BIL-05-cap" tabindex="0"><table class="sb-table"><caption id="BIL-05-cap">Wo die Markenfigur stehen darf</caption><thead><tr><th scope="col">Ort</th><th scope="col">Figur</th></tr></thead><tbody><tr><th scope="row">Website, Über-Seite, Einführung, Kommunikation</th><td>zurzeit keine (D94); wählt eine neue Entscheidung eine, dann als Linienbild mit Bildunterschrift „KI-generiert, nachbearbeitet“</td></tr><tr><th scope="row">App-Zeichen, Favicon, Icon</th><td>nein: dort stehen Symbol und Kürzel</td></tr><tr><th scope="row">Bedienelement, Wortmarke</th><td>nein: Bedienelemente tragen Icons und Wörter, der Name steht als gesetzte Wortmarke</td></tr><tr><th scope="row">Leerer Zustand</th><td>nein: dort steht ein Spot</td></tr></tbody></table></div>
   </div>
-  <p class="g-ex__note">Die Figur vertritt die Marke nur als Bild (D93); Zeichen, Icons, Bedienelemente, Wortmarke und leere Zustände behalten ihre eigenen Formen. Welche Figur es wird, ist noch nicht gewählt.</p>
+  <p class="g-ex__note">Die Figur vertritt die Marke nur als Bild (D93); Zeichen, Icons, Bedienelemente, Wortmarke und leere Zustände behalten ihre eigenen Formen. Zurzeit gibt es keine (D94): Die Marke entsteht aus Schrift, Farbe und App-Zeichen; eine Figur kommt nur mit einer neuen Entscheidung.</p>
 </div>
 <div class="g-ex g-ex--dont">
   <p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p>
   <div class="g-ex__stage">
-<ul class="g-rx-c-plainlist"><li>Die Figur als App-Kachel statt des Symbols.</li><li>Die Figur mit Sprechblase „Hier ist es aber leer!“ im leeren Zustand.</li><li>Text in das Bild der Figur gebacken.</li></ul>
+<ul class="g-rx-c-plainlist"><li>Eine Figur erzeugen und auf die Über-Seite stellen, bevor eine Entscheidung sie wählt.</li><li>Die Figur als App-Kachel statt des Symbols.</li><li>Die Figur mit Sprechblase „Hier ist es aber leer!“ im leeren Zustand.</li><li>Text in das Bild der Figur gebacken.</li></ul>
   </div>
-  <p class="g-ex__note">Als App-Kachel ersetzt die Figur das Zeichen, im leeren Zustand wird sie zum Witz, und Text im Bild bricht BIL-01.</p>
+  <p class="g-ex__note">Ohne Entscheidung gibt es keine Figur. Als App-Kachel ersetzt die Figur das Zeichen, im leeren Zustand wird sie zum Witz, und Text im Bild bricht BIL-01.</p>
 </div>
 </div>
   </div>
   <details class="g-rule__more">
     <summary>Warum, Werte und Prüfung</summary>
     <dl class="sb-meta-list g-rule__facts">
-      <div><dt>Warum</dt><dd>Inhaber D90 auf die Frage, ob eine Figur aus den Bildkatalogen Markenfigur werden darf: „ja darf“. Mehrere Produkte legen „keine Maskottchen“ fest; die Figur steht für die Marke, nicht für Witze in der Oberfläche. Die Grenzen zu Icons, Zeichen und leeren Zuständen hatte ein Agent gesetzt; D93, nach dem Bild „Figur als Icon in echten Größen“: „Nur als Bild (Empfohlen)“. Seitdem sind es die Grenzen des Inhabers.</dd></div>
-      <div><dt>So</dt><dd>Die Figur als Linienbild auf der Über-Seite mit HTML-Bildunterschrift.</dd></div>
-      <div><dt>Nicht so</dt><dd>Die Figur als App-Zeichen oder Favicon; Figur mit Sprechblase und Text im Bild; Figur im leeren Zustand mit Witz.</dd></div>
-      <div><dt>Hinweis</dt><dd>Welche Figur es wird, ist nicht entschieden (D93); bis der Inhaber eine wählt, wird keine erzeugt.</dd></div>
-      <div><dt>Prüfung</dt><dd>Review: Die Figur erscheint nur als Bild mit Kennzeichnung (Website, Über-Seite, Einführung, Kommunikation), nie in Icon-, Zeichen-, Favicon- oder Bedien-Slots, nie statt der Wortmarke und nie im leeren Zustand.</dd></div>
-      <div><dt>Entscheidung</dt><dd>D90, D93</dd></div>
-      <div><dt>Geändert</dt><dd>2026-10-21</dd></div>
-      <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D90, D93 (4); systems/sebaro/spec/06-imagery.md §1</code></dd></div>
-      <div><dt lang="en">Agent</dt><dd lang="en">A figure from the image catalogues may represent sebaro as a brand figure (D90), only ever as an image (website, about page, introduction, communication; D93); it is an image under BIL-01–04, never a control, icon, app sign, favicon or wordmark substitute, and never in an empty state (spots stay, DAT-07).</dd></div>
+      <div><dt>Warum</dt><dd>Inhaber D90 auf die Frage, ob eine Figur aus den Bildkatalogen Markenfigur werden darf: „ja darf“. Mehrere Produkte legen „keine Maskottchen“ fest; die Figur steht für die Marke, nicht für Witze in der Oberfläche. Die Grenzen zu Icons, Zeichen und leeren Zuständen hatte ein Agent gesetzt; D93, nach dem Bild „Figur als Icon in echten Größen“: „Nur als Bild (Empfohlen)“. Seitdem sind es die Grenzen des Inhabers. D94, nach dem Bild mit den Figuren A bis E auf einer Über-Seite und F „Keine Figur (vorerst)“: „keine figur aktuell bei f“, also F. Vorerst gibt es keine Markenfigur; D90 erlaubt eine weiter, in den Grenzen von D93, aber nur mit einer neuen Zeile im Protokoll.</dd></div>
+      <div><dt>So</dt><dd>Zurzeit keine Figur: Die Über-Seite zeigt Wortmarke, App-Zeichen und Text. Wählt eine neue Entscheidung eine Figur, dann als Linienbild auf der Über-Seite mit HTML-Bildunterschrift.</dd></div>
+      <div><dt>Nicht so</dt><dd>Eine Figur erzeugen oder zeigen, bevor eine Entscheidung sie wählt; die Figur als App-Zeichen oder Favicon; Figur mit Sprechblase und Text im Bild; Figur im leeren Zustand mit Witz.</dd></div>
+      <div><dt>Hinweis</dt><dd>Zurzeit gibt es keine Markenfigur (D94); eine Figur kommt nur mit einer neuen Zeile im Protokoll, und bis dahin wird keine erzeugt.</dd></div>
+      <div><dt>Prüfung</dt><dd>Review: Zurzeit erscheint keine Figur (D94). Kommt eine mit einer neuen Entscheidung, erscheint sie nur als Bild mit Kennzeichnung (Website, Über-Seite, Einführung, Kommunikation), nie in Icon-, Zeichen-, Favicon- oder Bedien-Slots, nie statt der Wortmarke und nie im leeren Zustand.</dd></div>
+      <div><dt>Entscheidung</dt><dd>D90, D93, D94</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-22</dd></div>
+      <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D90, D93 (4), D94 (7); systems/sebaro/spec/06-imagery.md §1; spec/05-brand.md</code></dd></div>
+      <div><dt lang="en">Agent</dt><dd lang="en">A figure from the image catalogues may represent sebaro as a brand figure (D90), only ever as an image (website, about page, introduction, communication; D93); it is an image under BIL-01–04, never a control, icon, app sign, favicon or wordmark substitute, and never in an empty state (spots stay, DAT-07). For now there is none (D94): the brand comes from type, colour and app signs, and no figure is generated until a new decision row picks one.</dd></div>
     </dl>
   </details>
 </article>
@@ -7394,7 +7394,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
     <h3 class="g-rule__title" id="BIL-07-h">Video mit Vorschaubild und Abspieltaste</h3>
     <p class="g-rule__meta"><span class="g-rule__status g-rule__status--entschieden"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>Entschieden</span> <span class="sb-tag">Alle Plattformen</span></p>
   </header>
-  <p class="g-rule__text">Zeig ein Video als natives &lt;video&gt; mit Vorschaubild vom eigenen Server und einer echten Taste „Abspielen“ in der Mitte (sb-video, sb-media.js): 48 px hoch, auf eigenem Grund bg mit 2-px-Tintenlinie, play--filled und Wort; ihr Name beginnt mit dem sichtbaren Wort („Abspielen: &lt;Titel&gt;, Video, 3 Minuten 42 Sekunden“). Das Vorschaubild lädt mit der Seite, das Video erst nach dem Druck. Das Vorschaubild hat eine Beschreibung in einem Satz, die per aria-describedby an Taste und Video hängt. Titel, Länge und Untertitelsprachen stehen als Text darunter, Untertitel als &lt;track&gt;. Nie Autoplay, nie ein fremder Player.</p>
+  <p class="g-rule__text">Zeig ein Video als natives &lt;video&gt; mit Vorschaubild vom eigenen Server und einer echten Taste „Abspielen“ in der Mitte (sb-video, sb-media.js): 48 px hoch, auf eigenem Grund bg mit 2-px-Tintenlinie, play--filled und Wort; ihr Name beginnt mit dem sichtbaren Wort („Abspielen: &lt;Titel&gt;, Video, 3 Minuten 42 Sekunden“). Das Vorschaubild lädt mit der Seite, das Video erst nach dem Druck. Das Vorschaubild hat eine Beschreibung in einem Satz, die nur der Screenreader liest und die per aria-describedby an Taste und Video hängt; nach dem Druck fällt sie am Video weg. Titel, Länge und Untertitelsprachen stehen als Text darunter, Untertitel als &lt;track&gt;. Nie Autoplay, nie ein fremder Player.</p>
   <div class="g-rule__example">
 <div class="g-examples">
 <div class="g-ex g-ex--do">
@@ -7416,16 +7416,16 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
   <details class="g-rule__more">
     <summary>Warum, Werte und Prüfung</summary>
     <dl class="sb-meta-list g-rule__facts">
-      <div><dt>Warum</dt><dd>Inhaber D91: Video mit Vorschaubild und Abspieltaste (B12b, statt des empfohlenen Rahmens ohne Bild). Die Skizze nannte die Schwächen: eine Anfrage mehr, das Vorschaubild braucht einen Alt-Text, die Taste muss auf jedem Bild lesbar bleiben. Das Vorschaubild kommt vom eigenen Server (im Dunkeln ein zweites), das Video erst nach dem Druck; die Beschreibung ersetzt den Alt-Text, den poster nicht hat; die Taste hat ihren eigenen Grund.</dd></div>
+      <div><dt>Warum</dt><dd>Inhaber D91: Video mit Vorschaubild und Abspieltaste (B12b, statt des empfohlenen Rahmens ohne Bild). Die Skizze nannte die Schwächen: eine Anfrage mehr, das Vorschaubild braucht einen Alt-Text, die Taste muss auf jedem Bild lesbar bleiben. Das Vorschaubild kommt vom eigenen Server (im Dunkeln ein zweites), das Video erst nach dem Druck; die Beschreibung ersetzt den Alt-Text, den poster nicht hat; die Taste hat ihren eigenen Grund. D94 (4), Antwort „4 wie vorgeschlagen“: der Satz zum Vorschaubild nur für Screenreader, an Taste und Video, nach dem Abspielen am Video weg.</dd></div>
       <div><dt>So</dt><dd>&lt;figure class=&#x27;sb-video&#x27; data-sb-video&gt;&lt;div class=&#x27;sb-video__frame&#x27;&gt;&lt;video class=&#x27;sb-video__media&#x27; poster=&#x27;…-light.webp&#x27; data-sb-poster-dark=&#x27;…-dark.webp&#x27; preload=&#x27;none&#x27; playsinline controls aria-describedby=&#x27;p&#x27;&gt;…&lt;track kind=&#x27;captions&#x27; srclang=&#x27;de&#x27; label=&#x27;Deutsch&#x27; default&gt;&lt;/video&gt;&lt;button class=&#x27;sb-video__play&#x27; type=&#x27;button&#x27; aria-label=&#x27;Abspielen: …&#x27; aria-describedby=&#x27;p&#x27; hidden&gt;…&lt;/button&gt;&lt;/div&gt;&lt;figcaption class=&#x27;sb-video__caption&#x27;&gt;…&lt;/figcaption&gt;&lt;p class=&#x27;sb-visually-hidden&#x27; id=&#x27;p&#x27;&gt;Vorschaubild: …&lt;/p&gt;&lt;/figure&gt;</dd></div>
       <div><dt>Nicht so</dt><dd>Autoplay; der eingebettete Player einer Plattform; ein Video, das vor dem Druck lädt; ein Play-Icon ohne Wort; ein Vorschaubild mit Schrift; ein Vorschaubild ohne Beschreibung.</dd></div>
       <div><dt>Werte</dt><dd>Rahmen 16 : 9, 1 px border-strong, Radius 12; Taste 48 px, Linie 2 px, Radius 8; preload=&#x27;none&#x27;</dd></div>
-      <div><dt>Hinweis</dt><dd>Beschreibung des Vorschaubilds, eigene Tastenfläche und die genannte Zahl der Anfragen sind die Antwort des Agenten auf die Schwächen aus der Skizze. Compose-Fassung fehlt noch.</dd></div>
+      <div><dt>Hinweis</dt><dd>Der Satz zum Vorschaubild war die Antwort der Agenten auf „braucht einen Alt-Text“; der Inhaber hat ihn mit D94 angenommen. Die eigene Tastenfläche und die genannte Zahl der Anfragen beantworten die übrigen Schwächen aus der Skizze. Compose-Fassung fehlt noch.</dd></div>
       <div><dt>Prüfung</dt><dd>Netzwerk-Log: vor dem Druck nur das Vorschaubild (im Dunkeln zwei), das Video danach; axe video-caption; nach dem Druck liegt der Fokus auf dem Video.</dd></div>
-      <div><dt>Entscheidung</dt><dd>D9, D18, D91</dd></div>
-      <div><dt>Geändert</dt><dd>2026-10-21</dd></div>
-      <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D91 (B12b); systems/sebaro/spec/02-components.md §3.26, §7 (sb-media.js); spec/06-imagery.md; spec/07-voice.md §4.11</code></dd></div>
-      <div><dt lang="en">Agent</dt><dd lang="en">Video: native &lt;video&gt; with a poster from the own server and a real centred button „Abspielen“ (sb-video, sb-media.js; 48 px, own bg ground with 2 px ink line, play--filled + word, its name starts with the visible word); the poster loads with the page, the video only after the press; the poster has a one-sentence description wired by aria-describedby; title, length and caption languages as text below, captions as &lt;track&gt;; never autoplay or a foreign player.</dd></div>
+      <div><dt>Entscheidung</dt><dd>D9, D18, D91, D94</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-22</dd></div>
+      <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D91 (B12b), D94 (4); systems/sebaro/spec/02-components.md §3.26, §7 (sb-media.js); spec/06-imagery.md; spec/07-voice.md §4.11</code></dd></div>
+      <div><dt lang="en">Agent</dt><dd lang="en">Video: native &lt;video&gt; with a poster from the own server and a real centred button „Abspielen“ (sb-video, sb-media.js; 48 px, own bg ground with 2 px ink line, play--filled + word, its name starts with the visible word); the poster loads with the page, the video only after the press; the poster has a one-sentence description for screen readers only, wired by aria-describedby to button and video and dropped from the video after the press; title, length and caption languages as text below, captions as &lt;track&gt;; never autoplay or a foreign player.</dd></div>
     </dl>
   </details>
 </article>
@@ -8137,15 +8137,15 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
   <details class="g-rule__more">
     <summary>Warum, Werte und Prüfung</summary>
     <dl class="sb-meta-list g-rule__facts">
-      <div><dt>Warum</dt><dd>Inhaber D91: häufige Fragen mit details (W3a), Doku-Navigation mit aufklappbaren Gruppen (W4b, statt alles offen). Die Skizze nannte die Schwächen des Zuklappens: Man sieht nicht mehr, was es gibt, und jeder Kopf wird eine Taste mit Zustand. Die Seitenzahl je Kopf und „Übersicht“ zeigen, was es gibt; das native &lt;summary&gt; bringt Zustand, Eingabe und Leertaste ohne Skript.</dd></div>
+      <div><dt>Warum</dt><dd>Inhaber D91: häufige Fragen mit details (W3a), Doku-Navigation mit aufklappbaren Gruppen (W4b, statt alles offen). Die Skizze nannte die Schwächen des Zuklappens: Man sieht nicht mehr, was es gibt, und jeder Kopf wird eine Taste mit Zustand. Die Seitenzahl je Kopf und „Übersicht“ zeigen, was es gibt; das native &lt;summary&gt; bringt Zustand, Eingabe und Leertaste ohne Skript. D94 (5), Antwort „5 wie vorgschlagen“: „Übersicht“ zuerst, die Zahl der Seiten in jedem Gruppenkopf und die offene Gruppe der aktuellen Seite gelten so, wie sie gebaut sind.</dd></div>
       <div><dt>So</dt><dd>&lt;details class=&#x27;sb-faq__item&#x27;&gt;&lt;summary class=&#x27;sb-faq__question&#x27;&gt;&lt;span&gt;Brauche ich ein Konto?&lt;/span&gt;&lt;svg class=&#x27;sb-icon sb-icon--20 sb-faq__chevron&#x27; …/&gt;&lt;/summary&gt;&lt;div class=&#x27;sb-faq__answer&#x27;&gt;&lt;p&gt;Nein. …&lt;/p&gt;&lt;/div&gt;&lt;/details&gt;; &lt;details class=&#x27;sb-toc__group&#x27; open&gt;&lt;summary class=&#x27;sb-toc__group-head&#x27;&gt;…&lt;span class=&#x27;sb-toc__group-name&#x27;&gt;Deine Daten&lt;/span&gt;&lt;span class=&#x27;sb-toc__group-count&#x27;&gt;3 Seiten&lt;/span&gt;&lt;/summary&gt;&lt;ol&gt;…</dd></div>
       <div><dt>Nicht so</dt><dd>Aufklappen mit eigenen Tasten und Skript; eine Antwort mit „Sie“ oder fünf Absätzen; ein zugeklappter Gruppenkopf ohne Seitenzahl; die Gruppe der aktuellen Seite zu; interne Begriffe als Gruppenwörter; mehr als zwei Ebenen.</dd></div>
       <div><dt>Werte</dt><dd>Fragezeile ab 56 px; Chevron 20 px, dreht 180° in 120 ms nur bei einer Handlung; Antwort höchstens 70 ch; Doku-Zeilen 48 px, ab 1024 px 32 px; höchstens 2 Ebenen</dd></div>
-      <div><dt>Hinweis</dt><dd>Seitenzahl je Kopf und „Übersicht“ sind die Antwort des Agenten auf die Schwächen von W4b.</dd></div>
+      <div><dt>Hinweis</dt><dd>Seitenzahl je Kopf, „Übersicht“ und die offene Gruppe der aktuellen Seite waren die Antwort der Agenten auf die Schwächen von W4b; der Inhaber hat sie mit D94 angenommen.</dd></div>
       <div><dt>Prüfung</dt><dd>Ohne Skript öffnen Eingabe und Leertaste; die Browsersuche öffnet eine zugeklappte Antwort (Chromium; WebKit und Firefox ungeprüft).</dd></div>
-      <div><dt>Entscheidung</dt><dd>D80, D91</dd></div>
-      <div><dt>Geändert</dt><dd>2026-10-21</dd></div>
-      <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D91 (W3a, W4b); systems/sebaro/spec/02-components.md §5.4.3, §5.4.4; spec/07-voice.md §4.10</code></dd></div>
+      <div><dt>Entscheidung</dt><dd>D80, D91, D94</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-22</dd></div>
+      <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D91 (W3a, W4b), D94 (5); systems/sebaro/spec/02-components.md §5.4.3, §5.4.4; spec/07-voice.md §4.10</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Frequent questions and docs-nav groups are native &lt;details&gt;: a question row at least 56 px (body-strong + chevron), answers of at most three sentences with „du“ then a link (sb-faq); a docs nav from about eight pages has „Übersicht“ first, every group head names its page count, the current page&#x27;s group is open (sb-toc__group).</dd></div>
     </dl>
   </details>
@@ -8914,15 +8914,15 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
   <details class="g-rule__more">
     <summary>Warum, Werte und Prüfung</summary>
     <dl class="sb-meta-list g-rule__facts">
-      <div><dt>Warum</dt><dd>Inhaber D91: kleines Fenster erlaubt, Seitenteile weichen (F2a); ziehbare Trennlinien mit Grenzen und Tastatur (F3a). WCAG 2.5.7 verlangt einen Weg ohne Ziehen; „Schmal · Normal · Breit“ ist dieser Weg.</dd></div>
+      <div><dt>Warum</dt><dd>Inhaber D91: kleines Fenster erlaubt, Seitenteile weichen (F2a); ziehbare Trennlinien mit Grenzen und Tastatur (F3a). WCAG 2.5.7 verlangt einen Weg ohne Ziehen; „Schmal · Normal · Breit“ ist dieser Weg. D94 (1), Antwort „1 wie vorgeschlagen“: „Schmal · Normal · Breit“ im Menü „Darstellung“ gilt so, wie es gebaut ist.</dd></div>
       <div><dt>So</dt><dd>&lt;div class=&#x27;sb-window__divider&#x27; role=&#x27;separator&#x27; aria-orientation=&#x27;vertical&#x27; aria-controls=&#x27;sidebar&#x27; aria-label=&#x27;Breite der Seitenleiste&#x27; aria-valuemin=&#x27;200&#x27; aria-valuemax=&#x27;360&#x27; aria-valuenow=&#x27;240&#x27;&gt;&lt;/div&gt;; Tauri minWidth 480, minHeight 400; sb-window.js.</dd></div>
       <div><dt>Nicht so</dt><dd>Ein großes Mindestfenster; eine Trennlinie ohne Tastatur oder ohne Weg ohne Ziehen; eine dickere oder farbige Linie zum Greifen; Inhalt unter 480 px gezogen.</dd></div>
       <div><dt>Werte</dt><dd>Fenster ab 480 × 400 px; Seitenleiste 200–360 px (Start 240), Inspektor 240–400 px (Start 280); Greiffläche 24 px, bei Touch 48 px; Schritte 8 / 32 px; aria-valuetext „264 Pixel“, „zugeklappt“</dd></div>
-      <div><dt>Hinweis</dt><dd>„Schmal · Normal · Breit“ ist eine Ergänzung nach der Prüfung des Baus für WCAG 2.5.7 (Agentenarbeit).</dd></div>
+      <div><dt>Hinweis</dt><dd>„Schmal · Normal · Breit“ war eine Ergänzung der Agenten nach der Prüfung des Baus (WCAG 2.5.7); der Inhaber hat sie mit D94 angenommen.</dd></div>
       <div><dt>Prüfung</dt><dd>Fenster auf 480 × 400 px; Trennlinie mit Tab erreichen und mit Pfeilen bewegen; „Schmal · Normal · Breit“ im Menü; neu laden behält die Breite.</dd></div>
-      <div><dt>Entscheidung</dt><dd>D81, D91</dd></div>
-      <div><dt>Geändert</dt><dd>2026-10-21</dd></div>
-      <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D91 (F2a, F3a), D81; systems/sebaro/spec/02-components.md §4.17, §4.23; spec/09-platform-web.md §13.1</code></dd></div>
+      <div><dt>Entscheidung</dt><dd>D81, D91, D94</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-22</dd></div>
+      <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D91 (F2a, F3a), D81, D94 (1); systems/sebaro/spec/02-components.md §4.17, §4.23; spec/09-platform-web.md §13.1</code></dd></div>
       <div><dt lang="en">Agent</dt><dd lang="en">Windows from 480 × 400 px; side parts give way, content keeps 480 px (DSK-04); the ink lines between a pane and the content are draggable (sidebar 200–360, inspector 240–400 px; below the minimum the pane collapses, double click = start width), keyboard <svg class="sb-icon sb-icon--16" role="img" aria-label="links" focusable="false"><use href="#arrow-left--16"/></svg> <svg class="sb-icon sb-icon--16" role="img" aria-label="zu" focusable="false"><use href="#arrow-right--16"/></svg> 8 px (⇧ 32 px), Home/End, Enter collapses; without dragging the menu „Darstellung“ offers „Schmal · Normal · Breit“; widths stored per window (sb-window__divider).</dd></div>
     </dl>
   </details>
@@ -9017,7 +9017,7 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
     <h3 class="g-rule__title" id="DSK-10-h">Dokument-Reiter 32 px, Kreuz am aktuellen</h3>
     <p class="g-rule__meta"><span class="g-rule__status g-rule__status--entschieden"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>Entschieden</span> <span class="sb-tag">Desktop</span> <span class="sb-tag">Web</span></p>
   </header>
-  <p class="g-rule__text">Zeig mehrere offene Dokumente als Dokument-Reiter (sb-doc-tabs) oben im Inhalt: 32 px, label, eine Haarlinie darunter, der aktuelle Reiter wie die Systemreiter mit 3-px-Ortslinie und Titelgewicht. Das Kreuz steht immer am aktuellen Reiter, an den anderen beim Zeigen oder Fokus, bei Touch an allen. Tastatur und Screenreader schließen mit Entf oder ⌘W; vor dem Schließen eines geänderten Dokuments fragt die App. Lange Namen werden am Ende gekürzt, der volle Name steht im title. Ist keins offen, sagt ein Satz, wie man eins öffnet.</p>
+  <p class="g-rule__text">Zeig mehrere offene Dokumente als Dokument-Reiter (sb-doc-tabs) oben im Inhalt: 32 px, label, eine Haarlinie darunter, der aktuelle Reiter wie die Systemreiter mit 3-px-Ortslinie und Titelgewicht. Das Kreuz steht immer am aktuellen Reiter, an den anderen beim Zeigen oder Fokus, bei Touch an allen. Das Kreuz ist nur für den Zeiger und hat keinen eigenen Tab-Halt; Tastatur und Screenreader schließen mit Entf oder ⌘W, aria-keyshortcuts sagt das Kürzel an; vor dem Schließen eines geänderten Dokuments fragt die App. Lange Namen werden am Ende gekürzt, der volle Name steht im title. Ist keins offen, sagt ein Satz, wie man eins öffnet.</p>
   <div class="g-rule__example">
 <div class="g-examples">
 <div class="g-ex g-ex--do">
@@ -9039,15 +9039,16 @@ python3 tools/signs.py sheet   <span class="sb-tok-comment"># Blatt bei 64, 24 u
   <details class="g-rule__more">
     <summary>Warum, Werte und Prüfung</summary>
     <dl class="sb-meta-list g-rule__facts">
-      <div><dt>Warum</dt><dd>Inhaber D91 F7a: Dokument-Reiter, 32 px, Kreuz am aktuellen Reiter. Die Systemreiter (NAV-08) wechseln Ansichten einer Sache, Dokument-Reiter öffnen und schließen. Das Kreuz ist nur ein Zeigerkürzel, weil ARIA in einer Reiterliste keine Taste erlaubt.</dd></div>
+      <div><dt>Warum</dt><dd>Inhaber D91 F7a: Dokument-Reiter, 32 px, Kreuz am aktuellen Reiter. Die Systemreiter (NAV-08) wechseln Ansichten einer Sache, Dokument-Reiter öffnen und schließen. Das Kreuz ist nur ein Zeigerkürzel, weil ARIA in einer Reiterliste keine Taste erlaubt. D94 (6), Antwort „6 wie vorgeschlagen“: das Kreuz nur für den Zeiger, kein eigener Tab-Halt, Entf oder ⌘W mit angesagtem Kürzel.</dd></div>
       <div><dt>So</dt><dd>&lt;div class=&#x27;sb-doc-tabs&#x27; role=&#x27;tablist&#x27; aria-label=&#x27;Offene Notizen&#x27;&gt;&lt;span class=&#x27;sb-doc-tabs__item&#x27; role=&#x27;presentation&#x27;&gt;&lt;button class=&#x27;sb-doc-tabs__tab&#x27; role=&#x27;tab&#x27; aria-selected=&#x27;true&#x27; aria-keyshortcuts=&#x27;Meta+W Delete&#x27;&gt;Wochenplan&lt;/button&gt;&lt;span class=&#x27;sb-doc-tabs__close&#x27; aria-hidden=&#x27;true&#x27; title=&#x27;Schließen&#x27;&gt;…&lt;/span&gt;&lt;/span&gt;…&lt;/div&gt;; &lt;p class=&#x27;sb-doc-tabs__none&#x27; hidden&gt;Keine Notiz offen. Wähle eine im Ordner links.&lt;/p&gt;</dd></div>
       <div><dt>Nicht so</dt><dd>Das Kreuz als Taste in der Reiterliste; das Kreuz nur beim Zeigen; eine ungesicherte Änderung still schließen; ein gefüllter Reiter; 48-px-Reiter im Fenster.</dd></div>
       <div><dt>Werte</dt><dd>Reiter 32 px, 8–15 rem breit; Kreuz 16 px mit 24-px-Ziel, bei Touch 48 px; Ortslinie 3 px</dd></div>
+      <div><dt>Hinweis</dt><dd>Das Kreuz nur für den Zeiger war die Antwort der Agenten auf den Befund von axe (aria-required-children); der Inhaber hat es mit D94 angenommen.</dd></div>
       <div><dt>Prüfung</dt><dd>axe (aria-required-children); Entf und ⌘W schließen; nach dem letzten Reiter steht der Satz und bekommt den Fokus.</dd></div>
-      <div><dt>Entscheidung</dt><dd>D67, D83, D91</dd></div>
-      <div><dt>Geändert</dt><dd>2026-10-21</dd></div>
-      <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D91 (F7a); systems/sebaro/spec/02-components.md §4.21</code></dd></div>
-      <div><dt lang="en">Agent</dt><dd lang="en">Several open documents as document tabs (sb-doc-tabs) at the top of the content: 32 px, label, hairline below, the current tab with the 3 px place line and title weight; the cross always on the current tab, on others on hover or focus, under touch on all; keyboard and screen readers close with Delete or ⌘W; a changed document asks first; long names cut at the end with the full name as title; with none open a sentence says how to open one.</dd></div>
+      <div><dt>Entscheidung</dt><dd>D67, D83, D91, D94</dd></div>
+      <div><dt>Geändert</dt><dd>2026-10-22</dd></div>
+      <div><dt>Quelle</dt><dd><code class="sb-code-inline">DECISIONS.md D91 (F7a), D94 (6); systems/sebaro/spec/02-components.md §4.21</code></dd></div>
+      <div><dt lang="en">Agent</dt><dd lang="en">Several open documents as document tabs (sb-doc-tabs) at the top of the content: 32 px, label, hairline below, the current tab with the 3 px place line and title weight; the cross always on the current tab, on others on hover or focus, under touch on all; the cross is for the pointer only, with no tab stop of its own; keyboard and screen readers close with Delete or ⌘W, announced by aria-keyshortcuts; a changed document asks first; long names cut at the end with the full name as title; with none open a sentence says how to open one.</dd></div>
     </dl>
   </details>
 </article>
@@ -9892,7 +9893,7 @@ d4e5f6a Kleinkram</code></pre></div>
     <li><a href="ausblick.html">Ausblick</a></li>
   </ul>
   </nav>
-  <p>sebaro Guide <a href="https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md">Version 2.3.0<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a> · System sebaro, Token-Vertrag 1.8 · aus sebaroDesign <code class="sb-code-inline">b46fb76</code></p>
+  <p>sebaro Guide <a href="https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md">Version 2.4.0<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a> · System sebaro, Token-Vertrag 1.8 · aus sebaroDesign <code class="sb-code-inline">11cf40f</code></p>
   <ul class="sb-site-footer__links">
     <li><a href="rules.json">rules.json</a></li>
     <li><a href="llms.txt">llms.txt</a></li>
