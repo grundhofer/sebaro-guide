@@ -1,8 +1,8 @@
 /* web.css: page chrome of web.html, the example website. Guide chrome: never shipped in a product.
  * Same discipline as sebaro.css: only var(--sb-*) tokens, no colour literals, no shadows, no tinted card grounds.
- * Classes start with "g-web-". Website patterns that the workshop has sketched and that wait for the owner's choice
- * (W1-W8: form result, pagination, FAQ rows, doc-nav groups, screenshot slots, social preview, language switch, print)
- * are built here from tokens as proposals; the page marks them „Skizziert, wartet auf die Wahl des Inhabers“. */
+ * Classes start with "g-web-". The website patterns of D91 (W1a-W8a: form result, page numbers, FAQ, doc-nav groups,
+ * screenshots, share preview, language switch, print) come from sebaro.css; what is left here is the frame around
+ * each example page and a few page-only fits. */
 
 /* ------------------------------------------------------------------ case sections */
 .g-web-case { scroll-margin-block-start: var(--sb-space-4); }
@@ -105,53 +105,7 @@
 /* search results */
 .g-web-results .sb-list-row__text strong { font-weight: var(--sb-type-body-strong-weight); color: var(--sb-color-text); }
 
-/* ------------------------------------------------------------------ Vorschlag: numbered pages of a list */
-.g-web-pages { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--sb-space-1); margin: var(--sb-space-6) 0 0; padding: 0; list-style: none; }
-.g-web-pages a, .g-web-pages [aria-current="page"], .g-web-pages__gap {
-  display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box;
-  min-inline-size: var(--sb-size-target-touch); min-block-size: var(--sb-size-target-touch); padding: 0 var(--sb-space-2);
-  border-block-end: var(--sb-border-width-strong) solid transparent; color: var(--sb-color-text); text-decoration: none;
-  font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); font-variant-numeric: var(--sb-type-numeric-variant);
-}
-.g-web-pages a { text-decoration: underline; text-decoration-color: var(--sb-color-link); text-decoration-thickness: var(--sb-x-sebaro-link-underline-width); text-underline-offset: 0.2em; }
-.g-web-pages a:hover { color: var(--sb-color-link); }
-.g-web-pages [aria-current="page"] { border-block-end-color: var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-body-strong-weight); }
-.g-web-pages__gap { color: var(--sb-color-text-muted); }
-.g-web-pages .sb-icon { color: var(--sb-color-text-muted); }
-
-/* ------------------------------------------------------------------ Vorschlag: questions that open (FAQ) */
-.g-web-faq { margin: 0; padding: 0; list-style: none; max-inline-size: var(--sb-size-measure-prose); border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
-.g-web-faq > li { border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
-.g-web-faq summary {
-  display: flex; align-items: center; justify-content: space-between; gap: var(--sb-space-3);
-  min-block-size: var(--sb-size-control-lg); padding-block: var(--sb-space-2); box-sizing: border-box; cursor: pointer; list-style: none;
-  font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking);
-}
-.g-web-faq summary::-webkit-details-marker { display: none; }
-.g-web-faq summary .sb-icon { color: var(--sb-color-text-muted); transition: transform var(--sb-motion-duration-short) var(--sb-motion-easing-standard); }
-.g-web-faq details[open] summary .sb-icon { transform: rotate(180deg); }
-.g-web-faq details > div { padding-block-end: var(--sb-space-4); }
-.g-web-faq details > div > p { margin: 0; }
-.g-web-faq details > div > p + p { margin-block-start: var(--sb-space-2); }
-@media (prefers-reduced-motion: reduce) { .g-web-faq summary .sb-icon { transition: none; } }
-[data-sb-motion="reduce"] .g-web-faq summary .sb-icon { transition: none; }
-
-/* ------------------------------------------------------------------ Vorschlag: groups in a documentation navigation */
-.g-web-docnav__group { margin: var(--sb-space-4) 0 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
-.g-web-docnav .g-web-docnav__group:first-of-type { margin-block-start: var(--sb-space-2); }
-.g-web-docnav ol { margin-block-start: var(--sb-space-1); }
-
-/* ------------------------------------------------------------------ Vorschlag: screenshot slots on the app page */
-.g-web-shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--sb-space-4); margin: 0; padding: 0; list-style: none; max-inline-size: 640px; }
-.g-web-shot { display: grid; gap: var(--sb-space-2); margin: 0; }
-.g-web-shot__slot {
-  display: grid; place-items: center; align-content: center; gap: var(--sb-space-2); aspect-ratio: 9 / 19.5; padding: var(--sb-space-3); box-sizing: border-box;
-  border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-sheet);
-  color: var(--sb-color-text-muted); text-align: center; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking);
-}
-.g-web-shot figcaption { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
-
-/* ------------------------------------------------------------------ Vorschlag: action zone of a website form + sent line */
+/* ------------------------------------------------------------------ Vorschlag: action zone of a website form (only the login frame of the account case) */
 .g-web-form { display: grid; gap: var(--sb-space-4); max-inline-size: 560px; }
 .g-web-form .sb-field__row { grid-template-columns: minmax(0, 1fr); }
 .g-web-form .sb-primary-action-bar { padding: var(--sb-space-2) 0 0; }
@@ -159,8 +113,6 @@
 @container (min-width: 640px) {
   .g-web-form .sb-primary-action-bar .sb-primary-action { inline-size: auto; min-inline-size: 240px; }
 }
-.g-web-sent { display: flex; align-items: flex-start; gap: var(--sb-space-2); margin: 0; max-inline-size: 42em; }
-.g-web-sent .sb-icon { flex: none; margin-block-start: 2px; color: var(--sb-color-success); }
 
 /* ------------------------------------------------------------------ Vorschlag: preview of a shared link (Open Graph) */
 .g-web-og { max-inline-size: 520px; margin: 0; border: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container); overflow: hidden; }
@@ -187,3 +139,14 @@
 
 /* Shiki theme block in the article case (TEC-08): a sentence between the two code blocks */
 .g-web-shiki-note { margin: var(--sb-space-3) 0; max-inline-size: 42em; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+
+/* ------------------------------------------------------------------ fits of system parts inside the example frames */
+/* the frames' headings start at h3 (the guide owns h1 and h2): the footer's „Darstellung“ is an h4 there, with the
+   look sebaro.css gives the h2 of a real footer */
+.sb-site-footer__display > h4 { margin: 0; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); color: var(--sb-color-text); }
+/* the Farbton choice sits in its own form, so its radio group stays apart from the other tone choices on this page */
+.g-web-tone { display: contents; }
+/* the about head brings the app gutter (spec/02 §3.24); inside a website section the container already has it */
+.g-web-frame .sb-section > .sb-about-head { padding-inline: 0; }
+.g-web-frame .sb-form-grid, .g-web-frame .sb-form-result, .g-web-frame .sb-place { margin-block-start: var(--sb-space-6); }
+.g-web-druck { max-inline-size: 52em; }

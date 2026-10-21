@@ -1,8 +1,8 @@
 /* generated — do not edit.
- * sebaroDesign token contract 1.7 · draft "sebaro" · palette "sebaro"
- * source: systems/sebaro/tokens/tokens.json (sha256 2058035356b6eae1)
- *         palettes/sebaro.json (sha256 f11812f50628e459)
- * builder: tools/build_tokens.py 1.7.0 · spec: shared/TOKEN-CONTRACT.md
+ * sebaroDesign token contract 1.8 · draft "sebaro" · palette "sebaro"
+ * source: systems/sebaro/tokens/tokens.json (sha256 dd23404b9dcdc1d7)
+ *         palettes/sebaro.json (sha256 706d00edee666460)
+ * builder: tools/build_tokens.py 1.8.0 · spec: shared/TOKEN-CONTRACT.md
  */
 
 /* 1. Mode-independent tokens. */
@@ -85,6 +85,7 @@
   --sb-x-sebaro-enter-distance: 8px;
   --sb-x-sebaro-start-tile-size: 96px;
   --sb-x-sebaro-link-underline-width: 2px;
+  --sb-x-sebaro-mark-edge-width: 2px;
 }
 
 /* 2. Light mode (default). [data-theme="light"] also works on any subtree. */
@@ -140,23 +141,26 @@
   --sb-dataviz-categorical-4: #D06482;
   --sb-dataviz-categorical-5: #2698C8;
   --sb-dataviz-categorical-6: #0B3C2B;
-  --sb-dataviz-sequential-1: #D5E5FF;
-  --sb-dataviz-sequential-2: #ABC4F6;
-  --sb-dataviz-sequential-3: #87A4E0;
-  --sb-dataviz-sequential-4: #6685C6;
-  --sb-dataviz-sequential-5: #4867A8;
-  --sb-dataviz-sequential-6: #2E4A87;
-  --sb-dataviz-sequential-7: #182F65;
-  --sb-dataviz-diverging-1: #81300F;
-  --sb-dataviz-diverging-2: #AC654B;
-  --sb-dataviz-diverging-3: #D3A595;
-  --sb-dataviz-diverging-4: #D7D9DD;
-  --sb-dataviz-diverging-5: #85BBC9;
-  --sb-dataviz-diverging-6: #0E899F;
-  --sb-dataviz-diverging-7: #00596D;
+  --sb-dataviz-sequential-1: #5C8AB3;
+  --sb-dataviz-sequential-2: #45658A;
+  --sb-dataviz-sequential-3: #294374;
+  --sb-dataviz-sequential-4: #1C2130;
+  --sb-dataviz-diverging-1: #965038;
+  --sb-dataviz-diverging-2: #BB7454;
+  --sb-dataviz-diverging-3: #D7D9DD;
+  --sb-dataviz-diverging-4: #4390A2;
+  --sb-dataviz-diverging-5: #256B7F;
   --sb-syntax-keyword: #54258C;
   --sb-syntax-string: #1B490F;
   --sb-syntax-constant: #951D52;
+  --sb-category-1: #486654;
+  --sb-category-2: #4B916B;
+  --sb-category-3: #767EA0;
+  --sb-category-4: #67548E;
+  --sb-category-5: #88763F;
+  --sb-category-6: #975C78;
+  --sb-mark: #FFF198;
+  --sb-mark-edge: #8D894E;
   --sb-type-display-family: var(--sb-font-family-display);
   --sb-type-display-size: 2.5rem;
   --sb-type-display-line-height: 1.2;
@@ -329,23 +333,26 @@
     --sb-dataviz-categorical-4: #AF7280;
     --sb-dataviz-categorical-5: #2591C4;
     --sb-dataviz-categorical-6: #1C7B5A;
-    --sb-dataviz-sequential-1: #142A5E;
-    --sb-dataviz-sequential-2: #294481;
-    --sb-dataviz-sequential-3: #4361A2;
-    --sb-dataviz-sequential-4: #5F7FC0;
-    --sb-dataviz-sequential-5: #809EDB;
-    --sb-dataviz-sequential-6: #A4BEF2;
-    --sb-dataviz-sequential-7: #CCDEFF;
-    --sb-dataviz-diverging-1: #FFC0AA;
-    --sb-dataviz-diverging-2: #D88669;
-    --sb-dataviz-diverging-3: #955640;
-    --sb-dataviz-diverging-4: #32353C;
-    --sb-dataviz-diverging-5: #237486;
-    --sb-dataviz-diverging-6: #46AEC5;
-    --sb-dataviz-diverging-7: #9BDDEE;
+    --sb-dataviz-sequential-1: #3C729E;
+    --sb-dataviz-sequential-2: #7295BC;
+    --sb-dataviz-sequential-3: #AFBED4;
+    --sb-dataviz-sequential-4: #EAEFFE;
+    --sb-dataviz-diverging-1: #CA7F67;
+    --sb-dataviz-diverging-2: #A05C3D;
+    --sb-dataviz-diverging-3: #32353C;
+    --sb-dataviz-diverging-4: #0A7989;
+    --sb-dataviz-diverging-5: #599AB1;
     --sb-syntax-keyword: #BC98F9;
     --sb-syntax-string: #7BB76E;
     --sb-syntax-constant: #FAA6B2;
+    --sb-category-1: #8DD3B1;
+    --sb-category-2: #71AF88;
+    --sb-category-3: #8192CF;
+    --sb-category-4: #BD9FDC;
+    --sb-category-5: #D2BD77;
+    --sb-category-6: #C07D9F;
+    --sb-mark: #3E3600;
+    --sb-mark-edge: #E3B831;
     --sb-type-display-family: var(--sb-font-family-display);
     --sb-type-display-size: 2.5rem;
     --sb-type-display-line-height: 1.2;
@@ -518,23 +525,26 @@
   --sb-dataviz-categorical-4: #AF7280;
   --sb-dataviz-categorical-5: #2591C4;
   --sb-dataviz-categorical-6: #1C7B5A;
-  --sb-dataviz-sequential-1: #142A5E;
-  --sb-dataviz-sequential-2: #294481;
-  --sb-dataviz-sequential-3: #4361A2;
-  --sb-dataviz-sequential-4: #5F7FC0;
-  --sb-dataviz-sequential-5: #809EDB;
-  --sb-dataviz-sequential-6: #A4BEF2;
-  --sb-dataviz-sequential-7: #CCDEFF;
-  --sb-dataviz-diverging-1: #FFC0AA;
-  --sb-dataviz-diverging-2: #D88669;
-  --sb-dataviz-diverging-3: #955640;
-  --sb-dataviz-diverging-4: #32353C;
-  --sb-dataviz-diverging-5: #237486;
-  --sb-dataviz-diverging-6: #46AEC5;
-  --sb-dataviz-diverging-7: #9BDDEE;
+  --sb-dataviz-sequential-1: #3C729E;
+  --sb-dataviz-sequential-2: #7295BC;
+  --sb-dataviz-sequential-3: #AFBED4;
+  --sb-dataviz-sequential-4: #EAEFFE;
+  --sb-dataviz-diverging-1: #CA7F67;
+  --sb-dataviz-diverging-2: #A05C3D;
+  --sb-dataviz-diverging-3: #32353C;
+  --sb-dataviz-diverging-4: #0A7989;
+  --sb-dataviz-diverging-5: #599AB1;
   --sb-syntax-keyword: #BC98F9;
   --sb-syntax-string: #7BB76E;
   --sb-syntax-constant: #FAA6B2;
+  --sb-category-1: #8DD3B1;
+  --sb-category-2: #71AF88;
+  --sb-category-3: #8192CF;
+  --sb-category-4: #BD9FDC;
+  --sb-category-5: #D2BD77;
+  --sb-category-6: #C07D9F;
+  --sb-mark: #3E3600;
+  --sb-mark-edge: #E3B831;
   --sb-type-display-family: var(--sb-font-family-display);
   --sb-type-display-size: 2.5rem;
   --sb-type-display-line-height: 1.2;
@@ -652,6 +662,62 @@
   --sb-type-mobile-numeric-variant: tabular-nums;
   --sb-type-mobile-numeric: 430 1rem/1.5 var(--sb-font-family-ui);
   --sb-x-sebaro-layer-line-color: var(--sb-color-border-strong);
+}
+
+/* 4a. Colour tone "warm" (Papier, choice „Warm“; PALETTE-CONTRACT 2.5 variants, D90):
+       <html data-sb-tone="warm">, set before first paint by theme-init.js. It replaces only these
+       grey roles; every other colour stays. On the root only; [data-theme] subtrees follow it. */
+:root[data-sb-tone="warm"],
+:root[data-sb-tone="warm"] [data-theme="light"] {
+  --sb-color-bg: #FBF4EA;
+  --sb-color-surface: #FFFBF5;
+  --sb-color-surface-raised: #FFFFFB;
+  --sb-color-surface-sunken: #F3EADC;
+  --sb-color-text: #231C18;
+  --sb-color-text-muted: #6F675F;
+  --sb-color-text-subtle: #8B837B;
+  --sb-color-border: #E0D8CC;
+  --sb-color-border-strong: #8B857C;
+  --sb-color-scrim: #231C1852;
+  --sb-color-hover-fill: #F3EADC;
+  --sb-color-pressed-fill: #F1E8DA;
+  --sb-color-on-primary-action: #231C18;
+  --sb-color-primary-action-outline: #231C18;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-sb-tone="warm"]:not([data-theme="light"]) {
+    --sb-color-bg: #1B140F;
+    --sb-color-surface: #241C16;
+    --sb-color-surface-raised: #29221D;
+    --sb-color-surface-sunken: #100B07;
+    --sb-color-text: #F3EBE8;
+    --sb-color-text-muted: #A69C96;
+    --sb-color-text-subtle: #817873;
+    --sb-color-border: #3B332D;
+    --sb-color-border-strong: #7A716A;
+    --sb-color-scrim: #00000099;
+    --sb-color-hover-fill: #2A221C;
+    --sb-color-pressed-fill: #2E2620;
+    --sb-color-on-primary-action: #101114;
+    --sb-color-primary-action-outline: #A9E277;
+  }
+}
+:root[data-sb-tone="warm"][data-theme="dark"],
+:root[data-sb-tone="warm"] [data-theme="dark"] {
+  --sb-color-bg: #1B140F;
+  --sb-color-surface: #241C16;
+  --sb-color-surface-raised: #29221D;
+  --sb-color-surface-sunken: #100B07;
+  --sb-color-text: #F3EBE8;
+  --sb-color-text-muted: #A69C96;
+  --sb-color-text-subtle: #817873;
+  --sb-color-border: #3B332D;
+  --sb-color-border-strong: #7A716A;
+  --sb-color-scrim: #00000099;
+  --sb-color-hover-fill: #2A221C;
+  --sb-color-pressed-fill: #2E2620;
+  --sb-color-on-primary-action: #101114;
+  --sb-color-primary-action-outline: #A9E277;
 }
 
 /* 5. Tokens that reference mode- or product-dependent values. Re-declared on every theme and

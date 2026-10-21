@@ -3,8 +3,8 @@
  * The windows themselves are the system's sb-window, sb-tree, sb-row, sb-listbox and sb-command-palette (D80); the
  * frame around them is demo-window-frame from the vendored demo.css. What is left here:
  *   1. guide chrome (rule lists, status marks, notes, frame widths for the size demo, the start replay frame),
- *   2. sketches that wait for the owner's choice (menu bar list, drag and drop, several windows) and the editor,
- *      which the system leaves to CodeMirror (DSK-03); each is marked on the page. */
+ *   2. the macOS menu bar as lists, the layout of two windows side by side, and the editor, which the system leaves
+ *      to CodeMirror (DSK-03). */
 
 /* ------------------------------------------------------------------ section footers: rules and platform hints */
 .g-desktop-facts { margin-block-start: var(--sb-space-6); max-inline-size: 52em; }
@@ -51,15 +51,14 @@
 .g-desktop-narrowbox { max-inline-size: 280px; }
 .g-desktop-plainnav { border-inline-end: 0; padding-block: var(--sb-space-1); }
 
-/* search results: until the owner picks the mark colour (FAR-12), a hit carries the 1 px border-strong frame, no fill */
-.g-desktop-hit { background: none; color: inherit; outline: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); }
+/* search results */
 .g-desktop-results { margin: 0; padding: 0; list-style: none; }
 .g-desktop-results li { padding-block: var(--sb-space-2); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
 .g-desktop-results li:first-child { border-block-start: 0; }
 .g-desktop-results p { margin: 0; }
 .g-desktop-results .g-desktop-results__where { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 
-/* ------------------------------------------------------------------ sketch, waits for the owner: menu bar structure as lists */
+/* ------------------------------------------------------------------ the macOS menu bar structure as lists (drawn by the system) */
 .g-desktop-menubar { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: var(--sb-space-6); margin: 0; }
 .g-desktop-menubar > div { min-inline-size: 0; }
 .g-desktop-menubar dt { margin: 0 0 var(--sb-space-1); font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
@@ -71,22 +70,12 @@
 .g-desktop-menubar .sb-icon { color: var(--sb-color-accent); }
 .g-desktop-menubar__blank { inline-size: 16px; flex: none; }
 
-/* ------------------------------------------------------------------ sketch, waits for the owner: drag and drop */
-.g-desktop-dnd { align-items: start; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: var(--sb-space-6); }
-.g-desktop-dnd__box { min-inline-size: 0; padding-block: var(--sb-space-1); border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container); }
-.g-desktop-row--source { color: var(--sb-color-text-muted); }
-.g-desktop-row--target { outline: var(--sb-x-sebaro-layer-line-width) solid var(--sb-color-accent); outline-offset: calc(-1 * var(--sb-x-sebaro-layer-line-width)); }
-.g-desktop-insert { block-size: 0; margin-inline-start: var(--sb-space-8); border-block-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-color-accent); }
-.g-desktop-ghost { display: inline-flex; align-items: center; gap: var(--sb-space-2); padding: var(--sb-space-1) var(--sb-space-3); border: var(--sb-elevation-overlay-border-width) solid var(--sb-elevation-overlay-border-color); border-radius: var(--sb-radius-control); background: var(--sb-elevation-overlay-surface); color: var(--sb-color-text); font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
-
-/* ------------------------------------------------------------------ sketch, waits for the owner: several windows */
+/* ------------------------------------------------------------------ several windows side by side (the one behind: data-sb-window-active="false", sebaro.css) */
 .g-desktop-stackwin { display: grid; gap: var(--sb-space-6); }
 @media (min-width: 1024px) {
   .g-desktop-stackwin { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: start; }
   .g-desktop-stackwin > :last-child { margin-block-start: var(--sb-space-12); }
 }
-/* the window behind steps back: path and text grey, nothing else changes */
-.g-desktop-back :is(.sb-window__path > span, .sb-window__name, .sb-window__content) { color: var(--sb-color-text-muted); }
 
 /* ------------------------------------------------------------------ code view: live token value under the token name (guide.js, data-g-token) */
 .g-desktop-tokval { font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); color: var(--sb-color-text-muted); }
@@ -108,3 +97,5 @@
 .g-desktop-match { outline: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); }
 .g-desktop-match.is-current { background: var(--sb-color-selection); }
 .g-desktop-caret { display: inline-block; inline-size: 0; block-size: 1.25em; margin-inline: -1px; vertical-align: text-bottom; border-inline-start: 2px solid var(--sb-color-accent); }
+/* the Farbton choice sits in its own form, so its radio group stays apart from the other tone choices on this page */
+.g-desktop-tone { display: contents; }

@@ -3,5 +3,8 @@
 // 'unsafe-inline'. Nothing stored = the page follows prefers-color-scheme.
 // It also applies the app setting „Bewegung immer reduzieren“ (D46, spec/03 §13): sb-motion = "reduce" sets
 // html[data-sb-motion="reduce"], which sebaro.css and sb-start.js treat like prefers-reduced-motion: reduce.
+// And the colour tone „Farbton: Kühl · Warm“ (D90, D91 C4c; TOKEN-CONTRACT §10.4): sb-tone = "warm" sets
+// html[data-sb-tone="warm"] (sb-tone.js stores it); nothing stored = the cool standard palette.
 try { var t = localStorage.getItem("sb-theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
 try { if (localStorage.getItem("sb-motion") === "reduce") document.documentElement.dataset.sbMotion = "reduce"; } catch (e) {}
+try { if (localStorage.getItem("sb-tone") === "warm") document.documentElement.dataset.sbTone = "warm"; } catch (e) {}

@@ -98,3 +98,13 @@
 
 /* a live specimen right after a do/don't pair (Kurzmeldung) */
 .g-examples + .g-bauteile-states { margin-block-start: var(--sb-space-6); }
+
+/* ------------------------------------------------------------------ D91 entries */
+/* footer „Darstellung“: the system styles an h2 there; on this page it is a paragraph so the outline stays intact */
+/* a form of its own keeps the specimen radios apart from the footer of this page (same name="sb-tone") */
+.g-bauteile-tone-form { display: contents; }
+.g-bauteile-disphead { margin: 0; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); color: var(--sb-color-text); }
+/* media rows and the video keep a readable width in a full-width state cell */
+.g-bauteile-media { display: grid; gap: var(--sb-space-4); inline-size: 100%; max-inline-size: 560px; }
+.g-bauteile-video { inline-size: 100%; max-inline-size: 560px; margin: 0; }
+.g-bauteile-place { inline-size: 100%; max-inline-size: 360px; }

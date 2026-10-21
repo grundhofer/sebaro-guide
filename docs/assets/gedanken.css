@@ -10,11 +10,8 @@
 .g-gedanken-space { margin-block-start: var(--sb-space-6); }
 .sb-table-wrap + .sb-prose { margin-block-start: var(--sb-space-4); }
 
-/* ------------------------------------------------------------------ pull quote (proposal: the system has no quote block) */
-.g-gedanken-quote { margin: var(--sb-space-6) 0; padding-inline-start: var(--sb-space-4); max-inline-size: 42em; border-inline-start: var(--sb-border-width-strong) solid var(--sb-color-border-strong); }
-.g-gedanken-quote blockquote { margin: 0; }
-.g-gedanken-quote blockquote p { margin: 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
-.g-gedanken-quote figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1) var(--sb-space-3); margin-block-start: var(--sb-space-2); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+/* ------------------------------------------------------------------ quotes: the system's sb-quote (D91 B8b, TXT-17); only the place on the page */
+.g-gedanken-quote { margin-block: var(--sb-space-6); max-inline-size: 42em; }
 
 /* ------------------------------------------------------------------ products and values */
 .g-gedanken-tiles { display: flex; flex-wrap: wrap; gap: var(--sb-space-4) var(--sb-space-6); margin: 0; padding: 0; list-style: none; }
@@ -54,14 +51,18 @@ html[data-sb-motion="reduce"] .g-gedanken-demo [data-g-job] { transition: none; 
 .g-gedanken-motion { border-block: var(--sb-border-width-hairline) solid var(--sb-color-border); }
 .g-gedanken-pre { margin: 0; padding: var(--sb-space-4); overflow-x: auto; white-space: pre; }
 
-/* ------------------------------------------------------------------ history timeline (proposal: the system has no timeline) */
-.g-gedanken-timeline { margin: var(--sb-space-6) 0 0; padding: 0; list-style: none; border-inline-start: var(--sb-border-width-strong) solid var(--sb-color-border-strong); }
-.g-gedanken-timeline__item { position: relative; padding: 0 0 var(--sb-space-8) var(--sb-space-6); max-inline-size: 48em; }
-.g-gedanken-timeline__item:last-child { padding-block-end: 0; }
-.g-gedanken-timeline__item::before { content: ""; position: absolute; inset-inline-start: 0; inset-block-start: 0.6em; inline-size: var(--sb-space-4); border-block-start: var(--sb-border-width-strong) solid var(--sb-color-border-strong); }
-.g-gedanken-timeline__date { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant); }
-.g-gedanken-timeline__title { margin: var(--sb-space-1) 0 var(--sb-space-2); font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
-.g-gedanken-timeline__item p:last-child { margin: 0; }
+/* ------------------------------------------------------------------ history: the system's sb-timeline (D91 B4b, DAT-15), newest first;
+ * each entry here carries a paragraph under its title and meta line */
+.g-gedanken-history { margin-block-start: var(--sb-space-6); max-inline-size: 48em; }
+.g-gedanken-history .sb-timeline__item { padding-block: var(--sb-space-3); }
+.g-gedanken-history__text { margin: var(--sb-space-2) 0 0; }
+/* these entries carry whole paragraphs: in a narrow place the date moves above glyph and text instead of keeping its
+ * 7rem column, so the paragraph keeps a readable measure (guide page only; short timeline rows keep the system layout) */
+.g-gedanken-history { container: g-history / inline-size; }
+@container g-history (width < 480px) {
+  .g-gedanken-history .sb-timeline__item { grid-template-columns: var(--sb-size-icon-sm) minmax(0, 1fr); row-gap: var(--sb-space-1); }
+  .g-gedanken-history .sb-timeline__date { grid-column: 1 / -1; }
+}
 
 /* ------------------------------------------------------------------ lists and gates */
 .g-gedanken-list { max-inline-size: 56em; }

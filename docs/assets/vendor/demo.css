@@ -1,6 +1,6 @@
 /* demo.css: page chrome of the sebaro demo pages (not part of the system; products never load it).
  * Only var(--sb-*) tokens, like css/sebaro.css. Classes here start with "demo-" except .sb-phone, the demo-only
- * phone frame of spec/09 §4.1. Load it after css/sebaro.css. */
+ * phone frame of spec/09 §4.1, and the illustration pair of spec/06 §8 (a copy of pages.css, for the component sheet). Load it after css/sebaro.css. */
 
 /* ------------------------------------------------------------------ page frame: table of contents + content */
 .demo-layout {
@@ -139,3 +139,38 @@
 .demo-view-frame { box-sizing: border-box; inline-size: 100%; overflow: hidden; border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container); }
 .demo-view-frame--520 { max-inline-size: 520px; }
 .demo-view-frame .sb-bottom-block { position: relative; }
+
+/* ------------------------------------------------------------------ round 6 stage 2b specimens (D91) */
+/* the scroll box of the sticky group head specimen (D91 B3b): the head sticks inside it */
+.demo-scrollbox { block-size: 260px; overflow-y: auto; border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container); background: var(--sb-color-bg); }
+/* the illustration pair of spec/06 §8 for the screenshot grid specimen (D91 W5b). The same six lines as pages.css,
+   which the component sheet does not load; sebaro.css has no mode rules by design, so the pair rules stay page CSS */
+.sb-illustration-dark { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .sb-illustration-light { display: none; }
+  :root:not([data-theme="light"]) .sb-illustration-dark { display: block; }
+}
+:root[data-theme="dark"] .sb-illustration-light { display: none; }
+:root[data-theme="dark"] .sb-illustration-dark { display: block; }
+/* the window chrome a page cannot have (D91 F1a, F9a): the operating system's parts drawn for the „Fenster“ specimens.
+   Neutral rings and greys only; the real lights and buttons are drawn by the system in its own colours. */
+.demo-window-frame--os { position: relative; }
+.demo-os-lights {
+  position: absolute; inset-block-start: calc(var(--sb-space-4) + var(--sb-space-0-5)); inset-inline-start: var(--sb-space-4); z-index: 1;
+  display: flex; gap: 6px; pointer-events: none;
+}
+.demo-os-lights > i { inline-size: 12px; block-size: 12px; box-sizing: border-box; border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-pill); }
+.demo-os-frame {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--sb-space-3);
+  min-block-size: var(--sb-size-control-sm); padding-inline: var(--sb-space-3) 0; box-sizing: border-box;
+  border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border);
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
+}
+.demo-os-frame__buttons { display: flex; align-self: stretch; }
+.demo-os-frame__buttons > span { display: inline-grid; place-items: center; inline-size: 46px; color: var(--sb-color-text-muted); }
+.demo-os-frame__max { inline-size: 10px; block-size: 10px; box-sizing: border-box; border: var(--sb-border-width-control) solid currentColor; }
+.demo-window-pair { display: flex; flex-wrap: wrap; gap: var(--sb-space-6); align-items: flex-start; }
+.demo-window-pair > * { flex: 1 1 22rem; min-inline-size: 0; }
+.demo-window-frame--short .sb-window__content { min-block-size: 6rem; }
+.demo-window-frame--clip { overflow: hidden; }   /* the zone's ground stays inside the frame's rounded corners */
+.demo-window-frame--resize { resize: horizontal; overflow: hidden; min-inline-size: min(320px, 100%); }   /* drag the corner: the window narrows */

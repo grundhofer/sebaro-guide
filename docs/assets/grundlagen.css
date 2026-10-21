@@ -192,6 +192,30 @@
 /* ------------------------------------------------------------------ small helpers used once */
 .g-grundlagen-statuses { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: var(--sb-space-3) var(--sb-space-6); }
 .g-grundlagen-fn { margin-inline-start: var(--sb-space-0-5); }
+/* ------------------------------------------------------------------ colour tone, category, mark, sign (D91) */
+/* the two tone samples side by side; grundlagen.js copies each tone's grey roles from tokens.css onto its sample */
+.g-grundlagen-tones { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: var(--sb-space-4) var(--sb-spacing-group); }
+.g-grundlagen-tones[hidden] { display: none; }
+.g-grundlagen-tone { display: grid; align-content: start; gap: var(--sb-space-3); min-inline-size: 0; padding: var(--sb-space-4); border: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container); background: var(--sb-color-bg); color: var(--sb-color-text); }
+.g-grundlagen-tone__title { margin: 0; font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
+.g-grundlagen-tone__note { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.g-grundlagen-tone__row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sb-space-2) var(--sb-space-4); margin: 0; }
+.g-grundlagen-tone-form { display: block; max-inline-size: 22rem; }
+.g-grundlagen-tone-form[hidden] { display: none; }
+.g-grundlagen-tone__swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 9rem), 1fr)); gap: var(--sb-space-2) var(--sb-space-4); margin: 0; padding: 0; list-style: none; }
+.g-grundlagen-tone__swatches > li { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--sb-space-2); align-items: center; min-inline-size: 0; }
+.g-grundlagen-tone__swatches > li > :not(.g-swatch) { grid-column: 2; overflow-wrap: anywhere; }
+.g-grundlagen-tone__chip { grid-row: span 2; display: block; inline-size: var(--sb-space-8); block-size: var(--sb-space-8); border: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-small); background: var(--g-swatch-color); }
+.g-grundlagen-plain { margin: 0; }
+.g-grundlagen-sample { display: grid; gap: var(--sb-space-2); }
+.g-grundlagen-signs { display: grid; gap: var(--sb-space-2); margin: 0; padding: 0; list-style: none; }
+.g-grundlagen-steps { display: grid; gap: var(--sb-space-2); margin: 0; padding-inline-start: var(--sb-space-6); max-inline-size: 42em; }
+.g-grundlagen-quote { margin: 0; }
+/* "Nicht so": a category dot without its word, a tinted fill, a coloured word (tokens only, inside .g-ex--dont) */
+.g-ex--dont .g-grundlagen-catdot { display: inline-block; inline-size: 10px; block-size: 10px; border-radius: 50%; background: var(--sb-category-2); vertical-align: middle; }
+.g-ex--dont .g-grundlagen-catfill { padding: var(--sb-space-0-5) var(--sb-space-2); border-radius: var(--sb-radius-small); background: var(--sb-category-1); color: var(--sb-color-bg); }
+.g-ex--dont .g-grundlagen-cattext { color: var(--sb-category-4); font-weight: var(--sb-type-title-weight); }
+
 /* last, so it wins over the margin: 0 of the lists above */
 .g-grundlagen-gap { margin-block-start: var(--sb-space-6); }
 

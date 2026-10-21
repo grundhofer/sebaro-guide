@@ -1,8 +1,8 @@
 /* generated — do not edit.
- * sebaroDesign token contract 1.7 · draft "sebaro" · palette "sebaro"
- * source: systems/sebaro/tokens/tokens.json (sha256 2058035356b6eae1)
- *         palettes/sebaro.json (sha256 f11812f50628e459)
- * builder: tools/build_tokens.py 1.7.0 · spec: shared/TOKEN-CONTRACT.md
+ * sebaroDesign token contract 1.8 · draft "sebaro" · palette "sebaro"
+ * source: systems/sebaro/tokens/tokens.json (sha256 dd23404b9dcdc1d7)
+ *         palettes/sebaro.json (sha256 706d00edee666460)
+ * builder: tools/build_tokens.py 1.8.0 · spec: shared/TOKEN-CONTRACT.md
  *
  * Tailwind CSS v4 bridge. Import order:
  *   @import "tailwindcss";
@@ -77,16 +77,11 @@
   --color-dataviz-sequential-2: var(--sb-dataviz-sequential-2);
   --color-dataviz-sequential-3: var(--sb-dataviz-sequential-3);
   --color-dataviz-sequential-4: var(--sb-dataviz-sequential-4);
-  --color-dataviz-sequential-5: var(--sb-dataviz-sequential-5);
-  --color-dataviz-sequential-6: var(--sb-dataviz-sequential-6);
-  --color-dataviz-sequential-7: var(--sb-dataviz-sequential-7);
   --color-dataviz-diverging-1: var(--sb-dataviz-diverging-1);
   --color-dataviz-diverging-2: var(--sb-dataviz-diverging-2);
   --color-dataviz-diverging-3: var(--sb-dataviz-diverging-3);
   --color-dataviz-diverging-4: var(--sb-dataviz-diverging-4);
   --color-dataviz-diverging-5: var(--sb-dataviz-diverging-5);
-  --color-dataviz-diverging-6: var(--sb-dataviz-diverging-6);
-  --color-dataviz-diverging-7: var(--sb-dataviz-diverging-7);
   --color-tile-studio: var(--sb-tile-studio);
   --color-tile-studio-glyph: var(--sb-tile-studio-glyph);
   --color-tile-collaboration: var(--sb-tile-collaboration);
@@ -106,6 +101,14 @@
   --color-syntax-keyword: var(--sb-syntax-keyword);
   --color-syntax-string: var(--sb-syntax-string);
   --color-syntax-constant: var(--sb-syntax-constant);
+  --color-category-1: var(--sb-category-1);
+  --color-category-2: var(--sb-category-2);
+  --color-category-3: var(--sb-category-3);
+  --color-category-4: var(--sb-category-4);
+  --color-category-5: var(--sb-category-5);
+  --color-category-6: var(--sb-category-6);
+  --color-mark: var(--sb-mark);
+  --color-mark-edge: var(--sb-mark-edge);
 
   --font-ui: var(--sb-font-family-ui);
   --font-display: var(--sb-font-family-display);

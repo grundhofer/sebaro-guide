@@ -18,6 +18,8 @@
 <link rel="icon" href="sebaro/brand/site-root/favicon.ico" sizes="32x32">
 <link rel="icon" href="sebaro/brand/site-root/icon.svg" type="image/svg+xml">
 <script defer src="sebaro/js/theme-button.js"></script>
+<script defer src="sebaro/js/sb-tone.js"></script>
+<script defer src="sebaro/js/sb-print.js"></script>
 <script defer src="assets/guide.js"></script>
 <!-- /guide:head -->
 <link rel="stylesheet" href="assets/grundlagen.css">
@@ -161,7 +163,7 @@
   </a>
   <div class="sb-site-header__links">
     <nav class="sb-site-nav g-nav" aria-label="Hauptmenü">
-      <a href="index.html">Start</a> <a href="regeln.html">Regeln</a> <a href="grundlagen.html" aria-current="page">Grundlagen</a> <a href="bauteile.html">Bauteile</a> <a href="daten.html">Daten</a> <a href="web.html">Web</a> <a href="app.html">App</a> <a href="desktop.html">Desktop</a> <a href="gedanken.html">Gedanken</a> <a href="ausblick.html">Ausblick</a>
+      <a href="index.html">Start</a> <a href="regeln.html">Regeln</a> <a href="grundlagen.html" aria-current="page">Grundlagen</a> <a href="bauteile.html">Bauteile</a> <a href="daten.html">Daten</a> <a href="web.html">Web</a> <a href="app.html">App</a> <a href="ios.html">iOS</a> <a href="desktop.html">Desktop</a> <a href="gedanken.html">Gedanken</a> <a href="ausblick.html">Ausblick</a>
     </nav>
   </div>
   <button class="sb-theme-button" type="button" data-sb-theme-button>Hell oder Dunkel</button>
@@ -266,10 +268,10 @@
               </li>
             </ol>
           </div>
-          <p class="g-grundlagen-text g-grundlagen-gap">Zwei weitere Jobs sind entschieden: <b>Kategorie</b> für Inhalte, die du selbst einordnest (sechs gedämpfte Töne, nur als Punkt neben dem Wort), und <b>Markierung</b> für Textmarker und Suchtreffer (<a href="regeln.html#FAR-12">FAR-12</a>). Ihre Töne sind skizziert und warten auf die Wahl des Inhabers; bis dahin bleibt eine Kategorie ein graues Wort, und ein Suchtreffer trägt einen 1-px-Rahmen in <code>border-strong</code>.</p>
+          <p class="g-grundlagen-text g-grundlagen-gap">Zwei weitere Jobs sind entschieden und seit der Wahl des Inhabers (D91) auch getönt: <b>Kategorie</b> für Inhalte, die du selbst einordnest (sechs gedämpfte, kühle Töne, nur als Punkt oder Zeichen neben dem Wort), und <b>Markierung</b> für Textmarker und Suchtreffer (Fläche mit Kante). In Zahlen-Apps folgt außerdem die Farbe von Plus und Minus dem Vorzeichen. Alle drei stehen unter <a href="#farbe-kategorie">Kategorie, Markierung, Vorzeichen</a>; die zweite, warme Palette unter <a href="#farbe-ton">Farbton</a>.</p>
           <p class="g-grundlagen-text">Zwei Farbfamilien haben einen örtlich begrenzten Job: Datenfarben trennen Reihen in einem Diagramm, Codefarben gliedern Code im Codeblock. Außerhalb davon gibt es sie nicht. Gezählt wird je Ansicht: Hauptaktions-Flächen 0 oder 1, andere Flächen hinter Text 0, Farben ohne Rolle 0.</p>
           <p class="g-grundlagen-text">Die Farbfelder auf dieser Seite sind Muster zum Nachschlagen, keine Flächen einer Oberfläche: Sie heißen „Farbfeld“, tragen Namen und Rolle daneben und lassen sich nicht bedienen. Diese Ausnahme gilt nur für Nachschlageseiten, nie in Produkten (<a href="regeln.html#FAR-13">FAR-13</a>).</p>
-          <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#FAR-01">FAR-01</a>, <a href="regeln.html#FAR-02">FAR-02</a>, <a href="regeln.html#FAR-09">FAR-09</a>, <a href="regeln.html#FAR-12">FAR-12</a>, <a href="regeln.html#FAR-13">FAR-13</a>, <a href="regeln.html#TEC-03">TEC-03</a></p>
+          <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#FAR-01">FAR-01</a>, <a href="regeln.html#FAR-02">FAR-02</a>, <a href="regeln.html#FAR-09">FAR-09</a>, <a href="regeln.html#FAR-12">FAR-12</a>, <a href="regeln.html#FAR-13">FAR-13</a>, <a href="regeln.html#FAR-14">FAR-14</a>, <a href="regeln.html#FAR-15">FAR-15</a>, <a href="regeln.html#TEC-03">TEC-03</a></p>
         </div>
 
         <div class="demo-group" id="farbe-grau">
@@ -350,6 +352,48 @@
         </li>
       </ul>
           <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#FAR-05">FAR-05</a>, <a href="regeln.html#FAR-06">FAR-06</a>, <a href="regeln.html#FAR-07">FAR-07</a>, <a href="regeln.html#FAR-08">FAR-08</a>, <a href="regeln.html#EBE-03">EBE-03</a></p>
+        </div>
+
+        <div class="demo-group" id="farbe-ton">
+          <h3>Farbton: Kühl oder Warm</h3>
+          <p class="g-grundlagen-text">Neben „Hell oder Dunkel“ gibt es eine zweite Wahl, den Farbton. „Warm“ ist die Palette „Papier“, nach der Wahl des Inhabers (D91). Sie verschiebt nur die Grautöne ins Warme: Gründe, Text, Linien, die Füllung beim Darüberfahren und Drücken, die Abdunklung und im Hellen Schrift und Rand der Hauptaktion. Jede Rolle behält ihre Helligkeit, darum halten alle Kontraste (am knappsten hell <code>text-muted</code> auf <code>pressed-fill</code> mit 4,57&nbsp;:&nbsp;1). Kobalt, Lindgrün, Status, Code-, Kategorie-, Markierungs- und Datenfarben und alle Kacheln bleiben gleich. Im Dunkeln ersetzt Warm die leichte Blautönung durch ein Kaffee-Dunkel.</p>
+          <p class="g-grundlagen-text">Die beiden Muster stehen nebeneinander (auf schmalen Bildschirmen untereinander), im Modus, den du gerade siehst. Ihre Werte liest die Seite aus <code class="sb-code-inline">tokens.css</code>; dort gilt der Farbton nur für die ganze Seite (<code class="sb-code-inline">html[data-sb-tone="warm"]</code>), nie für einen Teil davon.</p>
+          <div class="g-grundlagen-tones" data-g-tone-samples hidden>
+            <section class="g-grundlagen-tone" data-g-tone-sample="cool" aria-labelledby="g-tone-cool-h">
+              <h4 class="g-grundlagen-tone__title" id="g-tone-cool-h">Kühl: der Standard</h4>
+              <p class="g-grundlagen-tone__note">Grau mit einem Hauch Blau, nachts leicht blau getönt (D40).</p>
+              <ul class="sb-list" aria-label="Beispiel, Kühl">
+                <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Wasser trinken</p><p class="sb-list-row__meta">8&nbsp;Gläser · 5 geschafft</p></div><span class="sb-status sb-status--info"><svg class="sb-icon sb-icon--20" aria-hidden="true" focusable="false"><use href="#progress"/></svg>läuft</span></li>
+                <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Abendspaziergang</p><p class="sb-list-row__meta">ab 19:00 · <span class="sb-category sb-category--3">Bewegung</span></p></div><span class="sb-status sb-status--neutral"><svg class="sb-icon sb-icon--20" aria-hidden="true" focusable="false"><use href="#clock"/></svg>geplant</span></li>
+              </ul>
+              <p class="g-grundlagen-tone__row"><a href="#farbe-kategorie">Kategorien ansehen</a><button class="sb-secondary-action sb-secondary-action--compact" type="button">Bearbeiten</button></p>
+              <ul class="g-grundlagen-tone__swatches"><li><span class="g-swatch g-grundlagen-tone__chip" style="--g-swatch-color: var(--sb-color-bg)" role="img" aria-label="Farbfeld bg, Kühl"></span><span class="g-grundlagen-mono">bg</span><span class="g-grundlagen-mono g-grundlagen-muted" data-g-tone-value="--sb-color-bg"></span></li><li><span class="g-swatch g-grundlagen-tone__chip" style="--g-swatch-color: var(--sb-color-surface-sunken)" role="img" aria-label="Farbfeld surface-sunken, Kühl"></span><span class="g-grundlagen-mono">surface-sunken</span><span class="g-grundlagen-mono g-grundlagen-muted" data-g-tone-value="--sb-color-surface-sunken"></span></li><li><span class="g-swatch g-grundlagen-tone__chip" style="--g-swatch-color: var(--sb-color-text)" role="img" aria-label="Farbfeld text, Kühl"></span><span class="g-grundlagen-mono">text</span><span class="g-grundlagen-mono g-grundlagen-muted" data-g-tone-value="--sb-color-text"></span></li><li><span class="g-swatch g-grundlagen-tone__chip" style="--g-swatch-color: var(--sb-color-text-muted)" role="img" aria-label="Farbfeld text-muted, Kühl"></span><span class="g-grundlagen-mono">text-muted</span><span class="g-grundlagen-mono g-grundlagen-muted" data-g-tone-value="--sb-color-text-muted"></span></li><li><span class="g-swatch g-grundlagen-tone__chip" style="--g-swatch-color: var(--sb-color-border)" role="img" aria-label="Farbfeld border, Kühl"></span><span class="g-grundlagen-mono">border</span><span class="g-grundlagen-mono g-grundlagen-muted" data-g-tone-value="--sb-color-border"></span></li><li><span class="g-swatch g-grundlagen-tone__chip" style="--g-swatch-color: var(--sb-color-border-strong)" role="img" aria-label="Farbfeld border-strong, Kühl"></span><span class="g-grundlagen-mono">border-strong</span><span class="g-grundlagen-mono g-grundlagen-muted" data-g-tone-value="--sb-color-border-strong"></span></li></ul>
+            </section>
+            <section class="g-grundlagen-tone" data-g-tone-sample="warm" aria-labelledby="g-tone-warm-h">
+              <h4 class="g-grundlagen-tone__title" id="g-tone-warm-h">Warm: Papier</h4>
+              <p class="g-grundlagen-tone__note">Dieselben Helligkeiten, ins Warme verschoben.</p>
+              <ul class="sb-list" aria-label="Beispiel, Warm">
+                <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Wasser trinken</p><p class="sb-list-row__meta">8&nbsp;Gläser · 5 geschafft</p></div><span class="sb-status sb-status--info"><svg class="sb-icon sb-icon--20" aria-hidden="true" focusable="false"><use href="#progress"/></svg>läuft</span></li>
+                <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Abendspaziergang</p><p class="sb-list-row__meta">ab 19:00 · <span class="sb-category sb-category--3">Bewegung</span></p></div><span class="sb-status sb-status--neutral"><svg class="sb-icon sb-icon--20" aria-hidden="true" focusable="false"><use href="#clock"/></svg>geplant</span></li>
+              </ul>
+              <p class="g-grundlagen-tone__row"><a href="#farbe-kategorie">Kategorien ansehen</a><button class="sb-secondary-action sb-secondary-action--compact" type="button">Bearbeiten</button></p>
+              <ul class="g-grundlagen-tone__swatches"><li><span class="g-swatch g-grundlagen-tone__chip" style="--g-swatch-color: var(--sb-color-bg)" role="img" aria-label="Farbfeld bg, Warm"></span><span class="g-grundlagen-mono">bg</span><span class="g-grundlagen-mono g-grundlagen-muted" data-g-tone-value="--sb-color-bg"></span></li><li><span class="g-swatch g-grundlagen-tone__chip" style="--g-swatch-color: var(--sb-color-surface-sunken)" role="img" aria-label="Farbfeld surface-sunken, Warm"></span><span class="g-grundlagen-mono">surface-sunken</span><span class="g-grundlagen-mono g-grundlagen-muted" data-g-tone-value="--sb-color-surface-sunken"></span></li><li><span class="g-swatch g-grundlagen-tone__chip" style="--g-swatch-color: var(--sb-color-text)" role="img" aria-label="Farbfeld text, Warm"></span><span class="g-grundlagen-mono">text</span><span class="g-grundlagen-mono g-grundlagen-muted" data-g-tone-value="--sb-color-text"></span></li><li><span class="g-swatch g-grundlagen-tone__chip" style="--g-swatch-color: var(--sb-color-text-muted)" role="img" aria-label="Farbfeld text-muted, Warm"></span><span class="g-grundlagen-mono">text-muted</span><span class="g-grundlagen-mono g-grundlagen-muted" data-g-tone-value="--sb-color-text-muted"></span></li><li><span class="g-swatch g-grundlagen-tone__chip" style="--g-swatch-color: var(--sb-color-border)" role="img" aria-label="Farbfeld border, Warm"></span><span class="g-grundlagen-mono">border</span><span class="g-grundlagen-mono g-grundlagen-muted" data-g-tone-value="--sb-color-border"></span></li><li><span class="g-swatch g-grundlagen-tone__chip" style="--g-swatch-color: var(--sb-color-border-strong)" role="img" aria-label="Farbfeld border-strong, Warm"></span><span class="g-grundlagen-mono">border-strong</span><span class="g-grundlagen-mono g-grundlagen-muted" data-g-tone-value="--sb-color-border-strong"></span></li></ul>
+            </section>
+          </div>
+          <p class="g-grundlagen-text" data-g-tone-fallback>Die beiden Muster nebeneinander zeigt die Seite mit Skript und über einen Webserver geladen, wie im veröffentlichten Guide; als Datei geöffnet liest der Browser die Regeln von <code class="sb-code-inline">tokens.css</code> nicht. Den warmen Farbton siehst du dann mit der Wahl darunter.</p>
+          <div class="g-grundlagen-tone-switch g-grundlagen-gap">
+            <form class="g-grundlagen-tone-form" data-sb-tone-choice hidden>
+            <fieldset class="sb-segmented"><legend>Farbton dieser Seite</legend>
+              <div class="sb-segmented__options">
+                <label class="sb-segmented__option"><input type="radio" name="sb-tone" value="cool" checked><span class="sb-segmented__face"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>Kühl</span></label>
+                <label class="sb-segmented__option"><input type="radio" name="sb-tone" value="warm"><span class="sb-segmented__face"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>Warm</span></label>
+              </div>
+            </fieldset>
+            </form>
+            <p class="sb-visually-hidden" role="status" data-sb-tone-status></p>
+            <p class="g-grundlagen-text">Probier es aus: Die Wahl gilt für den ganzen Guide und bleibt gespeichert, wie Hell oder Dunkel; alle Werte auf dieser Seite wechseln mit. Dieselbe Wahl steht im Fuß jeder Seite. Auf Websites steht sie im Fuß unter „Darstellung“, in Apps in den Einstellungen neben „Hell oder Dunkel“; gespeichert wird nur „warm“ (<code class="sb-code-inline">sb-tone</code>), <code class="sb-code-inline">theme-init.js</code> setzt es vor dem ersten Bild.</p>
+          </div>
+          <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#FAR-15">FAR-15</a>, <a href="regeln.html#FAR-05">FAR-05</a>, <a href="regeln.html#WEB-03">WEB-03</a>, <a href="regeln.html#MOB-04">MOB-04</a></p>
         </div>
 
         <div class="demo-group" id="farbe-ort">
@@ -596,6 +640,107 @@
           <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#ZEI-01">ZEI-01</a>, <a href="regeln.html#ZEI-02">ZEI-02</a>, <a href="regeln.html#ZEI-05">ZEI-05</a>, <a href="regeln.html#ZEI-07">ZEI-07</a></p>
         </div>
 
+        <div class="demo-group" id="farbe-kategorie">
+          <h3>Kategorie, Markierung, Vorzeichen</h3>
+          <p class="g-grundlagen-text">Drei Farbaufgaben für Inhalte (D73), getönt nach der Wahl des Inhabers (D91). Jede beantwortet genau eine Frage, und keine steht ohne Wort oder Zeichen.</p>
+          <div class="g-grundlagen-gap">
+            <h4 class="g-grundlagen-h4">Kategorie: In welche Gruppe hast du das gelegt?</h4>
+            <p class="g-grundlagen-text">Sechs gedämpfte, kühle Töne für Dinge, die du selbst einordnest: Etiketten, Spalten, Projekte. Die App bietet sie in dieser Reihenfolge an und du wählst; nach Bedeutung vergibt die App sie nie. Jeder Ton erreicht auf jedem Grund mindestens 3&nbsp;:&nbsp;1 und hat zu Kobalt, Lindgrün und den Statusfarben einen Farbabstand von mindestens 0,08 (Delta&nbsp;E in OKLab).</p>
+      <ul class="g-grundlagen-swatches g-grundlagen-swatches--compact">
+        <li class="g-grundlagen-swatch">
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-category-1)" role="img" aria-label="Farbfeld category-1, Tanne"></span>
+          <p class="g-grundlagen-swatch__name">--sb-category-1</p>
+          <p class="g-grundlagen-swatch__value" data-g-token="--sb-category-1"></p>
+          <p class="g-grundlagen-swatch__use">1 Tanne: <span class="sb-category sb-category--1">Gesundheit</span></p>
+        </li>
+        <li class="g-grundlagen-swatch">
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-category-2)" role="img" aria-label="Farbfeld category-2, Jade"></span>
+          <p class="g-grundlagen-swatch__name">--sb-category-2</p>
+          <p class="g-grundlagen-swatch__value" data-g-token="--sb-category-2"></p>
+          <p class="g-grundlagen-swatch__use">2 Jade: <span class="sb-category sb-category--2">Lernen</span></p>
+        </li>
+        <li class="g-grundlagen-swatch">
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-category-3)" role="img" aria-label="Farbfeld category-3, Taube"></span>
+          <p class="g-grundlagen-swatch__name">--sb-category-3</p>
+          <p class="g-grundlagen-swatch__value" data-g-token="--sb-category-3"></p>
+          <p class="g-grundlagen-swatch__use">3 Taube: <span class="sb-category sb-category--3">Bewegung</span></p>
+        </li>
+        <li class="g-grundlagen-swatch">
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-category-4)" role="img" aria-label="Farbfeld category-4, Veilchen"></span>
+          <p class="g-grundlagen-swatch__name">--sb-category-4</p>
+          <p class="g-grundlagen-swatch__value" data-g-token="--sb-category-4"></p>
+          <p class="g-grundlagen-swatch__use">4 Veilchen: <span class="sb-category sb-category--4">Garten</span></p>
+        </li>
+        <li class="g-grundlagen-swatch">
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-category-5)" role="img" aria-label="Farbfeld category-5, Messing"></span>
+          <p class="g-grundlagen-swatch__name">--sb-category-5</p>
+          <p class="g-grundlagen-swatch__value" data-g-token="--sb-category-5"></p>
+          <p class="g-grundlagen-swatch__use">5 Messing: <span class="sb-category sb-category--5">Arbeit</span></p>
+        </li>
+        <li class="g-grundlagen-swatch">
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-category-6)" role="img" aria-label="Farbfeld category-6, Malve"></span>
+          <p class="g-grundlagen-swatch__name">--sb-category-6</p>
+          <p class="g-grundlagen-swatch__value" data-g-token="--sb-category-6"></p>
+          <p class="g-grundlagen-swatch__use">6 Malve: <span class="sb-category sb-category--6">Familie</span></p>
+        </li>
+      </ul>
+            <p class="g-grundlagen-text g-grundlagen-gap"><b>Das Wort steht immer neben dem Punkt.</b> Der Ton ist ein Punkt von 10&nbsp;px oder ein Zeichen vor dem Wort, nie eine Fläche, nie die Farbe der Schrift und nie ein Zustand, den die App vergibt. Unter Farbsehschwäche sehen manche Töne grau aus oder einander ähnlich (die beiden Grünen unterscheiden sich vor allem in der Helligkeit); das Wort trägt die Bedeutung, nie „der grüne“.</p>
+            <div class="g-examples">
+              <div class="g-ex g-ex--do">
+                <p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p>
+                <div class="g-ex__stage">
+                  <p class="g-grundlagen-plain">Rosen schneiden · <span class="sb-category sb-category--4">Garten</span> · 17:30</p>
+                  <p class="g-grundlagen-plain sb-category sb-category--4"><svg class="sb-icon sb-icon--20" aria-hidden="true" focusable="false"><use href="#folder--filled"/></svg>Garten</p>
+                  <p class="g-grundlagen-plain"><span class="sb-category">Ohne Farbe</span></p>
+                </div>
+                <p class="g-ex__note">Punkt oder Zeichen, daneben das Wort in Textfarbe. Ohne gewählten Ton steht nur das Wort (<code class="sb-code-inline">sb-category</code> ohne Nummer).</p>
+              </div>
+              <div class="g-ex g-ex--dont">
+                <p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p>
+                <div class="g-ex__stage">
+                  <p class="g-grundlagen-plain">Rosen schneiden <span class="g-grundlagen-catdot" role="img" aria-label="Punkt ohne Wort"></span> 17:30</p>
+                  <p class="g-grundlagen-plain"><span class="g-grundlagen-catfill">Garten</span> <span class="g-grundlagen-cattext">Arbeit</span></p>
+                </div>
+                <p class="g-ex__note">Ein Punkt ohne Wort, eine gefärbte Fläche hinter dem Wort, ein gefärbtes Wort.</p>
+              </div>
+            </div>
+          </div>
+          <div class="g-grundlagen-gap">
+            <h4 class="g-grundlagen-h4">Markierung: Was hast du markiert, was hat die Suche gefunden?</h4>
+            <p class="g-grundlagen-text">Fläche mit Kante: Die Fläche färbt, die 2-px-Kante am Fuß trägt die Form (mindestens 3&nbsp;:&nbsp;1 auf jedem Grund). Text, <code>text-muted</code>, Links und die drei Codetöne bleiben auf der Fläche bei mindestens 4,5&nbsp;:&nbsp;1. Der aktuelle Treffer bekommt statt der farbigen Kante 3&nbsp;px in Textfarbe, und die Suche nennt „Treffer 1 von 2“ in Worten. Weder Auswahl (Kobalt) noch Hauptaktion (Lindgrün).</p>
+      <ul class="g-grundlagen-swatches g-grundlagen-swatches--compact">
+        <li class="g-grundlagen-swatch">
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-mark)" role="img" aria-label="Farbfeld mark"></span>
+          <p class="g-grundlagen-swatch__name">--sb-mark</p>
+          <p class="g-grundlagen-swatch__value" data-g-token="--sb-mark"></p>
+          <p class="g-grundlagen-swatch__use">Fläche hinter markiertem Text</p>
+        </li>
+        <li class="g-grundlagen-swatch">
+          <span class="g-swatch g-grundlagen-swatch__chip" style="--g-swatch-color: var(--sb-mark-edge)" role="img" aria-label="Farbfeld mark-edge"></span>
+          <p class="g-grundlagen-swatch__name">--sb-mark-edge</p>
+          <p class="g-grundlagen-swatch__value" data-g-token="--sb-mark-edge"></p>
+          <p class="g-grundlagen-swatch__use">Kante am Fuß, <span data-g-token="--sb-x-sebaro-mark-edge-width"></span></p>
+        </li>
+      </ul>
+            <div class="g-grundlagen-sample g-grundlagen-gap">
+              <p class="g-grundlagen-plain">Morgen den <mark>Abendspaziergang</mark> früher beginnen, ab Oktober wird es um 19:00 dunkel.</p>
+              <p class="g-grundlagen-plain">Abend<mark aria-current="true">spazier</mark>gang · <mark>Spazier</mark>en mit Oma <span class="g-grundlagen-muted">· Treffer 1 von 2</span></p>
+            </div>
+            <p class="g-grundlagen-text g-grundlagen-gap">Im Markup ist es das Element <code>&lt;mark&gt;</code> (oder <code class="sb-code-inline">sb-mark</code>), der aktuelle Treffer trägt <code>aria-current="true"</code>; für Treffer ohne eigenes Element gibt es die Namen <code class="sb-code-inline">::highlight(sb-mark)</code> und <code class="sb-code-inline">::highlight(sb-mark-current)</code>.</p>
+          </div>
+          <div class="g-grundlagen-gap">
+            <h4 class="g-grundlagen-h4">Vorzeichen: Ging es hoch oder runter?</h4>
+            <p class="g-grundlagen-text">Nur in Zahlen-Apps (Geld, Verbrauch): Die Farbe folgt dem Vorzeichen, Plus in <code>success</code>, Minus in <code>danger</code>, immer mit Zeichen (+ und das echte Minus U+2212) und Pfeil. Null hat keinen Pfeil und bleibt in Textfarbe. Die Farbe sagt nur die Richtung, nie ob sie gut ist: Mehr Wasser und mehr Ausgaben sind beide „plus“. Eigene Töne gibt es dafür nicht; beide Statusfarben erreichen als Schrift auf jedem Grund mindestens 4,5&nbsp;:&nbsp;1 (am knappsten hell 5,52 für Minus, dunkel 4,55 für Plus).</p>
+            <ul class="g-grundlagen-signs">
+              <li><span class="sb-signed sb-signed--plus"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#arrow-up--16"/></svg>+3</span>&nbsp;Gläser mehr als gestern</li>
+              <li><span class="sb-signed sb-signed--minus"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#arrow-down--16"/></svg>−12&nbsp;%</span> weniger als letzte Woche</li>
+              <li><span class="sb-signed">±0</span> wie gestern</li>
+              <li>Strom, Abschlag <span class="sb-signed sb-signed--minus"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#arrow-down--16"/></svg>−84,00&nbsp;€</span></li>
+            </ul>
+          </div>
+          <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#FAR-12">FAR-12</a>, <a href="regeln.html#FAR-14">FAR-14</a>, <a href="regeln.html#FAR-01">FAR-01</a>, <a href="regeln.html#FAR-02">FAR-02</a>, <a href="regeln.html#ICO-06">ICO-06</a></p>
+        </div>
+
         <div class="demo-group" id="farbe-daten">
           <h3>Datenfarben</h3>
           <p class="g-grundlagen-text">Ein Diagramm ist zuerst neutral: beschriftete Balken in <code>border-strong</code>, nur die aktuelle Periode in Kobalt, Werte als Text. Farbe trennt Reihen erst, wenn Beschriftung allein nicht reicht, und trägt nie als Einziges den Unterschied. Lindgrün, Status- und Kachelfarben kommen in Diagrammen nie vor. Beispiele stehen unter <a href="daten.html">Daten</a>.</p>
@@ -641,31 +786,60 @@
           </div>
           <div class="g-grundlagen-gap">
             <h4 class="g-grundlagen-h4">Fortlaufend: eine Menge, von wenig nach viel</h4>
-            <p class="g-grundlagen-text">Für fortlaufende Werte ohne bedeutsame Mitte, etwa Gläser je Tag: sieben Stufen in Kobalt (<a href="regeln.html#DAT-10">DAT-10</a>). Welche Diagramme die Skala nutzen (etwa eine Heatmap) und in welche Richtung sie im Dunkeln läuft, ist skizziert und wartet auf die Wahl des Inhabers.</p>
-      <p class="g-grundlagen-type__meta">Tokens <span class="g-grundlagen-mono">--sb-dataviz-sequential-1</span> bis <span class="g-grundlagen-mono">--sb-dataviz-sequential-7</span></p>
-      <ol class="g-grundlagen-ramp" aria-label="Sequenzielle Datenfarben, Stufe 1 bis 7">
+            <p class="g-grundlagen-text">Für fortlaufende Werte ohne bedeutsame Mitte, etwa Gläser je Tag: vier Klassen, nie ein Verlauf. Mehr Werte werden in diese Klassen sortiert, und die Legende nennt die Zahlen jeder Klasse; in der Zelle steht nur die Farbe (Heatmap, nach der Wahl des Inhabers G6a). Mehr ist weiter weg vom Grund: im Hellen dunkler, im Dunkeln heller (G10a). „keine Angabe“ ist das leere Feld mit Rahmen, nie Klasse&nbsp;1.</p>
+      <p class="g-grundlagen-type__meta">Tokens <span class="g-grundlagen-mono">--sb-dataviz-sequential-1</span> bis <span class="g-grundlagen-mono">--sb-dataviz-sequential-4</span></p>
+      <p class="g-grundlagen-type__meta">Klassen <span class="g-grundlagen-mono">sb-scale-cell--seq-1</span> bis <span class="g-grundlagen-mono">--seq-4</span> und <span class="g-grundlagen-mono">--none</span></p>
+      <ol class="g-grundlagen-ramp" aria-label="Fortlaufende Datenfarben, Klasse 1 bis 4">
         <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-sequential-1)" role="img" aria-label="Farbfeld dataviz-sequential-1"></span><span class="g-grundlagen-ramp__step">1</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-1"></span></li>
         <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-sequential-2)" role="img" aria-label="Farbfeld dataviz-sequential-2"></span><span class="g-grundlagen-ramp__step">2</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-2"></span></li>
         <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-sequential-3)" role="img" aria-label="Farbfeld dataviz-sequential-3"></span><span class="g-grundlagen-ramp__step">3</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-3"></span></li>
         <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-sequential-4)" role="img" aria-label="Farbfeld dataviz-sequential-4"></span><span class="g-grundlagen-ramp__step">4</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-4"></span></li>
-        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-sequential-5)" role="img" aria-label="Farbfeld dataviz-sequential-5"></span><span class="g-grundlagen-ramp__step">5</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-5"></span></li>
-        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-sequential-6)" role="img" aria-label="Farbfeld dataviz-sequential-6"></span><span class="g-grundlagen-ramp__step">6</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-6"></span></li>
-        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-sequential-7)" role="img" aria-label="Farbfeld dataviz-sequential-7"></span><span class="g-grundlagen-ramp__step">7</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-sequential-7"></span></li>
       </ol>
+            <figure class="sb-chart g-grundlagen-gap">
+              <ul class="sb-scale-legend" aria-label="Legende, Gläser je Tag">
+                <li><span class="sb-scale-cell sb-scale-cell--seq-1" aria-hidden="true"></span>0–2</li>
+                <li><span class="sb-scale-cell sb-scale-cell--seq-2" aria-hidden="true"></span>3–4</li>
+                <li><span class="sb-scale-cell sb-scale-cell--seq-3" aria-hidden="true"></span>5–6</li>
+                <li><span class="sb-scale-cell sb-scale-cell--seq-4" aria-hidden="true"></span>7 und mehr</li>
+                <li><span class="sb-scale-cell sb-scale-cell--none" aria-hidden="true"></span>keine Angabe</li>
+              </ul>
+              <figcaption>Legende einer Heatmap „Wasser trinken, Gläser je Tag“ <span class="sb-demo-marker">Beispieldaten</span>; die Heatmap selbst steht unter <a href="daten.html#d-heatmap-h">Daten</a></figcaption>
+            </figure>
           </div>
           <div class="g-grundlagen-gap">
             <h4 class="g-grundlagen-h4">Zweiseitig: Abweichung von einer Mitte</h4>
-            <p class="g-grundlagen-text">Für Werte mit einer bedeutsamen Mitte, etwa „über dem Tagesziel“ und „darunter“: sieben Stufen, die Mitte neutral in <code>border</code> (<a href="regeln.html#DAT-10">DAT-10</a>). Die Mitte und beide Richtungen werden beschriftet. Das Diagramm dazu (Abweichung) ist skizziert und wartet auf die Wahl des Inhabers.</p>
-      <p class="g-grundlagen-type__meta">Tokens <span class="g-grundlagen-mono">--sb-dataviz-diverging-1</span> bis <span class="g-grundlagen-mono">--sb-dataviz-diverging-7</span></p>
-      <ol class="g-grundlagen-ramp" aria-label="Divergierende Datenfarben 1 bis 7, Mitte 4">
+            <p class="g-grundlagen-text">Für Werte mit einer bedeutsamen Mitte, etwa „mehr Schlaf als dein Mittel“ und „weniger“: fünf Klassen, die Mitte neutral in <code>border</code> und in der Legende als Wort genannt. Ein Abweichungsdiagramm nimmt nur die Klassen 2 und 4 (G7a); Wert, Vorzeichen und Pfeil stehen als Text daneben. Die Töne heißen nie gut oder schlecht.</p>
+      <p class="g-grundlagen-type__meta">Tokens <span class="g-grundlagen-mono">--sb-dataviz-diverging-1</span> bis <span class="g-grundlagen-mono">--sb-dataviz-diverging-5</span></p>
+      <p class="g-grundlagen-type__meta">Klassen <span class="g-grundlagen-mono">sb-scale-cell--div-1</span> bis <span class="g-grundlagen-mono">--div-5</span></p>
+      <ol class="g-grundlagen-ramp" aria-label="Zweiseitige Datenfarben, Klasse 1 bis 5, Mitte 3">
         <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-diverging-1)" role="img" aria-label="Farbfeld dataviz-diverging-1"></span><span class="g-grundlagen-ramp__step">1</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-1"></span></li>
         <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-diverging-2)" role="img" aria-label="Farbfeld dataviz-diverging-2"></span><span class="g-grundlagen-ramp__step">2</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-2"></span></li>
         <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-diverging-3)" role="img" aria-label="Farbfeld dataviz-diverging-3"></span><span class="g-grundlagen-ramp__step">3</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-3"></span></li>
         <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-diverging-4)" role="img" aria-label="Farbfeld dataviz-diverging-4"></span><span class="g-grundlagen-ramp__step">4</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-4"></span></li>
         <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-diverging-5)" role="img" aria-label="Farbfeld dataviz-diverging-5"></span><span class="g-grundlagen-ramp__step">5</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-5"></span></li>
-        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-diverging-6)" role="img" aria-label="Farbfeld dataviz-diverging-6"></span><span class="g-grundlagen-ramp__step">6</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-6"></span></li>
-        <li><span class="g-swatch g-grundlagen-ramp__chip" style="--g-swatch-color: var(--sb-dataviz-diverging-7)" role="img" aria-label="Farbfeld dataviz-diverging-7"></span><span class="g-grundlagen-ramp__step">7</span><span class="g-grundlagen-swatch__value" data-g-token="--sb-dataviz-diverging-7"></span></li>
       </ol>
+            <figure class="sb-chart g-grundlagen-gap">
+              <ul class="sb-scale-legend" aria-label="Legende, Schlaf gegenüber deinem Mittel">
+                <li><span class="sb-scale-cell sb-scale-cell--div-1" aria-hidden="true"></span>−2&nbsp;Std. und weniger</li>
+                <li><span class="sb-scale-cell sb-scale-cell--div-2" aria-hidden="true"></span>−1&nbsp;Std.</li>
+                <li><span class="sb-scale-cell sb-scale-cell--div-3" aria-hidden="true"></span>0 = 7&nbsp;Std.</li>
+                <li><span class="sb-scale-cell sb-scale-cell--div-4" aria-hidden="true"></span>+1&nbsp;Std.</li>
+                <li><span class="sb-scale-cell sb-scale-cell--div-5" aria-hidden="true"></span>+2&nbsp;Std. und mehr</li>
+              </ul>
+              <figcaption>Legende „Schlaf je Nacht gegenüber deinem Mittel“ <span class="sb-demo-marker">Beispieldaten</span></figcaption>
+            </figure>
+          </div>
+          <div class="g-grundlagen-gap" id="farbe-stufen">
+            <h4 class="g-grundlagen-h4">Die Regel für unterscheidbare Stufen</h4>
+            <p class="g-grundlagen-text">Der Inhaber hat Farbe in der Zelle und Zahlen in der Legende gewählt und dazu verlangt, dass die Stufen der Legende unterscheidbar bleiben; die sieben Stufen von vorher ließen sich nicht auseinanderhalten (Nachbarn nur 1,37 bis 1,55&nbsp;:&nbsp;1). Die messbare Regel dafür hat ein Agent aufgestellt, darum ist <a href="regeln.html#DAT-11">DAT-11</a> vorläufig, bis der Inhaber die Schwellen bestätigt. Die Werkstatt prüft sie bei jeder Palette als Fehler, auch mit dem warmen Farbton.</p>
+            <ol class="g-grundlagen-steps">
+              <li><b>Klassen, nie ein Verlauf.</b> Höchstens fünf Klassen; sebaro hat fortlaufend vier und zweiseitig fünf.</li>
+              <li><b>Der Grund ist Klasse&nbsp;0.</b> Klasse&nbsp;1 (zweiseitig jede Klasse außer der Mitte) hebt sich mit mindestens 3&nbsp;:&nbsp;1 von jedem Grund ab; gemessen hell 3,06, dunkel 3,03.</li>
+              <li><b>Nachbarn bleiben auseinander.</b> Mindestens 1,6&nbsp;:&nbsp;1 und ein Farbabstand von mindestens 0,10 (Delta&nbsp;E in OKLab), auch unter jeder Farbsehschwäche; gemessen 1,61 bis 1,65&nbsp;:&nbsp;1.</li>
+              <li><b>Mehr ist weiter weg vom Grund.</b> Der Kontrast zu <code>bg</code> steigt Klasse für Klasse, in Hell und in Dunkel.</li>
+              <li><b>Keine Farbaufgabe wird berührt.</b> Jede Klasse hat zu Kobalt und Lindgrün einen Farbabstand von mindestens 0,08.</li>
+            </ol>
+            <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#DAT-10">DAT-10</a>, <a href="regeln.html#DAT-11">DAT-11</a>, <a href="regeln.html#DAT-12">DAT-12</a></p>
           </div>
         </div>
 
@@ -1123,6 +1297,7 @@
           <ul class="g-grundlagen-lines">
             <li><div class="g-grundlagen-line-stage"><span class="g-grundlagen-line g-grundlagen-line--hairline" aria-hidden="true"></span></div><div><h4>Haarlinie</h4><p><span class="g-grundlagen-mono" data-g-token="--sb-border-width-hairline"></span> in <code>border</code>. Trennt Zeilen in einer Gruppe und Abschnitte einer Seite. Nie die einzige Grenze eines Bedienelements oder einer Ebene.</p></div></li>
             <li><div class="g-grundlagen-line-stage"><span class="g-grundlagen-line g-grundlagen-line--layer" aria-hidden="true"></span></div><div><h4>Ebenenlinie</h4><p><span class="g-grundlagen-mono" data-g-token="--sb-x-sebaro-layer-line-width"></span> in Tinte: tags <code>text</code>, nachts <code>border-strong</code>, damit sie nicht blendet. Der Rand einer Ebene: Karte, Overlay, untere Aktionszone, Kopf und Fuß der Website, Seitenleiste.</p></div></li>
+            <li><div class="g-grundlagen-line-stage"><figure class="sb-quote g-grundlagen-quote"><blockquote class="sb-quote__text"><p>„Erst sehen, dann installieren.“</p></blockquote></figure></div><div><h4>Zitatlinie</h4><p>Dieselbe Breite und Tinte wie die Ebenenlinie, aber nur am Anfang zitierter Worte, vom ersten bis zum letzten Satz: ohne Grund, ohne Rahmen, ohne Radius, die Quelle steht außerhalb. Beide unterscheidet der Ort: Die Ebenenlinie rahmt eine Ebene, die Zitatlinie begleitet Text (nach der Wahl des Inhabers, D91).</p></div></li>
             <li><div class="g-grundlagen-line-stage"><a href="#form-linien">Ein Link</a></div><div><h4>Linkunterstreichung</h4><p><span class="g-grundlagen-mono" data-g-token="--sb-x-sebaro-link-underline-width"></span> in <code>link</code>, 0,2&nbsp;em unter dem Wort; das Wort selbst bleibt Textfarbe. Links sind immer unterstrichen.</p></div></li>
             <li><div class="g-grundlagen-line-stage"><span class="sb-tag">Beta</span></div><div><h4>Bedienrand</h4><p><span class="g-grundlagen-mono" data-g-token="--sb-border-width-control"></span> in <code>border-strong</code>. Grenze von Nebenaktionen, Tags, Feldgrundlinien, Radio-Ring, Schalter aus. An Löschtasten in <code>danger</code>, mit der 45°-Kante.</p></div></li>
             <li><div class="g-grundlagen-line-stage"><span class="g-grundlagen-place">Heute</span></div><div><h4>Ortslinie</h4><p><span class="g-grundlagen-mono" data-g-token="--sb-border-width-strong"></span> in <code>accent</code>: „Du bist hier.“ Immer mit einem zweiten Merkmal wie Titelgewicht, gefülltem Icon oder Haken.</p></div></li>
@@ -1130,7 +1305,7 @@
             <li><div class="g-grundlagen-line-stage"><div class="sb-field"><label class="sb-field__label" for="g-line-error">Tagesziel</label><div class="sb-field__control"><input id="g-line-error" type="text" inputmode="numeric" value="80" autocomplete="off" aria-invalid="true" aria-describedby="g-line-error-msg"><span class="sb-field__suffix">Gläser</span></div><p class="sb-field__error" id="g-line-error-msg"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#error--filled-16"/></svg>Trag höchstens 20&nbsp;Gläser ein.</p></div></div><div><h4>Fehlerlinie</h4><p>2&nbsp;px in <code>danger</code> unter einem Feld mit Fehler, immer zusammen mit Glyphe und einem Satz, der sagt, was zu tun ist.</p></div></li>
             <li><div class="g-grundlagen-line-stage"><button class="sb-secondary-action is-focus" type="button">Bearbeiten</button></div><div><h4>Fokusring</h4><p><span class="g-grundlagen-mono" data-g-token="--sb-focus-width"></span> in <code>focus</code>, <span class="g-grundlagen-mono" data-g-token="--sb-focus-offset"></span> Abstand, Ecke = Radius plus Abstand. Einer für alles, nie animiert, nie je App umgefärbt. Die Breite ist entschieden: 2&nbsp;px, nicht 3.</p></div></li>
           </ul>
-          <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#FOR-02">FOR-02</a>, <a href="regeln.html#FOR-03">FOR-03</a>, <a href="regeln.html#FAR-07">FAR-07</a>, <a href="regeln.html#EBE-01">EBE-01</a>, <a href="regeln.html#LNK-01">LNK-01</a>, <a href="regeln.html#NAV-01">NAV-01</a>, <a href="regeln.html#ZUG-02">ZUG-02</a></p>
+          <p class="g-grundlagen-rules">Regeln: <a href="regeln.html#FOR-02">FOR-02</a>, <a href="regeln.html#FOR-03">FOR-03</a>, <a href="regeln.html#TXT-17">TXT-17</a>, <a href="regeln.html#FAR-07">FAR-07</a>, <a href="regeln.html#EBE-01">EBE-01</a>, <a href="regeln.html#LNK-01">LNK-01</a>, <a href="regeln.html#NAV-01">NAV-01</a>, <a href="regeln.html#ZUG-02">ZUG-02</a></p>
         </div>
 
         <div class="demo-group" id="form-kante">
@@ -1452,13 +1627,25 @@
 </main>
 <!-- guide:footer -->
 <footer class="sb-site-footer g-footer">
-  <p>sebaro Guide <a href="https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md">Version 2.0.0<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a> · System sebaro, Token-Vertrag 1.7 · aus sebaroDesign <code class="sb-code-inline">f2510b0</code></p>
+  <p>sebaro Guide <a href="https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md">Version 2.1.0<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a> · System sebaro, Token-Vertrag 1.8 · aus sebaroDesign <code class="sb-code-inline">6c9c222</code></p>
   <ul class="sb-site-footer__links">
     <li><a href="rules.json">rules.json</a></li>
     <li><a href="llms.txt">llms.txt</a></li>
     <li><a href="https://github.com/grundhofer/sebaro-guide">GitHub<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a></li>
     <li><a href="https://github.com/grundhofer/sebaro-guide/blob/main/AGENTS.md">Für Agenten<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a></li>
   </ul>
+  <section class="sb-site-footer__display" aria-labelledby="g-footer-display-h" data-sb-tone-choice hidden>
+    <h2 id="g-footer-display-h">Darstellung</h2>
+    <form class="g-footer__tone">
+      <fieldset class="sb-segmented"><legend>Farbton</legend>
+        <div class="sb-segmented__options">
+          <label class="sb-segmented__option"><input type="radio" name="sb-tone" value="cool" checked><span class="sb-segmented__face"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>Kühl</span></label>
+          <label class="sb-segmented__option"><input type="radio" name="sb-tone" value="warm"><span class="sb-segmented__face"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>Warm</span></label>
+        </div>
+      </fieldset>
+    </form>
+  </section>
+  <p class="sb-visually-hidden" role="status" data-sb-tone-status></p>
 </footer>
 <!-- /guide:footer -->
 </body>

@@ -1,4 +1,5 @@
-// sb-menu.js: the menu button of spec/02 §4.10 (ARIA menu button pattern, D80 „Skripte für Bedienung“).
+// sb-menu.js: the menu button of spec/02 §4.10 (ARIA menu button pattern, D80 „Skripte für Bedienung“), with
+// submenus (spec/02 §4.24, D91 F4b: „Untermenüs mit Pfeiltasten“).
 // Classic script (pages open from file://), CSP-safe: no inline handlers, no eval, position only through the CSSOM.
 // Progressive enhancement over markup that already works without it, through the Popover API:
 //   <button class="sb-icon-button" type="button" aria-label="Mehr" aria-haspopup="menu" aria-expanded="false"
@@ -8,16 +9,28 @@
 // aria-controls that points into a closed popover and reports it as "needs review".)
 //   <ul class="sb-menu" role="menu" id="m1" aria-label="Mehr" popover>
 //     <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1">…</button></li> …
+// A submenu is the ARIA APG form: the item that opens it and the submenu share one <li role="none">, the item carries
+// aria-haspopup="menu", aria-expanded and popovertarget, the submenu is a nested popover named like its item:
+//     <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-haspopup="menu"
+//         aria-expanded="false" popovertarget="m1-file">Datei<span class="sb-menu__sub" aria-hidden="true">…</span></button>
+//       <ul class="sb-menu" role="menu" id="m1-file" aria-label="Datei" popover>…</ul></li>
 // Without this script the browser already opens and closes the menu (click, Escape, click outside). The script adds:
 //   - aria-expanded on the button follows the menu; the menu sits under the button, its end on the button's end
-//     (above it when there is no room below), and follows on scroll and resize;
+//     (above it when there is no room below), and follows on scroll and resize; a submenu stands beside its parent
+//     menu at the height of its item (the other side when there is no room, over the parent in a narrow window);
 //   - opening by click, Enter or Space focuses the first item, ArrowDown the first, ArrowUp the last;
-//   - ArrowDown / ArrowUp move through the items and wrap, Home / End jump, typing letters jumps to the next item that
-//     starts with them (typeahead, 500 ms);
-//   - Escape closes and returns focus to the button; Tab (focus leaving the menu) closes and lets focus move on;
-//     a click outside closes;
-//   - choosing an item closes the menu and puts focus back on the button before the item's own click handlers run,
-//     so an item that opens a dialog (data-sb-opens, sb-controls.js) hands focus back to the button when it closes.
+//   - ArrowDown / ArrowUp move through the items of one menu and wrap, Home / End jump, typing letters jumps to the
+//     next item that starts with them (typeahead, 500 ms);
+//   - on an item with a submenu, Enter, Space, a click and ArrowRight (ArrowLeft right to left) open the submenu on
+//     its first item; in a submenu ArrowLeft (ArrowRight right to left) and Escape close it and go back to its item;
+//   - Escape closes and returns focus to the button; Tab (focus leaving the menu) closes the menu with all its
+//     submenus and lets focus move on; a click outside closes;
+//   - choosing an item closes the menu with all its submenus and puts focus back on the button before the item's own
+//     click handlers run, so an item that opens a dialog (data-sb-opens, sb-controls.js) hands focus back to the
+//     button when it closes.
+// Another script may open a menu for a key of its own (sb-window.js: F10 and a lone Alt open the window menu, F4b):
+//   button.dispatchEvent(new CustomEvent("sb-menu-open", { bubbles: true, detail: { returnTo: element } }))
+// opens on the first item; Escape and a chosen item then give focus back to returnTo instead of the button.
 // Disabled items (disabled or aria-disabled="true") are skipped. Motion: the menu enters through the
 // .sb-menu:popover-open rule of sebaro.css (an answer to the press, D80); it closes without motion.
 // The script writes no words, so it has no message table (D87).
@@ -25,7 +38,7 @@
   if (typeof HTMLElement.prototype.showPopover !== "function") return;   // the menu stays a static list
   var ITEM = "[role='menuitem'], [role='menuitemcheckbox'], [role='menuitemradio']";
   var TYPEAHEAD_MS = 500;
-  var state = new WeakMap();                                              // menu -> { focus, noReturn, focusInside, typed, typedAt }
+  var state = new WeakMap();                                              // menu -> { focus, noReturn, focusInside, returnTo, typed, typedAt }
 
   function menuOf(button) {
     var id = button.getAttribute("aria-controls") || button.getAttribute("popovertarget");
@@ -37,9 +50,15 @@
     var id = CSS.escape(menu.id);
     return document.querySelector("[aria-haspopup='menu'][aria-controls='" + id + "'], [aria-haspopup='menu'][popovertarget='" + id + "']");
   }
-  function s(menu) { var x = state.get(menu); if (!x) { x = { focus: "first", noReturn: false, focusInside: false, typed: "", typedAt: 0 }; state.set(menu, x); } return x; }
+  function parentMenu(menu) { return menu.parentElement ? menu.parentElement.closest(".sb-menu") : null; }
+  function rootOf(menu) { var m = menu, p; while ((p = parentMenu(m))) m = p; return m; }
+  function opensSub(item) { return item.getAttribute("aria-haspopup") === "menu" && !!menuOf(item); }
+  function s(menu) { var x = state.get(menu); if (!x) { x = { focus: "first", noReturn: false, focusInside: false, returnTo: null, typed: "", typedAt: 0 }; state.set(menu, x); } return x; }
+  // the items of this menu, not those of its submenus
   function items(menu) {
-    return Array.prototype.filter.call(menu.querySelectorAll(ITEM), function (i) { return !i.disabled && i.getAttribute("aria-disabled") !== "true"; });
+    return Array.prototype.filter.call(menu.querySelectorAll(ITEM), function (i) {
+      return i.closest(".sb-menu") === menu && !i.disabled && i.getAttribute("aria-disabled") !== "true";
+    });
   }
   function focusItem(menu, which) {
     var list = items(menu);
@@ -47,9 +66,30 @@
     var i = which === "last" ? list.length - 1 : 0;
     list[i].focus();
   }
+  function visible(el) { return !!el && el.isConnected && el.getClientRects().length > 0; }
+  // where focus goes back to when the menu closes: the element another script named (F10), else the button
+  function backTo(menu, button) {
+    var x = s(menu), to = x.returnTo && visible(x.returnTo) ? x.returnTo : button;
+    return to;
+  }
+  // closes the menu that holds this one at the top, with every submenu, without the usual focus return
+  function closeAll(menu) {
+    for (var m = menu; m; m = parentMenu(m)) s(m).noReturn = true;
+    var top = rootOf(menu);
+    if (top.matches(":popover-open")) top.hidePopover();
+    return top;
+  }
+  function openSub(item, which) {
+    var sub = menuOf(item);
+    if (!sub) return;
+    if (sub.matches(":popover-open")) { focusItem(sub, which); return; }
+    s(sub).focus = which;
+    item.click();                                                          // popovertarget keeps the native nesting
+  }
 
   // Place the menu under the button with its end on the button's end; above when the room below is too small.
   function place(menu, button, estimate) {
+    if (parentMenu(menu)) { placeSub(menu, button, estimate); return; }
     var b = button.getBoundingClientRect();
     var gap = 4, edge = 8;
     var vw = document.documentElement.clientWidth, vh = window.innerHeight;
@@ -67,6 +107,33 @@
       return;
     }
     menu.style.left = Math.round(Math.min(Math.max(edge, start), Math.max(edge, vw - w - edge))) + "px";
+  }
+  // A submenu: beside its parent menu, its first item level with the item that opened it; the two layer lines lie
+  // on each other. No room on the reading side: the other side; no room on either (a narrow window): over the parent,
+  // under its item and moved in by 16 px, so the item stays readable.
+  function placeSub(menu, item, estimate) {
+    var parent = parentMenu(menu), p = parent.getBoundingClientRect(), it = item.getBoundingClientRect();
+    var edge = 8, inset = 16;
+    var vw = document.documentElement.clientWidth, vh = window.innerHeight;
+    var cs = getComputedStyle(menu);
+    var line = parseFloat(cs.borderTopWidth) || 0, pad = parseFloat(cs.paddingTop) || 0;
+    var w = estimate ? (parseFloat(cs.minWidth) || 240) : menu.getBoundingClientRect().width;
+    var h = estimate ? items(menu).length * it.height + 2 * (pad + line) : menu.getBoundingClientRect().height;
+    var rtl = getComputedStyle(item).direction === "rtl";
+    var after = rtl ? p.left - w + line : p.right - line;                  // the reading side
+    var before = rtl ? p.right - line : p.left - w + line;
+    var top = it.top - pad - line, left;
+    if (after >= edge && after + w <= vw - edge) left = after;
+    else if (before >= edge && before + w <= vw - edge) left = before;
+    else {
+      left = rtl ? it.right - inset - w : it.left + inset;
+      top = it.bottom;
+    }
+    left = Math.min(Math.max(edge, left), Math.max(edge, vw - w - edge));
+    top = Math.min(Math.max(edge, top), Math.max(edge, vh - h - edge));
+    menu.style.right = ""; menu.style.bottom = "";
+    menu.style.left = Math.round(left) + "px";
+    menu.style.top = Math.round(top) + "px";
   }
 
   // The browser shows and hides the popover (popovertarget, Escape, click outside); these two events keep the rest in step.
@@ -91,8 +158,15 @@
       x.focus = "first"; x.noReturn = false;
       return;
     }
-    if (x.focusInside && button) button.focus({ preventScroll: true });
-    x.focusInside = false; x.noReturn = false;
+    // focus was in the menu (Escape, ArrowLeft in a submenu): back to the button, unless focus has gone elsewhere
+    // meanwhile (a click outside on something that takes focus) or the button itself went away with a parent menu
+    var a = document.activeElement;
+    var lost = !a || a === document.body || menu.contains(a) || a === button;
+    if (x.focusInside && button && lost) {
+      var to = backTo(menu, button);
+      if (visible(to)) to.focus({ preventScroll: true });
+    }
+    x.focusInside = false; x.noReturn = false; x.returnTo = null;
   }, true);
 
   // A button without popovertarget: the script toggles the menu itself, naming the button as the source so that a
@@ -116,21 +190,36 @@
     }
   });
 
-  // Choosing an item: close and give focus back first (capture phase, before the item's own handlers).
+  // Another script opens a menu for its own key (sb-window.js: F10, a lone Alt) and names where focus goes back to.
+  document.addEventListener("sb-menu-open", function (event) {
+    var button = event.target instanceof Element ? event.target.closest("[aria-haspopup='menu']") : null;
+    var menu = button && menuOf(button);
+    if (!menu) return;
+    var x = s(menu), to = event.detail && event.detail.returnTo;
+    x.returnTo = to instanceof Element && to !== document.body ? to : null;
+    if (menu.matches(":popover-open")) { focusItem(menu, "first"); return; }
+    x.focus = "first";
+    if (button.hasAttribute("popovertarget")) button.click();                // keeps the native invoker link
+    else { try { menu.showPopover({ source: button }); } catch (e) { menu.showPopover(); } }
+  });
+
+  // Choosing an item: close the whole menu and give focus back first (capture phase, before the item's own handlers).
+  // An item with a submenu is not a choice: its press opens the submenu (popovertarget).
   document.addEventListener("click", function (event) {
     var item = event.target instanceof Element ? event.target.closest(".sb-menu " + ITEM) : null;
-    if (!item) return;
-    var menu = item.closest(".sb-menu"), button = buttonOf(menu);
+    if (!item || opensSub(item)) return;
+    var menu = item.closest(".sb-menu");
     if (!menu.matches(":popover-open")) return;
-    s(menu).noReturn = true;
-    menu.hidePopover();
-    if (button) button.focus({ preventScroll: true });
+    var top = rootOf(menu), button = buttonOf(top), to = button && backTo(top, button);
+    closeAll(menu);
+    s(top).returnTo = null;
+    if (to && visible(to)) to.focus({ preventScroll: true });
   }, true);
 
   document.addEventListener("keydown", function (event) {
     if (!(event.target instanceof Element)) return;
     var button = event.target.closest("[aria-haspopup='menu']");
-    if (button && (event.key === "ArrowDown" || event.key === "ArrowUp")) {
+    if (button && !button.closest(".sb-menu") && (event.key === "ArrowDown" || event.key === "ArrowUp")) {
       var m = menuOf(button);
       if (!m) return;
       event.preventDefault();
@@ -144,11 +233,24 @@
     var menu = event.target.closest(".sb-menu");
     if (!menu || !menu.matches(":popover-open")) return;
     var list = items(menu), at = list.indexOf(document.activeElement), next = -1;
+    var rtl = getComputedStyle(menu).direction === "rtl";
+    var inward = rtl ? "ArrowLeft" : "ArrowRight", outward = rtl ? "ArrowRight" : "ArrowLeft";
     switch (event.key) {
       case "ArrowDown": next = at < 0 || at === list.length - 1 ? 0 : at + 1; break;
       case "ArrowUp": next = at <= 0 ? list.length - 1 : at - 1; break;
       case "Home": case "PageUp": next = 0; break;
       case "End": case "PageDown": next = list.length - 1; break;
+      case inward:
+        if (at >= 0 && opensSub(list[at])) { event.preventDefault(); openSub(list[at], "first"); }
+        return;
+      case outward:
+        var item = parentMenu(menu) && buttonOf(menu);
+        if (!item) return;
+        event.preventDefault();
+        s(menu).noReturn = true;
+        menu.hidePopover();
+        item.focus({ preventScroll: true });
+        return;
       default:
         if (event.key.length !== 1 || event.ctrlKey || event.metaKey || event.altKey) return;
         var x = s(menu), now = Date.now();
@@ -168,14 +270,13 @@
     list[next].focus();
   });
 
-  // Tab (or any other way focus leaves the open menu) closes it and lets focus go where it went.
+  // Tab (or any other way focus leaves the open menu) closes it with all its submenus and lets focus go where it went.
   document.addEventListener("focusout", function (event) {
     var menu = event.target instanceof Element ? event.target.closest(".sb-menu") : null;
     if (!menu || !menu.matches(":popover-open")) return;
-    var to = event.relatedTarget;
-    if (to instanceof Node && (menu.contains(to) || to === buttonOf(menu))) return;   // a press on the button toggles it
-    s(menu).noReturn = true;
-    menu.hidePopover();
+    var top = rootOf(menu), to = event.relatedTarget;
+    if (to instanceof Node && (top.contains(to) || to === buttonOf(top))) return;   // a press on the button toggles it
+    closeAll(menu);
   });
 
   function follow() {

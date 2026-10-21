@@ -13,6 +13,7 @@ Machine-readable rules: https://grundhofer.github.io/sebaro-guide/rules.json · 
 - [Daten](https://grundhofer.github.io/sebaro-guide/daten.html): Jede Datenart einmal dargestellt: Text, Zahlen, Zeit, Status, Listen, Tabellen, Diagramme, Code …
 - [Web](https://grundhofer.github.io/sebaro-guide/web.html): Beispiel-Website mit allen typischen Seiten und Fällen
 - [App](https://grundhofer.github.io/sebaro-guide/app.html): Beispiel-App am Handy: alle typischen Bildschirme und Zustände
+- [iOS](https://grundhofer.github.io/sebaro-guide/ios.html): Dieselbe App auf dem iPhone: SwiftUI-Bausteine, Systemleisten, Sheet, Dynamic Type
 - [Desktop](https://grundhofer.github.io/sebaro-guide/desktop.html): Beispiel-Desktop-App (Tauri/macOS): Fenster, Seitenleiste, Tabellen, Menüs, Tastatur
 - [Gedanken](https://grundhofer.github.io/sebaro-guide/gedanken.html): Die Gedanken dahinter: Haltung, Geschichte, Entscheidungen, Abwägungen
 - [Ausblick](https://grundhofer.github.io/sebaro-guide/ausblick.html): Was auf eine Wahl des Inhabers wartet, was offen ist, später kommt oder erledigt ist

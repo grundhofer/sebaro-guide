@@ -1,0 +1,28 @@
+/* ios.css: page chrome of ios.html (the iPhone page). Guide only, never in products.
+ * Only var(--sb-*) tokens, no colour literals, no shadows. Classes start with "g-ios-". The screen frames reuse
+ * g-app-* from app.css; the frames are web renderings of iOS screens, so a few iOS looks are drawn here from tokens:
+ * the check at the end of a chosen settings row (SbCheckChoice), the edge of the form sheet (sbFormSheet) and a
+ * larger text size for the Dynamic Type example. */
+
+.g-ios-text { margin: var(--sb-space-6) 0 0; max-inline-size: 42em; }
+.g-ios-list { margin: var(--sb-space-6) 0 0; padding-inline-start: var(--sb-space-6); display: grid; gap: var(--sb-space-2); max-inline-size: 52em; }
+.sb-section > .sb-code, .sb-section > .g-app-screens + .sb-code { margin-block-start: var(--sb-space-6); max-inline-size: 52em; }
+.g-ios-checks { max-inline-size: 52em; }
+
+/* the context menu of iOS opens beside the pressed row (here: the first row of „Heute“) */
+.g-ios-menu-dock { inset-block-start: 236px; inset-inline-end: var(--sb-space-4); }
+
+/* SbCheckChoice: flat 56 pt rows, the chosen one with the check in accent at its end and its word stronger */
+.g-ios-check { color: var(--sb-color-accent); }
+.g-ios-choice__chosen { font-weight: var(--sb-type-body-strong-weight); }
+
+/* sbFormSheet: the sheet lies over the screen it came from; 2 px ink line along its top edge and its 16 pt corners */
+.g-ios-sheet-phone { padding-block-start: var(--sb-space-3); }
+.g-ios-sheet {
+  border-block-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color);
+  border-start-start-radius: var(--sb-radius-sheet); border-start-end-radius: var(--sb-radius-sheet);
+}
+
+/* Dynamic Type at an accessibility size, approximated: the content grows, the bottom bar keeps its size */
+.g-ios-ax { zoom: 1.6; }
+.g-ios-ax .sb-list-row__main > .sb-status { margin-block-start: var(--sb-space-1); }

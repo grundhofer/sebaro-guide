@@ -12,6 +12,9 @@
 <link rel="stylesheet" href="sebaro/icons/sprite.css">
 <link rel="stylesheet" href="sebaro/css/sebaro.css">
 <script defer src="sebaro/js/theme-button.js"></script>
+<!-- D91: „Farbton: Kühl · Warm“ in the footer (sb-tone.js; theme-init.js applies a stored tone) and print always light -->
+<script defer src="sebaro/js/sb-tone.js"></script>
+<script defer src="sebaro/js/sb-print.js"></script>
 <!-- favicons etc.: copy the lines of sebaro/brand/site-root/head.snippet.html for your product export -->
 </head>
 <body class="sb-page">
@@ -37,6 +40,17 @@
 </main>
 <footer class="sb-site-footer">
   <p>© 2026 sebaro</p>
+  <!-- WEB-03: Impressum, Datenschutz, Barrierefreiheit as sb-site-footer__links -->
+  <section class="sb-site-footer__display" aria-labelledby="darstellung-h" data-sb-tone-choice hidden>
+    <h2 id="darstellung-h">Darstellung</h2>
+    <fieldset class="sb-segmented"><legend>Farbton</legend>
+      <div class="sb-segmented__options">
+        <label class="sb-segmented__option"><input type="radio" name="sb-tone" value="cool" checked><span class="sb-segmented__face"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>Kühl</span></label>
+        <label class="sb-segmented__option"><input type="radio" name="sb-tone" value="warm"><span class="sb-segmented__face"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>Warm</span></label>
+      </div>
+    </fieldset>
+  </section>
+  <p class="sb-visually-hidden" role="status" data-sb-tone-status></p>
 </footer>
 </body>
 </html>

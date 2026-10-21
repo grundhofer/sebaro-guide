@@ -1,11 +1,11 @@
 {
  "$schema": "./rules.schema.json",
- "version": "2.0.0",
- "date": "2026-10-20",
+ "version": "2.1.0",
+ "date": "2026-10-21",
  "source": {
   "repo": "sebaroDesign",
   "system": "sebaro",
-  "decisions": "D1-D90"
+  "decisions": "D1-D91"
  },
  "areas": [
   {
@@ -18,7 +18,7 @@
    "id": "farbe",
    "prefix": "FAR",
    "title": "Farbe",
-   "intro": "Jede Farbe hat genau einen Job; alles ohne Job bleibt grau. Kategorie und Markierung sind als Jobs entschieden, ihre Töne noch nicht."
+   "intro": "Jede Farbe hat genau einen Job; alles ohne Job bleibt grau. Kategorie, Markierung und Vorzeichen haben eigene Töne, der warme Farbton ändert nur die Graus."
   },
   {
    "id": "schrift",
@@ -84,7 +84,7 @@
    "id": "daten",
    "prefix": "DAT",
    "title": "Daten",
-   "intro": "Daten stehen in flachen Zeilen und neutralen Diagrammen, die Beschriftung trägt den Wert."
+   "intro": "Daten stehen in flachen Zeilen und grauen Diagrammen, die Beschriftung trägt den Wert; Farbskalen gibt es nur in unterscheidbaren Stufen."
   },
   {
    "id": "text",
@@ -113,8 +113,8 @@
   {
    "id": "bilder",
    "prefix": "BIL",
-   "title": "Bilder",
-   "intro": "Bilder sind optional, ohne Text, als Linienzeichnung und mit offener Herkunft."
+   "title": "Bilder und Medien",
+   "intro": "Bilder sind optional, ohne Text, als Linienzeichnung und mit offener Herkunft; Ton und Video spielen nie von selbst und kommen vom eigenen Server."
   },
   {
    "id": "zugang",
@@ -126,25 +126,25 @@
    "id": "start",
    "prefix": "STR",
    "title": "Start",
-   "intro": "Jedes Produkt startet gleich: die Kachel wandert in den Kopf."
+   "intro": "Jedes Produkt startet gleich: die Kachel wandert in den Kopf. Eine Einführung steht anfangsbündig und hat höchstens drei Schritte."
   },
   {
    "id": "plattform-web",
    "prefix": "WEB",
    "title": "Plattform Web",
-   "intro": "Was nur für Websites gilt: Laden, die Taste „Hell oder Dunkel“, Fußzeile, Druck."
+   "intro": "Was nur für Websites gilt: Laden, die Taste „Hell oder Dunkel“, Fußzeile mit „Darstellung“, Formulare, Seitenzahlen, Teilen, Sprachen und Druck."
   },
   {
    "id": "plattform-mobile",
    "prefix": "MOB",
    "title": "Plattform Mobil",
-   "intro": "Was nur für Handy-Apps gilt: Theme, gezähmtes Material 3, Haptik bei Touch, Hell oder Dunkel in den Einstellungen. iOS ist skizziert und wartet auf die Wahl des Inhabers; Regeln für Mitteilungen, Berechtigungen und Widgets kommen erst, wenn Benachrichtigungen wichtig werden (D89)."
+   "intro": "Was nur für Handy-Apps gilt, auf Android und iOS (Plattform „App“): Theme, gezähmtes Material 3, Haptik bei Touch, Hell oder Dunkel in den Einstellungen; auf iOS das Swift-Paket mit eigener unterer Leiste, eigenem Löschen-Dialog und Formular-Sheet. Regeln für Mitteilungen, Berechtigungen und Widgets am Handy kommen erst, wenn Benachrichtigungen wichtig werden (D89)."
   },
   {
    "id": "plattform-desktop",
    "prefix": "DSK",
    "title": "Plattform Desktop",
-   "intro": "Was nur für Desktop-Apps (Tauri) und Web-Apps mit Fenster gilt: Fenstergerüst, ausblendbare Fensterteile, Einstellungen, Hell oder Dunkel im Menü. Titelleiste, Menüleiste, Dokument-Reiter, Ziehen und Ablegen und weitere Fensterfragen sind skizziert und warten auf die Wahl des Inhabers."
+   "intro": "Was nur für Desktop-Apps (Tauri) und Web-Apps mit Fenster gilt: Fenstergerüst, Titelleiste je System, ausblendbare und ziehbare Fensterteile, die Taste „Menü“, feste Kürzel, Dokument-Reiter, Ziehen und Ablegen, mehrere Fenster, Einstellungen als Ansicht."
   },
   {
    "id": "technik",
@@ -378,28 +378,29 @@
    "id": "FAR-01",
    "area": "farbe",
    "title": "Jede Farbe hat genau einen Job",
-   "rule": "Gib jeder Farbe genau einen Job: Ort (Kobalt), nächster Schritt (Lindgrün, nur die Hauptaktion), Zustand (Statusfarben, nur mit Glyphe und Wort), Produkt (Kachelfarbe, nur in der App-Kachel). Alles andere ist Grau. Datenfarben sind ein lokaler Job nur im Diagramm, Codetöne nur im Code (FAR-11); Kategorie und Markierung sind zwei eigene Jobs, deren Töne noch gewählt werden (FAR-12).",
-   "rule_en": "Every colour has exactly one job: place = cobalt, next step = lime (primary action only), state = status colours (with glyph + word), product = tile colour (inside the app tile only), everything else grey; dataviz colours only inside charts, code tones only in code (FAR-11); category and mark are two further jobs whose tones are not chosen yet (FAR-12).",
+   "rule": "Gib jeder Farbe genau einen Job: Ort (Kobalt), nächster Schritt (Lindgrün, nur die Hauptaktion), Zustand (Statusfarben, nur mit Glyphe und Wort), Produkt (Kachelfarbe, nur in der App-Kachel). Alles andere ist Grau. Datenfarben sind ein lokaler Job nur im Diagramm, Codetöne nur im Code (FAR-11); Kategorie und Markierung sind zwei eigene Jobs mit eigenen Tönen (FAR-12), Plus und Minus färben sich nur mit Zeichen und Pfeil (FAR-14). Der warme Farbton ändert nur die Graus (FAR-15).",
+   "rule_en": "Every colour has exactly one job: place = cobalt, next step = lime (primary action only), state = status colours (with glyph + word), product = tile colour (inside the app tile only), everything else grey; dataviz colours only inside charts, code tones only in code (FAR-11); category and mark have their own tones (FAR-12); plus/minus are coloured only with sign and arrow (FAR-14); the warm tone moves only the greys (FAR-15).",
    "why": "Inhaber D36: „Die Richtung die mir gefällt … ist richtung a“ („Farbe ist Funktion“) und D37: „farben f3 lindgrün und blaU“. Wer die Farbe sieht, weiß sofort, was sie bedeutet; eine Farbregel wirkt auf jedem Alltagsbildschirm (research/09 §1.2).",
    "do": "M1 „Heute“: einzige Farben sind die 3-px-Kante über „Heute“, das lindgrüne „Neue Gewohnheit“, zwei Statusglyphen und die App-Kachel.",
    "dont": "Deko-Farbe, farbige Köpfe oder Kartenflächen, Tasten in Marken- oder Produktfarbe, Kobalt als Buttonfläche, Farben ohne Rolle.",
-   "numbers": "Ort: accent, link, link-visited, focus, selection, on-accent; nächster Schritt: primary-action, -hover, -pressed, on-primary-action, primary-action-outline; Zustand: success, warning, danger, info; Produkt: 8 signTiles (--sb-tile-<group>); Grau: bg, surface, surface-raised, surface-sunken, text, text-muted, text-subtle, border, border-strong, scrim",
+   "numbers": "Ort: accent, link, link-visited, focus, selection, on-accent; nächster Schritt: primary-action, -hover, -pressed, on-primary-action, primary-action-outline; Zustand: success, warning, danger, info; Produkt: 8 signTiles (--sb-tile-<group>); Kategorie: --sb-category-1 … -6; Markierung: --sb-mark, --sb-mark-edge; Grau: bg, surface, surface-raised, surface-sunken, text, text-muted, text-subtle, border, border-strong, scrim",
    "decisions": [
     "D36",
     "D37",
     "D40",
     "D50",
     "D67",
-    "D73"
+    "D73",
+    "D91"
    ],
-   "source": "systems/sebaro/spec/01-foundations.md §1.1, §1.9; spec/03-signature.md §1.1, §1.3; palettes/sebaro.json meta.concept; DECISIONS.md D36, D37, D73",
+   "source": "systems/sebaro/spec/01-foundations.md §1.1, §1.9, §9; spec/03-signature.md §1.1, §1.3; palettes/sebaro.json meta.concept; DECISIONS.md D36, D37, D73, D91",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Jede Farbe einer Rolle aus spec/01 §1.1 zuordnen; Farblint L1–L8 (spec/03 §1.4); Graustufen-Screenshot bleibt lesbar.",
    "example_hint": "Zwei sb-phone nebeneinander: richtig graue Liste, 3-px-Ortslinie, eine sb-primary-action unten, sb-status mit Glyphe+Wort; falsch blauer Kopf, getönte Karten, grüner Chip, rote Zählpunkte.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-21"
   },
   {
    "id": "FAR-02",
@@ -615,24 +616,73 @@
    "id": "FAR-12",
    "area": "farbe",
    "title": "Kategorie und Markierung: zwei eigene Farbaufgaben",
-   "rule": "Gib Inhalten, die der Nutzer selbst einordnet (Etiketten, Spalten, Projekte), die Aufgabe Kategorie: sechs gedämpfte Töne, nur als Punkt oder Glyphe neben dem Wort, nie als Fläche. Markierungen (Textmarker, Suchtreffer) bekommen eine eigene Farbe. Plus und Minus in Zahlen-Apps sind nur zusammen mit Vorzeichen und Pfeil farbig. Die Töne sind noch nicht gewählt: Bis dahin bleibt eine Kategorie ein graues Wort, ein Suchtreffer trägt den 1-px-Rahmen in border-strong.",
-   "rule_en": "Two colour jobs (D73): category = six muted tones for user-filed content, only as a dot or glyph next to the word, never a fill; mark = its own colour for highlights and search hits; plus/minus in number apps coloured only together with sign and arrow. The tones are not chosen yet: until then a category is a grey word and a search hit a 1 px border-strong frame.",
-   "why": "Inhaber D73: „Kategorien mit sechs gedämpften tönen, ja machen / Markierung auch entsprechend farblich machen wie vorgeschlagen“. Die Jobs sind entschieden; welche Töne, ist skizziert und wartet auf die Wahl des Inhabers (Fragen C1–C3). Ohne gewählte Töne gibt es keine Tokens, deshalb bleibt bis dahin alles grau.",
-   "do": "Zeile „Steuer 2026“ mit dem Wort „Finanzen“ in text-muted; Suchtreffer mit 1-px-Rahmen; „+ 12,90 €“ mit Vorzeichen und arrow-up--16.",
-   "dont": "Kategorie als farbige Fläche oder farbiges Wort; nur ein farbiger Punkt ohne Wort; Suchtreffer in Lindgrün; Plus und Minus nur über Rot und Grün; Töne aus anderen Paletten (Kacheln, Diagramme) als Kategoriefarben.",
-   "numbers": "Kategorie: 6 Töne (noch nicht gewählt); Markierung: 1 Farbe (noch nicht gewählt); bis dahin Rahmen 1 px --sb-color-border-strong",
+   "rule": "Gib Inhalten, die der Nutzer selbst einordnet (Etiketten, Spalten, Projekte), die Aufgabe Kategorie: einen der sechs Töne „gedämpft kühl“ (Tanne, Jade, Taube, Veilchen, Messing, Malve), nur als 10-px-Punkt oder Glyphe neben dem Wort (sb-category--1 bis --6), nie als Fläche, als Textfarbe oder als einziges Merkmal. Markiere Textmarker und Suchtreffer als Fläche mit 2-px-Kante am Fuß (mark, sb-mark); der aktuelle Treffer trägt stattdessen eine 3-px-Kante in Textfarbe, und die Suche sagt „Treffer 1 von 2“ in Worten.",
+   "rule_en": "Category (content the user files himself): one of six muted cool tones (Tanne, Jade, Taube, Veilchen, Messing, Malve) as a 10 px dot or a glyph beside the word (sb-category--1…6), never a fill, a text colour or the only cue; mark (highlighter, search hits): fill plus a 2 px edge at the foot (mark, sb-mark); the current hit a 3 px text-colour edge and „Treffer n von m“ in words.",
+   "why": "Inhaber D73: „Kategorien mit sechs gedämpften tönen, ja machen / Markierung auch entsprechend farblich machen wie vorgeschlagen“. D91: Kategorie „gedämpft kühl“ (C1b, statt der empfohlenen Erdtöne), Markierung als Fläche mit Kante (C2a). Die Schwächen der kühlen Töne sind gemessen: näher an Kobalt (mindestens ΔE OK 0,081, und ein Punkt ist eine andere Form als eine Linie), bei Farbsehschwäche nah an grauem Text und an Kacheln, die zwei Grünen vor allem in der Helligkeit verschieden. Deshalb steht neben dem Punkt immer das Wort. Die Fläche der Markierung allein hebt sich kaum vom Grund ab (1,05 : 1); die Kante trägt die Form.",
+   "do": "<span class='sb-category sb-category--4'>Garten</span> in der Zeile „Rosen schneiden · Garten · 17:30“; <mark>Abendspaziergang</mark> im Satz; der aktuelle Treffer <mark aria-current='true'>…</mark> mit „Treffer 1 von 2“; Editoren ohne Elemente: ::highlight(sb-mark).",
+   "dont": "Kategorie als farbige Fläche, farbiges Wort oder Punkt ohne Wort; ein Kategorieton für einen Zustand, den die App vergibt; ein grauer Punkt neben Kategoriepunkten in derselben Reihe; Markierung nur als Fläche ohne Kante; Suchtreffer in Lindgrün, Kobalt oder als Auswahl; Töne aus anderen Paletten (Kacheln, Diagramme) als Kategoriefarben.",
+   "numbers": "--sb-category-1 … -6 (Tanne, Jade, Taube, Veilchen, Messing, Malve); jeder Ton mindestens 3,0 : 1 auf jedem Grund, untereinander und zu Kobalt, Lindgrün und Status mindestens ΔE OK 0,08 (unter Farbsehschwäche 0,04); Punkt 10 px; Markierung --sb-mark mit --sb-mark-edge, Kante 2 px (--sb-x-sebaro-mark-edge-width); Text auf der Fläche mindestens 4,5 : 1 (knappster: hell text-muted 4,79, dunkel 4,52); aktueller Treffer 3 px text",
    "decisions": [
-    "D73"
+    "D73",
+    "D91"
    ],
-   "source": "DECISIONS.md D73; systems/sebaro/spec/01-foundations.md §1.9; spec/11-checklist.md §1",
+   "source": "DECISIONS.md D73, D91 (C1b, C2a); systems/sebaro/spec/01-foundations.md §1.9; spec/02-components.md §3.1b; palettes/sebaro.json categories, mark",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
-   "check": "Kategorien zeigen immer das Wort; keine Kategorie- oder Markierungsfarbe im Code, solange dist/tokens.json keine hat; Graustufen-Screenshot bleibt lesbar.",
-   "example_hint": "Liste mit Kategorie als grauem Wort und ein Suchtreffer mit Rahmen; falsch: farbige Punkte ohne Wort und ein lindgrün hinterlegter Treffer.",
-   "note": "Entschieden sind die Aufgaben; die sechs Töne, die Form der Markierung und die Farben für Plus und Minus sind skizziert und warten auf die Wahl des Inhabers.",
-   "changed": "2026-10-20"
+   "check": "Jede Kategorie zeigt ihr Wort; check_palette.py (Kategorie C1–C5) mit Exit 0; Graustufen-Screenshot: Kategorie am Wort, Markierung an der Kante erkennbar; der aktuelle Treffer hat die 3-px-Kante und die Zahl in Worten.",
+   "example_hint": "Zeilen mit Kategoriepunkt und Wort, ein Satz mit Markierung und aktuellem Treffer; falsch: farbige Punkte ohne Wort und ein lindgrün hinterlegter Treffer.",
+   "note": "Kategorie und Markierung gibt es als Bauteil bisher nur im Web; Compose und SwiftUI lesen dieselben Tokens (SebaroTheme.categories, SebaroTheme.mark), eigene Bausteine fehlen noch.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "FAR-14",
+   "area": "farbe",
+   "title": "Plus und Minus: Farbe folgt dem Vorzeichen",
+   "rule": "Färbe in Zahlen-Apps eine Veränderung nach ihrem Vorzeichen: Plus in success, Minus in danger, immer mit Zeichen (+, Minus als U+2212) und dem Pfeil arrow-up--16 bzw. arrow-down--16 (sb-signed--plus, sb-signed--minus). Null („±0“) hat keinen Pfeil und bleibt in Textfarbe. Die Farbe sagt nur die Richtung, nie ob sie gut ist; die Wörter nach der Zahl bleiben in Textfarbe.",
+   "rule_en": "Signed numbers in number apps: the colour follows the sign (plus = success, minus = danger), always with the sign (+, U+2212) and the arrow icon (sb-signed--plus, sb-signed--minus); zero („±0“) has no arrow and stays text; the colour says the direction, never good or bad.",
+   "why": "Inhaber D73: Plus und Minus nur zusammen mit Vorzeichen und Pfeil farbig; D91 C3, empfohlener Weg a: „Farbe folgt dem Vorzeichen“. Mehr Wasser und mehr Ausgaben sind beide „plus“; eine Wertung wäre oft falsch. Beide Farben haben als Text mindestens 4,5 : 1 auf allen vier Gründen.",
+   "do": "<span class='sb-signed sb-signed--plus'><svg class='sb-icon sb-icon--16' aria-hidden='true'><use href='#arrow-up--16'/></svg>+3</span> Gläser mehr als gestern; <span class='sb-signed sb-signed--minus'>…−84,00 €</span>; <span class='sb-signed'>±0</span> wie gestern.",
+   "dont": "Beträge nur rot und grün ohne Zeichen; Bindestrich statt U+2212; Grün für „gut“ und Rot für „schlecht“ unabhängig vom Vorzeichen; ein Pfeil an der Null; den ganzen Satz einfärben.",
+   "numbers": "success und danger als Text mindestens 4,5 : 1 (knappster Wert hell 5,96 / 5,52 auf surface-sunken, dunkel 4,55 / 4,80 auf surface-raised); Pfeil 16 px; Minus U+2212",
+   "decisions": [
+    "D73",
+    "D91"
+   ],
+   "source": "DECISIONS.md D73, D91 (C3a); systems/sebaro/spec/01-foundations.md §1.9; spec/02-components.md §3.1b",
+   "platforms": [
+    "alle"
+   ],
+   "status": "entschieden",
+   "check": "Graustufen-Screenshot: die Richtung bleibt an Zeichen und Pfeil erkennbar; kein Bindestrich als Minus in Beträgen.",
+   "example_hint": "+3, −12 % und ±0 mit Pfeilen; falsch: Beträge nur rot und grün.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "FAR-15",
+   "area": "farbe",
+   "title": "Farbton „Warm“ als zweite Wahl",
+   "rule": "Biete in jedem Produkt neben „Hell oder Dunkel“ die Wahl „Farbton: Kühl · Warm“. Warm ist die Palette „Papier“: Es wandern nur die Graus (Gründe, Text, Linien, Hover- und Druckflächen, Abdunklung, im Hellen Beschriftung und Rand der Hauptaktion); Kobalt, Lindgrün, Status, Code, Kategorie, Markierung, Diagramme und Kacheln bleiben. Websites zeigen die Wahl im Fuß unter „Darstellung“, Handy-Apps in den Einstellungen, Desktop-Apps in der Ansicht Einstellungen. Gespeichert wird nur „warm“.",
+   "rule_en": "Every product offers „Farbton: Kühl · Warm“ next to „Hell oder Dunkel“; warm is the palette „Papier“ and moves only the grey roles (grounds, text, lines, hover/pressed, scrim, in light mode the primary action's label and outline); cobalt, lime, status, code, category, mark, charts and tiles stay; websites put the choice in the footer under „Darstellung“, phone apps in settings, desktop apps in the settings view; only „warm“ is stored (sb-tone).",
+   "why": "Inhaber D90: warme Palette als zweite Wahl; D91: die Palette „Papier“ (C4c), auf Websites im Fuß unter „Darstellung“ (Z3a). Jede Rolle behält ihre Helligkeit, deshalb gelten alle Kontraste der kühlen Palette weiter; check_palette.py wiederholt jede Prüfung mit der Variante. Der Kopf behält nur „Hell oder Dunkel“, sonst bräuchte er am Handy eine dritte Zeile.",
+   "do": "<section class='sb-site-footer__display' aria-labelledby='d' data-sb-tone-choice hidden><h2 id='d'>Darstellung</h2><fieldset class='sb-segmented'><legend>Farbton</legend> „Kühl“ · „Warm“ (radio name='sb-tone', value cool | warm); sb-tone.js am Ende von body; theme-init.js setzt html[data-sb-tone='warm'] vor dem ersten Bild.",
+   "dont": "Eigene warme Farben im Produkt; Kobalt, Lindgrün oder Kacheln „wärmer“ machen; die Wahl in den Kopf neben „Hell oder Dunkel“; ein Schalter ohne Wort; „cool“ speichern statt den Schlüssel zu löschen; eine sichtbare Wahl, die ohne Skript nichts tut.",
+   "numbers": "Schlüssel sb-tone (nur „warm“); html[data-sb-tone='warm']; Variante variants.warm in dist/tokens.json; knappster Kontrast hell text-muted auf pressed-fill 4,57 : 1",
+   "decisions": [
+    "D75",
+    "D90",
+    "D91"
+   ],
+   "source": "DECISIONS.md D90, D91 (C4c, Z3a); systems/sebaro/spec/01-foundations.md §9; spec/09-platform-web.md §6.2; spec/02-components.md §4.24; spec/12-platform-ios.md §9",
+   "platforms": [
+    "alle"
+   ],
+   "status": "entschieden",
+   "check": "check_palette.py mit der Variante Exit 0; Screenshots hell und dunkel, kühl und warm: nur Gründe, Text und Linien ändern sich; ohne Skript bleibt die Wahl verborgen.",
+   "example_hint": "Fuß mit „Darstellung“ und „Farbton: Kühl · Warm“; falsch: dritte Taste im Kopf und warm gefärbte Hauptaktion.",
+   "note": "Der Startbildschirm des Systems auf iOS ist statisch und immer kühl; mit Warm ist der Schritt zum ersten Bild sichtbar (spec/12 §10).",
+   "changed": "2026-10-21"
   },
   {
    "id": "FAR-13",
@@ -1013,25 +1063,26 @@
    "id": "FOR-02",
    "area": "form",
    "title": "Jede Linie hat eine Bedeutung",
-   "rule": "Nutze jede Linie nur für ihre Bedeutung: Haarlinie 1 px border (Zeilen, Abschnitte), Ebenenlinie 2 px Tinte, Link-Unterstreichung 2 px link, Bedienrand 1 px border-strong (destruktiv: danger mit 45°-Kante), Ort 3 px accent, Hauptaktionsrand 2 px, Fehlerlinie 2 px danger, Fokusring 2 px mit 2 px Abstand.",
-   "rule_en": "Each line type has one meaning: hairline 1 px border, layer 2 px ink, link 2 px link, control 1 px border-strong, place 3 px accent, primary outline 2 px, error 2 px danger, focus 2 + 2 px.",
-   "why": "Linien statt Flächen (D46): wenn jede Linie eine Bedeutung hat, liest man sie wie Farben.",
+   "rule": "Nutze jede Linie nur für ihre Bedeutung: Haarlinie 1 px border (Zeilen, Abschnitte), Ebenenlinie 2 px Tinte, Zitatlinie 2 px Tinte am Anfang zitierter Worte (TXT-17), Link-Unterstreichung 2 px link, Bedienrand 1 px border-strong (destruktiv: danger mit 45°-Kante), Ort 3 px accent, Hauptaktionsrand 2 px, Fehlerlinie 2 px danger, Fokusring 2 px mit 2 px Abstand.",
+   "rule_en": "Each line type has one meaning: hairline 1 px border, layer 2 px ink, quote line 2 px ink on the start edge of quoted words (TXT-17), link 2 px link, control 1 px border-strong, place 3 px accent, primary outline 2 px, error 2 px danger, focus 2 + 2 px.",
+   "why": "Linien statt Flächen (D46): wenn jede Linie eine Bedeutung hat, liest man sie wie Farben. D91 B8b: Zitate tragen eine Tintenlinie am Anfang. Zitatlinie und Ebenenlinie teilen Breite und Tinte und unterscheiden sich durch den Ort: die Ebenenlinie begrenzt eine Ebene mit eigenem Grund, die Zitatlinie steht im Fließtext nur am Anfang der zitierten Worte.",
    "do": "Kartenkante 2 px Tinte, Zeilentrenner 1 px border.",
-   "dont": "3-px-Kobaltlinie als Deko über Überschriften; 2-px-Linien zwischen Listenzeilen.",
-   "numbers": "--sb-border-width-hairline 1px; --sb-x-sebaro-layer-line-width 2px; --sb-x-sebaro-link-underline-width 2px; --sb-border-width-control 1px; --sb-border-width-strong 3px; --sb-x-sebaro-primary-action-outline-width 2px; Fehlerlinie 2px; --sb-focus-width 2px; --sb-focus-offset 2px",
+   "dont": "3-px-Kobaltlinie als Deko über Überschriften; 2-px-Linien zwischen Listenzeilen; Zitatlinie mit Grund, Radius oder in Kobalt.",
+   "numbers": "--sb-border-width-hairline 1px; --sb-x-sebaro-layer-line-width 2px (Ebenen- und Zitatlinie); --sb-x-sebaro-link-underline-width 2px; --sb-border-width-control 1px; --sb-border-width-strong 3px; --sb-x-sebaro-primary-action-outline-width 2px; Fehlerlinie 2px; --sb-focus-width 2px; --sb-focus-offset 2px",
    "decisions": [
     "D46",
     "D48",
-    "D52"
+    "D52",
+    "D91"
    ],
-   "source": "systems/sebaro/spec/01-foundations.md §5.2",
+   "source": "systems/sebaro/spec/01-foundations.md §5.2; spec/02-components.md §3.22",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Jede border/outline im CSS einem Linientyp aus spec/01 §5.2 zuordnen.",
    "example_hint": "Legende aller acht Linientypen mit je einem Mini-Beispiel.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-21"
   },
   {
    "id": "FOR-03",
@@ -1202,24 +1253,27 @@
    "id": "EBE-04",
    "area": "ebenen",
    "title": "Bottom Sheet nur zum Auswählen",
-   "rule": "Nutz Bottom Sheets nur für Auswahl (Radiozeilen oder Liste): bg mit 2-px-Tintenlinie oben, obere Ecken 16, Kopf mit Titel und Schließen-Taste, kein Ziehgriff. Belege öffnen sich nie im Sheet, sondern in ihrer Zeile.",
-   "rule_en": "Bottom sheets for pickers only: top ink line, top radius 16, head with title + close, no drag handle; never for evidence.",
-   "why": "Der Ziehgriff zeigt keine Daten; Aussage-Zeilen klappen an Ort und Stelle auf (D40).",
-   "do": "<div class='sb-sheet' role='dialog' aria-labelledby='t'> „Kategorie wählen“ mit Radiozeilen.",
-   "dont": "Sheet mit Griff; Beleg im ModalBottomSheet.",
-   "numbers": "Radius 16px oben; Linie 2px",
+   "rule": "Nutz Bottom Sheets nur für Auswahl (Radiozeilen oder Liste): bg mit 2-px-Tintenlinie oben, obere Ecken 16, Kopf mit Titel und Schließen-Taste, kein Ziehgriff. Ab 640 px Fensterbreite ist das offene Sheet höchstens 560 px breit und steht unten in der Mitte, die Tintenlinie läuft dann auch an seinen Seiten hoch; am Handy bleibt es über die ganze Breite. Belege öffnen sich nie im Sheet, sondern in ihrer Zeile.",
+   "rule_en": "Bottom sheets for pickers only: top ink line, top radius 16, head with title + close, no drag handle; from 640 px window width at most 560 px wide and centred at the bottom (ink line up both sides), full width on phones; never for evidence.",
+   "why": "Der Ziehgriff zeigt keine Daten; Aussage-Zeilen klappen an Ort und Stelle auf (D40). D91 Z2b: „Sheet ab 640 px höchstens 560 px breit“, wie der Bestätigungsdialog; seine Seiten grenzen dann an die Abdunklung, dort endet eine Ebene (D46).",
+   "do": "<dialog class='sb-sheet' aria-labelledby='t'><form method='dialog'> „Erinnerung wählen“ mit Radiozeilen; geöffnet über data-sb-opens oder sbSheet.open(sheet).",
+   "dont": "Sheet mit Griff; Beleg im Sheet; Sheet auf dem Desktop über die ganze Fensterbreite.",
+   "numbers": "Radius 16px oben; Linie 2px; ab 640 px Fensterbreite höchstens 560 px breit; höchstens 85 % der Fensterhöhe",
    "decisions": [
     "D46",
-    "D40"
+    "D40",
+    "D91"
    ],
-   "source": "systems/sebaro/spec/02-components.md §4.7; css/sebaro.css Z. 928-936",
+   "source": "systems/sebaro/spec/02-components.md §4.7; demo/assets/sb-sheet.js",
    "platforms": [
-    "mobile"
+    "mobile",
+    "web"
    ],
    "status": "vorläufig",
-   "check": "Review; Fokusfalle und Schließen sind in den Demos noch nicht geskriptet.",
+   "check": "Bei 1440 px ist das offene Sheet 560 px breit und unten in der Mitte; Escape und „Schließen“ schließen, der Fokus kehrt zum Auslöser zurück.",
    "example_hint": "Sheet „Kategorie wählen“ mit sb-radio-Zeilen; falsch: Sheet mit Ziehgriff, das einen Beleg zeigt.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-21",
+   "note": "Die Breite ab 640 px hat der Inhaber gewählt (D91 Z2b); der Rest der Regel ist Spezifikation ohne eigene I-Zeile, deshalb bleibt sie vorläufig."
   },
   {
    "id": "EBE-05",
@@ -1273,8 +1327,8 @@
    "id": "EBE-07",
    "area": "ebenen",
    "title": "Menü nach ARIA-Muster",
-   "rule": "Bau Überlauf- und Kontextmenüs mit role='menu' und menuitem-Zeilen (48 px, in Desktop-Apps und Web-Apps mit Fenster 32 px), Icon in text-muted + Wort; Auslöser mit aria-haspopup='menu', aria-expanded und popovertarget; bg mit 2-px-Tinte, Radius 12, 200–320 px breit; Pfeiltasten, Pos1/Ende, Buchstaben, Escape und Fokusrückgabe über sb-menu.js. Die Löschzeile zeigt Wort und Icon in danger, öffnet trotzdem den Dialog und trägt keine Kante.",
-   "rule_en": "Menus: role=menu with menuitem rows (48 px, 32 px in windows), trigger with aria-haspopup, aria-expanded and popovertarget; bg + 2 px ink, radius 12, 200–320 px; keys and focus return by sb-menu.js; the delete row is danger word + icon, opens the dialog, no cut.",
+   "rule": "Bau Überlauf- und Kontextmenüs mit role='menu' und menuitem-Zeilen (48 px, in Desktop-Apps und Web-Apps mit Fenster 32 px), Icon in text-muted + Wort; Auslöser mit aria-haspopup='menu', aria-expanded und popovertarget; bg mit 2-px-Tinte, Radius 12, 200–320 px breit; Pfeiltasten, Pos1/Ende, Buchstaben, Escape und Fokusrückgabe über sb-menu.js. Ein Untermenü hängt an einer Zeile mit Chevron, öffnet mit →, Eingabe oder Druck, nie beim Darüberfahren, und schließt mit ← oder Escape. Die Löschzeile zeigt Wort und Icon in danger, öffnet trotzdem den Dialog und trägt keine Kante.",
+   "rule_en": "Menus: role=menu with menuitem rows (48 px, 32 px in windows), trigger with aria-haspopup, aria-expanded and popovertarget; bg + 2 px ink, radius 12, 200–320 px; keys and focus return by sb-menu.js; submenus hang on a row with a chevron, open with →, Enter or a press (never on hover), close with ← or Escape; the delete row is danger word + icon, opens the dialog, no cut.",
    "why": "Standard-Muster; destruktiv bleibt destruktiv, die Kante gehört der Taste im Dialog (D46 (1)).",
    "do": "<ul class='sb-menu' role='menu'><li role='none'><button class='sb-menu__item' role='menuitem'>",
    "dont": "Löschen direkt aus dem Menü ohne Rückfrage; Kante oder Rahmen an der Menüzeile; Schatten unter dem Menü.",
@@ -1283,17 +1337,18 @@
     "D39",
     "D46",
     "D67",
-    "D80"
+    "D80",
+    "D91"
    ],
-   "source": "systems/sebaro/spec/02-components.md §4.10, §4.12, §4.18; demo/assets/sb-menu.js",
+   "source": "systems/sebaro/spec/02-components.md §4.10, §4.12, §4.18, §4.24; demo/assets/sb-menu.js",
    "platforms": [
     "alle"
    ],
    "status": "vorläufig",
-   "check": "axe; Tastaturtest (Pfeile, Escape fehlen im Demo-Skript sb-controls.js).",
+   "check": "axe; Tastaturtest mit sb-menu.js: Pfeile, Pos1/Ende, → und ← im Untermenü, Escape mit Fokusrückgabe.",
    "example_hint": "Menü „Mehr“ mit Bearbeiten, Teilen, Trennlinie, Löschen; falsch: Löschzeile mit 45°-Kante, die sofort löscht.",
-   "note": "D67 (10): Seltenes und Löschen eines Bereichs im „Mehr“-Menü, Löschen ganz unten nach einer Trennlinie (AKT-10). Prüfelemente im Menü (menuitemradio, menuitemcheckbox mit sb-menu__check) zeigt DSK-05.",
-   "changed": "2026-10-20"
+   "note": "D67 (10): Seltenes und Löschen eines Bereichs im „Mehr“-Menü, Löschen ganz unten nach einer Trennlinie (AKT-10). Prüfelemente im Menü (menuitemradio, menuitemcheckbox mit sb-menu__check) zeigt DSK-05. D91 F4b wählt nur die Taste „Menü“ in der eigenen Leiste (DSK-08); Untermenüs und der Rest des Menümusters sind Spezifikation ohne eigene I-Zeile, deshalb bleibt die Regel vorläufig.",
+   "changed": "2026-10-21"
   },
   {
    "id": "EBE-08",
@@ -2204,6 +2259,30 @@
    "changed": "2026-10-20"
   },
   {
+   "id": "STA-09",
+   "area": "status",
+   "title": "Teilweise erledigt: zählen statt benennen",
+   "rule": "Zeig etwas, das zum Teil erledigt ist, als Zahl dessen, was fehlt, mit dem vorhandenen Wort „offen“: in der Zeile „2 offen“, als Satz „Noch 2 offen.“, als graue Zeile „3 von 5 beantwortet“. Die Glyphe ist pending: in warning, wenn der Rest etwas von der Person verlangt, grau (sb-status--neutral), wenn er nur informiert. Nie „teils offen“, „teilweise“ oder ein Prozentwert allein.",
+   "rule_en": "Partial completion is counted with the existing word „offen“: row „2 offen“, sentence „Noch 2 offen.“, meta line „3 von 5 beantwortet“; glyph pending in warning when the rest asks for something, grey (sb-status--neutral) when it only informs; never „teils offen“, „teilweise“ or a percentage alone.",
+   "why": "Inhaber D91 Z1a: zählen statt benennen. Eine Zahl sagt mehr als „teils“ und hält die Regel „nie schätzen“ (D21); „offen“ gibt es schon in Sätzen und als Prüfzustand (D24); ein drittes Wort bräuchte eine eigene Glyphe.",
+   "do": "<span class='sb-status sb-status--warning'><svg class='sb-icon sb-icon--20' aria-hidden='true'><use href='#pending'/></svg>2 offen</span>; <p class='sb-list-row__meta'>3 von 5 beantwortet</p>; für einen Abgleich, der von selbst weiterläuft, sb-status--neutral.",
+   "dont": "„teils offen“, „teilweise erledigt“, „60 %“ ohne die Zahl der offenen Dinge; ein neues Zustandswort mit eigener Glyphe; das Warnzeichen für etwas, das nur informiert.",
+   "numbers": "Glyphe pending 20 px in Listen, 16 px in Notizen; englisch „2 open“, „2 left“, „3 of 5 answered“",
+   "decisions": [
+    "D21",
+    "D24",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (Z1a); systems/sebaro/spec/02-components.md §3.1, §3.1a; spec/07-voice.md §5",
+   "platforms": [
+    "alle"
+   ],
+   "status": "entschieden",
+   "check": "Suche nach „teils offen“ und „teilweise“ in Oberflächentexten findet nichts.",
+   "example_hint": "Zwei Zeilen mit „2 offen“ (Warnzeichen und graues Zeichen) und der Satz „Noch 2 offen.“; falsch: „teils offen“ mit eigener Glyphe.",
+   "changed": "2026-10-21"
+  },
+  {
    "id": "EIN-01",
    "area": "eingaben",
    "title": "Feld: Beschriftung oben, graue Fläche, Grundlinie",
@@ -2383,26 +2462,27 @@
   {
    "id": "DAT-04",
    "area": "daten",
-   "title": "Diagramme: neutral, jetzt Kobalt, Werte als Text",
-   "rule": "Zeichne beschriftete Balken neutral in border-strong; nur die aktuelle Periode bekommt accent und Titelgewicht. Ziel als 1-px-gestrichelte Linie in text-muted mit Textlabel, Werte als Text unter der Achse, role='img' mit aria-label aller Werte. Mehrere Reihen zeigst du als beschriftete Zeilen mit neutralem Balken; für Reihen, Legende und Skalen gilt DAT-10.",
-   "rule_en": "Labelled bars neutral (border-strong), only the current period accent; dashed text-muted target with label; values as text; role=img + aria-label with all values; several series as labelled rows with neutral bars; series, legend and scales follow DAT-10.",
-   "why": "Lindgrün und Kachelfarben haben andere Jobs; Kobalt markiert hier den Ort „jetzt“, keine Serie. Die Beschriftung trägt den Wert, Farbe nichts (Fix-Stufe AD07). Kategoriefarben liegen ≥ ΔE OK 0,08 von allen Rollenfarben.",
-   "do": "--sb-x-sebaro-chart-bar für alle Tage, --sb-x-sebaro-chart-bar-current für heute; <li class='sb-chart__row'><span class='sb-chart__name'>Gesundheit <b>42</b></span><svg aria-hidden='true'>…",
-   "dont": "Regenbogen-Balken; Kategoriefarben für eine Balkenreihe; Werte nur im Tooltip; Lindgrün, Status- oder Produktfarben; Verläufe, 3-D; Beschriftung unter 14 px skaliert.",
-   "numbers": "--sb-x-sebaro-chart-bar #84868A / #707379 (3.34 / 3.75 : 1); -bar-current #3057B1 / #89B1FA; -grid #D7D9DD / #32353C 1px; -axis 1px; -line-width 2px; Zeilenbalken 12px; Referenzdaten So 8, Mo 6, Di 8, Mi 7, Do 4, Fr 8, Sa 5, Ziel 8",
+   "title": "Diagramme: grau, das Jetzt in Kobalt, Schrift als HTML",
+   "rule": "Zeichne Diagramme grau: Balken in border-strong, eine Linie 2 px in derselben Farbe; nur die aktuelle Periode oder der letzte Punkt bekommt accent und Titelgewicht. Jedes Wort und jede Zahl eines Diagramms ist HTML in caption (14 px bei jeder Breite), das SVG zeichnet nur Formen. Das Ziel ist eine 1-px-gestrichelte Linie in text-muted mit Wort. Jedes Diagramm ist ein figure mit Bildunterschrift (was, Einheit, Zeitraum) und hat seine Werte als Text: als Beschriftung oder als „Werte als Tabelle“. Eine Sparkline steht nur nach ihrer Zahl.",
+   "rule_en": "Charts are grey: bars border-strong, one line 2 px in the same colour; only the current period or the latest point is accent + title weight; every word and number is HTML in caption (14 px at every width), SVG draws shapes only; dashed text-muted target with its word; figure + figcaption (what, unit, period) and the values as text (labels or „Werte als Tabelle“); a sparkline only after its number.",
+   "why": "Lindgrün und Kachelfarben haben andere Jobs; Kobalt markiert den Ort „jetzt“, keine Serie (Fix-Stufe AD07). D91: Schrift als HTML statt im mitskalierten Bild (G1a), eine graue Linie mit dem Jetzt in Kobalt (G2a), die Zahl zuerst und die Sparkline als Beiwerk (G3a). Schrift im Bild schrumpft mit dem Bild; als HTML bleibt sie auch in einer schmalen Handy-Karte 14 px.",
+   "do": "<figure class='sb-chart'><div class='sb-chart__plot'><div class='sb-chart__area'><svg class='sb-chart__shapes' viewBox='0 0 100 100' preserveAspectRatio='none' aria-hidden='true'>…</svg><ol class='sb-chart__bars' aria-hidden='true'>…</ol></div><ol class='sb-chart__slots'><li aria-current='date'><span class='sb-chart__label'>Sa</span><span class='sb-chart__value'>5</span></li></ol></div><figcaption>…</figcaption></figure>; <p class='sb-stat__value'>7,1 Gläser<svg class='sb-sparkline' aria-hidden='true'>…</svg></p>",
+   "dont": "Regenbogen-Balken; Kategoriefarben für eine Balkenreihe; Schrift im SVG, die mit dem Bild schrumpft; Werte nur im Tooltip; Lindgrün, Status- oder Produktfarben; Flächen unter Linien, Verläufe, 3-D; eine Sparkline ohne Zahl.",
+   "numbers": "--sb-x-sebaro-chart-bar (border-strong); --sb-x-sebaro-chart-bar-current (accent); -grid und -axis 1px; Linie 2px (--sb-x-sebaro-chart-line-width); Punkt „Jetzt“ 8 px; Beschriftung caption 14 px; Diagrammhöhe 128 px; Sparkline 96 × 28 px; Referenzdaten So 8, Mo 6, Di 8, Mi 7, Do 4, Fr 8, Sa 5, Ziel 8",
    "decisions": [
     "D37",
-    "D83"
+    "D83",
+    "D91"
    ],
-   "source": "systems/sebaro/spec/01-foundations.md §1.1, §8; spec/02-components.md §3.7; css/sebaro.css Z. 684-713; palettes/sebaro.json dataviz",
+   "source": "DECISIONS.md D91 (G1a, G2a, G3a); systems/sebaro/spec/01-foundations.md §8; spec/02-components.md §3.7; palettes/sebaro.json dataviz",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
-   "check": "Farbprüfung: Dataviz-Farben nur in .sb-chart, genau ein Balken accent; aria-label nennt alle Werte; Diagramm in Graustufen lesbar.",
-   "example_hint": "7-Tage-Balken „Gläser je Tag“ mit den Referenzdaten und Kategorien als Zeilenbalken; falsch: bunte Balken in Kachelfarben ohne Werte.",
-   "note": "Für mehrere Reihen, Legende und Skalen gilt seit D83 (10) DAT-10. Linien, Sparklines, gestapelte Balken, Histogramme, Heatmaps und Abweichungen sind skizziert und warten auf die Wahl des Inhabers.",
-   "changed": "2026-10-20"
+   "status": "entschieden",
+   "check": "Höchstens ein Element in accent je Diagramm; kein <text> in .sb-chart__shapes; Beschriftung bei 390 px 14 px; Diagramm in Graustufen lesbar.",
+   "example_hint": "Balken „Gläser je Tag“ mit Schrift als HTML und eine Sparkline nach ihrer Zahl; falsch: bunte Balken mit Schrift im Bild ohne Werte.",
+   "note": "Die alte Form mit Schrift im SVG bleibt in sebaro.css eine Version lang als veraltet stehen. Diagramme in Compose sind noch nicht gebaut.",
+   "changed": "2026-10-21"
   },
   {
    "id": "DAT-05",
@@ -2496,16 +2576,16 @@
    "id": "DAT-09",
    "area": "daten",
    "title": "Bewertung: ein Stern-Icon und die Zahl",
-   "rule": "Zeig eine Bewertung als ein Stern-Icon in Textfarbe, dann den Wert mit Bezug und die Anzahl: „4,2 von 5 · 38 Bewertungen“. Eine Verteilung zeigst du als beschriftete Zeilen („5 von 5: 20“). Nie fünf Sterne als Wert, keine halben Sterne, kein gelber Stern, kein Stern ohne Zahl.",
-   "rule_en": "A rating is one star icon in text colour, then value with reference and count („4,2 von 5 · 38 Bewertungen“); a distribution as labelled rows; never five stars as the value, half stars, a yellow star or a star without a number.",
+   "rule": "Zeig eine Bewertung als ein Stern-Icon in Textfarbe, dann den Wert mit Bezug und die Anzahl (sb-rating): „4,2 von 5 · 38 Bewertungen“. Eine Verteilung zeigst du als beschriftete Zeilen („5 von 5: 20“). Nie fünf Sterne als Wert, keine halben Sterne, kein gelber Stern, kein Stern ohne Zahl.",
+   "rule_en": "A rating is one star icon in text colour, then value with reference and count (sb-rating: „4,2 von 5 · 38 Bewertungen“); a distribution as labelled rows (sb-chart__rows); never five stars as the value, half stars, a yellow star or a star without a number.",
    "why": "Inhaber D82, Wortlaut „Vorschlag machen mit stern Regeln fehlen für einige Datenarten“ (Lesart: Bewertung mit Stern). Eine Zahl sagt genau, was fünf halb gefüllte Sterne nur ungefähr zeigen; Gelb hat keinen Job (FAR-01).",
-   "do": "<p><svg class='sb-icon sb-icon--16' aria-hidden='true'><use href='#star'/></svg>4,2 von 5 · 38 Bewertungen</p>",
+   "do": "<p class='sb-rating'><svg class='sb-icon' aria-hidden='true'><use href='#star--filled'/></svg><span class='sb-visually-hidden'>Bewertung: </span><span class='sb-rating__value'>4,2 von 5</span> <span class='sb-rating__count'>· 38 Bewertungen</span></p>; Verteilung als <ul class='sb-chart__rows'>.",
    "dont": "Fünf Sternzeichen als Wert; halbe Sterne; gelber Stern; „4,2“ ohne „von 5“; Stern als Bild ohne Text.",
-   "numbers": "1 Stern-Icon (star, 16 oder 20 px, currentColor); Wert mit einer Nachkommastelle und „von 5“",
+   "numbers": "1 Stern-Icon star--filled (20 px, currentColor); Wert mit einer Nachkommastelle und „von 5“",
    "decisions": [
     "D82"
    ],
-   "source": "DECISIONS.md D82; systems/sebaro/spec/07-voice.md §3.1 (rating); spec/04-icons.md §7.6",
+   "source": "DECISIONS.md D82; systems/sebaro/spec/02-components.md §3.20; spec/07-voice.md §3.1 (rating); spec/04-icons.md §7.6",
    "platforms": [
     "alle"
    ],
@@ -2513,30 +2593,202 @@
    "check": "Jede Bewertung hat Zahl, Bezug und Anzahl als Text; kein Stern in Status- oder Akzentfarbe.",
    "example_hint": "Bewertungszeile mit einem Stern und „4,2 von 5 · 38 Bewertungen“; falsch: fünf gelbe Sterne ohne Zahl.",
    "note": "Das Icon star ist seit 2026-10-20 im Set; der Blick des Inhabers auf die Form steht aus (Status review).",
-   "changed": "2026-10-20"
+   "changed": "2026-10-21"
   },
   {
    "id": "DAT-10",
    "area": "daten",
    "title": "Mehrere Reihen und Skalen im Diagramm",
-   "rule": "Beschrifte jede Reihe direkt an ihrer Linie oder ihrem Balken. Ab drei Reihen kommt zusätzlich eine Legende, und die Reihen unterscheiden sich auch in der Linienart (durchgezogen, gestrichelt, gepunktet), nie nur in der Farbe. Fortlaufende Werte zeigst du auf der fortlaufenden Skala, Werte mit einer bedeutsamen Mitte auf der zweiseitigen Skala mit neutraler Mitte.",
-   "rule_en": "Label every series directly; from three series add a legend and tell series apart by line style too (solid, dashed, dotted), never by colour alone; continuous values use the sequential scale, values with a meaningful middle the diverging scale with a neutral middle.",
-   "why": "Inhaber D83 (10) auf die Rückfrage „Ja, Empfehlung übernehmen“: Diagramme direkt beschriften, Legende erst ab drei Reihen zusätzlich mit Linienart, Regeln für fortlaufende und zweiseitige Skalen. Direkte Beschriftung spart den Blick zwischen Legende und Linie; die Linienart übersteht den Verlust der Farbe.",
-   "do": "Zwei Linien mit Namen am Ende; drei Linien mit Legende darüber und den Arten durchgezogen, gestrichelt, gepunktet.",
-   "dont": "Legende bei zwei Reihen statt Beschriftung; drei Reihen nur in Farben; Regenbogen-Skala; zweiseitige Skala für Werte ohne Mitte.",
-   "numbers": "Legende ab 3 Reihen; Linie 2 px (--sb-x-sebaro-chart-line-width); dataviz.<mode>.sequential 7 Stufen (Kobalt), dataviz.<mode>.diverging 7 Stufen, Mitte = border",
+   "rule": "Beschrifte jede Reihe direkt am Ende ihrer Linie. Ab drei Reihen steht zusätzlich eine Legende über dem Diagramm, in der Reihenfolge der Linienenden, und die Reihen unterscheiden sich auch in der Linienart (durchgezogen, gestrichelt, gepunktet), nie nur in der Farbe. Fortlaufende Werte zeigst du in Stufen der fortlaufenden Skala, Werte mit einer bedeutsamen Mitte in Stufen der zweiseitigen Skala mit neutraler, als Wort genannter Mitte: die Farbe in der Zelle, die Zahlen jeder Stufe in der Legende. Mehr ist weiter weg vom Grund, im Hellen dunkler, im Dunkeln heller. Die Stufen bleiben unterscheidbar (DAT-11).",
+   "rule_en": "Label every series at its line end; from three series add a legend above the chart (in the order of the line ends) and line styles (solid, dashed, dotted), never colour alone; continuous values in classes of the sequential scale, values with a meaningful middle in classes of the diverging scale with a neutral middle named in words; colour in the cell, the number range of each class in the legend; more is farther from the ground in both modes; classes stay distinguishable (DAT-11).",
+   "why": "Inhaber D83 (10) auf die Rückfrage „Ja, Empfehlung übernehmen“: direkt beschriften, Legende erst ab drei Reihen mit Linienart, Regeln für fortlaufende und zweiseitige Skalen. D91: Legende über dem Diagramm (G9a), in der Heatmap Farbe in der Zelle und Zahlen in der Legende (G6a), im Dunkeln heißt mehr weiter weg vom Grund (G10a). Zu G6a der Inhaber: „aber die färben der legende müssen unterscheidbar bleiben. Bitte eine sinnvolle Regel aufstellen, die unterschiede im beispiel Funktionieren nicht.“ Die Regel dazu ist DAT-11.",
+   "do": "Zwei Linien nur mit Namen am Ende; drei Linien mit <ul class='sb-chart__legend'> darüber (sb-chart__key mit Linienart); Heatmap mit <ul class='sb-scale-legend'> „0–2 · 3–4 · 5–6 · 7 und mehr · keine Angabe“.",
+   "dont": "Legende bei zwei Reihen statt Beschriftung; Legende unter dem Diagramm oder nur in der Bildunterschrift; drei Reihen nur in Farben; Regenbogen- oder Verlaufsskala; Zahl auf der farbigen Zelle; zweiseitige Skala für Werte ohne Mitte; im Dunkeln „mehr ist dunkler“.",
+   "numbers": "Legende ab 3 Reihen, über dem Diagramm; Linienarten 1 und 4 durchgezogen, 2 und 5 gestrichelt (6 4), 3 und 6 gepunktet (0 5); fortlaufend 4 Stufen (--sb-dataviz-sequential-1 … -4), zweiseitig 5 Stufen (--sb-dataviz-diverging-1 … -5, Mitte = border)",
    "decisions": [
-    "D83"
+    "D83",
+    "D91"
    ],
-   "source": "DECISIONS.md D83 (10); systems/sebaro/spec/01-foundations.md §8",
+   "source": "DECISIONS.md D83 (10), D91 (G6a, G9a, G10a); systems/sebaro/spec/01-foundations.md §8, §8.1; spec/02-components.md §3.7",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
-   "check": "Graustufen-Screenshot: jede Reihe an Beschriftung und Linienart erkennbar; Legende genau ab drei Reihen.",
-   "example_hint": "Drei Linien mit Legende und drei Linienarten; falsch: drei Linien nur in Farben, ohne Beschriftung.",
-   "note": "Liniendiagramme, Heatmaps und Abweichungen sind als Bauteile skizziert und warten auf die Wahl des Inhabers (Fragen G1–G10), darunter der Ort der Legende und die Richtung der fortlaufenden Skala im Dunkeln; die Regel gilt unabhängig davon.",
-   "changed": "2026-10-20"
+   "check": "Graustufen-Screenshot: jede Reihe an Beschriftung und Linienart erkennbar; Legende genau ab drei Reihen und über dem Diagramm; jede Stufe der Legende nennt ihren Zahlenbereich.",
+   "example_hint": "Drei Linien mit Legende darüber und drei Linienarten; falsch: drei Linien nur in Farben, ohne Beschriftung.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "DAT-11",
+   "area": "daten",
+   "title": "Stufen einer Farbskala bleiben unterscheidbar",
+   "rule": "Gib einer Farbskala höchstens fünf Stufen (fortlaufend 4, zweiseitig 5), nie einen Verlauf; mehr Werte fasst du in diese Stufen. Die erste Stufe (bei der zweiseitigen Skala jede Stufe eines Arms) hebt sich mit mindestens 3 : 1 von jedem Grund ab; Nachbarstufen liegen mindestens 1,6 : 1 und ΔE OK 0,10 auseinander, auch unter jeder Farbsehschwäche; jede Stufe liegt mindestens ΔE OK 0,08 von accent und primary-action. „keine Angabe“ ist die leere Zelle mit Rahmen, nie Stufe 1. In der Heatmap steht der Wert jedes Tages als Text für Screenreader, bei Fokus und beim Zeigen; heute trägt die 3-px-Ortslinie am Fuß der Zelle.",
+   "rule_en": "A colour scale has at most 5 classes (sequential 4, diverging 5), never a gradient; class 1 (every class of a diverging arm) ≥ 3:1 against every ground; neighbours ≥ 1.6:1 and ≥ ΔE OK 0.10 apart, also under protanopia, deuteranopia and tritanopia; every class ≥ ΔE OK 0.08 from accent and primary-action; „keine Angabe“ is the empty framed cell, never class 1; heatmap values as text for assistive technology, on focus and pointing; today is the 3 px place line at the foot of the cell.",
+   "why": "Der Inhaber hat zur Heatmap (D91 G6a) eine messbare Regel verlangt: „die färben der legende müssen unterscheidbar bleiben. Bitte eine sinnvolle Regel aufstellen, die unterschiede im beispiel Funktionieren nicht.“ In der Skizze lagen sieben Stufen nur 1,37 bis 1,55 : 1 auseinander und die erste nur 1,06 bis 1,31 : 1 über dem Grund. Mit vier Stufen gemessen: Nachbarn 1,61 bis 1,65 : 1, die erste Stufe mindestens 3,03 : 1 auf jedem Grund, auch mit dem warmen Farbton.",
+   "do": "<ul class='sb-scale-legend'><li><span class='sb-scale-cell sb-scale-cell--seq-1' aria-hidden='true'></span>0–2</li>…<li><span class='sb-scale-cell sb-scale-cell--none' aria-hidden='true'></span>keine Angabe</li></ul>; Zelle <td><span class='sb-scale-cell sb-scale-cell--seq-3'></span><span class='sb-visually-hidden'>Dienstag, 29.09.: 6 Gläser</span></td>; sb-chart.js für Pfeiltasten und Anzeige.",
+   "dont": "Sieben feine Stufen oder ein Verlauf; eine erste Stufe fast wie der Grund; ein Tag ohne Daten in Stufe 1; Zahlen auf der Farbfläche; ein Kobaltrahmen für heute, der wie der Fokusring aussieht.",
+   "numbers": "höchstens 5 Stufen; Stufe 1 ab 3,0 : 1 zu bg, surface, surface-raised und surface-sunken; Nachbarn ab 1,6 : 1 und ΔE OK 0,10 (normal, Protanopie, Deuteranopie, Tritanopie); zu accent und primary-action ab ΔE OK 0,08; gemessen fortlaufend hell 1,61–1,64 : 1, dunkel 1,64–1,65 : 1, zweiseitig Arme 1,62–1,64 : 1",
+   "decisions": [
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (G6a, G7a, G10a); systems/sebaro/spec/01-foundations.md §8.1; spec/02-components.md §3.7 (Heatmap); palettes/sebaro.json dataviz; tools/check_palette.py",
+   "platforms": [
+    "alle"
+   ],
+   "status": "vorläufig",
+   "check": "python3 tools/check_palette.py palettes/sebaro.json mit Exit 0 (die fünf Punkte sind Fehler, keine Warnungen); Heatmap mit Tab und Pfeiltasten: die Anzeige nennt Tag und Wert.",
+   "example_hint": "Heatmap mit vier Stufen und einer Legende mit Zahlen; falsch: sieben feine Stufen ohne Zahlen.",
+   "note": "Vorläufig: Der Inhaber hat die Regel verlangt, die Schwellen (5 Stufen, 3 : 1, 1,6 : 1, ΔE OK 0,10) hat der Agent gesetzt und gemessen; sein Blick darauf steht aus. Offen ist auch „heute“ in der Heatmap: gebaut ist die 3-px-Ortslinie unter der Zelle, weil ein Rahmen in Kobalt, wie ihn die Notiz der Skizze nannte, wie der Fokusring aussähe; der Inhaber kann den Rahmen zurückwollen.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "DAT-12",
+   "area": "daten",
+   "title": "Diagrammform nach der Frage",
+   "rule": "Wähle die Form nach dem, was die Daten sagen: Anteile am Ganzen als beschriftete Zeilen mit grauer Spur (Name und Wert als Text, die Teile in fester Reihenfolge); eine Verteilung als Histogramm mit Säulen dicht an dicht (Anzahl auf jeder Säule, Grenzen an den Kanten, Einheit einmal darunter, Achse ab 0); eine Abweichung von einer Mitte mit den Stufen 2 und 4 der zweiseitigen Skala, Vorzeichen, Pfeil und Wert als Text und der Mitte als Wort; ein Ziel „5 von 8“ als Ring aus einem Teil je Einheit, Zahl und „von 8“ in der Mitte.",
+   "rule_en": "Pick the chart by the question: shares of a whole as labelled rows with a grey track (fixed order); a distribution as a dense histogram (count on each bin, boundaries at the edges, unit once, axis from 0); a deviation from a middle in diverging classes 2 and 4 with sign, arrow and value as text and the middle in words; a goal „5 of 8“ as a ring of one part per unit with the count in the middle.",
+   "why": "Inhaber D91: Anteile als beschriftete Zeilen mit Spur (G4b), Histogramm dicht (G5a), Abweichung mit zwei Tönen der zweiseitigen Skala (G7a), Zielring aus Teilen (G8a). Eine Zeile je Teil liest man, ohne Flächen zu vergleichen; die Töne einer Abweichung heißen nie gut oder schlecht; ein Ring aus Teilen zeigt die Zahl, keinen ungefähren Bogen.",
+   "do": "<ul class='sb-chart__rows'><li class='sb-chart__row'><span class='sb-chart__name'>Gesundheit <b>42</b></span><svg …><rect class='sb-chart__track'/><rect class='sb-chart__fill'/></svg></li>…</ul>; sb-chart__bars--dense; sb-chart__diverging mit Kopf „weniger · 0 = 7 Std. · mehr“; figure.sb-goal-ring mit „5<br>von 8“.",
+   "dont": "Torte oder Ring für Anteile; Stapel aus mehr als drei Teilen; Histogramm mit Lücken zwischen den Klassen; Abweichung in Grün und Rot; Zielring als durchgehender Bogen oder in Lindgrün; Teile nach Größe umsortiert.",
+   "numbers": "Zeilenbalken 12 px; Histogramm 2 px zwischen den Säulen; Abweichung diverging-2 („weniger“) und -4 („mehr“), je ab 3,0 : 1 zum Grund; Zielring 112 px, bis 12 Teile, 9° Lücke, erledigt text 8 px, offen border-strong 2 px",
+   "decisions": [
+    "D83",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (G4b, G5a, G7a, G8a); systems/sebaro/spec/01-foundations.md §8; spec/02-components.md §3.7",
+   "platforms": [
+    "alle"
+   ],
+   "status": "entschieden",
+   "check": "Jede Form hat ihre Werte als Text (Zeilen, Zahlen auf den Säulen oder „Werte als Tabelle“); Graustufen-Screenshot: die Abweichung bleibt an Vorzeichen und Pfeil erkennbar.",
+   "example_hint": "Anteile als Zeilen, Abweichung mit Mitte als Wort, Zielring; falsch: Torte in Kachelfarben und rot-grüne Abweichung.",
+   "note": "Ein Stapel nur für 2 bis 3 Teile, deren Summe die Aussage ist, ist kein Bauteil. Diagramme in Compose sind noch nicht gebaut.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "DAT-13",
+   "area": "daten",
+   "title": "Board: Haarlinien zwischen Spalten, am Handy wischen",
+   "rule": "Trenne die Spalten eines Boards nur durch 1-px-Haarlinien, ohne Rahmen und Grund je Spalte; die Karten (sb-card--item) sind die einzigen Kästen. Jede Spalte ist ein benannter Bereich mit Wort und Anzahl im Kopf. Unter 640 px eigener Breite stehen die Spalten nebeneinander und werden seitlich gewischt: Der Anfang der nächsten Spalte bleibt im Bild, die Leiste „Spalte 2 von 3: Verbessern“ mit „Vorige Spalte“ und „Nächste Spalte“ führt ohne Wischen hin, die Hauptaktion nennt die Spalte („Neue Karte in „Verbessern““), und die Seite scrollt nie seitlich. Verschieben geht immer auch ohne Ziehen.",
+   "rule_en": "Board columns are divided by 1 px hairlines only (no frame or ground per column), cards are the only boxes; each column is a named region with word and count. Below 640 px of its own width the columns are swiped: the next column's start stays visible, the bar „Spalte 2 von 3: …“ with previous/next buttons reaches each column without swiping, the primary action names the column, the page never scrolls sideways; moving never needs dragging (sb-board, sb-board.js).",
+   "why": "Inhaber D91: Haarlinien zwischen den Spalten (B1b), am Handy Spalten seitlich wischen (B2b, statt der empfohlenen Reiter). Die Skizze nannte die Schwächen des Wischens: Wo bin ich, Konflikt mit der Zurück-Geste des Systems, wohin kommt „Neue Karte“, die Tastatur. Die Leiste mit Tasten, die sichtbare Kante der nächsten Spalte und die Hauptaktion mit dem Spaltennamen beantworten sie; die Tasten kollidieren nie mit einer Geste.",
+   "do": "<div class='sb-board' id='b'><div class='sb-board__columns'><section class='sb-board__column' aria-labelledby='c1'><div class='sb-board__head'><h3 class='sb-board__title' id='c1'><span class='sb-board__name'>Verbessern</span> <span class='sb-board__count'>2<span class='sb-visually-hidden'> Karten</span></span></h3>…; Hauptaktion „Neue Karte in „<span data-sb-board-name='b'>…</span>““; sb-board.js.",
+   "dont": "Jede Spalte in einem Rahmen oder auf grauem Grund; Spalten am Handy untereinander; Wischen ohne Positionsleiste; „Neue Karte“ ohne Spalte; Karten nur durch Ziehen verschiebbar; die ganze Seite scrollt seitlich.",
+   "numbers": "Haarlinie 1 px border; Spaltenkopf 32 px (48 px mit 48-px-Taste); Karte 1 px border-strong, Radius 12; schmal unter 640 px eigener Breite: Spalte = Breite minus 48 px, scroll-snap je Spalte",
+   "decisions": [
+    "D80",
+    "D83",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (B1b, B2b); systems/sebaro/spec/02-components.md §3.16, §7 (sb-board.js); spec/07-voice.md §4.8",
+   "platforms": [
+    "alle"
+   ],
+   "status": "entschieden",
+   "check": "Bei 390 px: Positionsleiste da, Tab erreicht jede Spalte, die Seite ist nicht breiter als das Fenster; im Fenster schmaler als 640 px nennt „Neue Karte“ die Spalte.",
+   "example_hint": "Board in 390 px mit Positionsleiste und „Neue Karte in …“; falsch: gerahmte Spalten auf grauem Grund.",
+   "note": "Leiste, sichtbare Kante der nächsten Spalte und Spaltenname in der Hauptaktion sind die Antwort des Agenten auf die Schwächen aus der Skizze. Die Compose-Fassung fehlt noch; auf echten Geräten nicht geprüft.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "DAT-14",
+   "area": "daten",
+   "title": "Tabellen: Pfeil nur an der sortierten Spalte, Summe im Fuß",
+   "rule": "Mach einen sortierbaren Spaltenkopf zur Taste (sb-table__sort). Nur die Spalte, nach der sortiert ist, trägt aria-sort, Titelgewicht und den Pfeil arrow-up--16 oder arrow-down--16; die anderen zeigen nur ihr Wort. Der erste Druck sortiert Zahlen und Daten absteigend, Wörter aufsteigend, der nächste kehrt um. Eine Summe steht im Tabellenfuß (tfoot) unter ihrer Spalte, getrennt durch die Linie in border-strong, in body-strong; fehlt ein Wert, heißt die Zeile „Summe der bekannten …“ und die Lücke bleibt „keine Angabe“, nie 0.",
+   "rule_en": "Sortable heads are buttons (sb-table__sort); only the sorted column carries aria-sort, title weight and the arrow icon; the first press sorts numbers and dates descending, words ascending, the next reverses; totals in tfoot below their column (border-strong line, body-strong); with a missing value the row reads „Summe der bekannten …“ and the gap stays „keine Angabe“, never 0.",
+   "why": "Inhaber D91: Sortierpfeil nur an der sortierten Spalte (B5a), Summenzeile im Tabellenfuß (B6a). Doppelpfeile an jeder Spalte wären Lärm; ein Pfeil sagt, wonach sortiert ist. Eine fehlende Zahl als 0 zu zählen, wäre falsch (D82, TXT-14).",
+   "do": "<th scope='col' class='sb-num' aria-sort='descending'><button class='sb-table__sort' type='button'><svg …arrow-down--16/>Betrag</button></th>; <tfoot><tr><th scope='row' colspan='2'>Summe</th><td class='sb-num'>1.797,20 €</td></tr></tfoot>; sb-table.js sagt „Sortiert nach Betrag, absteigend“.",
+   "dont": "Doppelpfeile an jeder sortierbaren Spalte; aria-sort an mehreren Spalten; Summe als Kennzahl unter der Tabelle; ein fehlender Wert als 0 in der Summe; Summenzeile mit grauer Fläche; Summenzeile, die beim Sortieren mitwandert.",
+   "numbers": "Sortierkopf 48 px auf Seiten und Handys, 32 px nur im Fenster (data-sb-density='window'), bei Touch wieder 48 px; Pfeil 16 px; Linie über dem Fuß border-strong",
+   "decisions": [
+    "D82",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (B5a, B6a), D82; systems/sebaro/spec/02-components.md §3.9, §7 (sb-table.js)",
+   "platforms": [
+    "alle"
+   ],
+   "status": "entschieden",
+   "check": "axe; genau ein th mit aria-sort je Tabelle; die Summenzeile bleibt beim Sortieren unten; Tab auf den Kopf, Eingabe sortiert.",
+   "example_hint": "Ausgaben nach Betrag sortiert mit Summe im Fuß; falsch: Doppelpfeile überall und eine Lücke als 0.",
+   "note": "48 px außerhalb von Fenstern ist eine Korrektur nach der Prüfung des Baus (Agentenarbeit). Die Compose-Fassung fehlt noch.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "DAT-15",
+   "area": "daten",
+   "title": "Verläufe: stehender Gruppenkopf und Zeitleiste ohne Strich",
+   "rule": "Lass in Listen nach Tagen oder Gruppen den Kopf der aktuellen Gruppe oben stehen (sb-list-header--sticky, Grund bg); nur solange er steht, trägt er die 2-px-Linie in Tinte darunter, an seinem Platz hat er keine. Zeig den Verlauf einer Sache als Zeitleiste (sb-timeline): das Datum grau in einer festen Spalte, das Zeichen grau und 16 px, der Titel als Link auf die Fassung, Haarlinien zwischen den Einträgen, kein senkrechter Strich. Nur ein Ereignis, das etwas verlangt, trägt das Warnzeichen, immer mit seinem Wort. Das Neueste steht oben; lange Verläufe enden mit „Ältere zeigen“.",
+   "rule_en": "Grouped lists keep the current group's head at the top (sb-list-header--sticky, ground bg) with the 2 px ink line below it only while it is stuck; a history is a timeline (sb-timeline): grey date in a fixed column, grey 16 px glyph, the title links to the version, hairlines, no vertical stroke; only an event that asks for something gets the warning glyph with its word; newest first, „Ältere zeigen“ instead of endless scrolling.",
+   "why": "Inhaber D91: Tintenlinie 2 px nur, solange der Kopf steht (B3b); Zeitleiste mit Datumsspalte ohne Strich (B4b). Steht der Kopf, liegt er über Inhalt und ist damit eine Ebene (D46); ein senkrechter Strich wäre ein Linientyp ohne Bedeutung (FOR-02).",
+   "do": "<h3 class='sb-list-header sb-list-header--sticky' id='g2'>Gestern <span class='sb-list-header__count'>4</span></h3><ul class='sb-list' aria-labelledby='g2'>…; <ol class='sb-timeline'><li class='sb-timeline__item'><time class='sb-timeline__date'>Heute, 14:32</time><span class='sb-timeline__mark'>…</span><div class='sb-timeline__main'><p class='sb-timeline__title'><a class='sb-timeline__link'>…",
+   "dont": "Linie unter dem Kopf auch an seinem Platz; getönter Grund für den stehenden Kopf; Zeitleiste mit Strich und Punkten darauf; farbige Zeichen für jedes Ereignis; endloses Nachladen.",
+   "numbers": "Linie 2 px Tinte (--sb-x-sebaro-layer-line-*) nur bei scroll-state(stuck: top) oder data-sb-state='stuck' (sb-sticky.js); Datumsspalte 7 rem; Einträge 48 px am Handy, im Fenster 32 / 48 px",
+   "decisions": [
+    "D46",
+    "D80",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (B3b, B4b); systems/sebaro/spec/02-components.md §3.17, §3.18, §7 (sb-sticky.js)",
+   "platforms": [
+    "alle"
+   ],
+   "status": "entschieden",
+   "check": "In einer scrollenden Liste: Linie nur am stehenden Kopf; ohne Skript und ohne scroll-state steht der Kopf ohne Linie; die Zeitleiste hat keine senkrechte Linie.",
+   "example_hint": "Scrollende Liste nach Tagen mit stehendem Kopf und eine Zeitleiste; falsch: Zeitleiste mit Strich und bunten Punkten.",
+   "note": "Welches Zeichen „Konflikt“ trägt, ist noch offen (STA-08): Die gewählte Zeitleiste (D91 B4b) zeigte „Konflikt“ mit dem Warnzeichen, die Komponentenseite der Werkstatt zeigt „Konflikt“ als Zeilenstatus mit dem grauen Zeichen. Bis zur Wahl des Inhabers zeigt das Beispiel „Nicht abgeglichen“. Compose-Fassungen fehlen noch.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "DAT-16",
+   "area": "daten",
+   "title": "Kalender: Monat oben, Tagesliste darunter",
+   "rule": "Zeig einen Kalender als Monat oben und die Liste des gewählten Tages darunter, ab 640 px eigener Breite nebeneinander. Heute hat einen 1-px-Rahmen in border-strong und Titelgewicht, der gewählte Tag die 3-px-Ortslinie am Fuß; ein Tag mit Eintrag trägt einen grauen 6-px-Punkt unter der Zahl und für Screenreader die Worte „mit Eintrag“. Wochentage stehen mit zwei Buchstaben im Kopf. Kategoriefarben stehen nur in der Tagesliste neben ihrem Wort, nie im Raster.",
+   "rule_en": "Calendar: month on top, the chosen day's list below (side by side from 640 px of its own width); today = 1 px border-strong frame + title weight, chosen day = 3 px place line at its foot, a day with entries = grey 6 px dot plus the hidden words „mit Eintrag“; two-letter weekday heads; category colours only in the day list beside the word (sb-calendar, sb-calendar.js, ARIA grid).",
+   "why": "Inhaber D91: Monat oben, Tagesliste darunter (B7a), der Punkt als Zeichen (Z4a). Der Punkt ist ein Zeichen wie der Kategoriepunkt, keine Pillenfläche (D85). Weil ein Malve-Punkt bei Farbsehschwäche grau wirken kann, stehen Kategorien nur in der Liste neben ihrem Wort.",
+   "do": "<div class='sb-calendar' data-sb-calendar data-sb-month='2026-10' data-sb-selected='2026-10-21' data-sb-entries='…'>; Tageszelle <td class='sb-calendar__day' data-sb-entry><span class='sb-calendar__date' aria-hidden='true'>14</span><span class='sb-visually-hidden'>Mittwoch, 14. Oktober, mit Eintrag</span></td>; sb-calendar.js.",
+   "dont": "Farbige Punkte je Kategorie im Raster; der gewählte Tag als gefüllte Kobaltfläche; ein Punkt ohne Worte für Screenreader; „Mo.“ mit Punkt; nur die Liste ohne Monat.",
+   "numbers": "Zellen 48 px (Handy, Touch), 40 px im Fenster mit feinem Zeiger; der Tag 8 px kleiner als die Zelle, Radius 8; Punkt 6 px text-muted; Ortslinie 3 px accent; Tasten: Pfeile, Pos1/Ende, Bild auf/ab (mit Umschalt ein Jahr)",
+   "decisions": [
+    "D82",
+    "D85",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (B7a, Z4a); systems/sebaro/spec/02-components.md §3.21, §7 (sb-calendar.js); spec/07-voice.md §4.11",
+   "platforms": [
+    "alle"
+   ],
+   "status": "entschieden",
+   "check": "axe; ein Tab-Halt im Raster; Pfeiltasten und Bild auf/ab wechseln Tag und Monat; ohne Skript zeigt die Seite Monat, heute, den gewählten Tag und seine Liste.",
+   "example_hint": "Oktober mit heute, gewähltem Tag und grauen Punkten, darunter die Tagesliste; falsch: bunte Punkte im Raster und eine gefüllte Auswahl.",
+   "note": "Compose-Fassung fehlt noch.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "DAT-17",
+   "area": "daten",
+   "title": "Ort zuerst als Text, darunter eine kleine Karte",
+   "rule": "Schreib einen Ort zuerst als Text mit der Ortsnadel pin in Textfarbe, nie in Kobalt, dazu „In Karten öffnen“ als externen Link. Darunter darf eine kleine statische Karte stehen: höchstens 360 px breit, 1-px-Rahmen in border-strong, Radius 12, als lokales Bild oder als SVG aus dem Code in Grau, mit einer Beschreibung. Nie Kacheln oder Skripte eines Kartendienstes.",
+   "rule_en": "A place is text first: the pin icon in text colour (never cobalt) with the address and the external link „In Karten öffnen“; below it may stand a small static map (at most 360 px, 1 px border-strong, radius 12) as a local image or a code-drawn grey SVG with a description; never tiles or scripts of a map service.",
+   "why": "Inhaber D91: Text, darunter eine kleine statische Karte (B13a). Kobalt heißt „hier in der App“ (D37); Kacheln eines Kartendienstes wären Anfragen an einen fremden Server (D18, HAL-09).",
+   "do": "<div class='sb-place'><div class='sb-place__address'><svg class='sb-icon sb-icon--20'><use href='#pin'/></svg>…<a class='sb-place__link' href='geo:…'>In Karten öffnen<svg …external-link--16/></a></div><svg class='sb-place__map' role='img' aria-label='Kartenausschnitt, gezeichnet: …'>…</svg></div>",
+   "dont": "Eingebettete Karte eines Kartendienstes; Nadel in Kobalt oder Rot; Karte ohne Beschreibung; nur die Karte ohne Adresse als Text; farbige Kartenarten.",
+   "numbers": "Karte höchstens 360 px breit; Rahmen 1 px border-strong; Radius 12; Nadel 20 px in text; Link-Ziel 24 px, unter 1024 px und bei Touch 48 px",
+   "decisions": [
+    "D18",
+    "D37",
+    "D82",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (B13a), D82; systems/sebaro/spec/02-components.md §3.27",
+   "platforms": [
+    "alle"
+   ],
+   "status": "entschieden",
+   "check": "Netzwerk-Log: keine Anfrage an einen Kartendienst; die Karte hat role='img' mit aria-label oder alt.",
+   "example_hint": "Adresse mit Nadel und Link, darunter die gezeichnete Karte; falsch: Karte ohne Adresse mit Nadel in Kobalt.",
+   "note": "Das Icon pin ist seit 2026-10-20 im Set; der Blick des Inhabers auf die Form steht aus (D86, Status review).",
+   "changed": "2026-10-21"
   },
   {
    "id": "TXT-01",
@@ -2773,25 +3025,25 @@
    "id": "TXT-11",
    "area": "text",
    "title": "Fehler und Änderungen im Code nie nur über Farbe",
-   "rule": "Markier fehlerhaften Code mit einer 2 px gewellten Unterlinie in danger und der Meldung in der Problemzeile; der Text behält seinen Look. Zeig Änderungen (Diff) mit dem Randzeichen + oder − (U+2212) und einer Zeilenfläche in success-subtle bzw. danger-subtle; der Code darin behält seine fünf Looks, Hunk-Köpfe stehen in text-muted.",
-   "rule_en": "Code errors: 2 px wavy danger underline plus the message in the problem line, the text keeps its look; diffs: gutter + / − (U+2212) plus a success-subtle / danger-subtle line fill, code keeps its five looks, hunk headers text-muted; never colour alone.",
-   "why": "Ein Zustand muss den Verlust der Farbe überstehen (STA-01). spec/01 §1.8: „Never mark a change by colour alone“. Die Regel und die getönte Diff-Zeile als einzige Ausnahme von FAR-02 hat der Inhaber am 2026-10-20 bestätigt (D85, „Ja, Empfehlung übernehmen“): Diff-Zeilen dürfen eine getönte Fläche haben, immer mit + oder − davor.",
-   "do": "<span class='sb-tok-invalid'>…</span> plus Meldung; Diff-Zeile „− return 0“ auf danger-subtle, „+ return total“ auf success-subtle.",
+   "rule": "Markier fehlerhaften Code mit einer 2 px gewellten Unterlinie in danger und der Meldung in der Problemzeile; der Text behält seinen Look. Zeig Änderungen als Diff (sb-diff): das Randzeichen + oder − (U+2212) und eine Zeilenfläche in success-subtle bzw. danger-subtle, vor jeder geänderten Zeile für Screenreader „hinzugefügt:“ oder „entfernt:“, darunter der Satz mit den Zahlen („2 Zeilen hinzugefügt, 1 entfernt“). Der Code darin behält seine fünf Looks, Abschnittsköpfe und Zeilennummern stehen in text-muted.",
+   "rule_en": "Code errors: 2 px wavy danger underline plus the message in the problem line, the text keeps its look; diffs (sb-diff): gutter + / − (U+2212) plus a success-subtle / danger-subtle line fill, a hidden „hinzugefügt:“ / „entfernt:“ before each changed line, the count sentence below; code keeps its five looks, hunk headers and line numbers text-muted; never colour alone.",
+   "why": "Ein Zustand muss den Verlust der Farbe überstehen (STA-01). spec/01 §1.8: „Never mark a change by colour alone“. Die Regel und die getönte Diff-Zeile als einzige Ausnahme von FAR-02 hat der Inhaber am 2026-10-20 bestätigt (D85, „Ja, Empfehlung übernehmen“): Diff-Zeilen dürfen eine getönte Fläche haben, immer mit + oder − davor. Seit 2026-10-21 ist der Diff ein Baustein des Systems statt eines Nachbaus im Guide.",
+   "do": "<span class='sb-tok-invalid'>…</span> plus Meldung; <figure class='sb-diff'><figcaption class='sb-diff__bar'><span class='sb-diff__file'>habit.json</span><span>Fassung 1.4.0 gegen 1.3.2</span></figcaption><div class='sb-diff__lines' role='region' aria-label='…' tabindex='0'><div class='sb-diff__line sb-diff__line--del'>…<span class='sb-diff__sign' aria-hidden='true'>−</span><span class='sb-diff__code'><span class='sb-visually-hidden'>entfernt: </span>…</span></div>…</div><p class='sb-diff__sum'>2 Zeilen hinzugefügt, 1 entfernt</p></figure>",
    "dont": "Fehlerhaften Code rot einfärben; Diff nur mit grüner und roter Fläche ohne Randzeichen; Bindestrich statt U+2212; getönte Fläche hinter anderem Code als Diff-Zeilen.",
-   "numbers": "Unterlinie 2 px wavy, danger; Randzeichen + / U+2212; Flächen success-subtle / danger-subtle",
+   "numbers": "Unterlinie 2 px wavy, danger; Randzeichen + / U+2212; Flächen success-subtle / danger-subtle; Kasten surface-sunken, Radius 12",
    "decisions": [
     "D67",
     "D85",
     "D36"
    ],
-   "source": "DECISIONS.md D67 (12), D85; systems/sebaro/spec/01-foundations.md §1.8 (Where marks are not colour, Diff); css/sebaro.css .sb-tok-invalid; spec/09-platform-web.md §17",
+   "source": "DECISIONS.md D67 (12), D85; systems/sebaro/spec/01-foundations.md §1.8 (Where marks are not colour, Diff); spec/02-components.md §3.19; css/sebaro.css .sb-tok-invalid, .sb-diff; spec/09-platform-web.md §17",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Graustufen-Screenshot: Fehler an der Wellenlinie, Änderungen an + und − erkennbar.",
-   "example_hint": "Diff mit einer entfernten und einer neuen Zeile, darunter eine Zeile mit Wellenlinie und Meldung; falsch: Diff nur als rote und grüne Flächen, Fehler nur rot gefärbt.",
-   "changed": "2026-10-20",
+   "example_hint": "sb-diff mit einer entfernten und zwei neuen Zeilen, darunter Code mit Wellenlinie und Meldung; falsch: Diff nur als rote und grüne Flächen, Fehler nur rot gefärbt.",
+   "changed": "2026-10-21",
    "note": "Gemessen auf den Flächen (2026-10-20): hell success-subtle text 14,61, text-muted 4,82; danger-subtle 13,93 / 4,60; dunkel success-subtle 12,06 / 5,28; danger-subtle 12,40 / 5,43 : 1."
   },
   {
@@ -2889,10 +3141,10 @@
    "id": "TXT-16",
    "area": "text",
    "title": "Menüpfade: „Einstellungen, dann Über“",
-   "rule": "Schreib einen Weg durch Menüs im Fließtext mit „dann“: „Einstellungen, dann Über“, länger „Einstellungen, dann Konto, dann Daten exportieren“. In der Oberfläche ist ein Pfad eine Brotkrumenleiste mit dem Icon chevron-right zwischen den Stufen. Nie „›“, „>“ oder „→“ als Zeichen.",
-   "rule_en": "A menu path in running text uses „dann“ („Einstellungen, dann Über“); in the interface a path is a breadcrumb with the chevron-right icon between the steps (NAV-08); never „›“, „>“ or „→“ as characters.",
+   "rule": "Schreib einen Weg durch Menüs im Fließtext mit „dann“: „Einstellungen, dann Über“, länger „Einstellungen, dann Konto, dann Daten exportieren“. In der Oberfläche ist ein Pfad eine Brotkrumenleiste mit dem Icon chevron-right zwischen den Stufen; ein Pfad, der nur gezeigt wird und keine Navigation ist, steht als sb-breadcrumb--path (role='group', aria-label='Menüpfad') mit der letzten Stufe kräftig. Nie „›“, „>“ oder „→“ als Zeichen.",
+   "rule_en": "A menu path in running text uses „dann“ („Einstellungen, dann Über“); in the interface a path is a breadcrumb with the chevron-right icon between the steps (NAV-08); a path that is only shown, not a navigation, is sb-breadcrumb--path (role=group, aria-label „Menüpfad“, last step strong); never „›“, „>“ or „→“ as characters.",
    "why": "Inhaber D82, Wortlaut „vorschlag folgen Menüpfade mit Pfeilzeichen“: im Fließtext „Einstellungen, dann Über“, in der Oberfläche Brotkrumen mit Chevron-Icon. Pfeile sind Icons, nie Schriftzeichen (D38, ICO-06); „dann“ liest sich auch vorgelesen richtig.",
-   "do": "„Öffne Einstellungen, dann Über, dann Barrierefreiheit.“; <nav class='sb-breadcrumb' aria-label='Pfad'><ol><li><a>Einstellungen</a></li><svg …#chevron-right--16/>…",
+   "do": "„Öffne Einstellungen, dann Über, dann Barrierefreiheit.“; <div class='sb-breadcrumb sb-breadcrumb--path' role='group' aria-label='Menüpfad'><ol><li>Einstellungen<svg …#chevron-right--16/></li>…<li>Daten exportieren</li></ol></div>",
    "dont": "„Einstellungen › Über“, „Einstellungen > Über“, „Einstellungen → Über“; Pfeilzeichen in Brotkrumen.",
    "numbers": "Icon chevron-right--16, aria-hidden",
    "decisions": [
@@ -2906,7 +3158,31 @@
    "status": "entschieden",
    "check": "grep -n '›\\| > \\|→' in Oberflächentexten = 0.",
    "example_hint": "Satz „Einstellungen, dann Über“ und eine Brotkrumenleiste mit Chevron-Icons; falsch: „Einstellungen › Über“ als Text.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "TXT-17",
+   "area": "text",
+   "title": "Zitate mit Tintenlinie am Anfang",
+   "rule": "Setz zitierte Worte als sb-quote: die 2-px-Linie in Tinte nur am Anfang der zitierten Worte, vom ersten bis zum letzten zitierten Absatz, 16 px Abstand zum Text, ohne Grund, Radius oder weitere Kante. Die Quelle steht darunter in caption und text-muted, außerhalb der Linie. Kein Kursiv; Anführungszeichen gehören zum Text, nie ins CSS. Markdown-Zitate in sb-prose sehen gleich aus.",
+   "rule_en": "Quotes (sb-quote, .sb-prose > blockquote): the 2 px ink quote line on the start edge of the quoted words only, 16 px to the text, no ground, radius or other edge; the source below in caption text-muted outside the line; no italics; quotation marks belong to the text.",
+   "why": "Inhaber D91: Zitat mit Tintenlinie am Anfang (B8b, statt des empfohlenen Einzugs). Die Skizze nannte die Schwäche: Tinte heißt sonst Ebene. Deshalb ist die Zitatlinie ein eigener Linientyp (FOR-02), den der Ort unterscheidet: die Ebenenlinie begrenzt eine Ebene mit eigenem Grund, die Zitatlinie steht im Fließtext; die Ortslinie ist 3 px Kobalt.",
+   "do": "<figure class='sb-quote'><blockquote class='sb-quote__text'><p>„Ich will sehen, was eine App mit meinen Daten macht.“</p></blockquote><figcaption class='sb-quote__source'>Teilnehmerin einer Befragung, Oktober 2026</figcaption></figure>",
+   "dont": "Zitat in einem Kasten mit grauem Grund; Linie in Kobalt oder 3 px; Quelle innerhalb der Linie; ganzes Zitat kursiv; große Anführungszeichen als Schmuck.",
+   "numbers": "Linie 2 px (--sb-x-sebaro-layer-line-width, --sb-x-sebaro-layer-line-color); Abstand 16 px; Quelle caption 14/20",
+   "decisions": [
+    "D46",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (B8b); systems/sebaro/spec/01-foundations.md §5.2; spec/02-components.md §3.22",
+   "platforms": [
+    "alle"
+   ],
+   "status": "entschieden",
+   "check": "Kein Grund und kein Radius an .sb-quote; Graustufen-Screenshot: Zitatlinie und Ebenenlinie stehen an verschiedenen Orten.",
+   "example_hint": "Absatz, Zitat mit Linie und Quelle darunter; falsch: Zitat im grauen Kasten mit Kobaltkante und Kursivschrift.",
+   "note": "Compose-Fassung fehlt noch.",
+   "changed": "2026-10-21"
   },
   {
    "id": "BEL-01",
@@ -2968,14 +3244,15 @@
    "title": "Apps: aufklappbare Aussage-Zeilen",
    "rule": "Zeig Belege in Apps ohne Ziffern als Aussage-Zeile: die ganze Zeile (≥ 56 px) ist ein <button aria-expanded aria-controls>; Zeile 1 die Aussage in body-strong, Zeile 2 Prüfglyphe 16 + Ergebnis in caption, am Ende ein Chevron 24. Geöffnet: 3-px-accent-Kante am Anfang, darunter die vollständige Notiz mit „Wie geprüft?“.",
    "rule_en": "Apps: no digits; each claim is a toggle row (≥ 56 px, <button aria-expanded aria-controls>) that opens to its note with a 3 px accent start edge.",
-   "why": "Inhaber D40: Belege in Apps als aufklappbare Aussage-Zeilen, Ziffern nur auf Websites und in Texten.",
-   "do": "„Keine Werbe-ID“ / „bestanden · geprüft am 10.10.2026 für 1.4.0“; 1-px-Haarlinie zwischen Zeilen, 16 eingerückt; Compose SbClaimRow.",
-   "dont": "Hochgestellte Ziffer in der App; modales Sheet für Belege; farbiger Zeilengrund; Abfluss-Zeile verstecken.",
+   "why": "Inhaber D40: Belege in Apps als aufklappbare Aussage-Zeilen, Ziffern nur auf Websites und in Texten. D91 I10a: auch auf iOS klappen Aussagen an Ort und Stelle auf, wie auf Android, nie als eigene Seite.",
+   "do": "„Keine Werbe-ID“ / „bestanden · geprüft am 10.10.2026 für 1.4.0“; 1-px-Haarlinie zwischen Zeilen, 16 eingerückt; Compose SbClaimRow; iOS SbClaimRow mit SbClaimRowStyle (DisclosureGroupStyle, VoiceOver liest erweitert / reduziert).",
+   "dont": "Hochgestellte Ziffer in der App; modales Sheet für Belege; eine eigene Seite je Aussage; farbiger Zeilengrund; Abfluss-Zeile verstecken.",
    "numbers": "Zeile ≥ 56 px/dp; Glyphe 16; Chevron 24, dreht 180° in 120 ms; Aufklappen 160 ms, bei reduzierter Bewegung 0; „Wie geprüft?“ 48er Ziel",
    "decisions": [
-    "D40"
+    "D40",
+    "D91"
    ],
-   "source": "DECISIONS.md D40; systems/sebaro/spec/03-signature.md §5.1 (3), §5.4; spec/02-components.md §6; spec/08-platform-android.md §13; css/sebaro.css Z. 1038-1064",
+   "source": "DECISIONS.md D40, D91 (I10a); systems/sebaro/spec/03-signature.md §5.1 (3), §5.4; spec/02-components.md §6; spec/08-platform-android.md §13; spec/12-platform-ios.md §11; css/sebaro.css Z. 1038-1064",
    "platforms": [
     "alle"
    ],
@@ -2983,7 +3260,7 @@
    "check": "Keine Ziffern in App-Bildschirmen; sb-controls.js schaltet aria-expanded + hidden, ohne Skript stimmt der Zustand.",
    "example_hint": "Datenschutz-Ansicht mit drei Aussage-Zeilen, erste offen; falsch: Ziffer ¹ in der App.",
    "note": "spec/04 §7.3 nennt ≥ 48 dp; spec/01 §4, spec/03 §5.4 und spec/08 §13 nennen ≥ 56 (gilt).",
-   "changed": "2026-10-19"
+   "changed": "2026-10-21"
   },
   {
    "id": "BEL-04",
@@ -3464,6 +3741,30 @@
    "changed": "2026-10-20"
   },
   {
+   "id": "ZEI-13",
+   "area": "zeichen",
+   "title": "Kopf der Seite „Über“: Kachel links, Text daneben",
+   "rule": "Setz die 64-px-Kachel an den Anfang des Kopfs der Seite „Über“ und daneben Name (title, eine Überschrift), Einzeiler und die graue Zeile „Version 1.4.0 vom 20.10.2026“ mit der Version in sebaro Mono. Wird der Platz schmaler als Kachel und 12 rem, rutscht der Text unter die Kachel. Die Kachel ist für Screenreader ausgeblendet, weil der Name daneben steht; darunter folgt die kurze Zeile der Fakten. Nie zentriert.",
+   "rule_en": "About head (sb-about-head): the 64 px sign tile at the start, beside it the name (title role, a heading), the one-liner and the grey line „Version 1.4.0 vom 20.10.2026“ (version in sebaro Mono); the text moves under the tile below tile + 12 rem; the tile is aria-hidden because the name stands beside it; the compact facts line follows; never centred.",
+   "why": "Inhaber D91: Über-Kopf mit der Kachel links (B10a). Eine Leserichtung mit Listen und Zeilen (RAU-04); der Name steht neben dem Zeichen, das ihn trägt (ZEI-06).",
+   "do": "<div class='sb-about-head'><span class='sb-sign-tile sb-sign-tile--64' aria-hidden='true'>…</span><div class='sb-about-head__text'><h2 class='sb-about-head__name'>Tagwerk</h2><p class='sb-about-head__line'>Gewohnheiten ohne Konto</p><p class='sb-about-head__meta'>Version <span class='sb-mono'>1.4.0</span> vom <time datetime='2026-10-20'>20.10.2026</time></p></div></div>",
+   "dont": "Gestapelt und zentriert; die Kachel mit eigenem Namen für Screenreader neben dem sichtbaren Namen; die Version in sebaro Sans; eine Kachel kleiner als 64 px.",
+   "numbers": "Kachel 64 px mit Kürzel; Text mindestens 12 rem; Name title 20/28; Meta caption, text-muted",
+   "decisions": [
+    "D85",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (B10a); systems/sebaro/spec/02-components.md §3.24; spec/07-voice.md §4.11",
+   "platforms": [
+    "alle"
+   ],
+   "status": "entschieden",
+   "check": "Screenreader liest den Namen einmal; bei 320 px steht der Text unter der Kachel, nichts wird abgeschnitten.",
+   "example_hint": "Über-Kopf von Tagwerk mit Kachel links; falsch: gestapelt und zentriert.",
+   "note": "Compose-Fassung fehlt noch.",
+   "changed": "2026-10-21"
+  },
+  {
    "id": "ICO-01",
    "area": "icons",
    "title": "Icons werden per Code gezeichnet",
@@ -3780,6 +4081,56 @@
    "changed": "2026-10-20"
   },
   {
+   "id": "BIL-06",
+   "area": "bilder",
+   "title": "Audio-Zeile mit Schieberegler",
+   "rule": "Spiel Ton mit dem nativen <audio> als Motor und Rückfall und zeig darüber Teile des Systems (sb-audio, sb-media.js): eine 48-px-Taste „<Name> abspielen“ oder „<Name> anhalten“, einen Schieberegler zum Springen in accent wie jeder Regler und die Zeit „0:12 / 0:42“ als Text. Nichts spielt von selbst, nichts lädt vor dem Druck (preload='none'), die Länge steht schon im Markup. Startet eine Zeile, hält jede andere an. Scheitert das Abspielen, steht der Grund als Satz nach der danger-Glyphe.",
+   "rule_en": "Audio: the native <audio> is engine and fallback, system parts on top (sb-audio, sb-media.js): a 48 px button „<name> abspielen / anhalten“, a seek slider in accent like every slider and the time „0:12 / 0:42“ as text; nothing plays by itself, nothing loads before the press (preload none), the length is in the markup; one medium at a time; a failure as a sentence after the danger glyph.",
+   "why": "Inhaber D91: Audio mit Schieberegler (B11b). Mit einem Regler springt man, ein Balken lässt nur zusehen. Die Bedienung des Browsers trägt weder die Farbaufgaben noch 48-px-Ziele noch unseren Regler; das native Element behält Dekodieren, Springen und Medientasten.",
+   "do": "<div class='sb-audio' data-sb-audio data-sb-name='Sprachnotiz vom 20.10.2026'><p class='sb-audio__head'><span class='sb-audio__title'>Sprachnotiz</span><span class='sb-audio__time'><time class='sb-audio__now' datetime='PT0S'>0:00</time> / <time class='sb-audio__total' datetime='PT8S'>0:08</time></span></p><audio class='sb-audio__media' src='…' preload='none' controls></audio><button class='sb-icon-button sb-audio__toggle' …hidden>…",
+   "dont": "Autoplay; ein fremder Player; Fortschritt nur als Balken ohne Springen; eine Taste ohne den Namen der Aufnahme; die Zeit nur in der Grafik.",
+   "numbers": "Taste 48 px; Pfeiltasten ±5 s, Bild auf/ab ±10 %; Zeiten m:ss, ab einer Stunde h:mm:ss",
+   "decisions": [
+    "D18",
+    "D83",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (B11b); systems/sebaro/spec/02-components.md §3.25, §7 (sb-media.js); spec/07-voice.md §4.11",
+   "platforms": [
+    "alle"
+   ],
+   "status": "entschieden",
+   "check": "Netzwerk-Log: keine Anfrage vor dem Druck; Taste und Regler mit der Tastatur erreichbar; ohne Skript spielt die Bedienung des Browsers.",
+   "example_hint": "Zwei Audio-Zeilen, eine mit Fehlersatz; falsch: Balken ohne Regler und Play-Icon ohne Namen.",
+   "note": "Compose-Fassung fehlt noch.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "BIL-07",
+   "area": "bilder",
+   "title": "Video mit Vorschaubild und Abspieltaste",
+   "rule": "Zeig ein Video als natives <video> mit Vorschaubild vom eigenen Server und einer echten Taste „Abspielen“ in der Mitte (sb-video, sb-media.js): 48 px hoch, auf eigenem Grund bg mit 2-px-Tintenlinie, play--filled und Wort; ihr Name beginnt mit dem sichtbaren Wort („Abspielen: <Titel>, Video, 3 Minuten 42 Sekunden“). Das Vorschaubild lädt mit der Seite, das Video erst nach dem Druck. Das Vorschaubild hat eine Beschreibung in einem Satz, die per aria-describedby an Taste und Video hängt. Titel, Länge und Untertitelsprachen stehen als Text darunter, Untertitel als <track>. Nie Autoplay, nie ein fremder Player.",
+   "rule_en": "Video: native <video> with a poster from the own server and a real centred button „Abspielen“ (sb-video, sb-media.js; 48 px, own bg ground with 2 px ink line, play--filled + word, its name starts with the visible word); the poster loads with the page, the video only after the press; the poster has a one-sentence description wired by aria-describedby; title, length and caption languages as text below, captions as <track>; never autoplay or a foreign player.",
+   "why": "Inhaber D91: Video mit Vorschaubild und Abspieltaste (B12b, statt des empfohlenen Rahmens ohne Bild). Die Skizze nannte die Schwächen: eine Anfrage mehr, das Vorschaubild braucht einen Alt-Text, die Taste muss auf jedem Bild lesbar bleiben. Das Vorschaubild kommt vom eigenen Server (im Dunkeln ein zweites), das Video erst nach dem Druck; die Beschreibung ersetzt den Alt-Text, den poster nicht hat; die Taste hat ihren eigenen Grund.",
+   "do": "<figure class='sb-video' data-sb-video><div class='sb-video__frame'><video class='sb-video__media' poster='…-light.webp' data-sb-poster-dark='…-dark.webp' preload='none' playsinline controls aria-describedby='p'>…<track kind='captions' srclang='de' label='Deutsch' default></video><button class='sb-video__play' type='button' aria-label='Abspielen: …' aria-describedby='p' hidden>…</button></div><figcaption class='sb-video__caption'>…</figcaption><p class='sb-visually-hidden' id='p'>Vorschaubild: …</p></figure>",
+   "dont": "Autoplay; der eingebettete Player einer Plattform; ein Video, das vor dem Druck lädt; ein Play-Icon ohne Wort; ein Vorschaubild mit Schrift; ein Vorschaubild ohne Beschreibung.",
+   "numbers": "Rahmen 16 : 9, 1 px border-strong, Radius 12; Taste 48 px, Linie 2 px, Radius 8; preload='none'",
+   "decisions": [
+    "D9",
+    "D18",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (B12b); systems/sebaro/spec/02-components.md §3.26, §7 (sb-media.js); spec/06-imagery.md; spec/07-voice.md §4.11",
+   "platforms": [
+    "alle"
+   ],
+   "status": "entschieden",
+   "check": "Netzwerk-Log: vor dem Druck nur das Vorschaubild (im Dunkeln zwei), das Video danach; axe video-caption; nach dem Druck liegt der Fokus auf dem Video.",
+   "example_hint": "Video mit hellem und dunklem Vorschaubild und der Taste „Abspielen“; falsch: Play-Dreieck ohne Wort direkt auf dem Bild.",
+   "note": "Beschreibung des Vorschaubilds, eigene Tastenfläche und die genannte Zahl der Anfragen sind die Antwort des Agenten auf die Schwächen aus der Skizze. Compose-Fassung fehlt noch.",
+   "changed": "2026-10-21"
+  },
+  {
    "id": "ZUG-01",
    "area": "zugang",
    "title": "WCAG 2.2 AA, Werte abgeschnitten",
@@ -3964,8 +4315,8 @@
    "title": "Gleicher Start: Kachel wandert in den Kopf",
    "rule": "Lass jedes Produkt auf jeder Plattform gleich starten: die 96-px-Kachel steht mittig auf bg, nur solange die App wirklich lädt, und wandert dann in 200 ms (emphasized) in die 32-px-Kachel in Kopf- oder Titelleiste; der Inhalt kommt von unten. Im Web nur beim ersten Aufruf je Browser-Tab und nur bis load, ohne Skript oder Speicher gar nicht. Bei reduzierter Bewegung blendet die Kachel an Ort und Stelle aus.",
    "rule_en": "Same start everywhere: 96 px tile centred on bg while really loading, then flies to the 32 px header/title-bar tile in 200 ms (emphasized), content enters from below; on the web only on the first visit per browser tab (sessionStorage sb-started) until load; none without JS/storage; reduced motion = fade in place.",
-   "why": "Inhaber D49: „ich will überll gleichen start“; D52: „mach fest. kachel wandert in den kopf mit web“ (Web nur beim ersten Aufruf, nur während des echten Ladens); D55: „außer 3 da sind 200 ms gut“; D85: „Start „nur beim ersten Aufruf“ ja“, gemeint ist der erste Aufruf je Browser-Tab.",
-   "do": "Web: <html data-sb-start>, sb-start.js nach theme-init.js, data-sb-start-target, data-sb-start-enter, sbStart.hold()/release() für eigene App-Daten; Tauri: Fenster-backgroundColor = bg; Android: Systemsplash ohne eigene Animation → SbStart; iOS: Launch-Screen 96 pt + matchedGeometryEffect.",
+   "why": "Inhaber D49: „ich will überll gleichen start“; D52: „mach fest. kachel wandert in den kopf mit web“ (Web nur beim ersten Aufruf, nur während des echten Ladens); D55: „außer 3 da sind 200 ms gut“; D85: „Start „nur beim ersten Aufruf“ ja“, gemeint ist der erste Aufruf je Browser-Tab; D91 I9a: auf iOS Startbildschirm mit Grund und Kachel.",
+   "do": "Web: <html data-sb-start>, sb-start.js nach theme-init.js, data-sb-start-target, data-sb-start-enter, sbStart.hold()/release() für eigene App-Daten; Tauri: Fenstergrund aus der gespeicherten Wahl (DSK-14); Android: Systemsplash ohne eigene Animation → SbStart; iOS: der Exporter schreibt mit --product den Startbildschirm (Farbe SebaroBg, Bild StartTile 96 pt), SbStart(product:ready:) wiederholt ihn als erstes Bild.",
    "dont": "Startbild länger als das echte Laden; Logo-Animation; Spinner oder Ladebalken auf dem Startbild; Start bei jeder Navigation; weißer erster Frame.",
    "numbers": "--sb-x-sebaro-start-tile-size 96px; Ziel 32 px; 200 ms (--sb-motion-duration-long) statt 320 ms der Skizze; sessionStorage sb-started",
    "decisions": [
@@ -3973,16 +4324,18 @@
     "D52",
     "D55",
     "D62",
-    "D85"
+    "D85",
+    "D91"
    ],
-   "source": "DECISIONS.md D49, D52, D55, D85; systems/sebaro/spec/03-signature.md §14.1, §14.2; spec/01-foundations.md §7; spec/09-platform-web.md §1, §13; demo/assets/sb-start.js",
+   "source": "DECISIONS.md D49, D52, D55, D85, D91 (I9a); systems/sebaro/spec/03-signature.md §14.1, §14.2; spec/01-foundations.md §7; spec/09-platform-web.md §1, §13; spec/12-platform-ios.md §10; demo/assets/sb-start.js",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
-   "check": "Komponentenblatt „Start und Bewegung“ (sbStart.play(frame)) hell und dunkel; zweiter Seitenaufruf ohne Start; ungeprüft: WebKit/Tauri, Android-Splash-Übergabe (bis 160-dp-Icon vor der 96-dp-Kachel), iOS.",
+   "check": "Komponentenblatt „Start und Bewegung“ (sbStart.play(frame)) hell und dunkel; zweiter Seitenaufruf ohne Start; ungeprüft: WebKit/Tauri, Android-Splash-Übergabe (bis 160-dp-Icon vor der 96-dp-Kachel); iOS nur im Simulator als Einzelbilder gesehen, nicht als Bewegung.",
    "example_hint": "Rahmen mit Taste „Start zeigen“: Kachel fliegt in den Kopf, Inhalt gleitet von unten; falsch: Startbild mit Spinner und Logo-Animation.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-21",
+   "note": "Der Startbildschirm des Systems auf iOS ist statisch und immer kühl; mit dem Farbton Warm ist der Schritt zum ersten Bild sichtbar."
   },
   {
    "id": "STR-02",
@@ -4007,6 +4360,30 @@
    "check": "Replay im Komponentenblatt: gleiches Bild vor und nach dem Flug.",
    "example_hint": "Startkachel ohne Kürzel richtig; falsch: Startkachel mit Kürzel.",
    "changed": "2026-10-19"
+  },
+  {
+   "id": "STR-03",
+   "area": "start",
+   "title": "Einführung anfangsbündig, höchstens drei Schritte",
+   "rule": "Bau einen Einführungsschritt in der Form des leeren Zustands, anfangsbündig: Spot (128 × 96), Titel, ein bis zwei Sätze in text-muted und der leise Ausweg „Einführung überspringen“ als Textaktion. Die Schritte („Schritt 1 von 3“) stehen direkt unter der Kopfleiste; höchstens drei Schritte, kein Konto. Die Hauptaktion unten heißt „Weiter: <Ziel>“; im DOM steht der Ausweg vor ihr.",
+   "rule_en": "An intro step has the form of the empty state, start-aligned (sb-intro): spot 128 × 96, title, one or two text-muted sentences and the quiet way out „Einführung überspringen“ as a text action; steps „Schritt 1 von 3“ directly under the top bar; at most three steps, no account; the primary action reads „Weiter: <Ziel>“ and comes after the way out in the DOM.",
+   "why": "Inhaber D91: Einführungsschritt anfangsbündig wie der leere Zustand (B9a); D83 (6): „Weiter“ in Einführungen nur mit Ziel; D83 (5): Hauptaktion zuletzt. Zentriert wäre eine zweite Leserichtung neben den Listen (RAU-04).",
+   "do": "<div class='sb-intro'><svg class='sb-icon sb-icon--spot' width='128' height='96' aria-hidden='true'><use href='#onboarding--spot'/></svg><h2 class='sb-intro__title'>Ohne Konto, auf diesem Gerät</h2><p class='sb-intro__text'>…</p><button class='sb-text-action' type='button'>Einführung überspringen</button></div>; Hauptaktion „Weiter: Erste Gewohnheit“.",
+   "dont": "Zentrierter Text; mehr als drei Schritte; „Weiter“ ohne Ziel; ein Konto in der Einführung; Überspringen als Hauptaktion oder versteckt.",
+   "numbers": "Spot 128 × 96; Titel 20/28; höchstens 3 Schritte; Ausweg 48 px",
+   "decisions": [
+    "D83",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (B9a), D83 (5), (6); systems/sebaro/spec/02-components.md §3.23",
+   "platforms": [
+    "alle"
+   ],
+   "status": "entschieden",
+   "check": "Tab-Reihenfolge: „Einführung überspringen“ vor „Weiter: …“; Text linksbündig bei 390 px.",
+   "example_hint": "Schritt 1 von 3 mit Spot, Titel und Ausweg, unten „Weiter: Erste Gewohnheit“; falsch: zentriert mit „Weiter“ ohne Ziel.",
+   "note": "Compose deckt die Form mit SbEmptyState; ein eigener Baustein fehlt noch.",
+   "changed": "2026-10-21"
   },
   {
    "id": "WEB-01",
@@ -4059,44 +4436,215 @@
    "id": "WEB-03",
    "area": "plattform-web",
    "title": "Fußzeile mit den Pflichtlinks",
-   "rule": "Schließ jede Website mit einer Fußzeile: Tintenlinie oben, Copyright-Zeile in caption/text-muted, Links „Impressum“, „Datenschutz“, „Barrierefreiheit“ und „GitHub“ mit external-link--16.",
-   "rule_en": "Site footer: ink line on top, caption copyright, links Impressum, Datenschutz, Barrierefreiheit, GitHub (+ external-link icon).",
-   "why": "Pflichtlinks immer am selben Ort; extern endet im Icon (D56 (2)); Ebenenlinie D46.",
-   "do": "<footer class='sb-site-footer'>…<ul class='sb-site-footer__links'>",
-   "dont": "Impressum nur im Menü; Fußzeile mit grauem Grund.",
+   "rule": "Schließ jede Website mit einer Fußzeile: Tintenlinie oben, Copyright-Zeile in caption/text-muted, Links „Impressum“, „Datenschutz“, „Barrierefreiheit“ und „GitHub“ mit external-link--16, dann „Darstellung“ mit der Wahl „Farbton: Kühl · Warm“ (FAR-15).",
+   "rule_en": "Site footer: ink line on top, caption copyright, links Impressum, Datenschutz, Barrierefreiheit, GitHub (+ external-link icon), then „Darstellung“ with „Farbton: Kühl · Warm“ (FAR-15).",
+   "why": "Pflichtlinks immer am selben Ort; extern endet im Icon (D56 (2)); Ebenenlinie D46. D91 Z3a: Die Wahl des Farbtons steht im Fuß unter „Darstellung“; der Kopf behält nur „Hell oder Dunkel“.",
+   "do": "<footer class='sb-site-footer'>…<ul class='sb-site-footer__links'>…</ul><section class='sb-site-footer__display' aria-labelledby='d' data-sb-tone-choice hidden><h2 id='d'>Darstellung</h2><fieldset class='sb-segmented'><legend>Farbton</legend>…",
+   "dont": "Impressum nur im Menü; Fußzeile mit grauem Grund; die Wahl des Farbtons im Kopf.",
    "numbers": "",
    "decisions": [
     "D56",
-    "D46"
+    "D46",
+    "D91"
    ],
-   "source": "systems/sebaro/spec/02-components.md §5; spec/07-voice.md §5; css/sebaro.css Z. 221-230",
+   "source": "systems/sebaro/spec/02-components.md §5; spec/07-voice.md §5; spec/09-platform-web.md §6.2; css/sebaro.css .sb-site-footer",
    "platforms": [
     "web"
    ],
    "status": "vorläufig",
    "check": "Review jeder Seite.",
    "example_hint": "Fußzeile der Guide-Seite; falsch: graue Fußfläche ohne Barrierefreiheit-Link.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-21",
+   "note": "Den Ort „Darstellung“ im Fuß hat der Inhaber gewählt (D91 Z3a); der Rest der Fußzeile ist Spezifikation ohne eigene I-Zeile, deshalb bleibt die Regel vorläufig."
   },
   {
    "id": "WEB-04",
    "area": "plattform-web",
    "title": "Druck: nur Inhalt",
-   "rule": "Blende beim Drucken Fußnoten-Popover, „Hell oder Dunkel“, Sprunglink und untere Leiste aus; externe Links in Belegen und Fließtext zeigen ihre Adresse in Klammern.",
-   "rule_en": "Print hides popover, theme button, skip link and bottom block; external links in notes and prose print their URL.",
+   "rule": "Blende beim Drucken Navigation, Sprachwechsel, „Hell oder Dunkel“, Sprunglink, Doku-Navigation, Seitenzahlen und „Weiter“, jede Aktionszone, die Links im Fuß, „Darstellung“ und Fußnoten-Popover aus; externe Links im Inhalt zeigen ihre Adresse in Klammern. Papier ist immer hell (WEB-11).",
+   "rule_en": "Print hides navigation, language switch, theme button, skip link, docs nav, page numbers and „Weiter“, every action zone, footer links, „Darstellung“ and the note popover; external links in the content print their URL; paper is always light (WEB-11).",
    "why": "Papier kann nicht klicken.",
-   "do": "@media print { .sb-theme-button { display: none } }",
-   "dont": "Gedruckte Bedienknöpfe.",
+   "do": "Die Druckregeln von sebaro.css übernehmen; sb-print.js am Ende jeder Seite (WEB-11).",
+   "dont": "Gedruckte Bedienknöpfe, Seitenzahlen oder Fußlinks.",
    "numbers": "",
-   "decisions": [],
-   "source": "css/sebaro.css Z. 1124-1127; systems/sebaro/spec/03-signature.md §5.3",
+   "decisions": [
+    "D91"
+   ],
+   "source": "css/sebaro.css (@media print); systems/sebaro/spec/09-platform-web.md §18.3; spec/03-signature.md §5.3",
    "platforms": [
     "web"
    ],
    "status": "vorläufig",
-   "check": "Druckvorschau.",
+   "check": "Druckvorschau hell und dunkel.",
    "example_hint": "Hinweis auf die Druckvorschau der Regelseite; falsch: gedruckte Taste „Hell oder Dunkel“.",
-   "changed": "2026-10-19"
+   "note": "D91 W8a entscheidet nur, dass Papier immer hell ist (WEB-11); was beim Druck wegfällt, ist Spezifikation ohne eigene I-Zeile, deshalb bleibt die Regel vorläufig.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "WEB-05",
+   "area": "plattform-web",
+   "title": "Formular: das Ergebnis ersetzt das Formular",
+   "rule": "Lass nach dem Senden das Ergebnis an die Stelle des Formulars treten: eine Überschrift aus success-Glyphe und Wort („Nachricht gesendet“), die den Fokus bekommt, ein Satz, was jetzt passiert, auf Wunsch eine Zusammenfassung und der nächste Schritt als Textlink. Das Ergebnis hat keine Hauptaktion und kommt nie als Kurzmeldung. Der Server antwortet mit 303 auf eine Seite mit dem Ergebnis, damit es Neuladen übersteht; sb-form.js macht dasselbe ohne Seitenwechsel. Scheitert das Senden, bleiben alle Eingaben stehen, der Grund steht als Satz vor der Taste, und sie heißt „Noch mal versuchen“.",
+   "rule_en": "After sending, the result replaces the form: heading = success glyph + word („Nachricht gesendet“) that takes focus, one sentence on what happens now, optional summary, the next step as a text link; no primary action, no toast; the server answers 303 to a page with the result (survives reload), sb-form.js does the same in place; on failure every field keeps its value, the reason stands before the button, which reads „Noch mal versuchen“.",
+   "why": "Inhaber D91: Ergebnis ersetzt das Formular (W1a). So lässt sich nichts zweimal senden, der Fokus landet dort, wo die Antwort steht, und das Ergebnis braucht keinen nächsten Schritt, also keine Hauptaktion (D74).",
+   "do": "<form class='sb-form-grid' method='post' data-sb-result='r'>…<button class='sb-primary-action' type='submit'>…Nachricht senden…</button></form><div class='sb-form-result' id='r' hidden><h3 class='sb-form-result__title' tabindex='-1'><svg …success--filled/>Nachricht gesendet</h3><p class='sb-form-result__text'>…</p><a class='sb-text-action'>Noch eine Nachricht schreiben</a></div>",
+   "dont": "„Vielen Dank für Ihre Anfrage!“ als Kurzmeldung über dem stehenden Formular; das Ergebnis in einem grünen Kasten; ein Formular, das sich zweimal senden lässt; leere Felder nach einem Fehler; der Formulardienst eines fremden Anbieters.",
+   "numbers": "„Gesendet“ 1,5 s in der Taste (x-sebaro.primary-action.done-dwell); Breite höchstens 70 ch (sb-form-grid--measure); Glyphe der Überschrift 24 px",
+   "decisions": [
+    "D18",
+    "D48",
+    "D74",
+    "D78",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (W1a); systems/sebaro/spec/02-components.md §5.4.1; spec/09-platform-web.md §18.1; spec/07-voice.md §4.10",
+   "platforms": [
+    "web"
+   ],
+   "status": "entschieden",
+   "check": "Senden mit der Tastatur: der Fokus steht auf der Überschrift des Ergebnisses; Neuladen zeigt das Ergebnis (Server-Weg); Senden ohne Netz behält die Eingaben.",
+   "example_hint": "Formular mit „Nachricht senden“, das durch sein Ergebnis ersetzt wird; falsch: Formular bleibt, oben ein grüner Kasten „Vielen Dank!“.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "WEB-06",
+   "area": "plattform-web",
+   "title": "Seitenzahlen und Weiter-Link",
+   "rule": "Teil lange Listen auf Websites in Seiten mit Zahlen: erste und letzte Seite, die aktuelle und ihre Nachbarn, Lücken als „…“ ohne Link, höchstens fünf Zahlen, jede 48 × 48 px. Die aktuelle Seite ist Text, kein Link, mit 3-px-Ortslinie und kräftiger Schrift. Darunter steht der Weiter-Link mit Ziel („Weiter: Seite 6, ältere Notizen“). Nie endloses Nachladen, nie Lindgrün.",
+   "rule_en": "Long lists on websites get page numbers (sb-pagination): first and last page, the current one and its neighbours, gaps as „…“ without a link, at most five numbers of 48 × 48 px; the current page is text, not a link, with the 3 px place line and strong weight; below it the pager with its goal; never endless loading, never lime.",
+   "why": "Inhaber D91: Zahlen und Weiter-Link (W2a). Zahlen zeigen, wie viel es gibt, und lassen sich verlinken; die aktuelle Seite trägt Linie und Gewicht, nie Farbe allein (D48 (2)).",
+   "do": "<nav class='sb-pagination' aria-label='Seiten'><ol class='sb-pagination__list'><li><a class='sb-pagination__page' href='…'><span class='sb-visually-hidden'>Seite </span>1</a></li><li aria-hidden='true'><span class='sb-pagination__gap'>…</span></li>…<li><span class='sb-pagination__page' aria-current='page'>…5</span></li>…</ol></nav>; darunter <a class='sb-pager'>.",
+   "dont": "Nur „Zurück“ und „Weiter“ ohne Zahlen; die aktuelle Seite als Link oder als gefüllte Pille; „…“ als Link; Seitenzahlen in Lindgrün; „Mehr laden“ ohne Ende.",
+   "numbers": "Zahl 48 × 48 px; höchstens 5 Zahlen; unter 18 rem eigener Breite treten die Nachbarn zurück; Ortslinie 3 px accent; Adressen /seite/5/, Seite 1 ohne Nummer",
+   "decisions": [
+    "D48",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (W2a); systems/sebaro/spec/02-components.md §5.4.2, §3.15",
+   "platforms": [
+    "web"
+   ],
+   "status": "entschieden",
+   "check": "Bei 390 px eine Zeile; die Tastatur erreicht jede Zahl; die aktuelle Seite ist kein Link.",
+   "example_hint": "Seite 5 von 12 mit Lücken und Weiter-Link; falsch: nur „Zurück · Weiter“ und eine gefüllte Pille.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "WEB-07",
+   "area": "plattform-web",
+   "title": "Aufklappen mit details: häufige Fragen und Doku-Gruppen",
+   "rule": "Bau häufige Fragen und die Gruppen einer Doku-Navigation aus nativen <details>. Eine Frage ist eine Zeile von mindestens 56 px mit der Frage in body-strong und dem Chevron am Ende; die Antwort hat höchstens drei Sätze mit „du“ und dann einen Link. In einer Doku-Navigation ab etwa acht Seiten steht „Übersicht“ zuerst und führt zu allen Seiten, jeder Gruppenkopf nennt die Zahl seiner Seiten („3 Seiten“), und die Gruppe der aktuellen Seite ist offen.",
+   "rule_en": "Frequent questions and docs-nav groups are native <details>: a question row ≥ 56 px (body-strong + chevron), answers of at most three sentences with „du“ then a link (sb-faq); a docs nav from about eight pages has „Übersicht“ first, every group head names its page count, the current page's group is open (sb-toc__group).",
+   "why": "Inhaber D91: häufige Fragen mit details (W3a), Doku-Navigation mit aufklappbaren Gruppen (W4b, statt alles offen). Die Skizze nannte die Schwächen des Zuklappens: Man sieht nicht mehr, was es gibt, und jeder Kopf wird eine Taste mit Zustand. Die Seitenzahl je Kopf und „Übersicht“ zeigen, was es gibt; das native <summary> bringt Zustand, Eingabe und Leertaste ohne Skript.",
+   "do": "<details class='sb-faq__item'><summary class='sb-faq__question'><span>Brauche ich ein Konto?</span><svg class='sb-icon sb-icon--20 sb-faq__chevron' …/></summary><div class='sb-faq__answer'><p>Nein. …</p></div></details>; <details class='sb-toc__group' open><summary class='sb-toc__group-head'>…<span class='sb-toc__group-name'>Deine Daten</span><span class='sb-toc__group-count'>3 Seiten</span></summary><ol>…",
+   "dont": "Aufklappen mit eigenen Tasten und Skript; eine Antwort mit „Sie“ oder fünf Absätzen; ein zugeklappter Gruppenkopf ohne Seitenzahl; die Gruppe der aktuellen Seite zu; interne Begriffe als Gruppenwörter; mehr als zwei Ebenen.",
+   "numbers": "Fragezeile ab 56 px; Chevron 20 px, dreht 180° in 120 ms nur bei einer Handlung; Antwort höchstens 70 ch; Doku-Zeilen 48 px, ab 1024 px 32 px; höchstens 2 Ebenen",
+   "decisions": [
+    "D80",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (W3a, W4b); systems/sebaro/spec/02-components.md §5.4.3, §5.4.4; spec/07-voice.md §4.10",
+   "platforms": [
+    "web"
+   ],
+   "status": "entschieden",
+   "check": "Ohne Skript öffnen Eingabe und Leertaste; die Browsersuche öffnet eine zugeklappte Antwort (Chromium; WebKit und Firefox ungeprüft).",
+   "example_hint": "Drei Fragen, eine offen, und eine Doku-Navigation mit Gruppen und Seitenzahlen; falsch: Fragen als Karten mit Plus-Zeichen und Gruppen ohne Zahl.",
+   "note": "Seitenzahl je Kopf und „Übersicht“ sind die Antwort des Agenten auf die Schwächen von W4b.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "WEB-08",
+   "area": "plattform-web",
+   "title": "Bildschirmfotos im Raster",
+   "rule": "Zeig Bildschirmfotos einer App im Raster, alle sichtbar, ohne seitliches Wischen: zwei Spalten, drei sobald eine dritte passt, nie vier. Jedes Foto steht in einem Kasten im Seitenverhältnis seines Geräts mit 1-px-Rahmen in border-strong und Radius 12, ohne Schatten und ohne Handyrahmen, mit Bildunterschrift darunter und einem Alt-Text, der sagt, was der Bildschirm zeigt. Hell und Dunkel sind ein Bildpaar. Fehlt ein Foto, bleibt der Kasten mit „Bildschirmfoto folgt“.",
+   "rule_en": "Screenshots stand in a grid (sb-shots), all visible, no sideways swiping: two columns, three once a third fits, never four; each in a box of its device's ratio with 1 px border-strong and radius 12, no shadow, no device frame, caption below, alt text saying what the screen shows; light and dark as an image pair; a missing one keeps its box with „Bildschirmfoto folgt“.",
+   "why": "Inhaber D91: Bildschirmfotos im Raster (W5b). Eine Reihe zum Wischen versteckt, was rechts liegt; das Raster zeigt alles auf einen Blick.",
+   "do": "<ul class='sb-shots'><li><figure class='sb-shot'><div class='sb-shot__frame'><img class='sb-illustration-light' …><img class='sb-illustration-dark' …></div><figcaption>Heute: was noch offen ist</figcaption></figure></li>…</ul>; sb-shots--window für 16 : 10.",
+   "dont": "Karussell mit Punkten; Handyrahmen und Schatten; Fotos von fremden Servern; Alt-Text „Screenshot 1“; ein leerer Platz ohne Kasten.",
+   "numbers": "Spalten ab 2 × 10 rem + 24 px; Handy 390 : 844, Fenster 16 : 10; Rahmen 1 px, Radius 12; width und height an jedem img, loading='lazy' unter dem ersten Bildschirm",
+   "decisions": [
+    "D18",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (W5b); systems/sebaro/spec/02-components.md §5.4.5; spec/06-imagery.md §6",
+   "platforms": [
+    "web"
+   ],
+   "status": "entschieden",
+   "check": "Bei 390 px zwei Spalten ohne seitliches Scrollen; jedes img hat alt, width und height.",
+   "example_hint": "Raster mit einem Platz „Bildschirmfoto folgt“; falsch: Karussell mit Punkten.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "WEB-09",
+   "area": "plattform-web",
+   "title": "Ein Vorschaubild je Seite",
+   "rule": "Gib jeder Seite mit eigenem Titel ihr eigenes Vorschaubild zum Teilen, 1200 × 630 px auf hellem Grund: Kachel und Name des Produkts, Pfad, Seitentitel, Lesezeit und Datum, wo es sie gibt, unten klein das Zeichen von sebaro. Im Bild steht kein Text, den die Seite nicht auch als Text hat. Der Kopf trägt og:title, og:description, og:image mit Breite, Höhe und Alt-Text und canonical, alle Adressen absolut. Seiten ohne eigenen Titel nehmen das Bild der Website.",
+   "rule_en": "Every page with its own title has its own 1200 × 630 share image on a light ground (product tile and name, path, page title, reading time and date where they exist, small sebaro lockup), no text the page lacks; the head carries og:title, og:description, og:image with width, height and alt, and canonical, all absolute; pages without an own title use the site image.",
+   "why": "Inhaber D91: ein Vorschaubild je Seite (W6a). Wer einen Link teilt, sieht, welche Seite kommt, nicht nur welche Website.",
+   "do": "<meta property='og:image' content='{origin}/og/state.png'><meta property='og:image:width' content='1200'><meta property='og:image:height' content='630'><meta property='og:image:alt' content='Android Coden: State in Jetpack Compose verstehen'>; Vorlage brand/src/og/<seite>.html, gerendert mit brand_assets.py build.",
+   "dont": "Ein Bild für alle Seiten; ein Bild mit dunklem Grund; ein generiertes Bild mit Schrift darin (BIL-01); relative Adressen in og:image; Text im Bild, der auf der Seite fehlt.",
+   "numbers": "1200 × 630 px, ohne Alpha; heller Grund; twitter:card summary_large_image",
+   "decisions": [
+    "D9",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (W6a); systems/sebaro/spec/09-platform-web.md §18.1",
+   "platforms": [
+    "web"
+   ],
+   "status": "entschieden",
+   "check": "brand_assets.py check (BA20–BA22) mit Exit 0; og:url, og:image und canonical sind absolut.",
+   "example_hint": "Kopf einer Seite mit ihren og-Angaben; falsch: dasselbe Bild mit relativer Adresse auf jeder Seite.",
+   "note": "Ein Generator, der die Vorlagen aus einer Seitenliste schreibt, ist noch Werkzeugarbeit (offen); das Bild der Studio-Website ist noch dunkel.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "WEB-10",
+   "area": "plattform-web",
+   "title": "Sprachwechsel: dieselbe Seite oder kein Link",
+   "rule": "Lass „DE / EN“ nur auf dieselbe Seite in der anderen Sprache führen, nie auf eine Startseite. Gibt es die Seite nicht, steht das Kürzel grau und ist kein Link; Screenreader hören „: diese Seite gibt es nicht auf Englisch“. Leite nie nach der Browsersprache um und zeig keine Flaggen. Jeder Sprachlink trägt lang und hreflang; der Kopf nennt mit <link rel='alternate' hreflang> jede vorhandene Fassung und sonst keine.",
+   "rule_en": "„DE / EN“ links only to the same page in the other language, never to a start page; a missing page shows the code grey and unlinked (with a hidden reason); never redirect by browser language, no flags; every language link has lang and hreflang; the head lists every existing version with rel=alternate hreflang and nothing else.",
+   "why": "Inhaber D91: Sprachwechsel auf dieselbe Seite oder kein Link (W7a). Ein Link auf die englische Startseite verliert den Ort; eine Umleitung nach der Browsersprache nimmt die Wahl weg.",
+   "do": "<span class='sb-language-switch' role='group' aria-label='Sprache'><a href='…' lang='de' hreflang='de' aria-current='true'>DE</a> <span aria-hidden='true'>/</span> <span class='sb-language-switch__missing'><span lang='en'>EN</span><span class='sb-visually-hidden'>: diese Seite gibt es nicht auf Englisch</span></span></span>",
+   "dont": "„EN“ auf die englische Startseite; Umleitung nach Accept-Language; Flaggen; hreflang für eine Seite, die es nicht gibt; ein graues Kürzel, das doch ein Link ist.",
+   "numbers": "",
+   "decisions": [
+    "D87",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (W7a); systems/sebaro/spec/09-platform-web.md §18.2; spec/07-voice.md §4.10",
+   "platforms": [
+    "web"
+   ],
+   "status": "entschieden",
+   "check": "Jede Seite: jedes hreflang zeigt auf eine vorhandene Seite; kein Skript liest navigator.language für eine Umleitung.",
+   "example_hint": "DE / EN mit Link und DE / EN ohne englische Seite; falsch: Flaggen und EN auf die Startseite.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "WEB-11",
+   "area": "plattform-web",
+   "title": "Druck immer hell",
+   "rule": "Drucke jede Website hell, egal ob die Seite gerade dunkel ist, im gewählten Farbton. Lade dafür sb-print.js am Ende jeder Seite: Es schaltet vor dem Druck auf Hell, öffnet zugeklappte Antworten außerhalb der Navigation und stellt danach alles zurück, ohne die gespeicherte Wahl zu ändern.",
+   "rule_en": "Paper is always light, in the chosen tone: every website page loads sb-print.js at the end of body; it switches to light before printing, opens closed <details> outside navigation and restores both afterwards without touching the stored choice.",
+   "why": "Inhaber D91: Druck immer hell (W8a). Papier ist hell; im dunklen Modus fiele der Grund weg und heller Text stünde auf weißem Papier.",
+   "do": "<script src='sebaro/js/sb-print.js'></script> am Ende von body auf jeder Seite, auch auf Artikeln und Fakten.",
+   "dont": "Seiten ohne sb-print.js; Druck im dunklen Modus; die gespeicherte Wahl beim Drucken ändern; zugeklappte Antworten im Druck.",
+   "numbers": "beforeprint: html[data-theme='light']; afterprint: zurück",
+   "decisions": [
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (W8a); systems/sebaro/spec/09-platform-web.md §18.3; spec/02-components.md §7 (sb-print.js)",
+   "platforms": [
+    "web"
+   ],
+   "status": "entschieden",
+   "check": "Druckvorschau im dunklen Modus zeigt helles Papier (gemessen in Chromium mit page.pdf()); WebKit und Firefox ungeprüft.",
+   "example_hint": "Dieselbe Karte am Bildschirm dunkel und auf Papier hell; falsch: dunkles Papier.",
+   "note": "Ein erzeugter Druckblock in tokens.css, der auch Seiten ohne Skript hell druckt, ist noch Werkzeugarbeit (offen); bis dahin braucht jede Seite sb-print.js.",
+   "changed": "2026-10-21"
   },
   {
    "id": "MOB-01",
@@ -4155,55 +4703,157 @@
    "title": "Haptik nur auf dem Handy, nur bei Touch, nur zweimal",
    "rule": "Lass nur auf dem Handy, nur bei Touch-Bedienung und nur zwei Ereignisse spürbar werden: eine erfolgreiche Hauptaktion mit einem kurzen leichten Impuls, ein bestätigtes Löschen mit einem kräftigeren Doppelimpuls. Bei Tastatur, D-Pad oder Schaltersteuerung bleibt es still; folge der System-Einstellung für Haptik; Web und Desktop bekommen keinen Ersatz.",
    "rule_en": "Haptics on phones only and only under touch input: primary action succeeded = one short light pulse; delete confirmed = stronger double pulse; silent in keyboard, D-pad or switch-access mode; follow the system setting; no substitute on web/desktop.",
-   "why": "Inhaber D48 (3): „bis auf 2. das nehmen wir direkt fest mit.“ D85: „Haptik ja nur für touch so“; SbHaptics liest den Eingabemodus. Die Konstanten je Plattform legt der Ausbau fest.",
-   "do": "Android rememberSbHaptics(): success() = HapticFeedbackConstants.CONFIRM (API 30+, sonst CONTEXT_CLICK), deleteConfirmed() = REJECT (API 30+, sonst LONG_PRESS), beide nur bei InputMode.Touch; iOS .sensoryFeedback(.impact(weight: .light)) bzw. .warning.",
+   "why": "Inhaber D48 (3): „bis auf 2. das nehmen wir direkt fest mit.“ D85: „Haptik ja nur für touch so“; SbHaptics liest den Eingabemodus. D91 I6a: auf iOS ein Baustein SbHaptics mit UIKit statt .sensoryFeedback. Die Konstanten je Plattform legt der Ausbau fest.",
+   "do": "Android rememberSbHaptics(): success() = HapticFeedbackConstants.CONFIRM (API 30+, sonst CONTEXT_CLICK), deleteConfirmed() = REJECT (API 30+, sonst LONG_PRESS), beide nur bei InputMode.Touch; iOS SbHaptics: success() = UIImpactFeedbackGenerator(.light), deleteConfirmed() = UINotificationFeedbackGenerator .warning, still auf dem iPad, mit Hardware-Tastatur und bei Schaltersteuerung.",
    "dont": "Vibration bei jedem Tippen; Impuls bei Hardware-Tastatur; Systemton oder Wackel-Animation als Ersatz auf Desktop oder Web.",
    "numbers": "2 Ereignisse",
    "decisions": [
     "D48",
-    "D85"
+    "D85",
+    "D91"
    ],
-   "source": "DECISIONS.md D48 (3), D85; systems/sebaro/spec/03-signature.md §18; spec/08-platform-android.md §5, §8",
+   "source": "DECISIONS.md D48 (3), D85, D91 (I6a); systems/sebaro/spec/03-signature.md §18; spec/08-platform-android.md §5, §8; spec/12-platform-ios.md §8",
    "platforms": [
     "mobile"
    ],
    "status": "entschieden",
    "check": "Code-Review; kein Audio-/Vibrationsaufruf im Desktop-Code; auf Gerät nicht verifiziert.",
    "example_hint": "Kein Live-Beispiel möglich: Tabelle Ereignis → Impuls (richtig) neben Liste „jede Taste vibriert“ (falsch).",
-   "note": "Die konkreten Konstanten sind Agentenarbeit; auf einem Gerät nicht verifiziert.",
-   "changed": "2026-10-20"
+   "note": "Die konkreten Konstanten sind Agentenarbeit; auf keinem Gerät verifiziert. iOS kennt keinen Eingabemodus: „eine Tastatur ist verbunden“ ist nicht „die Tastatur wurde gerade benutzt“.",
+   "changed": "2026-10-21"
   },
   {
    "id": "MOB-04",
    "area": "plattform-mobile",
    "title": "Hell oder Dunkel in den Einstellungen der Handy-App",
-   "rule": "Folge in Handy-Apps standardmäßig dem System und biete in den Einstellungen die Gruppe „Hell oder Dunkel“ mit drei Radio-Zeilen „Wie das System“, „Hell“, „Dunkel“. In der App-Leiste gibt es keine Taste und kein Icon dafür.",
-   "rule_en": "Phone apps follow the system by default; settings group „Hell oder Dunkel“ with three 56 dp radio rows „Wie das System“, „Hell“, „Dunkel“; no button or icon toggle in the app bar.",
-   "why": "Inhaber D75, Wortlaut „ja, zwischen app und desktop unterscheiden wegen hell dunkel taste“: Handy-Apps wählen in den Einstellungen (Lesart des Orchestrators, vom Inhaber änderbar). Beschriftete Wahl statt Icon (D36).",
-   "do": "Zeile 56 dp, Radio-Ring 20 dp (2 dp border-strong), gewählt Ring + 10-dp-Punkt in accent; Compose SbThemeChoice.",
-   "dont": "Mond-Icon oder die Taste „Hell oder Dunkel“ in der Kopfleiste der App.",
-   "numbers": "Zeile 56 dp; Ring 20 dp; Punkt 10 dp; Rand 2 dp",
+   "rule": "Folge in Handy-Apps standardmäßig dem System und biete in den Einstellungen die Gruppe „Hell oder Dunkel“ mit drei Zeilen „Wie das System“, „Hell“, „Dunkel“, daneben „Farbton: Kühl · Warm“ (FAR-15). Android zeigt sie als Radiozeilen, iOS als flache Zeilen mit Haken am Ende in accent. In der App-Leiste gibt es keine Taste und kein Icon dafür.",
+   "rule_en": "Phone apps follow the system by default; settings group „Hell oder Dunkel“ with three rows „Wie das System“, „Hell“, „Dunkel“, plus „Farbton: Kühl · Warm“ (FAR-15); Android as radio rows, iOS as flat rows with an accent check mark at the end; no button or icon toggle in the app bar.",
+   "why": "Inhaber D75, Wortlaut „ja, zwischen app und desktop unterscheiden wegen hell dunkel taste“: Handy-Apps wählen in den Einstellungen (Lesart des Orchestrators, vom Inhaber änderbar). Beschriftete Wahl statt Icon (D36). D91: auf iOS Hell und Dunkel mit Haken wie im System (I8a); der Farbton steht in den Einstellungen (C4c).",
+   "do": "Android: Zeile 56 dp, Radio-Ring 20 dp (2 dp border-strong), gewählt Ring + 10-dp-Punkt in accent; Compose SbThemeChoice. iOS: SbThemeChoice und SbToneChoice, flache 56-pt-Zeilen mit Haarlinien, die gewählte mit check in accent und Wort in body-strong, VoiceOver liest „ausgewählt“.",
+   "dont": "Mond-Icon oder die Taste „Hell oder Dunkel“ in der Kopfleiste der App; gefüllte Gruppen von iOS; ein Schalter statt drei Zeilen.",
+   "numbers": "Zeile 56 dp / pt; Ring 20 dp; Punkt 10 dp; Rand 2 dp; iOS-Haken in accent",
    "decisions": [
     "D75",
-    "D36"
+    "D36",
+    "D91"
    ],
-   "source": "DECISIONS.md D75; systems/sebaro/spec/08-platform-android.md §12; spec/07-voice.md §4.7; demo/mobile.html M6",
+   "source": "DECISIONS.md D75, D91 (I8a, C4c); systems/sebaro/spec/08-platform-android.md §12; spec/12-platform-ios.md §9; spec/07-voice.md §4.7; demo/mobile.html M6",
    "platforms": [
     "mobile"
    ],
    "status": "entschieden",
    "check": "Einstellung vorhanden; Neustart behält die Wahl.",
    "example_hint": "Einstellungsgruppe mit drei sb-radio-Zeilen; falsch: Taste „Hell oder Dunkel“ oder Mond-Icon in der App-Leiste.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "MOB-05",
+   "area": "plattform-mobile",
+   "title": "iOS: eigene untere Leiste, Navigationsleiste des Systems",
+   "rule": "Bau iOS-Apps mit dem Swift-Paket SebaroDesign in SebaroAppRoot und SbScreen. Die untere Navigation ist unsere eigene Leiste SbTabBar wie auf Android (Icon und Wort, 3-pt-Ortslinie oben, ohne Glas, Pille oder Fläche), nie TabView. Den Kopf bildet die Navigationsleiste des Systems mit unseren Teilen: Grund bg, keine Schattenlinie, unsere Schrift, Zurück-Chevron aus dem Sprite, auf obersten Bildschirmen die 32-pt-Kachel zuerst. Icons kommen aus dem Sprite, nie aus SF Symbols.",
+   "rule_en": "iOS apps use the Swift package SebaroDesign (SebaroAppRoot, SbScreen); the bottom navigation is our own SbTabBar (icon + word, 3 pt place line on top, no glass, pill or fill), never TabView; the header is the system NavigationStack bar with our parts (bg, no shadow line, our type, sprite back chevron, 32 pt tile first on top-level screens); sprite icons only, never SF Symbols.",
+   "why": "Inhaber D88 (eine Seite und Bausteine für iOS) und D91: eigene untere Leiste (I1a), Navigationsleiste des Systems mit unseren Teilen (I2a). Die eigene Leiste sieht aus wie auf Android; die Leiste des Systems bringt VoiceOver, das Zurück-Wischen vom Rand, den Zurück-Knopf und Dynamic Type mit. SF Symbols wären fremde Zeichen.",
+   "do": "SbScreen(primaryAction: …, tabs: SbTabBar(…)) { … }; .sbTopLevelNavigation(title: „Heute“, subtitle: …, product: .tagwerk); Unterseiten .sbNavigationTitle(„Gewohnheit“); Werkzeuge in SbToolbarItem mit accessibilityLabel.",
+   "dont": "TabView oder .tabItem; Image(systemName:); die eingefärbte Systemleiste mit Glas und Pille; eine eigene Kopfleiste statt NavigationStack; ein Schatten unter der Leiste.",
+   "numbers": "untere Leiste 64 pt, 3–5 Ziele, Ortslinie 3 pt; Kopfkachel 32 pt; Titel headline 24/32 groß, title 20/28 in der Leiste",
+   "decisions": [
+    "D36",
+    "D46",
+    "D88",
+    "D91"
+   ],
+   "source": "DECISIONS.md D88, D91 (I1a, I2a); systems/sebaro/spec/12-platform-ios.md §1–§4, §14 (Lint I1, I4)",
+   "platforms": [
+    "mobile"
+   ],
+   "status": "entschieden",
+   "check": "lint-sebaro-ios.sh (spec/12 §14) mit Exit 0; Simulator hell und dunkel; auf echten Geräten und mit VoiceOver nicht geprüft.",
+   "example_hint": "iOS-Bildschirm „Heute“ mit Kachel im Kopf und unserer unteren Leiste; falsch: Tab-Leiste des Systems mit Glas und Pille.",
+   "note": "Nur iOS; die Plattform „App“ umfasst Android und iOS. Geprüft im iOS-Simulator (iOS 27.0 und 18.5), nicht auf einem Gerät.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "MOB-06",
+   "area": "plattform-mobile",
+   "title": "iOS: kein Wischen in Zeilen, eigener Löschen-Dialog",
+   "rule": "Gib Zeilen auf iOS keine Wisch-Aktionen; ein langer Druck öffnet stattdessen das Kontextmenü des Systems mit unseren Einträgen (sbContextMenu), „Löschen …“ zuletzt nach einer Trennlinie, und VoiceOver bekommt dieselben Einträge als Aktionen. Löschen öffnet immer unseren eigenen Dialog (sbConfirmDialog) wie auf Android: bg, 2-pt-Tintenlinie, Radius 16, „Abbrechen“ zuerst, das Verb mit der 45°-Kante zuletzt; nie .alert.",
+   "rule_en": "No swipe actions in iOS rows; a long press opens the system context menu with our entries (sbContextMenu), „Löschen …“ last after a divider, the same entries as VoiceOver actions; deleting always opens our own dialog (sbConfirmDialog: bg, 2 pt ink line, radius 16, „Abbrechen“ first, the verb with the 45° cut last), never .alert.",
+   "why": "Inhaber D91: kein Wischen, Kontextmenü bei langem Drücken (I3a), eigener Löschen-Dialog (I4a). Die Wisch-Taste von iOS ist eine rote Fläche hinter weißem Text, die sebaro nicht hat; der eigene Dialog trägt die Kante und die Reihenfolge von AKT-08 und AKT-11.",
+   "do": ".sbContextMenu([SbMenuItem(„Bearbeiten“, icon: „edit“) {…}, SbMenuItem(„Löschen …“, icon: „trash“, destructive: true) {…}]); .sbConfirmDialog(isPresented: $ask, title: „Gewohnheit löschen?“, …)",
+   "dont": ".swipeActions; .alert oder .confirmationDialog zum Löschen; Löschen direkt aus dem Kontextmenü ohne Dialog; ein roter Grund hinter der Zeile.",
+   "numbers": "Dialog höchstens 560 pt breit, Innenabstand 24 pt, Radius 16; Kante 12 pt",
+   "decisions": [
+    "D39",
+    "D46",
+    "D83",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (I3a, I4a); systems/sebaro/spec/12-platform-ios.md §5, §6, §14 (Lint I2, I3)",
+   "platforms": [
+    "mobile"
+   ],
+   "status": "entschieden",
+   "check": "lint-sebaro-ios.sh Regeln I2 und I3 mit Exit 0; das Kontextmenü per langem Druck ist im Simulator nicht prüfbar (offen).",
+   "example_hint": "Zeile mit Kontextmenü, „Löschen …“ zuletzt, und unser Dialog; falsch: rote Wischfläche hinter der Zeile.",
+   "note": "Nur iOS. Langer Druck, VoiceOver-Aktionen und der Fokus auf „Abbrechen“ sind auf keinem Gerät geprüft.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "MOB-07",
+   "area": "plattform-mobile",
+   "title": "iOS: Formular als Sheet in voller Höhe, „Sichern“ unten",
+   "rule": "Öffne ein Formular auf iOS als Sheet in voller Höhe (sbFormSheet): „Abbrechen“ oben am Anfang, die Felder scrollen, „Sichern“ ist die Hauptaktion unten im Sheet, nicht oben rechts wie sonst auf iOS. Solange es Änderungen gibt, schließt ein Wischen nach unten das Sheet nicht. Ab 640 pt Breite (iPad) ist es höchstens 560 pt breit.",
+   "rule_en": "Forms on iOS open as a full-height sheet (sbFormSheet): „Abbrechen“ at the top start, fields scroll, „Sichern“ is the primary action at the bottom of the sheet (not top trailing); while dirty, a swipe down does not close it; from 640 pt width (iPad) at most 560 pt wide.",
+   "why": "Inhaber D91: Formular als Sheet in voller Höhe mit „Sichern“ unten (I5b); Sheet ab 640 px höchstens 560 px breit (Z2b). Ein Formular ist eine Aufgabe mit Ende, keine Unterseite; die Hauptaktion steht wie überall unten (D39, D74).",
+   "do": ".sbFormSheet(isPresented: $edit, title: „Gewohnheit“, isDirty: changed, primaryAction: SbPrimaryActionModel(title: „Sichern“, …)) { SbTextField(…) }",
+   "dont": "„Sichern“ oben rechts in der Leiste; ein Formular als Unterseite im Stapel; ein Wischen nach unten, das Änderungen still verwirft; ein Ziehgriff.",
+   "numbers": "Hauptaktion 56 pt; Linie 2 pt oben, Ecken 16 pt; iPad höchstens 560 pt",
+   "decisions": [
+    "D39",
+    "D74",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (I5b, Z2b); systems/sebaro/spec/12-platform-ios.md §7",
+   "platforms": [
+    "mobile"
+   ],
+   "status": "entschieden",
+   "check": "Simulator: mit Änderungen schließt das Wischen nicht; die Breite auf dem iPad ist nicht gerendert (offen).",
+   "example_hint": "Formular-Sheet mit „Abbrechen“ oben und „Sichern“ unten; falsch: „Sichern“ oben rechts.",
+   "note": "Nur iOS. Auf einem iPad nicht gerendert.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "MOB-08",
+   "area": "plattform-mobile",
+   "title": "iOS: Dynamic Type ohne Obergrenze",
+   "rule": "Lass auf iOS Text, Zeilenhöhen und die Hauptaktion mit jeder Dynamic-Type-Größe wachsen, ohne Obergrenze (.sbFont, @ScaledMetric). In den Größen der Bedienungshilfen rückt der Status unter den Titel. Nur die untere Leiste behält ihre Größe und zeigt bei langem Druck die große Inhaltsanzeige des Systems.",
+   "rule_en": "On iOS text, row heights and the primary action grow with every Dynamic Type size, without an upper limit (.sbFont, @ScaledMetric); at accessibility sizes the status moves under the title; only the bottom bar keeps its size and shows the large content viewer on long press.",
+   "why": "Inhaber D91: Dynamic Type ohne Obergrenze (I7a). Wer große Schrift braucht, braucht sie überall; eine Grenze bei „xxxLarge“ ließe genau diese Menschen allein.",
+   "do": ".sbFont(.body) für jeden Text; @ScaledMetric var rowHeight = 56; SbTabBar mit der großen Inhaltsanzeige.",
+   "dont": ".dynamicTypeSize(...) mit Obergrenze; .font(.system …); feste Zeilenhöhen, an denen Text abgeschnitten wird.",
+   "numbers": "Zeilen 56 / 64 / 88 pt wachsen mit; untere Leiste fest 64 pt",
+   "decisions": [
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (I7a); systems/sebaro/spec/12-platform-ios.md §2, §5, §14 (Lint I7, I8)",
+   "platforms": [
+    "mobile"
+   ],
+   "status": "entschieden",
+   "check": "lint-sebaro-ios.sh Regeln I7 und I8 mit Exit 0; im Simulator mit AX5 angesehen; auf einem Gerät nicht geprüft.",
+   "example_hint": "Dieselbe Zeile in Standardgröße und in AX5, der Status unter dem Titel; falsch: abgeschnittener Text in fester Höhe.",
+   "note": "Nur iOS.",
+   "changed": "2026-10-21"
   },
   {
    "id": "DSK-01",
    "area": "plattform-desktop",
    "title": "Tauri-Fenster wie eine Web-App",
-   "rule": "Bau jede Tauri-Ansicht als sb-window (Titelleiste, Seitenleiste, Inhalt, Inspektor, Aktionszone über die ganze Breite, data-sb-density=\"window\") bzw. als sb-view sb-view--wide für einfache Fenster, Fensterteile getrennt durch Tintenlinien, Produktfarbe nur in der Titelleisten-Kachel. Halte CSP script-src 'self' (Theme-Zeile und Skripte als Dateien, Fakten als JSON-Blöcke) und setz backgroundColor des Fensters auf bg.",
-   "rule_en": "Tauri views: sb-window (title bar, sidebar, content, inspector, full-width action zone, window density) or sb-view sb-view--wide for simple windows; parts separated by ink lines, product colour only in the title-bar tile; CSP script-src 'self'; window backgroundColor = bg.",
+   "rule": "Bau jede Tauri-Ansicht als sb-window (Titelleiste, Seitenleiste, Inhalt, Inspektor, Aktionszone über die ganze Breite, data-sb-density=\"window\") bzw. als sb-view sb-view--wide für einfache Fenster, Fensterteile getrennt durch Tintenlinien, Produktfarbe nur in der Titelleisten-Kachel. Halte CSP script-src 'self' (Theme-Zeile und Skripte als Dateien, Fakten als JSON-Blöcke); den Grund des Fensters wählt Rust aus der gespeicherten Wahl (DSK-14).",
+   "rule_en": "Tauri views: sb-window (title bar, sidebar, content, inspector, full-width action zone, window density) or sb-view sb-view--wide for simple windows; parts separated by ink lines, product colour only in the title-bar tile; CSP script-src 'self'; the window ground comes from the stored choice in Rust (DSK-14).",
    "why": "Ein Tauri-Fenster ist eine Webseite in einer System-Webview; dieselben Klassen halten Web und Desktop gleich; der Start soll wie im Web aussehen (D52). D80: das Fenstergerüst ist im System gebaut, kein Nachbau in Produkten.",
-   "do": "<div class='sb-window sb-window--fill' data-sb-density='window'>; data-tauri-drag-region an der Titelleiste; tauri.conf.json backgroundColor auf --sb-color-bg des Modus; theme-init.js als Datei.",
+   "do": "<div class='sb-window sb-window--fill' data-sb-density='window'>; data-tauri-drag-region an der Titelleiste; Fenster in Rust anlegen (DSK-14); theme-init.js als Datei.",
    "dont": "Inline-Skripte; eigene Fensterklassen neben sebaro.css; weißer Blitz beim Öffnen; getönte Seitenleiste.",
    "numbers": "",
    "decisions": [
@@ -4211,42 +4861,45 @@
     "D39",
     "D46",
     "D65",
-    "D80"
+    "D80",
+    "D91"
    ],
-   "source": "systems/sebaro/spec/02-components.md §4.17; spec/09-platform-web.md §13; shared/ADOPTION.md §5",
+   "source": "systems/sebaro/spec/02-components.md §4.17; spec/09-platform-web.md §13, §13.1; shared/ADOPTION.md §5",
    "platforms": [
     "desktop"
    ],
    "status": "vorläufig",
    "check": "check_demo.py --csp \"default-src 'self'; style-src 'self'; script-src 'self'\"; in echter Tauri-Webview nicht verifiziert (spec/09 §15).",
    "example_hint": "sb-window mit Titelleiste, Seitenleiste, Inhalt und Aktionszone; falsch: getönte Seitenleiste mit Schatten und petrolfarbenen Reitern.",
-   "note": "Titelleiste und Fensterknöpfe unter Windows und Linux, Mindestgröße, ziehbare Trennlinien, Menüleiste, Kürzelsatz, Fokus zwischen den Bereichen, Dokument-Reiter, Ziehen und Ablegen, mehrere Fenster, Benachrichtigungen und Updates sind skizziert und warten auf die Wahl des Inhabers (D81).",
-   "changed": "2026-10-20"
+   "note": "Titelleiste, Größen, Menü, Kürzel, Reiter, Ziehen und Ablegen, mehrere Fenster, Mitteilungen und Fenstergrund regeln DSK-06 bis DSK-15 (D91). D91 entscheidet hier nur den Fenstergrund (F13a, DSK-14). Dass das Fenstergerüst im System gebaut wird, hat der Inhaber entschieden (D80); seine Form und die CSP stehen nur in der Spezifikation und sind in keiner echten Tauri-Webview geprüft, deshalb bleibt die Regel vorläufig.",
+   "changed": "2026-10-21"
   },
   {
    "id": "DSK-02",
    "area": "plattform-desktop",
-   "title": "Eigene Ansicht „Einstellungen“ (⌘,)",
-   "rule": "Gib jeder Desktop-App eine eigene Ansicht „Einstellungen“ (⌘,) mit einem Hilfesatz je Einstellung; dort steht auch „Hell oder Dunkel“ (DSK-05). Natives Menü und Befehlspalette bleiben zusätzlich und springen auch dorthin.",
-   "rule_en": "Every desktop app has its own Settings view (Cmd+,) with a help sentence per setting, including „Hell oder Dunkel“ (DSK-05); the native menu and the command palette stay and also lead there.",
-   "why": "Inhaber D67 (5), Wortlaut „5a“. Skizze §5: „So erwartet man es auf macOS und Windows. Menü und Palette bleiben zusätzlich, beide springen auch hierher. Mit Hilfetext je Einstellung.“ Verworfen: B (nur Menü und Palette), ohne Platz für erklärende Sätze.",
-   "do": "Gruppen „Allgemein“ und „Editor“; unter „Bewegung immer reduzieren“ der Satz „Fenster und Kacheln gleiten nicht mehr.“",
-   "dont": "Einstellungen nur im nativen Menü oder nur in der Palette; Einstellungen ohne Hilfesatz.",
+   "title": "Einstellungen als Ansicht im Hauptfenster (⌘,)",
+   "rule": "Zeig die Einstellungen jeder Desktop-App als Ansicht im Hauptfenster (⌘,), nie als eigenes Fenster: der Pfad nennt „Einstellungen“ und den Bereich, die Seitenleiste zeigt die Bereiche mit Icon und Wort, jede Einstellung hat einen Hilfesatz, und es gibt keine Aktionszone, weil jede Wahl sofort wirkt. Dort stehen „Hell oder Dunkel“ (DSK-05) und „Farbton“ (FAR-15) als Auswahlzeilen. „Zurück zu <Ort>“ in der Titelleiste und Escape führen an den Ort davor; Menü und Befehlspalette springen auch hierher.",
+   "rule_en": "Settings are a view in the main window (Cmd+,), never a separate window: the path names „Einstellungen“ and the area, the sidebar shows the areas with icon and word, every setting has a help sentence, no action zone (choices apply at once); „Hell oder Dunkel“ (DSK-05) and „Farbton“ (FAR-15) as choice rows; „Zurück zu <Ort>“ and Escape lead back; menu and palette lead there too.",
+   "why": "Inhaber D67 (5), Wortlaut „5a“. Skizze §5: „So erwartet man es auf macOS und Windows. Menü und Palette bleiben zusätzlich, beide springen auch hierher. Mit Hilfetext je Einstellung.“ D91 F10a: Ansicht im Hauptfenster statt eines eigenen Fensters wie in macOS-Programmen. Ohne nächsten Schritt keine Hauptaktion (D74).",
+   "do": "Seitenleiste „Allgemein, Editor, Tastatur, Über“; je Gruppe <form class='sb-window__settings-group'> mit Überschrift; Titelleiste mit „Zurück zu Wochenplan“ (data-sb-escape); unter „Bewegung immer reduzieren“ der Satz „Fenster und Kacheln gleiten nicht mehr.“",
+   "dont": "Einstellungen nur im nativen Menü oder nur in der Palette; Einstellungen als zweites Fenster; Einstellungen ohne Hilfesatz; eine Aktionszone mit „Übernehmen“.",
    "numbers": "Zeilen der Gruppen-Navigation 32 px (data-sb-density=\"window\")",
    "decisions": [
     "D67",
     "D75",
-    "D46"
+    "D46",
+    "D74",
+    "D91"
    ],
-   "source": "DECISIONS.md D67 (5), D75; systems/sebaro/spec/11-checklist.md §1a; spec/02-components.md §4.18",
+   "source": "DECISIONS.md D67 (5), D75, D91 (F10a); systems/sebaro/spec/02-components.md §4.18, §4.24; spec/11-checklist.md §1a",
    "platforms": [
     "desktop"
    ],
    "status": "entschieden",
-   "check": "⌘, öffnet die Ansicht; Menü und Palette führen dorthin.",
+   "check": "⌘, öffnet die Ansicht im selben Fenster; Escape führt zurück; Menü und Palette führen dorthin.",
    "example_hint": "Einstellungsansicht mit Gruppen und Hilfesätzen; falsch: Einstellungen nur als Haken im nativen Menü.",
    "note": "novalis nutzt heute die Palette als Einstellungsseite (ADR-0004); nach D67 braucht der Punkt dort eine ADR mit dem Wortlaut des Inhabers.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-21"
   },
   {
    "id": "DSK-03",
@@ -4298,8 +4951,8 @@
    "status": "entschieden",
    "check": "Fenster auf 1100, 900 und 700 px ziehen: der Inhalt bleibt mindestens 480 px, die Seitenteile gehen zuerst; Werkzeuge und Menü blenden sie wieder ein.",
    "example_hint": "sb-window mit sichtbarer Seitenleiste und ausgeblendetem Inspektor, beide mit Werkzeug; falsch: drei feste Spalten, die den Text auf 300 px drücken.",
-   "note": "Die übrigen Fensterfragen (Titelleiste, Mindestgröße, ziehbare Trennlinien, Menüleiste, Kürzelsatz, Dokument-Reiter, Ziehen und Ablegen, mehrere Fenster) sind skizziert und warten auf die Wahl des Inhabers (D81).",
-   "changed": "2026-10-20"
+   "note": "Wie klein ein Fenster werden darf und wie die Trennlinien gezogen werden, regelt DSK-07 (D91).",
+   "changed": "2026-10-21"
   },
   {
    "id": "DSK-05",
@@ -4324,6 +4977,259 @@
    "check": "Menü „Darstellung“ und Einstellungen bieten die drei Optionen; Neustart behält die Wahl; keine Kopf-Taste im Fenster.",
    "example_hint": "Menü „Darstellung“ mit Haken vor „Wie das System“; falsch: Taste „Hell oder Dunkel“ in der Titelleiste.",
    "changed": "2026-10-20"
+  },
+  {
+   "id": "DSK-06",
+   "area": "plattform-desktop",
+   "title": "Titelleiste je System",
+   "rule": "Mach auf macOS unsere 48-px-Leiste zur Titelleiste: Die drei Fensterknöpfe des Systems stehen an ihrem Anfang, die Leiste lässt ihnen 80 px und gibt den Platz im Vollbild zurück. Auf Windows und Linux bleibt der Rahmen des Systems mit seinen Knöpfen, dem Einrasten und dem Doppelklick; unsere Leiste steht darunter. Die Leiste ist Ziehfläche, ihr Text lässt sich nicht markieren, und der Fenstertitel des Systems lautet „<Ort> · <App>“ („Wochenplan · novalis“).",
+   "rule_en": "On macOS our 48 px bar is the title bar (system window buttons at its start, 80 px room, given back in full screen); on Windows and Linux the system frame stays (buttons, snap, double click) and our bar sits below; the bar is a drag region with unselectable text; the system window title is „<place> · <app>“.",
+   "why": "Inhaber D91 F1a: „macOS: eine Leiste über der Ampel; Windows und Linux: Systemrahmen, unsere Leiste darunter“. Eigene Fensterknöpfe auf Windows und Linux würden Einrasten, Fensterverwalter und Screenreader brechen.",
+   "do": "macOS: titleBarStyle 'Overlay', hiddenTitle, trafficLightPosition 16 / 18; Windows und Linux: decorations true; <html data-sb-platform='mac'> vor dem ersten Bild; data-tauri-drag-region an __titlebar, __name und __path.",
+   "dont": "Eigene Fensterknöpfe auf Windows oder Linux; data-sb-platform in einer Web-App; der Fenstertitel nur „novalis“; eine Titelleiste in Produktfarbe.",
+   "numbers": "Leiste 48 px; Platz für die Fensterknöpfe 80 px (space-16 + space-4); Knöpfe bei 16 / 18",
+   "decisions": [
+    "D67",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (F1a); systems/sebaro/spec/02-components.md §4.17; spec/09-platform-web.md §13.1",
+   "platforms": [
+    "desktop"
+   ],
+   "status": "entschieden",
+   "check": "Muster für macOS und Windows ansehen; in einem echten Tauri-Fenster nicht geprüft (offen).",
+   "example_hint": "macOS-Fenster mit Fensterknöpfen in unserer Leiste und Windows-Fenster mit Systemrahmen darüber; falsch: eigene Fensterknöpfe in Produktfarbe.",
+   "note": "Nicht in einem echten Tauri-Fenster und nicht unter Windows oder Linux geprüft.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "DSK-07",
+   "area": "plattform-desktop",
+   "title": "Kleines Fenster erlaubt, ziehbare Trennlinien",
+   "rule": "Erlaube Fenster ab 480 × 400 px; die Seitenteile weichen, der Inhalt behält 480 px (DSK-04). Die Tintenlinien zwischen Seitenteil und Inhalt lassen sich ziehen: Seitenleiste 200–360 px, Inspektor 240–400 px; unter die kleinste Breite gezogen klappt der Teil zu, ein Doppelklick gibt die Startbreite zurück. Mit der Tastatur bewegen ← und → die Linie um 8 px (mit ⇧ 32 px), Pos1 und Ende springen an die Grenzen, Eingabe klappt zu und auf. Ohne Ziehen wählt das Menü „Darstellung“ „Schmal · Normal · Breit“. Die Breiten bleiben je Fenster gespeichert.",
+   "rule_en": "Windows from 480 × 400 px; side parts give way, content keeps 480 px (DSK-04); the ink lines between a pane and the content are draggable (sidebar 200–360, inspector 240–400 px; below the minimum the pane collapses, double click = start width), keyboard ← → 8 px (⇧ 32 px), Home/End, Enter collapses; without dragging the menu „Darstellung“ offers „Schmal · Normal · Breit“; widths stored per window (sb-window__divider).",
+   "why": "Inhaber D91: kleines Fenster erlaubt, Seitenteile weichen (F2a); ziehbare Trennlinien mit Grenzen und Tastatur (F3a). WCAG 2.5.7 verlangt einen Weg ohne Ziehen; „Schmal · Normal · Breit“ ist dieser Weg.",
+   "do": "<div class='sb-window__divider' role='separator' aria-orientation='vertical' aria-controls='sidebar' aria-label='Breite der Seitenleiste' aria-valuemin='200' aria-valuemax='360' aria-valuenow='240'></div>; Tauri minWidth 480, minHeight 400; sb-window.js.",
+   "dont": "Ein großes Mindestfenster; eine Trennlinie ohne Tastatur oder ohne Weg ohne Ziehen; eine dickere oder farbige Linie zum Greifen; Inhalt unter 480 px gezogen.",
+   "numbers": "Fenster ab 480 × 400 px; Seitenleiste 200–360 px (Start 240), Inspektor 240–400 px (Start 280); Greiffläche 24 px, bei Touch 48 px; Schritte 8 / 32 px; aria-valuetext „264 Pixel“, „zugeklappt“",
+   "decisions": [
+    "D81",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (F2a, F3a), D81; systems/sebaro/spec/02-components.md §4.17, §4.23; spec/09-platform-web.md §13.1",
+   "platforms": [
+    "desktop",
+    "web"
+   ],
+   "status": "entschieden",
+   "check": "Fenster auf 480 × 400 px; Trennlinie mit Tab erreichen und mit Pfeilen bewegen; „Schmal · Normal · Breit“ im Menü; neu laden behält die Breite.",
+   "example_hint": "Fenster mit fokussierter Trennlinie und Breitenwahl im Menü; falsch: dicker farbiger Griff ohne Tastatur.",
+   "note": "„Schmal · Normal · Breit“ ist eine Ergänzung nach der Prüfung des Baus für WCAG 2.5.7 (Agentenarbeit).",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "DSK-08",
+   "area": "plattform-desktop",
+   "title": "Taste „Menü“ mit fünf Gruppen",
+   "rule": "Gib Desktop-Apps auf Windows und Linux und Web-Apps mit Fenster am Ende der Titelleiste die Taste „Menü“ mit Icon und Wort. Sie öffnet die fünf Gruppen Datei · Bearbeiten · Darstellung · Fenster · Hilfe als Untermenüs (EBE-07). F10 und eine allein gedrückte Alt-Taste öffnen das Menü auf „Datei“. Auf macOS steht dasselbe im nativen Menü oben am Bildschirm („Ablage“ statt „Datei“, dazu das App-Menü). Jede Zeile mit einem festen Kürzel nennt es (DSK-09); „Löschen …“ steht in „Bearbeiten“ zuletzt nach einer Trennlinie.",
+   "rule_en": "On Windows and Linux (and in web apps with a window) the title bar ends with the button „Menü“ (icon + word); it opens the five groups Datei · Bearbeiten · Darstellung · Fenster · Hilfe as submenus (EBE-07); F10 and a lone Alt open it on „Datei“; macOS has the same groups in the native menu bar; items show their fixed shortcut (DSK-09); „Löschen …“ last in „Bearbeiten“ after a divider.",
+   "why": "Inhaber D91 F4b: Taste „Menü“ in unserer Leiste statt einer nativen Menüzeile im Fenster. Die Taste kostet keine eigene Zeile; F10 und Alt sind die Menütasten der Systeme, deshalb öffnen sie es wie eine Menüzeile.",
+   "do": "<button class='sb-secondary-action sb-secondary-action--compact' aria-haspopup='menu' aria-expanded='false' popovertarget='m'><svg …menu/><span class='sb-window__word'>Menü</span></button><ul class='sb-menu sb-menu--window' role='menu' id='m' popover>…<button class='sb-menu__item' role='menuitem' aria-haspopup='menu' popovertarget='m-file'>Datei<span class='sb-menu__sub'>…</span></button><ul class='sb-menu' role='menu' id='m-file' aria-label='Datei' popover>…",
+   "dont": "Eine native Menüzeile im Fenster auf Windows und Linux; ein Hamburger-Icon ohne Wort; ein Untermenü, das beim Darüberfahren aufspringt; eigene Gruppen statt der fünf; F10 oder Alt als Kürzel der App.",
+   "numbers": "fünf Gruppen; Zeilen 32 px; Chevron 16 px in text-muted",
+   "decisions": [
+    "D67",
+    "D75",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (F4b); systems/sebaro/spec/02-components.md §4.10, §4.24; spec/07-voice.md §4.8; spec/09-platform-web.md §13.1",
+   "platforms": [
+    "desktop",
+    "web"
+   ],
+   "status": "entschieden",
+   "check": "Tastatur: F10 öffnet auf „Datei“, → öffnet das Untermenü, Escape kehrt zurück; axe. Alt und F10 sind nur in Chromium auf macOS gemessen, nicht unter Windows oder Linux.",
+   "example_hint": "Titelleiste mit „Menü“ und offenem Untermenü „Darstellung“; falsch: Hamburger-Icon ohne Wort mit flacher Liste.",
+   "note": "In einem Browser unter Windows kann der Browser Alt und F10 selbst nehmen; im Tauri-Fenster gehören sie uns.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "DSK-09",
+   "area": "plattform-desktop",
+   "title": "14 feste Kürzel und F6 durch die Bereiche",
+   "rule": "Nimm die 14 festen Kürzel in keiner Desktop-App und Web-App mit Fenster für etwas anderes: ⌘K Befehle, ⌘, Einstellungen, ⌘N Hauptaktion, ⌘O Öffnen, ⌘F Suchen, ⌃⌘S Seitenleiste, ⌥⌘I Inspektor, F6 / ⇧F6 Bereiche, ⌃⇥ / ⌃⇧⇥ Reiter, ⌘W Schließen, ⇧⌘N Neues Fenster, ⌘Z / ⇧⌘Z Widerrufen und Wiederholen, ⌘⌫ Löschen …, ⌘+ / ⌘− Schrift. Alles andere bestimmt die App. Kein Kürzel braucht eine Taste, die auf der deutschen Tastatur ⌥ oder AltGr verlangt. F6 und ⇧F6 springen reihum durch Titelleiste, Seitenleiste, Inhalt, Inspektor und Aktionszone und geben jedem Bereich seinen letzten Fokus zurück.",
+   "rule_en": "The 14 fixed shortcuts (⌘K, ⌘,, ⌘N, ⌘O, ⌘F, ⌃⌘S, ⌥⌘I, F6/⇧F6, ⌃⇥/⌃⇧⇥, ⌘W, ⇧⌘N, ⌘Z/⇧⌘Z, ⌘⌫, ⌘+/⌘−) are used for nothing else; everything else is the app's; no shortcut needs a key the German layout makes only with ⌥ or AltGr; F6 / ⇧F6 cycle through title bar, sidebar, content, inspector and action zone and return each area's last focus.",
+   "why": "Inhaber D91: diese 14 sind fest, alles andere bestimmt die App (F5a); F6 springt reihum, ⇧F6 zurück (F6a), wie in Windows und GNOME. Mit Tab allein ginge es durch jeden Ordner und jede Notiz, bevor man den Text erreicht.",
+   "do": "aria-keyshortcuts='Meta+K' im Markup (macOS-Form), <span class='sb-keys' data-sb-keys='Mod+K'>; sb-window.js schreibt Strg+K und Strg+Alt+S auf Windows und Linux; „Nächster Bereich“ auch im Menü „Fenster“ und in der Palette.",
+   "dont": "⌘\\ für die Seitenleiste (braucht ⌥ auf der deutschen Tastatur); ein festes Kürzel für etwas anderes; Kürzel, die das System behält (⌘H, ⌘Q, Alt+F4); ⌘1 bis ⌘5 als einzige Sprünge; Kürzel, die Textfeldern ihre Tasten nehmen.",
+   "numbers": "14 feste Kürzel; Bereiche: Titelleiste, Seitenleiste, Inhalt, Inspektor, Aktionszone",
+   "decisions": [
+    "D67",
+    "D84",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (F5a, F6a), D84; systems/sebaro/spec/02-components.md §4.19, §4.20; spec/07-voice.md §4.8",
+   "platforms": [
+    "desktop",
+    "web"
+   ],
+   "status": "entschieden",
+   "check": "Die Tabelle in spec/02 §4.19 hat 14 Zeilen ohne Dopplung und ohne AltGr-Taste; F6 erreicht jeden sichtbaren Bereich und gibt seinen letzten Fokus zurück.",
+   "example_hint": "Tabelle der 14 Kürzel mit macOS- und Windows-Form; falsch: ⌘\\ für die Seitenleiste.",
+   "note": "Die Kürzelprüfung ist noch kein Werkzeug der Werkstatt (offen). Im Browser behält der Browser ⌘N, ⇧⌘N, ⌘W und ⌃⇥; dort führen Menü und Palette.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "DSK-10",
+   "area": "plattform-desktop",
+   "title": "Dokument-Reiter 32 px, Kreuz am aktuellen",
+   "rule": "Zeig mehrere offene Dokumente als Dokument-Reiter (sb-doc-tabs) oben im Inhalt: 32 px, label, eine Haarlinie darunter, der aktuelle Reiter wie die Systemreiter mit 3-px-Ortslinie und Titelgewicht. Das Kreuz steht immer am aktuellen Reiter, an den anderen beim Zeigen oder Fokus, bei Touch an allen. Tastatur und Screenreader schließen mit Entf oder ⌘W; vor dem Schließen eines geänderten Dokuments fragt die App. Lange Namen werden am Ende gekürzt, der volle Name steht im title. Ist keins offen, sagt ein Satz, wie man eins öffnet.",
+   "rule_en": "Several open documents as document tabs (sb-doc-tabs) at the top of the content: 32 px, label, hairline below, the current tab with the 3 px place line and title weight; the cross always on the current tab, on others on hover or focus, under touch on all; keyboard and screen readers close with Delete or ⌘W; a changed document asks first; long names cut at the end with the full name as title; with none open a sentence says how to open one.",
+   "why": "Inhaber D91 F7a: Dokument-Reiter, 32 px, Kreuz am aktuellen Reiter. Die Systemreiter (NAV-08) wechseln Ansichten einer Sache, Dokument-Reiter öffnen und schließen. Das Kreuz ist nur ein Zeigerkürzel, weil ARIA in einer Reiterliste keine Taste erlaubt.",
+   "do": "<div class='sb-doc-tabs' role='tablist' aria-label='Offene Notizen'><span class='sb-doc-tabs__item' role='presentation'><button class='sb-doc-tabs__tab' role='tab' aria-selected='true' aria-keyshortcuts='Meta+W Delete'>Wochenplan</button><span class='sb-doc-tabs__close' aria-hidden='true' title='Schließen'>…</span></span>…</div>; <p class='sb-doc-tabs__none' hidden>Keine Notiz offen. Wähle eine im Ordner links.</p>",
+   "dont": "Das Kreuz als Taste in der Reiterliste; das Kreuz nur beim Zeigen; eine ungesicherte Änderung still schließen; ein gefüllter Reiter; 48-px-Reiter im Fenster.",
+   "numbers": "Reiter 32 px, 8–15 rem breit; Kreuz 16 px mit 24-px-Ziel, bei Touch 48 px; Ortslinie 3 px",
+   "decisions": [
+    "D67",
+    "D83",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (F7a); systems/sebaro/spec/02-components.md §4.21",
+   "platforms": [
+    "desktop",
+    "web"
+   ],
+   "status": "entschieden",
+   "check": "axe (aria-required-children); Entf und ⌘W schließen; nach dem letzten Reiter steht der Satz und bekommt den Fokus.",
+   "example_hint": "Zwei Reiter, der aktuelle mit Kreuz und Ortslinie; falsch: gefüllte Reiter mit Kreuz-Tasten an allen.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "DSK-11",
+   "area": "plattform-desktop",
+   "title": "Ziehen und Ablegen: das Ziel in Kobalt",
+   "rule": "Zeig beim Ziehen, was gezogen wird, wo es landet und ob es dort landen darf: Die gezogene Zeile behält einen 2-px-Tintenrand, der Ordner, der sie aufnimmt, einen 3-px-Rahmen in accent, zwischen zwei Zeilen steht eine 3-px-Linie in accent; ein Ziel, das nichts annimmt, bekommt keine Marke und sagt im title, warum. Keine gestrichelten Linien, kein Schatten, keine halbe Deckkraft. Jedes Ziehen hat einen Weg ohne Zeiger: „Verschieben nach …“ im „Mehr“-Menü und in „Bearbeiten“. Ist die Zeile danach nicht mehr zu sehen, sagt eine Kurzmeldung, wohin sie ging, mit „Rückgängig“.",
+   "rule_en": "Drag and drop shows what is dragged, where it lands and whether it may: the dragged row keeps a 2 px ink frame, a target folder a 3 px accent frame, a line between rows is 3 px accent; a refusing target gets no mark and says why in its title; no dashes, shadow or half opacity; every drag has a way without a pointer („Verschieben nach …“); a toast with „Rückgängig“ only when the row is no longer visible.",
+   "why": "Inhaber D91 F8a: Ziel in Kobalt, Rahmen um den Ordner, Linie zwischen Zeilen. Kobalt zeigt den Ort, an dem etwas ankommt (D37); WCAG 2.5.7 verlangt einen Weg ohne Ziehen.",
+   "do": "data-sb-drag an sb-row; data-sb-state='dragging' | 'drop-into' | 'drop-before' | 'drop-after'; data-sb-drop='none' am Papierkorb; dialog[data-sb-move-dialog]; Ereignis sb-move.",
+   "dont": "Ein Geisterbild mit halber Deckkraft; eine gestrichelte Ziellinie; das Ziel als getönte Fläche; Ziehen als einziger Weg; Löschen durch Ziehen in den Papierkorb ohne Dialog; eine Kurzmeldung für eine Verschiebung, die man sieht.",
+   "numbers": "Start nach 4 px; Zielrahmen und Ziellinie 3 px accent (--sb-border-width-strong); gezogene Zeile 2 px Tinte",
+   "decisions": [
+    "D37",
+    "D39",
+    "D78",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (F8a); systems/sebaro/spec/02-components.md §4.22",
+   "platforms": [
+    "desktop",
+    "web"
+   ],
+   "status": "entschieden",
+   "check": "„Verschieben nach …“ mit der Tastatur; Escape bricht ab; Dateien aus Finder oder Explorer in einem Tauri-Fenster nicht geprüft.",
+   "example_hint": "Baum mit gezogener Zeile und Zielordner im Kobaltrahmen; falsch: halb durchsichtiges Geisterbild und gestrichelte Linie.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "DSK-12",
+   "area": "plattform-desktop",
+   "title": "Mehrere Fenster, jedes eine volle Ansicht",
+   "rule": "Erlaube mehrere Hauptfenster einer App. Jedes Fenster ist eine volle Ansicht mit eigener Aktionszone, höchstens einer Hauptaktion, eigenen Bereichen und gespeicherten Breiten. „In neuem Fenster öffnen“ und ⇧⌘N öffnen eins, das Menü „Fenster“ listet sie. Das Fenster, das nicht vorne ist, lässt nur den aktuellen Ort in seinem Pfad in text-muted zurücktreten; kein Kobaltrahmen für das aktive. „Hell oder Dunkel“, „Farbton“ und „Bewegung immer reduzieren“ gelten für alle Fenster zugleich.",
+   "rule_en": "Several main windows: each is a full view (own action zone, at most one primary action, own areas and stored widths); „In neuem Fenster öffnen“ and ⇧⌘N open one, the menu „Fenster“ lists them; the window not in front only lets the current place of its path recede to text-muted, no cobalt frame for the active one; theme, tone and reduced motion apply to every window at once.",
+   "why": "Inhaber D91 F9a: „Ja, jedes Fenster ist eine volle Ansicht“. Zwei Notizen nebeneinander sind eine echte Aufgabe; Kobalt bleibt Ort und Fokus vorbehalten.",
+   "do": "html[data-sb-window-active='false'] setzt sb-window.js aus dem Fensterfokus; set_appearance in Rust setzt Grund und Thema jedes Fensters.",
+   "dont": "Ein Kobaltrahmen um das aktive Fenster; ausgegraute Fenster; Einstellungen als zweites Fenster; ein Fenster ohne Aktionszone.",
+   "numbers": "",
+   "decisions": [
+    "D74",
+    "D75",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (F9a); systems/sebaro/spec/02-components.md §4.24; spec/09-platform-web.md §13.1",
+   "platforms": [
+    "desktop"
+   ],
+   "status": "entschieden",
+   "check": "Zwei Fenster: nur der Pfad des hinteren tritt zurück; „Hell oder Dunkel“ im einen ändert beide.",
+   "example_hint": "Zwei Fenster, das hintere nur mit grauem Pfad; falsch: Kobaltrahmen um das vordere, das hintere ausgegraut.",
+   "note": "Ein Farbton-Knopf in einem anderen offenen Fenster folgt erst beim nächsten Öffnen der Einstellungen.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "DSK-13",
+   "area": "plattform-desktop",
+   "title": "Mitteilung nur im Hintergrund, Update als Wort",
+   "rule": "Schick eine Mitteilung des Systems nur, solange kein Fenster der App vorne ist; ist eins vorne, zeigt die Ansicht es selbst (Zeichen und Wort in der Zeile, Stand-Satz). Eine Mitteilung ist ein Satz, was wo passiert ist; ein Klick bringt die App an diese Stelle. Frag nach der Erlaubnis erst beim ersten Anlass, nach einem eigenen Satz, wofür; ein Schalter in den Einstellungen schaltet sie ab. Liegt ein Update bereit, zeigt die Titelleiste „Update bereit“ als Textaktion in Textfarbe mit Kobaltlinie: kein Punkt, kein Lindgrün, nie beim Start als Fenster. Ein Druck öffnet den Dialog „Update auf <Version>“ mit „Später“ · „Jetzt neu starten“; nichts startet ohne diesen Druck neu.",
+   "rule_en": "System notifications only while no window of the app is in front (otherwise the view shows it); one sentence saying what happened where, a click leads there; ask permission at the first occasion after an own sentence; a settings switch turns them off. A downloaded update shows „Update bereit“ as a text action in the title bar (no dot, no lime, never a window at start); a press opens „Update auf <Version>“ with „Später“ · „Jetzt neu starten“; nothing restarts without that press.",
+   "why": "Inhaber D91: Systembenachrichtigung nur, wenn das Fenster nicht vorne ist (F11a); Update als Wort in der Titelleiste (F12a). Wer vor dem Fenster sitzt, sieht es dort; ein Update ist nicht der nächste Schritt der Ansicht, also nicht lindgrün (D39).",
+   "do": "„„Umzug“ wurde auf zwei Geräten geändert.“; Schalter „Mitteilung, wenn das Fenster nicht vorne ist“; <button class='sb-text-action sb-text-action--compact'><svg …download/><span class='sb-window__word'>Update bereit</span></button>",
+   "dont": "Eine Mitteilung, während das Fenster vorne ist; Werbung oder Zahlen ohne Einheit in Mitteilungen; die Frage nach der Erlaubnis beim ersten Start; roter Punkt oder Badge für ein Update; ein Update-Fenster beim Start; Neustart ohne Zustimmung; „Jetzt aktualisieren!“.",
+   "numbers": "",
+   "decisions": [
+    "D39",
+    "D78",
+    "D83",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (F11a, F12a); systems/sebaro/spec/02-components.md §4.24; spec/07-voice.md §4.8, §4.9; spec/09-platform-web.md §13.1",
+   "platforms": [
+    "desktop"
+   ],
+   "status": "entschieden",
+   "check": "Review von Text und Ablauf; in einem Tauri-Fenster ist beides noch nicht gelaufen (offen).",
+   "example_hint": "Titelleiste mit „Update bereit“ und der Update-Dialog; falsch: roter Punkt am Zahnrad und lindgrünes „Jetzt aktualisieren!“.",
+   "note": "Regeln, Muster und Code stehen; in einem Tauri-Fenster ist beides noch nicht gelaufen.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "DSK-14",
+   "area": "plattform-desktop",
+   "title": "Fenstergrund aus der gespeicherten Wahl",
+   "rule": "Leg das Hauptfenster in Rust an, nicht in tauri.conf.json: Die App speichert „Hell oder Dunkel“ und „Farbton“ in ihrer eigenen Datei (appearance.json), wählt daraus den Grund des Fensters und das Systemthema und gibt die Wahl vor den Skripten der Seite an die Seite weiter. Die vier Gründe kommen beim Bauen aus dem exportierten tokens.json, nie als abgeschriebener Hex-Wert. Ändert die Seite die Wahl, setzt set_appearance Grund und Thema jedes Fensters.",
+   "rule_en": "Create the main window in Rust, not in tauri.conf.json: the app stores theme and tone in its own appearance.json, picks the window ground and system theme from it and hands the choice to the page before its scripts run; the four grounds come from the exported tokens.json at build time, never copied hex; set_appearance updates every window.",
+   "why": "Inhaber D91 F13a: Fenster in Rust anlegen, Grund nach der gespeicherten Wahl. So öffnet ein dunkles Fenster ohne weißen Blitz, auch mit dem warmen Farbton.",
+   "do": "\"windows\": [] in tauri.conf.json; build.rs liest color.bg und variants.warm.*.bg aus sebaro/tokens.json; ein Initialisierungsskript schreibt sb-theme und sb-tone für theme-init.js und setzt <html data-sb-platform>.",
+   "dont": "Ein fester Fenstergrund in tauri.conf.json; Hex-Werte im Rust-Code; die Wahl nur im localStorage der Webview; das Fenster unsichtbar starten und nach dem ersten Bild zeigen.",
+   "numbers": "vier Gründe: kühl hell, kühl dunkel, warm hell, warm dunkel",
+   "decisions": [
+    "D52",
+    "D75",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (F13a); systems/sebaro/spec/09-platform-web.md §13.1; tools/export_system.py --target tauri (tokens.json)",
+   "platforms": [
+    "desktop"
+   ],
+   "status": "entschieden",
+   "check": "Start im Dunkeln ohne weißen Rahmen auf jedem System; der Rust-Code kompiliert; in einem echten Tauri-Fenster nicht geprüft (offen).",
+   "example_hint": "Ein dunkles und ein warmes Fenster, die im richtigen Grund öffnen; falsch: weißer erster Rahmen vor der dunklen Ansicht.",
+   "note": "Auf macOS ist ein kurzer heller Rahmen der Webview möglich, weil Tauri dort nur den Fenstergrund setzt; nicht in einem echten Tauri-Fenster geprüft.",
+   "changed": "2026-10-21"
+  },
+  {
+   "id": "DSK-15",
+   "area": "plattform-desktop",
+   "title": "Inspektor kompakt: Beschriftung links, Feld 32 px",
+   "rule": "Setz Felder im Inspektor kompakt (sb-field--compact): die Beschriftung am Anfang in text-muted (eine Spalte von 5 rem bis 40 %), das Feld 32 px mit dem Wert in label; Hilfe und Fehler stehen darunter in der zweiten Spalte. Änderungen im Inspektor wirken sofort, deshalb hat er keine Hauptaktion. Bei Touch ist das Feld wieder 48 px; überall sonst steht die Beschriftung über einem 48-px-Feld (EIN-01).",
+   "rule_en": "Inspector fields are compact (sb-field--compact): label at the start in text-muted (a 5 rem to 40 % column), field 32 px with the value in label type, help and error below in the second column; changes apply at once, no primary action; under touch 48 px again; elsewhere the label stays above a 48 px field.",
+   "why": "Inhaber D91 F14a: „Kompakt: Beschriftung links, Feld 32 px“. Der Inspektor ist 280 px schmal; Beschriftungen über 48-px-Feldern bräuchten doppelt so viel Höhe.",
+   "do": "<div class='sb-field sb-field--compact'><label class='sb-field__label' for='f'>Ordner</label><div class='sb-field__control'><input id='f' value='Projekte'></div></div>",
+   "dont": "Platzhalter statt Beschriftung; kompakte Felder außerhalb des Inspektors; 32-px-Felder bei Touch; eine Taste „Übernehmen“ im Inspektor.",
+   "numbers": "Feld 32 px (bei Touch 48 px); Beschriftungsspalte 5 rem bis 40 %",
+   "decisions": [
+    "D67",
+    "D74",
+    "D91"
+   ],
+   "source": "DECISIONS.md D91 (F14a); systems/sebaro/spec/02-components.md §4.24",
+   "platforms": [
+    "desktop",
+    "web"
+   ],
+   "status": "entschieden",
+   "check": "axe (label); bei pointer: coarse sind die Felder 48 px.",
+   "example_hint": "Inspektor mit drei kompakten Feldern; falsch: Platzhalter statt Beschriftung und eine Taste „Übernehmen“.",
+   "changed": "2026-10-21"
   },
   {
    "id": "TEC-01",
@@ -4582,8 +5488,8 @@
    "status": "entschieden",
    "check": "check_site.py CHANGE: jede geänderte Regel steht unter „Unveröffentlicht“ und hat ein neues Datum; sync_from_design.py --verify-local.",
    "example_hint": "Auszug aus dem Änderungsprotokoll mit Regel-IDs; falsch: Regel ohne Eintrag geändert.",
-   "note": "Private Pakete (npm, Gradle) und das private Werkstatt-Repo werden eingerichtet; eine iOS-Seite mit SwiftUI-Bausteinen ist skizziert und wartet auf die Wahl des Inhabers. Vorlage-Repos je Produktart erst nach je einem erfolgreichen Projekt, eine eigene Mono-Schwester viel später (D88).",
-   "changed": "2026-10-20"
+   "note": "Private Pakete (npm, Gradle) und das private Werkstatt-Repo werden eingerichtet; die iOS-Bausteine sind gebaut (D91, MOB-05 bis MOB-08) und kommen über den Export (export_system.py --target ios). Vorlage-Repos je Produktart erst nach je einem erfolgreichen Projekt, eine eigene Mono-Schwester viel später (D88).",
+   "changed": "2026-10-21"
   }
  ]
 }

@@ -4,7 +4,9 @@
 // right state; the script only makes it change.
 //   .sb-claim-row__toggle   aria-expanded + hidden on the controlled note (claim rows, D40)
 //   .sb-switch              aria-checked; with data-sb-motion-setting it is „Bewegung immer reduzieren“ (D46): it
-//                           sets html[data-sb-motion="reduce"] and stores sb-motion (read again by theme-init.js)
+//                           sets html[data-sb-motion="reduce"] and stores sb-motion (read again by theme-init.js);
+//                           a menuitemcheckbox with data-sb-motion-setting (window menu „Darstellung“, F4b) is the
+//                           same setting, and every control of it keeps the same aria-checked
 //   [data-sb-demo-progress] specimen of D48: the primary action shows its own progress („ok“ or „fail“ run)
 //   .sb-chip[aria-pressed]  aria-pressed; one chosen chip per [data-sb-single] group (filter "Alle")
 //   [data-sb-opens="id"]    opens <dialog id> as a modal; the dialog's form method="dialog" closes it
@@ -53,6 +55,8 @@
       if (sw.hasAttribute("data-sb-motion-setting")) setMotion(on);
       return;
     }
+    var motionItem = closestIn(event, "[role='menuitemcheckbox'][data-sb-motion-setting]");
+    if (motionItem) { setMotion(motionItem.getAttribute("aria-checked") !== "true"); return; }
     var demo = closestIn(event, "[data-sb-demo-progress]");
     if (demo) { demoProgress(demo); return; }
 
@@ -116,7 +120,7 @@
     var root = document.documentElement;
     if (reduce) root.dataset.sbMotion = "reduce"; else delete root.dataset.sbMotion;
     try { if (reduce) localStorage.setItem("sb-motion", "reduce"); else localStorage.removeItem("sb-motion"); } catch (e) {}
-    document.querySelectorAll(".sb-switch[data-sb-motion-setting]").forEach(function (s) { s.setAttribute("aria-checked", String(reduce)); });
+    document.querySelectorAll("[data-sb-motion-setting]").forEach(function (s) { s.setAttribute("aria-checked", String(reduce)); });
   }
 
   function icon(href, cls) {
@@ -258,7 +262,7 @@
     document.querySelectorAll(".sb-range__track").forEach(syncRange);
     document.querySelectorAll("[data-sb-indeterminate]").forEach(function (box) { box.indeterminate = true; });
     var reduceSet = document.documentElement.getAttribute("data-sb-motion") === "reduce";
-    document.querySelectorAll(".sb-switch[data-sb-motion-setting]").forEach(function (s) { s.setAttribute("aria-checked", String(reduceSet)); });
+    document.querySelectorAll("[data-sb-motion-setting]").forEach(function (s) { s.setAttribute("aria-checked", String(reduceSet)); });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();

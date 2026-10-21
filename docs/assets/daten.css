@@ -1,7 +1,7 @@
 /* daten.css: page chrome and proposal patterns of daten.html. Not part of the system; products never load it.
  * Same discipline as sebaro.css: only var(--sb-*) tokens, no raw colours, no shadows, no tinted card grounds.
- * Classes start with "g-daten-". The one pattern built here whose rule is decided but whose class the system lacks
- * (the diff) is marked „Vorschlag, noch nicht im System“; forms that wait for the owner have no specimen here. */
+ * Classes start with "g-daten-". Since D91 every specimen here is a system class; the chrome only frames them and draws
+ * the deliberate "Nicht so" cases. */
 
 /* ------------------------------------------------------------------ item grid: specimen + rule + rule ids */
 .g-daten-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: var(--sb-space-10) var(--sb-spacing-group); align-items: start; }
@@ -13,6 +13,8 @@
 .g-daten-rule { margin: 0; max-inline-size: var(--sb-size-measure-prose); }
 .g-daten-refs { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .g-daten-refs a { font-family: var(--sb-font-family-mono); font-weight: var(--sb-type-code-weight); color: var(--sb-color-text); }
+/* where the component, its states and its markup live (bauteile.html), and which script it needs */
+.g-daten-more { margin: 0; max-inline-size: var(--sb-size-measure-prose); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 
 /* sample lines: value on the left, what it is on the right */
 .g-daten-samples { display: grid; gap: var(--sb-space-2); margin: 0; padding: 0; list-style: none; }
@@ -24,8 +26,7 @@
 .g-daten-narrow { inline-size: 11rem; max-inline-size: 100%; padding: var(--sb-space-3) var(--sb-space-3) var(--sb-space-3) 0; border-inline-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
 .g-daten-title-sample + .g-daten-title-sample { margin-block-start: var(--sb-space-3); }
 .g-daten-title-sample { margin: 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
-/* FAR-12: until the owner picks the mark tone, a search hit is a 1 px border-strong frame, never a ground */
-mark.g-daten-hit { padding: 0 var(--sb-space-0-5); border: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-small); background: transparent; color: inherit; }
+.g-daten-plain { margin: 0; }
 
 /* ------------------------------------------------------------------ charts beyond sb-chart */
 /* charts keep their drawn width (≤ 356 px, the content width at 390 px), so caption text stays 14 px (DAT-04);
@@ -37,28 +38,12 @@ mark.g-daten-hit { padding: 0 var(--sb-space-0-5); border: var(--sb-border-width
 .g-daten-cat-4 { fill: var(--sb-dataviz-categorical-4); }
 .g-daten-legend { display: flex; flex-wrap: wrap; gap: var(--sb-space-1) var(--sb-space-4); margin: var(--sb-space-2) 0 0; padding: 0; list-style: none; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .g-daten-legend svg { display: inline-block; inline-size: 12px; block-size: 12px; vertical-align: -1px; margin-inline-end: var(--sb-space-1); }
-/* DAT-10: from three series a legend, and the series differ in line style too (solid, dashed, dotted) */
-.g-daten-legend--lines { margin: 0 0 var(--sb-space-2); color: var(--sb-color-text); }
-.g-daten-legend--lines svg { inline-size: 24px; block-size: 8px; vertical-align: middle; margin-inline-end: var(--sb-space-2); overflow: visible; }
-.g-daten-series { fill: none; stroke-width: var(--sb-x-sebaro-chart-line-width); stroke-linecap: round; stroke-linejoin: round; }
-.g-daten-series--1 { stroke: var(--sb-dataviz-categorical-1); }
-.g-daten-series--2 { stroke: var(--sb-dataviz-categorical-2); stroke-dasharray: 8 5; }
-.g-daten-series--3 { stroke: var(--sb-dataviz-categorical-3); stroke-dasharray: 1 5; }
-.g-daten-rating { display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1); margin: 0; font-variant-numeric: var(--sb-type-numeric-variant); }
 .g-daten-stars { display: inline-flex; gap: 2px; color: var(--sb-color-text); }
 .g-daten-stars svg { inline-size: 20px; block-size: 20px; }
 .g-daten-wrong-up { color: var(--sb-color-success); }
 .g-daten-wrong-down { color: var(--sb-color-danger); }
 .g-daten-dot { display: inline-block; inline-size: 10px; block-size: 10px; border-radius: var(--sb-radius-pill); background: var(--sb-color-success); vertical-align: middle; }
 
-/* ------------------------------------------------------------------ diff (proposal) */
-.g-daten-diff { margin: 0; padding: var(--sb-space-3) 0; list-style: none; border-radius: var(--sb-radius-container); background: var(--sb-color-surface-sunken); font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); overflow-x: auto; }
-.g-daten-diff li { display: grid; grid-template-columns: 2.5rem auto; padding-inline-end: var(--sb-space-4); white-space: pre; }
-.g-daten-diff__sign { padding-inline-start: var(--sb-space-4); color: var(--sb-color-text-muted); }
-.g-daten-diff li[data-change] .g-daten-diff__sign { color: var(--sb-color-text); }
-.g-daten-diff li[data-change="removed"] { background: var(--sb-color-danger-subtle); }
-.g-daten-diff li[data-change="added"] { background: var(--sb-color-success-subtle); }
-.g-daten-diff__hunk { color: var(--sb-color-text-muted); }
 
 /* ------------------------------------------------------------------ code tones under the code block (FAR-11, D69) */
 .g-daten-tones { margin-block-start: var(--sb-space-4); }

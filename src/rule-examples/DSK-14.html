@@ -1,0 +1,21 @@
+<div class="g-examples">
+<div class="g-ex g-ex--do">
+  <p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p>
+  <div class="g-ex__stage">
+<div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">Rust</span></div><pre tabindex="0" role="region" aria-label="Fenster in Rust anlegen"><code><span class="sb-tok-keyword">let</span> ground = SEBARO_BG[(tone == Tone::Warm) <span class="sb-tok-keyword">as</span> usize][dark <span class="sb-tok-keyword">as</span> usize];
+WebviewWindowBuilder::new(app, <span class="sb-tok-string">"main"</span>, url)
+    .background_color(Color(ground.0, ground.1, ground.2, 255))
+    .theme(Some(<span class="sb-tok-keyword">if</span> dark { Theme::Dark } <span class="sb-tok-keyword">else</span> { Theme::Light }))
+    .initialization_script(&amp;appearance_script(&amp;a))
+    .build()?;</code></pre></div><p class="g-rx-d-note">SEBARO_BG schreibt build.rs beim Bauen aus dem exportierten tokens.json: kühl und warm, hell und dunkel.</p>
+  </div>
+  <p class="g-ex__note">Das Fenster entsteht in Rust, im Grund der gespeicherten Wahl (Hell oder Dunkel, Kühl oder Warm), und die Seite bekommt die Wahl vor ihren Skripten. So öffnet ein dunkles Fenster ohne weißen Blitz.</p>
+</div>
+<div class="g-ex g-ex--dont">
+  <p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p>
+  <div class="g-ex__stage">
+<div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">JSON</span></div><pre tabindex="0" role="region" aria-label="Fester Fenstergrund in tauri.conf.json"><code>{ <span class="sb-tok-string">"app"</span>: { <span class="sb-tok-string">"windows"</span>: [ { <span class="sb-tok-string">"label"</span>: <span class="sb-tok-string">"main"</span>, <span class="sb-tok-string">"backgroundColor"</span>: <span class="sb-tok-string">"#FFFFFF"</span> } ] } }</code></pre></div>
+  </div>
+  <p class="g-ex__note">Ein fester weißer Grund in tauri.conf.json und ein abgeschriebener Hex-Wert: Jedes dunkle Fenster blitzt erst weiß auf, und der Wert veraltet mit der Palette.</p>
+</div>
+</div>

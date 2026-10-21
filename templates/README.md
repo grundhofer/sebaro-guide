@@ -16,6 +16,6 @@ Starting points for new sebaro projects. Copy, then adapt; nothing here is loade
 2. **Get the system files**: web → copy `docs/sebaro/` of this repo into the project (e.g. `public/sebaro/` or
    `src/sebaro/`); Tauri/macOS/Android → `export_system.py` in sebaroDesign (see [AGENTS.md §4](../AGENTS.md)).
 3. **Paste the agent snippet** into the project's `AGENTS.md`.
-4. **Build screens from recipes**: `docs/app.html`, `docs/web.html`, `docs/desktop.html`; components from
+4. **Build screens from recipes**: `docs/app.html`, `docs/ios.html`, `docs/web.html`, `docs/desktop.html`; components from
    `docs/bauteile.html`; data from `docs/daten.html`.
 5. **Review with the checklist** in both modes; record exceptions with `design-exception.md`.

@@ -31,6 +31,9 @@
 // facts texts and note labels take that language and fall back to the file's meta.lang (FACTS-CONTRACT §5.1).
 // window.sbMessages = { "sb-facts": { fr: { … every key of MESSAGES.de … } } } before this script adds a language
 // (a missing key falls back to German); the note labels of check_facts.py carry only de and en.
+// Places (D82, spec/04 §7.6): a remote place stands with the `pin` icon before it, in the compact form before
+// „<City> (<CC>)“ (16 px, from the 24 master) and in the claim row of `places.<id>` before the claim (20 px, hanging
+// like the result glyph). The pin is aria-hidden and adds no word: the FACTS-CONTRACT wording stays exactly as it is.
 (function () {
   "use strict";
   var SVGNS = "http://www.w3.org/2000/svg";
@@ -382,11 +385,13 @@
     btn.setAttribute("aria-controls", id);
     var result = el("span", "sb-claim-row__result");
     append(result, [resultGlyph(note), document.createTextNode(resultLine(note, opts.forVersion))]);
-    append(btn, [el("span", "sb-claim-row__claim", cap(hidden ? w.label : w.text)), result, icon("chevron-down", "sb-claim-row__chevron")]);
+    var head = ref.split(".")[0], claim = el("span", "sb-claim-row__claim", cap(hidden ? w.label : w.text));
+    if (head === "places" && isRemote(placeById(P, ref.slice(7)))) claim.insertBefore(icon("pin", "sb-icon--20"), claim.firstChild);
+    append(btn, [claim, result, icon("chevron-down", "sb-claim-row__chevron")]);
     var body = el("div", "sb-claim-row__note sb-note__body");
     body.id = id;
     if (!open) body.hidden = true;
-    var head = ref.split(".")[0], path = head === "paths" ? pathById(P, ref.slice(6)) : null;
+    var path = head === "paths" ? pathById(P, ref.slice(6)) : null;
     noteBody(P, note, body, {
       pathLine: path && path.trigger !== "never" && !hidden ? pathLine(P, path) || null : null,
       checksHref: opts.checksHref, checksText: m("howChecked")
@@ -495,7 +500,7 @@
         if (!/^places\./.test(ref) || c.refs.length !== 1) return;
         var pl = placeById(P, ref.slice(7));
         if (!isRemote(pl)) return;
-        if (c.state === "shown") cells.push(cell(document.createTextNode(placeLoc(pl)))); else hiddenCount++;
+        if (c.state === "shown") cells.push(cell(append(el("span", "sb-facts-line__place"), [icon("pin", "sb-icon--16"), document.createTextNode(placeLoc(pl))]))); else hiddenCount++;
       });
       if (hiddenCount) {
         var href = target.getAttribute("data-sb-full-href");

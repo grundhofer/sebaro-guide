@@ -21,6 +21,9 @@
  * underline).
  * Layout follows its place, not the screen (D80, spec/02 §5.1-§5.3): sb-stack, sb-cluster, sb-form-grid; the
  * containers sb-page, sb-content, sb-view and sb-window. Windows are denser: data-sb-density="window" (section 7a).
+ * Round 6 stage 2b (D91, 2026-10-21): category, mark and signed numbers, charts and classed scales (section 6); board,
+ * sticky group head, timeline, diff, rating, calendar, quote, intro, about head, audio, video, place (section 6);
+ * website patterns (sections 2, 3, 6, 9); the window frame of the sketch answers F1a-F14a (section 7b).
  * Static state hooks for the component sheet and screenshot tests: .is-hover, .is-pressed, .is-focus, .is-visited.
  * State itself is carried by ARIA (aria-current, aria-expanded, aria-pressed, aria-checked, aria-selected,
  * aria-invalid, aria-busy, :disabled) wherever ARIA has it; the one data attribute for states ARIA has no word for is
@@ -185,6 +188,30 @@ body.sb-page { container: sb-page sb-content / inline-size; }
   .sb-form-grid__actions > * { flex: 1 1 100%; }
 }
 
+/* form result (D91 W1a; spec/02 §5.4.1) */
+/* a form that was sent is replaced by its result: status glyph + word as the heading, a sentence, a summary and the
+   next step as a text link (no primary action: there is no next step that needs one, D74). The server renders it
+   (POST → 303 → GET, so a reload keeps it); sb-form.js does the same in place. [hidden] must win over the display of
+   the layout blocks */
+.sb-form-grid[hidden], .sb-form-result[hidden] { display: none; }
+/* a form on a page keeps the reading measure (70 ch): one sentence per field label, no 1300 px textarea; the result
+   that replaces it keeps the same measure */
+.sb-form-grid--measure, .sb-form-result { max-inline-size: var(--sb-size-measure-prose); }
+.sb-form-result__title {
+  display: flex; align-items: center; gap: var(--sb-space-2); margin: 0;
+  font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); color: var(--sb-color-text);
+}
+.sb-form-result__title > .sb-icon { flex: none; color: var(--sb-color-success); }
+.sb-form-result__text { margin: 0; }
+/* the failure reason of a website form (D48, D83 (2)): a sentence in text colour with the error glyph in danger,
+   on a line of its own in the actions row, right before the button; empty = not shown */
+.sb-form-grid__message {
+  flex: 1 1 100%; display: flex; align-items: flex-start; gap: var(--sb-space-1); margin: 0;
+  font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); color: var(--sb-color-text);
+}
+.sb-form-grid__message:empty { display: none; }
+.sb-form-grid__message > .sb-icon { flex: none; margin-block-start: 4px; color: var(--sb-color-danger); }
+
 /* table of contents: a list beside the article from 1024 px, a <details> row below */
 .sb-toc { font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
 .sb-toc__title { display: none; margin: 0 0 var(--sb-space-2); font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); color: var(--sb-color-text-muted); }
@@ -211,6 +238,34 @@ body.sb-page { container: sb-page sb-content / inline-size; }
   .sb-toc__title { display: block; }
   .sb-toc ol { margin: 0; }
   .sb-toc a { min-block-size: var(--sb-size-control-sm); padding-block: var(--sb-space-1); }
+}
+
+/* docs navigation groups (D91 W4b; spec/02 §5.4.4) */
+/* a documentation nav is sb-toc with aria-current="page" (spec/02 §4.5); from about eight pages its pages sit in
+   groups that open and close: each group a native <details class="sb-toc__group">, its summary a 48 px row with the
+   twist (chevron-right--16, turned 90° when open, like the tree) and the group's word, then the number of its pages
+   („3 Seiten“), so a closed group still says what it holds. The server opens the group of the current page; the
+   current page keeps the 3 px place line of sb-toc. These rules undo sb-toc's own summary row (frame, hidden from
+   1024 px, chevron turned 180°), which belongs to the outer <details> only */
+.sb-toc .sb-toc__group-head {
+  display: flex; align-items: center; justify-content: flex-start; gap: var(--sb-space-2);
+  min-block-size: var(--sb-size-target-touch); padding: 0 var(--sb-space-2) 0 calc(var(--sb-space-1) + var(--sb-border-width-strong));
+  border: 0; border-radius: 0; box-sizing: border-box; cursor: pointer; list-style: none;
+  font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); color: var(--sb-color-text);
+}
+.sb-toc .sb-toc__group-head::-webkit-details-marker { display: none; }
+.sb-toc .sb-toc__group-head:hover > .sb-toc__group-name, .sb-toc .sb-toc__group-head.is-hover > .sb-toc__group-name { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
+.sb-toc .sb-toc__group > .sb-toc__group-head > .sb-icon { flex: none; color: var(--sb-color-text-muted); transform: none; transition: transform var(--sb-motion-duration-short) var(--sb-motion-easing-standard); }
+/* (0,5,0) and (0,4,0): above sb-toc's „.sb-toc details[open] summary .sb-icon“ (0,3,2), which the open outer row would
+   otherwise apply to every group head */
+.sb-toc .sb-toc__group[open] > .sb-toc__group-head > .sb-icon { transform: rotate(90deg); }
+.sb-toc .sb-toc__group > .sb-toc__group-head:dir(rtl) > .sb-icon { scale: -1 1; }
+.sb-toc__group-name { flex: 1 1 auto; min-inline-size: 0; }
+.sb-toc__group-count { flex: none; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant); }
+.sb-toc .sb-toc__group > ol { margin: 0 0 var(--sb-space-2); }
+.sb-toc .sb-toc__group > ol a { padding-inline-start: calc(var(--sb-space-1) + var(--sb-space-4) + var(--sb-space-2)); }   /* the page word under the group word */
+@media (min-width: 1024px) {
+  .sb-toc .sb-toc__group-head { min-block-size: var(--sb-size-control-sm); }
 }
 
 /* an app view: web app, Tauri window, phone stand-in (spec/03 §2.5) */
@@ -341,6 +396,16 @@ body.sb-page { container: sb-page sb-content / inline-size; }
   .sb-site-nav { margin-inline-start: var(--sb-space-10); }
 }
 
+/* language switch, page missing (D91 W7a; spec/09 §18.2) */
+/* the other language only links to the same page; where that page does not exist, its code stands grey and is no
+   link (a screen reader hears why). Same box as a link, so the header keeps its measured widths (D83 (4)) */
+.sb-language-switch__missing {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-block-size: var(--sb-size-target-touch); min-inline-size: var(--sb-size-target-touch);
+  padding: 0 6px; box-sizing: border-box; border-block-end: var(--sb-border-width-strong) solid transparent;
+  font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); color: var(--sb-color-text-muted);
+}
+
 .sb-site-footer {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sb-space-2) var(--sb-spacing-group);
   padding: var(--sb-space-6) var(--sb-spacing-gutter); box-sizing: border-box;
@@ -354,6 +419,12 @@ body.sb-page { container: sb-page sb-content / inline-size; }
   @media (min-width: 1024px) { .sb-site-footer { padding-inline: var(--sb-spacing-gutter-wide); } }
 }
 @container sb-page (width >= 1024px) { .sb-site-footer { padding-inline: var(--sb-spacing-gutter-wide); } }
+/* footer „Darstellung“ (D91 Z3a, C4c; spec/09 §6.2): the website's choice „Farbton: Kühl · Warm“ (sb-tone.js). The
+   group starts hidden and the script shows it, so a page without the script shows no dead control */
+.sb-site-footer__display { display: grid; gap: var(--sb-space-1); min-inline-size: min(100%, 16rem); margin: 0; }
+.sb-site-footer__display[hidden] { display: none; }
+.sb-site-footer__display > h2 { margin: 0; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); color: var(--sb-color-text); }
+.sb-site-footer__display .sb-segmented > legend { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 
 /* ===================================================================== 4 actions (only the primary action is filled) */
 
@@ -703,6 +774,50 @@ body.sb-page { container: sb-page sb-content / inline-size; }
 .sb-status--danger > .sb-icon { color: var(--sb-color-danger); }
 .sb-status--neutral > .sb-icon { color: var(--sb-color-text-muted); }
 
+/* category (D73, D91 C1b; spec/01 §1.9): content the user files himself. A 10 px dot (or the glyph inside) in the tone
+   the user chose, always next to the word in text; never a fill, never text colour, never an app-assigned state.
+   .sb-category alone (no tone chosen) shows the word only */
+.sb-category { display: inline-flex; align-items: center; gap: var(--sb-space-2); min-inline-size: 0; color: var(--sb-color-text); }
+.sb-category:is(.sb-category--1, .sb-category--2, .sb-category--3, .sb-category--4, .sb-category--5, .sb-category--6):not(:has(> .sb-icon))::before {
+  content: ""; flex: none; inline-size: 10px; block-size: 10px; border-radius: var(--sb-radius-pill); background: currentColor;
+}
+.sb-category > .sb-icon { flex: none; }
+.sb-category--1::before, .sb-category--1 > .sb-icon { color: var(--sb-category-1); }
+.sb-category--2::before, .sb-category--2 > .sb-icon { color: var(--sb-category-2); }
+.sb-category--3::before, .sb-category--3 > .sb-icon { color: var(--sb-category-3); }
+.sb-category--4::before, .sb-category--4 > .sb-icon { color: var(--sb-category-4); }
+.sb-category--5::before, .sb-category--5 > .sb-icon { color: var(--sb-category-5); }
+.sb-category--6::before, .sb-category--6 > .sb-icon { color: var(--sb-category-6); }
+
+/* mark (D73, D91 C2a; spec/01 §1.9): highlighter and search hit. The fill colours, the 2 px edge at the bottom carries
+   the shape (>= 3:1 on every ground); the word keeps its width and the line does not jump. The current hit of a search
+   (aria-current="true") takes a 3 px edge in text, and the search says „Treffer n von m“ in words. ::highlight() names
+   for the CSS Custom Highlight API: sb-mark, sb-mark-current */
+mark, .sb-mark {
+  background: var(--sb-mark); color: inherit;
+  border-block-end: var(--sb-x-sebaro-mark-edge-width) solid var(--sb-mark-edge);
+}
+mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var(--sb-border-width-strong) solid var(--sb-color-text); }
+::highlight(sb-mark) {
+  background-color: var(--sb-mark); color: inherit;
+  text-decoration: underline var(--sb-x-sebaro-mark-edge-width) var(--sb-mark-edge); text-underline-offset: 0.2em;
+}
+::highlight(sb-mark-current) {
+  background-color: var(--sb-mark); color: inherit;
+  text-decoration: underline var(--sb-border-width-strong) var(--sb-color-text); text-underline-offset: 0.2em;
+}
+
+/* signed number (D73, D91 C3a; spec/01 §1.9): for number apps. The colour follows the sign and comes only together with
+   the sign (+, − U+2212) and the arrow icon; the word after it stays text. Zero has no arrow and stays text. The
+   colour says the direction, not whether it is good */
+.sb-signed {
+  display: inline-flex; align-items: center; gap: var(--sb-space-1); white-space: nowrap; color: var(--sb-color-text);
+  font-weight: var(--sb-type-body-strong-weight); font-variant-numeric: var(--sb-type-numeric-variant);
+}
+.sb-signed > .sb-icon { flex: none; }
+.sb-signed--plus { color: var(--sb-color-success); }
+.sb-signed--minus { color: var(--sb-color-danger); }
+
 /* tag: an outlined word (platform, "Verfügbar", "Beta"), never a status colour; demo marker: the same frame in caption */
 .sb-tag, .sb-demo-marker {
   display: inline-flex; align-items: center; gap: var(--sb-space-1); padding: 1px var(--sb-space-2); box-sizing: border-box;
@@ -867,36 +982,256 @@ body.sb-page { container: sb-page sb-content / inline-size; }
 .sb-stat__label { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .sb-stat__value { margin: 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); font-variant-numeric: var(--sb-type-numeric-variant); }
 
-/* charts (spec/01 §8): SVG. Labelled bars in border-strong (chart.bar), only the current period in accent
-   (chart.bar-current, the current place); target line dashed text-muted with its label, every value as text.
-   Labelled rows (.sb-chart__rows) use the same two: the label carries the value, colour carries nothing (fix stage
-   AD07). Categorical colours (.sb-chart__fill--n) only for unlabelled overlapping series, always with direct labels */
-.sb-chart { margin: 0; }
-.sb-chart svg { display: block; inline-size: 100%; block-size: auto; overflow: visible; }
-.sb-chart__bar { fill: var(--sb-x-sebaro-chart-bar); }
-.sb-chart__bar--current { fill: var(--sb-x-sebaro-chart-bar-current); }
-.sb-chart__grid { stroke: var(--sb-x-sebaro-chart-grid); stroke-width: 1; }
-.sb-chart__axis { stroke: var(--sb-x-sebaro-chart-axis); stroke-width: 1; }
-.sb-chart__target { stroke: var(--sb-color-text-muted); stroke-width: 1; stroke-dasharray: 4 4; }
-.sb-chart__label { fill: var(--sb-color-text-muted); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: var(--sb-type-numeric-variant); }
-.sb-chart__label--current { fill: var(--sb-color-text); font-weight: var(--sb-type-title-weight); }
-.sb-chart__value { fill: var(--sb-color-text); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: var(--sb-type-numeric-variant); }
-.sb-chart__value--current { font-weight: var(--sb-type-title-weight); }
-.sb-chart figcaption { margin-block-start: var(--sb-space-2); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+/* charts (spec/01 §8, spec/02 §3.7; D83 (10), D91 G1a-G10a): every word and number of a chart is HTML in
+   type.caption (14 px at any width); SVG draws shapes only and stretches with its column
+   (preserveAspectRatio="none"), strokes keep their width (vector-effect). Positions are SVG geometry (a bar's
+   <svg height="62.5%">) or the hooks data-sb-y / data-sb-span at the end of this block; no style attribute. Grey by
+   default (chart.bar), accent only for the current period or the latest point (chart.bar-current); colour scales
+   only in the classes of the block after this one (spec/01 §8.1). The old whole-chart SVG with <text> stays for
+   one version (deprecated, end of this block) */
+/* the figure: optional legend (G9a) above, plot, optional table, caption */
+.sb-chart { display: grid; gap: var(--sb-space-3); justify-items: stretch; margin: 0; min-inline-size: 0; }
+.sb-chart figcaption { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+
+/* plot: [ticks] [area] [ends] over [slots] [edges]. One caption line of head room above the area holds the label of
+   the highest value; tick and end labels sit centred on their value */
+.sb-chart__plot {
+  --sb-chart-height: calc(var(--sb-space-16) * 2);   /* 128 px; a product may set it on .sb-chart__plot */
+  --sb-chart-line: calc(var(--sb-type-caption-size) * var(--sb-type-caption-line-height));
+  display: grid; grid-template-columns: max-content minmax(0, 1fr) max-content;
+  grid-template-areas: "ticks area ends" ". slots ." ". edges ." ". unit .";
+  padding-block-start: var(--sb-chart-line); min-inline-size: 0;
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: var(--sb-type-numeric-variant);
+}
+.sb-chart__area { grid-area: area; position: relative; block-size: var(--sb-chart-height); min-inline-size: 0; }
+.sb-chart .sb-chart__shapes {
+  position: absolute; inset: 0; display: block; inline-size: 100%; block-size: 100%; overflow: visible;
+}
+.sb-chart__shapes * { vector-effect: non-scaling-stroke; }
+
+/* labels at a value: ticks before the area (G9a), ends after it (G2a ticks, the current value, line ends) */
+.sb-chart__ticks, .sb-chart__ends {
+  display: grid; grid-template: minmax(0, 1fr) / max-content; margin: 0; padding: 0; list-style: none;
+  color: var(--sb-color-text-muted); white-space: nowrap;
+}
+.sb-chart__ticks { grid-area: ticks; justify-items: end; padding-inline-end: var(--sb-space-2); }
+.sb-chart__ends { grid-area: ends; justify-items: start; padding-inline-start: var(--sb-space-2); }
+.sb-chart__ticks > li, .sb-chart__ends > li { grid-area: 1 / 1; align-self: end; translate: 0 50%; }
+.sb-chart__end--current { color: var(--sb-color-text); font-weight: var(--sb-type-title-weight); }
+.sb-chart__end--series { color: var(--sb-color-text); }
+
+/* x: one slot per data point, equal width; the slot row lines up with the bars and with the points of a line,
+   which sit at slot centres. --current is the current period (title weight, like its accent bar) */
+.sb-chart__slots {
+  grid-area: slots; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr);
+  margin: var(--sb-space-1) 0 0; padding: 0; list-style: none; color: var(--sb-color-text-muted);
+}
+.sb-chart__slots > li { display: grid; justify-items: center; min-inline-size: 0; }
+.sb-chart__slots--start > li { justify-items: start; white-space: nowrap; }   /* a month over its weeks: data-sb-span (G2a) */
+.sb-chart__label { color: var(--sb-color-text-muted); }
+.sb-chart__value { color: var(--sb-color-text); }
+.sb-chart__slots > [aria-current] > * { color: var(--sb-color-text); font-weight: var(--sb-type-title-weight); }
+/* histogram class boundaries (G5a): N + 1 labels centred on the edges of N bins, the unit once below */
+.sb-chart__edges {
+  grid-area: edges; display: flex; justify-content: space-between; margin: var(--sb-space-1) 0 0; padding: 0;
+  list-style: none; color: var(--sb-color-text-muted);
+}
+.sb-chart__edges > li { display: flex; justify-content: center; inline-size: var(--sb-space-8); margin-inline: calc(-1 * var(--sb-space-4)); white-space: nowrap; }
+.sb-chart__unit { grid-area: unit; margin: var(--sb-space-1) 0 0; text-align: center; color: var(--sb-color-text-muted); }
+
+/* bars (one series) and bins (G5a): one column per slot over the area; the bar is an SVG as high as its value
+   (height="<value %>" on the <svg>, a presentation attribute and CSP-safe; viewBox 0 0 1 1 with one rect) standing on
+   the base line (drawn by the list itself), so the count of a bin (data-sb-y = the same %) stands on plain ground above
+   it, with no shape under its text */
+.sb-chart__bars {
+  position: absolute; inset: 0; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr); margin: 0; padding: 0; list-style: none;
+  border-block-end: var(--sb-border-width-hairline) solid var(--sb-x-sebaro-chart-axis);   /* the base line the bars stand on */
+}
+.sb-chart__bars--dense { column-gap: var(--sb-space-0-5); }   /* histogram: bins touch, 2 px apart */
+.sb-chart__bars > li { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); min-inline-size: 0; }
+.sb-chart .sb-chart__bars svg { grid-area: 1 / 1; align-self: end; display: block; inline-size: 100%; min-block-size: 0; overflow: visible; }   /* no block-size: the height attribute sets it */
+.sb-chart__count { grid-area: 1 / 1; align-self: end; justify-self: center; padding-block-end: var(--sb-space-0-5); color: var(--sb-color-text); }
+
+/* shapes */
+.sb-chart__bar, .sb-chart__fill { fill: var(--sb-x-sebaro-chart-bar); }
+.sb-chart__bar--current, .sb-chart__fill--current { fill: var(--sb-x-sebaro-chart-bar-current); }
+.sb-chart__grid { stroke: var(--sb-x-sebaro-chart-grid); stroke-width: var(--sb-border-width-hairline); }
+.sb-chart__axis, .sb-chart__zero { stroke: var(--sb-x-sebaro-chart-axis); stroke-width: var(--sb-border-width-hairline); }
+.sb-chart__target { stroke: var(--sb-color-text-muted); stroke-width: var(--sb-border-width-hairline); stroke-dasharray: 4 4; }
+/* line (G2a): one series is grey (chart.bar, spec/01 §8), 2 px; the latest point („Jetzt“) is a dot in the accent,
+   drawn as a zero-length line with a round cap so the stretched plot keeps it round */
+.sb-chart__line {
+  fill: none; stroke: var(--sb-x-sebaro-chart-bar); stroke-width: var(--sb-x-sebaro-chart-line-width);
+  stroke-linejoin: round; stroke-linecap: round;
+}
+.sb-chart__point { fill: none; stroke: var(--sb-x-sebaro-chart-bar); stroke-width: calc(var(--sb-space-2)); stroke-linecap: round; }
+.sb-chart__point--current { stroke: var(--sb-x-sebaro-chart-bar-current); }
+/* several series (D83 (10), G9a): categorical colours in fixed order, each with its own line style, so the series
+   stay apart without colour: 1 and 4 solid, 2 and 5 dashed, 3 and 6 dotted */
+.sb-chart__line--1 { stroke: var(--sb-dataviz-categorical-1); }
+.sb-chart__line--2 { stroke: var(--sb-dataviz-categorical-2); stroke-dasharray: 6 4; stroke-linecap: butt; }
+.sb-chart__line--3 { stroke: var(--sb-dataviz-categorical-3); stroke-dasharray: 0 5; }
+.sb-chart__line--4 { stroke: var(--sb-dataviz-categorical-4); }
+.sb-chart__line--5 { stroke: var(--sb-dataviz-categorical-5); stroke-dasharray: 6 4; stroke-linecap: butt; }
+.sb-chart__line--6 { stroke: var(--sb-dataviz-categorical-6); stroke-dasharray: 0 5; }
+
+/* legend (G9a): above the plot, from three series on; each key shows colour and line style; order = order of
+   the line ends from the top */
+.sb-chart__legend {
+  display: flex; flex-wrap: wrap; gap: var(--sb-space-1) var(--sb-space-4); margin: 0; padding: 0; list-style: none;
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking);
+}
+.sb-chart__legend > li { display: inline-flex; align-items: center; gap: var(--sb-space-2); }
+.sb-chart .sb-chart__key { display: block; flex: none; inline-size: var(--sb-size-icon-lg); block-size: var(--sb-space-2); overflow: visible; }
+
+/* labelled rows (G4b): name and value as text, the fill on a grey track that is the whole (100 %);
+   several unlabelled overlapping series only with .sb-chart__fill--1…6 and direct labels */
 .sb-chart__rows { display: grid; gap: var(--sb-space-2); margin: 0; padding: 0; list-style: none; }
 .sb-chart__row { display: grid; grid-template-columns: 8rem minmax(0, 1fr); align-items: center; column-gap: var(--sb-space-3); }
 .sb-chart__name { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
 .sb-chart__name b { font-weight: var(--sb-type-label-weight); font-variant-numeric: var(--sb-type-numeric-variant); }
-.sb-chart__row svg { block-size: 12px; }
+.sb-chart .sb-chart__row > svg { display: block; inline-size: 100%; block-size: var(--sb-space-3); overflow: visible; }
 .sb-chart__track { fill: var(--sb-color-surface-sunken); }
-.sb-chart__fill { fill: var(--sb-x-sebaro-chart-bar); }
-.sb-chart__fill--current { fill: var(--sb-x-sebaro-chart-bar-current); }
 .sb-chart__fill--1 { fill: var(--sb-dataviz-categorical-1); }
 .sb-chart__fill--2 { fill: var(--sb-dataviz-categorical-2); }
 .sb-chart__fill--3 { fill: var(--sb-dataviz-categorical-3); }
 .sb-chart__fill--4 { fill: var(--sb-dataviz-categorical-4); }
 .sb-chart__fill--5 { fill: var(--sb-dataviz-categorical-5); }
 .sb-chart__fill--6 { fill: var(--sb-dataviz-categorical-6); }
+
+/* deviation (G7a): bars leave a zero line to both sides in two tones of the diverging scale (classes 2 and 4,
+   ≥ 3 : 1 on every ground); sign, arrow and value stay text, the tone only repeats the direction. The head names
+   both sides and the midpoint in words. Columns: name | bar | value, shared by every row (subgrid) */
+.sb-chart__diverging {
+  display: grid; grid-template-columns: max-content minmax(0, 1fr) max-content; column-gap: var(--sb-space-3);
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: var(--sb-type-numeric-variant);
+}
+.sb-chart__diverging-head {
+  grid-column: 2; display: grid; grid-template-columns: minmax(0, 1fr) max-content minmax(0, 1fr); column-gap: var(--sb-space-2);
+  margin: 0 0 var(--sb-space-1); color: var(--sb-color-text-muted);
+}
+.sb-chart__diverging-head > :first-child { justify-self: start; }
+.sb-chart__diverging-head > :last-child { justify-self: end; }
+.sb-chart__rows--diverging { grid-column: 1 / -1; grid-template-columns: subgrid; row-gap: 0; }
+.sb-chart__rows--diverging > .sb-chart__row { grid-column: 1 / -1; grid-template-columns: subgrid; align-items: stretch; min-block-size: var(--sb-size-control-sm); }
+.sb-chart__rows--diverging .sb-chart__name { align-self: center; }
+.sb-chart .sb-chart__rows--diverging .sb-chart__row > svg { block-size: 100%; }
+.sb-chart__fill--less { fill: var(--sb-dataviz-diverging-2); }
+.sb-chart__fill--more { fill: var(--sb-dataviz-diverging-4); }
+.sb-chart__delta { display: inline-flex; align-items: center; justify-self: end; align-self: center; gap: var(--sb-space-1); color: var(--sb-color-text); }
+.sb-chart__delta > .sb-icon { flex: none; }
+
+/* heatmap (G6a): a table of days; colour only in the cell, in the four classes of dataviz.sequential (colours lane,
+   spec/01 §8.1: ground = class 0, neighbours ≥ 1.6 : 1, more is farther from the ground in both modes, G10a).
+   The legend above names the range of every class. Each cell holds its value as text for assistive technology
+   (.sb-visually-hidden); sb-chart.js turns the table into one Tab stop with arrow keys and shows the focused or
+   pointed cell in .sb-chart__readout. A day without data is the framed empty cell, never class 1. Today is the place
+   in time: the 3 px place line in accent at the foot of the cell, 2 px under its fill (spec/02 §0.2, like the
+   calendar's chosen day), a shape the focus ring never takes: focus is the 2 px frame all round, outside the cell */
+.sb-heatmap {
+  inline-size: calc(100% + 2 * var(--sb-space-1)); max-inline-size: 26rem; margin: 0 calc(-1 * var(--sb-space-1));
+  table-layout: fixed; border-collapse: separate; border-spacing: var(--sb-space-1);
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: var(--sb-type-numeric-variant);
+}
+.sb-heatmap th { padding: 0; font: inherit; color: var(--sb-color-text-muted); text-align: center; }
+.sb-heatmap thead > tr > :first-child { inline-size: 4.5rem; }
+.sb-heatmap tbody th { text-align: start; white-space: nowrap; }
+.sb-heatmap td { position: relative; padding: 0; }
+.sb-heatmap td > .sb-scale-cell { display: block; inline-size: 100%; block-size: auto; aspect-ratio: 1; }
+.sb-heatmap td[aria-current="date"] > .sb-scale-cell,
+.sb-heatmap__today-key {
+  border-block-end: var(--sb-border-width-strong) solid var(--sb-color-accent); padding-block-end: var(--sb-space-0-5);
+  background-clip: content-box; border-end-start-radius: 0; border-end-end-radius: 0;
+}
+.sb-heatmap__today-key { background: none; }
+.sb-chart__readout {
+  margin: 0; min-block-size: calc(var(--sb-type-caption-size) * var(--sb-type-caption-line-height));
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: var(--sb-type-numeric-variant);
+  color: var(--sb-color-text);
+}
+
+/* the values as a table (G2a and every chart whose shapes carry numbers): a 48 px summary row */
+.sb-chart__data > summary {
+  display: inline-flex; align-items: center; gap: var(--sb-space-2); min-block-size: var(--sb-size-target-touch);
+  font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); color: var(--sb-color-text); cursor: pointer; list-style: none;
+}
+.sb-chart__data > summary::-webkit-details-marker { display: none; }
+.sb-chart__data > summary > .sb-icon { color: var(--sb-color-text-muted); }
+.sb-chart__data[open] > summary > .sb-icon { transform: rotate(180deg); }
+
+/* sparkline (G3a): the number first, the line after it as an accessory, 96 × 28 px, aria-hidden, no axis; the last
+   point in the accent; the same period as the number names; never a colour for good or bad */
+.sb-stat__value:has(> .sb-sparkline) { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1) var(--sb-space-3); }
+.sb-sparkline { display: inline-block; flex: none; inline-size: calc(var(--sb-space-12) * 2); block-size: calc(var(--sb-space-6) + var(--sb-space-1)); overflow: visible; vertical-align: middle; }
+.sb-sparkline__line { fill: none; stroke: var(--sb-x-sebaro-chart-bar); stroke-width: var(--sb-x-sebaro-chart-line-width); stroke-linejoin: round; stroke-linecap: round; }
+.sb-sparkline__now { fill: var(--sb-x-sebaro-chart-bar-current); }
+
+/* goal ring (G8a): one part per unit (at most 12), done parts ink and thick, open parts border-strong and thin, so
+   shape carries the difference too; the count „5 von 8“ is HTML in the middle. Not the loading ring
+   (sb-progress-ring), not a button. Reached: glyph + word below (sb-status), no green in the ring */
+.sb-goal-ring { display: inline-grid; align-self: start; justify-items: center; gap: var(--sb-space-2); margin: 0; }   /* rings in a row share their top line */
+.sb-goal-ring__ring { position: relative; display: grid; place-items: center; inline-size: calc(var(--sb-space-16) + var(--sb-space-12)); block-size: calc(var(--sb-space-16) + var(--sb-space-12)); }
+.sb-goal-ring__ring > svg { position: absolute; inset: 0; display: block; inline-size: 100%; block-size: 100%; overflow: visible; }
+.sb-goal-ring__part { fill: none; stroke: var(--sb-color-border-strong); stroke-width: 2; }
+.sb-goal-ring__part[data-sb-state="done"] { stroke: var(--sb-color-text); stroke-width: 8; }
+.sb-goal-ring__text { position: relative; margin: 0; text-align: center; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant); }
+/* one text „5<br>von 8“: the count is its first line (one element, so it reads as one phrase) */
+.sb-goal-ring__text::first-line { font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); color: var(--sb-color-text); font-variant-numeric: var(--sb-type-numeric-variant); }
+.sb-goal-ring figcaption, .sb-goal-ring > .sb-status { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
+.sb-goal-ring figcaption { color: var(--sb-color-text-muted); }
+
+/* deprecated for one version (until the next versioned release after 2026-10-21): the old whole-chart SVG with
+   text inside (G1b). Its text shrinks below 14 px in narrow columns; new markup uses the plot above */
+.sb-chart > svg { display: block; inline-size: 100%; block-size: auto; overflow: visible; }
+svg .sb-chart__label { fill: var(--sb-color-text-muted); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: var(--sb-type-numeric-variant); }
+svg .sb-chart__label--current { fill: var(--sb-color-text); font-weight: var(--sb-type-title-weight); }
+svg .sb-chart__value { fill: var(--sb-color-text); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: var(--sb-type-numeric-variant); }
+svg .sb-chart__value--current { font-weight: var(--sb-type-title-weight); }
+
+/* slot spans: data-sb-span="n" lets one x label (a month over its weeks) cover n slots, so labels never run over
+   their neighbours; the spans of a row add up to the number of points */
+.sb-chart [data-sb-span="1"] { grid-column-end: span 1; } .sb-chart [data-sb-span="2"] { grid-column-end: span 2; } .sb-chart [data-sb-span="3"] { grid-column-end: span 3; } .sb-chart [data-sb-span="4"] { grid-column-end: span 4; } .sb-chart [data-sb-span="5"] { grid-column-end: span 5; } .sb-chart [data-sb-span="6"] { grid-column-end: span 6; } .sb-chart [data-sb-span="7"] { grid-column-end: span 7; } .sb-chart [data-sb-span="8"] { grid-column-end: span 8; }
+.sb-chart [data-sb-span="9"] { grid-column-end: span 9; } .sb-chart [data-sb-span="10"] { grid-column-end: span 10; } .sb-chart [data-sb-span="11"] { grid-column-end: span 11; } .sb-chart [data-sb-span="12"] { grid-column-end: span 12; } .sb-chart [data-sb-span="13"] { grid-column-end: span 13; } .sb-chart [data-sb-span="14"] { grid-column-end: span 14; } .sb-chart [data-sb-span="15"] { grid-column-end: span 15; } .sb-chart [data-sb-span="16"] { grid-column-end: span 16; }
+.sb-chart [data-sb-span="17"] { grid-column-end: span 17; } .sb-chart [data-sb-span="18"] { grid-column-end: span 18; } .sb-chart [data-sb-span="19"] { grid-column-end: span 19; } .sb-chart [data-sb-span="20"] { grid-column-end: span 20; } .sb-chart [data-sb-span="21"] { grid-column-end: span 21; } .sb-chart [data-sb-span="22"] { grid-column-end: span 22; } .sb-chart [data-sb-span="23"] { grid-column-end: span 23; } .sb-chart [data-sb-span="24"] { grid-column-end: span 24; }
+.sb-chart [data-sb-span="25"] { grid-column-end: span 25; } .sb-chart [data-sb-span="26"] { grid-column-end: span 26; } .sb-chart [data-sb-span="27"] { grid-column-end: span 27; } .sb-chart [data-sb-span="28"] { grid-column-end: span 28; } .sb-chart [data-sb-span="29"] { grid-column-end: span 29; } .sb-chart [data-sb-span="30"] { grid-column-end: span 30; } .sb-chart [data-sb-span="31"] { grid-column-end: span 31; }
+
+/* position hooks: data-sb-y="n" puts a label at n % of the plot height (0 = base line, 100 = top); CSP-safe
+   (no style attribute). Round to whole percent */
+.sb-chart [data-sb-y] { position: relative; inset-block-end: calc(var(--sb-chart-y, 0) * 1%); }
+.sb-chart [data-sb-y="0"] { --sb-chart-y: 0; } .sb-chart [data-sb-y="1"] { --sb-chart-y: 1; } .sb-chart [data-sb-y="2"] { --sb-chart-y: 2; } .sb-chart [data-sb-y="3"] { --sb-chart-y: 3; } .sb-chart [data-sb-y="4"] { --sb-chart-y: 4; } .sb-chart [data-sb-y="5"] { --sb-chart-y: 5; } .sb-chart [data-sb-y="6"] { --sb-chart-y: 6; } .sb-chart [data-sb-y="7"] { --sb-chart-y: 7; } .sb-chart [data-sb-y="8"] { --sb-chart-y: 8; } .sb-chart [data-sb-y="9"] { --sb-chart-y: 9; }
+.sb-chart [data-sb-y="10"] { --sb-chart-y: 10; } .sb-chart [data-sb-y="11"] { --sb-chart-y: 11; } .sb-chart [data-sb-y="12"] { --sb-chart-y: 12; } .sb-chart [data-sb-y="13"] { --sb-chart-y: 13; } .sb-chart [data-sb-y="14"] { --sb-chart-y: 14; } .sb-chart [data-sb-y="15"] { --sb-chart-y: 15; } .sb-chart [data-sb-y="16"] { --sb-chart-y: 16; } .sb-chart [data-sb-y="17"] { --sb-chart-y: 17; } .sb-chart [data-sb-y="18"] { --sb-chart-y: 18; } .sb-chart [data-sb-y="19"] { --sb-chart-y: 19; }
+.sb-chart [data-sb-y="20"] { --sb-chart-y: 20; } .sb-chart [data-sb-y="21"] { --sb-chart-y: 21; } .sb-chart [data-sb-y="22"] { --sb-chart-y: 22; } .sb-chart [data-sb-y="23"] { --sb-chart-y: 23; } .sb-chart [data-sb-y="24"] { --sb-chart-y: 24; } .sb-chart [data-sb-y="25"] { --sb-chart-y: 25; } .sb-chart [data-sb-y="26"] { --sb-chart-y: 26; } .sb-chart [data-sb-y="27"] { --sb-chart-y: 27; } .sb-chart [data-sb-y="28"] { --sb-chart-y: 28; } .sb-chart [data-sb-y="29"] { --sb-chart-y: 29; }
+.sb-chart [data-sb-y="30"] { --sb-chart-y: 30; } .sb-chart [data-sb-y="31"] { --sb-chart-y: 31; } .sb-chart [data-sb-y="32"] { --sb-chart-y: 32; } .sb-chart [data-sb-y="33"] { --sb-chart-y: 33; } .sb-chart [data-sb-y="34"] { --sb-chart-y: 34; } .sb-chart [data-sb-y="35"] { --sb-chart-y: 35; } .sb-chart [data-sb-y="36"] { --sb-chart-y: 36; } .sb-chart [data-sb-y="37"] { --sb-chart-y: 37; } .sb-chart [data-sb-y="38"] { --sb-chart-y: 38; } .sb-chart [data-sb-y="39"] { --sb-chart-y: 39; }
+.sb-chart [data-sb-y="40"] { --sb-chart-y: 40; } .sb-chart [data-sb-y="41"] { --sb-chart-y: 41; } .sb-chart [data-sb-y="42"] { --sb-chart-y: 42; } .sb-chart [data-sb-y="43"] { --sb-chart-y: 43; } .sb-chart [data-sb-y="44"] { --sb-chart-y: 44; } .sb-chart [data-sb-y="45"] { --sb-chart-y: 45; } .sb-chart [data-sb-y="46"] { --sb-chart-y: 46; } .sb-chart [data-sb-y="47"] { --sb-chart-y: 47; } .sb-chart [data-sb-y="48"] { --sb-chart-y: 48; } .sb-chart [data-sb-y="49"] { --sb-chart-y: 49; }
+.sb-chart [data-sb-y="50"] { --sb-chart-y: 50; } .sb-chart [data-sb-y="51"] { --sb-chart-y: 51; } .sb-chart [data-sb-y="52"] { --sb-chart-y: 52; } .sb-chart [data-sb-y="53"] { --sb-chart-y: 53; } .sb-chart [data-sb-y="54"] { --sb-chart-y: 54; } .sb-chart [data-sb-y="55"] { --sb-chart-y: 55; } .sb-chart [data-sb-y="56"] { --sb-chart-y: 56; } .sb-chart [data-sb-y="57"] { --sb-chart-y: 57; } .sb-chart [data-sb-y="58"] { --sb-chart-y: 58; } .sb-chart [data-sb-y="59"] { --sb-chart-y: 59; }
+.sb-chart [data-sb-y="60"] { --sb-chart-y: 60; } .sb-chart [data-sb-y="61"] { --sb-chart-y: 61; } .sb-chart [data-sb-y="62"] { --sb-chart-y: 62; } .sb-chart [data-sb-y="63"] { --sb-chart-y: 63; } .sb-chart [data-sb-y="64"] { --sb-chart-y: 64; } .sb-chart [data-sb-y="65"] { --sb-chart-y: 65; } .sb-chart [data-sb-y="66"] { --sb-chart-y: 66; } .sb-chart [data-sb-y="67"] { --sb-chart-y: 67; } .sb-chart [data-sb-y="68"] { --sb-chart-y: 68; } .sb-chart [data-sb-y="69"] { --sb-chart-y: 69; }
+.sb-chart [data-sb-y="70"] { --sb-chart-y: 70; } .sb-chart [data-sb-y="71"] { --sb-chart-y: 71; } .sb-chart [data-sb-y="72"] { --sb-chart-y: 72; } .sb-chart [data-sb-y="73"] { --sb-chart-y: 73; } .sb-chart [data-sb-y="74"] { --sb-chart-y: 74; } .sb-chart [data-sb-y="75"] { --sb-chart-y: 75; } .sb-chart [data-sb-y="76"] { --sb-chart-y: 76; } .sb-chart [data-sb-y="77"] { --sb-chart-y: 77; } .sb-chart [data-sb-y="78"] { --sb-chart-y: 78; } .sb-chart [data-sb-y="79"] { --sb-chart-y: 79; }
+.sb-chart [data-sb-y="80"] { --sb-chart-y: 80; } .sb-chart [data-sb-y="81"] { --sb-chart-y: 81; } .sb-chart [data-sb-y="82"] { --sb-chart-y: 82; } .sb-chart [data-sb-y="83"] { --sb-chart-y: 83; } .sb-chart [data-sb-y="84"] { --sb-chart-y: 84; } .sb-chart [data-sb-y="85"] { --sb-chart-y: 85; } .sb-chart [data-sb-y="86"] { --sb-chart-y: 86; } .sb-chart [data-sb-y="87"] { --sb-chart-y: 87; } .sb-chart [data-sb-y="88"] { --sb-chart-y: 88; } .sb-chart [data-sb-y="89"] { --sb-chart-y: 89; }
+.sb-chart [data-sb-y="90"] { --sb-chart-y: 90; } .sb-chart [data-sb-y="91"] { --sb-chart-y: 91; } .sb-chart [data-sb-y="92"] { --sb-chart-y: 92; } .sb-chart [data-sb-y="93"] { --sb-chart-y: 93; } .sb-chart [data-sb-y="94"] { --sb-chart-y: 94; } .sb-chart [data-sb-y="95"] { --sb-chart-y: 95; } .sb-chart [data-sb-y="96"] { --sb-chart-y: 96; } .sb-chart [data-sb-y="97"] { --sb-chart-y: 97; } .sb-chart [data-sb-y="98"] { --sb-chart-y: 98; } .sb-chart [data-sb-y="99"] { --sb-chart-y: 99; }
+.sb-chart [data-sb-y="100"] { --sb-chart-y: 100; }
+
+/* classed scales (D91 G6a, G7a, G10a; spec/01 §8.1): colour carries an amount only in classes, never as a gradient.
+   The legend stands above the chart and names the number range of every class; „keine Angabe“ is an empty cell with
+   a border-strong frame, never the first class. Sequential 1-4 (more = farther from the ground in both modes),
+   diverging 1-5 (3 = the midpoint, which the legend names in words). .sb-scale-cell is the same swatch as a cell */
+.sb-scale-legend {
+  display: flex; flex-wrap: wrap; gap: var(--sb-space-1) var(--sb-space-4); margin: 0; padding: 0; list-style: none;
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: var(--sb-type-numeric-variant);
+}
+.sb-scale-legend > li { display: inline-flex; align-items: center; gap: var(--sb-space-2); }
+.sb-scale-cell { display: inline-block; flex: none; inline-size: 16px; block-size: 16px; box-sizing: border-box; border-radius: var(--sb-radius-small); }
+.sb-scale-cell--seq-1 { background: var(--sb-dataviz-sequential-1); }
+.sb-scale-cell--seq-2 { background: var(--sb-dataviz-sequential-2); }
+.sb-scale-cell--seq-3 { background: var(--sb-dataviz-sequential-3); }
+.sb-scale-cell--seq-4 { background: var(--sb-dataviz-sequential-4); }
+.sb-scale-cell--div-1 { background: var(--sb-dataviz-diverging-1); }
+.sb-scale-cell--div-2 { background: var(--sb-dataviz-diverging-2); }
+.sb-scale-cell--div-3 { background: var(--sb-dataviz-diverging-3); }
+.sb-scale-cell--div-4 { background: var(--sb-dataviz-diverging-4); }
+.sb-scale-cell--div-5 { background: var(--sb-dataviz-diverging-5); }
+.sb-scale-cell--none { border: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); }
+.sb-scale-cell--large { inline-size: var(--sb-size-icon-lg); block-size: var(--sb-size-icon-lg); }   /* a cell of a calendar heatmap */
 
 /* meta list: "Erinnerung · alle 2 Stunden" rows */
 .sb-meta-list { margin: 0; padding: 0; }
@@ -1025,6 +1360,193 @@ kbd, .sb-kbd {
 .sb-empty__title { margin: 0; font: var(--sb-type-mobile-title); letter-spacing: var(--sb-type-mobile-title-tracking); }
 .sb-empty__text { margin: 0; color: var(--sb-color-text-muted); }
 
+/* calendar (D91 B7a, Z4a; spec/02 §3.21): the month on top, the list of the chosen day below; side by side once the
+   calendar itself is 640 px wide (in a window). ARIA grid with roving focus (sb-calendar.js). Today = 1 px border-strong
+   frame + title weight (aria-current="date"); the chosen day = the 3 px place line at its foot + title weight
+   (aria-selected="true", spec/02 §0.2: selected = place); a day with entries = a 6 px grey dot, a glyph like the
+   category dot (Z4a), always with the words „mit Eintrag“ for screen readers. Cells 48 px (phones, touch), 40 px in
+   windows with a pointer; the drawn day is 8 px smaller, so the focus ring on the cell keeps its gap. Without
+   container queries the calendar stays stacked */
+.sb-calendar {
+  container: sb-calendar / inline-size; box-sizing: border-box;
+  /* the gutter shrinks before the 48 px days do: 7 × 48 = 336 px fit a 360 px phone with 12 px at each side */
+  padding: var(--sb-space-2) clamp(0px, calc((100% - 7 * var(--sb-size-target-touch)) / 2), var(--sb-spacing-gutter)) var(--sb-space-4);
+}
+.sb-calendar__body { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-6); }
+@container sb-calendar (width >= 640px) {
+  .sb-calendar__body { grid-template-columns: auto minmax(0, 1fr); align-items: start; }
+}
+.sb-calendar__month { --sb-calendar-cell: var(--sb-size-target-touch); inline-size: calc(7 * var(--sb-calendar-cell)); max-inline-size: 100%; }
+.sb-calendar__head { display: flex; align-items: center; justify-content: space-between; gap: var(--sb-space-2); margin-block-end: var(--sb-space-1); }
+.sb-calendar__title { margin: 0; font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
+.sb-calendar__nav { display: flex; flex: none; }
+.sb-calendar__grid {
+  border-collapse: collapse; table-layout: fixed; inline-size: 100%;
+  font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); font-variant-numeric: var(--sb-type-numeric-variant);
+}
+.sb-calendar__grid th {
+  block-size: var(--sb-space-6); padding: 0; text-align: center;
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
+}
+.sb-calendar__grid td { block-size: var(--sb-calendar-cell); padding: 0; text-align: center; }
+.sb-calendar__day { cursor: pointer; }
+.sb-calendar__day:focus-visible { outline: var(--sb-focus-ring); outline-offset: calc(-1 * var(--sb-focus-width)); }
+.sb-calendar__date {
+  position: relative; display: inline-grid; place-items: center; box-sizing: border-box;
+  inline-size: calc(var(--sb-calendar-cell) - var(--sb-space-2)); block-size: calc(var(--sb-calendar-cell) - var(--sb-space-2));
+  padding-block-end: var(--sb-space-1); border: var(--sb-border-width-control) solid transparent; border-radius: var(--sb-radius-control);
+  font-weight: var(--sb-type-body-weight); color: var(--sb-color-text);
+}
+.sb-calendar__day:hover .sb-calendar__date { background: var(--sb-color-hover-fill); }
+.sb-calendar__day:active .sb-calendar__date { background: var(--sb-color-pressed-fill); }
+.sb-calendar__day[aria-current="date"] .sb-calendar__date { border-color: var(--sb-color-border-strong); font-weight: var(--sb-type-title-weight); }
+.sb-calendar__day[aria-selected="true"] .sb-calendar__date {
+  border-block-end: var(--sb-border-width-strong) solid var(--sb-color-accent);
+  border-end-start-radius: 0; border-end-end-radius: 0; font-weight: var(--sb-type-title-weight);
+}
+.sb-calendar__day[data-sb-entry] .sb-calendar__date::after {
+  content: ""; position: absolute; inset-block-end: var(--sb-space-1); inset-inline-start: calc(50% - 3px);
+  inline-size: 6px; block-size: 6px; border-radius: var(--sb-radius-pill); background: var(--sb-color-text-muted);
+}
+[data-sb-density="window"] .sb-calendar__month { --sb-calendar-cell: calc(var(--sb-size-target-touch) - var(--sb-space-2)); }
+@media (pointer: coarse) { [data-sb-density="window"] .sb-calendar__month { --sb-calendar-cell: var(--sb-size-target-touch); } }
+.sb-calendar__agenda { min-inline-size: 0; }
+.sb-calendar__agenda-title { margin: 0 0 var(--sb-space-1); font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
+.sb-calendar__entries { margin: 0; padding: 0; list-style: none; }
+.sb-calendar__entries[hidden], .sb-calendar__none[hidden] { display: none; }
+.sb-calendar__entry {
+  display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); column-gap: var(--sb-space-2); align-items: baseline;
+  min-block-size: var(--sb-size-target-touch); padding-block: var(--sb-space-3); box-sizing: border-box;
+  border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border);
+}
+.sb-calendar__entry:first-child { border-block-start: 0; }
+.sb-calendar__entry > time {
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: var(--sb-type-numeric-variant);
+  color: var(--sb-color-text-muted);
+}
+.sb-calendar__none { margin: 0; padding-block: var(--sb-space-3); color: var(--sb-color-text-muted); }
+
+/* quote (D91 B8b; spec/02 §3.22, spec/01 §5.2 „quote line“): the quoted words carry a 2 px ink line at their start edge,
+   the source stands under them, aligned with the words, outside the line. The line is ink like the layer line, but a
+   layer line always edges a layer (a frame, a top, foot or end edge, or a whole window part) and comes with its
+   own ground; the quote line has no ground, no radius and no other edge, stands inside running text and ends with
+   the last quoted line. It is never 3 px and never cobalt: that is the place line. Never italic. Markdown ">" output in
+   .sb-prose gets the same look */
+.sb-quote { display: grid; gap: var(--sb-space-2); margin: 0; }
+.sb-quote__text, .sb-prose > blockquote {
+  margin: 0; padding-inline-start: var(--sb-space-4); font-style: normal;
+  border-inline-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color);
+}
+.sb-quote__text > *, .sb-prose > blockquote > * { margin-block: 0; }
+.sb-quote__text > * + *, .sb-prose > blockquote > * + * { margin-block-start: var(--sb-spacing-stack); }
+.sb-quote__source {
+  margin: 0; padding-inline-start: calc(var(--sb-x-sebaro-layer-line-width) + var(--sb-space-4));
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
+}
+.sb-prose .sb-quote figcaption.sb-quote__source { margin-block-start: 0; }   /* the prose figcaption rule adds 8 px; the grid gap already has it */
+
+/* intro step (D91 B9a; spec/02 §3.23): the form of the empty state, start-aligned, centred in the height between the
+   steps and the bottom zone; spot from the icon set, title, one or two sentences, a quiet way out („Einführung
+   überspringen“, a text action, before the primary action in the DOM, D83 (5)); the bottom zone says „Weiter: <Ziel>“
+   (D83 (6)) */
+.sb-view__content:has(> .sb-intro:only-child) { display: flex; flex-direction: column; justify-content: center; }
+.sb-intro { display: grid; justify-items: start; gap: var(--sb-space-2); padding: var(--sb-space-8) var(--sb-spacing-gutter); }
+.sb-intro > .sb-icon--spot { margin-block-end: var(--sb-space-2); color: var(--sb-color-text-muted); --sb-icon-tone: var(--sb-color-border); }
+.sb-intro__title { margin: 0; font: var(--sb-type-mobile-title); letter-spacing: var(--sb-type-mobile-title-tracking); }
+.sb-intro__text { margin: 0; color: var(--sb-color-text-muted); }
+.sb-intro > .sb-text-action { min-block-size: var(--sb-size-target-touch); margin-block-start: var(--sb-space-2); margin-inline-start: calc(-1 * var(--sb-space-2)); }
+/* steps directly under the top bar of a view (the intro's „Schritt 1 von 3“) keep the gutter */
+.sb-view > .sb-progress { padding: var(--sb-space-2) var(--sb-spacing-gutter) 0; }
+
+/* about head (D91 B10a; spec/02 §3.24): the 64 px sign tile at the start, name, one-liner and version beside it; the
+   text wraps under the tile when its place is narrower than tile + 12 rem (no query needed: flex-wrap) */
+.sb-about-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-3) var(--sb-space-4); margin: 0; padding: var(--sb-space-4) var(--sb-spacing-gutter); }
+.sb-about-head > .sb-sign-tile { flex: none; }
+.sb-about-head__text { display: grid; gap: var(--sb-space-0-5); flex: 1 1 12rem; min-inline-size: 0; }
+.sb-about-head__name { margin: 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
+.sb-about-head__line { margin: 0; }
+.sb-about-head__meta { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.sb-about-head + .sb-facts-line { padding: 0 var(--sb-spacing-gutter) var(--sb-space-4); }
+
+/* audio row (D91 B11b; spec/02 §3.25): the name and the time as text on top, below it the play / pause icon button
+   (48 px) and the system slider (sb-range, fill and thumb in accent like every slider) to jump in the recording; a
+   failure reason under them. The native <audio> is the engine and, without sb-media.js, the visible fallback.
+   data-sb-state="playing" while it plays; no motion of its own (D80) */
+.sb-audio {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: ". head" "toggle seek" ". message";
+  column-gap: var(--sb-space-1); align-items: center; padding-block: var(--sb-space-2);
+}
+.sb-audio + .sb-audio { border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+.sb-audio__head {
+  grid-area: head; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--sb-space-2); margin: 0;
+  padding-inline: var(--sb-space-3); max-inline-size: none;
+}
+.sb-audio__title { font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
+.sb-audio__time {
+  margin-inline-start: auto; white-space: nowrap; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking);
+  font-variant-numeric: var(--sb-type-numeric-variant); color: var(--sb-color-text-muted);
+}
+.sb-audio__media { grid-column: 1 / -1; inline-size: 100%; }
+.sb-audio__media[hidden], .sb-audio__toggle[hidden], .sb-audio__seek[hidden] { display: none; }
+.sb-audio__toggle { grid-area: toggle; }
+.sb-audio__seek { grid-area: seek; }
+.sb-audio__message, .sb-video__message {
+  grid-area: message; display: flex; align-items: flex-start; gap: var(--sb-space-1); margin: 0; padding-inline: var(--sb-space-3);
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text);
+}
+.sb-audio__message:empty, .sb-video__message:empty { display: none; }
+:is(.sb-audio__message, .sb-video__message) > .sb-icon { flex: none; margin-block-start: 2px; color: var(--sb-color-danger); }
+
+/* video (D91 B12b; spec/02 §3.26): a native <video> with its poster in a 16:9 frame (1 px border-strong, radius 12,
+   like the item card), no autoplay, nothing loads before the press (preload="none"); captions as <track>. Over the
+   poster one real button „Abspielen“ (icon + word, 48 px), centred, on its own ground with the 2 px ink line, so it
+   stays legible on any picture; after the press the browser's own controls take over (sb-media.js). The poster is
+   content: no text in it (D9, spec/06); title, length and captions stand in the figcaption */
+.sb-video { display: grid; gap: var(--sb-space-2); margin: 0; }
+.sb-video__frame {
+  position: relative; aspect-ratio: 16 / 9; overflow: hidden; box-sizing: border-box;
+  border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container);
+  background: var(--sb-color-bg);
+}
+.sb-video__media { display: block; inline-size: 100%; block-size: 100%; object-fit: contain; background: var(--sb-color-bg); }
+.sb-video__play {
+  position: absolute; inset: 0; margin: auto; inline-size: fit-content; block-size: fit-content;
+  display: inline-flex; align-items: center; gap: var(--sb-space-2); min-block-size: var(--sb-size-target-touch);
+  padding: 0 var(--sb-space-4) 0 var(--sb-space-3); box-sizing: border-box;
+  border: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color); border-radius: var(--sb-radius-control);
+  background: var(--sb-color-bg); color: var(--sb-color-text);
+  font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); cursor: pointer;
+}
+.sb-video__play:hover, .sb-video__play.is-hover { background: var(--sb-color-hover-fill); }
+.sb-video__play:active, .sb-video__play.is-pressed { background: var(--sb-color-pressed-fill); }
+.sb-video__play[hidden] { display: none; }
+.sb-video__caption {
+  margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking);
+  font-variant-numeric: var(--sb-type-numeric-variant); color: var(--sb-color-text-muted);
+}
+.sb-video__message { padding-inline: 0; }
+
+/* place and small map (D91 B13a, D82; spec/02 §3.27): the place first as text with the pin (text colour, never cobalt:
+   cobalt means „here in the app“), an optional external link „In Karten öffnen“, then a small static map: a local image
+   or an SVG drawn in code, grey ground, water and roads, the pin in ink on a ground disc; never tiles from a map
+   server (D18). The map is an image with a description (role="img" + aria-label, or alt) */
+.sb-place { display: grid; gap: var(--sb-space-3); justify-items: start; }
+.sb-place__address { display: flex; align-items: flex-start; gap: var(--sb-space-2); margin: 0; }
+.sb-place__address > .sb-icon { margin-block-start: 2px; color: var(--sb-color-text); }
+.sb-place__address p { margin: 0; }
+.sb-place__link { display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-pointer); }
+@media (max-width: 1023.98px), (pointer: coarse) { .sb-place__link { min-block-size: var(--sb-size-target-touch); } }
+.sb-place__map {
+  display: block; inline-size: 100%; max-inline-size: 360px; block-size: auto; box-sizing: border-box;
+  border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container);
+}
+.sb-place__ground { fill: var(--sb-color-bg); }
+.sb-place__water { fill: var(--sb-color-surface-sunken); }
+.sb-place__road { fill: none; stroke: var(--sb-color-border); stroke-width: 6; }
+.sb-place__road--main { stroke: var(--sb-color-border-strong); stroke-width: 9; }
+.sb-place__marker { fill: var(--sb-color-bg); stroke: var(--sb-color-text); stroke-width: 2; }
+.sb-place__pin { color: var(--sb-color-text); }
+
 /* breadcrumb, pager, changelog */
 .sb-breadcrumb ol { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1); margin: 0; padding: 0; list-style: none; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
 .sb-breadcrumb li { display: inline-flex; align-items: center; gap: var(--sb-space-1); }
@@ -1045,6 +1567,272 @@ kbd, .sb-kbd {
 .sb-changelog li { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: var(--sb-space-3); padding-block: var(--sb-space-3); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
 .sb-changelog li:first-child { border-block-start: 0; }
 .sb-changelog time { color: var(--sb-color-text-muted); }
+
+/* board (D91 B1b, B2b; D83 (3); spec/02 §3.16): columns separated by hairlines only, no frame around a column; the cards are the only
+   boxes (sb-card sb-card--item, 1 px, radius 12, the current card with the place line). The board is a size
+   container: below 640 px of its own width the columns sit side by side and are swiped (B2b), with sb-board.js
+   adding the position bar „Spalte 2 von 3: …“ and the two step buttons */
+.sb-board { container: sb-board / inline-size; display: grid; grid-template-columns: minmax(0, 1fr); min-inline-size: 0; }
+.sb-board__nav { display: none; }   /* only in the swipe layout, and only once sb-board.js runs (it removes hidden) */
+.sb-board__columns {   /* position: hidden words (.sb-visually-hidden) in columns out of view stay inside the scroll box */
+  position: relative; display: flex; min-inline-size: 0; overflow-x: auto; overscroll-behavior-x: contain;
+}
+.sb-board__column {
+  flex: 1 1 0; min-inline-size: 240px; display: flex; flex-direction: column; gap: var(--sb-space-2);
+  padding-inline: var(--sb-space-3); box-sizing: border-box;
+}
+.sb-board__column:first-child { padding-inline-start: 0; }
+.sb-board__column:last-child { padding-inline-end: 0; }
+.sb-board__column + .sb-board__column { border-inline-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+.sb-board__head { display: flex; align-items: center; gap: var(--sb-space-2); min-block-size: var(--sb-size-control-sm); }
+.sb-board__title {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--sb-space-2); flex: 1 1 auto; min-inline-size: 0; margin: 0;
+  font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); overflow-wrap: anywhere;
+}
+.sb-board__title > .sb-category { align-self: center; }
+.sb-board__count { font-weight: var(--sb-type-caption-weight); font-variant-numeric: var(--sb-type-numeric-variant); color: var(--sb-color-text-muted); }
+.sb-board__head > .sb-icon-button { flex: none; margin-inline-start: auto; }
+.sb-board__cards { display: grid; gap: var(--sb-space-2); margin: 0; padding: 0; list-style: none; }
+.sb-board__empty { margin: 0; padding-block: var(--sb-space-2); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+/* the card on a board: title in label, a grey meta line, „Mehr“ at the end of the first line */
+.sb-board .sb-card--item {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--sb-space-1); align-items: start;
+  padding: var(--sb-space-2) var(--sb-space-1) var(--sb-space-2) var(--sb-space-3);
+}
+.sb-board .sb-card--item[aria-current="true"] { padding-inline-start: calc(var(--sb-space-3) - var(--sb-border-width-strong) + var(--sb-border-width-hairline)); }
+.sb-board .sb-card__title { margin: 0; padding-block-start: var(--sb-space-1); font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); overflow-wrap: anywhere; }
+.sb-board .sb-card--item > .sb-icon-button { margin-block: calc(-1 * var(--sb-space-2)); }
+.sb-card__meta {
+  grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1) var(--sb-space-2); margin: 0;
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
+  font-variant-numeric: var(--sb-type-numeric-variant);
+}
+.sb-card__meta > .sb-icon { flex: none; color: var(--sb-color-text-muted); }
+/* someone else is writing this card (aria-busy): the pending glyph and „Lea schreibt …“, no content, no dashed line */
+.sb-board .sb-card--item[aria-busy="true"] { grid-template-columns: minmax(0, 1fr); padding-block: var(--sb-space-3); border-color: var(--sb-color-border); }
+/* the position bar of the swipe layout: step buttons at both ends, the position as words between them */
+.sb-board__nav[hidden] { display: none; }
+.sb-board__position {
+  flex: 1 1 auto; min-inline-size: 0; margin: 0; text-align: center;
+  font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); font-variant-numeric: var(--sb-type-numeric-variant);
+}
+.sb-board__nav .sb-icon-button { flex: none; }
+.sb-board__nav:dir(rtl) .sb-icon { scale: -1 1; }
+
+/* B2b: swipe layout below 640 px of the board's width. One column fills the board minus 48 px, so the start of the
+   next column stays in view (the cue); scroll-snap stops at every column; the board scrolls inside itself, the page
+   never scrolls sideways; overscroll-behavior keeps a swipe at the end from turning into the browser's back gesture */
+@supports not (container-type: inline-size) {
+  @media (max-width: 639.98px) {
+    .sb-board__nav:not([hidden]) {
+      display: flex; align-items: center; gap: var(--sb-space-1); min-block-size: var(--sb-size-target-touch);
+      padding-inline: var(--sb-space-1); border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border);
+    }
+    .sb-board__columns { scroll-snap-type: x mandatory; scroll-padding-inline: var(--sb-spacing-gutter); padding: var(--sb-space-3) var(--sb-spacing-gutter); }
+    .sb-board__column { flex: 0 0 calc(100% - var(--sb-space-12)); min-inline-size: 0; scroll-snap-align: start; scroll-snap-stop: always; }
+  }
+}
+@container sb-board (width < 640px) {
+  .sb-board__nav:not([hidden]) {
+    display: flex; align-items: center; gap: var(--sb-space-1); min-block-size: var(--sb-size-target-touch);
+    padding-inline: var(--sb-space-1); border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border);
+  }
+  .sb-board__columns { scroll-snap-type: x mandatory; scroll-padding-inline: var(--sb-spacing-gutter); padding: var(--sb-space-3) var(--sb-spacing-gutter); }
+  .sb-board__column { flex: 0 0 calc(100% - var(--sb-space-12)); min-inline-size: 0; scroll-snap-align: start; scroll-snap-stop: always; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sb-board__columns:not([data-sb-motion="reduce"], [data-sb-motion="reduce"] *) { scroll-behavior: smooth; }
+}
+
+/* sticky group head (D91 B3b; spec/02 §3.17): sb-list-header--sticky stays at the top of its scroll box while its group passes
+   under it; only while it stands it gets the 2 px ink line (it lies over content: layer line, D46). Detected by the
+   container query scroll-state(stuck: top); without it sb-sticky.js sets data-sb-state="stuck"; without both the
+   head still stands, only without the line. Ground bg, never tinted */
+.sb-list-header--sticky {
+  position: sticky; inset-block-start: 0; z-index: 1; background: var(--sb-color-bg); container-type: scroll-state;
+}
+.sb-list-header--sticky::after {
+  content: ""; position: absolute; inset-inline: 0; inset-block-end: 0; pointer-events: none;
+  border-block-end: var(--sb-x-sebaro-layer-line-width) solid transparent;
+}
+.sb-list-header--sticky[data-sb-state="stuck"]::after { border-block-end-color: var(--sb-x-sebaro-layer-line-color); }
+@container scroll-state(stuck: top) {
+  .sb-list-header--sticky::after { border-block-end-color: var(--sb-x-sebaro-layer-line-color); }
+}
+
+/* timeline (D91 B4b; spec/02 §3.18): the form of sb-changelog. Date grey in a fixed column, the kind as a grey 16 px glyph (the
+   warning glyph only for an event that asks for something, always with its word), a hairline between entries, no
+   vertical stroke. Newest first. 48 px for two lines; in windows one line is 32 px (48 under touch) */
+.sb-timeline { margin: 0; padding: 0; list-style: none; }
+.sb-timeline__item {
+  position: relative; display: grid; grid-template-columns: 7rem var(--sb-size-icon-sm) minmax(0, 1fr); column-gap: var(--sb-space-2);
+  align-items: start; min-block-size: var(--sb-size-control-md); padding: var(--sb-space-1) var(--sb-space-2); box-sizing: border-box;
+  border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border);
+}
+.sb-timeline__item:first-child { border-block-start: 0; }
+.sb-timeline__date { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant); }
+.sb-timeline__mark { display: flex; padding-block-start: var(--sb-space-0-5); color: var(--sb-color-text-muted); }
+.sb-timeline__mark--warning { color: var(--sb-color-warning); }
+.sb-timeline__main { min-inline-size: 0; }
+.sb-timeline__title { margin: 0; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); font-weight: var(--sb-type-body-weight); overflow-wrap: anywhere; }
+.sb-timeline__meta { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant); }
+.sb-timeline__link { color: inherit; text-decoration: none; }
+.sb-timeline__link::after { content: ""; position: absolute; inset: 0; }
+.sb-timeline__link:focus-visible { outline: 0; }
+.sb-timeline__item:has(.sb-timeline__link:hover), .sb-timeline__item.is-hover { background: var(--sb-color-hover-fill); }
+.sb-timeline__item:has(.sb-timeline__link:active) { background: var(--sb-color-pressed-fill); }
+.sb-timeline__item:has(.sb-timeline__link:focus-visible) { outline: var(--sb-focus-ring); outline-offset: calc(-1 * var(--sb-focus-width)); }
+[data-sb-density="window"] .sb-timeline__item { min-block-size: var(--sb-size-control-sm); }
+@media (pointer: coarse) { [data-sb-density="window"] .sb-timeline__item { min-block-size: var(--sb-size-target-touch); } }
+
+/* diff (TXT-11, D85; spec/01 §1.8, spec/02 §3.19): head with the file and the two versions, the lines in sebaro Mono with two
+   grey line-number columns and the sign in text colour; an added / removed line has the fill success-subtle /
+   danger-subtle, never without its sign (+ or − U+2212). The code keeps its five looks (sb-tok-*). The lines scroll
+   inside the block (focusable region), the page never does. Screen readers hear „hinzugefügt:“ / „entfernt:“ */
+.sb-diff { margin: 0; min-inline-size: 0; border-radius: var(--sb-radius-container); background: var(--sb-color-surface-sunken); overflow: hidden; }
+.sb-diff__bar {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sb-space-1) var(--sb-space-3);
+  padding: var(--sb-space-2) var(--sb-space-4); border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border);
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
+}
+.sb-diff__file { color: var(--sb-color-text); font-weight: var(--sb-type-body-strong-weight); overflow-wrap: anywhere; }
+.sb-diff__lines {
+  position: relative; display: grid; grid-template-columns: auto auto auto minmax(max-content, 1fr); margin: 0; padding: var(--sb-space-2) 0;
+  overflow-x: auto; font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); color: var(--sb-color-text);
+}
+.sb-diff__lines:focus-visible { outline: var(--sb-focus-ring); outline-offset: calc(-1 * var(--sb-focus-width)); }
+.sb-diff__hunk { grid-column: 1 / -1; padding: var(--sb-space-1) var(--sb-space-4); color: var(--sb-color-text-muted); white-space: pre; }
+.sb-diff__line {
+  grid-column: 1 / -1; display: grid; grid-template-columns: 4ch 4ch 2ch max-content; column-gap: var(--sb-space-2);
+  padding-inline: var(--sb-space-4); white-space: pre;
+}
+@supports (grid-template-columns: subgrid) { .sb-diff__line { grid-template-columns: subgrid; } }
+.sb-diff__num { min-inline-size: 2ch; text-align: end; color: var(--sb-color-text-muted); user-select: none; }
+.sb-diff__sign { text-align: center; color: var(--sb-color-text); user-select: none; }
+.sb-diff__line--add { background: var(--sb-color-success-subtle); }
+.sb-diff__line--del { background: var(--sb-color-danger-subtle); }
+.sb-diff__sum {
+  margin: 0; max-inline-size: none; padding: var(--sb-space-2) var(--sb-space-4); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border);
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant);
+}
+
+/* table: sort heads (D91 B5a) and sum row (D91 B6a; spec/02 §3.9)
+   A sortable head is a button (.sb-table__sort) in the th. Only the sorted column carries the arrow (arrow-down--16 /
+   arrow-up--16 in text colour), the title weight and aria-sort; the others show the button ground on hover and the
+   focus ring. In number columns the arrow stands before the word. The wrap gives the button grounds 8 px of room at
+   both table edges, so the head words stay aligned with their column. 48 px buttons (control height of spec/01 §4,
+   on pages and phones); 32 px only in a window (data-sb-density="window"), 48 px there again under touch */
+.sb-table-wrap:has(.sb-table__sort) { margin-inline: calc(-1 * var(--sb-space-2)); padding-inline: var(--sb-space-2); }
+.sb-table th:has(> .sb-table__sort) { padding-block: var(--sb-space-1); vertical-align: bottom; }
+.sb-table__sort {
+  display: inline-flex; align-items: center; gap: var(--sb-space-1); min-block-size: var(--sb-size-control-md);
+  margin-inline: calc(-1 * var(--sb-space-2)); padding: 0 var(--sb-space-2); border: 0; border-radius: var(--sb-radius-control);
+  background: transparent; color: inherit; font: inherit; letter-spacing: inherit; text-align: inherit; cursor: pointer;
+}
+.sb-table__sort:hover, .sb-table__sort.is-hover { background: var(--sb-color-hover-fill); }
+.sb-table__sort:active, .sb-table__sort.is-pressed { background: var(--sb-color-pressed-fill); }
+.sb-table__sort > .sb-icon { flex: none; color: var(--sb-color-text); }
+.sb-table th:is([aria-sort="ascending"], [aria-sort="descending"]) > .sb-table__sort { font-weight: var(--sb-type-title-weight); }
+[data-sb-density="window"] .sb-table__sort { min-block-size: var(--sb-size-control-sm); }
+@media (pointer: coarse) { [data-sb-density="window"] .sb-table__sort { min-block-size: var(--sb-size-target-touch); } }
+/* the sum row: in tfoot, „Summe“ as row head, the same stronger line as under the head closes the data, bold, nothing
+   else. A missing value: the row reads „Summe der bekannten Beträge“ and the gap „keine Angabe“, never 0 (D82) */
+.sb-table:has(> tfoot) > tbody:last-of-type > tr:last-child > :is(th, td) { border-block-end-color: var(--sb-color-border-strong); }
+.sb-table tfoot :is(th, td) {
+  border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); border-block-end: 0;
+  font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking);
+}
+
+/* breadcrumb (D82): the chevron mirrors in right-to-left text; sb-breadcrumb--path = a menu path shown in the
+   interface that is not a navigation („Zu finden unter Einstellungen > Konto > Daten exportieren“, the arrows as the
+   chevron-right--16 icon): the steps are words in text, the last one in the strong weight */
+.sb-breadcrumb:dir(rtl) .sb-icon { scale: -1 1; }
+.sb-breadcrumb--path li:last-child { font-weight: var(--sb-type-body-strong-weight); }
+
+/* rating (D82; spec/02 §3.20, spec/07 §3.1): one filled star in the line's text colour, then the value with its reference and
+   the count. Never five stars, half stars, a yellow star or a star without a number */
+.sb-rating {
+  display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0 var(--sb-space-1); margin: 0;
+  color: var(--sb-color-text); font-variant-numeric: var(--sb-type-numeric-variant);
+}
+.sb-rating > .sb-icon { flex: none; inline-size: var(--sb-size-icon-md); block-size: var(--sb-size-icon-md); color: currentColor; }
+.sb-rating__value { font-weight: var(--sb-type-body-strong-weight); }
+.sb-rating__count { color: var(--sb-color-text-muted); }
+
+/* pagination (D91 W2a; spec/02 §5.4.2) */
+/* numbers: the first, the last, the current page and its neighbours; a gap is „…“ without a link. Each number is a
+   48 px target in the site-navigation style (text colour, underline on hover). The current page is text, not a link
+   (aria-current="page"), with the 3 px place line under it and the strong weight (D48 (2): never colour alone).
+   Below 18 rem of its own width the neighbours step back (__item--near), so „1 … 5 … 12“ stays on one line. A
+   neighbour next to the first or the last page carries no --near: hiding it would join two numbers without a gap */
+.sb-pagination { container: sb-pagination / inline-size; }
+.sb-pagination__list { display: flex; flex-wrap: wrap; align-items: center; gap: 0; margin: 0; padding: 0; list-style: none; }
+.sb-pagination__page {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-inline-size: var(--sb-size-target-touch); min-block-size: var(--sb-size-target-touch);
+  padding: 0 var(--sb-space-2); box-sizing: border-box;
+  border-block-end: var(--sb-border-width-strong) solid transparent;
+  font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); font-variant-numeric: var(--sb-type-numeric-variant);
+  color: var(--sb-color-text); text-decoration: none;
+}
+a.sb-pagination__page:hover, a.sb-pagination__page.is-hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
+.sb-pagination__page[aria-current="page"] {
+  border-block-end-color: var(--sb-color-accent); color: var(--sb-color-link);
+  font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); font-variant-numeric: var(--sb-type-numeric-variant);
+}
+.sb-pagination__gap {
+  display: inline-flex; align-items: center; justify-content: center; min-inline-size: var(--sb-size-target-pointer);
+  min-block-size: var(--sb-size-target-touch); color: var(--sb-color-text-muted);
+}
+@container sb-pagination (width < 18rem) {
+  .sb-pagination__item--near { display: none; }
+}
+.sb-pagination + .sb-pager { margin-block-start: var(--sb-space-2); }
+
+/* frequent questions (D91 W3a; spec/02 §5.4.3) */
+/* each question a native <details>: the summary is a row of at least 56 px with the question in body-strong and the
+   chevron at its end, hairlines between the rows. The chevron turns only when the reader opens or closes a row
+   (a transition, never on load; D80), and not at all with reduced motion (section 7) */
+.sb-faq { margin: 0; border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border); max-inline-size: var(--sb-size-measure-prose); }
+.sb-faq__item { border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+.sb-faq__question {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--sb-space-3);
+  min-block-size: var(--sb-size-control-lg); padding-block: var(--sb-space-3); box-sizing: border-box;
+  cursor: pointer; list-style: none;
+  font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); color: var(--sb-color-text);
+}
+.sb-faq__question::-webkit-details-marker { display: none; }
+.sb-faq__question:hover > span, .sb-faq__question.is-hover > span { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
+.sb-faq__chevron { flex: none; color: var(--sb-color-text-muted); transition: transform var(--sb-motion-duration-short) var(--sb-motion-easing-standard); }
+.sb-faq__item[open] > .sb-faq__question .sb-faq__chevron { transform: rotate(180deg); }
+.sb-faq__answer { padding-block-end: var(--sb-space-4); }
+.sb-faq__answer > * { margin: 0; }
+.sb-faq__answer > * + * { margin-block-start: var(--sb-spacing-stack); }
+
+/* screenshot grid (D91 W5b; spec/02 §5.4.5) */
+/* every picture visible, no sideways scrolling: two columns from 2 × 10 rem + 24 px, three as soon as a third fits
+   at a third of the width, never four (the form-grid rule). Each picture in a box of its device's ratio (phone
+   390 / 844 by default, --window 16 / 10), 1 px border-strong, radius 12, no shadow and no device frame; the caption
+   is text below it. A missing picture keeps its box: image icon and „Bildschirmfoto folgt“, no fill. Light and dark
+   pictures as the image pair of spec/06 §6 (.sb-illustration-light / -dark, page CSS) */
+.sb-shots {
+  display: grid; align-items: start; gap: var(--sb-spacing-group); margin: 0; padding: 0; list-style: none;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, max(10rem, calc((100% - 2 * var(--sb-spacing-group)) / 3))), 1fr));
+}
+.sb-shot { display: grid; gap: var(--sb-space-2); margin: 0; min-inline-size: 0; }
+.sb-shot__frame {
+  position: relative; aspect-ratio: 390 / 844; overflow: hidden; box-sizing: border-box;
+  border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container);
+}
+.sb-shots--window .sb-shot__frame { aspect-ratio: 16 / 10; }
+/* no display here: the light/dark pair rules (.sb-illustration-dark { display: none }, spec/06 §6) decide which shows */
+.sb-shot__frame > img { vertical-align: top; inline-size: 100%; block-size: 100%; object-fit: cover; object-position: top center; }
+.sb-shot__empty {
+  display: grid; place-content: center; justify-items: center; gap: var(--sb-space-2); block-size: 100%;
+  padding: var(--sb-space-4); box-sizing: border-box; text-align: center;
+  font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
+}
+.sb-shot > figcaption { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 
 /* ===================================================================== 7 navigation and overlays */
 
@@ -1126,7 +1914,8 @@ kbd, .sb-kbd {
     animation-name: sb-enter; animation-timing-function: var(--sb-motion-easing-emphasized);
   }
 }
-[data-sb-motion="reduce"] :is(.sb-toc summary .sb-icon, .sb-claim-row__chevron, .sb-switch__thumb) { transition: none; }
+[data-sb-motion="reduce"] :is(.sb-toc summary .sb-icon, .sb-claim-row__chevron, .sb-switch__thumb, .sb-faq__chevron,
+  .sb-toc .sb-toc__group > .sb-toc__group-head > .sb-icon) { transition: none; }
 @keyframes sb-enter { from { opacity: 0; transform: translateY(var(--sb-x-sebaro-enter-distance)); } }
 @keyframes sb-fade-in { from { opacity: 0; } }
 
@@ -1219,6 +2008,17 @@ dialog.sb-sheet:modal {
 dialog.sb-sheet::backdrop { background: var(--sb-color-scrim); }
 dialog.sb-sheet > form { margin: 0; }
 :root:has(dialog.sb-sheet:modal) { overflow: hidden; }
+
+/* the wide sheet (D91 Z2b; spec/02 §4.7): from 640 px of window width at most 560 px wide (like the dialog), centred
+   at the bottom edge; phones keep the full width. A viewport query, not a container query: the open sheet sits in the
+   top layer and is placed against the window. Its side edges now border the scrim, so the ink line runs up them too
+   (a layer ends there, D46); the foot stays on the window edge */
+@media (min-width: 640px) {
+  dialog.sb-sheet:modal {
+    inline-size: min(560px, 100%); inset-inline: 0; margin-inline: auto;
+    border-inline: var(--sb-elevation-overlay-border-width) solid var(--sb-elevation-overlay-border-color);
+  }
+}
 
 /* search: „Suche leeren“ only while the field has text (sb-search.js sets hidden); the field keeps its end padding
    while the button is hidden */
@@ -1441,6 +2241,7 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
   display: flex; align-items: center; gap: var(--sb-space-3); min-inline-size: 0;
   min-block-size: var(--sb-size-control-md); padding: var(--sb-space-1) var(--sb-space-2) var(--sb-space-1) var(--sb-space-4); box-sizing: border-box;
   border-block-end: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color);
+  -webkit-user-select: none; user-select: none;   /* the bar is a drag region (D91 F1a): no text selection */
 }
 .sb-window__titlebar > .sb-sign-tile { flex: none; }
 .sb-window__name { flex: none; margin: 0; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
@@ -1506,6 +2307,220 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
   [data-sb-density="window"] :is(.sb-side-nav__item, .sb-menu__item, .sb-list-row), .sb-row { min-block-size: var(--sb-size-target-touch); }
   .sb-icon-button--compact { inline-size: var(--sb-size-target-touch); block-size: var(--sb-size-target-touch); }
   .sb-secondary-action--compact { min-block-size: var(--sb-size-target-touch); }
+}
+
+/* ===================================================================== 7b desktop windows, round 6 sketch answers (spec/02 §4.19-§4.24) */
+
+/* Spec: spec/02 §4.17 (title bar per platform, minimum window size), §4.19 (fixed shortcuts), §4.20 (areas and F6),
+ * §4.21 (document tabs), §4.22 (drag and drop), §4.23 (dividers), §4.24 (the „Menü“ button, several windows, the
+ * settings view, the update word, compact inspector fields); spec/09 §4.5 (inventory), §13.1 (Tauri window);
+ * spec/11 §1a (checklist).
+ * Decisions: D91 F1a title bar (macOS: our bar over the lights; Windows / Linux: the system frame, our bar below),
+ * F2a small windows (480 × 400 px, the side parts give way), F3a draggable dividers with limits and keyboard, F4b
+ * the „Menü“ button with the groups Datei · Bearbeiten · Darstellung · Fenster · Hilfe, F6a F6 through the areas,
+ * F7a document tabs 32 px with the cross on the current one, F8a the drop target in cobalt, F9a several windows (a
+ * window not in front lets its path recede), F10a settings as a view, F12a the update as a word in the title bar,
+ * F14a compact inspector fields; D46 layers by the 2 px ink line, no shadow; D67 (2) 32 px rows, 48 px under touch;
+ * D81 the content keeps 480 px. Behaviour: demo/assets/sb-window.js (dividers, areas, tabs, drag, shortcuts) and
+ * sb-menu.js (the menu).
+ * Only var(--sb-*) (and the icon stroke variables --sb-icon-* of sprite.css): no raw colours, no shadows. Lint L4:
+ * cobalt marks (drop frame, drop line) are borders and outlines, never a background.
+ * Numbers that are not tokens: 80 px title bar start on macOS (= space-16 + space-4: the three lights at x 16 plus
+ * their width and a gap), 14 rem menu column, 11 px either side of a divider (24 px pointer target with the 2 px line). */
+
+/* ---------------------------------------------------------------- title bar per platform (F1a; spec/02 §4.17)
+   macOS: the Tauri window has titleBarStyle "Overlay" and hiddenTitle, so our 48 px bar is the title bar and the
+   system's three window buttons sit at its start; the bar leaves them room. Windows and Linux keep the system frame
+   (its buttons, snap layouts, the window manager's behaviour) and our bar sits below it: no room to leave.
+   html[data-sb-platform] is set by the Tauri app (spec/09 §13.1); a web app never sets it, so a browser window keeps
+   the plain bar. html[data-sb-fullscreen] (set by the app in full screen, where macOS hides the lights) gives the
+   room back. A specimen names its platform on the window itself. */
+:root[data-sb-platform="mac"]:not([data-sb-fullscreen]) .sb-window--fill > .sb-window__titlebar,
+.sb-window[data-sb-platform="mac"] > .sb-window__titlebar { padding-inline-start: calc(var(--sb-space-16) + var(--sb-space-4)); }
+
+/* ---------------------------------------------------------------- dividers between the window parts (F3a, F2a, D81)
+   <div class="sb-window__divider" role="separator" aria-orientation="vertical" aria-controls="<pane id>"
+   aria-label="Breite der Seitenleiste" aria-valuemin="200" aria-valuemax="360" aria-valuenow="240"> between a pane
+   and the content. The divider IS the 2 px ink layer line (the panes drop their own line while a divider stands
+   beside them); its pointer target is 24 px wide. Only the pointer changes on hover; the keyboard shows the focus
+   ring. The divider is in the row only while its pane is docked (from 722 / 1004 px of window width). */
+.sb-window__body:has(> .sb-window__divider) { grid-template-columns: auto auto minmax(min(480px, 100%), 1fr) auto auto; }
+.sb-window__body:has(> .sb-window__divider) > .sb-window__content { grid-column: 3; }
+.sb-window__body:has(> .sb-window__divider) > .sb-window__inspector { grid-column: 5; }
+.sb-window__sidebar + .sb-window__divider { grid-column: 2; }
+.sb-window__divider:has(+ .sb-window__inspector) { grid-column: 4; }
+.sb-window__divider {
+  position: relative; z-index: var(--sb-layer-sticky); inline-size: var(--sb-x-sebaro-layer-line-width); min-block-size: 0;
+  background: var(--sb-x-sebaro-layer-line-color); cursor: col-resize; touch-action: none;
+}
+.sb-window__divider::before { content: ""; position: absolute; inset-block: 0; inset-inline: -11px; }
+.sb-window__divider:focus-visible, .sb-window__divider.is-focus { outline: var(--sb-focus-ring); outline-offset: var(--sb-focus-offset); }
+@container sb-window (min-width: 722px) {
+  .sb-window__sidebar:has(+ .sb-window__divider) { border-inline-end: 0; }
+}
+@container sb-window (min-width: 1004px) {
+  .sb-window__divider + .sb-window__inspector { border-inline-start: 0; }
+}
+@container sb-window (max-width: 1003.98px) {
+  .sb-window__divider:has(+ .sb-window__inspector) { display: none; }   /* the inspector is an overlay: nothing to drag */
+}
+@container sb-window (max-width: 721.98px) {
+  .sb-window__sidebar + .sb-window__divider { display: none; }
+}
+/* while a pane is dragged (sb-window.js sets html[data-sb-dragging]): the pointer keeps its shape, no text selection */
+:root[data-sb-dragging], :root[data-sb-dragging] * { -webkit-user-select: none; user-select: none; }
+:root[data-sb-dragging="resize"], :root[data-sb-dragging="resize"] * { cursor: col-resize; }
+
+/* ---------------------------------------------------------------- areas (F6a)
+   F6 / ⇧F6 move focus area by area; an area with nothing to press takes focus itself (tabindex -1, set by the script)
+   and shows the ring inside its edge, so the scroll edge does not cut it */
+:is(.sb-window__titlebar, .sb-window__sidebar, .sb-window__content, .sb-window__inspector, .sb-window > .sb-bottom-block):focus-visible {
+  outline: var(--sb-focus-ring); outline-offset: calc(-1 * var(--sb-focus-width));
+}
+
+/* ---------------------------------------------------------------- the „Menü“ button and its menu (F4b)
+   Windows and Linux (and web apps with a window) have no menu bar: the title bar carries the button „Menü“
+   (sb-secondary-action--compact with the menu icon and the word, D67 (6): it is not a tool). Its menu
+   (.sb-menu--window, the marker sb-window.js opens with F10 and a lone Alt) holds the five group names Datei ·
+   Bearbeiten · Darstellung · Fenster · Hilfe; each opens its submenu beside it (sb-menu.js: → / ← right to left
+   opens, ← / Escape closes, the APG menu pattern). An item with a submenu ends in .sb-menu__sub, the 16 px
+   chevron in text-muted (mirrored right to left); while its submenu is open the item keeps the hover ground, so
+   the path through the menus stays visible. Submenus sit in the top layer like every menu: their 2 px layer line
+   lies on the parent's (sb-menu.js places them) */
+.sb-menu__sub { flex: none; display: inline-grid; place-items: center; margin-inline-start: auto; padding-inline-start: var(--sb-space-3); color: var(--sb-color-text-muted); }
+.sb-menu__sub:dir(rtl) > .sb-icon { scale: -1 1; }
+.sb-menu__item[aria-haspopup="menu"][aria-expanded="true"] { background: var(--sb-color-hover-fill); }
+
+/* ---------------------------------------------------------------- document tabs (F7a)
+   div.sb-doc-tabs[role=tablist] > span.sb-doc-tabs__item[role=presentation] > button.sb-doc-tabs__tab[role=tab]
+   + span.sb-doc-tabs__close[aria-hidden] (the cross is a pointer shortcut: a button inside a tab list is not
+   allowed by ARIA; Entf and ⌘W / Strg+W close by keyboard, „Schließen“ in the menu „Datei“). 32 px high, label type;
+   the current tab like the system tabs (3 px accent bottom edge, link colour, title weight); long names are cut at
+   the end (the full name in the title). The cross (16 px icon, 24 px target) always on the current tab, on the others
+   while the pointer is on the tab or the tab has focus; under touch on every tab with a 48 px target. The row sits
+   at the top of the content, over its full width, and stays while the text scrolls. */
+.sb-doc-tabs {
+  display: flex; align-items: stretch; overflow-x: auto; scrollbar-width: thin;
+  min-block-size: var(--sb-size-control-sm); margin: 0; padding: 0;
+  border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border);
+}
+.sb-doc-tabs[hidden] { display: none; }
+.sb-doc-tabs__item {
+  position: relative; display: flex; align-items: center; flex: 0 1 auto; min-inline-size: 8rem; max-inline-size: 15rem;
+  border-inline-end: var(--sb-border-width-hairline) solid var(--sb-color-border);
+}
+.sb-doc-tabs__tab {
+  display: block; flex: 1 1 auto; min-inline-size: 0; min-block-size: var(--sb-size-control-sm); margin: 0 0 calc(-1 * var(--sb-border-width-hairline));
+  padding: 0 calc(var(--sb-space-1) + var(--sb-size-target-pointer)) 0 var(--sb-space-3); box-sizing: border-box;
+  border: 0; border-block-end: var(--sb-border-width-strong) solid transparent; background: transparent;
+  color: var(--sb-color-text-muted); cursor: pointer; text-align: start;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking);
+}
+.sb-doc-tabs__tab:hover, .sb-doc-tabs__item.is-hover > .sb-doc-tabs__tab { color: var(--sb-color-text); }
+.sb-doc-tabs__tab[aria-selected="true"] { border-block-end-color: var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
+.sb-doc-tabs__tab:focus-visible { outline-offset: calc(-1 * var(--sb-focus-width)); }
+.sb-doc-tabs__close {
+  position: absolute; inset-inline-end: var(--sb-space-1); inset-block-start: 50%; translate: 0 -50%;
+  display: inline-grid; place-items: center; inline-size: var(--sb-size-target-pointer); block-size: var(--sb-size-target-pointer);
+  border-radius: var(--sb-radius-small); color: var(--sb-color-text-muted); cursor: pointer; visibility: hidden;
+}
+.sb-doc-tabs__close:hover { background: var(--sb-color-hover-fill); color: var(--sb-color-text); }
+.sb-doc-tabs__close:active { background: var(--sb-color-pressed-fill); }
+.sb-doc-tabs__item:is(:hover, :focus-within, .is-hover) > .sb-doc-tabs__close,
+.sb-doc-tabs__tab[aria-selected="true"] + .sb-doc-tabs__close { visibility: visible; }
+.sb-doc-tabs__none { margin: 0; padding: var(--sb-space-6) 0; font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); color: var(--sb-color-text-muted); }
+.sb-doc-tabs__panel:focus-visible { outline-offset: calc(-1 * var(--sb-focus-width)); }
+/* in the content area the tab row spans the area's full width (the content's padding is undone) and stays on top */
+.sb-window__content:has(> .sb-doc-tabs) { padding-block-start: 0; }
+.sb-window__content > .sb-doc-tabs {
+  position: sticky; inset-block-start: 0; z-index: var(--sb-layer-sticky);
+  margin: 0 calc(-1 * var(--sb-space-8)) var(--sb-space-6); padding-inline: var(--sb-space-4) 0; background: var(--sb-color-bg);
+}
+@container sb-window (max-width: 721.98px) {
+  .sb-window__content > .sb-doc-tabs { margin-inline: calc(-1 * var(--sb-space-4)); margin-block-end: var(--sb-space-4); padding-inline-start: 0; }
+}
+
+/* ---------------------------------------------------------------- drag and drop (F8a)
+   [data-sb-drag] on a row makes it draggable (sb-window.js, pointer events). States in data-sb-state: "dragging" =
+   the dragged row keeps a 2 px ink frame (no ghost, no half opacity, no shadow); "drop-into" = the folder that takes
+   it gets a 3 px cobalt frame (the place line: where something arrives, D37); "drop-before" / "drop-after" = a 3 px cobalt
+   line between two rows; "drop-refuse" ([data-sb-drop="none"], e.g. the trash: deleting goes through the dialog) =
+   no mark, the pointer shows „not allowed“ and the row's title says why. The frame sits inside the row, 2 px from the
+   focus ring's place, so both can be seen. */
+[data-sb-drag] { -webkit-user-select: none; user-select: none; }
+.sb-row[data-sb-state="dragging"] { outline: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color); outline-offset: calc(-1 * var(--sb-x-sebaro-layer-line-width)); }
+.sb-row[data-sb-state="drop-into"] { outline: var(--sb-border-width-strong) solid var(--sb-color-accent); outline-offset: calc(-1 * var(--sb-border-width-strong)); }
+.sb-row:is([data-sb-state="drop-before"], [data-sb-state="drop-after"])::after {
+  content: ""; position: absolute; inset-inline: 0; block-size: 0; pointer-events: none;
+  border-block-start: var(--sb-border-width-strong) solid var(--sb-color-accent);
+}
+.sb-row[data-sb-state="drop-before"]::after { inset-block-start: calc(-1 * var(--sb-border-width-strong) / 2); }
+.sb-row[data-sb-state="drop-after"]::after { inset-block-end: calc(-1 * var(--sb-border-width-strong) / 2); }
+:root[data-sb-dragging="move"], :root[data-sb-dragging="move"] * { cursor: grabbing; }
+:root[data-sb-dragging="refuse"], :root[data-sb-dragging="refuse"] * { cursor: no-drop; }
+
+/* ---------------------------------------------------------------- toast in a window (F8a, D78)
+   A toast of the window (e.g. „Nach „Ideen“ verschoben.“ after a row went into a closed folder) stands at the top of
+   the action zone, above the state sentence and the primary action, never over the text */
+.sb-window > .sb-bottom-block > .sb-toast { margin: var(--sb-space-2) var(--sb-space-4) 0; }
+
+/* ---------------------------------------------------------------- a window not in front (F9a)
+   html[data-sb-window-active="false"] (sb-window.js, from the window's focus): only the current place of the path
+   recedes to text-muted; no cobalt frame marks the active window */
+[data-sb-window-active="false"] .sb-window__path > span:last-child { color: var(--sb-color-text-muted); }
+
+/* ---------------------------------------------------------------- compact text action (F10a, F12a)
+   „Zurück zu Wochenplan“ and „Update bereit“ in the 48 px title bar: the link-style word, 32 px, label type, icon 20;
+   under touch 48 px again */
+.sb-text-action--compact {
+  min-block-size: var(--sb-size-control-sm); gap: var(--sb-space-1); white-space: nowrap;
+  font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking);
+}
+.sb-text-action--compact > .sb-icon { inline-size: var(--sb-size-icon-md); block-size: var(--sb-size-icon-md); --sb-icon-stroke: var(--sb-icon-w20); color: var(--sb-color-text-muted); }
+
+/* below the smallest window (480 px; a web app in a narrow browser) the words of the title bar's text actions and of
+   „Menü“ give way to their icons; .sb-window__word stays for screen readers */
+@container sb-window (max-width: 479.98px) {
+  .sb-window__titlebar .sb-window__word {
+    position: absolute; inline-size: 1px; block-size: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+  }
+}
+
+/* ---------------------------------------------------------------- settings as a view (F10a)
+   The settings view is the window with its own sidebar (Allgemein, Editor, Tastatur, Über: icon and word, place line)
+   and content; it has no action zone because every choice applies at once (D74). Groups: a title-role heading and
+   the controls in a stack; „Hell oder Dunkel“ (Wie das System · Hell · Dunkel, radios with data-sb-theme-choice) and
+   „Farbton“ (Kühl · Warm, sb-tone.js) are choice rows (spec/02 §2.5) like the phone settings (M6): a segmented control
+   cannot hold „Wie das System“ in three equal columns of a 480 px content. The view is a <form> per group, which also
+   keeps its radios apart from other radios of the same name on the page */
+.sb-window__settings-group { display: grid; gap: var(--sb-spacing-stack); margin: 0; max-inline-size: 36rem; }
+.sb-window__settings-group + .sb-window__settings-group { margin-block-start: var(--sb-spacing-group); }
+.sb-window__settings-group > :is(h2, h3, h4, h5) { margin: 0; font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
+.sb-window__settings-group .sb-switch-row { border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+
+/* ---------------------------------------------------------------- compact fields in the inspector (F14a)
+   .sb-field--compact: the label at the start (a column of at least 5 rem, at most 40 %), the field 32 px, value and
+   label in label type; help and error under the field. Fits 240 px of inspector without squeezing the text.
+   Under touch the field is 48 px again */
+.sb-field--compact { grid-template-columns: minmax(5rem, 40%) minmax(0, 1fr); align-items: center; column-gap: var(--sb-space-2); row-gap: var(--sb-space-0-5); }
+.sb-field--compact > .sb-field__label { color: var(--sb-color-text-muted); overflow-wrap: anywhere; }
+.sb-field--compact > :not(.sb-field__label) { grid-column: 2; }
+.sb-field--compact .sb-field__control { min-block-size: var(--sb-size-control-sm); padding-inline: var(--sb-space-2); }
+.sb-field--compact .sb-field__control > :is(input, select, textarea) {
+  block-size: calc(var(--sb-size-control-sm) - var(--sb-border-width-control));
+  font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); font-weight: var(--sb-type-body-weight);
+}
+.sb-field--compact .sb-field__suffix { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
+
+/* touch: the new window parts keep 48 px targets (D67 (2), D83 (9)) */
+@media (pointer: coarse) {
+  .sb-doc-tabs__tab { min-block-size: var(--sb-size-target-touch); padding-inline-end: calc(var(--sb-space-1) + var(--sb-size-target-touch)); }
+  .sb-doc-tabs__close { visibility: visible; inline-size: var(--sb-size-target-touch); block-size: var(--sb-size-target-touch); }
+  .sb-window__divider::before { inset-inline: -23px; }
+  .sb-text-action--compact { min-block-size: var(--sb-size-target-touch); }
+  .sb-field--compact .sb-field__control { min-block-size: var(--sb-size-target-touch); }
+  .sb-field--compact .sb-field__control > :is(input, select, textarea) { block-size: calc(var(--sb-size-target-touch) - var(--sb-border-width-control)); }
 }
 
 /* ===================================================================== 8 evidence ("Belege") and facts (spec/03 §5, spec/10) */
@@ -1640,6 +2655,12 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
 .sb-facts-line__cell { display: inline-flex; align-items: center; gap: var(--sb-space-1); white-space: nowrap; }
 .sb-facts-line__sep { color: var(--sb-color-text-muted); }
 .sb-facts-line__cell:has(> .sb-stale-notice) { white-space: normal; }   /* stale form: the notice wraps (spec/10 §4.1) */
+/* the place in the facts (D82, spec/10 §4.1, §4.2; sb-facts.js): the pin before „<City> (<CC>)“ in the compact line
+   (16 px, grey like the line) and before the claim of a remote place's claim row (20 px, hanging like the result glyph,
+   so a wrapped claim starts under its text). aria-hidden: the words of FACTS-CONTRACT stay unchanged */
+.sb-facts-line__place { display: inline-flex; align-items: center; gap: var(--sb-space-0-5); }
+.sb-claim-row__claim:has(> .sb-icon:first-child) { display: block; position: relative; padding-inline-start: calc(var(--sb-size-icon-md) + var(--sb-space-1)); }
+.sb-claim-row__claim > .sb-icon:first-child { position: absolute; inset-inline-start: 0; inset-block-start: 2px; }
 .sb-facts__device { margin: 0; padding: var(--sb-space-2) var(--sb-spacing-gutter); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
 /* device row as the facts renderer writes it (spec/10 §4.2): place and data in body-strong like a claim, then how it
    is kept and "Bleibt auf diesem Gerät."; no toggle, no note. A hairline separates it from the claim rows below */
@@ -1670,9 +2691,29 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
   .sb-chip[aria-pressed="true"]::before { border-color: CanvasText; }
   .sb-switch[aria-checked="true"] .sb-switch__thumb, .sb-radio > input:checked::after { background: CanvasText; }
   .sb-field__control { border: 1px solid CanvasText; }
+  .sb-category::before { background: CanvasText; }
+  mark, .sb-mark { background: Mark; color: MarkText; border-block-end-color: MarkText; }
+  /* the class colours of a scale are the data (every value is text as well): heatmap cells and legends keep them,
+     framed (D91 G6a); lines and bars follow the system colours */
+  .sb-scale-cell { forced-color-adjust: none; border: 1px solid CanvasText; }
+  .sb-heatmap td[aria-current="date"] > .sb-scale-cell, .sb-heatmap__today-key { border-block-end: var(--sb-border-width-strong) solid CanvasText; }
+  .sb-calendar__day[aria-current="date"] .sb-calendar__date { border-color: CanvasText; }
+  .sb-calendar__day[aria-selected="true"] .sb-calendar__date { border-block-end-color: CanvasText; }
+  .sb-calendar__day[data-sb-entry] .sb-calendar__date::after { background: CanvasText; }
+  .sb-pagination__page[aria-current="page"] { border-color: CanvasText; }
+  .sb-row[data-sb-state="drop-into"] { outline-color: Highlight; }
+  .sb-row:is([data-sb-state="drop-before"], [data-sb-state="drop-after"])::after { border-color: Highlight; }
+  .sb-window__divider { background: CanvasText; }
 }
+/* print (D91 W8a; spec/09 §18.3): paper is always light; sb-print.js sets html[data-theme="light"] before printing and restores the choice after it
+   (until tokens.css carries a generated print block, spec/09 §18.3). Navigation, the language switch, the docs nav,
+   page numbers, „Weiter“ and every action zone stay off paper; evidence stays as a list; a link that leaves the site
+   prints its address after the words */
 @media print {
   .sb-note-popover, .sb-theme-button, .sb-skip-link, .sb-bottom-block { display: none; }
+  .sb-site-nav, .sb-language-switch, .sb-site-footer__links, .sb-site-footer__display, .sb-toc, .sb-pagination, .sb-pager,
+  .sb-section__actions, .sb-form-grid__actions, .sb-primary-action-bar { display: none; }
+  main a[href^="http"]:not(.sb-note-ref)::after { content: " (" attr(href) ")"; }
   .sb-note__body a[href^="http"]::after, .sb-prose a[href^="http"]::after { content: " (" attr(href) ")"; }
 }
 

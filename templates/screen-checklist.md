@@ -1,15 +1,23 @@
 # Screen checklist
 
 Walk this for every screen in **light and dark**, at **390 px and 1440 px** (desktop apps: smallest and a wide window).
-Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D90.
+Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D91.
 
 ## Colour and hierarchy
 - [ ] Cobalt only for current place, links and focus; lime only for the one primary action (FAR, AKT)
 - [ ] Product colour only inside the sign tile; tiles carry the three-letter code, never words or names (ZEI)
-- [ ] User categories are a grey word and search hits a 1 px frame until the owner picks their tones (FAR-12)
+- [ ] User categories: a 10 px dot in one of the six tones next to the word, never a fill or the only cue; search hits
+      and highlights: fill with a 2 px edge, the current hit with „Treffer n von m“ (FAR-12)
+- [ ] Plus and minus in number apps: colour follows the sign, always with + / − and the arrow icon (FAR-14)
 - [ ] Status shows glyph + word, never colour alone (STA)
 - [ ] Layers end in the 2 px ink line; no tinted card grounds, no shadows (EBE)
 - [ ] Lists and stats flat with hairlines; directly labelled bars neutral (DAT)
+- [ ] Colour scales in classes, at most 5, each step tellable from its neighbours and from the ground; the legend
+      above the chart names the numbers of every class; with three or more series the legend shows line styles
+      (DAT-10, DAT-11)
+- [ ] Partially done is counted („2 offen“, „3 von 5 beantwortet“), never „teils offen“ (STA-09)
+- [ ] Sortable tables: the arrow and title weight only on the sorted column, `aria-sort` on its header; a sum row
+      in `tfoot` under its column, „Summe der bekannten …“ when a value is missing, never 0 (DAT-14)
 
 ## Actions and behaviour
 - [ ] At most one primary action, at the bottom of the area it acts on, verb + thing, 56 px zone; it comes **last** in
@@ -26,6 +34,9 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
 - [ ] Website: the labelled button „Hell oder Dunkel“ in the header, after the navigation and the language switch (NAV, WEB)
 - [ ] Phone app: System / Hell / Dunkel in the settings, no button in the app bar (MOB)
 - [ ] Desktop app: menu „Darstellung“ and the settings view (DSK)
+- [ ] Tone „Farbton: Kühl · Warm“: websites in the footer under „Darstellung“, apps next to light/dark in the
+      settings; only grounds, text and lines turn warm, cobalt, lime, status and tiles stay (FAR-15)
+- [ ] Website print is always light, whatever the screen shows (`sb-print.js`), and shows only the content (WEB-11, WEB-04)
 
 ## Desktop windows
 - [ ] Command palette opens with ⌘K / Ctrl+K (NAV-09)

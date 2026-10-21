@@ -18,6 +18,8 @@
 <link rel="icon" href="sebaro/brand/site-root/favicon.ico" sizes="32x32">
 <link rel="icon" href="sebaro/brand/site-root/icon.svg" type="image/svg+xml">
 <script defer src="sebaro/js/theme-button.js"></script>
+<script defer src="sebaro/js/sb-tone.js"></script>
+<script defer src="sebaro/js/sb-print.js"></script>
 <script defer src="assets/guide.js"></script>
 <!-- /guide:head -->
 <link rel="stylesheet" href="assets/gedanken.css">
@@ -160,7 +162,7 @@
   </a>
   <div class="sb-site-header__links">
     <nav class="sb-site-nav g-nav" aria-label="Hauptmenü">
-      <a href="index.html">Start</a> <a href="regeln.html">Regeln</a> <a href="grundlagen.html">Grundlagen</a> <a href="bauteile.html">Bauteile</a> <a href="daten.html">Daten</a> <a href="web.html">Web</a> <a href="app.html">App</a> <a href="desktop.html">Desktop</a> <a href="gedanken.html" aria-current="page">Gedanken</a> <a href="ausblick.html">Ausblick</a>
+      <a href="index.html">Start</a> <a href="regeln.html">Regeln</a> <a href="grundlagen.html">Grundlagen</a> <a href="bauteile.html">Bauteile</a> <a href="daten.html">Daten</a> <a href="web.html">Web</a> <a href="app.html">App</a> <a href="ios.html">iOS</a> <a href="desktop.html">Desktop</a> <a href="gedanken.html" aria-current="page">Gedanken</a> <a href="ausblick.html">Ausblick</a>
     </nav>
   </div>
   <button class="sb-theme-button" type="button" data-sb-theme-button>Hell oder Dunkel</button>
@@ -184,6 +186,7 @@
           <li><a href="#signatur">Tintenlinie, Kante, Bewegung</a></li>
           <li><a href="#geschichte">Geschichte in sechs Runden</a></li>
           <li><a href="#runde-6">Entscheidungen vom 20.10.2026</a></li>
+          <li><a href="#skizze-d91">Die Antworten auf die Skizze</a></li>
           <li><a href="#abwaegungen">Abwägungen und bekannte Grenzen</a></li>
           <li><a href="#entscheiden">Wie entschieden wird</a></li>
         </ol>
@@ -203,11 +206,11 @@
           <p>sebaro ist ein Ein-Personen-Studio für Web, Apps und digitale Produkte im DACH-Raum. Es arbeitet auf Deutsch und Englisch und baut überwiegend mit Coding-Agenten. Die Produkte treten als eigene Marken auf: Android-Apps, eine Retro-Web-App, eine Markdown-Desktop-App, ein Lernangebot für Android und weitere.</p>
           <p>Am Anfang stand ein kurzer Auftrag. Er erklärt, warum dieser Guide so gründlich ist:</p>
         </div>
-        <figure class="g-gedanken-quote">
-          <blockquote><p>„dieses projekt soll die grundlage für alle anderen projekte sein.“</p></blockquote>
-          <figcaption>Inhaber, Auftrag vom 10.10.2026 (Wortlaut) <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#clock--16"/></svg>Skizziert, wartet auf die Wahl des Inhabers</span></figcaption>
+        <figure class="sb-quote g-gedanken-quote">
+          <blockquote class="sb-quote__text"><p>„dieses projekt soll die grundlage für alle anderen projekte sein.“</p></blockquote>
+          <figcaption class="sb-quote__source">Inhaber, Auftrag vom 10.10.2026 (Wortlaut)</figcaption>
         </figure>
-        <p class="g-gedanken-note">Der Zitatblock ist ein Muster dieser Seite, kein Bauteil des Systems. Er gilt für alle Zitate hier.</p>
+        <p class="g-gedanken-note">Zitate auf dieser Seite stehen im Zitatblock des Systems: Tintenlinie am Anfang, Quelle darunter (D91, <a class="sb-mono" href="regeln.html#TXT-17">TXT-17</a>).</p>
 
         <h3 class="g-gedanken-h3">Die Produkte</h3>
         <ul class="g-gedanken-tiles" aria-label="Produkte mit eigenem Zeichen">
@@ -300,12 +303,13 @@
               <tr role="row"><td role="cell" data-label="Farbe">Statusfarben</td><td role="cell" data-label="Frage">Wie steht es? Immer mit Zeichen und Wort.</td><td role="cell" data-label="Token"><code>--sb-color-success</code> u.&nbsp;a.</td><td role="cell" data-label="Wert in diesem Modus"><span class="sb-mono" data-g-token="--sb-color-success">–</span></td></tr>
               <tr role="row"><td role="cell" data-label="Farbe">Kachelfarbe</td><td role="cell" data-label="Frage">Zu welcher Gruppe gehört diese App? Nur in der Kachel.</td><td role="cell" data-label="Token"><code>--sb-tile-*</code></td><td role="cell" data-label="Wert in diesem Modus">acht Gruppenfarben</td></tr>
               <tr role="row"><td role="cell" data-label="Farbe">Codetöne</td><td role="cell" data-label="Frage">Schlüsselwort, Zeichenkette oder Zahl? Nur im Code (D69).</td><td role="cell" data-label="Token"><code>--sb-syntax-keyword</code>, <code>--sb-syntax-string</code>, <code>--sb-syntax-constant</code></td><td role="cell" data-label="Wert in diesem Modus"><span class="sb-mono"><span class="sb-tok-keyword" data-g-token="--sb-syntax-keyword">–</span></span>, <span class="sb-mono"><span class="sb-tok-string" data-g-token="--sb-syntax-string">–</span></span>, <span class="sb-mono"><span class="sb-tok-constant" data-g-token="--sb-syntax-constant">–</span></span></td></tr>
-              <tr role="row"><td role="cell" data-label="Farbe">Kategorie und Markierung</td><td role="cell" data-label="Frage">Wie hat der Nutzer es eingeordnet? Was ist gefunden oder markiert? Entschieden als eigene Aufgaben (D73).</td><td role="cell" data-label="Token">noch keine</td><td role="cell" data-label="Wert in diesem Modus">Die Töne liegen als Skizze beim Inhaber; bis dahin graues Wort und 1-px-Rahmen.</td></tr>
+              <tr role="row"><td role="cell" data-label="Farbe">Kategorie und Markierung</td><td role="cell" data-label="Frage">Wie hat der Nutzer es eingeordnet? Was ist gefunden oder markiert? Eigene Aufgaben (D73), die Töne gewählt mit D91.</td><td role="cell" data-label="Token"><code>--sb-category-1</code> bis <code>-6</code>, <code>--sb-mark</code></td><td role="cell" data-label="Wert in diesem Modus">sechs Töne „gedämpft kühl“, nur als Punkt neben dem Wort; die Markierung als Fläche mit Kante</td></tr>
+              <tr role="row"><td role="cell" data-label="Farbe">Plus und Minus</td><td role="cell" data-label="Frage">Mehr oder weniger? Nur in Zahlen-Apps, immer mit Vorzeichen und Pfeil (D91).</td><td role="cell" data-label="Token"><code>--sb-color-success</code>, <code>--sb-color-danger</code></td><td role="cell" data-label="Wert in diesem Modus"><span class="sb-mono" data-g-token="--sb-color-success">–</span>, <span class="sb-mono" data-g-token="--sb-color-danger">–</span></td></tr>
               <tr role="row"><td role="cell" data-label="Farbe">Grau</td><td role="cell" data-label="Frage">Alles andere: Text, Linien, Flächen.</td><td role="cell" data-label="Token"><code>--sb-color-text</code>, <code>--sb-color-border</code></td><td role="cell" data-label="Wert in diesem Modus"><span class="sb-mono" data-g-token="--sb-color-text">–</span></td></tr>
             </tbody>
           </table>
         </div>
-        <p class="g-gedanken-rules">Regeln: <a class="sb-mono" href="regeln.html#FAR-01">FAR-01</a>, <a class="sb-mono" href="regeln.html#FAR-02">FAR-02</a>, <a class="sb-mono" href="regeln.html#FAR-03">FAR-03</a>, <a class="sb-mono" href="regeln.html#AKT-01">AKT-01</a>, <a class="sb-mono" href="regeln.html#STA-01">STA-01</a>, <a class="sb-mono" href="regeln.html#ZEI-01">ZEI-01</a>, <a class="sb-mono" href="regeln.html#FAR-11">FAR-11</a>, <a class="sb-mono" href="regeln.html#FAR-12">FAR-12</a></p>
+        <p class="g-gedanken-rules">Regeln: <a class="sb-mono" href="regeln.html#FAR-01">FAR-01</a>, <a class="sb-mono" href="regeln.html#FAR-02">FAR-02</a>, <a class="sb-mono" href="regeln.html#FAR-03">FAR-03</a>, <a class="sb-mono" href="regeln.html#AKT-01">AKT-01</a>, <a class="sb-mono" href="regeln.html#STA-01">STA-01</a>, <a class="sb-mono" href="regeln.html#ZEI-01">ZEI-01</a>, <a class="sb-mono" href="regeln.html#FAR-11">FAR-11</a>, <a class="sb-mono" href="regeln.html#FAR-12">FAR-12</a>, <a class="sb-mono" href="regeln.html#FAR-14">FAR-14</a></p>
 
         <h3 class="g-gedanken-h3" id="fif-demo-h">Probier es aus</h3>
         <p class="g-gedanken-intro">Wähl eine Frage. Alles, was eine andere Frage beantwortet, wird grau. Was dann noch Farbe hat, ist die Antwort.</p>
@@ -385,9 +389,9 @@
         <div class="sb-prose">
           <p>Die erste Runde baute vier vollständige Systeme, jedes mit einem Leitbild: ein Typenschild, ein Datenwegplan, Tag- und Nachtschnitt mit Gestirn, Flaggen mit Bordbuch. Der Inhaber lehnte alle vier ab.</p>
         </div>
-        <figure class="g-gedanken-quote">
-          <blockquote><p>„diese bauschild metapher und andere gefallen mir nicht, da muss es anderes geben. die ersten vier entwürfe sind es nicht, aber einige elemente von denen gefallen mir jeweils.“</p></blockquote>
-          <figcaption>Inhaber, 12.10.2026 (D27, D29, I)</figcaption>
+        <figure class="sb-quote g-gedanken-quote">
+          <blockquote class="sb-quote__text"><p>„diese bauschild metapher und andere gefallen mir nicht, da muss es anderes geben. die ersten vier entwürfe sind es nicht, aber einige elemente von denen gefallen mir jeweils.“</p></blockquote>
+          <figcaption class="sb-quote__source">Inhaber, 12.10.2026 (D27, D29, I)</figcaption>
         </figure>
         <div class="sb-prose">
           <p>Auf Nachfrage nannte er als Störfaktoren <strong>Gegenstände als Leitbild</strong> und <strong>Themen-Namen</strong> wie Bordbuch oder Gestirn (D32, I). Daraus folgt: Bauteile und Oberflächenwörter heißen nach ihrer Funktion. Das System heißt schlicht „sebaro“, weil ein eigener Name wieder ein Leitbild nahelegen würde (D41, O).</p>
@@ -615,60 +619,21 @@
       <!-- ============================================================ geschichte -->
       <section class="sb-section" id="geschichte" aria-labelledby="ges-h">
         <h2 class="sb-section__title" id="ges-h">Die Geschichte in sechs Runden</h2>
-        <p class="g-gedanken-intro">Elf Tage vom Auftrag bis zu den Antworten auf den Ausblick. Jede Runde endet mit Entscheidungen des Inhabers. <span class="g-mark-proposal"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#clock--16"/></svg>Skizziert, wartet auf die Wahl des Inhabers</span></p>
-        <ol class="g-gedanken-timeline">
-          <li class="g-gedanken-timeline__item">
-            <p class="g-gedanken-timeline__date"><time datetime="2026-10-10">10.10.2026</time> · D1–D12 (O)</p>
-            <h3 class="g-gedanken-timeline__title">Start</h3>
-            <p>Auftrag, Recherche zu Profil, Plattformen und Trends. Ein gemeinsamer Token-Vertrag mit dem Präfix <code>--sb-*</code>, Anrede „du“.</p>
-          </li>
-          <li class="g-gedanken-timeline__item">
-            <p class="g-gedanken-timeline__date"><time datetime="2026-10-12">11.–12.10.2026</time> · D13–D30</p>
-            <h3 class="g-gedanken-timeline__title">Runde 1: vier Entwürfe, alle abgelehnt</h3>
-            <p>Vier vollständige Systeme mit Leitbildern. Am 12.10. abgelehnt: „die ersten vier entwürfe sind es nicht“ (D27, I). Behalten: eine Taste für die Hauptaktion, Petrol, Belege als Fußnoten, ein Zeichen je App (D30, I).</p>
-          </li>
-          <li class="g-gedanken-timeline__item">
-            <p class="g-gedanken-timeline__date"><time datetime="2026-10-13">13.10.2026</time> · D31–D35</p>
-            <h3 class="g-gedanken-timeline__title">Nachfrage</h3>
-            <p>Petrol und Gelb: „Kombination überdenken“ (D31, I). Planung für mehr als 25 Produkte (D33, O). Ab jetzt kommt vor jedem Ausbau eine Skizze (D35, O).</p>
-          </li>
-          <li class="g-gedanken-timeline__item">
-            <p class="g-gedanken-timeline__date"><time datetime="2026-10-15">15.10.2026</time> · D36–D40 (I)</p>
-            <h3 class="g-gedanken-timeline__title">Runde 2: die Wahl</h3>
-            <p>Fünf Richtungen ohne Leitbild, Farbe und Schrift als Umschalter. Gewählt: „Farbe ist Funktion“, F3 Kobalt und Lindgrün, eine UI-Schrift (heute sebaro Sans) allein, höchstens eine Hauptaktion immer unten, Löschen mit Dialog. Wortlaut: „Die Richtung die mir gefällt … ist richtung a“.</p>
-          </li>
-          <li class="g-gedanken-timeline__item">
-            <p class="g-gedanken-timeline__date"><time datetime="2026-10-16">15.–16.10.2026</time> · D41–D44 (O)</p>
-            <h3 class="g-gedanken-timeline__title">Ausbau</h3>
-            <p>Das System wird gebaut und zweimal geprüft; 57 Beanstandungen werden einzeln behandelt.</p>
-          </li>
-          <li class="g-gedanken-timeline__item">
-            <p class="g-gedanken-timeline__date"><time datetime="2026-10-18">18.10.2026</time> · D45–D64</p>
-            <h3 class="g-gedanken-timeline__title">Runde 3: Signatur und Zeichen</h3>
-            <p>Tintenlinien, 45°-Kante nur bei destruktiven Aktionen, eine Bewegung, Fortschritt in der Hauptaktion, 3-px-Ortslinie, gleicher Start, ein Link-Stil. Eigenes Symbol je App mit drei Buchstaben, acht Kachelfarben nach Zweck, keine Akzentfamilien mehr. Abschluss: „super, haken dahinter.“ (D64, I)</p>
-          </li>
-          <li class="g-gedanken-timeline__item">
-            <p class="g-gedanken-timeline__date"><time datetime="2026-10-19">19.10.2026</time> · D65–D66 (I)</p>
-            <h3 class="g-gedanken-timeline__title">Runde 4: novalis als Pilot</h3>
-            <p>Die erste echte App im System: Petrol nur noch in der Kachel, die Einstellung „Bewegung immer reduzieren“, eine Gefahrenfarbe. Beide Schriften bleiben: „wir behalten beide schriftarten“ (D66).</p>
-          </li>
-          <li class="g-gedanken-timeline__item">
-            <p class="g-gedanken-timeline__date"><time datetime="2026-10-19">19.10.2026</time> · D67 (I)</p>
-            <h3 class="g-gedanken-timeline__title">Runde 5: Desktop</h3>
-            <p>Grundlagen für alle Desktop-Apps und Web-Apps mit Fenster: Aktionszone über die ganze Breite, Zeilen 32&nbsp;px, Befehlspalette, eigene Ansicht „Einstellungen“, Werkzeuge dürfen nur Icon sein, Codefarben, Umbenennung auf <code>--sb-*</code>. Wortlaut am Ende: „zukünftig für alle“. Offen blieb die Frage der Tastenzeichen; sie beantwortet D68.</p>
-          </li>
-          <li class="g-gedanken-timeline__item">
-            <p class="g-gedanken-timeline__date"><time datetime="2026-10-19">19.10.2026</time> · D68–D71 (I)</p>
-            <h3 class="g-gedanken-timeline__title">Schriftpaar und Codefarben</h3>
-            <p>sebaro Sans und sebaro Mono bekommen eigene Tastenzeichen: „gib beiden die schriftzeichen.“ (D68). Die Codefarben Indigo, Waldgrün und Himbeere werden Tokens; die erste, blassere Fassung war „zu blass, schwer zu erkennen“, die zweite: „ja, halte das so fest.“ (D69). Auf „die schrift sieht immer noch recht schwach aus“ wird sebaro Mono Medium 500 (D70). sebaro Sans und sebaro Mono sind die einzigen Schriften: „es gibt nur noch sebaro sans und mono“ (D71).</p>
-          </li>
-          <li class="g-gedanken-timeline__item">
-            <p class="g-gedanken-timeline__date"><time datetime="2026-10-20">20.10.2026</time> · D72–D90 (I)</p>
-            <h3 class="g-gedanken-timeline__title">Runde 6: Antworten auf den Ausblick</h3>
-            <p>Der Inhaber beantwortet die Vorschlagsliste dieses Guides Punkt für Punkt. Fast alles wird entschieden: Statussumme, Ort der Hauptaktion, Hell oder Dunkel je Produktart, Lizenz, Kurzmeldung, Barrierefreiheit, Datenarten, alle Widersprüche, die offenen Grundsätze, Versionen und Abgleich. Gebaut werden noch am selben Tag Fenstergerüst, Baum, Befehlspalette mit ⌘K, Desktop-Dichte, Layout-Bausteine, Überschriften-Rollen, Container-Abfragen und Skripte für die Bedienung: „wir sollten reproduzierbare Elemente und Prinzipien haben“ (D80). Was eine Skizze braucht, liegt mit 63 Fragen beim Inhaber. Die Einzelheiten stehen im nächsten Abschnitt.</p>
-          </li>
+        <p class="g-gedanken-intro">Elf Tage vom Auftrag bis zu den Antworten auf die Skizze der sechsten Runde. Jede Runde endet mit Entscheidungen des Inhabers; das Neueste steht oben.</p>
+        <ol class="sb-timeline g-gedanken-history" aria-label="Geschichte von sebaro, das Neueste oben">
+          <li class="sb-timeline__item"><time class="sb-timeline__date" datetime="2026-10-21">20.–21.10.2026</time><span class="sb-timeline__mark"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg></span><div class="sb-timeline__main"><h3 class="sb-timeline__title">Runde 6: Antworten auf die Skizze</h3><p class="sb-timeline__meta">D91 (I)</p><p class="g-gedanken-history__text">Der Inhaber beantwortet die 63 Fragen der Skizze in einer Zeile, etwa „C1b c2a C3 empfohlen C4c B1b B2b …“. Fünfmal wählt er gegen die Empfehlung. Am Tag danach ist alles gebaut: Kategorie und Markierung, ein warmer Farbton, Board, Kalender, Zeitleiste, Tabellen mit Sortierkopf und Summe, Zitat, Medien, Karte, Website-Muster, Diagramme, iOS-Bausteine und die übrigen Fensterteile. Die Einzelheiten stehen unter <a href="#skizze-d91">Die Antworten auf die Skizze</a>.</p></div></li>
+          <li class="sb-timeline__item"><time class="sb-timeline__date" datetime="2026-10-20">20.10.2026</time><span class="sb-timeline__mark"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg></span><div class="sb-timeline__main"><h3 class="sb-timeline__title">Runde 6: Antworten auf den Ausblick</h3><p class="sb-timeline__meta">D72–D90 (I)</p><p class="g-gedanken-history__text">Der Inhaber beantwortet die Vorschlagsliste dieses Guides Punkt für Punkt. Fast alles wird entschieden: Statussumme, Ort der Hauptaktion, Hell oder Dunkel je Produktart, Lizenz, Kurzmeldung, Barrierefreiheit, Datenarten, alle Widersprüche, die offenen Grundsätze, Versionen und Abgleich. Gebaut werden noch am selben Tag Fenstergerüst, Baum, Befehlspalette mit ⌘K, Desktop-Dichte, Layout-Bausteine, Überschriften-Rollen, Container-Abfragen und Skripte für die Bedienung: „wir sollten reproduzierbare Elemente und Prinzipien haben“ (D80). Was eine Skizze braucht, geht mit 63 Fragen an den Inhaber. Die Einzelheiten stehen unter <a href="#runde-6">Entscheidungen vom 20.10.2026</a>.</p></div></li>
+          <li class="sb-timeline__item"><time class="sb-timeline__date" datetime="2026-10-19">19.10.2026</time><span class="sb-timeline__mark"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg></span><div class="sb-timeline__main"><h3 class="sb-timeline__title">Schriftpaar und Codefarben</h3><p class="sb-timeline__meta">D68–D71 (I)</p><p class="g-gedanken-history__text">sebaro Sans und sebaro Mono bekommen eigene Tastenzeichen: „gib beiden die schriftzeichen.“ (D68). Die Codefarben Indigo, Waldgrün und Himbeere werden Tokens; die erste, blassere Fassung war „zu blass, schwer zu erkennen“, die zweite: „ja, halte das so fest.“ (D69). Auf „die schrift sieht immer noch recht schwach aus“ wird sebaro Mono Medium 500 (D70). sebaro Sans und sebaro Mono sind die einzigen Schriften: „es gibt nur noch sebaro sans und mono“ (D71).</p></div></li>
+          <li class="sb-timeline__item"><time class="sb-timeline__date" datetime="2026-10-19">19.10.2026</time><span class="sb-timeline__mark"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg></span><div class="sb-timeline__main"><h3 class="sb-timeline__title">Runde 5: Desktop</h3><p class="sb-timeline__meta">D67 (I)</p><p class="g-gedanken-history__text">Grundlagen für alle Desktop-Apps und Web-Apps mit Fenster: Aktionszone über die ganze Breite, Zeilen 32&nbsp;px, Befehlspalette, eigene Ansicht „Einstellungen“, Werkzeuge dürfen nur Icon sein, Codefarben, Umbenennung auf <code>--sb-*</code>. Wortlaut am Ende: „zukünftig für alle“. Offen blieb die Frage der Tastenzeichen; sie beantwortet D68.</p></div></li>
+          <li class="sb-timeline__item"><time class="sb-timeline__date" datetime="2026-10-19">19.10.2026</time><span class="sb-timeline__mark"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg></span><div class="sb-timeline__main"><h3 class="sb-timeline__title">Runde 4: novalis als Pilot</h3><p class="sb-timeline__meta">D65–D66 (I)</p><p class="g-gedanken-history__text">Die erste echte App im System: Petrol nur noch in der Kachel, die Einstellung „Bewegung immer reduzieren“, eine Gefahrenfarbe. Beide Schriften bleiben: „wir behalten beide schriftarten“ (D66).</p></div></li>
+          <li class="sb-timeline__item"><time class="sb-timeline__date" datetime="2026-10-18">18.10.2026</time><span class="sb-timeline__mark"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg></span><div class="sb-timeline__main"><h3 class="sb-timeline__title">Runde 3: Signatur und Zeichen</h3><p class="sb-timeline__meta">D45–D64</p><p class="g-gedanken-history__text">Tintenlinien, 45°-Kante nur bei destruktiven Aktionen, eine Bewegung, Fortschritt in der Hauptaktion, 3-px-Ortslinie, gleicher Start, ein Link-Stil. Eigenes Symbol je App mit drei Buchstaben, acht Kachelfarben nach Zweck, keine Akzentfamilien mehr. Abschluss: „super, haken dahinter.“ (D64, I)</p></div></li>
+          <li class="sb-timeline__item"><time class="sb-timeline__date" datetime="2026-10-16">15.–16.10.2026</time><span class="sb-timeline__mark"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#edit"/></svg></span><div class="sb-timeline__main"><h3 class="sb-timeline__title">Ausbau</h3><p class="sb-timeline__meta">D41–D44 (O)</p><p class="g-gedanken-history__text">Das System wird gebaut und zweimal geprüft; 57 Beanstandungen werden einzeln behandelt.</p></div></li>
+          <li class="sb-timeline__item"><time class="sb-timeline__date" datetime="2026-10-15">15.10.2026</time><span class="sb-timeline__mark"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg></span><div class="sb-timeline__main"><h3 class="sb-timeline__title">Runde 2: die Wahl</h3><p class="sb-timeline__meta">D36–D40 (I)</p><p class="g-gedanken-history__text">Fünf Richtungen ohne Leitbild, Farbe und Schrift als Umschalter. Gewählt: „Farbe ist Funktion“, F3 Kobalt und Lindgrün, eine UI-Schrift (heute sebaro Sans) allein, höchstens eine Hauptaktion immer unten, Löschen mit Dialog. Wortlaut: „Die Richtung die mir gefällt … ist richtung a“.</p></div></li>
+          <li class="sb-timeline__item"><time class="sb-timeline__date" datetime="2026-10-13">13.10.2026</time><span class="sb-timeline__mark"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg></span><div class="sb-timeline__main"><h3 class="sb-timeline__title">Nachfrage</h3><p class="sb-timeline__meta">D31–D35</p><p class="g-gedanken-history__text">Petrol und Gelb: „Kombination überdenken“ (D31, I). Planung für mehr als 25 Produkte (D33, O). Ab jetzt kommt vor jedem Ausbau eine Skizze (D35, O).</p></div></li>
+          <li class="sb-timeline__item"><time class="sb-timeline__date" datetime="2026-10-12">11.–12.10.2026</time><span class="sb-timeline__mark"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg></span><div class="sb-timeline__main"><h3 class="sb-timeline__title">Runde 1: vier Entwürfe, alle abgelehnt</h3><p class="sb-timeline__meta">D13–D30</p><p class="g-gedanken-history__text">Vier vollständige Systeme mit Leitbildern. Am 12.10. abgelehnt: „die ersten vier entwürfe sind es nicht“ (D27, I). Behalten: eine Taste für die Hauptaktion, Petrol, Belege als Fußnoten, ein Zeichen je App (D30, I).</p></div></li>
+          <li class="sb-timeline__item"><time class="sb-timeline__date" datetime="2026-10-10">10.10.2026</time><span class="sb-timeline__mark"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#plus--16"/></svg></span><div class="sb-timeline__main"><h3 class="sb-timeline__title">Start</h3><p class="sb-timeline__meta">D1–D12 (O)</p><p class="g-gedanken-history__text">Auftrag, Recherche zu Profil, Plattformen und Trends. Ein gemeinsamer Token-Vertrag mit dem Präfix <code>--sb-*</code>, Anrede „du“.</p></div></li>
         </ol>
-        <p class="g-gedanken-rules">Regeln: <a class="sb-mono" href="regeln.html#HAL-07">HAL-07</a>, <a class="sb-mono" href="regeln.html#HAL-08">HAL-08</a>, <a class="sb-mono" href="regeln.html#RAU-06">RAU-06</a>, <a class="sb-mono" href="regeln.html#EBE-08">EBE-08</a>, <a class="sb-mono" href="regeln.html#TEC-07">TEC-07</a></p>
+        <p class="g-gedanken-rules">Regeln: <a class="sb-mono" href="regeln.html#HAL-07">HAL-07</a>, <a class="sb-mono" href="regeln.html#HAL-08">HAL-08</a>, <a class="sb-mono" href="regeln.html#RAU-06">RAU-06</a>, <a class="sb-mono" href="regeln.html#EBE-08">EBE-08</a>, <a class="sb-mono" href="regeln.html#TEC-07">TEC-07</a>, <a class="sb-mono" href="regeln.html#DAT-15">DAT-15</a></p>
       </section>
 
       <!-- ============================================================ runde 6 -->
@@ -683,7 +648,7 @@
             <thead><tr><th scope="col">Nr.</th><th scope="col">Entscheidung</th><th scope="col">Wortlaut</th><th scope="col">Regeln</th></tr></thead>
             <tbody>
               <tr><th scope="row">D72</th><td data-label="Entscheidung">Die Summe der Zustände steht in Fenstern genau einmal, als Stand-Satz links in der Aktionszone; in Zeilen stehen Zeichen und Wort.</td><td data-label="Wortlaut">„Statussumme in Aktionszone“</td><td data-label="Regeln"><a class="sb-mono" href="regeln.html#STA-07">STA-07</a>, <a class="sb-mono" href="regeln.html#EBE-08">EBE-08</a></td></tr>
-              <tr><th scope="row">D73</th><td data-label="Entscheidung">Zwei neue Farbaufgaben statt einer Zweitfarbe: Kategorie (sechs gedämpfte Töne, nur als Punkt neben dem Wort) und Markierung. Die Töne liegen als Skizze beim Inhaber.</td><td data-label="Wortlaut">„Kategorien mit sechs gedämpften tönen, ja machen“</td><td data-label="Regeln"><a class="sb-mono" href="regeln.html#FAR-12">FAR-12</a></td></tr>
+              <tr><th scope="row">D73</th><td data-label="Entscheidung">Zwei neue Farbaufgaben statt einer Zweitfarbe: Kategorie (sechs gedämpfte Töne, nur als Punkt neben dem Wort) und Markierung. Die Töne hat der Inhaber mit D91 gewählt.</td><td data-label="Wortlaut">„Kategorien mit sechs gedämpften tönen, ja machen“</td><td data-label="Regeln"><a class="sb-mono" href="regeln.html#FAR-12">FAR-12</a></td></tr>
               <tr><th scope="row">D74</th><td data-label="Entscheidung">Die Hauptaktion steht unten an dem Bereich, auf den sie wirkt; eine Ansicht ohne klaren nächsten Schritt hat keine.</td><td data-label="Wortlaut">„Vorschlag annehmen zur position der Aktionstaste“</td><td data-label="Regeln"><a class="sb-mono" href="regeln.html#AKT-01">AKT-01</a></td></tr>
               <tr><th scope="row">D75</th><td data-label="Entscheidung">Hell oder Dunkel je Produktart: Websites behalten die Taste, Handy-Apps wählen in den Einstellungen, Desktop-Apps im Menü „Darstellung“ und in den Einstellungen. Die Aufteilung ist eine Lesart, die der Inhaber ändern kann.</td><td data-label="Wortlaut">„ja, zwischen app und desktop unterscheiden wegen hell dunkel taste“</td><td data-label="Regeln"><a class="sb-mono" href="regeln.html#AKT-09">AKT-09</a>, <a class="sb-mono" href="regeln.html#WEB-02">WEB-02</a>, <a class="sb-mono" href="regeln.html#MOB-04">MOB-04</a>, <a class="sb-mono" href="regeln.html#DSK-05">DSK-05</a></td></tr>
               <tr><th scope="row">D76</th><td data-label="Entscheidung">Icons, CSS, Regeln, Spezifikationen und Werkzeuge unter MIT, Schriften unter der OFL, Name und Zeichen vorbehalten; dieselbe Lizenzdatei in Werkstatt, Guide und Export.</td><td data-label="Wortlaut">„Ja, wie vorschlag Lizenz der eigenen Dateien“</td><td data-label="Regeln"><a class="sb-mono" href="regeln.html#TEC-09">TEC-09</a></td></tr>
@@ -700,7 +665,7 @@
               <tr><th scope="row">D87</th><td data-label="Entscheidung">Jedes Produkt wird für mehrere Sprachen geplant; die Skripte melden sich in der Sprache der Seite. Eine englische Fassung der Regeln entfällt.</td><td data-label="Wortlaut">„wir planen immer für Internationalisierung des Produkt contents.“</td><td data-label="Regeln"><a class="sb-mono" href="regeln.html#TEC-10">TEC-10</a></td></tr>
               <tr><th scope="row">D88</th><td data-label="Entscheidung">Versionen und Änderungsprotokoll sofort, automatischer Abgleich mit der Werkstatt, private Pakete, eine Seite für iOS. Nicht: eine Bibliothek für Design-Werkzeuge und ein eigenes Hochkontrast-Schema.</td><td data-label="Wortlaut">„sehr gute idee, damit wir regression verhindern …“, „machen wir nicht: Hochkontrast“</td><td data-label="Regeln"><a class="sb-mono" href="regeln.html#TEC-11">TEC-11</a>, <a class="sb-mono" href="regeln.html#ZUG-05">ZUG-05</a></td></tr>
               <tr><th scope="row">D89</th><td data-label="Entscheidung">Erst die offenen Punkte, dann die Übernahme in novalis; alles Weitere später.</td><td data-label="Wortlaut">„Erst die offenen punkte bearbeiten und danach auf Novalis anwenden.“</td><td data-label="Regeln">–</td></tr>
-              <tr><th scope="row">D90</th><td data-label="Entscheidung">Eine Markenfigur ist erlaubt; ältere Websites werden an sebaro angepasst; eine warme Palette kommt als Vorschlag; der Serverort darf ohne Stadt stehen.</td><td data-label="Wortlaut">„ja darf“, „regeln lockern: Serverort in Belegen“</td><td data-label="Regeln"><a class="sb-mono" href="regeln.html#BIL-05">BIL-05</a></td></tr>
+              <tr><th scope="row">D90</th><td data-label="Entscheidung">Eine Markenfigur ist erlaubt; ältere Websites werden an sebaro angepasst; eine warme Palette kommt als Vorschlag (gewählt mit D91: „Papier“); der Serverort darf ohne Stadt stehen.</td><td data-label="Wortlaut">„ja darf“, „regeln lockern: Serverort in Belegen“</td><td data-label="Regeln"><a class="sb-mono" href="regeln.html#BIL-05">BIL-05</a></td></tr>
             </tbody>
           </table>
         </div>
@@ -709,10 +674,73 @@
           <ul>
             <li><strong>Reproduzierbar statt nachgebaut.</strong> Bisher bauten die Seiten dieses Guides fehlende Muster selbst nach und markierten sie als Vorschlag. Seit D80 kommt ein Baustein erst ins System und dann auf die Seite; dafür wartet manches länger, bis seine Skizze entschieden ist.</li>
             <li><strong>Lesarten bleiben Lesarten.</strong> Zwei Antworten haben Agenten ausgelegt: wo Handy und Desktop Hell oder Dunkel wählen (D75) und welches Kürzel die Befehlspalette hat (D84). Beide stehen als „vom Inhaber änderbar“ im Protokoll, nicht als seine Wahl.</li>
-            <li><strong>Erst entscheiden, dann bauen.</strong> Farbtöne, fehlende Bauteile, Website-Muster, Diagramme, iOS und die übrigen Fensterfragen liegen als Skizze mit 63 Fragen beim Inhaber. Bis zu seiner Wahl zeigt dieser Guide sie nicht als Teil von sebaro.</li>
+            <li><strong>Erst entscheiden, dann bauen.</strong> Farbtöne, fehlende Bauteile, Website-Muster, Diagramme, iOS und die übrigen Fensterfragen gingen als Skizze mit 63 Fragen an den Inhaber. Bis zu seiner Wahl zeigte dieser Guide sie nicht als Teil von sebaro; gebaut wurde erst nach seiner Antwort (D91, nächster Abschnitt).</li>
             <li><strong>Nicht alles, was gut klingt.</strong> Ein eigenes Hochkontrast-Schema und eine Bibliothek für Design-Werkzeuge hätten den Prüfaufwand verdoppelt oder eine zweite Quelle geschaffen; beides machen wir nicht (D88).</li>
           </ul>
         </div>
+      </section>
+
+      <!-- ============================================================ skizze d91 -->
+      <section class="sb-section" id="skizze-d91" aria-labelledby="d91-h">
+        <h2 class="sb-section__title" id="d91-h">Die Antworten auf die Skizze</h2>
+        <div class="sb-prose">
+          <p>Was am 20.10.2026 eine Skizze brauchte, ging mit 63 nummerierten Fragen an den Inhaber; die Skizze bleibt als Skizze beim Inhaber und wird hier nicht verlinkt. Er hat noch am selben Tag alle 63 beantwortet, in einer Zeile. Daraus wurde D91 (I), gebaut am 21.10.2026. Ein Auszug aus dem Wortlaut:</p>
+        </div>
+        <figure class="sb-quote g-gedanken-quote">
+          <blockquote class="sb-quote__text"><p>„C1b c2a C3 empfohlen C4c B1b B2b … G6a aber die färben der legende müssen unterscheidbar bleiben. Bitte eine sinnvolle Regel aufstellen, die unterschiede im beispiel Funktionieren nicht. g7a … Z4a“</p></blockquote>
+          <figcaption class="sb-quote__source">Inhaber, 20.10.2026 (D91, I)</figcaption>
+        </figure>
+        <div class="sb-table-wrap g-gedanken-space" role="region" aria-labelledby="d91-tbl-cap" tabindex="0">
+          <table class="sb-table g-table-stack">
+            <caption id="d91-tbl-cap">D91: was gewählt wurde, nach Gruppen der Skizze</caption>
+            <thead><tr><th scope="col">Gruppe</th><th scope="col">Fragen</th><th scope="col">Gewählt</th><th scope="col">Regeln</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Farben</th><td data-label="Fragen">C1–C4, Z3</td><td data-label="Gewählt">Kategorie in sechs gedämpft kühlen Tönen, Markierung als Fläche mit Kante, Farbe folgt dem Vorzeichen, ein warmer Farbton „Papier“ als zweite Wahl, auf Websites im Fuß unter „Darstellung“</td><td data-label="Regeln"><a class="sb-mono" href="regeln.html#FAR-12">FAR-12</a>, <a class="sb-mono" href="regeln.html#FAR-14">FAR-14</a>, <a class="sb-mono" href="regeln.html#FAR-15">FAR-15</a></td></tr>
+              <tr><th scope="row">Bauteile</th><td data-label="Fragen">B1–B13, Z4</td><td data-label="Gewählt">Board mit Haarlinien, am Handy wischen; stehender Gruppenkopf; Zeitleiste ohne Strich; Sortierpfeil und Summenzeile; Kalender mit Punkt; Zitat mit Tintenlinie; Einführung, Kopf „Über“, Audio, Video, kleine Karte</td><td data-label="Regeln"><a class="sb-mono" href="regeln.html#DAT-13">DAT-13</a>, <a class="sb-mono" href="regeln.html#DAT-14">DAT-14</a>, <a class="sb-mono" href="regeln.html#DAT-15">DAT-15</a>, <a class="sb-mono" href="regeln.html#DAT-16">DAT-16</a>, <a class="sb-mono" href="regeln.html#DAT-17">DAT-17</a>, <a class="sb-mono" href="regeln.html#TXT-17">TXT-17</a>, <a class="sb-mono" href="regeln.html#STR-03">STR-03</a>, <a class="sb-mono" href="regeln.html#ZEI-13">ZEI-13</a>, <a class="sb-mono" href="regeln.html#BIL-06">BIL-06</a>, <a class="sb-mono" href="regeln.html#BIL-07">BIL-07</a></td></tr>
+              <tr><th scope="row">Website-Muster</th><td data-label="Fragen">W1–W8</td><td data-label="Gewählt">Ergebnis ersetzt das Formular, Seitenzahlen, häufige Fragen und Doku-Gruppen zum Aufklappen, Bildschirmfotos im Raster, ein Vorschaubild je Seite, Sprachwechsel auf dieselbe Seite, Druck immer hell</td><td data-label="Regeln"><a class="sb-mono" href="regeln.html#WEB-05">WEB-05</a>, <a class="sb-mono" href="regeln.html#WEB-06">WEB-06</a>, <a class="sb-mono" href="regeln.html#WEB-07">WEB-07</a>, <a class="sb-mono" href="regeln.html#WEB-08">WEB-08</a>, <a class="sb-mono" href="regeln.html#WEB-09">WEB-09</a>, <a class="sb-mono" href="regeln.html#WEB-10">WEB-10</a>, <a class="sb-mono" href="regeln.html#WEB-11">WEB-11</a></td></tr>
+              <tr><th scope="row">Diagramme</th><td data-label="Fragen">G1–G10</td><td data-label="Gewählt">Schrift als HTML, Linie grau mit dem Jetzt in Kobalt, Sparkline nach der Zahl, Anteile als Zeilen, dichtes Histogramm, Heatmap mit Zahlen in der Legende, Abweichung in zwei Tönen, Zielring, Legende oben, im Dunkeln mehr weiter weg vom Grund</td><td data-label="Regeln"><a class="sb-mono" href="regeln.html#DAT-04">DAT-04</a>, <a class="sb-mono" href="regeln.html#DAT-10">DAT-10</a>, <a class="sb-mono" href="regeln.html#DAT-11">DAT-11</a>, <a class="sb-mono" href="regeln.html#DAT-12">DAT-12</a></td></tr>
+              <tr><th scope="row">iOS</th><td data-label="Fragen">I1–I10</td><td data-label="Gewählt">eigene untere Leiste, Navigationsleiste des Systems, kein Wischen in Zeilen, eigener Löschen-Dialog, Formular als Sheet mit „Sichern“ unten, Haptik, Dynamic Type ohne Grenze, Hell oder Dunkel mit Haken, Start mit Kachel</td><td data-label="Regeln"><a class="sb-mono" href="regeln.html#MOB-05">MOB-05</a>, <a class="sb-mono" href="regeln.html#MOB-06">MOB-06</a>, <a class="sb-mono" href="regeln.html#MOB-07">MOB-07</a>, <a class="sb-mono" href="regeln.html#MOB-08">MOB-08</a></td></tr>
+              <tr><th scope="row">Fenster</th><td data-label="Fragen">F1–F14</td><td data-label="Gewählt">Titelleiste je System, kleines Fenster, ziehbare Trennlinien, Taste „Menü“, 14 feste Kürzel, F6, Dokument-Reiter, Ablageziel in Kobalt, mehrere Fenster, Mitteilungen, Update als Wort, Fenstergrund, kompakter Inspektor</td><td data-label="Regeln"><a class="sb-mono" href="regeln.html#DSK-06">DSK-06</a>, <a class="sb-mono" href="regeln.html#DSK-07">DSK-07</a>, <a class="sb-mono" href="regeln.html#DSK-08">DSK-08</a>, <a class="sb-mono" href="regeln.html#DSK-09">DSK-09</a>, <a class="sb-mono" href="regeln.html#DSK-10">DSK-10</a>, <a class="sb-mono" href="regeln.html#DSK-11">DSK-11</a>, <a class="sb-mono" href="regeln.html#DSK-12">DSK-12</a>, <a class="sb-mono" href="regeln.html#DSK-13">DSK-13</a>, <a class="sb-mono" href="regeln.html#DSK-14">DSK-14</a>, <a class="sb-mono" href="regeln.html#DSK-15">DSK-15</a></td></tr>
+              <tr><th scope="row">Zustände</th><td data-label="Fragen">Z1, Z2</td><td data-label="Gewählt">zählen statt „teils offen“; das Sheet ab 640&nbsp;px höchstens 560&nbsp;px breit</td><td data-label="Regeln"><a class="sb-mono" href="regeln.html#STA-09">STA-09</a>, <a class="sb-mono" href="regeln.html#EBE-04">EBE-04</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="g-gedanken-h3">Fünfmal gegen die Empfehlung</h3>
+        <p class="g-gedanken-intro">Die Skizze schlug je Frage einen Weg vor und nannte die Schwächen der anderen. Fünfmal hat der Inhaber den anderen Weg gewählt. Gebaut ist genau seine Wahl; die Schwächen aus der Skizze sind einzeln beantwortet.</p>
+        <ul class="sb-list g-gedanken-list">
+          <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Kategorie: gedämpft kühl statt erdig (C1b)</p><p class="sb-list-row__text">Empfohlen waren Erdtöne. Die kühlen Töne liegen näher an Kobalt, bei Farbsehschwäche nah an den Kacheln und an grauem Text, und zwei von ihnen sind Grüne, die sich vor allem in der Helligkeit unterscheiden. Gemessen: zu Kobalt, Link, Status und Hauptaktion mindestens 0,081 (Farbabstand in OKLab), alle Töne mindestens 3&nbsp;:&nbsp;1 auf jedem Grund. Die Antwort darauf ist die Form: Eine Kategorie ist ein 10-px-Punkt neben ihrem Wort, Kobalt ist Linie, Wortfarbe oder Rahmen. Der Punkt steht nie allein, und der Kalender zeigt Kategorien nur in der Tagesliste neben dem Wort, nie neben seinem grauen Punkt „mit Eintrag“. <a class="sb-mono" href="regeln.html#FAR-12">FAR-12</a></p></div></li>
+          <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Board am Handy: Spalten wischen statt Reiter (B2b)</p><p class="sb-list-row__text">Empfohlen war ein Reiter je Spalte. Wischen kann mit der Wischgeste des Systems kollidieren und versteckt die anderen Spalten. Gebaut ist: Die nächste Spalte bleibt am Rand im Bild, eine Leiste „Spalte 2 von 3“ hat Tasten zum Weiterschalten, die Hauptaktion nennt die Spalte, die Tabulatortaste erreicht jede Spalte, und die Seite selbst rollt nie seitlich. <a class="sb-mono" href="regeln.html#DAT-13">DAT-13</a></p></div></li>
+          <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Zitat mit Tintenlinie statt Einzug (B8b)</p><p class="sb-list-row__text">Empfohlen waren Einzug und Anführungszeichen ohne Linie, denn die Tintenlinie heißt bei uns Ebene. Jetzt gibt es eine zweite Bedeutung, und der Ort unterscheidet sie: Eine Ebenenlinie begrenzt immer eine Ebene mit eigenem Grund; die Zitatlinie steht im Fließtext, ohne Grund, Radius oder weitere Kante, und endet mit der letzten zitierten Zeile. Nie 3&nbsp;px, nie Kobalt, denn das ist die Ortslinie. <a class="sb-mono" href="regeln.html#TXT-17">TXT-17</a>, <a class="sb-mono" href="regeln.html#FOR-02">FOR-02</a></p></div></li>
+          <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Video mit Vorschaubild statt Rahmen ohne Bild (B12b)</p><p class="sb-list-row__text">Empfohlen war ein Rahmen ohne Bild. Ein Vorschaubild kostet eine Anfrage mehr, braucht einen Text für Menschen, die es nicht sehen, und die Abspieltaste muss auf jedem Bild lesbar sein. Gebaut ist: Das Bild kommt mit der Seite vom eigenen Server (im Dunkeln eine eigene Fassung), das Video erst nach dem Druck; ein versteckter Satz beschreibt das Bild; die Taste hat einen eigenen Grund und eine Tintenlinie. <a class="sb-mono" href="regeln.html#BIL-07">BIL-07</a></p></div></li>
+          <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Doku-Navigation mit aufklappbaren Gruppen statt alles offen (W4b)</p><p class="sb-list-row__text">Empfohlen war ein Gruppenkopf als Wort, alles offen. Was zugeklappt ist, sieht man nicht, und die aktuelle Seite kann verschwinden. Gebaut ist: Jeder Kopf nennt die Zahl seiner Seiten, es gibt eine „Übersicht“, die Gruppe der aktuellen Seite steht offen, und der Kopf ist ein natives <code>summary</code>, das jede Tastatur und jeder Screenreader kennt. <a class="sb-mono" href="regeln.html#WEB-07">WEB-07</a></p></div></li>
+        </ul>
+
+        <h3 class="g-gedanken-h3">Eine Regel, die man messen kann</h3>
+        <div class="sb-prose">
+          <p>Bei der Heatmap wählte der Inhaber die Farbe in der Zelle und die Zahlen in der Legende, aber mit einer Bedingung: Die Stufen der Legende müssen unterscheidbar bleiben, und dafür braucht es eine Regel. Die Skizze hatte sieben fließende Stufen; gemessen lagen Nachbarn nur 1,37 bis 1,55&nbsp;:&nbsp;1 auseinander, die erste Stufe nur 1,06 bis 1,31&nbsp;:&nbsp;1 vom Grund.</p>
+          <p>Jetzt gilt: Stufen statt Verlauf, höchstens fünf (fortlaufend vier, zweiseitig fünf). Die erste Stufe hebt sich mit mindestens 3&nbsp;:&nbsp;1 von jedem Grund ab, Nachbarn liegen mindestens 1,6&nbsp;:&nbsp;1 und 0,10 (Farbabstand in OKLab) auseinander, auch bei jeder Farbsehschwäche. „keine Angabe“ ist die leere Zelle mit Rahmen, nie die erste Stufe. Die Prüfung der Palette meldet jeden Verstoß als Fehler; gemessen sind jetzt 1,61 bis 1,65&nbsp;:&nbsp;1 zwischen Nachbarn.</p>
+        </div>
+        <figure class="g-gedanken-space">
+          <ul class="sb-scale-legend" aria-label="Legende, Gläser je Tag">
+            <li><span class="sb-scale-cell sb-scale-cell--seq-1" aria-hidden="true"></span>0–2</li>
+            <li><span class="sb-scale-cell sb-scale-cell--seq-2" aria-hidden="true"></span>3–4</li>
+            <li><span class="sb-scale-cell sb-scale-cell--seq-3" aria-hidden="true"></span>5–6</li>
+            <li><span class="sb-scale-cell sb-scale-cell--seq-4" aria-hidden="true"></span>7 und mehr</li>
+            <li><span class="sb-scale-cell sb-scale-cell--none" aria-hidden="true"></span>keine Angabe</li>
+          </ul>
+          <figcaption class="g-gedanken-note">Die vier Stufen der fortlaufenden Skala, wie diese Seite sie gerade zeigt; schalt Hell oder Dunkel und den Farbton im Fuß um. <span class="sb-demo-marker">Beispieldaten</span></figcaption>
+        </figure>
+        <p class="g-gedanken-rules">Regeln: <a class="sb-mono" href="regeln.html#DAT-11">DAT-11</a>, <a class="sb-mono" href="regeln.html#DAT-10">DAT-10</a>, <a class="sb-mono" href="regeln.html#DAT-04">DAT-04</a></p>
+
+        <h3 class="g-gedanken-h3">Was ein Agent dazugelegt hat</h3>
+        <p class="g-gedanken-intro">Nicht alles im Bau ist eine Wahl des Inhabers. Was Agenten ergänzt oder ausgelegt haben, nennt der Hinweis der Regel, und der Inhaber kann es ändern. Eine Regel, deren Kern ein Agent gesetzt hat, bleibt vorläufig.</p>
+        <ul class="sb-list g-gedanken-list">
+          <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Die Schwellen der Skalenregel</p><p class="sb-list-row__text">Höchstens fünf Stufen, 3&nbsp;:&nbsp;1 für die erste Stufe, 1,6&nbsp;:&nbsp;1 zwischen Nachbarn: Die Regel hat der Inhaber verlangt, die Zahlen hat ein Agent gesetzt. Sie bleibt vorläufig, bis er sie gesehen hat. <a class="sb-mono" href="regeln.html#DAT-11">DAT-11</a></p></div></li>
+          <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">„Heute“ in der Heatmap</p><p class="sb-list-row__text">Die Notiz der Skizze nannte einen Rahmen in Kobalt. Gebaut ist die 3-px-Ortslinie unter der Zelle, weil ein Kobaltrahmen wie der Fokusring aussieht. Der Inhaber kann den Rahmen zurückwollen; das steht im <a href="ausblick.html#entscheidung">Ausblick</a>. <a class="sb-mono" href="regeln.html#DAT-11">DAT-11</a></p></div></li>
+          <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Ergänzungen nach der Prüfung</p><p class="sb-list-row__text">Breiten ohne Ziehen („Schmal, Normal, Breit“ im Menü „Darstellung“, für Menschen, die nicht ziehen können), Sortierköpfe 48&nbsp;px außerhalb von Fenstern, die Leiste am Board. Das sind Antworten der Agenten auf Prüfbefunde, keine Wahl des Inhabers; die Regeln selbst sind entschieden, ihr Hinweis nennt die Ergänzung. <a class="sb-mono" href="regeln.html#DSK-07">DSK-07</a>, <a class="sb-mono" href="regeln.html#DAT-14">DAT-14</a>, <a class="sb-mono" href="regeln.html#DAT-13">DAT-13</a></p></div></li>
+          <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Regeln, die vorläufig bleiben</p><p class="sb-list-row__text">Bei fünf Regeln hat D91 nur einen Teil entschieden, etwa die Breite des Sheets oder den Ort von „Darstellung“ im Fuß; der Rest stammt aus der Spezifikation. Sie bleiben vorläufig und sagen das in ihrem Hinweis. <a class="sb-mono" href="regeln.html#EBE-04">EBE-04</a>, <a class="sb-mono" href="regeln.html#EBE-07">EBE-07</a>, <a class="sb-mono" href="regeln.html#WEB-03">WEB-03</a>, <a class="sb-mono" href="regeln.html#WEB-04">WEB-04</a>, <a class="sb-mono" href="regeln.html#DSK-01">DSK-01</a></p></div></li>
+        </ul>
       </section>
 
       <!-- ============================================================ abwaegungen -->
@@ -730,15 +758,16 @@
           <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Dichte auf dem Desktop</p><p class="sb-list-row__text">Zeilen sind dort 32, 48 oder 64&nbsp;px hoch, je nach ein, zwei oder drei Zeilen Text; bei Touch bleibt die Trefferfläche 48&nbsp;px. Mehr Inhalt je Fenster, dafür zwei Maßstäbe statt einem (D67, D83, I; <a class="sb-mono" href="regeln.html#RAU-06">RAU-06</a>).</p></div></li>
           <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Fenster geben Platz ab</p><p class="sb-list-row__text">Seitenleiste und Inspektor lassen sich ausblenden, und unter 1004 und 722&nbsp;px legen sie sich über den Rand. Der Text behält mindestens 480&nbsp;px, dafür sieht man in kleinen Fenstern weniger auf einmal (D81, I; <a class="sb-mono" href="regeln.html#DSK-04">DSK-04</a>).</p></div></li>
           <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Hell oder Dunkel an drei Orten</p><p class="sb-list-row__text">Websites haben die Taste im Kopf, Handy-Apps die Einstellungen, Desktop-Apps das Menü „Darstellung“. Wer zwischen Produkten wechselt, sucht an verschiedenen Stellen; dafür bleibt jeder Kopf frei (D75, I; <a class="sb-mono" href="regeln.html#DSK-05">DSK-05</a>).</p></div></li>
+          <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Ein zweiter Farbton</p><p class="sb-list-row__text">Mit „Warm“ wandern nur die Graus: Gründe, Text und Linien. Kobalt, Lindgrün, Status und Kacheln bleiben, und jede Prüfung der Palette läuft mit beiden Fassungen. Dafür hat jede Website im Fuß eine Wahl mehr, und der Startbildschirm des Systems auf iOS bleibt kühl (D91, I; <a class="sb-mono" href="regeln.html#FAR-15">FAR-15</a>).</p></div></li>
           <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Kein eigenes Hochkontrast-Schema</p><p class="sb-list-row__text">Der Kontrastmodus des Systems bleibt bedacht: Linien statt Flächen, Formen statt Farben. Ein eigenes drittes Schema hätte jede Prüfung verdoppelt (D88, I; <a class="sb-mono" href="regeln.html#ZUG-05">ZUG-05</a>).</p></div></li>
           <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Zeichenprüfung braucht Augen</p><p class="sb-list-row__text">Die automatische Prüfung ist nur ein Vorsieb. Seit D86 vergleicht sie mit gezeichneten Formen und Symbolzeichen statt mit Buchstaben; eine normale Nähe braucht eine schriftliche Begründung und den Blick des Inhabers (<a class="sb-mono" href="regeln.html#ZEI-08">ZEI-08</a>, <a class="sb-mono" href="regeln.html#ZEI-12">ZEI-12</a>).</p></div></li>
         </ul>
         <h3 class="g-gedanken-h3">Noch nicht geprüft</h3>
         <ul class="sb-list g-gedanken-list">
-          <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Echte Geräte</p><p class="sb-list-row__text">Android, iOS, Windows-Darstellung ohne Hinting, macOS, Firefox, WebKit und Tauri. Geprüft ist nur in Chromium. Der Inhaber hat entschieden: „tests auf echten geraten später“ (D79).</p></div><span class="sb-status sb-status--neutral"><svg class="sb-icon sb-icon--20" aria-hidden="true" focusable="false"><use href="#clock"/></svg>geplant (D79)</span></li>
+          <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Echte Geräte</p><p class="sb-list-row__text">Android, iOS, Windows-Darstellung ohne Hinting, macOS, Firefox, WebKit und Tauri, auch die Titelleiste, Mitteilungen und der Fenstergrund aus D91 in einem echten Tauri-Fenster. Geprüft ist nur in Chromium und im iOS-Simulator. Der Inhaber hat entschieden: „tests auf echten geraten später“ (D79).</p></div><span class="sb-status sb-status--neutral"><svg class="sb-icon sb-icon--20" aria-hidden="true" focusable="false"><use href="#clock"/></svg>geplant (D79)</span></li>
           <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Screenreader und echte Touch-Eingabe</p><p class="sb-list-row__text">Vier feste Aufgaben je Plattform sind festgelegt und mit der Tastatur geprüft (anlegen, löschen mit Dialog, Beleg öffnen, Modus wechseln). Ein Mensch mit Screenreader hat das System noch nicht benutzt; das kommt nach D79 später.</p></div><span class="sb-status sb-status--neutral"><svg class="sb-icon sb-icon--20" aria-hidden="true" focusable="false"><use href="#clock"/></svg>geplant (D79)</span></li>
           <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Markenrecherche</p><p class="sb-list-row__text">Für Zeichen und Wortmarke steht sie aus. Sie wird Pflicht vor der Veröffentlichung eines Produkts (D88).</p></div><span class="sb-status sb-status--neutral"><svg class="sb-icon sb-icon--20" aria-hidden="true" focusable="false"><use href="#clock"/></svg>geplant (D88)</span></li>
-          <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Compose- und Swift-Bausteine</p><p class="sb-list-row__text">Die neuen Compose-Bausteine sind gegen beide Versionen kompiliert, aber nicht gerendert; TalkBack ist ungeprüft. Swift steht nur in der Skizze für iOS und ist nicht kompiliert.</p></div><span class="sb-status sb-status--warning"><svg class="sb-icon sb-icon--20" aria-hidden="true" focusable="false"><use href="#pending"/></svg>offen</span></li>
+          <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Compose- und Swift-Bausteine</p><p class="sb-list-row__text">Die Compose-Bausteine aus D80 sind gegen beide Versionen kompiliert, aber nicht gerendert; TalkBack ist ungeprüft. Für die Bauteile und Diagramme aus D91 gibt es noch keine Compose-Fassung. Die SwiftUI-Bausteine laufen im iOS-Simulator (iOS 27.0 und 18.5), nicht auf einem Gerät; VoiceOver und das iPad sind ungeprüft.</p></div><span class="sb-status sb-status--warning"><svg class="sb-icon sb-icon--20" aria-hidden="true" focusable="false"><use href="#pending"/></svg>offen</span></li>
           <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Codefarben bei Farbfehlsichtigkeit</p><p class="sb-list-row__text">Gemessen in der Werkstatt: jeder Codeton hat auf jedem Grund mindestens 6,55&nbsp;:&nbsp;1. Am engsten liegen Himbeere und Kommentar-Grau hell bei Deuteranopie, mit einem Farbabstand von 0,065 (in OKLab gemessen). Die Töne sind Tokens und färben den Code auf diesen Seiten (D69, <a class="sb-mono" href="regeln.html#FAR-11">FAR-11</a>).</p></div><span class="sb-status sb-status--success"><svg class="sb-icon sb-icon--20" aria-hidden="true" focusable="false"><use href="#success--filled"/></svg>erledigt (D69)</span></li>
           <li class="sb-list-row"><div class="sb-list-row__main"><p class="sb-list-row__title">Übernahme in Produkte</p><p class="sb-list-row__text">Noch ist nichts in ein Produkt-Repo übernommen. Erst kommen die offenen Punkte, dann novalis (D89).</p></div><span class="sb-status sb-status--neutral"><svg class="sb-icon sb-icon--20" aria-hidden="true" focusable="false"><use href="#clock"/></svg>geplant (D89)</span></li>
         </ul>
@@ -765,11 +794,11 @@
           </table>
         </div>
         <div class="sb-prose">
-          <p>Im Regelkatalog wird daraus ein Status: <strong>entschieden</strong>, wenn der Kern der Regel in einer I-Zeile steht, <strong>vorläufig</strong>, wenn er nur auf Spezifikation, Code oder O-Zeilen ruht, <strong>offen</strong>, wenn er den Inhaber braucht. Stand 20.10.2026: 185 Regeln, 110 entschieden, 75 vorläufig, keine offen. Jede neue, geänderte oder entfallene Regel steht seit D88 mit ihrer ID im Änderungsprotokoll, und Guide und Regelkatalog tragen eine gemeinsame Version.</p>
+          <p>Im Regelkatalog wird daraus ein Status: <strong>entschieden</strong>, wenn der Kern der Regel in einer I-Zeile steht, <strong>vorläufig</strong>, wenn er nur auf Spezifikation, Code oder O-Zeilen ruht, <strong>offen</strong>, wenn er den Inhaber braucht. Stand 21.10.2026: 221 Regeln, 146 entschieden, 75 vorläufig, keine offen. Jede neue, geänderte oder entfallene Regel steht seit D88 mit ihrer ID im Änderungsprotokoll, und Guide und Regelkatalog tragen eine gemeinsame Version.</p>
         </div>
         <h3 class="g-gedanken-h3">Skizze vor Ausbau</h3>
         <div class="sb-prose">
-          <p>Runde 1 baute vier Systeme, bevor der Inhaber eines gesehen hatte. Seitdem kommt zuerst eine Skizze (D35, O): eine Seite mit nummerierten Fragen, je Frage zwei oder drei Wege, Farbe und Schrift als Umschalter. Der Inhaber antwortet knapp, etwa „1a 2a … 13b“, und der Wortlaut wird unverändert festgehalten. Erst dann wird gebaut. So liegt auch die Skizze der sechsten Runde mit 63 Fragen beim Inhaber; was sie zeigt, steht im Ausblick als „wartet auf deine Wahl“.</p>
+          <p>Runde 1 baute vier Systeme, bevor der Inhaber eines gesehen hatte. Seitdem kommt zuerst eine Skizze (D35, O): eine Seite mit nummerierten Fragen, je Frage zwei oder drei Wege, Farbe und Schrift als Umschalter. Der Inhaber antwortet knapp, etwa „1a 2a … 13b“, und der Wortlaut wird unverändert festgehalten. Erst dann wird gebaut. So lief auch die sechste Runde: 63 Fragen, beantwortet in einer Zeile (D91), gebaut am Tag danach. Die Skizze bleibt beim Inhaber; was er gewählt hat, steht unter <a href="#skizze-d91">Die Antworten auf die Skizze</a>.</p>
         </div>
         <h3 class="g-gedanken-h3">Konflikte zeigen, nicht mitteln</h3>
         <div class="sb-prose">
@@ -796,13 +825,25 @@
 </main>
 <!-- guide:footer -->
 <footer class="sb-site-footer g-footer">
-  <p>sebaro Guide <a href="https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md">Version 2.0.0<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a> · System sebaro, Token-Vertrag 1.7 · aus sebaroDesign <code class="sb-code-inline">f2510b0</code></p>
+  <p>sebaro Guide <a href="https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md">Version 2.1.0<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a> · System sebaro, Token-Vertrag 1.8 · aus sebaroDesign <code class="sb-code-inline">6c9c222</code></p>
   <ul class="sb-site-footer__links">
     <li><a href="rules.json">rules.json</a></li>
     <li><a href="llms.txt">llms.txt</a></li>
     <li><a href="https://github.com/grundhofer/sebaro-guide">GitHub<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a></li>
     <li><a href="https://github.com/grundhofer/sebaro-guide/blob/main/AGENTS.md">Für Agenten<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a></li>
   </ul>
+  <section class="sb-site-footer__display" aria-labelledby="g-footer-display-h" data-sb-tone-choice hidden>
+    <h2 id="g-footer-display-h">Darstellung</h2>
+    <form class="g-footer__tone">
+      <fieldset class="sb-segmented"><legend>Farbton</legend>
+        <div class="sb-segmented__options">
+          <label class="sb-segmented__option"><input type="radio" name="sb-tone" value="cool" checked><span class="sb-segmented__face"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>Kühl</span></label>
+          <label class="sb-segmented__option"><input type="radio" name="sb-tone" value="warm"><span class="sb-segmented__face"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>Warm</span></label>
+        </div>
+      </fieldset>
+    </form>
+  </section>
+  <p class="sb-visually-hidden" role="status" data-sb-tone-status></p>
 </footer>
 <!-- /guide:footer -->
 </body>

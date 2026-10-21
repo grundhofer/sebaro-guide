@@ -1,16 +1,11 @@
 // web.js: behaviour of the example website on web.html (guide page only, never shipped). Classic script, loaded with
 // defer, CSP-safe (no inline handlers, no eval), no network. The system scripts (sb-controls.js, sb-notes.js,
-// sb-start.js, sb-search.js) do the rest: chips, code copy, dialog, footnote popover, start replay, „Suche leeren“.
+// sb-start.js, sb-search.js, sb-form.js, sb-tone.js, sb-media.js, sb-print.js) do the rest: chips, code copy, dialog, footnote popover, start replay, „Suche leeren“.
 //   1) project overview: filter chips, search and the order (segmented) narrow and sort the list; count + empty state
-//   2) forms with [data-g-web-send]: the fields are checked first (EIN-02, TXT-07), then the primary action shows its
-//      own progress (AKT-05, D48): label says what runs, the ink bar grows, check + done word, then the sent line.
-//      No toast. The run is a stand-in for real network work; a product drives the same attributes from its request.
+//   2) forms with [data-g-web-check-form]: the fields are checked first (EIN-02, TXT-07), as the server would; a valid
+//      form goes on to sb-form.js, which shows progress in the primary action and then puts the result in place of
+//      the form (D91 W1a). No toast.
 (function () {
-  var reduced = function () {
-    return document.documentElement.getAttribute("data-sb-motion") === "reduce" ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  };
-
   // 1) project overview
   var list = document.querySelector("[data-g-web-projects]");
   if (list) {
@@ -58,13 +53,7 @@
     apply();
   }
 
-  // 2) forms that send
-  function icon(href, cls) {
-    var NS = "http://www.w3.org/2000/svg", svg = document.createElementNS(NS, "svg"), use = document.createElementNS(NS, "use");
-    svg.setAttribute("class", cls || "sb-icon"); svg.setAttribute("aria-hidden", "true"); svg.setAttribute("focusable", "false");
-    use.setAttribute("href", href); svg.appendChild(use);
-    return svg;
-  }
+  // 2) forms: the field check before sending
   function de(n) { return n.toLocaleString("de-DE"); }
 
   function check(field) {
@@ -106,13 +95,9 @@
     sync();
   });
 
-  document.querySelectorAll("form[data-g-web-send]").forEach(function (form) {
-    var button = form.querySelector(".sb-primary-action");
-    var label = button && button.querySelector(".sb-primary-action__label");
-    var bar = button && button.querySelector(".sb-primary-action__bar");
-    var sent = form.querySelector("[data-g-web-sent]");
-    if (!button || !label || !bar) return;
-    var idle = label.textContent;
+  // the fields are checked before sb-form.js sends (a stand-in for the server's field check, which answers 4xx and
+  // renders the errors at the fields): a wrong form stops here, the first wrong field gets the focus
+  document.querySelectorAll("form[data-g-web-check-form]").forEach(function (form) {
     var fields = Array.prototype.slice.call(form.querySelectorAll("[data-g-web-check]"));
 
     // a field that was wrong is checked again while the person types
@@ -124,43 +109,16 @@
     });
 
     form.addEventListener("submit", function (event) {
-      event.preventDefault();
-      if (button.getAttribute("aria-busy") === "true") return;
       var first = null;
       fields.forEach(function (field) {
         var message = check(field);
         show(field, message);
         if (message && !first) first = field.querySelector("input, textarea");
       });
-      if (first) { first.focus(); return; }
-
-      if (sent) sent.textContent = "";
-      button.removeAttribute("data-sb-state");
-      label.textContent = button.getAttribute("data-sb-busy") || "Wird gesendet …";
-      button.setAttribute("aria-busy", "true");
-      button.style.setProperty("--sb-progress", "0");
-      if (!reduced()) {
-        requestAnimationFrame(function () { requestAnimationFrame(function () {
-          bar.style.transition = "transform 1800ms linear";
-          button.style.setProperty("--sb-progress", "1");
-        }); });
-      } else {
-        button.style.setProperty("--sb-progress", "1");
-      }
-      setTimeout(function () {
-        bar.style.transition = "";
-        button.removeAttribute("aria-busy");
-        button.style.removeProperty("--sb-progress");
-        label.textContent = "";
-        label.appendChild(icon("#check"));
-        label.appendChild(document.createTextNode(button.getAttribute("data-sb-done") || "Gesendet"));
-        button.setAttribute("data-sb-state", "done");
-        if (sent) {
-          sent.appendChild(icon("#success--filled-16", "sb-icon sb-icon--16"));
-          sent.appendChild(document.createTextNode(sent.getAttribute("data-g-web-sent")));
-        }
-        setTimeout(function () { label.textContent = idle; button.removeAttribute("data-sb-state"); }, 1500);
-      }, 1800);
+      if (!first) return;   // valid: sb-form.js (listening on the document) sends and shows the result
+      event.preventDefault();
+      event.stopPropagation();
+      first.focus();
     });
   });
 })();

@@ -18,6 +18,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 | correct markup of every component | `docs/bauteile.html` (each entry has a "Markup" block) |
 | how to show any kind of data | `docs/daten.html` |
 | full example: website / phone app / desktop app | `docs/web.html`, `docs/app.html`, `docs/desktop.html` |
+| iOS (SwiftUI): what differs on the iPhone | `docs/ios.html`; the SwiftUI package comes with the workshop export (`--target ios`, §4), its spec is sebaroDesign `systems/sebaro/spec/12-platform-ios.md` (private) |
 | why it is the way it is | `docs/gedanken.html` |
 | what waits for the owner's choice, is open, comes later or is done | `docs/ausblick.html` |
 | what changed between versions | [`CHANGELOG.md`](CHANGELOG.md) (every rule change by id) |
@@ -26,7 +27,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 
 Rule status: **entschieden** = owner decision, binding. **vorläufig** = an agent's decision, valid until the owner
 changes it. **offen** = proposal only, do not build it as a rule. `D<n>` refers to row n of the decision log in the
-workshop repository sebaroDesign (private; the guide covers D1–D90). A rule id (e.g. `AKT-01`) is stable; cite it
+workshop repository sebaroDesign (private; the guide covers D1–D91). A rule id (e.g. `AKT-01`) is stable; cite it
 in code reviews, commit messages and ADRs.
 
 ## 2 The ten rules most often broken
@@ -52,10 +53,12 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
 
 ## 3 Building a product with sebaro
 
-1. Read `guide/RULES.md` (or filter `rules/rules.json` by `platforms`: `web`, `mobile`, `desktop`, `alle`).
+1. Read `guide/RULES.md` (or filter `rules/rules.json` by `platforms`: `web`, `mobile`, `desktop`, `alle`; `mobile`
+   covers Android and iOS, rules only for iOS say „Nur iOS“ in their note).
 2. Get the system files for your platform (§4). Never copy colour values; reference tokens (`var(--sb-color-*)`,
    `SebaroTheme`, `Color.sb*`).
-3. Copy markup from `docs/bauteile.html` and screen recipes from `docs/app.html`, `docs/web.html`, `docs/desktop.html`.
+3. Copy markup from `docs/bauteile.html` and screen recipes from `docs/app.html`, `docs/ios.html`, `docs/web.html`,
+   `docs/desktop.html`.
    Their specimens use only `sb-*` classes from `docs/sebaro/css/sebaro.css`. Classes starting with `demo-` and `g-` are
    guide chrome; never ship them. Patterns marked „Vorschlag, noch nicht im System“ are not part of sebaro yet.
 4. Pick the product's sign tile by product id; its colour appears nowhere else in the UI.
@@ -63,13 +66,42 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
    apps choose System, Hell or Dunkel in their settings; desktop apps in the menu „Darstellung“ and in the settings
    view (WEB-02, MOB-04, DSK-05). Desktop and windowed web apps: command palette on ⌘K / Ctrl+K (D84, NAV-09),
    sidebar and inspector can be hidden and the content keeps at least 480 px (D81, DSK-04). Plan every product for
-   several languages: no string built into code, script messages by `lang` (D87, TEC-10).
+   several languages: no string built into code, script messages by `lang` (D87, TEC-10). The second tone
+   „Farbton: Kühl · Warm“ (D91, FAR-15): websites in the footer under „Darstellung“, apps next to light/dark in their
+   settings (`js/sb-tone.js`; `theme-init.js` applies a stored tone). Websites print always light (`js/sb-print.js`,
+   WEB-11).
 6. Check both light and dark, 390 px and 1440 px, keyboard and screen reader basics, then the checklist.
 7. When a rule does not fit your case, do not work around it silently: name the rule id and ask the owner.
-8. Components that wait for the owner's choice (category and mark colours, warm palette, board, calendar, timeline,
-   table sort and sum row, quote, audio, video, map, onboarding, about head, website patterns, charts beyond bars,
-   iOS, the remaining desktop window questions) are sketched in the workshop but **not decided**. Do not build them
-   as sebaro; if a product needs one now, ask the owner (see `docs/ausblick.html#entscheidung`).
+8. The round-6 components are **decided and built** (owner's answers D91 to the 63 sketch questions); copy them, never
+   rebuild them in a product:
+   - colours: category `sb-category--1…6` (dot next to the word), mark `mark` / `sb-mark`, signed numbers `sb-signed`,
+     warm tone `html[data-sb-tone="warm"]` with `js/sb-tone.js` (FAR-12, FAR-14, FAR-15);
+   - data: board `sb-board` + `js/sb-board.js`, sticky group head `sb-list-header--sticky` + `js/sb-sticky.js`,
+     timeline `sb-timeline`, table sort `sb-table__sort` + `js/sb-table.js` and the sum row in `tfoot`, calendar
+     `sb-calendar` + `js/sb-calendar.js`, menu path `sb-breadcrumb--path`, rating `sb-rating`, diff `sb-diff`, place
+     with a small static map (DAT-09, DAT-13 to DAT-17, TXT-11, TXT-16);
+   - charts: `sb-chart` + `js/sb-chart.js` (text as HTML, grey line with the now in cobalt, sparkline after the number,
+     labelled share rows, dense histogram, heatmap with classed scales, diverging, goal ring, legend above), scales
+     `--sb-dataviz-sequential-1…4` and `--sb-dataviz-diverging-1…5` (DAT-04, DAT-10 to DAT-12);
+   - text and media: quote `sb-quote` (and `.sb-prose > blockquote`), intro step, about head, audio `sb-audio` and video
+     with poster via `js/sb-media.js` (TXT-17, STR-03, ZEI-13, BIL-06, BIL-07);
+   - website patterns: form result `sb-form-result` (+ optional `js/sb-form.js`), page numbers `sb-pagination`, FAQ
+     `sb-faq`, docs groups `sb-toc__group`, screenshots `sb-shots`, one share image per page, language switch to the
+     same page or none, print always light `js/sb-print.js` (WEB-04 to WEB-11);
+   - states: count partial states („2 offen“), never „teils offen“ (STA-09); the sheet is at most 560 px wide from
+     640 px (EBE-04);
+   - iOS: SwiftUI package (own bottom bar, system navigation bar, no row swipe, own delete dialog, form sheet with
+     „Sichern“ at the bottom, `SbHaptics`, Dynamic Type without a cap) (MOB-05 to MOB-08);
+   - desktop windows: title bar per system, small windows, draggable dividers, „Menü“ key with submenus, 14 fixed
+     shortcuts, F6, document tabs, drop target, several windows, notifications, update word, window ground, compact
+     inspector (DSK-06 to DSK-15).
+
+   Still open, do not present as decided: the heatmap „heute“ marker (built as the 3 px place line under the cell; the
+   sketch note said a cobalt frame) and the step thresholds of DAT-11 (agent's, vorläufig); the „Konflikt“ glyph
+   in rows and in the timeline (STA-08, DAT-15); the licence reading (TEC-09); FAR-13; the `pin` and `star` icons and
+   five sign near cases (D86); the share-image generator and a generated print block in `tokens.css` (tool work);
+   Compose versions of the new web parts and charts (not built: ask before building one in Compose). Nothing of this is tested on real iOS devices,
+   WebKit, Firefox, screen readers or real Tauri windows. See `docs/ausblick.html#entscheidung`.
 
 ## 4 Where the system files come from
 
@@ -81,8 +113,8 @@ never edits colours, fonts, icons or brand files by hand. `docs/sebaro/` is a **
 | Target | How to get the files |
 |---|---|
 | Website, web app (plain CSS, Astro, React, Tailwind v4) | copy `docs/sebaro/` into your project as one folder, never edit inside it; wiring in `docs/sebaro/README.md` |
-| Tauri / macOS / Android (Compose) | with a sebaroDesign checkout: `python3 tools/export_system.py sebaro --target tauri|macos|android --out <dir> --product <id>` then `--verify <dir>` |
-| Packages (planned, D88) | private GitHub Packages built on a workshop version tag: `@grundhofer/sebaro` (npm, web and Tauri) and a Maven artifact for Android (Compose). The workflow is set up; no package is published yet. Until then use the export. |
+| Tauri / macOS / Android (Compose) / iOS (SwiftUI) | with a sebaroDesign checkout: `python3 tools/export_system.py sebaro --target tauri|macos|android|ios --out <dir> --product <id>` then `--verify <dir>` |
+| Packages (planned, D88) | private GitHub Packages built on a workshop version tag: `@grundhofer/sebaro` (npm, web and Tauri) and a Maven artifact for Android (Compose). Their version follows the token contract, now 1.8, so `1.8.x`. The workflow is set up; no package is published yet (the workshop CI is blocked). Until then use the export. |
 
 Fonts are self-hosted (D18, D66, D68, D71): sebaro Sans + sebaro Mono, the only two families, as variable WOFF2 with
 the key glyphs (⌘ ⇧ ⌥ ⌃ ↩ ⎋ ⌫ ⇥ ↑ ↓ ← →) included, for web and for Tauri on every platform (D77); OFL texts in
@@ -133,6 +165,10 @@ hand with `tools/sync_from_design.py`.
     its `data-label`. Give each `td` a `data-label` equal to its column header; `guide.js` adds missing table roles.
     The wrapper must take its width from its parent (not a shrink-to-fit grid or flex item).
   - Inline code in `main` breaks with `overflow-wrap: anywhere`; code blocks keep their lines.
+- **Every page gets from `build.py`** (`guide:head`, `guide:footer`): `sebaro/js/sb-tone.js` and `sebaro/js/sb-print.js`
+  in the head, and the footer section „Darstellung“ with the „Farbton“ radios (`name="sb-tone"`, inside a `<form>`
+  so they never join the radio group of a rule example) and a `data-sb-tone-status` element. A page never loads
+  `sb-tone.js` or `sb-print.js` a second time. Guide chrome must hold in `data-sb-tone="warm"` too (token-only CSS does).
 - **Marker blocks nest:** `build.py` pairs `<!-- guide:x -->` / `<!-- /guide:x -->` with a stack and fills markers at
   any depth (e.g. `guide:tile` in a rule fragment). Use a `guide:tile` marker instead of pasting a tile SVG; an
   unclosed or crossed marker stops the build.
@@ -157,5 +193,6 @@ hand with `tools/sync_from_design.py`.
 
 The guide shows sebaro as built and checked in sebaroDesign; Chromium screenshots do not verify real Android/iOS
 devices, Windows rendering, WebKit/Tauri webviews or screen readers. All example data on the pages is invented.
-What waits for the owner (the round-6 sketch with 63 questions is private and never linked from here) is collected on
+The owner answered the round-6 sketch (63 questions, private, never linked from here) with D91; what still waits for
+the owner, and what is built but untested (real iOS devices, real Tauri windows), is collected on
 `docs/ausblick.html`.

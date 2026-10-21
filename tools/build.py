@@ -49,6 +49,7 @@ PAGES = [
     ("daten.html", "Daten", "chart-bar", "Jede Datenart einmal dargestellt: Text, Zahlen, Zeit, Status, Listen, Tabellen, Diagramme, Code …"),
     ("web.html", "Web", "globe", "Beispiel-Website mit allen typischen Seiten und Fällen"),
     ("app.html", "App", "file", "Beispiel-App am Handy: alle typischen Bildschirme und Zustände"),
+    ("ios.html", "iOS", "smartphone", "Dieselbe App auf dem iPhone: SwiftUI-Bausteine, Systemleisten, Sheet, Dynamic Type"),
     ("desktop.html", "Desktop", "folder", "Beispiel-Desktop-App (Tauri/macOS): Fenster, Seitenleiste, Tabellen, Menüs, Tastatur"),
     ("gedanken.html", "Gedanken", "book", "Die Gedanken dahinter: Haltung, Geschichte, Entscheidungen, Abwägungen"),
     ("ausblick.html", "Ausblick", "arrow-right", "Was auf eine Wahl des Inhabers wartet, was offen ist, später kommt oder erledigt ist"),
@@ -115,6 +116,10 @@ def block_head(_attrs: dict) -> str:
         '<link rel="icon" href="sebaro/brand/site-root/favicon.ico" sizes="32x32">',
         '<link rel="icon" href="sebaro/brand/site-root/icon.svg" type="image/svg+xml">',
         '<script defer src="sebaro/js/theme-button.js"></script>',
+        # D91 Z3a/C4c: the footer choice „Farbton: Kühl · Warm“; W8a: paper is always light (theme-init.js applies a
+        # stored tone before first paint)
+        '<script defer src="sebaro/js/sb-tone.js"></script>',
+        '<script defer src="sebaro/js/sb-print.js"></script>',
         '<script defer src="assets/guide.js"></script>',
     ])
 
@@ -173,6 +178,22 @@ def block_footer(_attrs: dict) -> str:
         f'    <li><a href="{REPO_URL}">GitHub{icon("external-link--16")}</a></li>',
         f'    <li><a href="{REPO_URL}/blob/main/AGENTS.md">Für Agenten{icon("external-link--16")}</a></li>',
         '  </ul>',
+        # D91 Z3a: websites put „Farbton“ in the footer under „Darstellung“ (sb-tone.js shows the hidden group). The
+        # <form> keeps these radios a group of their own: rule examples on regeln.html carry name="sb-tone" too.
+        '  <section class="sb-site-footer__display" aria-labelledby="g-footer-display-h" data-sb-tone-choice hidden>',
+        '    <h2 id="g-footer-display-h">Darstellung</h2>',
+        '    <form class="g-footer__tone">',
+        '      <fieldset class="sb-segmented"><legend>Farbton</legend>',
+        '        <div class="sb-segmented__options">',
+        f'          <label class="sb-segmented__option"><input type="radio" name="sb-tone" value="cool" checked>'
+        f'<span class="sb-segmented__face">{icon("check--16")}Kühl</span></label>',
+        f'          <label class="sb-segmented__option"><input type="radio" name="sb-tone" value="warm">'
+        f'<span class="sb-segmented__face">{icon("check--16")}Warm</span></label>',
+        '        </div>',
+        '      </fieldset>',
+        '    </form>',
+        '  </section>',
+        '  <p class="sb-visually-hidden" role="status" data-sb-tone-status></p>',
         '</footer>',
     ])
 
