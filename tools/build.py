@@ -3,6 +3,8 @@
 
 Pages in docs/*.html are hand-written. Shared parts sit between marker comments and are rewritten by this script:
 
+    <!-- guide:og page="x" -->     … <!-- /guide:og -->        canonical, og:* and twitter:card of page x (D96, WEB-09),
+                                                               from src/og/head/x.head.html (written by tools/og.mjs)
     <!-- guide:head -->            … <!-- /guide:head -->      fonts, tokens, sprite.css, sebaro.css, guide.css, scripts
     <!-- guide:sprite -->          … <!-- /guide:sprite -->    docs/sebaro/icons/sprite.svg, inlined (works from file://)
     <!-- guide:header page="x" --> … <!-- /guide:header -->    site header; page x gets aria-current
@@ -16,7 +18,13 @@ Markers may nest at any depth: open and close markers are paired with a stack, a
 (a guide:tile in a rule fragment inside guide:rules) are filled as well. An unclosed or crossed marker stops the build.
 
 Rule examples are fragments in src/rule-examples/<RULE-ID>.html. Outputs written besides the pages:
-docs/rules.json (copy of rules/rules.json), guide/RULES.md (all rules as Markdown for agents), docs/llms.txt.
+docs/rules.json (copy of rules/rules.json), guide/RULES.md (all rules as Markdown for agents), docs/llms.txt, and
+src/og/pages.json: the share-image page list (D96 (a), brand/og/pages.schema.json of the export), written from the
+pages themselves: per page its file, its <h1> as title and its meta description, nothing else (the pages state no
+breadcrumb, reading time or date, so every image takes the start form). tools/og.mjs renders it with the exported
+docs/sebaro/brand/og/render.mjs to docs/og/<id>.png and src/og/head/<id>.head.html; this script copies each snippet
+into the page's guide:og block, without its meta description (the page writes its own). A page without a snippet
+gets a placeholder and the build exits 1 (render first: node tools/og.mjs, then this script again).
 
     python3 tools/build.py          # rewrite blocks and outputs
     python3 tools/build.py --check  # exit 1 if anything would change (freshness gate)
@@ -30,7 +38,9 @@ import html
 import json
 import re
 import sys
+from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
@@ -39,6 +49,10 @@ RULES = ROOT / "rules" / "rules.json"
 EXAMPLES = ROOT / "src" / "rule-examples"
 REPO_URL = "https://github.com/grundhofer/sebaro-guide"
 SITE_URL = "https://grundhofer.github.io/sebaro-guide/"
+OG_SRC = ROOT / "src" / "og"
+OG_PAGES = OG_SRC / "pages.json"         # page list for render.mjs, written by outputs()
+OG_HEAD = OG_SRC / "head"                # <id>.head.html + head.json, written by tools/og.mjs (never published)
+OG_MISSING: list[str] = []               # pages whose snippet is missing (build exits 1)
 
 # file, label, icon (sprite id), one line for llms.txt
 PAGES = [
@@ -108,6 +122,78 @@ def rules_data() -> dict:
 
 
 # ------------------------------------------------------------------ blocks
+
+def page_id(file: str) -> str:
+    return file[:-len(".html")]
+
+
+class _Lead(HTMLParser):
+    """The first <h1> text and the meta description of a page (entities decoded, white space collapsed)."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.h1: list[str] | None = None
+        self.done = False
+        self.description = ""
+
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        if tag == "meta" and a.get("name") == "description" and not self.description:
+            self.description = a.get("content") or ""
+        if tag == "h1" and self.h1 is None:
+            self.h1 = []
+
+    def handle_endtag(self, tag):
+        if tag == "h1" and self.h1 is not None:
+            self.done = True
+
+    def handle_data(self, data):
+        if self.h1 is not None and not self.done:
+            self.h1.append(data)
+
+
+def page_lead(path: Path) -> tuple[str, str]:
+    p = _Lead()
+    p.feed(path.read_text(encoding="utf-8"))
+    title = " ".join("".join(p.h1 or []).split())
+    return title, " ".join(p.description.split())
+
+
+def og_pages() -> str:
+    """src/og/pages.json: one entry per page, its words taken from the page (D96 (a)). Only the start page is
+    og:type website; the others keep the default article. No path, reading time or date: no page states them."""
+    site = urlsplit(SITE_URL)
+    pages = []
+    for file, _label, _icon, _desc in PAGES:
+        title, description = page_lead(DOCS / file)
+        entry = {"id": page_id(file), "url": site.path + ("" if file == "index.html" else file), "title": title}
+        if description:
+            entry["description"] = description
+        if file == "index.html":
+            entry["type"] = "website"
+        pages.append(entry)
+    doc = {
+        "$schema": "../../docs/sebaro/brand/og/pages.schema.json",
+        "$comment": "written by tools/build.py from the pages (h1, meta description); do not edit. "
+                    "tools/og.mjs renders it with docs/sebaro/brand/og/render.mjs (D96 (a), WEB-09).",
+        "site": {"product": "studio", "name": "sebaro Guide", "origin": f"{site.scheme}://{site.netloc}",
+                 "lang": "de", "imageBase": site.path + "og/"},
+        "pages": pages,
+    }
+    return json.dumps(doc, ensure_ascii=False, indent=2) + "\n"
+
+
+def block_og(attrs: dict) -> str:
+    pid = attrs.get("page", "")
+    snippet = OG_HEAD / f"{pid}.head.html"
+    if not snippet.is_file():
+        OG_MISSING.append(pid)
+        return f"<!-- no share image for {esc(pid)} yet: run node tools/og.mjs, then python3 tools/build.py -->"
+    # the page writes its own meta description (the page list took it from there); keep every other tag
+    lines = [ln for ln in snippet.read_text(encoding="utf-8").strip().splitlines()
+             if not ln.startswith('<meta name="description" ')]
+    return "\n".join(lines)
+
 
 def block_head(_attrs: dict) -> str:
     return "\n".join([
@@ -189,7 +275,9 @@ def block_footer(_attrs: dict) -> str:
         '  </nav>',
         f'  <p>sebaro Guide <a href="{REPO_URL}/blob/main/CHANGELOG.md">Version {esc(rules_data().get("version", "?"))}{icon("external-link--16")}</a> · '
         f'System sebaro, Token-Vertrag {esc(str(contracts.get("tokens", "?")))} · '
-        f'aus sebaroDesign <code class="sb-code-inline">{esc(commit)}</code></p>',
+        f'aus sebaroDesign <code class="sb-code-inline">{esc(commit)}</code> · '
+        # D96 (a), WEB-09: the share images end with the host; the page says it too (no text the page lacks)
+        f'online unter {esc(SITE_URL.split("://", 1)[1].rstrip("/"))}</p>',
         '  <ul class="sb-site-footer__links">',
         '    <li><a href="rules.json">rules.json</a></li>',
         '    <li><a href="llms.txt">llms.txt</a></li>',
@@ -303,7 +391,7 @@ def block_stats(_attrs: dict) -> str:
     ])
 
 
-BLOCKS = {"head": block_head, "sprite": block_sprite, "header": block_header, "footer": block_footer,
+BLOCKS = {"og": block_og, "head": block_head, "sprite": block_sprite, "header": block_header, "footer": block_footer,
           "tile": block_tile, "rules": block_rules, "rules-toc": block_rules_toc, "stats": block_stats}
 # one pattern for open and close markers; pairs are matched with a stack, so markers may nest at any depth
 MARKER = re.compile(r'<!-- (?P<close>/)?guide:(?P<name>[a-z-]+)(?P<attrs>(?:\s+[a-z]+="[^"]*")*)\s*-->')
@@ -394,6 +482,7 @@ def outputs() -> dict[Path, str]:
         out[DOCS / "rules.json"] = RULES.read_text(encoding="utf-8")
         out[ROOT / "guide" / "RULES.md"] = rules_markdown()
     out[DOCS / "llms.txt"] = llms_txt()
+    out[OG_PAGES] = og_pages()
     return out
 
 
@@ -417,13 +506,15 @@ def main() -> int:
             if not args.check:
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_text(new, encoding="utf-8")
+    for pid in sorted(set(OG_MISSING)):
+        print(f"error: no share-image snippet src/og/head/{pid}.head.html (render: node tools/og.mjs, then build again)")
     if args.check:
         for s in stale:
             print(f"stale: {s}")
         print(f"build --check: {len(stale)} stale of {len(targets)}")
-        return 1 if stale else 0
+        return 1 if stale or OG_MISSING else 0
     print(f"build: wrote {len(stale)} of {len(targets)} files")
-    return 0
+    return 1 if OG_MISSING else 0
 
 
 if __name__ == "__main__":

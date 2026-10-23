@@ -17,7 +17,7 @@ jobs:
           python-version: "3.12"
       - name: Generated blocks and outputs are fresh
         run: python3 tools/build.py --check
-      - name: Site checks (pages, links, no foreign requests, token-only CSS, rules)
+      - name: Site checks (pages, links, no foreign requests, token-only CSS, rules, share-image heads and PNGs)
         run: python3 tools/check_site.py
       - name: System files untouched since the export
         run: python3 tools/sync_from_design.py --verify-local
@@ -30,6 +30,13 @@ jobs:
           node-version: "22"
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
+      - id: browsers
+        run: npx playwright install --with-deps chromium
       - name: axe (WCAG 2.2 AA), overflow and console errors, light and dark, 390 and 1440 px
         run: node tools/check_a11y.mjs
+      # D96: render the share images again with the exported render.mjs (Chromium only, D96 (b)); the head snippets
+      # must be equal, the PNG bytes are only reported (Linux draws the fonts with other pixels than macOS); runs even
+      # when the axe step failed, so one failure does not hide the other
+      - name: Share images render here too, head snippets equal the committed ones
+        if: ${{ !cancelled() && steps.browsers.outcome == 'success' }}
+        run: node tools/og.mjs --check

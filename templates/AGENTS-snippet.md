@@ -39,7 +39,13 @@ This product uses the sebaro design system. Before building or changing any UI:
    room a submenu replaces its parent in place with the back row „‹ <parent>“ (`sb-menu.js` does it, never build your
    own placement); „Schmal · Normal · Breit“ in a too narrow window only stores the width, and a menu command never
    moves focus into a pane (EBE-07, DSK-04, DSK-07, DSK-08).
-   Without a decision, in the same workshop round: pages print light from `tokens.css` alone since token contract
+   Decided with D96: share images are rendered in the website's own build: it writes a page list from its pages
+   (`sebaro/brand/og/pages.schema.json`) and runs `node sebaro/brand/og/render.mjs --pages og-pages.json --out public/og
+   --head build/og-head`, then includes each `<page>.head.html`; never copy or edit `brand/og/template.html`. A title
+   over three lines fails the build for that page: shorten the page's title, never the image's (WEB-09). CI checks in
+   Chromium only (D96 (b)). Tauri loads sebaro Sans and Mono as WOFF2 since D77; only the look on Windows and Linux is
+   checked later (SCH-02).
+   Without a decision, in the D95 workshop round: pages print light from `tokens.css` alone since token contract
    1.9; keep `sb-print.js` for the closed answers (WEB-11).
 10. Ship the export's `LICENSE.md` unchanged (D76). If a rule does not fit, cite its id (e.g. `AKT-01`) and ask the
     owner; do not work around it. Rule changes are listed by id in

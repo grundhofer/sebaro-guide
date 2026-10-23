@@ -28,7 +28,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 
 Rule status: **entschieden** = owner decision, binding. **vorläufig** = an agent's decision, valid until the owner
 changes it. **offen** = proposal only, do not build it as a rule. `D<n>` refers to row n of the decision log in the
-workshop repository sebaroDesign (private; the guide covers D1–D95). A rule id (e.g. `AKT-01`) is stable; cite it
+workshop repository sebaroDesign (private; the guide covers D1–D96). A rule id (e.g. `AKT-01`) is stable; cite it
 in code reviews, commit messages and ADRs.
 
 ## 2 The ten rules most often broken
@@ -141,11 +141,23 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
    `SbMotionSetting` with `SebaroAppTheme(mode, reduceMotion, tone)` (MOB-01, MOB-04, BEW-04), the wrappers' words from
    `SbMessages` (build an app table with `SbMessages.De.copy(…)`); all compiled, none rendered. The inspector overlay
    below 1004 px is 280 px wide again (it was 34 px).
+   Settled by the owner with D96 (2026-10-23, synced from workshop `2b1003b`): (a) share images are rendered **in
+   each website's own build** (WEB-09): the site writes a page list from its own pages (title, path, reading time,
+   date; format `docs/sebaro/brand/og/pages.schema.json`) and runs the exported
+   `node sebaro/brand/og/render.mjs --pages og-pages.json --out public/og --head build/og-head`, then puts each
+   `<page>.head.html` into that page's head (it still writes `<title>` itself). The look comes from the one template
+   `brand/og/template.html`; never copy, fill or edit it yourself. The script fails loud (exit 1, page id named, no
+   image and no head for that page): a title over three lines or a word wider than its line (shorten the page's
+   title, never cut it or set it smaller in the image), a character sebaro Sans lacks, a ground that is not
+   `color.bg` light; exit 2 for a list that breaks the schema or a missing export file. It needs Node 20+ and
+   Playwright with Chromium. The workshop's own images (`brand/src/og/`) stay samples and its test case. (b) CI
+   checks in Chromium only; WebKit and Firefox come only with a new decision row. (c) No new decision: Tauri loads
+   sebaro Sans and Mono as WOFF2 on every platform since D77; only the look on Windows (WebView2) and Linux
+   (WebKitGTK) is checked later.
    Nothing waits for the owner's choice now (`docs/ausblick.html#entscheidung` has no entries; a „vorläufig“ rule is
    not an entry there). The five rules decided only in part (EBE-04, WEB-03, WEB-04, DSK-01 by D91, EBE-07 by D91 and
-   D95) stay vorläufig; never present them as decided. Still open, do not present as decided: the share-image
-   generator (tool work); Compose versions of the new web parts and charts (not built: ask before building one in
-   Compose). Nothing of this is tested on real iOS
+   D95) stay vorläufig; never present them as decided. Still open, do not present as decided: Compose versions of the
+   new web parts and charts (not built: ask before building one in Compose). Nothing of this is tested on real iOS
    devices, WebKit, Firefox, screen readers or real Tauri windows. See `docs/ausblick.html#offen`.
 
 ## 4 Where the system files come from
@@ -177,10 +189,12 @@ python3 tools/check_site.py --strict   # all groups (list below); exit 0 require
 python3 tools/build.py --check         # freshness gate (CI runs this and check_site.py)
 python3 tools/sync_from_design.py --verify-local   # docs/sebaro/ untouched since the export
 npm ci && node tools/check_a11y.mjs    # axe WCAG 2.2 AA, overflow, console errors; light/dark, 390/1440 (CI runs it)
+node tools/og.mjs                      # share images (D96): render src/og/pages.json to docs/og/ + src/og/head/, then build.py
+node tools/og.mjs --check --png-bytes  # fresh render equals the committed snippets and PNGs (CI runs it without --png-bytes)
 python3 tools/sync_from_design.py --check          # docs/sebaro/ equals a fresh export of the workshop commit
 # with a sebaroDesign checkout, its demo check on every page, run from there (absolute page path):
 #   python3 tools/check_demo.py <abs path>/docs/<page>.html --page web --skip content --no-write
-python3 tools/release.py 2.6.0         # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.5.0 is the last release)
+python3 tools/release.py 2.7.0         # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.6.0 is the last release)
 ```
 
 The workshop's demo check (1.3.0) measures one- and two-character text on screen pixels; on `regeln.html` it reports
@@ -196,7 +210,25 @@ page a second time with `--tones warm` (and `regeln.html` again with `--skip con
 report.
 
 `check_site.py` groups: PAGE, LINK, NET, CSS, TOKEN (every `var(--sb-*)` exists in `tokens.css` / `sebaro.css`), STYLE,
-SWATCH, LICENSE, TEXT, CHANGE, TERM, RULES; the docstring explains each.
+SWATCH, LICENSE, TEXT, CHANGE, OG, TERM, RULES; the docstring explains each.
+
+**The guide's own share images (D96 (a), WEB-09).** The guide follows its own rule like any sebaro website:
+`build.py` writes the page list `src/og/pages.json` from the pages themselves (file, `<h1>` as title, meta
+description; product `studio`, so the large lockup; no page states a breadcrumb, reading time or date, so every image
+takes the start form, title and host). `node tools/og.mjs` runs the exported `docs/sebaro/brand/og/render.mjs` on it
+into a temporary folder and, only if every page passes, replaces `docs/og/<page>.png` and `src/og/head/` (snippets,
+`head.json`, `inputs.json` with the sha256 of every input). `build.py` then copies each snippet into the page's
+`<!-- guide:og page="<page>" -->` block, without its meta description (the page writes its own). Order after a
+change of an `<h1>`, a description, a page or a synced export: `build.py`, `og.mjs`, `build.py`. A title that does not
+fit fails the render: shorten the page's `<h1>`. The footer says „online unter grundhofer.github.io/sebaro-guide“,
+because the image ends with the host and may show no text the page lacks. What is checked where: `build.py --check`
+(page list and head blocks fresh), `check_site.py` OG (one canonical and each og tag per page, absolute under the
+site address, og:title = `<h1>`, og:description = meta description; every `docs/og/` PNG present, 1200 × 630, RGB
+without alpha, ground = `color.bg` light; a warning when an input changed since the render, an error under
+`--strict`), `og.mjs --check` (CI, Linux: a fresh render passes render.mjs' own checks and writes the same snippets
+byte for byte; `inputs.json` and the PNG bytes are only reported, because a synced token or font may change no
+snippet and Linux draws the fonts with other pixels: a sync PR stays green and shows the check_site.py OG warning;
+locally add `--png-bytes`). CI never renders or commits images: render on your machine and commit `docs/og/` and `src/og/`.
 
 **Automatic sync (D88, set up; runs once the workshop CI runs).** A workflow in sebaroDesign exports the commit of every
 successful gate run on its main branch (its one gate list is `tools/gates.sh` there; since 2026-10-22 the sync waits for
@@ -232,7 +264,8 @@ hand with `tools/sync_from_design.py`.
   button, spec/03 §6.1). On a platform page that entry carries `aria-current="true"` with the place line from
   `guide.css`. The footer lists every page (`g-footer__pages`), `llms.txt` too. Measured: the navigation needs two
   rows at 390 px, three at 320 px, one at 1440 px; no page scrolls sideways.
-- **Every page gets from `build.py`** (`guide:head`, `guide:footer`): `sebaro/js/sb-tone.js` and `sebaro/js/sb-print.js`
+- **Every page gets from `build.py`** (`guide:og`, `guide:head`, `guide:footer`): the canonical and og tags of its share
+  image (above); `sebaro/js/sb-tone.js` and `sebaro/js/sb-print.js`
   in the head, and the footer section „Darstellung“ with the „Farbton“ radios (`name="sb-tone"`, inside a `<form>`
   so they never join the radio group of a rule example) and a `data-sb-tone-status` element. A page never loads
   `sb-tone.js` or `sb-print.js` a second time. Guide chrome must hold in `data-sb-tone="warm"` too (token-only CSS does).
@@ -240,7 +273,8 @@ hand with `tools/sync_from_design.py`.
   any depth (e.g. `guide:tile` in a rule fragment). Use a `guide:tile` marker instead of pasting a tile SVG; an
   unclosed or crossed marker stops the build.
 
-- **Never edit** `docs/sebaro/`, `docs/assets/vendor/`, `docs/rules.json`, `guide/RULES.md`, `docs/llms.txt`, or
+- **Never edit** `docs/sebaro/`, `docs/assets/vendor/`, `docs/rules.json`, `guide/RULES.md`, `docs/llms.txt`, `docs/og/`,
+  `src/og/`, or
   anything between `<!-- guide:… -->` and `<!-- /guide:… -->` markers. Change the source and rebuild.
 - **Rules** change only in `rules/rules.json`; a rule's live example lives in `src/rule-examples/<RULE-ID>.html`
   (fragment with `g-examples` / `g-ex--do` / `g-ex--dont`). Never renumber ids; retire a rule by setting
@@ -249,7 +283,8 @@ hand with `tools/sync_from_design.py`.
   **vorläufig** and say so.
 - Guide chrome CSS (`docs/assets/*.css`) uses only `var(--sb-*)` tokens that exist: no colour literals, no shadows
   (checked; the only exception is inside `g-ex--dont`, see above).
-- New pages start from `src/page-template.html` and must be added to `PAGES` in `tools/build.py`.
+- New pages start from `src/page-template.html` (set `guide:og page=` to the file name without `.html`) and must be
+  added to `PAGES` in `tools/build.py`; then render its share image (`build.py`, `og.mjs`, `build.py`).
 - Pages are German with „du“; agent documents (this file, `guide/`, code) are English (D2). The guide's own voice may
   say „unser“/„wir“ about sebaro (D85); product UIs never do.
 - Preview locally: `python3 -m http.server -d docs 8000`; screenshots in both schemes before calling a page done.
@@ -261,5 +296,5 @@ hand with `tools/sync_from_design.py`.
 The guide shows sebaro as built and checked in sebaroDesign; Chromium screenshots do not verify real Android/iOS
 devices, Windows rendering, WebKit/Tauri webviews or screen readers. All example data on the pages is invented.
 The owner answered the round-6 sketch (63 questions, private, never linked from here) with D91 and the open readings
-after it with D92 to D95; what is still open, and what is built but untested (real iOS devices, real Tauri windows),
+after it with D92 to D96; what is still open, and what is built but untested (real iOS devices, real Tauri windows),
 is collected on `docs/ausblick.html`.

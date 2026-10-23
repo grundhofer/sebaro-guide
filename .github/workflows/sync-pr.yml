@@ -28,9 +28,10 @@ jobs:
           short="${BRANCH#sync/}"
           number=$(gh pr list --head "$BRANCH" --base main --state open --json number --jq '.[0].number // empty')
           if [ -z "$number" ]; then
-            body=$(printf '%s\n\n%s\n\n%s\n' \
+            body=$(printf '%s\n\n%s\n\n%s\n\n%s\n' \
               "Automatischer Abgleich aus sebaroDesign, Commit \`$short\`: \`docs/sebaro/\` und die Musterdateien neu exportiert, die Seiten mit \`tools/build.py\` neu gebaut." \
               "Nichts wird ohne Durchsicht übernommen: Prüfungen (check) ansehen, die Seiten in Hell und Dunkel bei 390 und 1440 px ansehen, dann von Hand zusammenführen." \
+              "Vorschaubilder (D96): Meldet \`check_site.py\` eine Warnung OG, hat sich eine Vorlage, ein Token oder eine Schrift geändert; vor dem Zusammenführen auf diesem Zweig \`node tools/og.mjs\` und \`python3 tools/build.py\` laufen lassen und die Bilder in \`docs/og/\` ansehen." \
               "Ein neuerer Abgleich schließt diesen Antrag.")
             url=$(gh pr create --base main --head "$BRANCH" --title "Abgleich mit sebaroDesign $short" --body "$body")
             number="${url##*/}"

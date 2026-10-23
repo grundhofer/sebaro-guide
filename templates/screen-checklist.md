@@ -1,7 +1,7 @@
 # Screen checklist
 
 Walk this for every screen in **light and dark**, at **390 px and 1440 px** (desktop apps: smallest and a wide window).
-Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D95.
+Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D96.
 
 ## Colour and hierarchy
 - [ ] Cobalt only for current place, links and focus; lime only for the one primary action (FAR, AKT)
@@ -39,6 +39,8 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
 - [ ] Tone „Farbton: Kühl · Warm“: websites in the footer under „Darstellung“, apps next to light/dark in the
       settings; only grounds, text and lines turn warm, cobalt, lime, status and tiles stay (FAR-15)
 - [ ] Website print is always light, whatever the screen shows (`sb-print.js`), and shows only the content (WEB-11, WEB-04)
+- [ ] Website: every page with its own title has its own share image and head tags from the build (`sebaro/brand/og/render.mjs`
+      on the site's page list, exit 0; canonical, og:url, og:image absolute); the template is never copied or edited (WEB-09, D96)
 
 ## Desktop windows
 - [ ] Command palette opens with ⌘K / Ctrl+K (NAV-09)

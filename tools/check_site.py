@@ -5,12 +5,13 @@
     python3 tools/check_site.py --strict   # warnings count as errors
 
 Groups
-  PAGE   every docs/*.html: lang="de", <title>, exactly one <h1>, guide:head/header/footer blocks, unique ids (the
+  PAGE   every docs/*.html: lang="de", <title>, exactly one <h1>, guide:og/head/header/footer blocks, unique ids (the
          inlined icon sprite included: a section id equal to an icon id is reported as such); rule fragments in
          src/rule-examples/ use no icon id of the sprite
   LINK   every relative href/src resolves to a file; same-page and cross-page #fragments exist; a link never points
          at an icon of the inlined sprite (only <use href> does)
-  NET    no foreign requests: no http(s) in src=, <link href>, CSS url(), @import (plain <a href> links are allowed)
+  NET    no foreign requests: no http(s) in src=, <link href>, CSS url(), @import (plain <a href> links are allowed;
+         <link rel="canonical"> is no request and is checked by OG instead)
   CSS    docs/assets/*.css (not vendor/): only var(--sb-*) colours, no hex/rgb/hsl literals, no box-shadow; a rule
          whose every selector is scoped by .g-ex--dont (a deliberate "Nicht so" specimen, not its label or note)
          may use both
@@ -27,15 +28,30 @@ Groups
   CHANGE every rule that differs from the last snapshot in rules/releases/ (new, changed, removed) is named under
          "Unveröffentlicht" in CHANGELOG.md and carries a newer "changed" date (a rule already dated on the day of the
          last release may keep that day, it cannot move further the same day); the version is the last release's
+  OG     share images (D96 (a), WEB-09): every page has exactly one canonical and one each of og:type (website on the
+         start page, else article), og:site_name, og:locale de_DE, og:url, og:title, og:description, og:image with
+         width 1200, height 630 and a non-empty alt, twitter:card summary_large_image, and one meta description;
+         canonical = og:url = the page's address under SITE_URL, og:title = its <h1>, og:description = its meta
+         description, og:image = SITE_URL og/<page>.png. docs/og/ holds exactly those PNGs, each 1200 x 630, 8-bit RGB
+         without alpha (colour type 2, no tRNS), and its most frequent colour is --sb-color-bg of [data-theme="light"]
+         in docs/sebaro/tokens.css (within 2 per channel, like render.mjs). The PNG bytes are not compared: Linux and
+         macOS render the fonts with other pixels (tools/og.mjs --check). Warning: an input recorded in
+         src/og/head/inputs.json (page list, template, script, tokens, fonts, sprite, tile, lockups) changed since
+         the images were rendered (render again: node tools/og.mjs, then tools/build.py)
   TERM   retired names do not appear in pages, fragments, rules or docs (D71: only "sebaro Sans" and "sebaro Mono");
          the font licence files in docs/sebaro/ keep the authors' copyright as the OFL requires
 """
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
+import struct
 import sys
+import zlib
+from collections import Counter
+from itertools import accumulate
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit, unquote
@@ -44,6 +60,12 @@ ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 RULES = ROOT / "rules" / "rules.json"
 EXAMPLES = ROOT / "src" / "rule-examples"
+SITE_URL = "https://grundhofer.github.io/sebaro-guide/"   # as tools/build.py
+OG_DIR = DOCS / "og"
+OG_STAMP = ROOT / "src" / "og" / "head" / "inputs.json"
+OG_SIZE = (1200, 630)
+OG_ONCE = ["og:type", "og:site_name", "og:locale", "og:url", "og:title", "og:description", "og:image",
+           "og:image:width", "og:image:height", "og:image:alt"]
 REQUIRED_RULE_FIELDS = ["id", "area", "title", "rule", "rule_en", "why", "do", "dont", "decisions", "source",
                         "platforms", "status", "check", "changed"]
 COLOUR_LITERAL = re.compile(r"#[0-9a-fA-F]{3,8}\b|\b(?:rgb|rgba|hsl|hsla|oklch|oklab|lab|lch|color)\(", re.I)
@@ -98,6 +120,10 @@ class Page(HTMLParser):
         self.dont_styles = 0
         self.swatches: list[dict] = []
         self.var_refs: list[str] = []
+        self.canonical: list[str] = []
+        self.meta: list[tuple[str, str]] = []      # (property or name, content)
+        self.h1_text: list[str] = []
+        self._in_h1 = False
 
     def _dont(self, a: dict) -> bool:
         cls = (a.get("class") or "").split()
@@ -116,6 +142,12 @@ class Page(HTMLParser):
             self.lang = a.get("lang")
         if tag == "h1":
             self.h1 += 1
+            self._in_h1 = self.h1 == 1
+        if tag == "meta" and (a.get("property") or a.get("name")):
+            self.meta.append((a.get("property") or a.get("name") or "", a.get("content") or ""))
+        if tag == "link" and (a.get("rel") or "").strip().lower() == "canonical":
+            self.canonical.append(a.get("href") or "")   # no request; OG checks it instead of NET
+            a = {k: v for k, v in a.items() if k != "href"}
         if tag == "title":
             self._in_title = True
         if tag in ("script", "style"):
@@ -144,15 +176,80 @@ class Page(HTMLParser):
                 break
         if tag == "title":
             self._in_title = False
+        if tag == "h1":
+            self._in_h1 = False
         if tag in ("script", "style"):
             self._skip = max(0, self._skip - 1)
 
     def handle_data(self, data):
         if self._in_title and data.strip():
             self.title = True
+        if self._in_h1:
+            self.h1_text.append(data)
         self.var_refs += VAR_SB.findall(data)   # <style> blocks and code samples alike
         if not self._skip:
             self.text.append(data)
+
+
+def png_info(data: bytes) -> tuple[int, int, int, int, set[str], bytes]:
+    """(width, height, bit depth, colour type, chunk types, zlib data) of a PNG; raises ValueError."""
+    if data[:8] != b"\x89PNG\r\n\x1a\n":
+        raise ValueError("not a PNG")
+    pos, ihdr, idat, kinds = 8, None, [], set()
+    while pos + 8 <= len(data):
+        n, kind = struct.unpack(">I4s", data[pos:pos + 8])
+        body = data[pos + 8:pos + 8 + n]
+        kinds.add(kind.decode("latin1"))
+        if kind == b"IHDR":
+            ihdr = struct.unpack(">IIBBBBB", body)
+        elif kind == b"IDAT":
+            idat.append(body)
+        elif kind == b"IEND":
+            break
+        pos += 12 + n
+    if not ihdr:
+        raise ValueError("no IHDR")
+    if ihdr[6]:
+        raise ValueError("interlaced")
+    return ihdr[0], ihdr[1], ihdr[2], ihdr[3], kinds, b"".join(idat)
+
+
+def png_ground(width: int, height: int, raw: bytes) -> tuple[bytes, float]:
+    """Most frequent colour of an 8-bit RGB image (filters 0-4) and its share of the pixels."""
+    stride, bpp = width * 3, 3
+    m7, m8 = int.from_bytes(b"\x7f" * stride, "big"), int.from_bytes(b"\x80" * stride, "big")
+    prev, counts = bytes(stride), Counter()
+    for y in range(height):
+        f, line = raw[y * (stride + 1)], raw[y * (stride + 1) + 1:(y + 1) * (stride + 1)]
+        if f == 0:
+            cur = line
+        elif f == 2:   # Up: bytewise sum without carries, on whole rows at once
+            x, p = int.from_bytes(line, "big"), int.from_bytes(prev, "big")
+            cur = (((x & m7) + (p & m7)) ^ ((x ^ p) & m8)).to_bytes(stride, "big")
+        elif f == 1:   # Sub: a running sum per channel
+            b = bytearray(stride)
+            for c in range(bpp):
+                b[c::bpp] = bytes(v & 255 for v in accumulate(line[c::bpp]))
+            cur = bytes(b)
+        else:          # Average, Paeth (render.mjs writes neither; kept for other encoders)
+            b = bytearray(line)
+            for i in range(stride):
+                a, up, c = (b[i - bpp] if i >= bpp else 0), prev[i], (prev[i - bpp] if i >= bpp else 0)
+                if f == 3:
+                    b[i] = (b[i] + ((a + up) >> 1)) & 255
+                else:
+                    pp = a + up - c
+                    pa, pb, pc = abs(pp - a), abs(pp - up), abs(pp - c)
+                    b[i] = (b[i] + (a if pa <= pb and pa <= pc else up if pb <= pc else c)) & 255
+            cur = bytes(b)
+        counts.update(cur[k:k + 3] for k in range(0, stride, 3))
+        prev = cur
+    colour, n = counts.most_common(1)[0]
+    return colour, n / (width * height)
+
+
+def page_url(name: str) -> str:
+    return SITE_URL if name == "index.html" else SITE_URL + name
 
 
 def parse(path: Path) -> Page:
@@ -183,7 +280,7 @@ def main() -> int:
             errors.append(f"PAGE {name}: missing <title>")
         if pg.h1 != 1:
             errors.append(f"PAGE {name}: {pg.h1} <h1>, expected 1")
-        for block in ("head", "header", "footer", "sprite"):
+        for block in ("og", "head", "header", "footer", "sprite"):
             if f"<!-- guide:{block}" not in raw:
                 errors.append(f"PAGE {name}: missing <!-- guide:{block} --> block")
         seen = set()
@@ -324,6 +421,67 @@ def main() -> int:
                 was, now = old[rid].get("changed", ""), new[rid].get("changed", "")
                 if now < rel_date or (now <= was and was < rel_date):
                     errors.append(f"CHANGE {rid} changed but its 'changed' date was not moved forward")
+
+    # OG
+    tokens_css = (DOCS / "sebaro" / "tokens.css").read_text(encoding="utf-8") if (DOCS / "sebaro" / "tokens.css").is_file() else ""
+    m = re.search(r'\[data-theme="light"\]\s*\{[^}]*?--sb-color-bg:\s*#([0-9A-Fa-f]{6})\b', tokens_css)
+    light_bg = bytes.fromhex(m.group(1)) if m else None
+    if light_bg is None:
+        errors.append('OG docs/sebaro/tokens.css: no --sb-color-bg under [data-theme="light"]')
+    for name, pg in parsed.items():
+        want_url, stem = page_url(name), name[:-len(".html")]
+        tags: dict[str, list[str]] = {}
+        for key, content in pg.meta:
+            tags.setdefault(key, []).append(content)
+        if pg.canonical != [want_url]:
+            errors.append(f"OG {name}: canonical {pg.canonical!r}, expected one {want_url!r}")
+        for key in OG_ONCE + ["twitter:card", "description"]:
+            if len(tags.get(key, [])) != 1:
+                errors.append(f"OG {name}: {len(tags.get(key, []))}x {key}, expected 1 (guide:og block; tools/build.py)")
+        one = lambda key: (tags.get(key) or [""])[0]
+        h1 = " ".join("".join(pg.h1_text).split())
+        expect = {"og:type": "website" if name == "index.html" else "article", "og:site_name": "sebaro Guide",
+                  "og:locale": "de_DE", "og:url": want_url, "og:title": h1, "og:description": one("description"),
+                  "og:image": f"{SITE_URL}og/{stem}.png", "og:image:width": str(OG_SIZE[0]),
+                  "og:image:height": str(OG_SIZE[1]), "twitter:card": "summary_large_image"}
+        for key, value in expect.items():
+            if key in tags and one(key) != value:
+                errors.append(f"OG {name}: {key} is {one(key)!r}, expected {value!r} (render again: node tools/og.mjs, then tools/build.py)")
+        if "og:image:alt" in tags and not one("og:image:alt").strip():
+            errors.append(f"OG {name}: empty og:image:alt")
+    wanted = {name[:-len(".html")] + ".png" for name in parsed}
+    have = {p.name for p in OG_DIR.iterdir()} if OG_DIR.is_dir() else set()
+    for extra in sorted(have - wanted):
+        errors.append(f"OG docs/og/{extra} belongs to no page")
+    for png in sorted(wanted):
+        f = OG_DIR / png
+        if not f.is_file():
+            errors.append(f"OG docs/og/{png} missing (node tools/og.mjs)")
+            continue
+        try:
+            w, h, depth, ctype, kinds, idat = png_info(f.read_bytes())
+            if (w, h) != OG_SIZE or depth != 8 or ctype != 2 or "tRNS" in kinds:
+                errors.append(f"OG docs/og/{png}: {w} x {h}, depth {depth}, colour type {ctype}"
+                              f"{', tRNS' if 'tRNS' in kinds else ''}; expected 1200 x 630, 8-bit RGB without alpha")
+                continue
+            colour, share = png_ground(w, h, zlib.decompress(idat))
+        except (ValueError, zlib.error, struct.error, IndexError) as e:
+            errors.append(f"OG docs/og/{png}: unreadable PNG ({e})")
+            continue
+        if light_bg and any(abs(a - b) > 2 for a, b in zip(colour, light_bg)):
+            errors.append(f"OG docs/og/{png}: ground #{colour.hex().upper()} ({share:.0%} of the pixels) is not "
+                          f"color.bg light #{light_bg.hex().upper()}")
+    if not OG_STAMP.is_file():
+        errors.append("OG src/og/head/inputs.json missing (node tools/og.mjs)")
+    else:
+        stamp = json.loads(OG_STAMP.read_text(encoding="utf-8")).get("inputs", {})
+        if "src/og/pages.json" not in stamp or "docs/sebaro/brand/og/template.html" not in stamp:
+            errors.append("OG src/og/head/inputs.json does not record the page list and the template")
+        for path, digest in sorted(stamp.items()):
+            f = ROOT / path
+            if not f.is_file() or hashlib.sha256(f.read_bytes()).hexdigest() != digest:
+                warnings.append(f"OG {path} changed since the share images were rendered "
+                                f"(node tools/og.mjs, then tools/build.py)")
 
     # TERM
     retired = re.compile(r"radio[\s_-]*canada", re.I)

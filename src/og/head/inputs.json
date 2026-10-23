@@ -1,0 +1,20 @@
+{
+  "$comment": "written by tools/og.mjs after a successful render; tools/check_site.py compares it (OG); do not edit",
+  "render": "1.0.0",
+  "inputs": {
+    "src/og/pages.json": "c5bb47f0b6f1ee10855c5064635bfc707f59b6998fb36532b9cdcb31b0555a0d",
+    "docs/sebaro/brand/og/render.mjs": "5a8fe588b980a5d27fe61740332319f375862d691bb7ead4762d1c2a360046db",
+    "docs/sebaro/brand/og/template.html": "10a7ef84269e8872d09650676a6f64467c245a9cbb044d4720854aa746550afe",
+    "docs/sebaro/brand/og/pages.schema.json": "0a439cd83eab1c52a8b0503ea4f1ef0529bf0689767797bc42a3ec3a7a9eb75c",
+    "docs/sebaro/tokens.css": "2e164ba74f10b0a99f53d817512ce4ea01f9a85f954f772fb6fabd7c8a6285c7",
+    "docs/sebaro/fonts/fonts.css": "c10d1061c7a7687e73b9030b9660dafa9d81876ac787328c8bc16bbd6d929c7a",
+    "docs/sebaro/fonts/web/sebaro-mono-latin-de.woff2": "2512639768811e136c441f24e94a5f365ab1c18dbceb138f181c7e67a4be5ccf",
+    "docs/sebaro/fonts/web/sebaro-sans-italic-latin-de.woff2": "3334dbd7fd7c6c6a150afd76f90783572cdd1ea6e6ece5b2f42ba90a6a61fd0f",
+    "docs/sebaro/fonts/web/sebaro-sans-latin-de.woff2": "589be2f709be7e198bfa223e58a9515ffcbd4f1d652f757c2c49bc05f1bcb92d",
+    "docs/sebaro/icons/sprite.svg": "390e6a3996da1976bf52803b85bb1365d85a2859d91ee553db085830b3fc6500",
+    "docs/sebaro/icons/sprite.css": "1489a117f476737b284ffbb1a2348a1b3161341773f14c93d9b18764eaa39b32",
+    "docs/sebaro/brand/inline/tile-studio.svg": "dd16f7f3b53f825d9662e77105fc6b93e26f5744dc1c80d05cc5b7569f6e2508",
+    "docs/sebaro/brand/inline/lockup-horizontal.svg": "684f2e4b347f8b338f4a79118d2d7f6e030b3c5ef22f8c595d3cf5722a66915d",
+    "docs/sebaro/brand/inline/lockup-horizontal-large.svg": "7524d4c1686e4952ca22088314378703c1e396dea88e512695808256c782599f"
+  }
+}

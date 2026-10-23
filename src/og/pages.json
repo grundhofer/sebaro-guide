@@ -1,0 +1,86 @@
+{
+  "$schema": "../../docs/sebaro/brand/og/pages.schema.json",
+  "$comment": "written by tools/build.py from the pages (h1, meta description); do not edit. tools/og.mjs renders it with docs/sebaro/brand/og/render.mjs (D96 (a), WEB-09).",
+  "site": {
+    "product": "studio",
+    "name": "sebaro Guide",
+    "origin": "https://grundhofer.github.io",
+    "lang": "de",
+    "imageBase": "/sebaro-guide/og/"
+  },
+  "pages": [
+    {
+      "id": "index",
+      "url": "/sebaro-guide/",
+      "title": "Eine Gestaltung für alles, was sebaro baut.",
+      "description": "Der Gestaltungsleitfaden für alle Apps, Websites und Desktop-Apps von sebaro: Farben, Formen, Verhalten, Funktion und die Gedanken dahinter, mit Beispielen.",
+      "type": "website"
+    },
+    {
+      "id": "regeln",
+      "url": "/sebaro-guide/regeln.html",
+      "title": "Alle Regeln, jede mit Beispiel",
+      "description": "Alle Gestaltungsregeln von sebaro mit ID, Begründung, Prüfung und Live-Beispiel."
+    },
+    {
+      "id": "grundlagen",
+      "url": "/sebaro-guide/grundlagen.html",
+      "title": "Die Bausteine unter jedem Bildschirm",
+      "description": "Farbe, Schrift, Raum, Form, Ebenen, Bewegung und Zustände von sebaro: jedes Token mit seinem Wert, seiner Aufgabe und der Regel dazu."
+    },
+    {
+      "id": "bauteile",
+      "url": "/sebaro-guide/bauteile.html",
+      "title": "Alle Bauteile mit ihren Zuständen",
+      "description": "Alle Bauteile von sebaro mit ihren Zuständen, Regeln und dem genauen Markup zum Kopieren."
+    },
+    {
+      "id": "daten",
+      "url": "/sebaro-guide/daten.html",
+      "title": "Daten zeigen",
+      "description": "Jede Datenart einmal so, wie sebaro sie zeigt: Text, Zahlen, Zeit, Zustand, Kategorien, Personen, Technisches, Sammlungen, Diagramme, Medien, Orte, Leeres und Belege, jeweils mit Regel."
+    },
+    {
+      "id": "plattformen",
+      "url": "/sebaro-guide/plattformen.html",
+      "title": "Eine Gestaltung auf vier Plattformen",
+      "description": "Die vier Plattformseiten des sebaro Guides, Web, App, iOS und Desktop, auf einen Blick, und was je Plattform anders ist: Hell oder Dunkel, Navigation und Systemdateien."
+    },
+    {
+      "id": "web",
+      "url": "/sebaro-guide/web.html",
+      "title": "Eine Website in sebaro, Fall für Fall",
+      "description": "Eine Beispiel-Website in sebaro mit allen typischen Seiten und Fällen, vom Einstieg über Formulare und Rechtstexte bis zu 404, Wartung und Start, jeder Fall mit seinen Regeln."
+    },
+    {
+      "id": "app",
+      "url": "/sebaro-guide/app.html",
+      "title": "Eine App am Handy, Bildschirm für Bildschirm",
+      "description": "Beispiel-App am Handy in sebaro: jeder typische Bildschirm und Zustand, mit Regeln und Compose-Namen."
+    },
+    {
+      "id": "ios",
+      "url": "/sebaro-guide/ios.html",
+      "title": "Dieselbe App auf dem iPhone",
+      "description": "Dieselbe App auf dem iPhone: das Swift-Paket SebaroDesign, die Wahl des Inhabers für iOS (eigene untere Leiste, Leiste des Systems, Kontextmenü, eigener Dialog, Sheet, Dynamic Type) und was noch nicht auf einem Gerät lief."
+    },
+    {
+      "id": "desktop",
+      "url": "/sebaro-guide/desktop.html",
+      "title": "Eine Desktop-App in sebaro",
+      "description": "Eine Beispiel-Desktop-App in sebaro (Tauri/macOS): Fenster, Seitenleiste, Befehlspalette, Menüs, Tabellen, Dialoge, Tastatur, mit Regel-IDs und Hinweisen zu Tauri."
+    },
+    {
+      "id": "gedanken",
+      "url": "/sebaro-guide/gedanken.html",
+      "title": "Warum sebaro so aussieht",
+      "description": "Warum sebaro so aussieht: Haltung, die Kernidee „Farbe ist Funktion“, Schrift, Farben, Belege, Zeichen, Signatur, Geschichte in sechs Runden, die Entscheidungen vom 20.10.2026, Abwägungen und wie entschieden wird."
+    },
+    {
+      "id": "ausblick",
+      "url": "/sebaro-guide/ausblick.html",
+      "title": "Was als Nächstes kommen könnte",
+      "description": "Was nach den Entscheidungen vom 23.10.2026 noch auf eine Wahl des Inhabers wartet, was offen ist, was später kommt, was wir nicht machen und was erledigt ist."
+    }
+  ]
+}

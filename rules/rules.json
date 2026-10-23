@@ -1,11 +1,11 @@
 {
  "$schema": "./rules.schema.json",
- "version": "2.5.0",
+ "version": "2.6.0",
  "date": "2026-10-23",
  "source": {
   "repo": "sebaroDesign",
   "system": "sebaro",
-  "decisions": "D1-D95"
+  "decisions": "D1-D96"
  },
  "areas": [
   {
@@ -4598,24 +4598,25 @@
    "id": "WEB-09",
    "area": "plattform-web",
    "title": "Ein Vorschaubild je Seite",
-   "rule": "Gib jeder Seite mit eigenem Titel ihr eigenes Vorschaubild zum Teilen, 1200 × 630 px auf hellem Grund: Kachel und Name des Produkts, Pfad, Seitentitel, Lesezeit und Datum, wo es sie gibt, unten klein das Zeichen von sebaro. Im Bild steht kein Text, den die Seite nicht auch als Text hat. Der Kopf trägt og:title, og:description, og:image mit Breite, Höhe und Alt-Text und canonical, alle Adressen absolut. Seiten ohne eigenen Titel nehmen das Bild der Website.",
-   "rule_en": "Every page with its own title has its own 1200 × 630 share image on a light ground (product tile and name, path, page title, reading time and date where they exist, small sebaro lockup), no text the page lacks; the head carries og:title, og:description, og:image with width, height and alt, and canonical, all absolute; pages without an own title use the site image.",
-   "why": "Inhaber D91: ein Vorschaubild je Seite (W6a). Wer einen Link teilt, sieht, welche Seite kommt, nicht nur welche Website.",
-   "do": "<meta property='og:image' content='{origin}/og/state.png'><meta property='og:image:width' content='1200'><meta property='og:image:height' content='630'><meta property='og:image:alt' content='Android Coden: State in Jetpack Compose verstehen'>; Vorlage brand/src/og/<seite>.html, gerendert mit brand_assets.py build.",
-   "dont": "Ein Bild für alle Seiten; ein Bild mit dunklem Grund; ein generiertes Bild mit Schrift darin (BIL-01); relative Adressen in og:image; Text im Bild, der auf der Seite fehlt.",
-   "numbers": "1200 × 630 px, ohne Alpha; heller Grund; twitter:card summary_large_image",
+   "rule": "Gib jeder Seite mit eigenem Titel ihr eigenes Vorschaubild zum Teilen, 1200 × 630 px auf hellem Grund: Kachel und Name des Produkts, Pfad, Seitentitel, Lesezeit und Datum, wo es sie gibt, unten klein das Zeichen von sebaro. Im Bild steht kein Text, den die Seite nicht auch als Text hat. Die Bilder entstehen im Build der Website: Er schreibt aus ihrer eigenen Seitenliste (Titel, Pfad, Lesezeit, Datum) eine Liste nach brand/og/pages.schema.json und rendert sie mit brand/og/render.mjs aus dem Web-Export; das Aussehen kommt aus der einen Vorlage brand/og/template.html, die nie kopiert oder geändert wird. Passt ein Titel nicht in drei Zeilen, fehlt ein Zeichen in sebaro Sans oder ist der Grund nicht hell, bricht der Build mit dieser Seite ab, ohne Bild und ohne Kopf für sie; gekürzt oder kleiner gesetzt wird nie. Der Kopf trägt og:title, og:description, og:image mit Breite, Höhe und Alt-Text und canonical, alle Adressen absolut. Seiten ohne eigenen Titel nehmen das Bild der Website.",
+   "rule_en": "Every page with its own title has its own 1200 × 630 share image on a light ground (product tile and name, path, page title, reading time and date where they exist, small sebaro lockup), no text the page lacks; the site's build writes a page list (brand/og/pages.schema.json) from its own pages and renders it with the exported brand/og/render.mjs from the one template brand/og/template.html, never copied or edited; a title over three lines, a character sebaro Sans lacks or a ground that is not light fails the build for that page (no image, no head), never cut or set smaller; the head carries og:title, og:description, og:image with width, height and alt, and canonical, all absolute; pages without an own title use the site image.",
+   "why": "Inhaber D91: ein Vorschaubild je Seite (W6a). Wer einen Link teilt, sieht, welche Seite kommt, nicht nur welche Website. Inhaber D96 (a), 2026-10-23, auf die Frage nach dem Ort des Generators (Build der Website, zentral in der Werkstatt, gemischt): „Im Build der Website (Empfohlen)“. Die Seitenliste kennt nur die Website selbst; das Aussehen bleibt in einer Vorlage der Werkstatt.",
+   "do": "<meta property='og:image' content='{origin}/og/state.png'><meta property='og:image:width' content='1200'><meta property='og:image:height' content='630'><meta property='og:image:alt' content='Android Coden: State in Jetpack Compose verstehen'>; im Build: node <sebaro>/brand/og/render.mjs --pages og-pages.json --out public/og --head build/og-head, dann <head>/<seite>.head.html in den Kopf der Seite.",
+   "dont": "Ein Bild für alle Seiten; ein Bild mit dunklem Grund; ein generiertes Bild mit Schrift darin (BIL-01); relative Adressen in og:image; Text im Bild, der auf der Seite fehlt; eine eigene Kopie oder Änderung der Vorlage; einen zu langen Titel nur fürs Bild kürzen, statt ihn auf der Seite zu kürzen.",
+   "numbers": "1200 × 630 px, 24-bit RGB ohne Alpha; heller Grund (color.bg hell, ±2 je Kanal); Titel höchstens drei Zeilen; twitter:card summary_large_image",
    "decisions": [
     "D9",
-    "D91"
+    "D91",
+    "D96"
    ],
-   "source": "DECISIONS.md D91 (W6a); systems/sebaro/spec/09-platform-web.md §18.1",
+   "source": "DECISIONS.md D91 (W6a), D96 (a); systems/sebaro/spec/09-platform-web.md §18.1",
    "platforms": [
     "web"
    ],
    "status": "entschieden",
-   "check": "brand_assets.py check (BA20–BA22, BA37: heller Grund in Vorlage und Bild) mit Exit 0; og:url, og:image und canonical sind absolut.",
+   "check": "render.mjs mit Exit 0: je Seite ein Bild und ein Kopf; Exit 1 nennt die Seite, deren Titel, Pfad oder Zeichen nicht passt oder deren Grund nicht hell ist, Exit 2 eine Liste, die nicht zum Schema passt. In der Werkstatt brand_assets.py check (BA20–BA22, BA37) und Schritt 5d (ihre Muster frisch aus der Vorlage). og:url, og:image und canonical sind absolut.",
    "example_hint": "Kopf einer Seite mit ihren og-Angaben; falsch: dasselbe Bild mit relativer Adresse auf jeder Seite.",
-   "note": "Ein Generator, der die Vorlagen aus einer Seitenliste schreibt, ist noch Werkzeugarbeit (offen). Das Bild der Studio-Website ist seit dem Werkstatt-Commit 90843c8 hell, und die Werkstatt prüft den hellen Grund (BA37).",
+   "note": "D96 (a): Die Werkstatt liefert Vorlage, Render-Skript (1.0.0) und Schema mit jedem Web-Export (export_system.py 1.5.0); ihre eigenen Bilder (brand/src/og/) bleiben Muster und Prüffall. Das Skript braucht Node und Playwright mit Chromium im Build der Website, geprüft wird nur in Chromium (D96 (b)). Das Bild der Studio-Website ist hell (BA37). Dieser Guide macht es selbst so: tools/og.mjs rendert seine Seiten nach docs/og/.",
    "changed": "2026-10-23"
   },
   {

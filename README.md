@@ -14,7 +14,7 @@ Verhalten, Funktion und die Gedanken dahinter, jede Regel mit Beispiel.
 | [Daten](https://grundhofer.github.io/sebaro-guide/daten.html) | jede Datenart einmal dargestellt |
 | [Plattformen](https://grundhofer.github.io/sebaro-guide/plattformen.html) | die vier Plattformseiten auf einen Blick und was je Plattform anders ist; im Kopf stehen sie unter „Plattformen“ (D92) |
 | [Web](https://grundhofer.github.io/sebaro-guide/web.html) · [App](https://grundhofer.github.io/sebaro-guide/app.html) · [iOS](https://grundhofer.github.io/sebaro-guide/ios.html) · [Desktop](https://grundhofer.github.io/sebaro-guide/desktop.html) | Beispielseiten mit allen typischen Fällen je Plattform |
-| [Gedanken](https://grundhofer.github.io/sebaro-guide/gedanken.html) | Haltung, Geschichte in sechs Runden, die Entscheidungen D72–D95, Abwägungen |
+| [Gedanken](https://grundhofer.github.io/sebaro-guide/gedanken.html) | Haltung, Geschichte in sechs Runden, die Entscheidungen D72–D96, Abwägungen |
 | [Ausblick](https://grundhofer.github.io/sebaro-guide/ausblick.html) | was auf eine Wahl des Inhabers wartet, was offen ist, später kommt oder erledigt ist |
 
 ## Für Agenten
@@ -26,7 +26,7 @@ Produkts.
 
 ## Woher die Werte kommen
 
-Die Quellen von sebaro (Paletten, Verträge, Generatoren, Prüfungen und das Entscheidungsprotokoll D1–D95) liegen in
+Die Quellen von sebaro (Paletten, Verträge, Generatoren, Prüfungen und das Entscheidungsprotokoll D1–D96) liegen in
 der Werkstatt **sebaroDesign**, einem privaten Repository. Dieser Guide schreibt keine Farbe, Schrift und kein Icon ab:
 `docs/sebaro/` ist ein geprüfter Web-Export (`tools/sync_from_design.py`), jede Datei mit Prüfsumme. Regeln ändern sich
 nur in `rules/rules.json`; `tools/build.py` erzeugt daraus die Regelseite, `guide/RULES.md` und `docs/llms.txt`.
@@ -36,8 +36,19 @@ python3 tools/sync_from_design.py   # sebaro neu aus sebaroDesign holen
 python3 tools/build.py              # Seitenblöcke und Ausgaben erzeugen
 python3 tools/check_site.py         # Seiten, Links, keine fremden Server, nur Tokens, Regeln, Änderungsprotokoll, Lizenz
 npm ci && node tools/check_a11y.mjs # axe in Hell und Dunkel bei 390 und 1440 px
+node tools/og.mjs                   # Vorschaubilder der Seiten neu rendern (D96), danach tools/build.py
 python3 -m http.server -d docs 8000 # lokal ansehen
 ```
+
+## Vorschaubilder (D96)
+
+Der Guide hält sich an seine eigene Regel WEB-09: Jede seiner Seiten hat ein Vorschaubild zum Teilen, gerendert aus
+der Seitenliste `src/og/pages.json` (die `tools/build.py` aus Überschrift und Beschreibung jeder Seite schreibt) mit
+dem Skript `docs/sebaro/brand/og/render.mjs` aus dem Export. `node tools/og.mjs` legt die Bilder unter `docs/og/` und
+die Kopfzeilen unter `src/og/head/` ab, `tools/build.py` setzt sie in den Kopf jeder Seite. Gerendert wird auf dem
+eigenen Rechner; die CI rendert nur zur Kontrolle nach und vergleicht die Kopfzeilen, nicht die Pixel (Linux zeichnet
+die Schrift etwas anders als macOS). Ändert ein Abgleich nur ein Token, eine Schrift oder ein Zeichen, bleibt die CI
+grün und `tools/check_site.py` warnt (OG); dann neu rendern.
 
 ## Versionen und Änderungsprotokoll
 
@@ -64,7 +75,7 @@ Werte; Korrektur für Wortlaut und Beispiele.
 ## Stand
 
 Alle Beispieldaten sind erfunden. Geprüft ist im Browser (Chromium) in Hell und Dunkel bei 390 und 1440 px; echte
-Geräte, Windows, WebKit und Screenreader kommen später (D79). Was auf eine Wahl des Inhabers wartet, steht im
+Geräte, Windows, WebKit und Screenreader kommen später (D79); die CI prüft vorerst nur in Chromium (D96). Was auf eine Wahl des Inhabers wartet, steht im
 [Ausblick](https://grundhofer.github.io/sebaro-guide/ausblick.html).
 
 ## Lizenz
