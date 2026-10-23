@@ -660,16 +660,16 @@ Nutz Tooltips nur bei Zeiger- und Tastaturbedienung und nie als einzigen Ort ein
 
 ### EBE-07 Menü nach ARIA-Muster  ·  vorläufig  ·  alle
 
-Bau Überlauf- und Kontextmenüs mit role='menu' und menuitem-Zeilen (48 px, in Desktop-Apps und Web-Apps mit Fenster 32 px), Icon in text-muted + Wort; Auslöser mit aria-haspopup='menu', aria-expanded und popovertarget; bg mit 2-px-Tinte, Radius 12, 200–320 px breit; Pfeiltasten, Pos1/Ende, Buchstaben, Escape und Fokusrückgabe über sb-menu.js. Ein Untermenü hängt an einer Zeile mit Chevron, öffnet mit →, Eingabe oder Druck, nie beim Darüberfahren, und schließt mit ← oder Escape. Es steht neben seinem Elternmenü, sein erster Eintrag auf der Höhe seiner Zeile: ein Untermenü des Hauptmenüs zur Leserichtung, sonst zur anderen Seite, ein tieferes in die Richtung seines Elternmenüs. Es verdeckt nie einen noch sichtbaren Teil einer Ebene weiter oben und seinen eigenen Eintrag nur, wenn das Fenster in beiden Richtungen zu niedrig ist; ohne Platz zur Seite liegt es über seinem Elternmenü, vom Eintrag eingerückt, so weit das Fenster es zulässt, unter seinem Eintrag oder nahe dem unteren Rand darüber. Jede Ebene bleibt im Fenster. Die Löschzeile zeigt Wort und Icon in danger, öffnet trotzdem den Dialog und trägt keine Kante.
+Bau Überlauf- und Kontextmenüs mit role='menu' und menuitem-Zeilen (48 px, in Desktop-Apps und Web-Apps mit Fenster 32 px), Icon in text-muted + Wort; Auslöser mit aria-haspopup='menu', aria-expanded und popovertarget; bg mit 2-px-Tinte, Radius 12, 200–320 px breit; Pfeiltasten, Pos1/Ende, Buchstaben, Escape und Fokusrückgabe über sb-menu.js. Ein Untermenü hängt an einer Zeile mit Chevron, öffnet mit →, Eingabe oder Druck, nie beim Darüberfahren, und schließt mit ← oder Escape. Es steht neben seinem Elternmenü, sein erster Eintrag auf der Höhe seiner Zeile: ein Untermenü des Hauptmenüs zur Leserichtung, sonst zur anderen Seite, ein tieferes in die Richtung seines Elternmenüs. Ist zu keiner Seite Platz, ersetzt es sein Elternmenü an dessen Stelle (gleiche Kante, gleiche Breite), mit der Zeile „‹ <Name des Elternmenüs>“ zuerst, die Screenreader „Zurück zu <Name>“ nennen; diese Zeile, ← und Escape gehen eine Ebene zurück. Keine Ebene verdeckt Einträge einer anderen, und jede Ebene bleibt im Fenster. Jedes Menü und Untermenü trägt einen Namen (aria-label). Ändert sich die Breite des Fensters oder scrollt der Auslöser aus dem Bild, schließt sich das ganze Menü, und der Fokus geht auf den Auslöser zurück, wenn er im Menü war; eine reine Höhenänderung schließt nicht. Die Löschzeile zeigt Wort und Icon in danger, öffnet trotzdem den Dialog und trägt keine Kante.
 
-*EN:* Menus: role=menu with menuitem rows (48 px, 32 px in windows), trigger with aria-haspopup, aria-expanded and popovertarget; bg + 2 px ink, radius 12, 200–320 px; keys and focus return by sb-menu.js; submenus hang on a row with a chevron, open with →, Enter or a press (never on hover), close with ← or Escape; a submenu stands beside its parent (the top menu's on the reading side, else the other; deeper ones keep their parent's direction), never covers a still visible upper level, covers its own item only when the window is too short either way, and without room lies over its parent, moved in from its item as far as the window allows, below or (near the bottom edge) above its item; every level stays inside the window; the delete row is danger word + icon, opens the dialog, no cut.
+*EN:* Menus: role=menu with menuitem rows (48 px, 32 px in windows), trigger with aria-haspopup, aria-expanded and popovertarget; bg + 2 px ink, radius 12, 200–320 px; keys and focus return by sb-menu.js; submenus hang on a row with a chevron, open with →, Enter or a press (never on hover), close with ← or Escape; a submenu stands beside its parent (the top menu's on the reading side, else the other; deeper ones keep their parent's direction), and where no side has room it replaces its parent in place (same edge and width) with the back row „‹ <parent>“ first (accessible name „Zurück zu <parent>“; it, ← and Escape go back one level); no level covers items of another, every level stays inside the window, every menu has a name; a change of the window's width or a scroll that takes the trigger out of view closes every level (focus back on the trigger if it was in the menu), a height-only change does not (D95); the delete row is danger word + icon, opens the dialog, no cut.
 
-- **Warum:** Standard-Muster; destruktiv bleibt destruktiv, die Kante gehört der Taste im Dialog (D46 (1)).
+- **Warum:** Standard-Muster; destruktiv bleibt destruktiv, die Kante gehört der Taste im Dialog (D46 (1)). Inhaber D95 nach Bildern aus Chromium (die dritte Ebene lag bei 390 px bündig auf der zweiten und verdeckte deren Einträge; die erste Ebene wanderte beim Scrollen mit ihrer Taste aus dem Bild): „Menü schließen (Empfohlen)“ und „Ebene ersetzt Ebene (Empfohlen)“, wie es native Menüs tun. Das ersetzt die Lage über dem Elternmenü aus D94.
 - **So:** <ul class='sb-menu' role='menu'><li role='none'><button class='sb-menu__item' role='menuitem'>
-- **Nicht so:** Löschen direkt aus dem Menü ohne Rückfrage; Kante oder Rahmen an der Menüzeile; Schatten unter dem Menü.
+- **Nicht so:** Löschen direkt aus dem Menü ohne Rückfrage; Kante oder Rahmen an der Menüzeile; Schatten unter dem Menü; ein Untermenü, das Einträge seines Elternmenüs oder einer anderen Ebene verdeckt; ein Menü, das nach dem Drehen oder Verkleinern des Fensters offen an der alten Stelle stehen bleibt.
 - **Werte:** Zeilen 48px (Fenster 32 px, data-sb-density="window"); Breite 200–320px (Fenster ab 240 px); Radius 12px; Padding 4 0
-- **Prüfung:** axe; Tastaturtest mit sb-menu.js: Pfeile, Pos1/Ende, → und ← im Untermenü, Escape mit Fokusrückgabe. Lage der Untermenüs bei 1440 und 390 px, auch mit „Menü“ nahe dem unteren Rand: kein Untermenü verdeckt seinen eigenen Eintrag oder einen noch sichtbaren Teil einer Ebene weiter oben, jede Ebene bleibt im Fenster.
-- **Entscheidung:** D39, D46, D67, D80, D91 · **Quelle:** `systems/sebaro/spec/02-components.md §4.10, §4.12, §4.18, §4.24; spec/11-checklist.md §1a; demo/assets/sb-menu.js`
+- **Prüfung:** axe; Tastaturtest mit sb-menu.js: Pfeile, Pos1/Ende, → und ← im Untermenü, Escape mit Fokusrückgabe. Lage der Untermenüs bei 1440, 1024, 700, 640, 390 und 320 px, von rechts nach links, mit Touch und mit dem Auslöser nahe dem unteren Rand: kein sichtbarer Eintrag einer Ebene ist verdeckt, ohne Platz ersetzt ein Untermenü sein Elternmenü mit der Zeile „‹ …“ (Name „Zurück zu …“) zuerst, Eingabe darauf, ← und Escape führen zurück, jede Ebene bleibt im Fenster. Die Breite ändern oder den Auslöser aus dem Bild scrollen schließt alles, der Fokus steht auf dem Auslöser; nur die Höhe ändern lässt das Menü offen, solange der Auslöser im Bild bleibt. In der Werkstatt prüft das tools/tests/test_menu.py, nur in Chromium.
+- **Entscheidung:** D39, D46, D67, D80, D91, D94, D95 · **Quelle:** `DECISIONS.md D95 (a), (c/d); systems/sebaro/spec/02-components.md §4.10, §4.12, §4.18, §4.24; spec/09-platform-web.md §4, §6.1; spec/11-checklist.md §1a; demo/assets/sb-menu.js`
 
 ### EBE-08 Aktionszone über die ganze Fensterbreite  ·  entschieden  ·  desktop, web
 
@@ -733,11 +733,11 @@ Reduziere Bewegung, wenn das System es verlangt oder die App-Einstellung „Bewe
 *EN:* Reduced motion = system setting OR app setting „Bewegung immer reduzieren“ (localStorage sb-motion=reduce → html[data-sb-motion=reduce]) OR data-sb-motion="reduce" on any container for its part: fade only, spinner and bar stand still; guard every moving rule.
 
 - **Warum:** Inhaber D46 (4): „mit der möglichkeit in einstellungen immer bewegung zu reduzieren“; D48 (1): Balken steht dann still; D65: auch novalis bekommt die Einstellung; D80: data-sb-motion je Behälter. Die erzeugte tokens.css kürzt Dauern nur unter prefers-reduced-motion.
-- **So:** Einstellungszeile mit Hilfetext „Neues erscheint dann ohne Bewegung, es wird nur eingeblendet. Gilt auch, wenn das Telefon Bewegung zulässt.“; theme-init.js liest sb-motion vor dem ersten Malen; Compose sbReduceMotion(); SwiftUI @AppStorage('sb-motion').
+- **So:** Einstellungszeile mit Hilfetext „Neues erscheint dann ohne Bewegung, es wird nur eingeblendet. Gilt auch, wenn das Telefon Bewegung zulässt.“; theme-init.js liest sb-motion vor dem ersten Malen; Compose sbReduceMotion() und die Schalterzeile SbMotionSetting, SbMenu blendet dann nur ein; SwiftUI @AppStorage('sb-motion').
 - **Nicht so:** Nur die System-Einstellung beachten; Bewegung ungeschützt in der Grundregel; Sweep unter reduzierter Bewegung.
 - **Werte:** Fade 200 ms, --sb-motion-easing-standard; CSS-Dauern 1 ms, Compose 0 ms
 - **Prüfung:** MOT1/MOT2 unter prefers-reduced-motion: reduce; mit data-sb-motion='reduce' blenden Menü und Toast nur ein; Neuladen behält die Einstellung.
-- **Entscheidung:** D46, D48, D65, D80 · **Quelle:** `DECISIONS.md D46 (4), D65 (2), D80; systems/sebaro/spec/03-signature.md §13.1; spec/01-foundations.md §7; spec/02-components.md §0.4`
+- **Entscheidung:** D46, D48, D65, D80 · **Quelle:** `DECISIONS.md D46 (4), D65 (2), D80; systems/sebaro/spec/03-signature.md §13.1; spec/08-platform-android.md §12.2, §14.8; spec/01-foundations.md §7; spec/02-components.md §0.4`
 
 ## Aktionen (AKT)
 
@@ -1073,11 +1073,11 @@ Zeig jeden Zustand als Glyphe in der Statusfarbe plus Wort in text, nie nur übe
 *EN:* Status = glyph in status colour (≤ 20 px) + word in text colour; never colour alone, never a fill or coloured status word; glyph aria-hidden, the word carries the meaning.
 
 - **Warum:** Der Zustand muss Farbverlust überstehen (AGENTS §6; WCAG 1.4.1); Richtung A „Farbe ist Funktion“ (D36).
-- **So:** <span class='sb-status sb-status--info'><svg class='sb-icon sb-icon--20' …#progress/>läuft</span>; in Bäumen „Konfliktkopie“ mit warning-Glyphe, Wort in text.
+- **So:** <span class='sb-status sb-status--info'><svg class='sb-icon sb-icon--20' …#progress/>läuft</span>; in Bäumen „Konfliktkopie“ mit warning-Glyphe, Wort in text. Compose: SbStatus(SbStatusTone.Warning, word = "Konflikt", glyph = SbStatusGlyph.Warning); SwiftUI: SbStatus(.warning, word: "Konflikt", glyph: .warning).
 - **Nicht so:** Grüner Punkt ohne Wort; grünes Wort „erledigt“; gefülltes Badge; orange gefärbter Text „Konflikt“.
 - **Werte:** --sb-color-success #07662E / #439C5B; --sb-color-warning #BE5A0A / #F59258; --sb-color-danger #AF2A27 / #E66761; --sb-color-info #33485D / #C8DDF5; Glyphe 20 px in Listen, 16 px in Belegen und Aussage-Zeilen; Abstand 4 px; Wort caption 14/20
 - **Prüfung:** Graustufen-Screenshot: alle Zustände unterscheidbar; computed color des Worts = --sb-color-text.
-- **Entscheidung:** D36, D15 · **Quelle:** `systems/sebaro/spec/01-foundations.md §1.1, §1.5; spec/03-signature.md §1.1, §1.2; spec/02-components.md §3.1; css/sebaro.css Z. 546-555`
+- **Entscheidung:** D36, D15 · **Quelle:** `systems/sebaro/spec/01-foundations.md §1.1, §1.5; spec/03-signature.md §1.1, §1.2; spec/02-components.md §3.1; css/sebaro.css Z. 546-555; spec/08-platform-android.md §14.3; spec/12-platform-ios.md §5`
 
 ### STA-02 Feste Zustandswörter und Glyphenformen  ·  vorläufig  ·  alle
 
@@ -1177,11 +1177,11 @@ Zeig etwas, das zum Teil erledigt ist, als Zahl dessen, was fehlt, mit dem vorha
 *EN:* Partial completion is counted with the existing word „offen“: row „2 offen“, sentence „Noch 2 offen.“, meta line „3 von 5 beantwortet“; glyph pending in warning when the rest asks for something, grey (sb-status--neutral) when it only informs; never „teils offen“, „teilweise“ or a percentage alone.
 
 - **Warum:** Inhaber D91 Z1a: zählen statt benennen. Eine Zahl sagt mehr als „teils“ und hält die Regel „nie schätzen“ (D21); „offen“ gibt es schon in Sätzen und als Prüfzustand (D24); ein drittes Wort bräuchte eine eigene Glyphe.
-- **So:** <span class='sb-status sb-status--warning'><svg class='sb-icon sb-icon--20' aria-hidden='true'><use href='#pending'/></svg>2 offen</span>; <p class='sb-list-row__meta'>3 von 5 beantwortet</p>; für einen Abgleich, der von selbst weiterläuft, sb-status--neutral.
+- **So:** <span class='sb-status sb-status--warning'><svg class='sb-icon sb-icon--20' aria-hidden='true'><use href='#pending'/></svg>2 offen</span>; <p class='sb-list-row__meta'>3 von 5 beantwortet</p>; für einen Abgleich, der von selbst weiterläuft, sb-status--neutral. Compose: SbStatus(SbStatusTone.Warning, word = "2 offen") verlangt etwas, SbStatus(SbStatusTone.Neutral, word = "2 offen", glyph = SbStatusGlyph.Pending) informiert; SwiftUI gleich mit glyph: .pending.
 - **Nicht so:** „teils offen“, „teilweise erledigt“, „60 %“ ohne die Zahl der offenen Dinge; ein neues Zustandswort mit eigener Glyphe; das Warnzeichen für etwas, das nur informiert.
 - **Werte:** Glyphe pending 20 px in Listen, 16 px in Notizen; englisch „2 open“, „2 left“, „3 of 5 answered“
 - **Prüfung:** Suche nach „teils offen“ und „teilweise“ in Oberflächentexten findet nichts.
-- **Entscheidung:** D21, D24, D91 · **Quelle:** `DECISIONS.md D91 (Z1a); systems/sebaro/spec/02-components.md §3.1, §3.1a; spec/07-voice.md §5`
+- **Entscheidung:** D21, D24, D91 · **Quelle:** `DECISIONS.md D91 (Z1a); systems/sebaro/spec/02-components.md §3.1, §3.1a; spec/07-voice.md §5; spec/08-platform-android.md §14.3; spec/12-platform-ios.md §5`
 
 ## Eingaben (EIN)
 
@@ -1396,8 +1396,8 @@ Gib einer fortlaufenden Farbskala höchstens vier Stufen, einer zweiseitigen hö
 - **So:** <ul class='sb-scale-legend'><li><span class='sb-scale-cell sb-scale-cell--seq-1' aria-hidden='true'></span>0–2</li>…<li><span class='sb-scale-cell sb-scale-cell--none' aria-hidden='true'></span>keine Angabe</li><li><span class='sb-scale-cell sb-heatmap__today-key' aria-hidden='true'></span>Rahmen: heute</li></ul>; Zelle <td><span class='sb-scale-cell sb-scale-cell--seq-3'></span><span class='sb-visually-hidden'>Dienstag, 29.09.: 6 Gläser</span></td>; heute <td aria-current='date'><span class='sb-scale-cell sb-scale-cell--seq-2'></span><span class='sb-visually-hidden'>Samstag, 10.10., heute: 4 Gläser</span></td>; Rahmen und Fuge für heute zeichnet sebaro.css (border: calc(var(--sb-border-width-strong) + var(--sb-border-width-hairline)) solid var(--sb-color-accent) und innen 1 px var(--sb-color-bg)), nie eigenes CSS; sb-chart.js für Pfeiltasten und Anzeige.
 - **Nicht so:** Sieben feine Stufen oder ein Verlauf; eine erste Stufe fast wie der Grund; ein Tag ohne Daten in Stufe 1; Zahlen auf der Farbfläche; Kobaltrahmen direkt auf der Farbe (1,1 : 1); heute als abgesetzter 2-px-Ring, der wie der Fokusring aussieht; heute als Linie unter der Zelle.
 - **Werte:** fortlaufend höchstens 4 Stufen, zweiseitig 5; Stufe 1 ab 3,0 : 1 zu bg, surface, surface-raised und surface-sunken; Nachbarn ab 1,6 : 1 und ΔE OK 0,10 (normal, Protanopie, Deuteranopie, Tritanopie); zu accent und primary-action ab ΔE OK 0,08; gemessen fortlaufend hell 1,61–1,64 : 1, dunkel 1,64–1,65 : 1, zweiseitig Arme 1,62–1,64 : 1; heute: Rahmen 4 px accent (border-width-strong + border-width-hairline) auf der Zellkante, innen 1 px Fuge in bg; Fuge gegen Füllung gemessen hell 3,35–14,70 : 1, dunkel 3,53–15,76 : 1, warm hell 3,34–14,68 : 1, warm dunkel 3,54–15,84 : 1 (Stufe 1 bis 4); Kobalt gegen bg und surface ab 6,15 : 1; vorher Kobalt direkt auf der Füllung 1,11–2,38 : 1; in Zwangsfarben Rahmen CanvasText, Fuge Canvas; Fokus 2 px focus, 2 px außen; Zellabstand 6 px; Legende „Rahmen: heute“
-- **Prüfung:** python3 tools/check_palette.py palettes/sebaro.json mit Exit 0 (die fünf Punkte sind Fehler, keine Warnungen; das Werkzeug lässt fortlaufend 5 Stufen zu, die 4 von sebaro prüft das Review); Heatmap mit Tab und Pfeiltasten: die Anzeige nennt Tag und Wert. Fokus auf heute und auf den Nachbartag: Rahmen mit Fuge auf der Zelle, Ring abgesetzt außen; heute auf jeder Stufe in hell, dunkel und warm: Fuge gegen Füllung ab 3 : 1.
-- **Entscheidung:** D91, D92, D93 · **Quelle:** `DECISIONS.md D91 (G6a, G7a, G10a), D92 (2), (3), D93 (1); systems/sebaro/spec/01-foundations.md §8, §8.1; spec/02-components.md §3.7 (Heatmap); spec/03-signature.md §10.2, §10.3; palettes/sebaro.json dataviz; tools/check_palette.py`
+- **Prüfung:** python3 tools/check_palette.py palettes/sebaro.json mit Exit 0 (die fünf Punkte sind Fehler, keine Warnungen; die Grenzen 4 und 5 von sebaro stehen als dataviz.maxClasses in der Palette und werden mitgeprüft); Heatmap mit Tab und Pfeiltasten: die Anzeige nennt Tag und Wert. Fokus auf heute und auf den Nachbartag: Rahmen mit Fuge auf der Zelle, Ring abgesetzt außen; heute auf jeder Stufe in hell, dunkel und warm: Fuge gegen Füllung ab 3 : 1.
+- **Entscheidung:** D91, D92, D93 · **Quelle:** `DECISIONS.md D91 (G6a, G7a, G10a), D92 (2), (3), D93 (1); systems/sebaro/spec/01-foundations.md §8, §8.1; spec/02-components.md §3.7 (Heatmap); spec/03-signature.md §10.2, §10.3; palettes/sebaro.json dataviz (maxClasses); shared/PALETTE-CONTRACT.md 2.6; tools/check_palette.py`
 
 ### DAT-12 Diagrammform nach der Frage  ·  entschieden  ·  alle
 
@@ -2458,7 +2458,7 @@ Gib jeder Seite mit eigenem Titel ihr eigenes Vorschaubild zum Teilen, 1200 × 6
 - **So:** <meta property='og:image' content='{origin}/og/state.png'><meta property='og:image:width' content='1200'><meta property='og:image:height' content='630'><meta property='og:image:alt' content='Android Coden: State in Jetpack Compose verstehen'>; Vorlage brand/src/og/<seite>.html, gerendert mit brand_assets.py build.
 - **Nicht so:** Ein Bild für alle Seiten; ein Bild mit dunklem Grund; ein generiertes Bild mit Schrift darin (BIL-01); relative Adressen in og:image; Text im Bild, der auf der Seite fehlt.
 - **Werte:** 1200 × 630 px, ohne Alpha; heller Grund; twitter:card summary_large_image
-- **Prüfung:** brand_assets.py check (BA20–BA22) mit Exit 0; og:url, og:image und canonical sind absolut.
+- **Prüfung:** brand_assets.py check (BA20–BA22, BA37: heller Grund in Vorlage und Bild) mit Exit 0; og:url, og:image und canonical sind absolut.
 - **Entscheidung:** D9, D91 · **Quelle:** `DECISIONS.md D91 (W6a); systems/sebaro/spec/09-platform-web.md §18.1`
 
 ### WEB-10 Sprachwechsel: dieselbe Seite oder kein Link  ·  entschieden  ·  web
@@ -2475,16 +2475,16 @@ Lass „DE / EN“ nur auf dieselbe Seite in der anderen Sprache führen, nie au
 
 ### WEB-11 Druck immer hell  ·  entschieden  ·  web
 
-Drucke jede Website hell, egal ob die Seite gerade dunkel ist, im gewählten Farbton. Lade dafür sb-print.js am Ende jeder Seite: Es schaltet vor dem Druck auf Hell, öffnet zugeklappte Antworten außerhalb der Navigation und stellt danach alles zurück, ohne die gespeicherte Wahl zu ändern.
+Drucke jede Website hell, egal ob die Seite gerade dunkel ist, im gewählten Farbton. Die hellen Farben fürs Papier bringt tokens.css selbst mit (ein erzeugter Druckblock, Token-Vertrag 1.9), auch ohne Skript. Lade trotzdem sb-print.js am Ende jeder Seite: Es schaltet vor dem Druck auf Hell, öffnet zugeklappte Antworten außerhalb der Navigation und stellt danach alles zurück, ohne die gespeicherte Wahl zu ändern.
 
-*EN:* Paper is always light, in the chosen tone: every website page loads sb-print.js at the end of body; it switches to light before printing, opens closed <details> outside navigation and restores both afterwards without touching the stored choice.
+*EN:* Paper is always light, in the chosen tone: tokens.css ends with a generated @media print block with the light values (token contract 1.9), also without scripts; every website page still loads sb-print.js at the end of body; it switches to light before printing, opens closed <details> outside navigation and restores both afterwards without touching the stored choice.
 
 - **Warum:** Inhaber D91: Druck immer hell (W8a). Papier ist hell; im dunklen Modus fiele der Grund weg und heller Text stünde auf weißem Papier.
 - **So:** <script src='sebaro/js/sb-print.js'></script> am Ende von body auf jeder Seite, auch auf Artikeln und Fakten.
 - **Nicht so:** Seiten ohne sb-print.js; Druck im dunklen Modus; die gespeicherte Wahl beim Drucken ändern; zugeklappte Antworten im Druck.
 - **Werte:** beforeprint: html[data-theme='light']; afterprint: zurück
-- **Prüfung:** Druckvorschau im dunklen Modus zeigt helles Papier (gemessen in Chromium mit page.pdf()); WebKit und Firefox ungeprüft.
-- **Entscheidung:** D91 · **Quelle:** `DECISIONS.md D91 (W8a); systems/sebaro/spec/09-platform-web.md §18.3; spec/02-components.md §7 (sb-print.js)`
+- **Prüfung:** Druckvorschau im dunklen Modus zeigt helles Papier, auch mit abgeschaltetem Skript (gemessen in Chromium mit page.pdf() und in der Werkstatt mit den Tests des Druckblocks); WebKit und Firefox ungeprüft.
+- **Entscheidung:** D91 · **Quelle:** `DECISIONS.md D91 (W8a); systems/sebaro/spec/09-platform-web.md §18.3; spec/02-components.md §7 (sb-print.js); shared/TOKEN-CONTRACT.md 1.9 §9.1`
 
 ## Plattform Mobil (MOB)
 
@@ -2492,16 +2492,16 @@ Was nur für Handy-Apps gilt, auf Android und iOS (Plattform „App“): Theme, 
 
 ### MOB-01 SebaroAppTheme und SbScreen als Wurzel  ·  entschieden  ·  mobile
 
-Leg jeden Compose-Bildschirm in SebaroAppTheme ohne Produkt und bau ihn mit SbScreen; nur SbScreen platziert die Hauptaktion (höchstens eine) fest unten über Navigation oder Tastatur mit 2-dp-Linie darüber. Dynamic Color bleibt aus, Edge-to-Edge ist an; Modus und „Bewegung immer reduzieren“ sind App-Einstellungen.
+Leg jeden Compose-Bildschirm in SebaroAppTheme ohne Produkt und bau ihn mit SbScreen; nur SbScreen platziert die Hauptaktion (höchstens eine) fest unten über Navigation oder Tastatur mit 2-dp-Linie darüber. Dynamic Color bleibt aus, Edge-to-Edge ist an; Modus, Farbton und „Bewegung immer reduzieren“ sind App-Einstellungen (SbThemeChoice, SbToneChoice, SbMotionSetting); die App speichert sie und gibt sie an SebaroAppTheme(mode = …, reduceMotion = …, tone = …).
 
-*EN:* Every Compose screen under SebaroAppTheme (no product) and built with SbScreen (≤ 1 primary action fixed at the bottom, 2 dp line on top); dynamic colour off; edge-to-edge on; mode and reduceMotion from app settings.
+*EN:* Every Compose screen under SebaroAppTheme (no product) and built with SbScreen (≤ 1 primary action fixed at the bottom, 2 dp line on top); dynamic colour off; edge-to-edge on; mode, tone and reduceMotion from app settings (SbThemeChoice, SbToneChoice, SbMotionSetting) passed to SebaroAppTheme(mode, reduceMotion, tone).
 
 - **Warum:** Material You würde die Farben mit Job auslöschen; Produktfarbe nur in der Kachel (D40, D54); D39 „feste stelle -> immer unten“.
-- **So:** SebaroAppTheme(reduceMotion = …) { SbScreen(primaryAction = null) }, wenn keine nötig ist.
+- **So:** SebaroAppTheme(mode = …, reduceMotion = …, tone = …) { SbScreen(primaryAction = null) }, wenn keine nötig ist; den Inhalt als nachgestelltes Lambda übergeben.
 - **Nicht so:** SebaroTheme(product = …); dynamicColorScheme; FAB; zweite lindgrüne Taste.
 - **Werte:** Linie 2 dp; Hauptaktion 56 dp
 - **Prüfung:** Lint A1, A8; extract_compose.py --compile (BOM 2024.12.01 und 2026.08.00).
-- **Entscheidung:** D40, D46, D54, D39 · **Quelle:** `systems/sebaro/spec/08-platform-android.md §2.2, §4; AGENTS.md §3`
+- **Entscheidung:** D40, D46, D54, D39 · **Quelle:** `systems/sebaro/spec/08-platform-android.md §2.2, §4, §12; AGENTS.md §3`
 
 ### MOB-02 Material 3 nur gezähmt  ·  vorläufig  ·  mobile
 
@@ -2536,11 +2536,11 @@ Folge in Handy-Apps standardmäßig dem System und biete in den Einstellungen di
 *EN:* Phone apps follow the system by default; settings group „Hell oder Dunkel“ with three rows „Wie das System“, „Hell“, „Dunkel“, plus „Farbton: Kühl · Warm“ (FAR-15); Android as radio rows, iOS as flat rows with an accent check mark at the end; no button or icon toggle in the app bar.
 
 - **Warum:** Inhaber D75, Wortlaut „ja, zwischen app und desktop unterscheiden wegen hell dunkel taste“: Handy-Apps wählen in den Einstellungen (zuerst Lesart des Orchestrators, mit D93 vom Inhaber bestätigt: „Ja, bestätigen (Empfohlen)“). Beschriftete Wahl statt Icon (D36). D91: auf iOS Hell und Dunkel mit Haken wie im System (I8a); der Farbton steht in den Einstellungen (C4c).
-- **So:** Android: Zeile 56 dp, Radio-Ring 20 dp (2 dp border-strong), gewählt Ring + 10-dp-Punkt in accent; Compose SbThemeChoice. iOS: SbThemeChoice und SbToneChoice, flache 56-pt-Zeilen mit Haarlinien, die gewählte mit check in accent und Wort in body-strong, VoiceOver liest „ausgewählt“.
+- **So:** Android: Zeile 56 dp, Radio-Ring 20 dp (2 dp border-strong), gewählt Ring + 10-dp-Punkt in accent; Compose SbThemeChoice und darunter SbToneChoice („Farbton“: „Kühl“ · „Warm“, dieselben Radiozeilen), die Wahl geht an SebaroAppTheme(mode = …, tone = …). iOS: SbThemeChoice und SbToneChoice, flache 56-pt-Zeilen mit Haarlinien, die gewählte mit check in accent und Wort in body-strong, VoiceOver liest „ausgewählt“.
 - **Nicht so:** Mond-Icon oder die Taste „Hell oder Dunkel“ in der Kopfleiste der App; gefüllte Gruppen von iOS; ein Schalter statt drei Zeilen.
 - **Werte:** Zeile 56 dp / pt; Ring 20 dp; Punkt 10 dp; Rand 2 dp; iOS-Haken in accent
 - **Prüfung:** Einstellung vorhanden; Neustart behält die Wahl.
-- **Entscheidung:** D75, D36, D91, D93 · **Quelle:** `DECISIONS.md D75, D91 (I8a, C4c), D93 (2); systems/sebaro/spec/08-platform-android.md §12; spec/12-platform-ios.md §9; spec/07-voice.md §4.7; demo/mobile.html M6`
+- **Entscheidung:** D75, D36, D91, D93 · **Quelle:** `DECISIONS.md D75, D91 (I8a, C4c), D93 (2); systems/sebaro/spec/08-platform-android.md §12, §12.1; spec/12-platform-ios.md §9; spec/07-voice.md §4.7; demo/mobile.html M6`
 
 ### MOB-05 iOS: eigene untere Leiste, Navigationsleiste des Systems  ·  entschieden  ·  mobile
 
@@ -2638,16 +2638,16 @@ Zeig Markdown-Quelltext im Editor in sebaro Sans, nicht in Mono: Auszeichnungsze
 
 ### DSK-04 Fensterteile ausblendbar, Text behält 480 px  ·  entschieden  ·  desktop, web
 
-Lass Seitenleiste, Inspektor und andere Fensterteile ausblenden, je über ein Werkzeug mit aria-expanded und aria-controls und im Menü „Darstellung“. Der Inhalt behält mindestens 480 px: Wird das Fenster schmaler, gehen zuerst die Seitenteile, unter 1004 px legt sich der Inspektor als Überlagerung über den Rand, unter 722 px auch die Seitenleiste, und beide sind dann zu.
+Lass Seitenleiste, Inspektor und andere Fensterteile ausblenden, je über ein Werkzeug mit aria-expanded und aria-controls und im Menü „Darstellung“. Der Inhalt behält mindestens 480 px: Wird das Fenster schmaler, gehen zuerst die Seitenteile, unter 1004 px legt sich der Inspektor als Überlagerung über den Rand, unter 722 px auch die Seitenleiste, und beide sind dann zu. Als Überlagerung öffnet das Werkzeug in der Titelleiste einen Teil und setzt den Fokus hinein, wenn darin etwas fokussierbar ist; ein Befehl im Menü („Darstellung › Seitenleiste“) öffnet ihn, ohne den Fokus hineinzusetzen, der Fokus geht zurück auf „Menü“. Escape auf „Menü“ schließt eine so geöffnete Überlagerung wieder.
 
-*EN:* Sidebar, inspector and other window parts can be hidden (a tool with aria-expanded + aria-controls, and the menu „Darstellung“); the content keeps at least 480 px: below 1004 px of window width the inspector, below 722 px also the sidebar becomes a closed overlay (sb-window, sb-window.js).
+*EN:* Sidebar, inspector and other window parts can be hidden (a tool with aria-expanded + aria-controls, and the menu „Darstellung“); the content keeps at least 480 px: below 1004 px of window width the inspector, below 722 px also the sidebar becomes a closed overlay (sb-window, sb-window.js); as an overlay, the title-bar tool opens a pane with focus inside (when it holds something focusable), a menu command opens it without moving focus into it (focus back on „Menü“, D95 (b)), and Escape on „Menü“ closes such an overlay.
 
-- **Warum:** Inhaber D81: „ja, mach nen Vorschlag, aber wir müssen drauf achten, dass der Textbereich groß genug ist. Vielleicht eine Regel, das Fensterelemente wie Inspektor etc. ausgeblendet werden können müssen?“ Die Schwellen folgen aus 240 + 2 + 480 (+ 2 + 280) px.
+- **Warum:** Inhaber D81: „ja, mach nen Vorschlag, aber wir müssen drauf achten, dass der Textbereich groß genug ist. Vielleicht eine Regel, das Fensterelemente wie Inspektor etc. ausgeblendet werden können müssen?“ Die Schwellen folgen aus 240 + 2 + 480 (+ 2 + 280) px. D95 (b): „Öffnet ein Menübefehl einen Bereich, springt der Fokus nicht hinein“ (Antwort „Nur merken, Fokus bleibt (Empfohlen)“); wer das Menü benutzt, bleibt im Menü.
 - **So:** <button class='sb-icon-button sb-icon-button--compact' aria-label='Eigenschaften' aria-expanded='false' aria-controls='insp' data-sb-window-toggle>; <aside class='sb-window__inspector' id='insp' hidden>.
 - **Nicht so:** Inhalt unter 480 px drücken, damit Seitenleiste und Inspektor bleiben; ein Seitenteil ohne Werkzeug zum Ausblenden; Text, der beim Verkleinern umbricht, bis er unlesbar ist.
 - **Werte:** Inhalt min. 480 px; Seitenleiste 240 px; Inspektor 280 px; Überlagerung unter 1004 px (Inspektor) und 722 px (Seitenleiste); Linien je 2 px
-- **Prüfung:** Fenster auf 1100, 900 und 700 px ziehen: der Inhalt bleibt mindestens 480 px, die Seitenteile gehen zuerst; Werkzeuge und Menü blenden sie wieder ein.
-- **Entscheidung:** D81, D80, D67 · **Quelle:** `DECISIONS.md D81; systems/sebaro/spec/02-components.md §4.17; spec/11-checklist.md §1a`
+- **Prüfung:** Fenster auf 1100, 900 und 700 px ziehen: der Inhalt bleibt mindestens 480 px, die Seitenteile gehen zuerst; Werkzeuge und Menü blenden sie wieder ein. Bei 700 px „Menü › Darstellung › Seitenleiste“: die Überlagerung ist offen, der Fokus bleibt auf „Menü“, Escape schließt sie wieder; bei 700 bis 1003 px ist der Inspektor als Überlagerung so breit wie seine Trennlinie angibt (280 px).
+- **Entscheidung:** D81, D80, D67, D95 · **Quelle:** `DECISIONS.md D81, D95 (b); systems/sebaro/spec/02-components.md §4.17; spec/11-checklist.md §1a`
 
 ### DSK-05 Hell oder Dunkel im Menü „Darstellung“  ·  entschieden  ·  desktop, web
 
@@ -2677,29 +2677,29 @@ Mach auf macOS unsere 48-px-Leiste zur Titelleiste: Die drei Fensterknöpfe des 
 
 ### DSK-07 Kleines Fenster erlaubt, ziehbare Trennlinien  ·  entschieden  ·  desktop, web
 
-Erlaube Fenster ab 480 × 400 px; die Seitenteile weichen, der Inhalt behält 480 px (DSK-04). Die Tintenlinien zwischen Seitenteil und Inhalt lassen sich ziehen: Seitenleiste 200–360 px, Inspektor 240–400 px; unter die kleinste Breite gezogen klappt der Teil zu, ein Doppelklick gibt die Startbreite zurück. Mit der Tastatur bewegen ← und → die Linie um 8 px (mit ⇧ 32 px), Pos1 und Ende springen an die Grenzen, Eingabe klappt zu und auf. Ohne Ziehen wählt das Menü „Darstellung“ „Schmal · Normal · Breit“. Die Breiten bleiben je Fenster gespeichert.
+Erlaube Fenster ab 480 × 400 px; die Seitenteile weichen, der Inhalt behält 480 px (DSK-04). Die Tintenlinien zwischen Seitenteil und Inhalt lassen sich ziehen: Seitenleiste 200–360 px, Inspektor 240–400 px; unter die kleinste Breite gezogen klappt der Teil zu, ein Doppelklick gibt die Startbreite zurück. Mit der Tastatur bewegen ← und → die Linie um 8 px (mit ⇧ 32 px), Pos1 und Ende springen an die Grenzen, Eingabe klappt zu und auf. Ohne Ziehen wählt das Menü „Darstellung“ „Schmal · Normal · Breit“. Ist das Fenster für den Teil zu schmal (dort liegt er als Überlagerung über dem Inhalt), merkt die Wahl nur die Breite: Der Teil bleibt, wie er ist, eine geschlossene Überlagerung bleibt zu, und der Fokus geht zurück auf „Menü“; die Breite gilt, sobald Platz ist. Die Breiten bleiben je Fenster gespeichert.
 
-*EN:* Windows from 480 × 400 px; side parts give way, content keeps 480 px (DSK-04); the ink lines between a pane and the content are draggable (sidebar 200–360, inspector 240–400 px; below the minimum the pane collapses, double click = start width), keyboard ← → 8 px (⇧ 32 px), Home/End, Enter collapses; without dragging the menu „Darstellung“ offers „Schmal · Normal · Breit“; widths stored per window (sb-window__divider).
+*EN:* Windows from 480 × 400 px; side parts give way, content keeps 480 px (DSK-04); the ink lines between a pane and the content are draggable (sidebar 200–360, inspector 240–400 px; below the minimum the pane collapses, double click = start width), keyboard ← → 8 px (⇧ 32 px), Home/End, Enter collapses; without dragging the menu „Darstellung“ offers „Schmal · Normal · Breit“ (in a window too narrow for the pane the choice only stores the width: the pane stays closed, focus back on „Menü“, D95 (b)); widths stored per window (sb-window__divider).
 
-- **Warum:** Inhaber D91: kleines Fenster erlaubt, Seitenteile weichen (F2a); ziehbare Trennlinien mit Grenzen und Tastatur (F3a). WCAG 2.5.7 verlangt einen Weg ohne Ziehen; „Schmal · Normal · Breit“ ist dieser Weg. D94 (1), Antwort „1 wie vorgeschlagen“: „Schmal · Normal · Breit“ im Menü „Darstellung“ gilt so, wie es gebaut ist.
+- **Warum:** Inhaber D91: kleines Fenster erlaubt, Seitenteile weichen (F2a); ziehbare Trennlinien mit Grenzen und Tastatur (F3a). WCAG 2.5.7 verlangt einen Weg ohne Ziehen; „Schmal · Normal · Breit“ ist dieser Weg. D94 (1), Antwort „1 wie vorgeschlagen“: „Schmal · Normal · Breit“ im Menü „Darstellung“ gilt so, wie es gebaut ist. D95 (b), Antwort „Nur merken, Fokus bleibt (Empfohlen)“: Vorher öffnete „Breit“ bei 700 px die versteckte Seitenleiste und setzte den Fokus in sie.
 - **So:** <div class='sb-window__divider' role='separator' aria-orientation='vertical' aria-controls='sidebar' aria-label='Breite der Seitenleiste' aria-valuemin='200' aria-valuemax='360' aria-valuenow='240'></div>; Tauri minWidth 480, minHeight 400; sb-window.js.
-- **Nicht so:** Ein großes Mindestfenster; eine Trennlinie ohne Tastatur oder ohne Weg ohne Ziehen; eine dickere oder farbige Linie zum Greifen; Inhalt unter 480 px gezogen.
+- **Nicht so:** Ein großes Mindestfenster; eine Trennlinie ohne Tastatur oder ohne Weg ohne Ziehen; eine dickere oder farbige Linie zum Greifen; Inhalt unter 480 px gezogen; „Breit“ im schmalen Fenster, das den versteckten Teil aufklappt und den Fokus hineinsetzt.
 - **Werte:** Fenster ab 480 × 400 px; Seitenleiste 200–360 px (Start 240), Inspektor 240–400 px (Start 280); Greiffläche 24 px, bei Touch 48 px; Schritte 8 / 32 px; aria-valuetext „264 Pixel“, „zugeklappt“
-- **Prüfung:** Fenster auf 480 × 400 px; Trennlinie mit Tab erreichen und mit Pfeilen bewegen; „Schmal · Normal · Breit“ im Menü; neu laden behält die Breite.
-- **Entscheidung:** D81, D91, D94 · **Quelle:** `DECISIONS.md D91 (F2a, F3a), D81, D94 (1); systems/sebaro/spec/02-components.md §4.17, §4.23; spec/09-platform-web.md §13.1`
+- **Prüfung:** Fenster auf 480 × 400 px; Trennlinie mit Tab erreichen und mit Pfeilen bewegen; „Schmal · Normal · Breit“ im Menü; neu laden behält die Breite. Bei 700 px „Breit“ für die Seitenleiste, bei 900 px für den Inspektor: der Teil bleibt zu, „Breit“ ist angehakt, der Fokus steht auf „Menü“.
+- **Entscheidung:** D81, D91, D94, D95 · **Quelle:** `DECISIONS.md D91 (F2a, F3a), D81, D94 (1), D95 (b); systems/sebaro/spec/02-components.md §4.17, §4.23; spec/09-platform-web.md §13.1`
 
 ### DSK-08 Taste „Menü“ mit fünf Gruppen  ·  entschieden  ·  desktop, web
 
-Gib Desktop-Apps auf Windows und Linux und Web-Apps mit Fenster am Ende der Titelleiste die Taste „Menü“ mit Icon und Wort. Sie öffnet die fünf Gruppen Datei · Bearbeiten · Darstellung · Fenster · Hilfe als Untermenüs (EBE-07). F10 und eine allein gedrückte Alt-Taste öffnen das Menü auf „Datei“. Auf macOS steht dasselbe im nativen Menü oben am Bildschirm („Ablage“ statt „Datei“, dazu das App-Menü). Jede Zeile mit einem festen Kürzel nennt es (DSK-09); „Löschen …“ steht in „Bearbeiten“ zuletzt nach einer Trennlinie.
+Gib Desktop-Apps auf Windows und Linux und Web-Apps mit Fenster am Ende der Titelleiste die Taste „Menü“ mit Icon und Wort. Sie öffnet die fünf Gruppen Datei · Bearbeiten · Darstellung · Fenster · Hilfe als Untermenüs (EBE-07). F10 und eine allein gedrückte Alt-Taste öffnen das Menü auf „Datei“, aber nur, solange „Menü“ im Bild ist. Ändert sich die Breite des Fensters oder scrollt „Menü“ aus dem Bild, schließt sich das Menü mit allen Ebenen, und der Fokus geht auf „Menü“ zurück, wenn er im Menü war; eine reine Höhenänderung schließt nicht. Ist zu keiner Seite Platz, ersetzt eine Gruppe die Ebene darüber an ihrer Stelle, mit „‹ Menü“ oder „‹ <Gruppe>“ zuerst (EBE-07). Auf macOS steht dasselbe im nativen Menü oben am Bildschirm („Ablage“ statt „Datei“, dazu das App-Menü). Jede Zeile mit einem festen Kürzel nennt es (DSK-09); „Löschen …“ steht in „Bearbeiten“ zuletzt nach einer Trennlinie.
 
-*EN:* On Windows and Linux (and in web apps with a window) the title bar ends with the button „Menü“ (icon + word); it opens the five groups Datei · Bearbeiten · Darstellung · Fenster · Hilfe as submenus (EBE-07); F10 and a lone Alt open it on „Datei“; macOS has the same groups in the native menu bar; items show their fixed shortcut (DSK-09); „Löschen …“ last in „Bearbeiten“ after a divider.
+*EN:* On Windows and Linux (and in web apps with a window) the title bar ends with the button „Menü“ (icon + word); it opens the five groups Datei · Bearbeiten · Darstellung · Fenster · Hilfe as submenus (EBE-07); F10 and a lone Alt open it on „Datei“, only while „Menü“ is in view; a change of the window's width or „Menü“ scrolling out of view closes every level (focus back on „Menü“), a height-only change does not; without room a level replaces the one above it with „‹ <name>“ first (D95, EBE-07); macOS has the same groups in the native menu bar; items show their fixed shortcut (DSK-09); „Löschen …“ last in „Bearbeiten“ after a divider.
 
-- **Warum:** Inhaber D91 F4b: Taste „Menü“ in unserer Leiste statt einer nativen Menüzeile im Fenster. Die Taste kostet keine eigene Zeile; F10 und Alt sind die Menütasten der Systeme, deshalb öffnen sie es wie eine Menüzeile.
+- **Warum:** Inhaber D91 F4b: Taste „Menü“ in unserer Leiste statt einer nativen Menüzeile im Fenster. Die Taste kostet keine eigene Zeile; F10 und Alt sind die Menütasten der Systeme, deshalb öffnen sie es wie eine Menüzeile. D95 (a), Antwort „Menü schließen (Empfohlen)“: Ein natives Menü schließt sich, wenn das Fenster seine Breite ändert; F10 öffnete das Menü vorher auch, wenn „Menü“ aus dem Bild gescrollt war. D95 (c/d), Antwort „Ebene ersetzt Ebene (Empfohlen)“.
 - **So:** <button class='sb-secondary-action sb-secondary-action--compact' aria-haspopup='menu' aria-expanded='false' popovertarget='m'><svg …menu/><span class='sb-window__word'>Menü</span></button><ul class='sb-menu sb-menu--window' role='menu' id='m' popover>…<button class='sb-menu__item' role='menuitem' aria-haspopup='menu' popovertarget='m-file'>Datei<span class='sb-menu__sub'>…</span></button><ul class='sb-menu' role='menu' id='m-file' aria-label='Datei' popover>…
-- **Nicht so:** Eine native Menüzeile im Fenster auf Windows und Linux; ein Hamburger-Icon ohne Wort; ein Untermenü, das beim Darüberfahren aufspringt; eigene Gruppen statt der fünf; F10 oder Alt als Kürzel der App.
+- **Nicht so:** Eine native Menüzeile im Fenster auf Windows und Linux; ein Hamburger-Icon ohne Wort; ein Untermenü, das beim Darüberfahren aufspringt; eigene Gruppen statt der fünf; F10 oder Alt als Kürzel der App; ein Menü, das F10 öffnet, während „Menü“ nicht im Bild ist; ein Menü, das beim Verkleinern des Fensters offen stehen bleibt.
 - **Werte:** fünf Gruppen; Zeilen 32 px; Chevron 16 px in text-muted
-- **Prüfung:** Tastatur: F10 öffnet auf „Datei“, → öffnet das Untermenü, Escape kehrt zurück; axe. Alt und F10 sind nur in Chromium auf macOS gemessen, nicht unter Windows oder Linux.
-- **Entscheidung:** D67, D75, D91 · **Quelle:** `DECISIONS.md D91 (F4b); systems/sebaro/spec/02-components.md §4.10, §4.24; spec/07-voice.md §4.8; spec/09-platform-web.md §13.1`
+- **Prüfung:** Tastatur: F10 öffnet auf „Datei“, → öffnet das Untermenü, Escape kehrt zurück; axe. „Menü“ aus dem Bild gescrollt: F10 öffnet nichts. Offenes Menü, dann das Fenster schmaler ziehen: alles zu, Fokus auf „Menü“; nur niedriger, solange „Menü“ im Bild bleibt: bleibt offen. Bei 390 px ersetzt jede Gruppe „Menü“ mit „‹ Menü“ zuerst. Alt und F10 sind nur in Chromium auf macOS gemessen, nicht unter Windows oder Linux.
+- **Entscheidung:** D67, D75, D91, D95 · **Quelle:** `DECISIONS.md D91 (F4b), D95 (a), (c/d); systems/sebaro/spec/02-components.md §4.10, §4.24; spec/07-voice.md §4.8; spec/09-platform-web.md §13.1`
 
 ### DSK-09 14 feste Kürzel und F6 durch die Bereiche  ·  entschieden  ·  desktop, web
 
@@ -2711,7 +2711,7 @@ Nimm die 14 festen Kürzel in keiner Desktop-App und Web-App mit Fenster für et
 - **So:** aria-keyshortcuts='Meta+K' im Markup (macOS-Form), <span class='sb-keys' data-sb-keys='Mod+K'>; sb-window.js schreibt Strg+K und Strg+Alt+S auf Windows und Linux; „Nächster Bereich“ auch im Menü „Fenster“ und in der Palette.
 - **Nicht so:** ⌘\ für die Seitenleiste (braucht ⌥ auf der deutschen Tastatur); ein festes Kürzel für etwas anderes; Kürzel, die das System behält (⌘H, ⌘Q, Alt+F4); ⌘1 bis ⌘5 als einzige Sprünge; Kürzel, die Textfeldern ihre Tasten nehmen.
 - **Werte:** 14 feste Kürzel; Bereiche: Titelleiste, Seitenleiste, Inhalt, Inspektor, Aktionszone
-- **Prüfung:** Die Tabelle in spec/02 §4.19 hat 14 Zeilen ohne Dopplung und ohne AltGr-Taste; F6 erreicht jeden sichtbaren Bereich und gibt seinen letzten Fokus zurück.
+- **Prüfung:** python3 tools/check_shortcuts.py sebaro in der Werkstatt mit Exit 0: Die Tabelle in spec/02 §4.19 hat 14 Zeilen ohne Dopplung, ohne AltGr- und Systemtaste, auf den Seiten gleichen .sb-keys und aria-keyshortcuts einander, und kein festes Kürzel ist als eigenes der App markiert; F6 erreicht jeden sichtbaren Bereich und gibt seinen letzten Fokus zurück.
 - **Entscheidung:** D67, D84, D91 · **Quelle:** `DECISIONS.md D91 (F5a, F6a), D84; systems/sebaro/spec/02-components.md §4.19, §4.20; spec/07-voice.md §4.8`
 
 ### DSK-10 Dokument-Reiter 32 px, Kreuz am aktuellen  ·  entschieden  ·  desktop, web
@@ -2825,12 +2825,12 @@ Markiere jede Ansicht mit data-sb-view="<name>" und, wo es keine Hauptaktion gib
 
 *EN:* Every view root carries data-sb-view (and data-sb-primary-expected="0" without a primary action); the colour count must pass (expected primary fills, 0 roleless colours, 0 text on colour).
 
-- **Warum:** Port der Live-Prüfung aus Skizze A; macht die Farbregel (D36) messbar. Werkzeug für Reviews, kein Gate.
+- **Warum:** Port der Live-Prüfung aus Skizze A; macht die Farbregel (D36) messbar. Seit dem 22.10.2026 auch eine Prüfung der Werkstatt: check_demo.py 1.3 zählt jede Ansicht der Musterseiten in Hell und Dunkel, bei 390 und 1440 px und im warmen Farbton (Gruppe colour, COL1 bis COL4, Fehler).
 - **So:** Zeile „Farbprüfung: Hauptaktion 1 · Ort 4 · Status 3 · App-Zeichen 1 · Farben ohne Rolle 0 · Text auf Farbfläche 0 · bestanden“.
 - **Nicht so:** Ansichten ohne Markierung; Ergebnis behaupten ohne Lauf.
-- **Werte:** Standard-Erwartung Hauptaktion 1; Kacheln zählen als „App-Zeichen“; Dataviz-Farben nur in .sb-chart
+- **Werte:** Standard-Erwartung Hauptaktion 1; Kacheln zählen als „App-Zeichen“; Farben mit eigenem Job zählen nur in ihrem Teil: Diff-Flächen auf der Diff-Zeile, Kategorie in .sb-category, Markierung in mark / .sb-mark, Diagrammfarben in .sb-chart und .sb-scale-cell, Codefarben im Code; Hover- und Druckflächen sind neutral
 - **Prüfung:** sbColourCount(view).pass === true; Lücken: Pseudo-Elemente und Fokus-Outlines werden nicht gelesen.
-- **Entscheidung:** D36 · **Quelle:** `systems/sebaro/spec/03-signature.md §1.4 (Colour count); demo/assets/sb-colour-count.js`
+- **Entscheidung:** D36 · **Quelle:** `systems/sebaro/spec/03-signature.md §1.4 (Colour count); demo/assets/sb-colour-count.js; shared/DEMO-CHECK.md 1.3 §3.4; tools/check_demo.py (colour)`
 
 ### TEC-04 Musterseiten-Teile nie ausliefern  ·  vorläufig  ·  alle
 

@@ -10,7 +10,9 @@
 //   [data-sb-window-toggle]       shows / hides the pane named by aria-controls (sidebar, inspector; D81) and keeps
 //                                 aria-expanded (aria-checked on a menuitemcheckbox in „Darstellung“); a pane that no longer fits beside the content (480 px) becomes an
 //                                 overlay (CSS container query) and is closed here; opened again it lies over the
-//                                 content edge, Escape or a click outside closes it and focus returns to the toggle
+//                                 content edge, Escape or a click outside closes it and focus returns to the toggle;
+//                                 opened from a menu item focus stays with the menu's button, where Escape closes
+//                                 it too and focus stays (D95 (b))
 //   .sb-listbox[role="listbox"]   ↑ ↓ Home End move and choose; with aria-multiselectable: ⇧ + arrow / click extends,
 //                                 ⌘ / Strg + click toggles, Space toggles, ⌘A / Strg+A chooses all, Escape keeps only
 //                                 the current row (D67 (8)); data-sb-selection-status="<id>" names the state sentence
@@ -42,10 +44,13 @@
 //   [data-sb-pane-width]          the way without dragging (WCAG 2.5.7): „Schmal · Normal · Breit“ in the menu
 //                                 „Darstellung“ (menuitemradio, aria-controls = the pane; "min" | "start" | "max")
 //                                 set the width through the divider of that pane, store it like a drag and keep
-//                                 aria-checked on the width that is shown (none while a dragged width is between)
+//                                 aria-checked on the width that is shown (none while a dragged width is between);
+//                                 a pane that is an overlay in a narrow window only keeps the width and stays as it
+//                                 is (D95 (b))
 //   F10, a lone Alt (F4b)         open the window menu behind „Menü“ (.sb-menu--window) on its first item, like a
-//                                 menu bar; again (or Escape) closes it and focus goes back to where it was. Alt
-//                                 only off macOS (on a Mac ⌥ types characters); not while a dialog has the keyboard
+//                                 menu bar, only while „Menü“ is in the window (D95 (a)); again (or Escape) closes
+//                                 it and focus goes back to where it was. Alt only off macOS (on a Mac ⌥ types
+//                                 characters); not while a dialog has the keyboard
 //   .sb-doc-tabs (F7a)            document tabs: click or ← → Home End choose, ⌃⇥ / ⌃⇧⇥ next / previous, Entf or ⌘W
 //                                 / Strg+W close the tab (the cross is a pointer shortcut, aria-hidden), middle click
 //                                 closes; "sb-doc-tab-close" (cancelable) is fired on the tab before it goes
@@ -190,13 +195,13 @@
     var el = pane.querySelector("[role='treeitem'][tabindex='0'], [role='option'][tabindex='0'], [aria-current]:not([aria-current='false']), a[href], button:not([disabled]), input:not([disabled]), [tabindex='0']");
     if (el) el.focus({ preventScroll: true });
   }
-  function setPane(s, open, how) {
+  function setPane(s, open, how, stay) {   // stay: a menu command opened it, focus stays where the menu put it (D95 (b))
     s.pane.hidden = !open;
     s.toggles.forEach(function (b) { b.setAttribute(b.getAttribute("role") === "menuitemcheckbox" ? "aria-checked" : "aria-expanded", String(open)); });
     if (how === "user" && !s.overlay) s.want = open;
     if (open && s.overlay && how === "user") {
       s.pane.classList.remove("sb-enter"); void s.pane.offsetWidth; s.pane.classList.add("sb-enter");
-      focusInto(s.pane);
+      if (!stay) focusInto(s.pane);
     }
     updateDividers(s.pane);   // F3a: the dividers say „zugeklappt“ or the width, the open panes share the room again
   }
@@ -401,11 +406,20 @@
 
   // ------------------------------------------------------------------ the window and its areas (F6a, F9a, F10a)
   function shown(el) { return !!el && !el.hidden && el.getClientRects().length > 0; }
+  function inView(el) {   // some part of it inside the window (sb-menu.js closes the menu when none is)
+    var r = el.getBoundingClientRect();
+    return r.bottom > 0 && r.right > 0 && r.top < window.innerHeight && r.left < document.documentElement.clientWidth;
+  }
   function windowOf(el) {
     var win = el instanceof Element ? el.closest(".sb-window") : null;
     if (win) return win;
     var fill = document.querySelectorAll(".sb-window--fill");   // focus on the page itself: the product's one window
     return fill.length === 1 ? fill[0] : null;
+  }
+  function isWindowMenuButton(el) {   // „Menü“: the button of a window menu (.sb-menu--window)
+    if (!(el instanceof Element) || !el.matches("[aria-haspopup='menu']")) return false;
+    var menu = document.getElementById(el.getAttribute("popovertarget") || el.getAttribute("aria-controls") || "");
+    return !!menu && menu.classList.contains("sb-menu--window");
   }
   function isTextField(el) {
     return el instanceof Element && (el.isContentEditable ||
@@ -802,10 +816,10 @@
     if (paneWidth) {   // „Schmal · Normal · Breit“: the same width code as the keyboard on the divider
       var pd = dividerFor(paneWidth.getAttribute("aria-controls"));
       if (pd) {   // the chosen width is the pane's width from now on; fit() shows what the window has room for
-        var ps = dState(pd);
+        var ps = dState(pd), pp = dividerPane(pd);
         ps.width = clampW(ps, widthOf(pd, paneWidth.getAttribute("data-sb-pane-width")));
         saveWidth(pd);
-        paneOpen(pd, true);
+        if (pp && !isOverlay(pp)) paneOpen(pd, true);   // D95 (b): a pane that gives way to a narrow window stays as it is
         fit(pd.closest(".sb-window"));
         checkWidths(pd);
       }
@@ -814,7 +828,7 @@
     var toggle = closestIn(event, "[data-sb-window-toggle][aria-controls]");
     if (toggle) {
       var s = paneState(toggle.getAttribute("aria-controls"));
-      if (s) { s.overlay = isOverlay(s.pane); setPane(s, s.pane.hidden, "user"); }
+      if (s) { s.overlay = isOverlay(s.pane); setPane(s, s.pane.hidden, "user", !!toggle.closest(".sb-menu")); }
       return;
     }
     var opt = closestIn(event, ".sb-listbox [role='option']");
@@ -903,6 +917,8 @@
         var s = panes[id];
         if (!s.overlay || s.pane.hidden || !(event.target instanceof Node)) return;
         if (s.pane.contains(event.target) || s.toggles.some(function (b) { return b.contains(event.target); })) { closeOverlay(s, true); event.preventDefault(); }
+        // opened from the menu, focus stayed on „Menü“ (D95 (b)): Escape there closes it too, focus stays
+        else if (isWindowMenuButton(event.target) && windowOf(event.target) === windowOf(s.pane)) { closeOverlay(s, false); event.preventDefault(); }
       });
       if (event.defaultPrevented) return;
     }
@@ -935,7 +951,7 @@
     if (!menu) return false;
     var id = CSS.escape(menu.id);
     var button = document.querySelector("[aria-haspopup='menu'][popovertarget='" + id + "'], [aria-haspopup='menu'][aria-controls='" + id + "']");
-    if (!button || !shown(button)) return false;
+    if (!button || !shown(button) || !inView(button)) return false;   // D95 (a): only while „Menü“ is in the window
     var back = document.activeElement && document.activeElement !== document.body ? document.activeElement : null;
     button.dispatchEvent(new CustomEvent("sb-menu-open", { bubbles: true, detail: { returnTo: back } }));
     return true;

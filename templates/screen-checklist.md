@@ -1,7 +1,7 @@
 # Screen checklist
 
 Walk this for every screen in **light and dark**, at **390 px and 1440 px** (desktop apps: smallest and a wide window).
-Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D94.
+Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D95.
 
 ## Colour and hierarchy
 - [ ] Cobalt only for current place, links and focus; lime only for the one primary action (FAR, AKT)
@@ -44,8 +44,15 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
 - [ ] Command palette opens with ⌘K / Ctrl+K (NAV-09)
 - [ ] Sidebar and inspector can be hidden (tool with aria-expanded, menu „Darstellung“); content keeps ≥ 480 px (DSK-04)
 - [ ] Rows 32 / 48 / 64 px for one / two / three lines with a pointer, 48 px with touch (RAU)
-- [ ] Submenus of „Menü“ at 1440 and 390 px, also with „Menü“ near the bottom edge: none covers its own item or a
-      still visible part of a level further up, every level stays inside the window (EBE-07)
+- [ ] Submenus of „Menü“ at 1440, 1024, 700, 640, 390 and 320 px, right to left and with touch, also with „Menü“ near
+      the bottom edge: each opens beside its parent, or without room replaces it in place with the back row
+      „‹ <parent>“ first (named „Zurück zu <parent>“; it, ← and Escape go back); no level covers items of another,
+      every level stays inside the window (EBE-07, D95)
+- [ ] An open menu closes with every level when the window gets narrower or wider or „Menü“ scrolls out of view, focus
+      back on „Menü“; a height-only change keeps it open while „Menü“ stays in view; F10 / Alt open nothing while
+      „Menü“ is out of view (DSK-08)
+- [ ] In a window too narrow for a pane, „Schmal · Normal · Breit“ only stores the width (pane stays closed, focus on
+      „Menü“); a menu command that opens a pane leaves focus on „Menü“, Escape there closes the overlay (DSK-07, DSK-04)
 
 ## Navigation and links
 - [ ] Current place: 3 px cobalt line + weight; app navigation with icon + word (NAV)

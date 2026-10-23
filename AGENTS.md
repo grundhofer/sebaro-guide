@@ -28,7 +28,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 
 Rule status: **entschieden** = owner decision, binding. **vorläufig** = an agent's decision, valid until the owner
 changes it. **offen** = proposal only, do not build it as a rule. `D<n>` refers to row n of the decision log in the
-workshop repository sebaroDesign (private; the guide covers D1–D94). A rule id (e.g. `AKT-01`) is stable; cite it
+workshop repository sebaroDesign (private; the guide covers D1–D95). A rule id (e.g. `AKT-01`) is stable; cite it
 in code reviews, commit messages and ADRs.
 
 ## 2 The ten rules most often broken
@@ -100,8 +100,8 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
    Settled by the owner with D92 (2026-10-21): „Konflikt“ always carries the warning glyph, in rows, trees and the
    timeline (STA-08, DAT-15); the heatmap „heute“ is a cobalt frame on the cell, rounded like it, while focus
    stays the square 2 px ring with a 2 px gap outside (cells 6 px apart, legend „Rahmen: heute“); the scale
-   thresholds stand, sequential at most 4 steps and diverging 5 (DAT-11, entschieden; `check_palette.py` allows 5
-   sequential, the 4 is checked by review); the licence reading (TEC-09); FAR-13; sortable tables scroll sideways
+   thresholds stand, sequential at most 4 steps and diverging 5 (DAT-11, entschieden; sebaro's palette names both limits as
+   `dataviz.maxClasses`, PALETTE-CONTRACT 2.6, and `check_palette.py` checks them); the licence reading (TEC-09); FAR-13; sortable tables scroll sideways
    inside their `sb-table-wrap` on phones, never the page, and never stack (DAT-14); the `pin` and `star` icons and
    the five D86 sign near cases (DAT-09, DAT-17, ZEI-12). The marking of generated images stays open until the first
    product publication with generated images, then a legal check (BIL-04, vorläufig).
@@ -118,14 +118,34 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
    primary action (DAT-13), the poster sentence for screen readers only (BIL-07), the docs nav with „Übersicht“ first,
    page counts and the current group open (WEB-07), the pointer-only tab cross with Entf / ⌘W (DSK-10). For now there
    is **no brand figure** (BIL-05): the brand comes from type, colour and app signs; D90 still allows one within the
-   D93 limits, but only with a new decision row, so never generate or show one. Submenus (`sb-menu.js`, synced from the
-   workshop with D94) open on the side their parent went (the top menu's: reading side, else the other), never cover
-   their own item or a still visible part of a level further up, and without room lie over their parent, moved in from
-   the item as far as the window allows, or open above the item near the bottom edge (EBE-07).
+   D93 limits, but only with a new decision row, so never generate or show one.
+   Settled by the owner with D95 (2026-10-22), menus in a changed or narrow window (`sb-menu.js`, `sb-window.js`,
+   synced from workshop `90843c8`): an open menu closes with every level when the window's **width** changes or its
+   button („Menü“) scrolls out of view, focus back on the button if it was in the menu; a height-only change (address
+   bar, on-screen keyboard) does not close it; F10 / a lone Alt open the window menu only while „Menü“ is in view
+   (EBE-07, DSK-08). „Schmal · Normal · Breit“ for a pane that is an overlay in a too narrow window only stores the
+   width: the pane stays closed, focus goes back to „Menü“ (DSK-07); a menu command that opens a pane never moves focus
+   into it, and Escape on „Menü“ closes such an overlay (DSK-04; the Escape part is a workshop addition from the review).
+   Submenus open beside their parent (the top menu's on the reading side, else the other; deeper ones keep their
+   parent's direction); where no side has room the submenu **replaces its parent in place** (same edge and width, the
+   parent hidden under it, `data-sb-replaced`) with the back row „‹ <parent>“ first (`li.sb-menu__back-row >
+   button.sb-menu__back[role="menuitem"]`, accessible name „Zurück zu <parent>“ / „Back to <parent>“ from the script's
+   message table); the back row, ← and Escape go back one level. No level covers items of another level any more; this
+   replaces the D94 overlap. Every menu and submenu needs a name (`aria-label`). Never build your own submenu
+   placement. EBE-07 stays vorläufig: D95 decides only this part of the menu pattern.
+   In the same workshop round, without a new decision: `tokens.css` ends with a generated `@media print` block with
+   the light values (TOKEN-CONTRACT 1.9), so pages print light without scripts too; keep loading `sb-print.js` (it opens
+   closed answers; its theme half is now redundant and stays until its removal is checked) (WEB-11). The studio share
+   image has a light ground (WEB-09). Compose caught up: `SbStatus(…, glyph = SbStatusGlyph.Warning)` for „Konflikt“,
+   `SbStatusGlyph.Pending` in the neutral tone for a „2 offen“ that only informs (STA-01, STA-09), `SbToneChoice` and
+   `SbMotionSetting` with `SebaroAppTheme(mode, reduceMotion, tone)` (MOB-01, MOB-04, BEW-04), the wrappers' words from
+   `SbMessages` (build an app table with `SbMessages.De.copy(…)`); all compiled, none rendered. The inspector overlay
+   below 1004 px is 280 px wide again (it was 34 px).
    Nothing waits for the owner's choice now (`docs/ausblick.html#entscheidung` has no entries; a „vorläufig“ rule is
-   not an entry there). The five rules D91 decided only in part (EBE-04, EBE-07, WEB-03, WEB-04, DSK-01) stay
-   vorläufig; never present them as decided. Still open, do not present as decided: the share-image generator and a generated print block in `tokens.css` (tool work); Compose versions of
-   the new web parts and charts (not built: ask before building one in Compose). Nothing of this is tested on real iOS
+   not an entry there). The five rules decided only in part (EBE-04, WEB-03, WEB-04, DSK-01 by D91, EBE-07 by D91 and
+   D95) stay vorläufig; never present them as decided. Still open, do not present as decided: the share-image
+   generator (tool work); Compose versions of the new web parts and charts (not built: ask before building one in
+   Compose). Nothing of this is tested on real iOS
    devices, WebKit, Firefox, screen readers or real Tauri windows. See `docs/ausblick.html#offen`.
 
 ## 4 Where the system files come from
@@ -139,7 +159,7 @@ never edits colours, fonts, icons or brand files by hand. `docs/sebaro/` is a **
 |---|---|
 | Website, web app (plain CSS, Astro, React, Tailwind v4) | copy `docs/sebaro/` into your project as one folder, never edit inside it; wiring in `docs/sebaro/README.md` |
 | Tauri / macOS / Android (Compose) / iOS (SwiftUI) | with a sebaroDesign checkout: `python3 tools/export_system.py sebaro --target tauri|macos|android|ios --out <dir> --product <id>` then `--verify <dir>` |
-| Packages (planned, D88) | private GitHub Packages built on a workshop version tag: `@grundhofer/sebaro` (npm, web and Tauri) and a Maven artifact for Android (Compose). Their version follows the token contract, now 1.8, so `1.8.x`. The workflow is set up; no package is published yet (the workshop CI is blocked). Until then use the export. |
+| Packages (planned, D88) | private GitHub Packages built on a workshop version tag: `@grundhofer/sebaro` (npm, web and Tauri) and a Maven artifact for Android (Compose). Their version follows the token contract, now 1.9, so `1.9.x`; the first is `1.9.0` (there is never a `1.8.0`). The workflow is set up; no package is published yet (the workshop CI is blocked; a self-hosted runner comes later, D95). Until then use the export. |
 
 Fonts are self-hosted (D18, D66, D68, D71): sebaro Sans + sebaro Mono, the only two families, as variable WOFF2 with
 the key glyphs (⌘ ⇧ ⌥ ⌃ ↩ ⎋ ⌫ ⇥ ↑ ↓ ← →) included, for web and for Tauri on every platform (D77); OFL texts in
@@ -157,14 +177,30 @@ python3 tools/check_site.py --strict   # all groups (list below); exit 0 require
 python3 tools/build.py --check         # freshness gate (CI runs this and check_site.py)
 python3 tools/sync_from_design.py --verify-local   # docs/sebaro/ untouched since the export
 npm ci && node tools/check_a11y.mjs    # axe WCAG 2.2 AA, overflow, console errors; light/dark, 390/1440 (CI runs it)
-python3 tools/release.py 2.5.0         # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.4.0 is the last release)
+python3 tools/sync_from_design.py --check          # docs/sebaro/ equals a fresh export of the workshop commit
+# with a sebaroDesign checkout, its demo check on every page, run from there (absolute page path):
+#   python3 tools/check_demo.py <abs path>/docs/<page>.html --page web --skip content --no-write
+python3 tools/release.py 2.6.0         # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.5.0 is the last release)
 ```
+
+The workshop's demo check (1.3.0) measures one- and two-character text on screen pixels; on `regeln.html` it reports
+the deliberately unreadable cells of the „Nicht so“ specimens inside `g-ex--dont` (DAT-11's heatmap, one pill) as CTR1
+errors, which it cannot tell from real faults. Run `regeln.html` also with `--skip contrast` (a documented group of the
+tool; axe still checks contrast) and say so; every other page runs without it.
+Two limits of that command on guide pages: the colour group (COL1–COL4) never runs here, because the tool loads
+`assets/sb-colour-count.js` next to the page and the guide ships that script at `docs/assets/vendor/` (the report
+says „colour skipped“; the tool has no option for another path, so this is a workshop request, never a local
+workaround in `docs/`; run on a scratch copy with the script placed there, it flags only the deliberate „Nicht so“
+view `TEC-03-bad` on `regeln.html`); and a single file gets the warm tone only with `--tones warm`, so run every
+page a second time with `--tones warm` (and `regeln.html` again with `--skip content,contrast`). Say both in your
+report.
 
 `check_site.py` groups: PAGE, LINK, NET, CSS, TOKEN (every `var(--sb-*)` exists in `tokens.css` / `sebaro.css`), STYLE,
 SWATCH, LICENSE, TEXT, CHANGE, TERM, RULES; the docstring explains each.
 
-**Automatic sync (D88, set up; runs from the next workshop push).** A workflow in sebaroDesign exports on every push
-to its main branch, runs this repository's `sync_from_design.py` and `build.py`, and pushes a branch `sync/<short sha>`
+**Automatic sync (D88, set up; runs once the workshop CI runs).** A workflow in sebaroDesign exports the commit of every
+successful gate run on its main branch (its one gate list is `tools/gates.sh` there; since 2026-10-22 the sync waits for
+it instead of running beside it), runs this repository's `sync_from_design.py` and `build.py`, and pushes a branch `sync/<short sha>`
 when the guide is behind. `.github/workflows/sync-pr.yml` opens a pull request from it; `check.yml` runs on the push.
 Nothing merges automatically; a newer sync closes the older PR. **Manual steps for the owner:** the SSH deploy key
 with write access to this repository and the list of excluded products as secrets in sebaroDesign, and here the
@@ -225,5 +261,5 @@ hand with `tools/sync_from_design.py`.
 The guide shows sebaro as built and checked in sebaroDesign; Chromium screenshots do not verify real Android/iOS
 devices, Windows rendering, WebKit/Tauri webviews or screen readers. All example data on the pages is invented.
 The owner answered the round-6 sketch (63 questions, private, never linked from here) with D91 and the open readings
-after it with D92 to D94; what is still open, and what is built but untested (real iOS devices, real Tauri windows),
+after it with D92 to D95; what is still open, and what is built but untested (real iOS devices, real Tauri windows),
 is collected on `docs/ausblick.html`.

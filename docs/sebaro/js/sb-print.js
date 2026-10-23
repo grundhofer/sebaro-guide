@@ -3,8 +3,9 @@
 // „Hell oder Dunkel“ choice), and opens every closed <details> outside navigation (frequent questions, a closed table
 // of contents row is navigation and stays off paper); after printing it puts both back. It never touches the stored
 // choice (sb-theme) and fires no sb-theme-change. The print rules of css/sebaro.css hide navigation and action zones.
-// Interim: once tokens.css carries a generated @media print block with the light values (open point, spec/09 §18.3),
-// the theme part of this script is redundant and is removed; the <details> part stays.
+// Since 2026-10-22 tokens.css carries a generated @media print block with the light values (TOKEN-CONTRACT 1.9), so the
+// theme part of this script is redundant; it goes once that is checked on the demo pages (spec/09 §18.3). The
+// <details> part stays.
 (function () {
   var root = document.documentElement;
   var saved = null;

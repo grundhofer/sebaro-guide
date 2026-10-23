@@ -2374,6 +2374,8 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
 }
 @container sb-window (max-width: 1003.98px) {
   .sb-window__divider:has(+ .sb-window__inspector) { display: none; }   /* the inspector is an overlay: nothing to drag */
+  /* the overlay leaves the grid: column 5 above would make the empty column its containing block (34 px wide) */
+  .sb-window__body:has(> .sb-window__divider) > .sb-window__inspector { grid-column: auto; }
 }
 @container sb-window (max-width: 721.98px) {
   .sb-window__sidebar + .sb-window__divider { display: none; }
@@ -2401,6 +2403,15 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
 .sb-menu__sub { flex: none; display: inline-grid; place-items: center; margin-inline-start: auto; padding-inline-start: var(--sb-space-3); color: var(--sb-color-text-muted); }
 .sb-menu__sub:dir(rtl) > .sb-icon { scale: -1 1; }
 .sb-menu__item[aria-haspopup="menu"][aria-expanded="true"] { background: var(--sb-color-hover-fill); }
+/* drill-in (D95 (c/d)): where no side has room, a submenu takes its parent's place and width; the parent stays open
+   under it but hidden (data-sb-replaced, set by sb-menu.js), so no level lies over the items of another. The
+   submenu's first row li.sb-menu__back-row > button.sb-menu__item.sb-menu__back („‹ <parent's name>“, made by
+   sb-menu.js) goes back; its mark is the item's chevron turned back, in the 16 px slot at the start */
+.sb-menu[data-sb-replaced] { visibility: hidden; }
+.sb-menu[data-sb-replaced] .sb-menu:popover-open:not([data-sb-replaced]) { visibility: visible; }
+.sb-menu__back-mark { flex: none; display: inline-grid; place-items: center; inline-size: var(--sb-size-icon-sm); block-size: var(--sb-size-icon-sm); color: var(--sb-color-text-muted); }
+.sb-menu__back-mark > .sb-icon { scale: -1 1; }
+.sb-menu__back-mark:dir(rtl) > .sb-icon { scale: none; }
 
 /* ---------------------------------------------------------------- document tabs (F7a)
    div.sb-doc-tabs[role=tablist] > span.sb-doc-tabs__item[role=presentation] > button.sb-doc-tabs__tab[role=tab]
@@ -2719,8 +2730,9 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
   .sb-row:is([data-sb-state="drop-before"], [data-sb-state="drop-after"])::after { border-color: Highlight; }
   .sb-window__divider { background: CanvasText; }
 }
-/* print (D91 W8a; spec/09 §18.3): paper is always light; sb-print.js sets html[data-theme="light"] before printing and restores the choice after it
-   (until tokens.css carries a generated print block, spec/09 §18.3). Navigation, the language switch, the docs nav,
+/* print (D91 W8a; spec/09 §18.3): paper is always light; since TOKEN-CONTRACT 1.9 tokens.css ends with a generated print block of the light
+   values, and sb-print.js still sets html[data-theme="light"] before printing and restores the choice after it (that half is redundant now,
+   kept until the demo pages are checked without it). Navigation, the language switch, the docs nav,
    page numbers, „Weiter“ and every action zone stay off paper; evidence stays as a list; a link that leaves the site
    prints its address after the words */
 @media print {

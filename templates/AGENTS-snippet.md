@@ -34,6 +34,13 @@ This product uses the sebaro design system. Before building or changing any UI:
    Decided with D94: the six agent additions to D91 as built (pane widths „Schmal · Normal · Breit“, sort heads 48 px
    with 32 px only in windows, the narrow board's position bar, the poster sentence, docs nav with „Übersicht“ and page
    counts, the pointer-only tab cross); for now no brand figure (BIL-05; a figure needs a new decision row).
+   Decided with D95: a menu closes with all levels when the window's width changes or its button scrolls out of view
+   (a height-only change does not), F10 / Alt open the window menu only while „Menü“ is in view; where no side has
+   room a submenu replaces its parent in place with the back row „‹ <parent>“ (`sb-menu.js` does it, never build your
+   own placement); „Schmal · Normal · Breit“ in a too narrow window only stores the width, and a menu command never
+   moves focus into a pane (EBE-07, DSK-04, DSK-07, DSK-08).
+   Without a decision, in the same workshop round: pages print light from `tokens.css` alone since token contract
+   1.9; keep `sb-print.js` for the closed answers (WEB-11).
 10. Ship the export's `LICENSE.md` unchanged (D76). If a rule does not fit, cite its id (e.g. `AKT-01`) and ask the
     owner; do not work around it. Rule changes are listed by id in
     https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md.

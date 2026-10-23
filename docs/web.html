@@ -216,7 +216,7 @@
         <h1 id="lead-h">Eine Website in sebaro, Fall für Fall</h1>
         <p>Hier steht eine erfundene Website von sebaro mit allem, was eine Website typischerweise braucht: Einstieg, App-Seite, Übersicht mit Filter, Suche, Artikel, Dokumentation, Formulare, Rechtstexte und die Seiten für den Fall, dass etwas schiefgeht. Jeder Fall nennt die Regeln, die er zeigt, und verlinkt sie.</p>
         <p>Jeder Rahmen ist ein Browserfenster. Oben steht die Beispieladresse, darunter die Seite, gebaut nur aus Klassen von <code class="sb-code-inline">sebaro.css</code>. Unter 430&nbsp;px Breite füllt der Rahmen den Bildschirm, so siehst du die Seite wie auf einem Telefon. Kopf und Fuß sind auf jeder Seite gleich; viele Rahmen zeigen darum nur den Inhalt.</p>
-        <p>Alle Namen, Zahlen, Adressen und Belege sind erfunden. Wo etwas wie eine Tatsache über ein Produkt aussieht, steht <span class="sb-demo-marker">Beispieldaten</span> daneben. Die Website-Muster Formular-Ergebnis, Seitenzahlen, häufige Fragen, Gruppen in der Doku-Navigation, Bildschirmfotos, Vorschau beim Teilen, Sprachwechsel und Druck hat der Inhaber im Oktober 2026 gewählt (D91), ebenso Zitat, Über-Kopf, Video, Ort mit kleiner Karte und den Farbton im Fuß. Alles hier ist aus <code class="sb-code-inline">sebaro.css</code> und den Skripten des Systems gebaut. Zwei Werkzeuge fehlen noch: ein Generator für das Vorschaubild je Seite und ein erzeugter Druckblock in <code class="sb-code-inline">tokens.css</code>; das steht bei den Fällen.</p>
+        <p>Alle Namen, Zahlen, Adressen und Belege sind erfunden. Wo etwas wie eine Tatsache über ein Produkt aussieht, steht <span class="sb-demo-marker">Beispieldaten</span> daneben. Die Website-Muster Formular-Ergebnis, Seitenzahlen, häufige Fragen, Gruppen in der Doku-Navigation, Bildschirmfotos, Vorschau beim Teilen, Sprachwechsel und Druck hat der Inhaber im Oktober 2026 gewählt (D91), ebenso Zitat, Über-Kopf, Video, Ort mit kleiner Karte und den Farbton im Fuß. Alles hier ist aus <code class="sb-code-inline">sebaro.css</code> und den Skripten des Systems gebaut. Ein Werkzeug fehlt noch: ein Generator für das Vorschaubild je Seite; das steht bei den Fällen. Den erzeugten Druckblock in <code class="sb-code-inline">tokens.css</code> gibt es seit dem Werkstatt-Commit <code class="sb-code-inline">90843c8</code>.</p>
       </section>
 
       <!-- ============================================================ Startseite -->
@@ -2084,7 +2084,7 @@
       <!-- ============================================================ Druck -->
       <section class="sb-section g-web-case" id="fall-druck" aria-labelledby="fall-druck-h">
         <h2 class="sb-section__title" id="fall-druck-h">Druckansicht</h2>
-        <p class="demo-section-text">Papier ist immer hell, auch wenn die Seite gerade dunkel ist, im gewählten Farbton (D91). Und Papier kann nicht klicken: Navigation, Sprachwechsel, „Hell oder Dunkel“, Seitenzahlen, Aktionszonen und „Darstellung“ fallen weg, externe Links zeigen ihre Adresse in Klammern. Diese Regeln bringt <code class="sb-code-inline">sebaro.css</code> mit; das Hell schaltet <code class="sb-code-inline">sb-print.js</code>. Probier es mit der Druckvorschau dieser Seite, auch im Dunkeln.</p>
+        <p class="demo-section-text">Papier ist immer hell, auch wenn die Seite gerade dunkel ist, im gewählten Farbton (D91). Und Papier kann nicht klicken: Navigation, Sprachwechsel, „Hell oder Dunkel“, Seitenzahlen, Aktionszonen und „Darstellung“ fallen weg, externe Links zeigen ihre Adresse in Klammern. Diese Regeln bringt <code class="sb-code-inline">sebaro.css</code> mit; die hellen Farben stehen in <code class="sb-code-inline">tokens.css</code>, und <code class="sb-code-inline">sb-print.js</code> schaltet zusätzlich auf Hell. Probier es mit der Druckvorschau dieser Seite, auch im Dunkeln.</p>
         <p class="g-web-rules"><span>Regeln:</span> <a href="regeln.html#WEB-11">WEB-11</a> <a href="regeln.html#WEB-04">WEB-04</a> <a href="regeln.html#BEL-02">BEL-02</a> <a href="regeln.html#LNK-02">LNK-02</a></p>
         <dl class="sb-meta-list sb-meta-list--labels g-web-druck">
           <div><dt>Bleibt auf Papier</dt><dd>Zeichen und Name, Überschriften, Text, Tabellen, Belege als Liste, Links mit ihrer Unterstreichung</dd></div>
@@ -2103,7 +2103,7 @@
         <ul class="g-web-points">
           <li><code>sb-print.js</code> setzt vor dem Druck <code>data-theme="light"</code> und danach zurück, ohne die gespeicherte Wahl zu ändern, und öffnet zugeklappte Antworten außerhalb der Navigation. Jede Website lädt es am Ende jeder Seite.</li>
           <li>Belege bleiben im Druck stehen, denn sie stehen ohnehin als Liste am Abschnittsende.</li>
-          <li>Noch offen ist Werkzeugarbeit: ein erzeugter Druckblock in <code>tokens.css</code>, der auch Seiten ohne Skript hell druckt. Bis dahin braucht jede Seite <code>sb-print.js</code>.</li>
+          <li>Die Farben fürs Papier stehen seit Token-Vertrag 1.9 in <code>tokens.css</code> selbst: ein erzeugter Block <code>@media print</code> wiederholt die hellen Werte, auch für den warmen Farbton, deshalb druckt auch eine Seite ohne Skript hell. <code>sb-print.js</code> bleibt trotzdem auf jeder Seite, weil es die zugeklappten Antworten öffnet; seine Umschaltung auf Hell ist jetzt doppelt und bleibt, bis ihr Wegfall geprüft ist.</li>
         </ul>
         <details class="g-source"><summary>Markup</summary><div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">HTML</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="Markup: Druck immer hell"><code>&lt;<span class="sb-tok-keyword">script</span> src=<span class="sb-tok-string">"sebaro/js/sb-print.js"</span>&gt;&lt;/<span class="sb-tok-keyword">script</span>&gt;</code></pre></div></details>
       </section>
@@ -2114,7 +2114,7 @@
         <p class="demo-section-text">Wird ein Link geteilt, zeigen Messenger und soziale Netze ein Bild mit Titel. Jede Seite mit eigenem Titel bekommt ihr eigenes Vorschaubild (D91), 1200&nbsp;×&nbsp;630&nbsp;px auf hellem Grund: Kachel und Name des Produkts, Pfad, Seitentitel, Lesezeit und Datum, wo es sie gibt, unten klein das Zeichen von sebaro. Seiten ohne eigenen Titel nehmen das Bild der Website. Titel und Beschreibung kommen als Text aus dem Kopf der Seite; im Bild steht nichts, was die Seite nicht auch als Text hat.</p>
         <p class="g-web-rules"><span>Regeln:</span> <a href="regeln.html#ZEI-09">ZEI-09</a> <a href="regeln.html#ZEI-10">ZEI-10</a> <a href="regeln.html#BIL-01">BIL-01</a> <a href="regeln.html#BIL-04">BIL-04</a> <a href="regeln.html#HAL-09">HAL-09</a> <a href="regeln.html#WEB-09">WEB-09</a></p>
         <figure class="g-web-og g-web-demo">
-          <img src="sebaro/brand/og/studio.png" width="1200" height="630" alt="Vorschaubild: das sebaro-Lockup, der Satz „Software, die man versteht.“ die Kacheln von Tagwerk, RetroBeam, novalis und Android Coden und die Adresse der Website auf dunklem Grund.">
+          <img src="sebaro/brand/og/studio.png" width="1200" height="630" alt="Vorschaubild: das sebaro-Lockup, der Satz „Software, die man versteht.“ die Kacheln von Tagwerk, RetroBeam, novalis und Android Coden und die Adresse der Website, dunkle Schrift auf hellem Grund.">
           <figcaption class="g-web-og__text">
             <p class="g-web-og__domain">sebaro.example</p>
             <p class="g-web-og__title">sebaro: Software, die man versteht.</p>
@@ -2122,7 +2122,7 @@
           </figcaption>
         </figure>
         <ul class="g-web-points">
-          <li>So ungefähr zeigt ein Messenger den Link. Der Rahmen ist eine Nachbildung zur Anschauung, kein Bauteil, das eine Seite selbst zeigt. Das Bild darin ist das Bild der Studio-Website, also das für Seiten ohne eigenen Titel; es ist noch dunkel und wird hell neu erzeugt.</li>
+          <li>So ungefähr zeigt ein Messenger den Link. Der Rahmen ist eine Nachbildung zur Anschauung, kein Bauteil, das eine Seite selbst zeigt. Das Bild darin ist das Bild der Studio-Website, also das für Seiten ohne eigenen Titel; seit dem Werkstatt-Commit <code>90843c8</code> ist es hell, und die Werkstatt prüft den hellen Grund.</li>
           <li>Noch offen ist Werkzeugarbeit: ein Generator, der die Vorlage je Seite aus einer Seitenliste schreibt. Bis dahin rendert <code>brand_assets.py</code> eine Vorlage je Seite (<code>brand/src/og/&lt;seite&gt;.html</code>), die man selbst anlegt.</li>
           <li>Das Bild liegt unter <code>brand/og/</code> und wird aus Tokens und Kacheln erzeugt, nicht gezeichnet. Das Profilbild für soziale Netze (<code>brand/social/avatar-1024.png</code>) zeigt die Kachel allein, das Banner (<code>brand/social/banner.png</code>) Lockup, Satz und die Kacheln aller Apps.</li>
           <li>Das Vorschaubild zeigt die Adresse der echten Website; im Beispiel steht im Kopf <code>sebaro.example</code>.</li>
@@ -2177,7 +2177,7 @@
     <li><a href="ausblick.html">Ausblick</a></li>
   </ul>
   </nav>
-  <p>sebaro Guide <a href="https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md">Version 2.4.0<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a> · System sebaro, Token-Vertrag 1.8 · aus sebaroDesign <code class="sb-code-inline">11cf40f</code></p>
+  <p>sebaro Guide <a href="https://github.com/grundhofer/sebaro-guide/blob/main/CHANGELOG.md">Version 2.5.0<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a> · System sebaro, Token-Vertrag 1.9 · aus sebaroDesign <code class="sb-code-inline">90843c8</code></p>
   <ul class="sb-site-footer__links">
     <li><a href="rules.json">rules.json</a></li>
     <li><a href="llms.txt">llms.txt</a></li>
