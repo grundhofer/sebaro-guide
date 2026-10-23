@@ -11,6 +11,15 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+## 2.7.0 · 2026-10-23
+
+Übernahme von D97 aus der Werkstatt (Commit `dba6720`): die Antworten des Inhabers vom 2026-10-23 auf drei Rückfragen
+zum Bau von 2.6.0. WEB-09 sagt jetzt, woher der Titel im Bild kommt. Deshalb eine Nebenversion.
+
+- Geändert nach D97 (D97 unter „Entscheidungen“, Status entschieden wie bisher): WEB-09 (der Titel im Bild ist der Seitentitel ohne den Zusatz „ · sebaro“ oder, wenn er nur das Wort der Navigation ist, die Überschrift der Seite; „Warum“ zitiert „Überschrift (Empfohlen)“).
+- Bestätigt mit D97, ohne Änderung: die Überschrift „Eine App am Handy, Bildschirm für Bildschirm“ und die Adresse im Fuß jeder Seite.
+- Regelkatalog: `source.decisions` steht auf D1–D97. Start, README und AGENTS stehen auf D1–D97; AGENTS nennt die Titelquelle und als nächste Version 2.8.0.
+
 ## 2.6.0 · 2026-10-23
 
 Übernahme von D96 aus der Werkstatt: die Antwort des Inhabers vom 2026-10-23 auf die Frage, wo der Generator für die

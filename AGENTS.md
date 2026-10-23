@@ -28,7 +28,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 
 Rule status: **entschieden** = owner decision, binding. **vorläufig** = an agent's decision, valid until the owner
 changes it. **offen** = proposal only, do not build it as a rule. `D<n>` refers to row n of the decision log in the
-workshop repository sebaroDesign (private; the guide covers D1–D96). A rule id (e.g. `AKT-01`) is stable; cite it
+workshop repository sebaroDesign (private; the guide covers D1–D97). A rule id (e.g. `AKT-01`) is stable; cite it
 in code reviews, commit messages and ADRs.
 
 ## 2 The ten rules most often broken
@@ -145,7 +145,7 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
    each website's own build** (WEB-09): the site writes a page list from its own pages (title, path, reading time,
    date; format `docs/sebaro/brand/og/pages.schema.json`) and runs the exported
    `node sebaro/brand/og/render.mjs --pages og-pages.json --out public/og --head build/og-head`, then puts each
-   `<page>.head.html` into that page's head (it still writes `<title>` itself). The look comes from the one template
+   `<page>.head.html` into that page's head (it still writes `<title>` itself). The image title is the page's `<title>` without its suffix, or its `<h1>` where `<title>` is only the navigation word (D97, as this guide does); if it does not fit in three lines, shorten the page's heading, never only the image's. The look comes from the one template
    `brand/og/template.html`; never copy, fill or edit it yourself. The script fails loud (exit 1, page id named, no
    image and no head for that page): a title over three lines or a word wider than its line (shorten the page's
    title, never cut it or set it smaller in the image), a character sebaro Sans lacks, a ground that is not
@@ -194,7 +194,7 @@ node tools/og.mjs --check --png-bytes  # fresh render equals the committed snipp
 python3 tools/sync_from_design.py --check          # docs/sebaro/ equals a fresh export of the workshop commit
 # with a sebaroDesign checkout, its demo check on every page, run from there (absolute page path):
 #   python3 tools/check_demo.py <abs path>/docs/<page>.html --page web --skip content --no-write
-python3 tools/release.py 2.7.0         # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.6.0 is the last release)
+python3 tools/release.py 2.8.0         # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.7.0 is the last release)
 ```
 
 The workshop's demo check (1.3.0) measures one- and two-character text on screen pixels; on `regeln.html` it reports
@@ -296,5 +296,5 @@ hand with `tools/sync_from_design.py`.
 The guide shows sebaro as built and checked in sebaroDesign; Chromium screenshots do not verify real Android/iOS
 devices, Windows rendering, WebKit/Tauri webviews or screen readers. All example data on the pages is invented.
 The owner answered the round-6 sketch (63 questions, private, never linked from here) with D91 and the open readings
-after it with D92 to D96; what is still open, and what is built but untested (real iOS devices, real Tauri windows),
+after it with D92 to D97; what is still open, and what is built but untested (real iOS devices, real Tauri windows),
 is collected on `docs/ausblick.html`.
