@@ -1,11 +1,11 @@
 {
  "$schema": "./rules.schema.json",
- "version": "2.7.0",
- "date": "2026-10-23",
+ "version": "2.8.0",
+ "date": "2026-10-24",
  "source": {
   "repo": "sebaroDesign",
   "system": "sebaro",
-  "decisions": "D1-D97"
+  "decisions": "D1-D98"
  },
  "areas": [
   {
@@ -257,24 +257,25 @@
    "id": "HAL-05",
    "area": "haltung",
    "title": "Leise gestalten, laut ist nur eins",
-   "rule": "Halte jede Ansicht ruhig: höchstens eine laute Fläche (die lindgrüne Hauptaktion), keine Zähl-Badges, keine roten Punkte. Schreib sachlich, mit Zahlen, ohne Ausrufezeichen, Hype, Druck oder Schuld; Erinnerungen nur, wenn die Person sie eingeschaltet hat.",
-   "rule_en": "Calm views and copy: at most one loud element (the lime primary action), no count badges or red dots, no exclamation marks, hype, pressure or guilt; reminders only when turned on.",
-   "why": "Richtung A trug „Verhalten aus G5 ‚Leise‘“ (concepts/runde-2/BRIEF.md §3 A); D39 (I): „höchstens eine hauptaktion“; D48 (I) verwarf den Stand-Satz als eigene Regel („das nimmt nur platz weg“). Projektwerte: „No mascots, no clutter.“ (research/04 §3).",
+   "rule": "Halte jede Ansicht ruhig: höchstens eine laute Fläche (die lindgrüne Hauptaktion), keine Zahlen an Seitenleiste, Reitern und unterer Navigation, also keine Zähl-Badges und keine roten Punkte; Zahlen stehen im Listenkopf und im Stand-Satz. Schreib sachlich, mit Zahlen, ohne Ausrufezeichen, Hype, Druck oder Schuld; Erinnerungen nur, wenn die Person sie eingeschaltet hat.",
+   "rule_en": "Calm views and copy: at most one loud element (the lime primary action), no numbers on sidebar, tabs or bottom navigation (no count badges or red dots; numbers go into the list head and the state sentence), no exclamation marks, hype, pressure or guilt; reminders only when turned on.",
+   "why": "Richtung A trug „Verhalten aus G5 ‚Leise‘“ (concepts/runde-2/BRIEF.md §3 A); D39 (I): „höchstens eine hauptaktion“; D48 (I) verwarf den Stand-Satz als eigene Regel („das nimmt nur platz weg“). Projektwerte: „No mascots, no clutter.“ (research/04 §3). D98 (V3), Antwort „Keine Zahlen (Empfohlen)“: Zahlen stehen im Listenkopf und im Stand-Satz.",
    "do": "„3 von 5 erledigt, 60 %. Noch 2 offen.“; „Mehr steht heute nicht an.“; Erinnerung „Zeit für: Wasser trinken (5 von 8)“.",
    "dont": "„Super!“, „Ups“, „revolutionär“, „Du hast 3 verpasst“, „Deine Serie ist in Gefahr“, Countdowns, Emoji, Konfetti als Standard, pulsierende Knöpfe.",
    "numbers": "höchstens 1 Hauptaktion je Ansicht; 0 Zähl-Badges",
    "decisions": [
     "D39",
-    "D48"
+    "D48",
+    "D98"
    ],
-   "source": "DECISIONS.md D39, D48; systems/sebaro/SYSTEM.md §5; spec/07-voice.md §1, §4.9, §6.4; research/09-grundlagen-ohne-metapher.md §3 G5",
+   "source": "DECISIONS.md D39, D48, D98 (V3); systems/sebaro/SYSTEM.md §5; spec/07-voice.md §1, §4.9, §6.4; research/09-grundlagen-ohne-metapher.md §3 G5",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
-   "check": "grep -rn '!' in Strings; Bannwort-grep spec/07 §7; Review je Ansicht: höchstens eine lindgrüne Fläche, keine Badge-Zahl.",
+   "status": "entschieden",
+   "check": "grep -rn '!' in Strings; Bannwort-grep spec/07 §7; Review je Ansicht: höchstens eine lindgrüne Fläche, keine Zahl an Seitenleiste, Reitern oder unterer Navigation.",
    "example_hint": "Heute-Liste mit sb-day-summary „3 von 5 erledigt, 60 %. Noch 2 offen.“ und einer sb-primary-action; falsch: rote Badge „3“ am Reiter und „Du hast 3 verpasst!“.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "HAL-06",
@@ -288,16 +289,17 @@
    "numbers": "",
    "decisions": [
     "D46",
-    "D48"
+    "D48",
+    "D98"
    ],
-   "source": "concepts/runde-2/BRIEF.md §2.1; research/09-grundlagen-ohne-metapher.md §1.2, §4.1 Punkte 3–4",
+   "source": "DECISIONS.md D98; concepts/runde-2/BRIEF.md §2.1; research/09-grundlagen-ohne-metapher.md §1.2, §4.1 Punkte 3–4",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Vergleichsbogen ohne Heldenfeld und Faktenseite: ist sebaro noch erkennbar? (research/09 §4.1 Punkt 4)",
    "example_hint": "Formular mit sb-field, Tintenlinie über sb-bottom-block und lindgrüner sb-primary-action (erkennbar sebaro) gegen dasselbe Formular als graues Standardformular mit Deko-Bild oben.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "HAL-07",
@@ -328,25 +330,26 @@
    "id": "HAL-08",
    "area": "haltung",
    "title": "Skizze vor Ausbau",
-   "rule": "Zeig dem Inhaber vor jedem Ausbau eine Skizzenseite mit gerenderten Bildschirmen, je Frage zwei Wege, einer als Vorschlag markiert. Gebaut wird erst, was er gewählt hat; seine Antwort steht als I-Zeile mit Wortlaut in DECISIONS.md.",
-   "rule_en": "Before any build, show the owner a rendered sketch page (two ways per question, one marked as proposal); build only what he picked and record his words as an I-row.",
-   "why": "D35 (O): „Runde 1 baute vier komplette Systeme, bevor du eines gesehen hast.“ Seitdem folgen die Runden 2–5 diesem Ablauf; D45 (I) nennt „Skizze vor Ausbau nach D35“. Antwortformat wie „1b 2b 3b“ (D56).",
+   "rule": "Zeig dem Inhaber vor jedem Ausbau eine Skizzenseite mit gerenderten Bildschirmen, je Frage mindestens zwei Wege, einer als Vorschlag markiert. Gebaut wird erst, was er gewählt hat; seine Antwort steht als I-Zeile mit Wortlaut in DECISIONS.md.",
+   "rule_en": "Before any build, show the owner a rendered sketch page (at least two ways per question, one marked as proposal); build only what he picked and record his words as an I-row.",
+   "why": "D35 (O): „Runde 1 baute vier komplette Systeme, bevor du eines gesehen hast.“ Seitdem folgen die Runden 2–5 diesem Ablauf; D45 (I) nennt „Skizze vor Ausbau nach D35“. Antwortformat wie „1b 2b 3b“ (D56). D98 bestätigt die Regel mit „mindestens zwei Wegen“.",
    "do": "Offene Punkte im Guide als „offen“ führen, bis eine I-Zeile existiert.",
    "dont": "Komplette Systeme vor einer Wahl bauen; I-Zeilen selbst schreiben; offene Inhaberfragen selbst beantworten.",
    "numbers": "",
    "decisions": [
     "D35",
     "D45",
-    "D56"
+    "D56",
+    "D98"
    ],
-   "source": "DECISIONS.md D35, D45, D56; concepts/runde-5-desktop/skizze.html (Einleitung)",
+   "source": "DECISIONS.md D35, D45, D56, D98; concepts/runde-5-desktop/skizze.html (Einleitung)",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Jede Regel im Guide hat eine D-Nummer; ohne I-Zeile trägt sie den Status vorläufig oder offen.",
    "example_hint": "Skizzenblock „Dichte“: Weg A 32 px (Vorschlag) neben Weg B 40 px mit Antwortformat „2a“.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "HAL-09",
@@ -462,16 +465,17 @@
    "numbers": "--sb-color-primary-action #A9E773 / #A9E277; ΔE OK ≥ 0.08 normal, ≥ 0.04 je CVD; nächste Rolle hell warning 0.346, dunkel info 0.178",
    "decisions": [
     "D16",
-    "D37"
+    "D37",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/01-foundations.md §1.4 (Measured); palettes/sebaro.json extras.checks",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §1.4 (Measured); palettes/sebaro.json extras.checks",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "python3 tools/check_palette.py palettes/sebaro.json (Exit 0) im Quellrepo.",
    "example_hint": "Farbfelder Lindgrün neben success, warning, danger, info mit ΔE-Werten in einer sb-table.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "FAR-05",
@@ -509,16 +513,17 @@
    "dont": "Hinweise oder Fehlermeldungen in --sb-color-text-subtle.",
    "numbers": "--sb-color-text #1C1E22 / #EBEDEF; --sb-color-text-muted #66696E / #9D9EA1 (5.05 / 6.76 auf bg); --sb-color-text-subtle #828589 / #797A7D (3.40 / 4.22 auf bg)",
    "decisions": [
-    "D6"
+    "D6",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/01-foundations.md §1.2, §1.7; palettes/sebaro.json rules.textSubtleNonEssential",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §1.2, §1.7; palettes/sebaro.json rules.textSubtleNonEssential",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "tools/color.py contrast je genutztem Paar; text-subtle nur an Elementen ≥ 24 px oder ≥ 18.66 px/700 bzw. dekorativ.",
    "example_hint": "Listenzeile mit Meta „Gestern, 3 Einträge“ in text-muted; falsch: dieselbe Meta in 14 px text-subtle.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "FAR-07",
@@ -531,17 +536,18 @@
    "dont": "Eingabefeld nur mit --sb-color-border umrahmen.",
    "numbers": "--sb-color-border #D7D9DD / #32353C; --sb-color-border-strong #84868A / #707379 (hell 3.34/3.55/3.64/3.05, dunkel 3.81/3.51/3.27/4.11 auf bg/surface/surface-raised/surface-sunken)",
    "decisions": [
-    "D6"
+    "D6",
+    "D98"
    ],
-   "source": "palettes/sebaro.json modes + meta.notes (Fix-Stufe 2026-10-16); systems/sebaro/spec/01-foundations.md §1.2, §1.7, §5.2 (Dunkelwerte dort veraltet)",
+   "source": "DECISIONS.md D98; palettes/sebaro.json modes + meta.notes (Fix-Stufe 2026-10-16); systems/sebaro/spec/01-foundations.md §1.2, §1.7, §5.2 (Dunkelwerte dort veraltet)",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Kontrast border-strong gegen den Grund jedes Bedienelements ≥ 3 : 1; kein Bedienelement, dessen einzige Kante --sb-color-border ist.",
    "example_hint": "sb-secondary-action mit border-strong-Rand; falsch: gleiche Taste mit hellgrauer Haarlinie, die im Hellmodus kaum sichtbar ist.",
    "note": "Dunkle Werte aus Palette/Tokens (#32353C, #707379); spec/01 §1.2 nennt veraltet #343539/#707275.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "FAR-08",
@@ -549,20 +555,22 @@
    "title": "Zeiger und Druck ändern nur die Füllung",
    "rule": "Zeig Hover mit hover-fill und Druck mit pressed-fill, eine Graustufe vom Grund weg; im Dunkelmodus heller als bg, nie dunkler. Links und Textaktionen zeigen Hover am Wort. Nie Tönung, Schatten, Ripple oder Bewegung als Zustand.",
    "rule_en": "Hover = --sb-color-hover-fill, pressed = --sb-color-pressed-fill (lighter than bg in dark mode); never tint, shadow, ripple or motion as state.",
-   "why": "Eine farbige Hover-Fläche wäre eine Rolle ohne Job; ein dunklerer Hover wirkt im Dunkelmodus wie ein Loch (Fix-Stufe AD14).",
+   "why": "Eine farbige Hover-Fläche wäre eine Rolle ohne Job; ein dunklerer Hover wirkt im Dunkelmodus wie ein Loch (Fix-Stufe AD14). D98 (V7), Antwort „Kurz grau, wie heute (Empfohlen)“: Antippen zeigt auch auf Android kurz die graue Füllung wie auf allen Plattformen, keine Welle.",
    "do": "background: var(--sb-color-hover-fill) an Listenzeilen und ruhigen Bedienelementen.",
    "dont": "box-shadow beim Hover, accent-subtle als Hover, opacity-Overlays, surface-sunken als Hover (dunkel #090C11).",
    "numbers": "--sb-color-hover-fill #E9EBEE / #212429; --sb-color-pressed-fill #E7E9EC / #25282F; Übergang 120 ms (--sb-motion-duration-short)",
-   "decisions": [],
-   "source": "systems/sebaro/spec/02-components.md §0.2; spec/01-foundations.md §11; css/sebaro.css Z. 15-16, 287-288",
+   "decisions": [
+    "D98"
+   ],
+   "source": "DECISIONS.md D98 (V7); systems/sebaro/spec/02-components.md §0.2; spec/01-foundations.md §11; css/sebaro.css Z. 15-16, 287-288",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Hover-Regeln nutzen hover-fill; Texte darauf ≥ 4,5 : 1; grep box-shadow zeigt nur Danger-Inset und forced-colors.",
    "example_hint": "sb-list-row und sb-secondary-action in Ruhe/Zeiger/Gedrückt (is-hover, is-pressed) in beiden Modi; falsch: Schatten und Blautönung beim Hover.",
-   "note": "spec/02 §1.5, §2.7, §3.3, §3.15, §4.3, §4.10 nennen noch surface-sunken; CSS (Fix-Stufe AD14) gilt.",
-   "changed": "2026-10-19"
+   "note": "Seit dem Werkstatt-Commit 47b42db nennen auch die Texte von spec/02 und spec/03 hover-fill und pressed-fill statt surface-sunken; das CSS (Fix-Stufe AD14) war schon so.",
+   "changed": "2026-10-24"
   },
   {
    "id": "FAR-09",
@@ -798,16 +806,17 @@
    "numbers": "Web: display 40/48 670/700; headline 28/36 670/700; title 20/28 670/700; body 16/24 400/430; body-strong 16/24 570/600; label 14/20 570/600; caption 14/20 400/430; code 14/20 500/500; numeric 16/24 400/430. Mobile: --sb-type-mobile-display 32/40, -headline 24/32, -label-small 12/16 400/430",
    "decisions": [
     "D38",
-    "D40"
+    "D40",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/01-foundations.md §2.2, §2.3, §2.5 Regel 3; systems/sebaro/AGENTS.md §10",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §2.2, §2.3, §2.5 Regel 3; systems/sebaro/AGENTS.md §10",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Alle font-size-Werte ∈ {12 nur Bottom-Nav, 14, 16, 20, 24, 28, 32, 40} px; font-style: italic nur an <cite>/<i> in Artikeln.",
    "example_hint": "Typo-Leiter aller Rollen hell und dunkel; falsch: 18-px-Kursivhinweis.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "SCH-05",
@@ -844,17 +853,18 @@
    "dont": "text-overflow: ellipsis an Titeln; hyphens: auto an Überschriften.",
    "numbers": "Grenze 639.98px; mobile display 32/40",
    "decisions": [
-    "D28"
+    "D28",
+    "D98"
    ],
-   "source": "css/sebaro.css Z. 37-38, 79-81; systems/sebaro/spec/02-components.md §10; spec/01-foundations.md §2.5 Regel 1",
+   "source": "DECISIONS.md D98; css/sebaro.css Z. 37-38, 79-81; systems/sebaro/spec/02-components.md §10; spec/01-foundations.md §2.5 Regel 1",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Keine ellipsis an h1–h6; Review bei 390 px.",
    "example_hint": "Langer deutscher Titel mit &shy; auf 320 px Breite getrennt; falsch: „Gewohnheitsstatisti…“.",
    "note": "spec/09 §3 nannte einmal hyphens: auto; die gebaute CSS (manual) gilt. Fließtext trennt ebenfalls nicht automatisch (TXT-15, D82).",
-   "changed": "2026-10-20"
+   "changed": "2026-10-24"
   },
   {
    "id": "SCH-07",
@@ -889,15 +899,17 @@
    "do": "gap: var(--sb-spacing-stack) zwischen Feldern; var(--sb-spacing-group) zwischen Gruppen.",
    "dont": "margin: 18px; padding: 10px; derselbe Abstand innerhalb und zwischen Gruppen.",
    "numbers": "--sb-space-0 0, -0-5 2, -1 4, -2 8, -3 12, -4 16, -5 20, -6 24, -8 32, -10 40, -12 48, -16 64 px; --sb-spacing-inline 8, -stack 12, -group 24, -inset-control 16, -inset-container 16, -gutter 16, -gutter-wide 48, -section 48, -section-wide 64",
-   "decisions": [],
-   "source": "systems/sebaro/spec/01-foundations.md §3.1",
+   "decisions": [
+    "D98"
+   ],
+   "source": "DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §3.1",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Alle margin/padding/gap-Werte sind var(--sb-space-*) oder var(--sb-spacing-*).",
    "example_hint": "Formular mit eingezeichneten Abständen stack/group/section; falsch: ungleichmäßige 10/18-px-Abstände.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "RAU-02",
@@ -909,15 +921,17 @@
    "do": "<div class='sb-container'><section class='sb-section'>; max-inline-size: var(--sb-size-container-max).",
    "dont": "Feste 960-px-Container, eigene Max-Breiten je Seite.",
    "numbers": "--sb-size-container-max 1440px; Ränder 16/16/48; Gutter 16/24/24; Spalten 4/8/12; --sb-spacing-section 48 / -wide 64",
-   "decisions": [],
-   "source": "systems/sebaro/spec/01-foundations.md §3.2; spec/02-components.md §5; css/sebaro.css Z. 68-88",
+   "decisions": [
+    "D98"
+   ],
+   "source": "DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §3.2; spec/02-components.md §5; css/sebaro.css Z. 68-88",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Layout bei 390, 800 und 1280 px; check_demo OVF1: kein horizontales Scrollen.",
    "example_hint": "Rasterüberlagerung in drei Breiten über einer sb-container-Seite.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "RAU-03",
@@ -954,15 +968,17 @@
    "do": "Leerzustand linksbündig; „Du kannst das später ändern.“ zentriert unter der Hauptaktion.",
    "dont": "Zentrierte Absätze im Hero oder im Leerzustand.",
    "numbers": "",
-   "decisions": [],
-   "source": "systems/sebaro/spec/01-foundations.md §3.2",
+   "decisions": [
+    "D98"
+   ],
+   "source": "DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §3.2",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "text-align: center nur am Aktionshinweis.",
    "example_hint": "Hero-Abschnitt linksbündig gegen dieselbe Fläche zentriert.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "RAU-05",
@@ -976,16 +992,17 @@
    "numbers": "56 / 64 / 88 / 40 / ≥ 56 / 64 / 64 px; Fenster 32 / 48 / 64 px (--sb-size-control-sm, -md, --sb-space-16)",
    "decisions": [
     "D67",
-    "D83"
+    "D83",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/01-foundations.md §4; spec/02-components.md §4.12; DECISIONS.md D67 (2), D83 (9)",
+   "source": "systems/sebaro/spec/01-foundations.md §4; spec/02-components.md §4.12; DECISIONS.md D67 (2), D83 (9), D98",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Zeilenhöhen im Layout messen; keine Dichte-Einstellung.",
    "example_hint": "Liste mit 56/64/88-Zeilen und 40-px-Erledigtzeilen mit Maßlinien.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-24"
   },
   {
    "id": "RAU-06",
@@ -1048,17 +1065,18 @@
    "numbers": "--sb-radius-small 4px; --sb-radius-control 8px; --sb-radius-container 12px; --sb-radius-sheet 16px; --sb-radius-pill 9999px (FOR-06); --sb-x-sebaro-sign-tile-radius-ratio 0.1667",
    "decisions": [
     "D83",
-    "D85"
+    "D85",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/01-foundations.md §5.1; spec/02-components.md §0.3, §3.4, §3.13",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §5.1; spec/02-components.md §0.3, §3.4, §3.13",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "grep border-radius: nur var(--sb-radius-*).",
    "example_hint": "Reihe sb-tag, Taste, sb-card, Dialog, sb-switch, sb-avatar, Kachel mit Radius-Beschriftung.",
    "note": "Für Karten hat D83 (3) den Radius 12 überall festgelegt, für die Pille D85 (FOR-06); die übrigen Stufen sind Agentenspezifikation.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-24"
   },
   {
    "id": "FOR-02",
@@ -1096,16 +1114,17 @@
    "dont": "Gestrichelte Upload-Box, Verlaufs-Hero, Glow um den Fokus.",
    "numbers": "",
    "decisions": [
-    "D46"
+    "D46",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/01-foundations.md §5.2",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §5.2",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "grep border-style: dashed, linear-gradient, Glow-Schatten → nur erlaubte Stellen (225°-Verlauf im Kanten-Fallback der Gefahrtaste).",
    "example_hint": "sb-chart mit gestrichelter Ziellinie; falsch: Verlaufsfläche und gestrichelte Dropzone.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "FOR-04",
@@ -1254,27 +1273,28 @@
    "id": "EBE-04",
    "area": "ebenen",
    "title": "Bottom Sheet nur zum Auswählen",
-   "rule": "Nutz Bottom Sheets nur für Auswahl (Radiozeilen oder Liste): bg mit 2-px-Tintenlinie oben, obere Ecken 16, Kopf mit Titel und Schließen-Taste, kein Ziehgriff. Ab 640 px Fensterbreite ist das offene Sheet höchstens 560 px breit und steht unten in der Mitte, die Tintenlinie läuft dann auch an seinen Seiten hoch; am Handy bleibt es über die ganze Breite. Belege öffnen sich nie im Sheet, sondern in ihrer Zeile.",
-   "rule_en": "Bottom sheets for pickers only: top ink line, top radius 16, head with title + close, no drag handle; from 640 px window width at most 560 px wide and centred at the bottom (ink line up both sides), full width on phones; never for evidence.",
-   "why": "Der Ziehgriff zeigt keine Daten; Aussage-Zeilen klappen an Ort und Stelle auf (D40). D91 Z2b: „Sheet ab 640 px höchstens 560 px breit“, wie der Bestätigungsdialog; seine Seiten grenzen dann an die Abdunklung, dort endet eine Ebene (D46).",
+   "rule": "Nutz Bottom Sheets nur für Auswahl (Radiozeilen oder Liste): bg mit 2-px-Tintenlinie oben, obere Ecken 16, Kopf mit Titel und Schließen-Taste, kein Ziehgriff. Ab 640 px Fensterbreite ist das offene Sheet höchstens 560 px breit und steht unten in der Mitte, die Tintenlinie läuft dann auch an seinen Seiten hoch; am Handy bleibt es über die ganze Breite. Belege öffnen sich nie im Sheet, sondern in ihrer Zeile. Einzige Ausnahme ist das Formular-Sheet auf iOS (sbFormSheet, MOB-07): volle Höhe, „Sichern“ unten, eine Aufgabe mit Ende statt einer Auswahl; auf Android und im Web gibt es keine Ausnahme.",
+   "rule_en": "Bottom sheets for pickers only: top ink line, top radius 16, head with title + close, no drag handle; from 640 px window width at most 560 px wide and centred at the bottom (ink line up both sides), full width on phones; never for evidence; the one exception is the iOS form sheet (sbFormSheet, MOB-07).",
+   "why": "Der Ziehgriff zeigt keine Daten; Aussage-Zeilen klappen an Ort und Stelle auf (D40). D91 Z2b: „Sheet ab 640 px höchstens 560 px breit“, wie der Bestätigungsdialog; seine Seiten grenzen dann an die Abdunklung, dort endet eine Ebene (D46). D98 bestätigt die Regel mit der Ausnahme des Formular-Sheets auf iOS (D91 I5b, MOB-07).",
    "do": "<dialog class='sb-sheet' aria-labelledby='t'><form method='dialog'> „Erinnerung wählen“ mit Radiozeilen; geöffnet über data-sb-opens oder sbSheet.open(sheet).",
-   "dont": "Sheet mit Griff; Beleg im Sheet; Sheet auf dem Desktop über die ganze Fensterbreite.",
+   "dont": "Sheet mit Griff; Beleg im Sheet; Sheet auf dem Desktop über die ganze Fensterbreite; ein Formular im Sheet außer auf iOS (MOB-07).",
    "numbers": "Radius 16px oben; Linie 2px; ab 640 px Fensterbreite höchstens 560 px breit; höchstens 85 % der Fensterhöhe",
    "decisions": [
     "D46",
     "D40",
-    "D91"
+    "D91",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/02-components.md §4.7; demo/assets/sb-sheet.js",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §4.7; spec/12-platform-ios.md §7; demo/assets/sb-sheet.js",
    "platforms": [
     "mobile",
     "web"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Bei 1440 px ist das offene Sheet 560 px breit und unten in der Mitte; Escape und „Schließen“ schließen, der Fokus kehrt zum Auslöser zurück.",
    "example_hint": "Sheet „Kategorie wählen“ mit sb-radio-Zeilen; falsch: Sheet mit Ziehgriff, das einen Beleg zeigt.",
-   "changed": "2026-10-21",
-   "note": "Die Breite ab 640 px hat der Inhaber gewählt (D91 Z2b); der Rest der Regel ist Spezifikation ohne eigene I-Zeile, deshalb bleibt sie vorläufig."
+   "changed": "2026-10-24",
+   "note": "Die Breite ab 640 px hat der Inhaber gewählt (D91 Z2b), den Rest der Regel mit D98 bestätigt, mit der Ausnahme des Formular-Sheets auf iOS (spec/02 §4.7, spec/12 §7)."
   },
   {
    "id": "EBE-05",
@@ -1312,17 +1332,18 @@
    "dont": "Pflichtinformation oder Statusbedeutung nur im Tooltip.",
    "numbers": "Radius 8px; Padding 4 8; max. 240px; Verzögerung 400 ms",
    "decisions": [
-    "D80"
+    "D80",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/02-components.md §4.9, §4.18; demo/assets/sb-tooltip.js",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §4.9, §4.18; demo/assets/sb-tooltip.js",
    "platforms": [
     "web",
     "desktop"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Tooltip-Text ist nur Zusatz; Ein-/Ausblenden ist in den Demos noch nicht geskriptet.",
    "example_hint": "Kalender-Icon-Taste mit Tooltip; falsch: Konfliktstatus nur im Tooltip einer Baumzeile.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-24"
   },
   {
    "id": "EBE-07",
@@ -1341,17 +1362,18 @@
     "D80",
     "D91",
     "D94",
-    "D95"
+    "D95",
+    "D98"
    ],
-   "source": "DECISIONS.md D95 (a), (c/d); systems/sebaro/spec/02-components.md §4.10, §4.12, §4.18, §4.24; spec/09-platform-web.md §4, §6.1; spec/11-checklist.md §1a; demo/assets/sb-menu.js",
+   "source": "DECISIONS.md D95 (a), (c/d), D98; systems/sebaro/spec/02-components.md §4.10, §4.12, §4.18, §4.24; spec/09-platform-web.md §4, §6.1; spec/11-checklist.md §1a; demo/assets/sb-menu.js",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "axe; Tastaturtest mit sb-menu.js: Pfeile, Pos1/Ende, → und ← im Untermenü, Escape mit Fokusrückgabe. Lage der Untermenüs bei 1440, 1024, 700, 640, 390 und 320 px, von rechts nach links, mit Touch und mit dem Auslöser nahe dem unteren Rand: kein sichtbarer Eintrag einer Ebene ist verdeckt, ohne Platz ersetzt ein Untermenü sein Elternmenü mit der Zeile „‹ …“ (Name „Zurück zu …“) zuerst, Eingabe darauf, ← und Escape führen zurück, jede Ebene bleibt im Fenster. Die Breite ändern oder den Auslöser aus dem Bild scrollen schließt alles, der Fokus steht auf dem Auslöser; nur die Höhe ändern lässt das Menü offen, solange der Auslöser im Bild bleibt. In der Werkstatt prüft das tools/tests/test_menu.py, nur in Chromium.",
    "example_hint": "Menü „Mehr“ mit Bearbeiten, Teilen, Trennlinie, Löschen; falsch: Löschzeile mit 45°-Kante, die sofort löscht.",
-   "note": "D67 (10): Seltenes und Löschen eines Bereichs im „Mehr“-Menü, Löschen ganz unten nach einer Trennlinie (AKT-10). Prüfelemente im Menü (menuitemradio, menuitemcheckbox mit sb-menu__check) zeigt DSK-05. D91 F4b wählt nur die Taste „Menü“ in der eigenen Leiste (DSK-08). D95 entscheidet, dass ein Menü sich bei geänderter Breite oder ohne seinen Auslöser im Bild schließt und dass ein Untermenü ohne Platz sein Elternmenü ersetzt; der Name „Zurück zu <Name>“ der Zeile „‹ …“ ist eine Ergänzung der Werkstatt beim Review des Baus (WCAG 2.5.3, die sichtbare Zeile bleibt, wie D95 sie beschreibt). Der Rest des Menümusters (Rollen, Zeilen, Tasten) ist Spezifikation ohne eigene I-Zeile, deshalb bleibt die Regel vorläufig. Nicht geprüft: WebKit, Firefox, Screenreader, echte Touch-Geräte.",
-   "changed": "2026-10-23"
+   "note": "D67 (10): Seltenes und Löschen eines Bereichs im „Mehr“-Menü, Löschen ganz unten nach einer Trennlinie (AKT-10). Prüfelemente im Menü (menuitemradio, menuitemcheckbox mit sb-menu__check) zeigt DSK-05. D91 F4b wählt nur die Taste „Menü“ in der eigenen Leiste (DSK-08). D95 entscheidet, dass ein Menü sich bei geänderter Breite oder ohne seinen Auslöser im Bild schließt und dass ein Untermenü ohne Platz sein Elternmenü ersetzt; der Name „Zurück zu <Name>“ der Zeile „‹ …“ ist eine Ergänzung der Werkstatt beim Review des Baus (WCAG 2.5.3, die sichtbare Zeile bleibt, wie D95 sie beschreibt). Den Rest des Menümusters (Rollen, Zeilen, Tasten) hat der Inhaber mit D98 bestätigt. Nicht geprüft: WebKit, Firefox, Screenreader, echte Touch-Geräte.",
+   "changed": "2026-10-24"
   },
   {
    "id": "EBE-08",
@@ -1438,16 +1460,17 @@
    "dont": "300- oder 500-ms-Übergänge.",
    "numbers": "--sb-motion-duration-short 120ms; -medium 160ms; -long 200ms; --sb-motion-easing-standard cubic-bezier(0.2, 0, 0, 1); -emphasized cubic-bezier(0.05, 0.7, 0.1, 1); -exit cubic-bezier(0.3, 0, 1, 1)",
    "decisions": [
-    "D55"
+    "D55",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/01-foundations.md §7",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §7",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Alle transition/animation-duration ≤ 200 ms und aus Tokens.",
    "example_hint": "Drei Demo-Tasten mit 120/160/200 ms; falsch: 500-ms-Übergang.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "BEW-04",
@@ -1613,16 +1636,17 @@
    "numbers": "Rand 1px (--sb-border-width-control); Höhe 48px; Padding 0 24px; Textaktion Linie 2px, Abstand 0.2em, Padding 0 8px",
    "decisions": [
     "D52",
-    "D46"
+    "D46",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/02-components.md §1, §1.2, §1.3; spec/08-platform-android.md §6; css/sebaro.css Z. 281-296",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §1, §1.2, §1.3; spec/08-platform-android.md §6; css/sebaro.css Z. 281-296",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Farbprüfung: Nebenaktionen tragen keine Farbe mit Rolle; sb-text-action nur auf <button>.",
    "example_hint": "„Bearbeiten“ (Nebenaktion) und „Rückgängig“ (Textaktion) neben einer Hauptaktion; falsch: drei gefüllte Tasten.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "AKT-07",
@@ -1839,17 +1863,18 @@
     "D48",
     "D46",
     "D67",
-    "D81"
+    "D81",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/03-signature.md §3.1, §10.1; spec/02-components.md §4.3; spec/09-platform-web.md §13; css/sebaro.css Z. 860-873",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/03-signature.md §3.1, §10.1; spec/02-components.md §4.3; spec/09-platform-web.md §13; css/sebaro.css Z. 860-873",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Breitfenster-Screenshot; Graustufen: aktueller Eintrag an Linie, Füllung und Gewicht erkennbar.",
    "example_hint": "Fenster mit Seitenleiste und breiter Aktionszone; falsch: Icon-Rail ohne Wörter mit blauer Fläche.",
    "note": "novalis nutzt 256 px. Im Rahmen data-sb-density=\"window\" sind die Zeilen 32 px mit 20-px-Icon (spec/02 §4.12); im sb-window ist die Seitenleiste ausblendbar (DSK-04).",
-   "changed": "2026-10-20"
+   "changed": "2026-10-24"
   },
   {
    "id": "NAV-05",
@@ -1913,17 +1938,18 @@
    "decisions": [
     "D36",
     "D48",
-    "D83"
+    "D83",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/03-signature.md §6.1, §6.3, §6.5; spec/01-foundations.md §11; DECISIONS.md D83 (4)",
+   "source": "systems/sebaro/spec/03-signature.md §6.1, §6.3, §6.5; spec/01-foundations.md §11; DECISIONS.md D83 (4), D98",
    "platforms": [
     "web"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Screenshots bei 390, 800, 1280 px; computed font der Kopf-Links.",
    "example_hint": "Derselbe Kopf in drei Breiten untereinander.",
    "note": "Werden die Wörter eines Produkts länger und bricht DE / EN doch in eine dritte Zeile, kürz die Wörter, nie die 48-px-Ziele (spec/03 §6.5).",
-   "changed": "2026-10-20"
+   "changed": "2026-10-24"
   },
   {
    "id": "NAV-08",
@@ -1939,17 +1965,18 @@
     "D48",
     "D38",
     "D80",
-    "D82"
+    "D82",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/02-components.md §3.15, §4.4, §4.5, §7; demo/assets/sb-tabs.js",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §3.15, §4.4, §4.5, §7; demo/assets/sb-tabs.js",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "axe; Tastatur: Pfeiltasten wechseln den Reiter; Review bei 390 und 1280 px.",
    "example_hint": "Reiter „Übersicht · Einträge · Notizen“ und Artikelkopf mit Brotkrumen; falsch: Pille als aktiver Reiter.",
    "note": "Der Pager ist ein Block mit einer Haarlinie oben (CSS, AD26); der gerahmte Pager in spec/02 §3.15 ist veraltet.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-24"
   },
   {
    "id": "NAV-09",
@@ -2008,26 +2035,27 @@
    "id": "NAV-11",
    "area": "navigation",
    "title": "Baum nach ARIA-Muster, Auswahl folgt nicht dem Fokus",
-   "rule": "Bau Ordner- und Dateibäume als sb-tree (role='tree', treeitem-Zeilen aus sb-row, 32 px, 16 px Einzug je Ebene, Chevron als Aufklapper). Pfeiltasten bewegen den Fokus, rechts öffnet, links schließt, Eingabe wählt; die Auswahl folgt dem Fokus nicht. Die gewählte Zeile ist der aktuelle Ort mit Ortslinie, eine Zeile hat tabindex 0.",
-   "rule_en": "Folder and file trees are sb-tree (role=tree, treeitem rows built from sb-row, 32 px, 16 px indent per level, chevron twist); arrows move focus, right opens, left closes, Enter chooses; selection never follows focus; the chosen row is the current place; one row has tabindex 0 (sb-tree.js).",
-   "why": "D80 (I): der Baum ist ein Baustein des Systems statt ein Nachbau („Fehlende Bauteile bitte Vorschlag umsetzen“); D67 (2): 32-px-Zeilen. Dass die Auswahl dem Fokus nicht folgt, ist Agentenspezifikation: ein Dateibaum würde sonst jede Datei auf dem Weg öffnen.",
+   "rule": "Bau Ordner- und Dateibäume als sb-tree (role='tree', treeitem-Zeilen aus sb-row, 32 px, 16 px Einzug je Ebene, Chevron als Aufklapper). Pfeiltasten bewegen nur den Fokus, rechts öffnet einen Ordner, links schließt ihn; erst Eingabe, Leertaste oder Klick wählt eine Zeile und öffnet sie; die Auswahl folgt dem Fokus nicht. Die gewählte Zeile ist der aktuelle Ort mit Ortslinie, eine Zeile hat tabindex 0.",
+   "rule_en": "Folder and file trees are sb-tree (role=tree, treeitem rows built from sb-row, 32 px, 16 px indent per level, chevron twist); arrows only move focus, right opens a folder, left closes it; Enter, Space or a click chooses and opens; selection never follows focus; the chosen row is the current place; one row has tabindex 0 (sb-tree.js).",
+   "why": "D80 (I): der Baum ist ein Baustein des Systems statt ein Nachbau („Fehlende Bauteile bitte Vorschlag umsetzen“); D67 (2): 32-px-Zeilen. Dass die Auswahl dem Fokus nicht folgt, war Agentenspezifikation: ein Dateibaum würde sonst jede Datei auf dem Weg öffnen. D98 (V1), Antwort „Erst Eingabe öffnet (Empfohlen)“.",
    "do": "<ul class='sb-tree' role='tree' aria-labelledby='h'><li role='none'><div class='sb-row sb-tree__row' role='treeitem' aria-level='1' aria-expanded='true' aria-owns='g1' tabindex='-1'>…",
    "dont": "Baum aus verschachtelten Links ohne Rollen; Auswahl beim Pfeilen; gefüllte Auswahlzeile; Einzug ohne aria-level.",
    "numbers": "Zeile 32 px; Einzug 16 px je Ebene (Ebene 1–8); Aufklapper 24 × 32 px, chevron-right--16, offen 90° gedreht",
    "decisions": [
     "D80",
     "D67",
-    "D48"
+    "D48",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/02-components.md §4.14; demo/assets/sb-tree.js",
+   "source": "DECISIONS.md D98 (V1); systems/sebaro/spec/02-components.md §4.14; demo/assets/sb-tree.js",
    "platforms": [
     "desktop",
     "web"
    ],
-   "status": "vorläufig",
-   "check": "axe; Tastatur: Pfeile, Pos1/Ende, rechts/links, Eingabe; nur eine Zeile mit tabindex 0.",
+   "status": "entschieden",
+   "check": "axe; Tastatur: Pfeile, Pos1/Ende, rechts/links, Eingabe und Leertaste; Pfeile öffnen nichts; nur eine Zeile mit tabindex 0.",
    "example_hint": "sb-tree mit offenem Ordner, gewählter Notiz und Statuszeile; falsch: Liste aus Links mit gefüllter Auswahl.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-24"
   },
   {
    "id": "LNK-01",
@@ -2114,39 +2142,41 @@
    "numbers": "Formen: gefüllte Scheibe mit Haken, Ring aus 8 Strichen, Ring mit Schrägstrich, Achteck mit „!“ (spec/04 §7.2)",
    "decisions": [
     "D15",
-    "D24"
+    "D24",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/01-foundations.md §1.5; spec/04-icons.md §7.2; shared/FACTS-CONTRACT.md §6.3, §6.5",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §1.5; spec/04-icons.md §7.2; shared/FACTS-CONTRACT.md §6.3, §6.5",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Wortliste gegen spec/01 §1.5; Icons aus shared/icon-set.json; Kontaktbogen in Graustufen.",
    "example_hint": "Alle Zustände mit Glyphe und Wort, einmal farbig und einmal in Graustufen.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "STA-03",
    "area": "status",
    "title": "Gesperrt bleibt lesbar, ohne Lindgrün und Deckkraft",
-   "rule": "Zeig gesperrte Bedienelemente mit Beschriftung in text-muted, Rand in border und cursor: not-allowed; die gesperrte Hauptaktion mit surface-sunken, border-strong-Rand und text-muted-Label, ganz ohne Lindgrün. Senk nie die Deckkraft. Besser: lass die Taste aktiv und erkläre das Problem beim Drücken.",
-   "rule_en": "Disabled = text-muted label, border boundary, not-allowed cursor; disabled primary action = surface-sunken fill, border-strong outline, text-muted label, no lime; never opacity; prefer an enabled button that explains on press.",
-   "why": "Mit Deckkraft fällt der Kontrast unter die Grenze; Lindgrün heißt „weiter“ und darf das nicht versprechen; stumme Sackgassen vermeiden.",
-   "do": "<button class='sb-primary-action' disabled>; bei fehlender Eingabe die Taste aktiv lassen und die Fehlerzeile zeigen.",
-   "dont": "opacity: .4; blasses Lindgrün; Statusfarbe für gesperrt.",
+   "rule": "Zeig gesperrte Bedienelemente mit Beschriftung in text-muted, Rand in border und cursor: not-allowed; die gesperrte Hauptaktion mit surface-sunken, border-strong-Rand und text-muted-Label, ganz ohne Lindgrün. Senk nie die Deckkraft. Sperr eine Taste nur, solange ihre Aktion gerade gar nicht geht. Fehlt in einem Formular etwas, bleibt die Hauptaktion drückbar und lindgrün: Ihr Druck sendet nichts, sagt an jedem leeren Pflichtfeld „<Beschriftung> fehlt.“ und setzt den Fokus auf das erste davon.",
+   "rule_en": "Disabled = text-muted label, border boundary, not-allowed cursor; disabled primary action = surface-sunken fill, border-strong outline, text-muted label, no lime; never opacity; disabled only while the action cannot work at all; with required fields empty the primary action stays enabled, its press sends nothing, says „<Label> fehlt.“ at each empty required field and moves focus to the first (sb-form.js on websites).",
+   "why": "Mit Deckkraft fällt der Kontrast unter die Grenze; Lindgrün heißt „weiter“ und darf das nicht versprechen; stumme Sackgassen vermeiden. D98 (V2), Antwort „Drückbar, sagt was fehlt (Empfohlen)“: Eine gesperrte Taste sagt nicht, was fehlt; die Meldung am Feld und der Fokus darauf sagen es.",
+   "do": "<button class='sb-primary-action' disabled> nur, solange die Aktion gar nicht geht; fehlt eine Eingabe, bleibt die Taste aktiv und ihr Druck zeigt „Nachricht fehlt.“ unter dem Feld (p.sb-field__error mit Fehlerglyphe, aria-invalid, aria-describedby) mit dem Fokus auf dem ersten fehlenden Feld; auf Websites macht das sb-form.js an required-Feldern.",
+   "dont": "opacity: .4; blasses Lindgrün; Statusfarbe für gesperrt; eine gesperrte Hauptaktion, weil ein Feld noch leer ist.",
    "numbers": "Label text-muted auf surface-sunken 4.61 hell / 7.31 dunkel",
    "decisions": [
-    "D80"
+    "D80",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/01-foundations.md §1.4 Regel 5; spec/02-components.md §0.2, §1.1; css/sebaro.css Z. 253-256, 325-330",
+   "source": "DECISIONS.md D98 (V2); systems/sebaro/spec/01-foundations.md §1.4 Regel 5; spec/02-components.md §0.2, §1.1, §5.4.1; demo/assets/sb-form.js; css/sebaro.css Z. 253-256, 325-330",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
-   "check": "grep opacity: nicht für disabled; Farbprüfung zählt gesperrte Taste nicht als Hauptaktion.",
+   "status": "entschieden",
+   "check": "grep opacity: nicht für disabled; Farbprüfung zählt gesperrte Taste nicht als Hauptaktion. Formular mit leeren Pflichtfeldern absenden: nichts wird gesendet, jedes leere Feld sagt „… fehlt.“, der Fokus steht auf dem ersten (Werkstatt: tools/tests/test_form.py, nur Chromium).",
    "example_hint": "Haupt-, Neben-, Gefahr- und Icon-Taste jeweils aktiv und gesperrt; falsch: halbtransparente lindgrüne Taste.",
-   "note": "Die Vertragstokens opacity.* sind seit TOKEN-CONTRACT 1.7 gestrichen (D80: ungenutzte Tokens streichen); gesperrt heißt eine Graustufe heller, nie Deckkraft (spec/02 §0.2).",
-   "changed": "2026-10-20"
+   "note": "Die Vertragstokens opacity.* sind seit TOKEN-CONTRACT 1.7 gestrichen (D80: ungenutzte Tokens streichen); gesperrt heißt eine Graustufe heller, nie Deckkraft (spec/02 §0.2). Auf Websites prüft sb-form.js leere required-Felder selbst (seit dem Werkstatt-Commit 47b42db); andere Fehler meldet der Browser (reportValidity) oder der Server. Compose und SwiftUI haben dafür keinen Baustein: Die Ansicht setzt Fehler und Fokus selbst (spec/08 §14.12, spec/12 §7), dort nicht gebaut und nicht geprüft.",
+   "changed": "2026-10-24"
   },
   {
    "id": "STA-04",
@@ -2158,16 +2188,18 @@
    "do": "<li class='sb-tag'>Beta</li> auf der App-Karte.",
    "dont": "Orange gefülltes Beta-Badge; klickbarer Tag.",
    "numbers": "Rand 1px; Radius 4px; Padding 1px 8px; caption 14/20 400",
-   "decisions": [],
-   "source": "systems/sebaro/spec/02-components.md §3.2, §10; css/sebaro.css Z. 558-565",
+   "decisions": [
+    "D98"
+   ],
+   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §3.2, §10; css/sebaro.css Z. 558-565",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Review; keine Statusfarbe in .sb-tag.",
    "example_hint": "App-Karte mit Tags „Android“ „Verfügbar“ „Beta“; falsch: orange Beta-Pille.",
    "note": "spec/02 §3.2 und spec/09 §4.4 nennen label 14/20; CSS (caption 400, AD15) gilt.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "STA-05",
@@ -2179,15 +2211,17 @@
    "do": "<div class='sb-callout sb-callout--warning' role='note' aria-labelledby='t'>",
    "dont": "Gelb hinterlegter Hinweis mit linker Farbleiste.",
    "numbers": "Glyphe 20px (info--filled, warning--filled, error--filled, success--filled); Rahmen 1px; Radius 12px; Padding 12 16",
-   "decisions": [],
-   "source": "systems/sebaro/spec/02-components.md §3.11; spec/09-platform-web.md §4.4; css/sebaro.css Z. 755-767",
+   "decisions": [
+    "D98"
+   ],
+   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §3.11; spec/09-platform-web.md §4.4; css/sebaro.css Z. 755-767",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "grep background/border-inline-start in .sb-callout = 0.",
    "example_hint": "Vier Hinweisarten untereinander; falsch: farbige Leiste links und getönte Fläche.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "STA-06",
@@ -2200,16 +2234,17 @@
    "dont": "Spinner beim lokalen Speichern; blauer Fortschrittsbalken; schimmerndes Skelett ohne Text.",
    "numbers": "Schwellen 1 s und 10 s; Balken 4px (11.80 / 10.43 : 1); Ring 48px; Schrittkante 3px; höchstens 1 Freude-Moment je Ablauf",
    "decisions": [
-    "D48"
+    "D48",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/02-components.md §0.2, §1.7, §3.12; spec/07-voice.md §4.5; spec/01-foundations.md §7; css/sebaro.css Z. 769-802",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §0.2, §1.7, §3.12; spec/07-voice.md §4.5; spec/01-foundations.md §7; css/sebaro.css Z. 769-802",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Jeder Ladezustand hängt an einem Netzaufruf über 1 s; keine @keyframes für Skelette.",
    "example_hint": "Linearer Balken, Ring, Schritte „Schritt 2 von 3“ und Skelett mit „Wird geladen …“; falsch: Vollbild-Spinner beim Speichern.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "STA-07",
@@ -2298,15 +2333,17 @@
    "do": "<div class='sb-field'><label class='sb-field__label' for='n'>Name</label><div class='sb-field__control'><input id='n' aria-describedby='n-help'></div><p class='sb-field__help' id='n-help'>…</p></div>",
    "dont": "Platzhalter als einzige Beschriftung; umrandetes Feld; Hilfetext ohne Verknüpfung.",
    "numbers": "Höhe 48px (Input 46px); Padding 0 12px; Grundlinie 1px; Radius 8px oben; Hilfe caption 14/20 text-muted",
-   "decisions": [],
-   "source": "systems/sebaro/spec/02-components.md §2.1; css/sebaro.css Z. 354-381; demo/mobile.html Z. 343",
+   "decisions": [
+    "D98"
+   ],
+   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §2.1; css/sebaro.css Z. 354-381; demo/mobile.html Z. 343",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "axe label; jede __help/__error-ID wird von aria-describedby referenziert.",
    "example_hint": "Formular M4: Name, Tagesziel, Notiz mit Zähler „0 / 120“; falsch: nur Platzhalter in umrandeten Feldern.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "EIN-02",
@@ -2318,15 +2355,17 @@
    "do": "<p class='sb-field__error' id='x'><svg …#error--filled-16/>Notiz ist zu lang (134 / 120).</p>",
    "dont": "Rote Fehlermeldung; rot gefülltes Feld; nur rote Umrandung ohne Text.",
    "numbers": "Grundlinie 2px; Glyphe 16px; danger auf surface-sunken 5.52 / 6.04; dunkel danger auf pressed-fill 4.55",
-   "decisions": [],
-   "source": "systems/sebaro/spec/01-foundations.md §1.7, §5.2; spec/02-components.md §0.2, §2.1; css/sebaro.css Z. 375-377",
+   "decisions": [
+    "D98"
+   ],
+   "source": "DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §1.7, §5.2; spec/02-components.md §0.2, §2.1; css/sebaro.css Z. 375-377",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Fehlerfall: aria-invalid und aria-describedby gesetzt; Meldung in text-Farbe.",
    "example_hint": "Textfeld im Fehler mit „Notiz ist zu lang (134 / 120).“; falsch: rote Schrift ohne Glyphe.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "EIN-03",
@@ -2362,16 +2401,17 @@
    "dont": "Blau gefülltes Segment; farbig gefüllter Chip.",
    "numbers": "Segmente 2–4, Höhe 48px, Rand 1px; Chip-Rahmen 36px, Ziel 48px; Kante 3px",
    "decisions": [
-    "D48"
+    "D48",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/02-components.md §2.7, §2.9; spec/08-platform-android.md §14; css/sebaro.css Z. 457-477, 513-541",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §2.7, §2.9; spec/08-platform-android.md §14; css/sebaro.css Z. 457-477, 513-541",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Keine background-Farbe für :checked/aria-pressed; axe button-name an sb-chip__remove.",
    "example_hint": "Filter „Alle · Gesundheit · Lernen“ und Segmente „Woche · Monat · Jahr“; falsch: gefülltes aktives Segment.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "EIN-05",
@@ -2383,40 +2423,43 @@
    "do": "<div class='sb-field__control sb-search'>…<button class='sb-icon-button' aria-label='Suche leeren'>; <div class='sb-field__control sb-select'><select>…</select>",
    "dont": "Suchfeld ganz ohne Label; Dropdown aus divs.",
    "numbers": "Icon 24px text-muted",
-   "decisions": [],
-   "source": "systems/sebaro/spec/02-components.md §2.2, §2.3; demo/components.html Z. 389-391",
+   "decisions": [
+    "D98"
+   ],
+   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §2.2, §2.3; demo/components.html Z. 389-391",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Label existiert (ggf. sb-visually-hidden); Leeren-Knopf nur gefüllt sichtbar (Skript fehlt in den Demos).",
    "example_hint": "Suchfeld leer und gefüllt, Kategorie-Select; falsch: div-Dropdown ohne Label.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "DAT-01",
    "area": "daten",
    "title": "Flache Listen mit Haarlinien und Ende",
-   "rule": "Bau Listen aus flachen Zeilen statt Karten: Haarlinie über jeder Zeile außer der ersten, 16 px eingerückt. Interaktive Zeilen haben den Link im Titel über die ganze Zeile und einen Chevron am Ende. Jede Liste endet mit einem Satz oder nichts; kein endloses Scrollen, keine Zähl-Badges.",
-   "rule_en": "Lists are flat rows (hairline inset 16, stretched title link + chevron), end with a closing sentence or nothing; no infinite scroll, no count badges.",
-   "why": "Richtung A (D36): Zeilen statt Karten halten den Bildschirm ruhig; ein Ende sagt „fertig“ (spec/01 §4).",
+   "rule": "Bau Listen aus flachen Zeilen statt Karten: Haarlinie über jeder Zeile außer der ersten, 16 px eingerückt. Interaktive Zeilen haben den Link im Titel über die ganze Zeile und einen Chevron am Ende. Jede Liste endet mit einem Satz oder nichts; kein endloses Scrollen, keine Zähl-Badges. Die Zahl steht im Listenkopf („Offen 2“), nie an Seitenleiste, Reitern oder unterer Navigation (HAL-05).",
+   "rule_en": "Lists are flat rows (hairline inset 16, stretched title link + chevron), end with a closing sentence or nothing; no infinite scroll, no count badges; the count goes into the list head, never on sidebar, tabs or bottom navigation (HAL-05).",
+   "why": "Richtung A (D36): Zeilen statt Karten halten den Bildschirm ruhig; ein Ende sagt „fertig“ (spec/01 §4). D98 (V3), Antwort „Keine Zahlen (Empfohlen)“.",
    "do": "<p class='sb-list-end'>Mehr steht heute nicht an.</p>; Kopf „Offen 2“.",
    "dont": "Karte je Listeneintrag; Endlos-Scroll-Loader; roter Badge „3“.",
    "numbers": "Zeilen 56/64/88px; Padding 8 16; Einzug 16px",
    "decisions": [
     "D36",
     "D46",
-    "D67"
+    "D67",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/02-components.md §3.3; spec/01-foundations.md §4; css/sebaro.css Z. 567-605",
+   "source": "DECISIONS.md D98 (V3); systems/sebaro/spec/02-components.md §3.3; spec/01-foundations.md §4; css/sebaro.css Z. 567-605",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Liste hat sb-list-end; keine sb-card in Listen; keine Badge-Komponenten.",
    "example_hint": "Heute-Liste mit Kopf, Zeilen und Ende-Satz; falsch: Kartenstapel mit Endlos-Loader.",
-   "note": "D67 (2): In Desktop-Apps und Web-Apps mit Fenster sind Zeilen in Listen und Bäumen 32 px hoch (RAU-06); offen ist, ob das auch für zwei- und dreizeilige Zeilen gilt.",
-   "changed": "2026-10-19"
+   "note": "D67 (2) und D83 (9): In Desktop-Apps und Web-Apps mit Fenster sind Zeilen in Listen und Bäumen einzeilig 32 px, zweizeilig 48 px und dreizeilig 64 px hoch, bei Touch wie bisher (RAU-06).",
+   "changed": "2026-10-24"
   },
   {
    "id": "DAT-02",
@@ -2454,16 +2497,17 @@
    "dont": "Drei Kacheln mit grauem Grund; zweispaltige Tabelle für Eigenschaften.",
    "numbers": "Stat Padding-inline 12px; Spaltenmin. 96px; Meta-Zeilen 48px, Spalten 2fr/3fr",
    "decisions": [
-    "D36"
+    "D36",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/02-components.md §3.6, §3.8, §10; css/sebaro.css Z. 674-682, 715-723",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §3.6, §3.8, §10; css/sebaro.css Z. 674-682, 715-723",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Review: keine Fläche oder Radius an .sb-stat.",
    "example_hint": "Serie · Quote · Bestwert und Meta-Liste Erinnerung/Kategorie/Seit; falsch: drei graue Dashboard-Kacheln.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "DAT-04",
@@ -2500,15 +2544,17 @@
    "do": "<div class='sb-table-wrap' role='region' aria-labelledby='cap' tabindex='0'><table class='sb-table'><caption id='cap'>…",
    "dont": "Graue Streifen; Tabelle ohne caption.",
    "numbers": "Zellen-Padding 12px",
-   "decisions": [],
-   "source": "systems/sebaro/spec/02-components.md §3.9; css/sebaro.css Z. 725-732",
+   "decisions": [
+    "D98"
+   ],
+   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §3.9; css/sebaro.css Z. 725-732",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "axe scrollable-region-focusable; jede Tabelle hat caption.",
    "example_hint": "Wochentabelle mit Zahlen bei 390 px scrollbar; falsch: gestreifte Tabelle ohne caption.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "DAT-06",
@@ -2520,15 +2566,17 @@
    "do": "<li class='sb-avatar' aria-label='Anna Keller'><span aria-hidden='true'>AK</span></li>",
    "dont": "Farbige Avatar-Scheiben.",
    "numbers": "40px / 32px; Ring 1px",
-   "decisions": [],
-   "source": "systems/sebaro/spec/02-components.md §3.13; css/sebaro.css Z. 804-811",
+   "decisions": [
+    "D98"
+   ],
+   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §3.13; css/sebaro.css Z. 804-811",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "axe; Review.",
    "example_hint": "Avatar-Reihe „Im Board“; falsch: bunte Kreise mit weißen Initialen.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "DAT-07",
@@ -2541,16 +2589,17 @@
    "dont": "Großer Knopf mitten im Leerraum; lustige Figur; zentrierter Text.",
    "numbers": "Spot 128 × 96px",
    "decisions": [
-    "D39"
+    "D39",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/02-components.md §3.14; spec/07-voice.md §4.2; css/sebaro.css Z. 813-817",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §3.14; spec/07-voice.md §4.2; css/sebaro.css Z. 813-817",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Keine sb-primary-action innerhalb .sb-empty.",
    "example_hint": "M5 Statistik ohne Daten mit Aktion unten; falsch: zentrierter Knopf und Maskottchen.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "DAT-08",
@@ -2859,16 +2908,17 @@
    "dont": "„Dein Dashboard“; Themen-Namen.",
    "numbers": "",
    "decisions": [
-    "D32"
+    "D32",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/07-voice.md §3.3",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/07-voice.md §3.3",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Review der Bildschirmtitel.",
    "example_hint": "App-Kopf „Statistik“ neben Website-Überschrift in Satzform; falsch: App-Titel „Deine tolle Woche!“.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "TXT-04",
@@ -2898,24 +2948,26 @@
   {
    "id": "TXT-05",
    "area": "text",
-   "title": "Satzzeichen, keine Versalien, neutral gendern",
-   "rule": "Nutze deutsche Anführungszeichen „…“ und ‚…‘ und den Halbgeviertstrich für Bereiche und als Gedankenstrich. Keine Versal-Labels, keine Eyebrows, keine gesperrten Großbuchstaben; inklusiv mit neutralen Formen ohne Stern oder Doppelpunkt. Abkürzungen nur „Std.“ und „Min.“, dazu Wochentage mit zwei Buchstaben ohne Punkt („Mo“, „Di“) nur an Diagrammachsen und in Kalenderköpfen; alles andere schreibst du aus.",
-   "rule_en": "German quotes „…“ ‚…‘, en dash for ranges and as dash; no all-caps or eyebrow labels; inclusive neutral forms without gender star/colon; abbreviations only „Std.“, „Min.“ and two-letter weekdays without a period on chart axes and calendar heads; spell out everything else (no „ca.“, no „z. B.“ in UI).",
-   "why": "Ruhiges, lesbares Deutsch; ẞ wäre nur in Versaltext nötig, den sebaro nicht nutzt. D82, Wortlaut „Abkürzungen … Vorschlag folgen“: neben „Std.“ und „Min.“ Wochentage mit zwei Buchstaben, nur an Achsen und in Kalendern, wo der Platz knapp und die Bedeutung eindeutig ist.",
-   "do": "„Teilnehmende“, „alle, die …“, „08:00–22:00“; Achse „So Mo Di Mi Do Fr Sa“; Tageskopf „Samstag, 10. Oktober“.",
-   "dont": "\"…\" gerade Anführungszeichen, text-transform: uppercase, „NEU“, „Nutzer*innen“; „Sa.“ oder „Sa“ im Fließtext; „ca. 40 Min.“; „z. B.“ in der Oberfläche.",
+   "title": "Satzzeichen, keine Versalien, Menschen neutral ansprechen",
+   "rule": "Nutze deutsche Anführungszeichen „…“ und ‚…‘ und den Halbgeviertstrich für Bereiche und als Gedankenstrich. Keine Versal-Labels, keine Eyebrows, keine gesperrten Großbuchstaben. Sprich Gruppen von Menschen mit einem neutralen Wort an („Teilnehmende“, „Mitglieder“, „alle, die …“); wo keins gut passt, mit beiden Formen („Nutzerinnen und Nutzer“). Nie ein Zeichen im Wort: kein Stern, kein Doppelpunkt, kein Unterstrich, kein Mediopunkt, kein Binnen-I; das Amtliche Regelwerk (Fassung vom 1. Juli 2024) zählt solche Zeichen nicht zum Kern der Rechtschreibung. Abkürzungen nur „Std.“ und „Min.“, dazu Wochentage mit zwei Buchstaben ohne Punkt („Mo“, „Di“) nur an Diagrammachsen und in Kalenderköpfen; alles andere schreibst du aus.",
+   "rule_en": "German quotes „…“ ‚…‘, en dash for ranges and as dash; no all-caps or eyebrow labels; groups of people with a neutral word („Teilnehmende“, „Mitglieder“), else both forms („Nutzerinnen und Nutzer“), never a sign inside the word (gender star, colon, underscore, middle dot, Binnen-I; Amtliches Regelwerk, version of 1 July 2024); abbreviations only „Std.“, „Min.“ and two-letter weekdays without a period on chart axes and calendar heads; spell out everything else (no „ca.“, no „z. B.“ in UI).",
+   "why": "Ruhiges, lesbares Deutsch; ẞ wäre nur in Versaltext nötig, den sebaro nicht nutzt. D82, Wortlaut „Abkürzungen … Vorschlag folgen“: neben „Std.“ und „Min.“ Wochentage mit zwei Buchstaben, nur an Achsen und in Kalendern, wo der Platz knapp und die Bedeutung eindeutig ist. D98 (V6), nach der Rückfrage „was sagt der duden zum gendern in deutschland und was ist die sprachlich korrekte form“, Antwort „Neutral, sonst beide (Empfohlen)“: Das Amtliche Regelwerk des Rats für deutsche Rechtschreibung (Fassung vom 1. Juli 2024) zählt Zeichen im Wort nicht zum Kern der Rechtschreibung; ein neutrales Wort und beide Formen sind korrekt. Die Oberfläche sagt meist „du“; Gruppen stehen vor allem in Hilfetexten, beim Teilen und auf Websites.",
+   "do": "„Teilnehmende“, „Mitglieder“, „alle, die …“, „Nutzerinnen und Nutzer“; „08:00–22:00“; Achse „So Mo Di Mi Do Fr Sa“; Tageskopf „Samstag, 10. Oktober“.",
+   "dont": "\"…\" gerade Anführungszeichen, text-transform: uppercase, „NEU“; ein Zeichen im Wort für Menschen (Stern, Doppelpunkt, Unterstrich oder Mediopunkt vor „innen“, ein großes I mitten im Wort); „alle Nutzer“, wo ein neutrales Wort oder beide Formen passen; „Sa.“ oder „Sa“ im Fließtext; „ca. 40 Min.“; „z. B.“ in der Oberfläche.",
    "numbers": "",
    "decisions": [
-    "D82"
+    "D82",
+    "D98"
    ],
-   "source": "DECISIONS.md D82; systems/sebaro/spec/01-foundations.md §2.5 Regel 5; spec/07-voice.md §3.6–§3.11",
+   "source": "DECISIONS.md D82, D98 (V6); systems/sebaro/spec/01-foundations.md §2.5 Regel 5; spec/07-voice.md §3.6–§3.11, §3 Regel 9, §7; shared/DEMO-CHECK.md §4.3 (TXT8)",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
-   "check": "grep text-transform: uppercase und gerade Anführungszeichen in UI-Texten; grep * und : in Personenbezeichnungen.",
+   "status": "entschieden",
+   "check": "Werkstatt: python3 tools/check_demo.py meldet TXT8 (Fehler, Gruppe content) für jedes Wort für Menschen mit einem Zeichen darin, im sichtbaren und versteckten Text und in Feldwerten jeder Demoseite; Texte außerhalb der Demos: grep -nE '[a-zäöüß][*∗:_·][iI]n|[a-zäöüß]In(nen)?([^a-zA-Zäöüß]|$)' und jeden Treffer ansehen (auch Code wie :invalid oder Namen wie LinkedIn treffen). Dazu grep text-transform: uppercase und gerade Anführungszeichen in UI-Texten.",
    "example_hint": "Abschnitt ohne Eyebrow richtig; falsch: Versal-Eyebrow „NEU“ über der Überschrift.",
-   "changed": "2026-10-20"
+   "note": "TXT8 prüft keinen Text in Attributen (aria-label, alt, title), keine Form mit Schrägstrich und kein großes I in der Einzahl nach einer Endung, die es nicht kennt (shared/DEMO-CHECK.md §4.3); dort helfen nur Lesen und der grep unter „Prüfung“. Die Prüfung kennt keine Ausnahmeliste: Ein Codebeispiel, das wie ein solches Wort endet, braucht einen anderen Namen.",
+   "changed": "2026-10-24"
   },
   {
    "id": "TXT-06",
@@ -2927,15 +2979,17 @@
    "do": "<article class='sb-prose'> mit Code, Hinweis, Tabelle, Abbildung.",
    "dont": "Absatz über die volle Breite eines 1440-px-Fensters.",
    "numbers": "--sb-size-measure-prose 70ch; Stapel 12px; H2 40px; H3 32px",
-   "decisions": [],
-   "source": "systems/sebaro/spec/01-foundations.md §2.5 Regel 2; spec/02-components.md §5; css/sebaro.css Z. 39, 90-98",
+   "decisions": [
+    "D98"
+   ],
+   "source": "DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §2.5 Regel 2; spec/02-components.md §5; css/sebaro.css Z. 39, 90-98",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Absätze haben max-inline-size ≤ 70ch.",
    "example_hint": "Absatz mit 70 ch gegen denselben Absatz über volle Breite.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "TXT-07",
@@ -2947,15 +3001,17 @@
    "do": "„Notiz ist zu lang (134 / 120).“; „Name fehlt.“; „Export hat nicht geklappt. Deine Einträge sind unverändert. Versuch es noch einmal oder wähl einen anderen Ort.“",
    "dont": "„Ungültige Eingabe“, „Leider ist ein Fehler aufgetreten“, „Fehler 0x80…“, „Ups“.",
    "numbers": "",
-   "decisions": [],
-   "source": "systems/sebaro/spec/07-voice.md §4.1; spec/02-components.md §2.1; spec/08-platform-android.md §14",
+   "decisions": [
+    "D98"
+   ],
+   "source": "DECISIONS.md D98; systems/sebaro/spec/07-voice.md §4.1; spec/02-components.md §2.1; spec/08-platform-android.md §14",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Review aller Fehlertexte.",
    "example_hint": "Zwei Meldungen nebeneinander: konkret mit Ausweg gegen „Ungültige Eingabe“.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "TXT-08",
@@ -3309,39 +3365,41 @@
    "decisions": [
     "D40",
     "D15",
-    "D21"
+    "D21",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/10-facts.md §1, §3.3, §4.1–§4.3; spec/03-signature.md §5.3",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/10-facts.md §1, §3.3, §4.1–§4.3; spec/03-signature.md §5.3",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "check_demo.py --system sebaro (facts.html).",
    "example_hint": "Annotierte Notiz mit sieben Teilen und darunter die Kompaktzeile; falsch: Notiz ohne „Nicht geprüft“.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "BEL-06",
    "area": "belege",
    "title": "Belegtext generiert, nie getippt",
-   "rule": "Erzeug alles nach der Aussage mit tools/check_facts.py --notes und render es zur Bauzeit (oder in Demos mit sb-facts.js); tipp Notiztext nie selbst. Nummeriere je Seite einmal in der Reihenfolge des ersten Auftretens; eine Aussage mit denselben Fakten behält ihre Nummer. Die Aussage nennt genau den Faktwert, nicht mehr.",
-   "rule_en": "Note text is generated by check_facts.py --notes, never typed; one numbering per page by first appearance; same facts keep their number; the claim states exactly the fact value.",
-   "why": "Der Prüfer ist die einzige Quelle jeder Tatsache; wahre, prüfbare Belege.",
+   "rule": "Belege sind freiwillig. Zeigst du welche, erzeug alles nach der Aussage mit tools/check_facts.py --notes und render es zur Bauzeit (oder in Demos mit sb-facts.js); tipp Notiztext nie selbst. Nummeriere je Seite einmal in der Reihenfolge des ersten Auftretens; eine Aussage mit denselben Fakten behält ihre Nummer. Die Aussage nennt genau den Faktwert, nicht mehr.",
+   "rule_en": "Evidence is optional; when shown, note text is generated by check_facts.py --notes, never typed; one numbering per page by first appearance; same facts keep their number; the claim states exactly the fact value.",
+   "why": "Der Prüfer ist die einzige Quelle jeder Tatsache; wahre, prüfbare Belege. D98 (V5), Antwort „Freiwillig, aber erzeugt (Empfohlen)“, eine Lesart von D40.",
    "do": "python3 tools/check_facts.py facts.json --notes --today \"$(date +%F)\" --app-version \"$VERSION\"; data-sb-needs-note='studio:1,2'.",
    "dont": "Methode oder Datum in den Code schreiben; Aussage größer als der Wert („komplett privat“); doppelte Nummern.",
    "numbers": "",
    "decisions": [
     "D14",
-    "D36"
+    "D36",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/10-facts.md §1, §3.2, §9; spec/03-signature.md §5.1 (6); spec/09-platform-web.md §10-§11",
+   "source": "DECISIONS.md D98 (V5); systems/sebaro/spec/10-facts.md §1, §3.2, §9; spec/03-signature.md §5.1 (6); spec/09-platform-web.md §10-§11",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Notes neu erzeugen und gegen die ausgelieferte Datei diffen; check_demo.py TXT6.",
    "example_hint": "Seite, auf der Ziffer 1 zweimal vorkommt und zwei Rücksprünge hat; falsch: getippte Note mit erfundenem Datum.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "BEL-07",
@@ -3354,17 +3412,18 @@
    "dont": "Modaler Dialog oder Sheet für Belege; Liste nur noch im Popover.",
    "numbers": "< 1024 px (Skript 63.99rem); max-block-size 60dvh; „Schließen“ 48 px",
    "decisions": [
-    "D36"
+    "D36",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/03-signature.md §5.3; spec/09-platform-web.md §9; spec/02-components.md §6; demo/assets/sb-notes.js",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/03-signature.md §5.3; spec/09-platform-web.md §9; spec/02-components.md §6; demo/assets/sb-notes.js",
    "platforms": [
     "web",
     "mobile"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Playwright bei 390 px: Popover öffnet, Escape schließt, Fokus zurück auf die Ziffer.",
    "example_hint": "Schmale Seite mit geöffnetem Popover und sichtbarer Liste darunter; falsch: Beleg im modalen Dialog.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "BEL-08",
@@ -3401,38 +3460,40 @@
    "numbers": "Marker 1 px border-strong, Radius 4, caption",
    "decisions": [
     "D21",
-    "D24"
+    "D24",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/10-facts.md §2, §4.4; spec/02-components.md §3.2; spec/11-checklist.md §2",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/10-facts.md §2, §4.4; spec/02-components.md §3.2; spec/11-checklist.md §2",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Negativtest mit data-sb-running-version; jeder Demo-Faktenblock enthält „Beispieldaten“.",
    "example_hint": "Datenschutz-Ansicht normal und veraltet, Belegliste mit Marker; falsch: Demo-Belege ohne Marker.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "BEL-10",
    "area": "belege",
    "title": "Hinweis direkt unter der Aktion",
-   "rule": "Schreib unter jede Aktion mit Datenweg einen Hinweis „<Auslöser>. Ziel: <wohin>.“ in caption, text-muted, direkt darunter. Bleiben die Daten lokal: „Bleibt auf diesem Gerät.“ Nie im Tooltip.",
-   "rule_en": "Under each action with a data path: hint „<Trigger>. Ziel: <to>.“ (caption, text-muted); local only: „Bleibt auf diesem Gerät.“; never in a tooltip.",
-   "why": "Die Folge einer Handlung steht dort, wo sie ausgelöst wird (D21).",
+   "rule": "Schreib unter jede Aktion mit Datenweg immer einen Hinweis „<Auslöser>. Ziel: <wohin>.“ in caption, text-muted, direkt darunter. Bleiben die Daten lokal, steht dort trotzdem „Bleibt auf diesem Gerät.“ Nie im Tooltip.",
+   "rule_en": "Under each action with a data path, always: hint „<Trigger>. Ziel: <to>.“ (caption, text-muted); local only, still: „Bleibt auf diesem Gerät.“; never in a tooltip.",
+   "why": "Die Folge einer Handlung steht dort, wo sie ausgelöst wird (D21). D98 (V4), Antwort „Immer (Empfohlen)“: auch, wenn die Daten auf dem Gerät bleiben.",
    "do": "„Nur auf deinen Befehl. Ziel: CSV-Datei an einem Ort deiner Wahl.“ zentriert 8 px unter der Hauptaktion.",
-   "dont": "Hinweis im Tooltip oder auf einer anderen Seite.",
+   "dont": "Hinweis im Tooltip oder auf einer anderen Seite; keine Zeile, weil die Daten ja auf dem Gerät bleiben.",
    "numbers": "8 px unter der Hauptaktion",
    "decisions": [
-    "D21"
+    "D21",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/10-facts.md §3.4; spec/08-platform-android.md §5",
+   "source": "DECISIONS.md D98 (V4); systems/sebaro/spec/10-facts.md §3.4; spec/08-platform-android.md §5",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Review aller Aktionen mit Datenweg.",
    "example_hint": "Aktionszone „Als CSV exportieren“ mit Hinweis darunter; falsch: Hinweis nur im Tooltip.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "ZEI-01",
@@ -3639,17 +3700,18 @@
     "D58",
     "D85",
     "D86",
-    "D88"
+    "D88",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/05-brand.md §2.4, §2.5; shared/SIGNS-GUIDE.md §8; spec/11-checklist.md §3; DECISIONS.md D33, D85, D86, D88",
+   "source": "systems/sebaro/spec/05-brand.md §2.4, §2.5; shared/SIGNS-GUIDE.md §8; spec/11-checklist.md §3; DECISIONS.md D33, D85, D86, D88, D98",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": ".venv/bin/python tools/signs.py check sebaro Exit 0; brand_assets.py check Exit 0; SG90 (menschliche Sichtprüfung) bleibt offen; Markenrecherche vor der Veröffentlichung.",
    "example_hint": "Tabelle Name → Kürzel mit markierten Buchstaben und Vorher/nachher der umgezeichneten Symbole.",
    "note": "Drei bestehende Kürzel folgen der Bildungsregel nicht; sie bleiben (spec/05 §2.5). Die Kapazität ist eine geometrische Schätzung; freigegeben ist jedes Zeichen erst nach dem Blick des Inhabers.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-24"
   },
   {
    "id": "ZEI-09",
@@ -3667,16 +3729,17 @@
     "D44",
     "D36",
     "D68",
-    "D71"
+    "D71",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/05-brand.md §3 (Quelle fonts/sebaro-sans/src/sebaroSans[wdth,wght].ttf), §4, §11",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/05-brand.md §3 (Quelle fonts/sebaro-sans/src/sebaroSans[wdth,wght].ttf), §4, §11",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "brand_assets.py check; Konstruktionszeichnungen wordmark-light-cut.svg / -dark-cut.svg und Lockup-Schutzraum.",
    "example_hint": "Lockup hell und dunkel mit eingezeichnetem Schutzraum; falsch: gesperrte, gestreckte Wortmarke mit Glow.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-24"
   },
   {
    "id": "ZEI-10",
@@ -3717,17 +3780,18 @@
    "decisions": [
     "D10",
     "D53",
-    "D57"
+    "D57",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/05-brand.md §6; spec/04-icons.md §13; spec/08-platform-android.md §11; shared/ADOPTION.md §5 Schritt 3",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/05-brand.md §6; spec/04-icons.md §13; spec/08-platform-android.md §11; shared/ADOPTION.md §5 Schritt 3",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "brand_assets.py check sebaro; src-tauri/icons enthält icon.icns, icon.ico; Launcher-Masken auf Gerät nicht verifiziert.",
    "example_hint": "Adaptive-Icon-Fläche mit Sicherheitskreis und Kürzel-Grundlinie; falsch: Glocken-Icon als Benachrichtigung.",
    "note": "spec/08 §11 („family accent in signs.iconMode“) ist veraltet; signTiles gilt (D53/D54).",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "ZEI-12",
@@ -3814,16 +3878,17 @@
     "D10",
     "D38",
     "D40",
-    "D44"
+    "D44",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/04-icons.md §0, §1.1 (gemessen an fonts/desktop/sebaroSans-*.ttf), §1.4, §1.5, §2",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/04-icons.md §0, §1.1 (gemessen an fonts/desktop/sebaroSans-*.ttf), §1.4, §1.5, §2",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "python3 tools/icons.py lint sebaro --strict Exit 0 (ICN304–308; 6 begründete Waiver in §15); Kontaktbogen hell/dunkel bei 100 % und 3×.",
    "example_hint": "Konstruktionsraster 24 mit Keylines und einem richtigen Icon; falsch: 2,5-px-Icon neben dünnem Text.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-24"
   },
   {
    "id": "ICO-03",
@@ -3865,16 +3930,17 @@
    "numbers": "--sb-size-icon-sm 16, -md 20, -lg 24; stroke-width viewBox: 16 Master 1.5, 16 aus 24 2.25, 20: 1.8, 24: 1.75, 32: 1.5, 48: 1.125, Spot 2; 25 Namen mit 16er-Master; Spot 128 × 96",
    "decisions": [
     "D38",
-    "D56"
+    "D56",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/04-icons.md §3, §6; spec/09-platform-web.md §14; icons/dist/sprite.css",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/04-icons.md §3, §6; spec/09-platform-web.md §14; icons/dist/sprite.css",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Größenklassen im Markup; 16-px-Zoom im Kontaktbogen.",
    "example_hint": "Dasselbe Icon in 16/20/24/32/48 px; Pfeil nach Linktext bei 16 px scharf (Master) gegen matschig (skaliert).",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "ICO-05",
@@ -3888,16 +3954,17 @@
    "numbers": "Gefüllt 24: 14 Icons; gefüllt 16: info, warning, error, success; Box ±0.25 (ICN308); ein <path> je Datei",
    "decisions": [
     "D36",
-    "D48"
+    "D48",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/04-icons.md §5",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/04-icons.md §5",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Umschalten Umriss/gefüllt ohne Versatz; ICN308.",
    "example_hint": "Untere Navigation: aktives Ziel gefüllt, andere Umriss; falsch: alle gefüllt.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "ICO-06",
@@ -3936,16 +4003,17 @@
    "dont": "Reihe von Spots; Maskottchen; Linien im Ton (border auf bg nur 1,47 : 1 im Dunkelmodus).",
    "numbers": "viewBox 128 × 96; Strich 2; Rand 4; Raster 0.25; Lücke 2.5; Radius 3 (≥ 12) / 1.5; text-muted auf bg 5.05 / 6.76",
    "decisions": [
-    "D36"
+    "D36",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/04-icons.md §8",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/04-icons.md §8",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "aria-hidden='true'; Ton im Dunkelmodus sichtbar; Überschrift und Satz tragen die Bedeutung.",
    "example_hint": "Leerzustand mit empty-stats-Spot; falsch: bunte Szene mit Figur.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "ICO-08",
@@ -4000,26 +4068,27 @@
    "id": "BIL-02",
    "area": "bilder",
    "title": "Bilder sind optional und erklären Inhalt",
-   "rule": "Setz Bilder nur ein, wenn sie Inhalt erklären; auf Websites sind sie optional. Der erste Bildschirm (W1) bleibt Typografie, Belegziffern und Hauptaktion; Apps nutzen SVG-Spots statt Rasterbildern; nie generierte Raster in Zeichen- oder Icon-Slots.",
-   "rule_en": "Images are optional and only illustrate content; W1 first screen stays typography; apps use SVG spots; never AI raster in sign or icon slots.",
-   "why": "Identität ist code-gezeichnet (D10); kein Gegenstand als Markenidee (D29, D32).",
+   "rule": "Setz Bilder nur ein, wenn sie Inhalt erklären; auf Websites sind sie optional. Der erste Bildschirm einer App-Website (W1) hat nur Überschrift, Satz (mit Belegziffern) und Hauptaktion, kein Bild; Bildschirmfotos stehen darunter im Raster (WEB-08); Apps nutzen SVG-Spots statt Rasterbildern; nie generierte Raster in Zeichen- oder Icon-Slots.",
+   "rule_en": "Images are optional and only illustrate content; the first screen of an app website (W1) has only heading, sentence and primary action, screenshots below in a grid (WEB-08); apps use SVG spots; never AI raster in sign or icon slots.",
+   "why": "Identität ist code-gezeichnet (D10); kein Gegenstand als Markenidee (D29, D32). D98 (V8), Antwort „Nur Text und Taste (Empfohlen)“.",
    "do": "Artikelillustration oder optionales Studio-Bild im Über- oder Projekte-Bereich.",
-   "dont": "Hero-Bild im W1; Wasserglas als Tagwerk-Identität; generiertes Bild, wo ein Spot den Zustand genauer zeigt.",
+   "dont": "Hero-Bild oder Bildschirmfoto im W1; Wasserglas als Tagwerk-Identität; generiertes Bild, wo ein Spot den Zustand genauer zeigt.",
    "numbers": "",
    "decisions": [
     "D9",
     "D10",
     "D29",
-    "D32"
+    "D32",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/06-imagery.md §1, §7, §9; AGENTS.md §6",
+   "source": "DECISIONS.md D98 (V8); systems/sebaro/spec/06-imagery.md §1, §7, §9; AGENTS.md §6",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Review: hat jedes Bild einen Inhaltszweck?",
    "example_hint": "Dieselbe Seite mit und ohne Bild, beide vollständig; falsch: W1 mit großem Heldenbild.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "BIL-03",
@@ -4027,22 +4096,23 @@
    "title": "Fineliner-Linie, getönt in beiden Modi",
    "rule": "Generiere Bilder im Stil sebaro-line-v1 (gleichmäßige 0,3-mm-Linie, nur Umrisse) oder sebaro-steps-v1 (wortlose Anleitung), ohne Schraffur, Füllung, Farbe, Schatten, Textur und Gesichter. Töne die Linie danach in text (Inhalt) oder text-muted (Deko) über bg, für Hell und Dunkel. WebP unter 300 KB, nie hochskaliert.",
    "rule_en": "Generated images use the verbatim style blocks sebaro-line-v1 or sebaro-steps-v1 (uniform outline, no fills/colour/shadow/faces), tinted afterwards to text / text-muted over bg for both schemes; WebP < 300 KB; never upscale.",
-   "why": "Kein Verlauf, Glow oder Farbe darf mit den Funktionsfarben konkurrieren; beide Modi sind gleichwertig.",
+   "why": "Kein Verlauf, Glow oder Farbe darf mit den Funktionsfarben konkurrieren; beide Modi sind gleichwertig. D98 (V9), Antwort „Fineliner ohne Farbe (Empfohlen)“.",
    "do": "Stilblock + Motiv + Constraints + Guard über compose.py; post.py line …; <figure> mit .sb-illustration-light/-dark (6 Regeln aus pages.css ins Produkt übernehmen).",
    "dont": "Freie Prompts ohne Stilblock; bunte Illustration; nur ein Modus; Hand-Edits an abgeleiteten Dateien.",
    "numbers": "Linie 0,3 mm (Prompt); WebP < 300 KB; Artikel 672 CSS px; Studio ≈ 480 CSS px; Master 1536 × 1024; MaxFilter(5) Studio / MaxFilter(3) Artikel",
    "decisions": [
     "D9",
-    "D20"
+    "D20",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/06-imagery.md §2–§6",
+   "source": "DECISIONS.md D98 (V9); systems/sebaro/spec/06-imagery.md §2–§6",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "images/pipeline/verify.py; Ansicht bei 1× und 2× in beiden Modi.",
    "example_hint": "Linienillustration hell und dunkel getönt; falsch: farbige Illustration mit Schatten.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "BIL-04",
@@ -4068,8 +4138,8 @@
    "status": "vorläufig",
    "check": "verify.py; Sidecar vorhanden; axe image-alt.",
    "example_hint": "Zwei <figure>: dekorativ mit alt='' und Inhaltsbild mit Alt-Text und Kennzeichnung; falsch: alt='Bild' ohne Kennzeichnung.",
-   "changed": "2026-10-21",
-   "note": "Ob die Kennzeichnung rechtlich reicht, bleibt bis zur ersten Veröffentlichung eines Produkts mit erzeugten Bildern offen; dann wird sie rechtlich geprüft und das Ergebnis als Beleg festgehalten (D92 (8))."
+   "changed": "2026-10-24",
+   "note": "Ob die Kennzeichnung rechtlich reicht, bleibt bis zur ersten Veröffentlichung eines Produkts mit erzeugten Bildern offen; dann wird sie rechtlich geprüft und das Ergebnis als Beleg festgehalten (D92 (8)). D98 lässt die Regel deshalb vorläufig: Rechtsprüfung vor der ersten Veröffentlichung."
   },
   {
    "id": "BIL-05",
@@ -4206,16 +4276,17 @@
    "dont": "32-px-Icon-Tasten in einer App; 40-dp-Icon-Tasten.",
    "numbers": "--sb-size-target-touch 48px; --sb-size-target-pointer 24px; --sb-size-control-sm 32; -md 48; -lg 56; Grenze 1023.98px / (pointer: coarse)",
    "decisions": [
-    "D67"
+    "D67",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/01-foundations.md §4; spec/02-components.md §0.3, §10; css/sebaro.css Z. 1010-1016; DECISIONS.md D67 (2)",
+   "source": "systems/sebaro/spec/01-foundations.md §4; spec/02-components.md §0.3, §10; css/sebaro.css Z. 1010-1016; DECISIONS.md D67 (2), D98",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "check_demo.py targets; axe target-size; mit pointer: coarse emulieren.",
    "example_hint": "Chip mit sichtbarem 36-px-Rahmen und gestrichelt markierter 48-px-Trefferfläche; falsch: 32-px-Icon-Taste auf dem Handy.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "ZUG-04",
@@ -4227,15 +4298,17 @@
    "do": "<button class='sb-icon-button' type='button' aria-label='Kalender'>; aria-label='Mehr zu Wasser trinken, gestern'; Compose contentDescription = 'Zurück'.",
    "dont": "Icon-Taste ohne Namen; „calendar-icon“ vorlesen lassen; tabindex > 0.",
    "numbers": "48 × 48 px; Icon 24 px",
-   "decisions": [],
-   "source": "systems/sebaro/spec/02-components.md §1.5, §8; spec/04-icons.md §11; spec/07-voice.md §4.8; css/sebaro.css Z. 334-342",
+   "decisions": [
+    "D98"
+   ],
+   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §1.5, §8; spec/04-icons.md §11; spec/07-voice.md §4.8; css/sebaro.css Z. 334-342",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "axe button-name in beiden Modi; grep sb-icon-button ohne aria-label = 0; TalkBack/VoiceOver nicht verifiziert.",
    "example_hint": "Obere Leiste mit Zurück- und Mehr-Taste mit aria-label; falsch: dieselben Tasten ohne Namen.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "ZUG-05",
@@ -4249,17 +4322,18 @@
    "numbers": "",
    "decisions": [
     "D7",
-    "D88"
+    "D88",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/01-foundations.md §5.3, §9; spec/02-components.md §8; spec/09-platform-web.md §5; DECISIONS.md D7, D88",
+   "source": "systems/sebaro/spec/01-foundations.md §5.3, §9; spec/02-components.md §8; spec/09-platform-web.md §5; DECISIONS.md D7, D88, D98",
    "platforms": [
     "web",
     "desktop"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Chromium-Emulation forced-colors (laut spec/02 §9 nicht verifiziert).",
    "example_hint": "Screenshot-Paar Navigation und Hauptaktion normal und in forced colors; falsch: Ortsmarkierung verschwindet.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-24"
   },
   {
    "id": "ZUG-06",
@@ -4271,15 +4345,17 @@
    "do": "<a class='sb-skip-link' href='#inhalt'>Zum Inhalt</a> … <main id='inhalt'>; Dialog: Fokus tritt ein und kehrt zurück.",
    "dont": "Kein Sprunglink; nur automatisch prüfen und fertig melden.",
    "numbers": "Sprunglink 48px; Breiten 390 und 1440 px",
-   "decisions": [],
-   "source": "systems/sebaro/spec/02-components.md §5; spec/11-checklist.md §1; css/sebaro.css Z. 56-64",
+   "decisions": [
+    "D98"
+   ],
+   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §5; spec/11-checklist.md §1; css/sebaro.css Z. 56-64",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Tab nach dem Laden zeigt den Sprunglink; manueller Durchlauf mit Screenshots beider Modi.",
    "example_hint": "Seitenanfang mit Sprunglink im Fokus; falsch: erster Tab landet im Logo.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "ZUG-07",
@@ -4301,7 +4377,8 @@
    "status": "vorläufig",
    "check": "check_demo.py <Seite> 0 Fehler hell/dunkel bei 1440 und 390 px.",
    "example_hint": "Gliederung der Erklärungsseite als sb-prose mit Abschnitt „Bekannte Einschränkungen“; falsch: „vollständig barrierefrei“ ohne Prüfung.",
-   "changed": "2026-10-19"
+   "note": "D98 lässt die Regel vorläufig: Vor der ersten Veröffentlichung eines Produkts wird die Erklärung rechtlich geprüft; Teile der Vorlage sind noch nicht belegt (shared/ACCESSIBILITY-STATEMENT.md, UNVERIFIED).",
+   "changed": "2026-10-24"
   },
   {
    "id": "ZUG-08",
@@ -4412,17 +4489,19 @@
    "do": "<script src='assets/theme-init.js'></script> vor dem ersten <link rel='stylesheet'>.",
    "dont": "theme-init.js am Ende des body (heller Blitz); sprite.css weglassen.",
    "numbers": "",
-   "decisions": [],
-   "source": "systems/sebaro/spec/09-platform-web.md §1, §2; demo/components.html Z. 7-14",
+   "decisions": [
+    "D98"
+   ],
+   "source": "DECISIONS.md D98; systems/sebaro/spec/09-platform-web.md §1, §2; demo/components.html Z. 7-14",
    "platforms": [
     "web",
     "desktop"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Seite mit gespeichertem 'dark' laden: kein heller Blitz.",
    "example_hint": "Kopf-Snippet zum Kopieren in sb-code; falsch-Variante mit theme-init am Ende.",
    "note": "systems/sebaro/AGENTS.md §3 (Quickstart: theme-button.js mit defer im head, data-sb-theme-button, ohne sprite.css; Tailwind mit layer(components)) weicht ab; spec/09 und die Demo-Seiten gelten.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "WEB-02",
@@ -4437,42 +4516,44 @@
    "decisions": [
     "D36",
     "D75",
-    "D87"
+    "D87",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/03-signature.md §6.2; spec/09-platform-web.md §2, §6, §6.1; spec/01-foundations.md §9; shared/TOKEN-CONTRACT.md §9; demo/assets/theme-button.js",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/03-signature.md §6.2; spec/09-platform-web.md §2, §6, §6.1; spec/01-foundations.md §9; shared/TOKEN-CONTRACT.md §9; demo/assets/theme-button.js",
    "platforms": [
     "web"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "check_demo THM1–THM3; zweimal drücken: data-theme weg, sb-theme leer; grep prefers-color-scheme in Komponenten-CSS = 0.",
    "example_hint": "Taste mit Live-Anzeige des gespeicherten Werts und der Statusansage; falsch: Taste, die ihre Beschriftung auf „Dunkel“ ändert.",
    "note": "theme-button.js hat deutsche und englische Ansagen; weitere Sprachen über window.sbMessages (TEC-10).",
-   "changed": "2026-10-20"
+   "changed": "2026-10-24"
   },
   {
    "id": "WEB-03",
    "area": "plattform-web",
    "title": "Fußzeile mit den Pflichtlinks",
-   "rule": "Schließ jede Website mit einer Fußzeile: Tintenlinie oben, Copyright-Zeile in caption/text-muted, Links „Impressum“, „Datenschutz“, „Barrierefreiheit“ und „GitHub“ mit external-link--16, dann „Darstellung“ mit der Wahl „Farbton: Kühl · Warm“ (FAR-15).",
-   "rule_en": "Site footer: ink line on top, caption copyright, links Impressum, Datenschutz, Barrierefreiheit, GitHub (+ external-link icon), then „Darstellung“ with „Farbton: Kühl · Warm“ (FAR-15).",
-   "why": "Pflichtlinks immer am selben Ort; extern endet im Icon (D56 (2)); Ebenenlinie D46. D91 Z3a: Die Wahl des Farbtons steht im Fuß unter „Darstellung“; der Kopf behält nur „Hell oder Dunkel“.",
+   "rule": "Schließ jede Website mit einer Fußzeile: Tintenlinie oben, Copyright-Zeile in caption/text-muted, Links „Impressum“, „Datenschutz“ und „Barrierefreiheit“ immer, „GitHub“ mit external-link--16 nur, wenn das Produkt ein öffentliches Repository hat; dazu immer „Darstellung“ mit der Wahl „Farbton: Kühl · Warm“ (FAR-15).",
+   "rule_en": "Site footer: ink line on top, caption copyright, links Impressum, Datenschutz, Barrierefreiheit always, GitHub (+ external-link icon) only when the product has a public repository; always „Darstellung“ with „Farbton: Kühl · Warm“ (FAR-15).",
+   "why": "Pflichtlinks immer am selben Ort; extern endet im Icon (D56 (2)); Ebenenlinie D46. D91 Z3a: Die Wahl des Farbtons steht im Fuß unter „Darstellung“; der Kopf behält nur „Hell oder Dunkel“. D98 (V10), Antwort „Nur bei öffentlichem Code (Empfohlen)“: „GitHub“ ist der einzige Link, der fehlen darf.",
    "do": "<footer class='sb-site-footer'>…<ul class='sb-site-footer__links'>…</ul><section class='sb-site-footer__display' aria-labelledby='d' data-sb-tone-choice hidden><h2 id='d'>Darstellung</h2><fieldset class='sb-segmented'><legend>Farbton</legend>…",
-   "dont": "Impressum nur im Menü; Fußzeile mit grauem Grund; die Wahl des Farbtons im Kopf.",
+   "dont": "Impressum nur im Menü; Fußzeile mit grauem Grund; die Wahl des Farbtons im Kopf; ein Link „GitHub“ ohne öffentlichen Code.",
    "numbers": "",
    "decisions": [
     "D56",
     "D46",
-    "D91"
+    "D91",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/02-components.md §5; spec/07-voice.md §5; spec/09-platform-web.md §6.2; css/sebaro.css .sb-site-footer",
+   "source": "DECISIONS.md D98 (V10); systems/sebaro/spec/02-components.md §5; spec/07-voice.md §4.8, §5; spec/09-platform-web.md §4.1, §6.2; css/sebaro.css .sb-site-footer",
    "platforms": [
     "web"
    ],
-   "status": "vorläufig",
-   "check": "Review jeder Seite.",
-   "example_hint": "Fußzeile der Guide-Seite; falsch: graue Fußfläche ohne Barrierefreiheit-Link.",
-   "changed": "2026-10-21",
-   "note": "Den Ort „Darstellung“ im Fuß hat der Inhaber gewählt (D91 Z3a); der Rest der Fußzeile ist Spezifikation ohne eigene I-Zeile, deshalb bleibt die Regel vorläufig."
+   "status": "entschieden",
+   "check": "Review jeder Seite: Impressum, Datenschutz und Barrierefreiheit im Fuß; GitHub nur bei öffentlichem Repository.",
+   "example_hint": "Fußzeile der Guide-Seite (ihr Code ist öffentlich, deshalb mit GitHub); falsch: graue Fußfläche ohne Barrierefreiheit-Link.",
+   "changed": "2026-10-24",
+   "note": "Den Ort „Darstellung“ im Fuß hat der Inhaber gewählt (D91 Z3a), die übrige Fußzeile mit D98 bestätigt, „GitHub“ nur bei öffentlichem Code (V10). Dieser Guide zeigt den Link, weil sein Code öffentlich ist."
   },
   {
    "id": "WEB-04",
@@ -4485,17 +4566,18 @@
    "dont": "Gedruckte Bedienknöpfe, Seitenzahlen oder Fußlinks.",
    "numbers": "",
    "decisions": [
-    "D91"
+    "D91",
+    "D98"
    ],
-   "source": "css/sebaro.css (@media print); systems/sebaro/spec/09-platform-web.md §18.3; spec/03-signature.md §5.3",
+   "source": "DECISIONS.md D98; css/sebaro.css (@media print); systems/sebaro/spec/09-platform-web.md §18.3; spec/03-signature.md §5.3",
    "platforms": [
     "web"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "Druckvorschau hell und dunkel.",
    "example_hint": "Hinweis auf die Druckvorschau der Regelseite; falsch: gedruckte Taste „Hell oder Dunkel“.",
-   "note": "D91 W8a entscheidet nur, dass Papier immer hell ist (WEB-11); was beim Druck wegfällt, ist Spezifikation ohne eigene I-Zeile, deshalb bleibt die Regel vorläufig.",
-   "changed": "2026-10-21"
+   "note": "D91 W8a entscheidet, dass Papier immer hell ist (WEB-11); was beim Druck wegfällt, hat der Inhaber mit D98 bestätigt.",
+   "changed": "2026-10-24"
   },
   {
    "id": "WEB-05",
@@ -4705,17 +4787,18 @@
     "D39",
     "D40",
     "D46",
-    "D36"
+    "D36",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/08-platform-android.md §14, §15; spec/01-foundations.md §6",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/08-platform-android.md §14, §15; spec/01-foundations.md §6",
    "platforms": [
     "mobile"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "lint-sebaro-android.sh A1–A9 Exit 0 (Grep, an einer echten App nicht geprüft).",
    "example_hint": "Tabelle M3-Komponente → sebaro-Ersatz; falsch: Screen mit BadgedBox und ElevatedCard.",
    "note": "spec/08 §14 erlaubt Snackbar mit overlay shadow, ModalBottomSheet auf surfaceRaised und OutlinedCard; D46 (Linien statt Flächen und Schatten) gilt.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "MOB-03",
@@ -4892,8 +4975,8 @@
    "status": "vorläufig",
    "check": "check_demo.py --csp \"default-src 'self'; style-src 'self'; script-src 'self'\"; in echter Tauri-Webview nicht verifiziert (spec/09 §15).",
    "example_hint": "sb-window mit Titelleiste, Seitenleiste, Inhalt und Aktionszone; falsch: getönte Seitenleiste mit Schatten und petrolfarbenen Reitern.",
-   "note": "Titelleiste, Größen, Menü, Kürzel, Reiter, Ziehen und Ablegen, mehrere Fenster, Mitteilungen und Fenstergrund regeln DSK-06 bis DSK-15 (D91). D91 entscheidet hier nur den Fenstergrund (F13a, DSK-14). Dass das Fenstergerüst im System gebaut wird, hat der Inhaber entschieden (D80); seine Form und die CSP stehen nur in der Spezifikation und sind in keiner echten Tauri-Webview geprüft, deshalb bleibt die Regel vorläufig.",
-   "changed": "2026-10-21"
+   "note": "Titelleiste, Größen, Menü, Kürzel, Reiter, Ziehen und Ablegen, mehrere Fenster, Mitteilungen und Fenstergrund regeln DSK-06 bis DSK-15 (D91). D91 entscheidet hier nur den Fenstergrund (F13a, DSK-14). Dass das Fenstergerüst im System gebaut wird, hat der Inhaber entschieden (D80); seine Form und die CSP stehen nur in der Spezifikation und sind in keiner echten Tauri-Webview geprüft. Deshalb lässt D98 die Regel vorläufig, bis sie in einer echten Tauri-Webview mit novalis gelaufen ist (D89: erst die offenen Punkte, dann novalis).",
+   "changed": "2026-10-24"
   },
   {
    "id": "DSK-02",
@@ -5270,16 +5353,17 @@
    "dont": "color: #66696E;",
    "numbers": "grep -nE '#[0-9A-Fa-f]{3,8}\\b' auf Komponenten-CSS → 0 Treffer; Color(0x nur in dist/SebaroTheme.kt",
    "decisions": [
-    "D4"
+    "D4",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/01-foundations.md Einleitung, §10; spec/09-platform-web.md §5; css/sebaro.css Z. 3-4",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/01-foundations.md Einleitung, §10; spec/09-platform-web.md §5; css/sebaro.css Z. 3-4",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "sh lint-colour.sh <css> <pages> Exit 0 (L5); check_site.py CSS.",
    "example_hint": "Codeblock richtig/falsch mit Lint-Ausgabe vorher/nachher.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "TEC-02",
@@ -5316,17 +5400,18 @@
    "dont": "Ansichten ohne Markierung; Ergebnis behaupten ohne Lauf.",
    "numbers": "Standard-Erwartung Hauptaktion 1; Kacheln zählen als „App-Zeichen“; Farben mit eigenem Job zählen nur in ihrem Teil: Diff-Flächen auf der Diff-Zeile, Kategorie in .sb-category, Markierung in mark / .sb-mark, Diagrammfarben in .sb-chart und .sb-scale-cell, Codefarben im Code; Hover- und Druckflächen sind neutral",
    "decisions": [
-    "D36"
+    "D36",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/03-signature.md §1.4 (Colour count); demo/assets/sb-colour-count.js; shared/DEMO-CHECK.md 1.3 §3.4; tools/check_demo.py (colour)",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/03-signature.md §1.4 (Colour count); demo/assets/sb-colour-count.js; shared/DEMO-CHECK.md 1.3 §3.4; tools/check_demo.py (colour)",
    "platforms": [
     "web",
     "desktop"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "sbColourCount(view).pass === true; Lücken: Pseudo-Elemente und Fokus-Outlines werden nicht gelesen.",
    "example_hint": "Live-Ansicht mit Prüfzeile; Umschalter fügt eine zweite lindgrüne Fläche ein und zeigt „nicht bestanden“.",
-   "changed": "2026-10-23"
+   "changed": "2026-10-24"
   },
   {
    "id": "TEC-04",
@@ -5339,16 +5424,17 @@
    "dont": "<div class='sb-phone'> in einer echten App; is-active per JS setzen; Demo-Ordner kopieren.",
    "numbers": "",
    "decisions": [
-    "D80"
+    "D80",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/02-components.md §0.1, §4.11, §5.1, §7; spec/09-platform-web.md §4.1, §16; systems/sebaro/AGENTS.md §2",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §0.1, §4.11, §5.1, §7; spec/09-platform-web.md §4.1, §16; systems/sebaro/AGENTS.md §2",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "grep -rn 'demo-\\|sb-phone\\|is-hover\\|is-pressed\\|is-focus' src/ im Produkt = 0.",
    "example_hint": "Zustandsmatrix einer Nebenaktion mit eingefrorenen is-Klassen (nur im Guide); falsch: is-active im Produktcode.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-24"
   },
   {
    "id": "TEC-05",
@@ -5362,17 +5448,18 @@
    "numbers": "Breakpoints sm 640, lg 1024 (md und xl gestrichen, TOKEN-CONTRACT 1.7); Container-Abfragen statt weiterer Breakpoints (RAU-03)",
    "decisions": [
     "D36",
-    "D80"
+    "D80",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/09-platform-web.md §8",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/09-platform-web.md §8",
    "platforms": [
     "web",
     "desktop"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "grep -rnE 'bg-(accent|link|success|warning|danger|info)|-subtle' src/ = 0 außerhalb Schalter, Radio, Regler.",
    "example_hint": "Tailwind-Snippet richtig/falsch in sb-code.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-24"
   },
   {
    "id": "TEC-06",
@@ -5386,17 +5473,18 @@
    "numbers": "16 Screenshots; Unittests 0 Skips (venv)",
    "decisions": [
     "D15",
-    "D23"
+    "D23",
+    "D98"
    ],
-   "source": "systems/sebaro/spec/11-checklist.md §4; AGENTS.md §9",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/11-checklist.md §4; AGENTS.md §9",
    "platforms": [
     "alle"
    ],
-   "status": "vorläufig",
+   "status": "entschieden",
    "check": "CHECKS.md mit Befehl, Datum, Exit, Ergebnis.",
    "example_hint": "Prüfliste als sb-check-list mit einer übersprungenen Zeile und Grund; falsch: „alles grün“ ohne Liste.",
    "note": "README.md (726 Tests, 0 ausgelassen) und AGENTS.md (763 Tests, 1 übersprungen) widersprechen sich.",
-   "changed": "2026-10-19"
+   "changed": "2026-10-24"
   },
   {
    "id": "TEC-07",

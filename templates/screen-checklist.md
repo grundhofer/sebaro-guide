@@ -1,7 +1,7 @@
 # Screen checklist
 
 Walk this for every screen in **light and dark**, at **390 px and 1440 px** (desktop apps: smallest and a wide window).
-Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D96.
+Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D98.
 
 ## Colour and hierarchy
 - [ ] Cobalt only for current place, links and focus; lime only for the one primary action (FAR, AKT)
@@ -26,6 +26,9 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
       every action group; wide windows: the state sentence (the status total, once) at the start of the zone (AKT, STA)
 - [ ] Busy primary action shows its own label and ink bar; no spinner over the view, no toast for the result (AKT)
 - [ ] Delete opens a confirmation; only destructive actions carry the 45° cut (AKT, FOR)
+- [ ] Required fields empty: the primary action stays enabled, its press sends nothing, says „<Beschriftung> fehlt.“
+      at each and moves focus to the first (`sb-form.js` on websites); disabled only while the action cannot work at
+      all (STA-03, D98)
 - [ ] Toast only for a reversible result outside the primary action, fixed duration, never for errors (EBE)
 - [ ] Motion only in answer to an action: new content enters from below (8 px, 200 ms); only a fade with reduced
       motion / „Bewegung immer reduzieren“ (BEW)
@@ -65,6 +68,8 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
       key glyphs („⇧⌘P“) (SCH, ICO)
 - [ ] Code only in the five looks (three tones, comments grey, rest ink), no bold or italic; errors and diffs not by colour alone (TXT, FAR)
 - [ ] du, verb + thing, concrete sentences; U+00A0 between number and unit; German thousands 10.000 (TXT)
+- [ ] Groups of people: a neutral word („Teilnehmende“, „Mitglieder“), else both forms („Nutzerinnen und Nutzer“);
+      never a sign inside the word: no star, colon, underscore, middle dot or Binnen-I (TXT-05, D98)
 - [ ] Money, ranks, „etwa“, „keine“ vs „keine Angabe“, no automatic hyphenation in running text; menu paths as
       „Einstellungen, dann Über“ (TXT-12 to TXT-16)
 - [ ] No UI string built into code; script messages and number/date formats follow the page's language (TEC-10)
@@ -81,3 +86,4 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
 - [ ] No claim without proof; outflows stay visible; unknown = „nicht belegt“ (BEL)
 - [ ] Websites: footnote digits are text, notes 1..n in one column with backlinks; apps: claim rows (BEL)
 - [ ] No invented demo data shipped; no foreign network requests (WEB)
+- [ ] Website footer: „Impressum“, „Datenschutz“, „Barrierefreiheit“ always; „GitHub“ only with a public repository (WEB-03, D98)

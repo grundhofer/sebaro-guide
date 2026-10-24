@@ -59,20 +59,20 @@ Zeig jeden Fehlschlag: einen gescheiterten oder übersprungenen Prüfschritt, ei
 - **Prüfung:** Zählung der Prüfliste = Zählung in facts.json; check_facts.py erlaubt nur die vier Wörter; CHECKS.md listet jede übersprungene Prüfung mit Grund.
 - **Entscheidung:** D85, D15, D24 · **Quelle:** `DECISIONS.md D85, D15, D24; systems/sebaro/spec/07-voice.md §1; spec/10-facts.md §3.1; spec/02-components.md §6`
 
-### HAL-05 Leise gestalten, laut ist nur eins  ·  vorläufig  ·  alle
+### HAL-05 Leise gestalten, laut ist nur eins  ·  entschieden  ·  alle
 
-Halte jede Ansicht ruhig: höchstens eine laute Fläche (die lindgrüne Hauptaktion), keine Zähl-Badges, keine roten Punkte. Schreib sachlich, mit Zahlen, ohne Ausrufezeichen, Hype, Druck oder Schuld; Erinnerungen nur, wenn die Person sie eingeschaltet hat.
+Halte jede Ansicht ruhig: höchstens eine laute Fläche (die lindgrüne Hauptaktion), keine Zahlen an Seitenleiste, Reitern und unterer Navigation, also keine Zähl-Badges und keine roten Punkte; Zahlen stehen im Listenkopf und im Stand-Satz. Schreib sachlich, mit Zahlen, ohne Ausrufezeichen, Hype, Druck oder Schuld; Erinnerungen nur, wenn die Person sie eingeschaltet hat.
 
-*EN:* Calm views and copy: at most one loud element (the lime primary action), no count badges or red dots, no exclamation marks, hype, pressure or guilt; reminders only when turned on.
+*EN:* Calm views and copy: at most one loud element (the lime primary action), no numbers on sidebar, tabs or bottom navigation (no count badges or red dots; numbers go into the list head and the state sentence), no exclamation marks, hype, pressure or guilt; reminders only when turned on.
 
-- **Warum:** Richtung A trug „Verhalten aus G5 ‚Leise‘“ (concepts/runde-2/BRIEF.md §3 A); D39 (I): „höchstens eine hauptaktion“; D48 (I) verwarf den Stand-Satz als eigene Regel („das nimmt nur platz weg“). Projektwerte: „No mascots, no clutter.“ (research/04 §3).
+- **Warum:** Richtung A trug „Verhalten aus G5 ‚Leise‘“ (concepts/runde-2/BRIEF.md §3 A); D39 (I): „höchstens eine hauptaktion“; D48 (I) verwarf den Stand-Satz als eigene Regel („das nimmt nur platz weg“). Projektwerte: „No mascots, no clutter.“ (research/04 §3). D98 (V3), Antwort „Keine Zahlen (Empfohlen)“: Zahlen stehen im Listenkopf und im Stand-Satz.
 - **So:** „3 von 5 erledigt, 60 %. Noch 2 offen.“; „Mehr steht heute nicht an.“; Erinnerung „Zeit für: Wasser trinken (5 von 8)“.
 - **Nicht so:** „Super!“, „Ups“, „revolutionär“, „Du hast 3 verpasst“, „Deine Serie ist in Gefahr“, Countdowns, Emoji, Konfetti als Standard, pulsierende Knöpfe.
 - **Werte:** höchstens 1 Hauptaktion je Ansicht; 0 Zähl-Badges
-- **Prüfung:** grep -rn '!' in Strings; Bannwort-grep spec/07 §7; Review je Ansicht: höchstens eine lindgrüne Fläche, keine Badge-Zahl.
-- **Entscheidung:** D39, D48 · **Quelle:** `DECISIONS.md D39, D48; systems/sebaro/SYSTEM.md §5; spec/07-voice.md §1, §4.9, §6.4; research/09-grundlagen-ohne-metapher.md §3 G5`
+- **Prüfung:** grep -rn '!' in Strings; Bannwort-grep spec/07 §7; Review je Ansicht: höchstens eine lindgrüne Fläche, keine Zahl an Seitenleiste, Reitern oder unterer Navigation.
+- **Entscheidung:** D39, D48, D98 · **Quelle:** `DECISIONS.md D39, D48, D98 (V3); systems/sebaro/SYSTEM.md §5; spec/07-voice.md §1, §4.9, §6.4; research/09-grundlagen-ohne-metapher.md §3 G5`
 
-### HAL-06 Kein Ornament ohne Daten  ·  vorläufig  ·  alle
+### HAL-06 Kein Ornament ohne Daten  ·  entschieden  ·  alle
 
 Gib jedem wiederkehrenden Gestaltungselement einen echten Wert oder eine Funktion. Die Identität muss auf Alltagsbildschirmen (Liste, Formular, Artikel) sichtbar sein, nicht nur im Heldenbild.
 
@@ -82,7 +82,7 @@ Gib jedem wiederkehrenden Gestaltungselement einen echten Wert oder eine Funktio
 - **So:** Signaturelemente, die überall wirken: Tintenlinien, untere Aktionszone, 3-px-Ortslinie, Fortschritt in der Hauptaktion.
 - **Nicht so:** Deko-Illustrationen als Leitbild, Tagbogen ohne Information, Schmucklinien ohne Bedeutung.
 - **Prüfung:** Vergleichsbogen ohne Heldenfeld und Faktenseite: ist sebaro noch erkennbar? (research/09 §4.1 Punkt 4)
-- **Entscheidung:** D46, D48 · **Quelle:** `concepts/runde-2/BRIEF.md §2.1; research/09-grundlagen-ohne-metapher.md §1.2, §4.1 Punkte 3–4`
+- **Entscheidung:** D46, D48, D98 · **Quelle:** `DECISIONS.md D98; concepts/runde-2/BRIEF.md §2.1; research/09-grundlagen-ohne-metapher.md §1.2, §4.1 Punkte 3–4`
 
 ### HAL-07 Ein System für alle Produkte  ·  entschieden  ·  alle
 
@@ -96,17 +96,17 @@ Nutz in jeder App, Website und Desktop-App genau ein System: sebaro, mit gleiche
 - **Prüfung:** export_system.py --verify <Mappe>; Start und Links je Plattform gegen spec/03 §14–§15.
 - **Entscheidung:** D49, D52, D54, D66 · **Quelle:** `BRIEF.md „Auftrag“; DECISIONS.md D49, D54, D66; sebaroDesign AGENTS.md §2, §7`
 
-### HAL-08 Skizze vor Ausbau  ·  vorläufig  ·  alle
+### HAL-08 Skizze vor Ausbau  ·  entschieden  ·  alle
 
-Zeig dem Inhaber vor jedem Ausbau eine Skizzenseite mit gerenderten Bildschirmen, je Frage zwei Wege, einer als Vorschlag markiert. Gebaut wird erst, was er gewählt hat; seine Antwort steht als I-Zeile mit Wortlaut in DECISIONS.md.
+Zeig dem Inhaber vor jedem Ausbau eine Skizzenseite mit gerenderten Bildschirmen, je Frage mindestens zwei Wege, einer als Vorschlag markiert. Gebaut wird erst, was er gewählt hat; seine Antwort steht als I-Zeile mit Wortlaut in DECISIONS.md.
 
-*EN:* Before any build, show the owner a rendered sketch page (two ways per question, one marked as proposal); build only what he picked and record his words as an I-row.
+*EN:* Before any build, show the owner a rendered sketch page (at least two ways per question, one marked as proposal); build only what he picked and record his words as an I-row.
 
-- **Warum:** D35 (O): „Runde 1 baute vier komplette Systeme, bevor du eines gesehen hast.“ Seitdem folgen die Runden 2–5 diesem Ablauf; D45 (I) nennt „Skizze vor Ausbau nach D35“. Antwortformat wie „1b 2b 3b“ (D56).
+- **Warum:** D35 (O): „Runde 1 baute vier komplette Systeme, bevor du eines gesehen hast.“ Seitdem folgen die Runden 2–5 diesem Ablauf; D45 (I) nennt „Skizze vor Ausbau nach D35“. Antwortformat wie „1b 2b 3b“ (D56). D98 bestätigt die Regel mit „mindestens zwei Wegen“.
 - **So:** Offene Punkte im Guide als „offen“ führen, bis eine I-Zeile existiert.
 - **Nicht so:** Komplette Systeme vor einer Wahl bauen; I-Zeilen selbst schreiben; offene Inhaberfragen selbst beantworten.
 - **Prüfung:** Jede Regel im Guide hat eine D-Nummer; ohne I-Zeile trägt sie den Status vorläufig oder offen.
-- **Entscheidung:** D35, D45, D56 · **Quelle:** `DECISIONS.md D35, D45, D56; concepts/runde-5-desktop/skizze.html (Einleitung)`
+- **Entscheidung:** D35, D45, D56, D98 · **Quelle:** `DECISIONS.md D35, D45, D56, D98; concepts/runde-5-desktop/skizze.html (Einleitung)`
 
 ### HAL-09 Nichts von fremden Servern  ·  entschieden  ·  alle
 
@@ -164,7 +164,7 @@ Nutze die Kobalt-Familie nur für: 3-px-Ortskante, Link- und Fußnotenlinie, akt
 - **Prüfung:** Jede Nutzung von --sb-color-accent/link/focus/selection liegt in der Liste spec/01 §1.1; keine background-color in accent hinter Text.
 - **Entscheidung:** D37, D5, D52 · **Quelle:** `systems/sebaro/spec/01-foundations.md §1.1, §1.3, §1.7, §8; spec/03-signature.md §1.1, §1.4 L4`
 
-### FAR-04 Lindgrün bleibt unterscheidbar  ·  vorläufig  ·  alle
+### FAR-04 Lindgrün bleibt unterscheidbar  ·  entschieden  ·  alle
 
 Halte Lindgrün zu jeder anderen Farbe des Systems mindestens ΔE OK 0,08 entfernt, unter jeder Farbfehlsichtigkeit mindestens 0,04. Miss jede neue Farbe vor der Aufnahme gegen primary-action.
 
@@ -175,7 +175,7 @@ Halte Lindgrün zu jeder anderen Farbe des Systems mindestens ΔE OK 0,08 entfer
 - **Nicht so:** Grünliche Chart- oder Statusfarbe nahe am Lindgrün einführen.
 - **Werte:** --sb-color-primary-action #A9E773 / #A9E277; ΔE OK ≥ 0.08 normal, ≥ 0.04 je CVD; nächste Rolle hell warning 0.346, dunkel info 0.178
 - **Prüfung:** python3 tools/check_palette.py palettes/sebaro.json (Exit 0) im Quellrepo.
-- **Entscheidung:** D16, D37 · **Quelle:** `systems/sebaro/spec/01-foundations.md §1.4 (Measured); palettes/sebaro.json extras.checks`
+- **Entscheidung:** D16, D37, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §1.4 (Measured); palettes/sebaro.json extras.checks`
 
 ### FAR-05 Gründe in vier Grautönen  ·  entschieden  ·  alle
 
@@ -190,7 +190,7 @@ Lege jede Ansicht auf bg. surface-sunken trägt Eingabefelder, Codeblöcke und d
 - **Prüfung:** Computed background der Seite = --sb-color-bg in beiden Modi; keine Hex-Werte im Code.
 - **Entscheidung:** D40, D46, D85 · **Quelle:** `systems/sebaro/spec/01-foundations.md §1.2, §6; palettes/sebaro.json modes`
 
-### FAR-06 Drei Textgrau mit klaren Grenzen  ·  vorläufig  ·  alle
+### FAR-06 Drei Textgrau mit klaren Grenzen  ·  entschieden  ·  alle
 
 Setz Inhalt in text und Nebentext (Datum, Zähler, Meta, nicht gewählte Icons) in text-muted. text-subtle nur für großen (≥ 24 px oder ≥ 18,66 px bei ≥ 700) oder nicht wesentlichen Text.
 
@@ -201,9 +201,9 @@ Setz Inhalt in text und Nebentext (Datum, Zähler, Meta, nicht gewählte Icons) 
 - **Nicht so:** Hinweise oder Fehlermeldungen in --sb-color-text-subtle.
 - **Werte:** --sb-color-text #1C1E22 / #EBEDEF; --sb-color-text-muted #66696E / #9D9EA1 (5.05 / 6.76 auf bg); --sb-color-text-subtle #828589 / #797A7D (3.40 / 4.22 auf bg)
 - **Prüfung:** tools/color.py contrast je genutztem Paar; text-subtle nur an Elementen ≥ 24 px oder ≥ 18.66 px/700 bzw. dekorativ.
-- **Entscheidung:** D6 · **Quelle:** `systems/sebaro/spec/01-foundations.md §1.2, §1.7; palettes/sebaro.json rules.textSubtleNonEssential`
+- **Entscheidung:** D6, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §1.2, §1.7; palettes/sebaro.json rules.textSubtleNonEssential`
 
-### FAR-07 Haarlinie gliedert, border-strong begrenzt  ·  vorläufig  ·  alle
+### FAR-07 Haarlinie gliedert, border-strong begrenzt  ·  entschieden  ·  alle
 
 Trenne Zeilen und Abschnitte mit 1 px border. Begrenze Bedienelemente (Nebenaktionen, Tags, Feldgrundlinien, Schalter aus, Radio-Ring) und Chart-Achsen mit border-strong (≥ 3 : 1). Eine Haarlinie ist nie die einzige Grenze eines Bedienelements.
 
@@ -214,20 +214,20 @@ Trenne Zeilen und Abschnitte mit 1 px border. Begrenze Bedienelemente (Nebenakt
 - **Nicht so:** Eingabefeld nur mit --sb-color-border umrahmen.
 - **Werte:** --sb-color-border #D7D9DD / #32353C; --sb-color-border-strong #84868A / #707379 (hell 3.34/3.55/3.64/3.05, dunkel 3.81/3.51/3.27/4.11 auf bg/surface/surface-raised/surface-sunken)
 - **Prüfung:** Kontrast border-strong gegen den Grund jedes Bedienelements ≥ 3 : 1; kein Bedienelement, dessen einzige Kante --sb-color-border ist.
-- **Entscheidung:** D6 · **Quelle:** `palettes/sebaro.json modes + meta.notes (Fix-Stufe 2026-10-16); systems/sebaro/spec/01-foundations.md §1.2, §1.7, §5.2 (Dunkelwerte dort veraltet)`
+- **Entscheidung:** D6, D98 · **Quelle:** `DECISIONS.md D98; palettes/sebaro.json modes + meta.notes (Fix-Stufe 2026-10-16); systems/sebaro/spec/01-foundations.md §1.2, §1.7, §5.2 (Dunkelwerte dort veraltet)`
 
-### FAR-08 Zeiger und Druck ändern nur die Füllung  ·  vorläufig  ·  alle
+### FAR-08 Zeiger und Druck ändern nur die Füllung  ·  entschieden  ·  alle
 
 Zeig Hover mit hover-fill und Druck mit pressed-fill, eine Graustufe vom Grund weg; im Dunkelmodus heller als bg, nie dunkler. Links und Textaktionen zeigen Hover am Wort. Nie Tönung, Schatten, Ripple oder Bewegung als Zustand.
 
 *EN:* Hover = --sb-color-hover-fill, pressed = --sb-color-pressed-fill (lighter than bg in dark mode); never tint, shadow, ripple or motion as state.
 
-- **Warum:** Eine farbige Hover-Fläche wäre eine Rolle ohne Job; ein dunklerer Hover wirkt im Dunkelmodus wie ein Loch (Fix-Stufe AD14).
+- **Warum:** Eine farbige Hover-Fläche wäre eine Rolle ohne Job; ein dunklerer Hover wirkt im Dunkelmodus wie ein Loch (Fix-Stufe AD14). D98 (V7), Antwort „Kurz grau, wie heute (Empfohlen)“: Antippen zeigt auch auf Android kurz die graue Füllung wie auf allen Plattformen, keine Welle.
 - **So:** background: var(--sb-color-hover-fill) an Listenzeilen und ruhigen Bedienelementen.
 - **Nicht so:** box-shadow beim Hover, accent-subtle als Hover, opacity-Overlays, surface-sunken als Hover (dunkel #090C11).
 - **Werte:** --sb-color-hover-fill #E9EBEE / #212429; --sb-color-pressed-fill #E7E9EC / #25282F; Übergang 120 ms (--sb-motion-duration-short)
 - **Prüfung:** Hover-Regeln nutzen hover-fill; Texte darauf ≥ 4,5 : 1; grep box-shadow zeigt nur Danger-Inset und forced-colors.
-- **Entscheidung:** – · **Quelle:** `systems/sebaro/spec/02-components.md §0.2; spec/01-foundations.md §11; css/sebaro.css Z. 15-16, 287-288`
+- **Entscheidung:** D98 · **Quelle:** `DECISIONS.md D98 (V7); systems/sebaro/spec/02-components.md §0.2; spec/01-foundations.md §11; css/sebaro.css Z. 15-16, 287-288`
 
 ### FAR-09 Hell und Dunkel sind gleichwertig  ·  entschieden  ·  alle
 
@@ -349,7 +349,7 @@ Setz Zahlen in Tabellen, Zählern, Timern, Statistiken und Daten in sebaro Sans 
 - **Prüfung:** Zahlenspalten haben font-variant-numeric: tabular-nums; grep sb-mono in Statistik-Komponenten = 0.
 - **Entscheidung:** D38 · **Quelle:** `systems/sebaro/spec/01-foundations.md §2.1, §2.2; spec/02-components.md §3.6, §3.10`
 
-### SCH-04 Schriftskala: wenige feste Rollen  ·  vorläufig  ·  alle
+### SCH-04 Schriftskala: wenige feste Rollen  ·  entschieden  ·  alle
 
 Nutze nur die Rollen der Skala. Web: display 40/48, headline 28/36, title 20/28, body und body-strong 16/24, label, caption und code 14/20, numeric 16/24. Apps: display 32/40, headline 24/32, Rest gleich; label-small 12/16 nur für die Bottom-Navigation. Eine Gewichtsstufe je Ebene, kein Kursiv in der Oberfläche.
 
@@ -360,7 +360,7 @@ Nutze nur die Rollen der Skala. Web: display 40/48, headline 28/36, title 20/28,
 - **Nicht so:** 18 px oder 22 px; Stock-M3-labelMedium für Fließtext (wird 12 px); kursive Hinweise.
 - **Werte:** Web: display 40/48 670/700; headline 28/36 670/700; title 20/28 670/700; body 16/24 400/430; body-strong 16/24 570/600; label 14/20 570/600; caption 14/20 400/430; code 14/20 500/500; numeric 16/24 400/430. Mobile: --sb-type-mobile-display 32/40, -headline 24/32, -label-small 12/16 400/430
 - **Prüfung:** Alle font-size-Werte ∈ {12 nur Bottom-Nav, 14, 16, 20, 24, 28, 32, 40} px; font-style: italic nur an <cite>/<i> in Artikeln.
-- **Entscheidung:** D38, D40 · **Quelle:** `systems/sebaro/spec/01-foundations.md §2.2, §2.3, §2.5 Regel 3; systems/sebaro/AGENTS.md §10`
+- **Entscheidung:** D38, D40, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §2.2, §2.3, §2.5 Regel 3; systems/sebaro/AGENTS.md §10`
 
 ### SCH-05 Dunkelmodus: Schrift kräftiger und weiter  ·  entschieden  ·  alle
 
@@ -375,7 +375,7 @@ Setz im Dunkelmodus jede sebaro-Sans-Rolle 30 Gewichtsstufen kräftiger und 0,01
 - **Prüfung:** Jede font:-Zeile hat letter-spacing derselben Rolle; computed font-weight/letter-spacing dunkel = Tokenwerte.
 - **Entscheidung:** D40, D44, D70 · **Quelle:** `systems/sebaro/spec/01-foundations.md §2.4, §11; spec/02-components.md §0.3; spec/09-platform-web.md §3; systems/sebaro/AGENTS.md (Dark typography)`
 
-### SCH-06 Überschriften umbrechen, nie abschneiden  ·  vorläufig  ·  alle
+### SCH-06 Überschriften umbrechen, nie abschneiden  ·  entschieden  ·  alle
 
 Lass Überschriften umbrechen und trenn sie von Hand (&shy;), nie automatisch und nie mit Auslassungspunkten. Bezeichner und Code in Überschriften brechen nie; unter 640 px nutzt die Seitenüberschrift die mobile Display-Rolle 32/40.
 
@@ -386,7 +386,7 @@ Lass Überschriften umbrechen und trenn sie von Hand (&shy;), nie automatisch un
 - **Nicht so:** text-overflow: ellipsis an Titeln; hyphens: auto an Überschriften.
 - **Werte:** Grenze 639.98px; mobile display 32/40
 - **Prüfung:** Keine ellipsis an h1–h6; Review bei 390 px.
-- **Entscheidung:** D28 · **Quelle:** `css/sebaro.css Z. 37-38, 79-81; systems/sebaro/spec/02-components.md §10; spec/01-foundations.md §2.5 Regel 1`
+- **Entscheidung:** D28, D98 · **Quelle:** `DECISIONS.md D98; css/sebaro.css Z. 37-38, 79-81; systems/sebaro/spec/02-components.md §10; spec/01-foundations.md §2.5 Regel 1`
 
 ### SCH-07 Überschriften-Rollen als Klassen  ·  entschieden  ·  web, desktop
 
@@ -405,7 +405,7 @@ Gib einer Überschrift das Aussehen ihrer Rolle, nicht ihrer Ebene: sb-type-disp
 
 Abstände, Raster und Höhen kommen aus einer Skala und gelten auf allen Plattformen.
 
-### RAU-01 Abstände aus Skala und Rollen  ·  vorläufig  ·  alle
+### RAU-01 Abstände aus Skala und Rollen  ·  entschieden  ·  alle
 
 Nutze für Abstände nur die Skala 0, 2, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64 px und wähle sie über die Rolle: inline 8, stack 12, group 24, inset-control 16, inset-container 16 (Dialoge ab 640 px 24), gutter 16, gutter-wide 48, section 48, section-wide 64.
 
@@ -416,9 +416,9 @@ Nutze für Abstände nur die Skala 0, 2, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64 p
 - **Nicht so:** margin: 18px; padding: 10px; derselbe Abstand innerhalb und zwischen Gruppen.
 - **Werte:** --sb-space-0 0, -0-5 2, -1 4, -2 8, -3 12, -4 16, -5 20, -6 24, -8 32, -10 40, -12 48, -16 64 px; --sb-spacing-inline 8, -stack 12, -group 24, -inset-control 16, -inset-container 16, -gutter 16, -gutter-wide 48, -section 48, -section-wide 64
 - **Prüfung:** Alle margin/padding/gap-Werte sind var(--sb-space-*) oder var(--sb-spacing-*).
-- **Entscheidung:** – · **Quelle:** `systems/sebaro/spec/01-foundations.md §3.1`
+- **Entscheidung:** D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §3.1`
 
-### RAU-02 Raster und Seitenrahmen  ·  vorläufig  ·  alle
+### RAU-02 Raster und Seitenrahmen  ·  entschieden  ·  alle
 
 Baue Layouts im Raster: unter 640 px 4 Spalten, Rand 16, Gutter 16; 640–1023 px 8 Spalten, Rand 16, Gutter 24; ab 1024 px 12 Spalten, Rand 48, Gutter 24. Die Seite ist höchstens 1440 px breit inklusive Rand; Abschnitte haben 48 px (ab 1024 px 64 px) Innenabstand und eine Haarlinie dazwischen.
 
@@ -429,7 +429,7 @@ Baue Layouts im Raster: unter 640 px 4 Spalten, Rand 16, Gutter 16; 640–1023�
 - **Nicht so:** Feste 960-px-Container, eigene Max-Breiten je Seite.
 - **Werte:** --sb-size-container-max 1440px; Ränder 16/16/48; Gutter 16/24/24; Spalten 4/8/12; --sb-spacing-section 48 / -wide 64
 - **Prüfung:** Layout bei 390, 800 und 1280 px; check_demo OVF1: kein horizontales Scrollen.
-- **Entscheidung:** – · **Quelle:** `systems/sebaro/spec/01-foundations.md §3.2; spec/02-components.md §5; css/sebaro.css Z. 68-88`
+- **Entscheidung:** D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §3.2; spec/02-components.md §5; css/sebaro.css Z. 68-88`
 
 ### RAU-03 Zwei Breakpoints, sonst Container  ·  entschieden  ·  web, desktop
 
@@ -444,7 +444,7 @@ Nutze für die Seite nur die Breakpoints 640 und 1024 px; Bauteile richten sich
 - **Prüfung:** Alle Media-Queries nutzen 640 oder 1024; Bauteile reagieren auf @container; dieselbe Ansicht in einer 390-px-Spalte auf 1440 px Bildschirm verhält sich wie am Handy.
 - **Entscheidung:** D36, D46, D80 · **Quelle:** `systems/sebaro/spec/01-foundations.md §3.2; spec/02-components.md §5.3; spec/03-signature.md §2.1, §5, §12; shared/TOKEN-CONTRACT.md 1.7`
 
-### RAU-04 Anfangsbündig und asymmetrisch  ·  vorläufig  ·  alle
+### RAU-04 Anfangsbündig und asymmetrisch  ·  entschieden  ·  alle
 
 Richte Layouts anfangsbündig und asymmetrisch aus. Zentriere Textblöcke nie, außer einer einzelnen Hinweiszeile unter einer vollbreiten Taste.
 
@@ -454,9 +454,9 @@ Richte Layouts anfangsbündig und asymmetrisch aus. Zentriere Textblöcke nie, a
 - **So:** Leerzustand linksbündig; „Du kannst das später ändern.“ zentriert unter der Hauptaktion.
 - **Nicht so:** Zentrierte Absätze im Hero oder im Leerzustand.
 - **Prüfung:** text-align: center nur am Aktionshinweis.
-- **Entscheidung:** – · **Quelle:** `systems/sebaro/spec/01-foundations.md §3.2`
+- **Entscheidung:** D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §3.2`
 
-### RAU-05 Feste Höhen, eine Dichte  ·  vorläufig  ·  alle
+### RAU-05 Feste Höhen, eine Dichte  ·  entschieden  ·  alle
 
 Nutze feste Höhen und eine Dichte ohne Umschalter: Listenzeile 56 (einzeilig), 64 (mit Meta), 88 (mit Meta und Text), erledigte Einträge 40, Aussage-Zeile ≥ 56, Top-Bar 64, Bottom-Nav 64 plus Systemeinsatz. In Desktop-Apps und Web-Apps mit Fenster sind Zeilen 32, 48 und 64 px hoch (RAU-06); das ist der Rahmen data-sb-density="window", keine Einstellung.
 
@@ -467,7 +467,7 @@ Nutze feste Höhen und eine Dichte ohne Umschalter: Listenzeile 56 (einzeilig), 
 - **Nicht so:** Umschalter „kompakt/komfortabel“.
 - **Werte:** 56 / 64 / 88 / 40 / ≥ 56 / 64 / 64 px; Fenster 32 / 48 / 64 px (--sb-size-control-sm, -md, --sb-space-16)
 - **Prüfung:** Zeilenhöhen im Layout messen; keine Dichte-Einstellung.
-- **Entscheidung:** D67, D83 · **Quelle:** `systems/sebaro/spec/01-foundations.md §4; spec/02-components.md §4.12; DECISIONS.md D67 (2), D83 (9)`
+- **Entscheidung:** D67, D83, D98 · **Quelle:** `systems/sebaro/spec/01-foundations.md §4; spec/02-components.md §4.12; DECISIONS.md D67 (2), D83 (9), D98`
 
 ### RAU-06 32, 48, 64 px je Zeile auf dem Desktop  ·  entschieden  ·  desktop, web
 
@@ -499,7 +499,7 @@ Bau Abstände zwischen Elementen mit sb-stack (12, --group 24, --section 48/64),
 
 Ein Radius je Klasse, eine Bedeutung je Linie, die 45°-Kante nur für Endgültiges.
 
-### FOR-01 Ein Radius je Klasse  ·  vorläufig  ·  alle
+### FOR-01 Ein Radius je Klasse  ·  entschieden  ·  alle
 
 Nutze genau einen Radius je Klasse: 4 px für Tags, Marker, Inline-Code, Checkbox; 8 px für Tasten, Felder, Segmente, Chips, Tooltips; 12 px für Karten (beide Formen), Hinweise, Codeblöcke, Toasts, Menüs, Befehlspalette; 16 px für Dialoge und Sheets; die Pille nur nach FOR-06. Menschen sind Kreise, App-Zeichen abgerundete Quadrate.
 
@@ -510,7 +510,7 @@ Nutze genau einen Radius je Klasse: 4 px für Tags, Marker, Inline-Code, Checkb
 - **Nicht so:** Pillen-Tasten; 6-px- oder 20-px-Sonderradien.
 - **Werte:** --sb-radius-small 4px; --sb-radius-control 8px; --sb-radius-container 12px; --sb-radius-sheet 16px; --sb-radius-pill 9999px (FOR-06); --sb-x-sebaro-sign-tile-radius-ratio 0.1667
 - **Prüfung:** grep border-radius: nur var(--sb-radius-*).
-- **Entscheidung:** D83, D85 · **Quelle:** `systems/sebaro/spec/01-foundations.md §5.1; spec/02-components.md §0.3, §3.4, §3.13`
+- **Entscheidung:** D83, D85, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §5.1; spec/02-components.md §0.3, §3.4, §3.13`
 
 ### FOR-02 Jede Linie hat eine Bedeutung  ·  entschieden  ·  alle
 
@@ -525,7 +525,7 @@ Nutze jede Linie nur für ihre Bedeutung: Haarlinie 1 px border (Zeilen, Abschn
 - **Prüfung:** Jede border/outline im CSS einem Linientyp aus spec/01 §5.2 zuordnen.
 - **Entscheidung:** D46, D48, D52, D91 · **Quelle:** `systems/sebaro/spec/01-foundations.md §5.2; spec/02-components.md §3.22`
 
-### FOR-03 Keine Strichlinien, Verläufe, Glühen  ·  vorläufig  ·  alle
+### FOR-03 Keine Strichlinien, Verläufe, Glühen  ·  entschieden  ·  alle
 
 Verwende keine gestrichelten Linien außer in der pending-Glyphe und der Ziellinie im Diagramm. Keine Verläufe, kein Glühen, keine Texturen.
 
@@ -535,7 +535,7 @@ Verwende keine gestrichelten Linien außer in der pending-Glyphe und der Ziellin
 - **So:** Ziellinie im Diagramm 1 px gestrichelt in text-muted.
 - **Nicht so:** Gestrichelte Upload-Box, Verlaufs-Hero, Glow um den Fokus.
 - **Prüfung:** grep border-style: dashed, linear-gradient, Glow-Schatten → nur erlaubte Stellen (225°-Verlauf im Kanten-Fallback der Gefahrtaste).
-- **Entscheidung:** D46 · **Quelle:** `systems/sebaro/spec/01-foundations.md §5.2`
+- **Entscheidung:** D46, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §5.2`
 
 ### FOR-04 Die 45°-Kante heißt endgültig  ·  entschieden  ·  alle
 
@@ -619,18 +619,18 @@ Nutze Karten nur, um Einstellungen oder Kennzahlen zu gruppieren: bg mit 2-px-Ti
 - **Prüfung:** Farbprüfung des Dialogs „Hauptaktion 0“; Fokus kehrt nach Escape zum Auslöser zurück; --sb-color-scrim nur in Dialog/Sheet.
 - **Entscheidung:** D39, D46 · **Quelle:** `systems/sebaro/spec/02-components.md §4.6; spec/03-signature.md §7.3–§7.5; spec/08-platform-android.md §8; palettes/sebaro.json modes.light.scrim`
 
-### EBE-04 Bottom Sheet nur zum Auswählen  ·  vorläufig  ·  mobile, web
+### EBE-04 Bottom Sheet nur zum Auswählen  ·  entschieden  ·  mobile, web
 
-Nutz Bottom Sheets nur für Auswahl (Radiozeilen oder Liste): bg mit 2-px-Tintenlinie oben, obere Ecken 16, Kopf mit Titel und Schließen-Taste, kein Ziehgriff. Ab 640 px Fensterbreite ist das offene Sheet höchstens 560 px breit und steht unten in der Mitte, die Tintenlinie läuft dann auch an seinen Seiten hoch; am Handy bleibt es über die ganze Breite. Belege öffnen sich nie im Sheet, sondern in ihrer Zeile.
+Nutz Bottom Sheets nur für Auswahl (Radiozeilen oder Liste): bg mit 2-px-Tintenlinie oben, obere Ecken 16, Kopf mit Titel und Schließen-Taste, kein Ziehgriff. Ab 640 px Fensterbreite ist das offene Sheet höchstens 560 px breit und steht unten in der Mitte, die Tintenlinie läuft dann auch an seinen Seiten hoch; am Handy bleibt es über die ganze Breite. Belege öffnen sich nie im Sheet, sondern in ihrer Zeile. Einzige Ausnahme ist das Formular-Sheet auf iOS (sbFormSheet, MOB-07): volle Höhe, „Sichern“ unten, eine Aufgabe mit Ende statt einer Auswahl; auf Android und im Web gibt es keine Ausnahme.
 
-*EN:* Bottom sheets for pickers only: top ink line, top radius 16, head with title + close, no drag handle; from 640 px window width at most 560 px wide and centred at the bottom (ink line up both sides), full width on phones; never for evidence.
+*EN:* Bottom sheets for pickers only: top ink line, top radius 16, head with title + close, no drag handle; from 640 px window width at most 560 px wide and centred at the bottom (ink line up both sides), full width on phones; never for evidence; the one exception is the iOS form sheet (sbFormSheet, MOB-07).
 
-- **Warum:** Der Ziehgriff zeigt keine Daten; Aussage-Zeilen klappen an Ort und Stelle auf (D40). D91 Z2b: „Sheet ab 640 px höchstens 560 px breit“, wie der Bestätigungsdialog; seine Seiten grenzen dann an die Abdunklung, dort endet eine Ebene (D46).
+- **Warum:** Der Ziehgriff zeigt keine Daten; Aussage-Zeilen klappen an Ort und Stelle auf (D40). D91 Z2b: „Sheet ab 640 px höchstens 560 px breit“, wie der Bestätigungsdialog; seine Seiten grenzen dann an die Abdunklung, dort endet eine Ebene (D46). D98 bestätigt die Regel mit der Ausnahme des Formular-Sheets auf iOS (D91 I5b, MOB-07).
 - **So:** <dialog class='sb-sheet' aria-labelledby='t'><form method='dialog'> „Erinnerung wählen“ mit Radiozeilen; geöffnet über data-sb-opens oder sbSheet.open(sheet).
-- **Nicht so:** Sheet mit Griff; Beleg im Sheet; Sheet auf dem Desktop über die ganze Fensterbreite.
+- **Nicht so:** Sheet mit Griff; Beleg im Sheet; Sheet auf dem Desktop über die ganze Fensterbreite; ein Formular im Sheet außer auf iOS (MOB-07).
 - **Werte:** Radius 16px oben; Linie 2px; ab 640 px Fensterbreite höchstens 560 px breit; höchstens 85 % der Fensterhöhe
 - **Prüfung:** Bei 1440 px ist das offene Sheet 560 px breit und unten in der Mitte; Escape und „Schließen“ schließen, der Fokus kehrt zum Auslöser zurück.
-- **Entscheidung:** D46, D40, D91 · **Quelle:** `systems/sebaro/spec/02-components.md §4.7; demo/assets/sb-sheet.js`
+- **Entscheidung:** D46, D40, D91, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/02-components.md §4.7; spec/12-platform-ios.md §7; demo/assets/sb-sheet.js`
 
 ### EBE-05 Kurzmeldung nur für Umkehrbares  ·  entschieden  ·  alle
 
@@ -645,7 +645,7 @@ Zeig eine Kurzmeldung (sb-toast, role='status') nur für das umkehrbare Ergebnis
 - **Prüfung:** Review aller Toast-Auslöser gegen die Liste in spec/07 §4.3; keiner ist Hauptaktion, Löschen oder Fehler; Zeiger und Fokus halten die Meldung.
 - **Entscheidung:** D78, D39, D48 · **Quelle:** `DECISIONS.md D78; systems/sebaro/spec/07-voice.md §4.3; spec/02-components.md §4.8; spec/03-signature.md §7.2`
 
-### EBE-06 Tooltip nur als Zusatz  ·  vorläufig  ·  web, desktop
+### EBE-06 Tooltip nur als Zusatz  ·  entschieden  ·  web, desktop
 
 Nutz Tooltips nur bei Zeiger- und Tastaturbedienung und nie als einzigen Ort einer Information: bg mit 2-px-Tintenlinie, Radius 8, Innenabstand 4 8, caption, role='tooltip', per aria-describedby verknüpft, gebaut mit sb-tooltip.js (erscheint nach 400 ms, bleibt, wenn der Zeiger darauf wechselt, schließt mit Escape). Icon-Tasten brauchen trotzdem ein aria-label.
 
@@ -656,9 +656,9 @@ Nutz Tooltips nur bei Zeiger- und Tastaturbedienung und nie als einzigen Ort ein
 - **Nicht so:** Pflichtinformation oder Statusbedeutung nur im Tooltip.
 - **Werte:** Radius 8px; Padding 4 8; max. 240px; Verzögerung 400 ms
 - **Prüfung:** Tooltip-Text ist nur Zusatz; Ein-/Ausblenden ist in den Demos noch nicht geskriptet.
-- **Entscheidung:** D80 · **Quelle:** `systems/sebaro/spec/02-components.md §4.9, §4.18; demo/assets/sb-tooltip.js`
+- **Entscheidung:** D80, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/02-components.md §4.9, §4.18; demo/assets/sb-tooltip.js`
 
-### EBE-07 Menü nach ARIA-Muster  ·  vorläufig  ·  alle
+### EBE-07 Menü nach ARIA-Muster  ·  entschieden  ·  alle
 
 Bau Überlauf- und Kontextmenüs mit role='menu' und menuitem-Zeilen (48 px, in Desktop-Apps und Web-Apps mit Fenster 32 px), Icon in text-muted + Wort; Auslöser mit aria-haspopup='menu', aria-expanded und popovertarget; bg mit 2-px-Tinte, Radius 12, 200–320 px breit; Pfeiltasten, Pos1/Ende, Buchstaben, Escape und Fokusrückgabe über sb-menu.js. Ein Untermenü hängt an einer Zeile mit Chevron, öffnet mit →, Eingabe oder Druck, nie beim Darüberfahren, und schließt mit ← oder Escape. Es steht neben seinem Elternmenü, sein erster Eintrag auf der Höhe seiner Zeile: ein Untermenü des Hauptmenüs zur Leserichtung, sonst zur anderen Seite, ein tieferes in die Richtung seines Elternmenüs. Ist zu keiner Seite Platz, ersetzt es sein Elternmenü an dessen Stelle (gleiche Kante, gleiche Breite), mit der Zeile „‹ <Name des Elternmenüs>“ zuerst, die Screenreader „Zurück zu <Name>“ nennen; diese Zeile, ← und Escape gehen eine Ebene zurück. Keine Ebene verdeckt Einträge einer anderen, und jede Ebene bleibt im Fenster. Jedes Menü und Untermenü trägt einen Namen (aria-label). Ändert sich die Breite des Fensters oder scrollt der Auslöser aus dem Bild, schließt sich das ganze Menü, und der Fokus geht auf den Auslöser zurück, wenn er im Menü war; eine reine Höhenänderung schließt nicht. Die Löschzeile zeigt Wort und Icon in danger, öffnet trotzdem den Dialog und trägt keine Kante.
 
@@ -669,7 +669,7 @@ Bau Überlauf- und Kontextmenüs mit role='menu' und menuitem-Zeilen (48 px, in
 - **Nicht so:** Löschen direkt aus dem Menü ohne Rückfrage; Kante oder Rahmen an der Menüzeile; Schatten unter dem Menü; ein Untermenü, das Einträge seines Elternmenüs oder einer anderen Ebene verdeckt; ein Menü, das nach dem Drehen oder Verkleinern des Fensters offen an der alten Stelle stehen bleibt.
 - **Werte:** Zeilen 48px (Fenster 32 px, data-sb-density="window"); Breite 200–320px (Fenster ab 240 px); Radius 12px; Padding 4 0
 - **Prüfung:** axe; Tastaturtest mit sb-menu.js: Pfeile, Pos1/Ende, → und ← im Untermenü, Escape mit Fokusrückgabe. Lage der Untermenüs bei 1440, 1024, 700, 640, 390 und 320 px, von rechts nach links, mit Touch und mit dem Auslöser nahe dem unteren Rand: kein sichtbarer Eintrag einer Ebene ist verdeckt, ohne Platz ersetzt ein Untermenü sein Elternmenü mit der Zeile „‹ …“ (Name „Zurück zu …“) zuerst, Eingabe darauf, ← und Escape führen zurück, jede Ebene bleibt im Fenster. Die Breite ändern oder den Auslöser aus dem Bild scrollen schließt alles, der Fokus steht auf dem Auslöser; nur die Höhe ändern lässt das Menü offen, solange der Auslöser im Bild bleibt. In der Werkstatt prüft das tools/tests/test_menu.py, nur in Chromium.
-- **Entscheidung:** D39, D46, D67, D80, D91, D94, D95 · **Quelle:** `DECISIONS.md D95 (a), (c/d); systems/sebaro/spec/02-components.md §4.10, §4.12, §4.18, §4.24; spec/09-platform-web.md §4, §6.1; spec/11-checklist.md §1a; demo/assets/sb-menu.js`
+- **Entscheidung:** D39, D46, D67, D80, D91, D94, D95, D98 · **Quelle:** `DECISIONS.md D95 (a), (c/d), D98; systems/sebaro/spec/02-components.md §4.10, §4.12, §4.18, §4.24; spec/09-platform-web.md §4, §6.1; spec/11-checklist.md §1a; demo/assets/sb-menu.js`
 
 ### EBE-08 Aktionszone über die ganze Fensterbreite  ·  entschieden  ·  desktop, web
 
@@ -713,7 +713,7 @@ Lass alles Neue (Dialog, Sheet, Menü, Toast, Palette, Fußnoten-Popover, frisch
 - **Prüfung:** check_demo.py MOT1/MOT2; keine Animation außer @keyframes sb-enter/sb-fade-in/sb-spin/sb-sweep.
 - **Entscheidung:** D46 · **Quelle:** `DECISIONS.md D46 (4); systems/sebaro/spec/03-signature.md §13.1, §13.2; spec/02-components.md §0.4; css/sebaro.css Z. 899-913`
 
-### BEW-03 Drei Dauern, drei Kurven  ·  vorläufig  ·  alle
+### BEW-03 Drei Dauern, drei Kurven  ·  entschieden  ·  alle
 
 Nutze nur 120 ms (Farb- und Zustandswechsel, Ausblenden), 160 ms (Aussage-Zeile auf und zu, Popover) und 200 ms (eintretender Inhalt, Startkachel; Höchstwert) mit den Kurven standard, emphasized (rein) und exit (raus).
 
@@ -724,7 +724,7 @@ Nutze nur 120 ms (Farb- und Zustandswechsel, Ausblenden), 160 ms (Aussage-Zeil
 - **Nicht so:** 300- oder 500-ms-Übergänge.
 - **Werte:** --sb-motion-duration-short 120ms; -medium 160ms; -long 200ms; --sb-motion-easing-standard cubic-bezier(0.2, 0, 0, 1); -emphasized cubic-bezier(0.05, 0.7, 0.1, 1); -exit cubic-bezier(0.3, 0, 1, 1)
 - **Prüfung:** Alle transition/animation-duration ≤ 200 ms und aus Tokens.
-- **Entscheidung:** D55 · **Quelle:** `systems/sebaro/spec/01-foundations.md §7`
+- **Entscheidung:** D55, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §7`
 
 ### BEW-04 Bewegung reduzieren: System oder App  ·  entschieden  ·  alle
 
@@ -807,7 +807,7 @@ Lass die Hauptaktion während ihrer Arbeit an ihrem Platz: die Beschriftung sagt
 - **Prüfung:** aria-busy während der Arbeit; bei data-sb-state='retry' ist __status aus und __message gefüllt, Satz in --sb-color-text, Glyphe in --sb-color-danger; kein role=dialog/Toast entsteht; Review unter reduzierter Bewegung.
 - **Entscheidung:** D48, D83, D85 · **Quelle:** `DECISIONS.md D48 (1), D83 (2); systems/sebaro/spec/03-signature.md §16; spec/02-components.md §1.1; spec/08-platform-android.md §5`
 
-### AKT-06 Alle anderen Aktionen ungefüllt  ·  vorläufig  ·  alle
+### AKT-06 Alle anderen Aktionen ungefüllt  ·  entschieden  ·  alle
 
 Füll nur die Hauptaktion. Nebenaktionen sind umrandet (1 px border-strong, transparent, 48 px, Innenabstand 0 24); Wort-Aktionen („Rückgängig“, „Wie geprüft?“) sind <button class='sb-text-action'> im Link-Stil mit 48-px-Ziel. Seitenwechsel sind <a>, keine Textaktion.
 
@@ -818,7 +818,7 @@ Füll nur die Hauptaktion. Nebenaktionen sind umrandet (1 px border-strong, tra
 - **Nicht so:** Grau oder kobalt gefüllte Zweittaste; <button> für einen Seitenwechsel; Stock-M3-Button.
 - **Werte:** Rand 1px (--sb-border-width-control); Höhe 48px; Padding 0 24px; Textaktion Linie 2px, Abstand 0.2em, Padding 0 8px
 - **Prüfung:** Farbprüfung: Nebenaktionen tragen keine Farbe mit Rolle; sb-text-action nur auf <button>.
-- **Entscheidung:** D52, D46 · **Quelle:** `systems/sebaro/spec/02-components.md §1, §1.2, §1.3; spec/08-platform-android.md §6; css/sebaro.css Z. 281-296`
+- **Entscheidung:** D52, D46, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/02-components.md §1, §1.2, §1.3; spec/08-platform-android.md §6; css/sebaro.css Z. 281-296`
 
 ### AKT-07 Destruktive Aktion: Gefahrwort im danger-Rahmen  ·  entschieden  ·  alle
 
@@ -928,7 +928,7 @@ Setz die untere Navigation nur auf oberste App-Bildschirme; Unterseiten haben ei
 - **Prüfung:** Review der Bildschirmhierarchie; Android A4, A9.
 - **Entscheidung:** D36, D48, D46 · **Quelle:** `systems/sebaro/spec/03-signature.md §3.2; spec/02-components.md §4.2; spec/08-platform-android.md §7; css/sebaro.css Z. 842-858`
 
-### NAV-04 Seitenleiste ab Tablet und Fenster  ·  vorläufig  ·  alle
+### NAV-04 Seitenleiste ab Tablet und Fenster  ·  entschieden  ·  alle
 
 Ab 840 dp (Tablet) bzw. 1024 px (Desktop-Fenster, Tauri) wird die Navigation zur Seitenleiste sb-side-nav: 240 px breit, Zeilen 48 px (in Desktop-Apps und Web-Apps mit Fenster 32 px, D67) mit Icon 24 + 12 px + Wort 14/20, Startabstand 16; aktueller Ort mit 3-px-Kante am Anfang; 2-px-Tintenlinie an der Endkante der Leiste.
 
@@ -939,7 +939,7 @@ Ab 840 dp (Tablet) bzw. 1024 px (Desktop-Fenster, Tauri) wird die Navigation z
 - **Nicht so:** Icon-only-Rail; gefüllte Auswahlfläche; graue Leistenfläche.
 - **Werte:** ≥ 840 dp / ≥ 1024 px; Breite 240 px; Zeile 48 px (Desktop-Fenster 32 px, D67 (2)); Icon 24; Abstand 12; Label 14/20; Startabstand 16; Ortslinie 3 px; Endkante 2 px Tinte
 - **Prüfung:** Breitfenster-Screenshot; Graustufen: aktueller Eintrag an Linie, Füllung und Gewicht erkennbar.
-- **Entscheidung:** D36, D48, D46, D67, D81 · **Quelle:** `systems/sebaro/spec/03-signature.md §3.1, §10.1; spec/02-components.md §4.3; spec/09-platform-web.md §13; css/sebaro.css Z. 860-873`
+- **Entscheidung:** D36, D48, D46, D67, D81, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/03-signature.md §3.1, §10.1; spec/02-components.md §4.3; spec/09-platform-web.md §13; css/sebaro.css Z. 860-873`
 
 ### NAV-05 Obere Leiste ohne Hauptaktion  ·  entschieden  ·  alle
 
@@ -967,7 +967,7 @@ Bau jeden Website-Kopf aus Dachmarken-Kachel 32 + 8 px + Wortmarke, den Wörter
 - **Prüfung:** check_demo.py-Strings „Apps“, „Projekte“, „Über“, „Kontakt“, „DE / EN“, „Hell oder Dunkel“; bei 390 px in beiden Modi zwei Zeilen, kein Überlauf.
 - **Entscheidung:** D36, D39, D32, D75, D83 · **Quelle:** `DECISIONS.md D36, D39, D83 (4); systems/sebaro/spec/03-signature.md §3.1, §6.1, §6.5; spec/07-voice.md §4.8, §5`
 
-### NAV-07 Kopf: Anordnung und Schrift nach Breite  ·  vorläufig  ·  web
+### NAV-07 Kopf: Anordnung und Schrift nach Breite  ·  entschieden  ·  web
 
 Ordne den Kopf ab 1024 px in einer Zeile (Lockup · 48 px · Navigation · frei · Sprache · 8 px · Taste), bei 640–1023 px in zwei Zeilen (Lockup · Sprache · Taste / Navigation), unter 640 px Lockup · Taste / Navigation, 4 px, dann DE / EN ohne Lücke. DOM-Reihenfolge immer Lockup, Navigation, Sprache, Taste. Kopf-Links in body 16/24, das gewählte Ziel und die Taste in body-strong.
 
@@ -978,9 +978,9 @@ Ordne den Kopf ab 1024 px in einer Zeile (Lockup · 48 px · Navigation · fre
 - **Nicht so:** Header-Links in label 14 px; klebender Kopf ohne scroll-margin-block-start an Noten und Ziffern.
 - **Werte:** Umbrüche 640 und 1024 px; Zeile 2 bei 390 px 348 px (hell) / 352 px (dunkel) von 358 px; Links 16/24 400/430; body-strong 570/600; Lead 20/28
 - **Prüfung:** Screenshots bei 390, 800, 1280 px; computed font der Kopf-Links.
-- **Entscheidung:** D36, D48, D83 · **Quelle:** `systems/sebaro/spec/03-signature.md §6.1, §6.3, §6.5; spec/01-foundations.md §11; DECISIONS.md D83 (4)`
+- **Entscheidung:** D36, D48, D83, D98 · **Quelle:** `systems/sebaro/spec/03-signature.md §6.1, §6.3, §6.5; spec/01-foundations.md §11; DECISIONS.md D83 (4), D98`
 
-### NAV-08 Reiter, Inhaltsverzeichnis, Brotkrumen  ·  vorläufig  ·  alle
+### NAV-08 Reiter, Inhaltsverzeichnis, Brotkrumen  ·  entschieden  ·  alle
 
 Bau Reiter als role='tablist' mit role='tab'-Tasten (48 px, aria-selected, aria-controls, roving tabindex, Pfeiltasten über sb-tabs.js) und Haarlinie unten. Zeig das Inhaltsverzeichnis ab 1024 px als Leiste (32-px-Zeilen), darunter als <details open>. Brotkrumen sind <nav aria-label> mit <ol>, getrennt durch das Icon chevron-right--16, die aktuelle Seite ohne Link mit aria-current='page' (TXT-16). Der Weiter-Link hat nur eine Haarlinie oben.
 
@@ -991,7 +991,7 @@ Bau Reiter als role='tablist' mit role='tab'-Tasten (48 px, aria-selected, aria
 - **Nicht so:** Gefüllter aktiver Reiter; „>“ als Textzeichen; gerahmter Pager-Kasten; Inhaltsverzeichnis, das auf dem Handy verschwindet.
 - **Werte:** Reiter 48px, Padding 0 16; TOC-Zeilen 32px ab 1024 (4px Abstand), 48px darunter; Folge-Schwelle 96px; Pager min. 64px
 - **Prüfung:** axe; Tastatur: Pfeiltasten wechseln den Reiter; Review bei 390 und 1280 px.
-- **Entscheidung:** D48, D38, D80, D82 · **Quelle:** `systems/sebaro/spec/02-components.md §3.15, §4.4, §4.5, §7; demo/assets/sb-tabs.js`
+- **Entscheidung:** D48, D38, D80, D82, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/02-components.md §3.15, §4.4, §4.5, §7; demo/assets/sb-tabs.js`
 
 ### NAV-09 Befehlspalette mit ⌘K, Gruppen und Haken  ·  entschieden  ·  desktop, web
 
@@ -1019,18 +1019,18 @@ Gib allem, was einen Ort öffnet (Einstellungen, Heute, Suche), immer Icon und W
 - **Prüfung:** axe button-name; Tooltip mit Name und Kürzel bei Zeiger und Fokus; jeder Ort hat ein sichtbares Wort.
 - **Entscheidung:** D67, D36, D80 · **Quelle:** `DECISIONS.md D67 (6); systems/sebaro/spec/02-components.md §4.9, §4.18; demo/assets/sb-tooltip.js`
 
-### NAV-11 Baum nach ARIA-Muster, Auswahl folgt nicht dem Fokus  ·  vorläufig  ·  desktop, web
+### NAV-11 Baum nach ARIA-Muster, Auswahl folgt nicht dem Fokus  ·  entschieden  ·  desktop, web
 
-Bau Ordner- und Dateibäume als sb-tree (role='tree', treeitem-Zeilen aus sb-row, 32 px, 16 px Einzug je Ebene, Chevron als Aufklapper). Pfeiltasten bewegen den Fokus, rechts öffnet, links schließt, Eingabe wählt; die Auswahl folgt dem Fokus nicht. Die gewählte Zeile ist der aktuelle Ort mit Ortslinie, eine Zeile hat tabindex 0.
+Bau Ordner- und Dateibäume als sb-tree (role='tree', treeitem-Zeilen aus sb-row, 32 px, 16 px Einzug je Ebene, Chevron als Aufklapper). Pfeiltasten bewegen nur den Fokus, rechts öffnet einen Ordner, links schließt ihn; erst Eingabe, Leertaste oder Klick wählt eine Zeile und öffnet sie; die Auswahl folgt dem Fokus nicht. Die gewählte Zeile ist der aktuelle Ort mit Ortslinie, eine Zeile hat tabindex 0.
 
-*EN:* Folder and file trees are sb-tree (role=tree, treeitem rows built from sb-row, 32 px, 16 px indent per level, chevron twist); arrows move focus, right opens, left closes, Enter chooses; selection never follows focus; the chosen row is the current place; one row has tabindex 0 (sb-tree.js).
+*EN:* Folder and file trees are sb-tree (role=tree, treeitem rows built from sb-row, 32 px, 16 px indent per level, chevron twist); arrows only move focus, right opens a folder, left closes it; Enter, Space or a click chooses and opens; selection never follows focus; the chosen row is the current place; one row has tabindex 0 (sb-tree.js).
 
-- **Warum:** D80 (I): der Baum ist ein Baustein des Systems statt ein Nachbau („Fehlende Bauteile bitte Vorschlag umsetzen“); D67 (2): 32-px-Zeilen. Dass die Auswahl dem Fokus nicht folgt, ist Agentenspezifikation: ein Dateibaum würde sonst jede Datei auf dem Weg öffnen.
+- **Warum:** D80 (I): der Baum ist ein Baustein des Systems statt ein Nachbau („Fehlende Bauteile bitte Vorschlag umsetzen“); D67 (2): 32-px-Zeilen. Dass die Auswahl dem Fokus nicht folgt, war Agentenspezifikation: ein Dateibaum würde sonst jede Datei auf dem Weg öffnen. D98 (V1), Antwort „Erst Eingabe öffnet (Empfohlen)“.
 - **So:** <ul class='sb-tree' role='tree' aria-labelledby='h'><li role='none'><div class='sb-row sb-tree__row' role='treeitem' aria-level='1' aria-expanded='true' aria-owns='g1' tabindex='-1'>…
 - **Nicht so:** Baum aus verschachtelten Links ohne Rollen; Auswahl beim Pfeilen; gefüllte Auswahlzeile; Einzug ohne aria-level.
 - **Werte:** Zeile 32 px; Einzug 16 px je Ebene (Ebene 1–8); Aufklapper 24 × 32 px, chevron-right--16, offen 90° gedreht
-- **Prüfung:** axe; Tastatur: Pfeile, Pos1/Ende, rechts/links, Eingabe; nur eine Zeile mit tabindex 0.
-- **Entscheidung:** D80, D67, D48 · **Quelle:** `systems/sebaro/spec/02-components.md §4.14; demo/assets/sb-tree.js`
+- **Prüfung:** axe; Tastatur: Pfeile, Pos1/Ende, rechts/links, Eingabe und Leertaste; Pfeile öffnen nichts; nur eine Zeile mit tabindex 0.
+- **Entscheidung:** D80, D67, D48, D98 · **Quelle:** `DECISIONS.md D98 (V1); systems/sebaro/spec/02-components.md §4.14; demo/assets/sb-tree.js`
 
 ## Links (LNK)
 
@@ -1079,7 +1079,7 @@ Zeig jeden Zustand als Glyphe in der Statusfarbe plus Wort in text, nie nur übe
 - **Prüfung:** Graustufen-Screenshot: alle Zustände unterscheidbar; computed color des Worts = --sb-color-text.
 - **Entscheidung:** D36, D15 · **Quelle:** `systems/sebaro/spec/01-foundations.md §1.1, §1.5; spec/03-signature.md §1.1, §1.2; spec/02-components.md §3.1; css/sebaro.css Z. 546-555; spec/08-platform-android.md §14.3; spec/12-platform-ios.md §5`
 
-### STA-02 Feste Zustandswörter und Glyphenformen  ·  vorläufig  ·  alle
+### STA-02 Feste Zustandswörter und Glyphenformen  ·  entschieden  ·  alle
 
 Verwende die festen Wörter mit ihrer Glyphe: läuft (progress, info), geplant (clock, text-muted), erledigt (success gefüllt), Fehler (error gefüllt, danger); Prüfzustände bestanden, offen (pending, warning), übersprungen (skipped, info), nicht bestanden; „nicht belegt“ (pending, warning); Beta (flask). „läuft“ ist nie ein Dreieck, „Fehler“ ist das einzige Achteck.
 
@@ -1090,22 +1090,22 @@ Verwende die festen Wörter mit ihrer Glyphe: läuft (progress, info), geplant (
 - **Nicht so:** Eigene Wörter wie „ausstehend“, „OK“, „pending“; play-Dreieck als „läuft“.
 - **Werte:** Formen: gefüllte Scheibe mit Haken, Ring aus 8 Strichen, Ring mit Schrägstrich, Achteck mit „!“ (spec/04 §7.2)
 - **Prüfung:** Wortliste gegen spec/01 §1.5; Icons aus shared/icon-set.json; Kontaktbogen in Graustufen.
-- **Entscheidung:** D15, D24 · **Quelle:** `systems/sebaro/spec/01-foundations.md §1.5; spec/04-icons.md §7.2; shared/FACTS-CONTRACT.md §6.3, §6.5`
+- **Entscheidung:** D15, D24, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §1.5; spec/04-icons.md §7.2; shared/FACTS-CONTRACT.md §6.3, §6.5`
 
-### STA-03 Gesperrt bleibt lesbar, ohne Lindgrün und Deckkraft  ·  vorläufig  ·  alle
+### STA-03 Gesperrt bleibt lesbar, ohne Lindgrün und Deckkraft  ·  entschieden  ·  alle
 
-Zeig gesperrte Bedienelemente mit Beschriftung in text-muted, Rand in border und cursor: not-allowed; die gesperrte Hauptaktion mit surface-sunken, border-strong-Rand und text-muted-Label, ganz ohne Lindgrün. Senk nie die Deckkraft. Besser: lass die Taste aktiv und erkläre das Problem beim Drücken.
+Zeig gesperrte Bedienelemente mit Beschriftung in text-muted, Rand in border und cursor: not-allowed; die gesperrte Hauptaktion mit surface-sunken, border-strong-Rand und text-muted-Label, ganz ohne Lindgrün. Senk nie die Deckkraft. Sperr eine Taste nur, solange ihre Aktion gerade gar nicht geht. Fehlt in einem Formular etwas, bleibt die Hauptaktion drückbar und lindgrün: Ihr Druck sendet nichts, sagt an jedem leeren Pflichtfeld „<Beschriftung> fehlt.“ und setzt den Fokus auf das erste davon.
 
-*EN:* Disabled = text-muted label, border boundary, not-allowed cursor; disabled primary action = surface-sunken fill, border-strong outline, text-muted label, no lime; never opacity; prefer an enabled button that explains on press.
+*EN:* Disabled = text-muted label, border boundary, not-allowed cursor; disabled primary action = surface-sunken fill, border-strong outline, text-muted label, no lime; never opacity; disabled only while the action cannot work at all; with required fields empty the primary action stays enabled, its press sends nothing, says „<Label> fehlt.“ at each empty required field and moves focus to the first (sb-form.js on websites).
 
-- **Warum:** Mit Deckkraft fällt der Kontrast unter die Grenze; Lindgrün heißt „weiter“ und darf das nicht versprechen; stumme Sackgassen vermeiden.
-- **So:** <button class='sb-primary-action' disabled>; bei fehlender Eingabe die Taste aktiv lassen und die Fehlerzeile zeigen.
-- **Nicht so:** opacity: .4; blasses Lindgrün; Statusfarbe für gesperrt.
+- **Warum:** Mit Deckkraft fällt der Kontrast unter die Grenze; Lindgrün heißt „weiter“ und darf das nicht versprechen; stumme Sackgassen vermeiden. D98 (V2), Antwort „Drückbar, sagt was fehlt (Empfohlen)“: Eine gesperrte Taste sagt nicht, was fehlt; die Meldung am Feld und der Fokus darauf sagen es.
+- **So:** <button class='sb-primary-action' disabled> nur, solange die Aktion gar nicht geht; fehlt eine Eingabe, bleibt die Taste aktiv und ihr Druck zeigt „Nachricht fehlt.“ unter dem Feld (p.sb-field__error mit Fehlerglyphe, aria-invalid, aria-describedby) mit dem Fokus auf dem ersten fehlenden Feld; auf Websites macht das sb-form.js an required-Feldern.
+- **Nicht so:** opacity: .4; blasses Lindgrün; Statusfarbe für gesperrt; eine gesperrte Hauptaktion, weil ein Feld noch leer ist.
 - **Werte:** Label text-muted auf surface-sunken 4.61 hell / 7.31 dunkel
-- **Prüfung:** grep opacity: nicht für disabled; Farbprüfung zählt gesperrte Taste nicht als Hauptaktion.
-- **Entscheidung:** D80 · **Quelle:** `systems/sebaro/spec/01-foundations.md §1.4 Regel 5; spec/02-components.md §0.2, §1.1; css/sebaro.css Z. 253-256, 325-330`
+- **Prüfung:** grep opacity: nicht für disabled; Farbprüfung zählt gesperrte Taste nicht als Hauptaktion. Formular mit leeren Pflichtfeldern absenden: nichts wird gesendet, jedes leere Feld sagt „… fehlt.“, der Fokus steht auf dem ersten (Werkstatt: tools/tests/test_form.py, nur Chromium).
+- **Entscheidung:** D80, D98 · **Quelle:** `DECISIONS.md D98 (V2); systems/sebaro/spec/01-foundations.md §1.4 Regel 5; spec/02-components.md §0.2, §1.1, §5.4.1; demo/assets/sb-form.js; css/sebaro.css Z. 253-256, 325-330`
 
-### STA-04 Tags sind umrandete Wörter  ·  vorläufig  ·  alle
+### STA-04 Tags sind umrandete Wörter  ·  entschieden  ·  alle
 
 Zeig Kennzeichen („Android“, „Web“, „macOS“, „Verfügbar“, „Beta“) als umrandetes Wort: 1 px border-strong, Radius 4, Innenabstand 1 8, caption-Gewicht. Tags sind nicht klickbar und tragen nie eine Statusfarbe; „Beta“ ist ein Tag, kein Status.
 
@@ -1116,9 +1116,9 @@ Zeig Kennzeichen („Android“, „Web“, „macOS“, „Verfügbar“, „Be
 - **Nicht so:** Orange gefülltes Beta-Badge; klickbarer Tag.
 - **Werte:** Rand 1px; Radius 4px; Padding 1px 8px; caption 14/20 400
 - **Prüfung:** Review; keine Statusfarbe in .sb-tag.
-- **Entscheidung:** – · **Quelle:** `systems/sebaro/spec/02-components.md §3.2, §10; css/sebaro.css Z. 558-565`
+- **Entscheidung:** D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/02-components.md §3.2, §10; css/sebaro.css Z. 558-565`
 
-### STA-05 Hinweise ohne Füllung und Farbkante  ·  vorläufig  ·  alle
+### STA-05 Hinweise ohne Füllung und Farbkante  ·  entschieden  ·  alle
 
 Bau Hinweise („Hinweis“, „Achtung“, „Fehler“, „Erfolg“) mit 20-px-Glyphe in der Statusfarbe, Titel in body-strong und Text in text, in einem 1-px-Haarlinienrahmen mit Radius 12 und role='note'. Keine Fläche, keine farbige Kante.
 
@@ -1129,9 +1129,9 @@ Bau Hinweise („Hinweis“, „Achtung“, „Fehler“, „Erfolg“) mit 20-p
 - **Nicht so:** Gelb hinterlegter Hinweis mit linker Farbleiste.
 - **Werte:** Glyphe 20px (info--filled, warning--filled, error--filled, success--filled); Rahmen 1px; Radius 12px; Padding 12 16
 - **Prüfung:** grep background/border-inline-start in .sb-callout = 0.
-- **Entscheidung:** – · **Quelle:** `systems/sebaro/spec/02-components.md §3.11; spec/09-platform-web.md §4.4; css/sebaro.css Z. 755-767`
+- **Entscheidung:** D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/02-components.md §3.11; spec/09-platform-web.md §4.4; css/sebaro.css Z. 755-767`
 
-### STA-06 Laden: lokal still, entfernt benannt, Fortschritt in Tinte  ·  vorläufig  ·  alle
+### STA-06 Laden: lokal still, entfernt benannt, Fortschritt in Tinte  ·  entschieden  ·  alle
 
 Zeig bei lokaler Arbeit weder Kreisel noch Text. Bei Netzarbeit über 1 s „Wird geladen …“ mit Anzeige, über 10 s dazu, was passiert. Linearer Fortschritt ist ein natives <progress> in Tinte auf border-Spur, der Ring ein 48-px-SVG mit role='progressbar', Schritte haben eine 3-px-Oberkante. Skelette sind statisch grau und tragen das Wort; kein Schimmer, kein Konfetti.
 
@@ -1142,7 +1142,7 @@ Zeig bei lokaler Arbeit weder Kreisel noch Text. Bei Netzarbeit über 1 s „Wi
 - **Nicht so:** Spinner beim lokalen Speichern; blauer Fortschrittsbalken; schimmerndes Skelett ohne Text.
 - **Werte:** Schwellen 1 s und 10 s; Balken 4px (11.80 / 10.43 : 1); Ring 48px; Schrittkante 3px; höchstens 1 Freude-Moment je Ablauf
 - **Prüfung:** Jeder Ladezustand hängt an einem Netzaufruf über 1 s; keine @keyframes für Skelette.
-- **Entscheidung:** D48 · **Quelle:** `systems/sebaro/spec/02-components.md §0.2, §1.7, §3.12; spec/07-voice.md §4.5; spec/01-foundations.md §7; css/sebaro.css Z. 769-802`
+- **Entscheidung:** D48, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/02-components.md §0.2, §1.7, §3.12; spec/07-voice.md §4.5; spec/01-foundations.md §7; css/sebaro.css Z. 769-802`
 
 ### STA-07 Statussumme einmal, in der Aktionszone  ·  entschieden  ·  desktop, web
 
@@ -1187,7 +1187,7 @@ Zeig etwas, das zum Teil erledigt ist, als Zahl dessen, was fehlt, mit dem vorha
 
 Felder sind graue Flächen mit Grundlinie, Auswahl ist eine Kobalt-Marke, Fehler haben Linie, Glyphe und Satz.
 
-### EIN-01 Feld: Beschriftung oben, graue Fläche, Grundlinie  ·  vorläufig  ·  alle
+### EIN-01 Feld: Beschriftung oben, graue Fläche, Grundlinie  ·  entschieden  ·  alle
 
 Setz über jedes Feld eine sichtbare <label for> (label 14/20). Das Feld ist eine surface-sunken-Fläche mit 1-px-border-strong-Grundlinie, oben 8 px gerundet, mindestens 48 px hoch, ohne Rahmen. Hilfetext und Fehler hängen per aria-describedby am Input; ein Zähler steht am Ende in Tabellenziffern.
 
@@ -1198,9 +1198,9 @@ Setz über jedes Feld eine sichtbare <label for> (label 14/20). Das Feld ist ein
 - **Nicht so:** Platzhalter als einzige Beschriftung; umrandetes Feld; Hilfetext ohne Verknüpfung.
 - **Werte:** Höhe 48px (Input 46px); Padding 0 12px; Grundlinie 1px; Radius 8px oben; Hilfe caption 14/20 text-muted
 - **Prüfung:** axe label; jede __help/__error-ID wird von aria-describedby referenziert.
-- **Entscheidung:** – · **Quelle:** `systems/sebaro/spec/02-components.md §2.1; css/sebaro.css Z. 354-381; demo/mobile.html Z. 343`
+- **Entscheidung:** D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/02-components.md §2.1; css/sebaro.css Z. 354-381; demo/mobile.html Z. 343`
 
-### EIN-02 Fehler im Feld: rote Linie, Glyphe, Satz  ·  vorläufig  ·  alle
+### EIN-02 Fehler im Feld: rote Linie, Glyphe, Satz  ·  entschieden  ·  alle
 
 Zeig einen Feldfehler mit aria-invalid='true', einer 2-px-Grundlinie in danger, der Glyphe error--filled-16 in danger und der Meldung in text. Die Meldung sagt, was falsch ist und wie man es behebt. Kein roter Text, keine rote Feldfläche.
 
@@ -1211,7 +1211,7 @@ Zeig einen Feldfehler mit aria-invalid='true', einer 2-px-Grundlinie in danger, 
 - **Nicht so:** Rote Fehlermeldung; rot gefülltes Feld; nur rote Umrandung ohne Text.
 - **Werte:** Grundlinie 2px; Glyphe 16px; danger auf surface-sunken 5.52 / 6.04; dunkel danger auf pressed-fill 4.55
 - **Prüfung:** Fehlerfall: aria-invalid und aria-describedby gesetzt; Meldung in text-Farbe.
-- **Entscheidung:** – · **Quelle:** `systems/sebaro/spec/01-foundations.md §1.7, §5.2; spec/02-components.md §0.2, §2.1; css/sebaro.css Z. 375-377`
+- **Entscheidung:** D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §1.7, §5.2; spec/02-components.md §0.2, §2.1; css/sebaro.css Z. 375-377`
 
 ### EIN-03 Gewählt ist eine Kobalt-Marke, keine Fläche  ·  entschieden  ·  alle
 
@@ -1226,7 +1226,7 @@ Zeig „an“ bei Checkbox, Radio, Schalter und Regler als Marke in accent: Rand
 - **Prüfung:** Farbprüfung: Lindgrün nur in der Hauptaktion (Lint L1); sb-controls.js schaltet aria-checked, ohne Skript stimmt der Anfangszustand.
 - **Entscheidung:** D37 · **Quelle:** `systems/sebaro/spec/02-components.md §0.2, §2.4–§2.6, §2.8; css/sebaro.css Z. 396-455, 479-511`
 
-### EIN-04 Chips und Segmente: Kante statt Füllung  ·  vorläufig  ·  alle
+### EIN-04 Chips und Segmente: Kante statt Füllung  ·  entschieden  ·  alle
 
 Nutz Segmente nur für 2–4 kurze Optionen, die eine Ansicht ändern („Woche · Monat · Jahr“), sonst Radiozeilen. Filterchips sind <button aria-pressed> mit 36-px-Rahmen im 48-px-Ziel. Gewählt heißt bei beiden: 3-px-accent-Unterkante, Haken, Titelgewicht, link-Farbe; nie gefüllt.
 
@@ -1237,9 +1237,9 @@ Nutz Segmente nur für 2–4 kurze Optionen, die eine Ansicht ändern („Woche 
 - **Nicht so:** Blau gefülltes Segment; farbig gefüllter Chip.
 - **Werte:** Segmente 2–4, Höhe 48px, Rand 1px; Chip-Rahmen 36px, Ziel 48px; Kante 3px
 - **Prüfung:** Keine background-Farbe für :checked/aria-pressed; axe button-name an sb-chip__remove.
-- **Entscheidung:** D48 · **Quelle:** `systems/sebaro/spec/02-components.md §2.7, §2.9; spec/08-platform-android.md §14; css/sebaro.css Z. 457-477, 513-541`
+- **Entscheidung:** D48, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/02-components.md §2.7, §2.9; spec/08-platform-android.md §14; css/sebaro.css Z. 457-477, 513-541`
 
-### EIN-05 Suche und Auswahlliste nativ  ·  vorläufig  ·  alle
+### EIN-05 Suche und Auswahlliste nativ  ·  entschieden  ·  alle
 
 Bau das Suchfeld mit search-Icon am Anfang, <input type='search'> (Browser-Kreuz ausgeblendet) und gefüllt einer Icon-Taste „Suche leeren“; das Label darf versteckt sein, wenn der Platzhalter die Aufgabe nennt. Auswahllisten sind natives <select> mit chevron-down; lange Listen in Apps als Sheet mit Radiozeilen.
 
@@ -1250,24 +1250,24 @@ Bau das Suchfeld mit search-Icon am Anfang, <input type='search'> (Browser-Kreuz
 - **Nicht so:** Suchfeld ganz ohne Label; Dropdown aus divs.
 - **Werte:** Icon 24px text-muted
 - **Prüfung:** Label existiert (ggf. sb-visually-hidden); Leeren-Knopf nur gefüllt sichtbar (Skript fehlt in den Demos).
-- **Entscheidung:** – · **Quelle:** `systems/sebaro/spec/02-components.md §2.2, §2.3; demo/components.html Z. 389-391`
+- **Entscheidung:** D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/02-components.md §2.2, §2.3; demo/components.html Z. 389-391`
 
 ## Daten (DAT)
 
 Daten stehen in flachen Zeilen und grauen Diagrammen, die Beschriftung trägt den Wert; Farbskalen gibt es nur in unterscheidbaren Stufen.
 
-### DAT-01 Flache Listen mit Haarlinien und Ende  ·  vorläufig  ·  alle
+### DAT-01 Flache Listen mit Haarlinien und Ende  ·  entschieden  ·  alle
 
-Bau Listen aus flachen Zeilen statt Karten: Haarlinie über jeder Zeile außer der ersten, 16 px eingerückt. Interaktive Zeilen haben den Link im Titel über die ganze Zeile und einen Chevron am Ende. Jede Liste endet mit einem Satz oder nichts; kein endloses Scrollen, keine Zähl-Badges.
+Bau Listen aus flachen Zeilen statt Karten: Haarlinie über jeder Zeile außer der ersten, 16 px eingerückt. Interaktive Zeilen haben den Link im Titel über die ganze Zeile und einen Chevron am Ende. Jede Liste endet mit einem Satz oder nichts; kein endloses Scrollen, keine Zähl-Badges. Die Zahl steht im Listenkopf („Offen 2“), nie an Seitenleiste, Reitern oder unterer Navigation (HAL-05).
 
-*EN:* Lists are flat rows (hairline inset 16, stretched title link + chevron), end with a closing sentence or nothing; no infinite scroll, no count badges.
+*EN:* Lists are flat rows (hairline inset 16, stretched title link + chevron), end with a closing sentence or nothing; no infinite scroll, no count badges; the count goes into the list head, never on sidebar, tabs or bottom navigation (HAL-05).
 
-- **Warum:** Richtung A (D36): Zeilen statt Karten halten den Bildschirm ruhig; ein Ende sagt „fertig“ (spec/01 §4).
+- **Warum:** Richtung A (D36): Zeilen statt Karten halten den Bildschirm ruhig; ein Ende sagt „fertig“ (spec/01 §4). D98 (V3), Antwort „Keine Zahlen (Empfohlen)“.
 - **So:** <p class='sb-list-end'>Mehr steht heute nicht an.</p>; Kopf „Offen 2“.
 - **Nicht so:** Karte je Listeneintrag; Endlos-Scroll-Loader; roter Badge „3“.
 - **Werte:** Zeilen 56/64/88px; Padding 8 16; Einzug 16px
 - **Prüfung:** Liste hat sb-list-end; keine sb-card in Listen; keine Badge-Komponenten.
-- **Entscheidung:** D36, D46, D67 · **Quelle:** `systems/sebaro/spec/02-components.md §3.3; spec/01-foundations.md §4; css/sebaro.css Z. 567-605`
+- **Entscheidung:** D36, D46, D67, D98 · **Quelle:** `DECISIONS.md D98 (V3); systems/sebaro/spec/02-components.md §3.3; spec/01-foundations.md §4; css/sebaro.css Z. 567-605`
 
 ### DAT-02 Erledigtes tritt zurück, Stand als Satz  ·  entschieden  ·  alle
 
@@ -1282,7 +1282,7 @@ Trag Ordnung mit Gewicht, Größe, Lage und Haarlinien, nicht mit Farbe. Fass de
 - **Prüfung:** Graustufen-Screenshot liest sich gleich geordnet; Screenreader hört „erledigt:“ je Zeile; .sb-list-row.sb-list-row--done bleibt 40 px auch mit Meta-Zeile.
 - **Entscheidung:** D83, D36, D22 · **Quelle:** `DECISIONS.md D83 (1); systems/sebaro/spec/01-foundations.md §4; spec/02-components.md §3.3; spec/03-signature.md §1.2`
 
-### DAT-03 Kennzahlen und Eigenschaften flach  ·  vorläufig  ·  alle
+### DAT-03 Kennzahlen und Eigenschaften flach  ·  entschieden  ·  alle
 
 Zeig Kennzahlen als flache Spalten ohne Fläche, Rahmen oder Radius, getrennt durch Haarlinien am Anfang (erste Spalte ohne Linie): Beschriftung caption in text-muted, Wert title mit Tabellenziffern. Eigenschaften als <dl class='sb-meta-list'> mit einem <div> je Paar, 48-px-Zeilen und Haarlinien.
 
@@ -1293,7 +1293,7 @@ Zeig Kennzahlen als flache Spalten ohne Fläche, Rahmen oder Radius, getrennt du
 - **Nicht so:** Drei Kacheln mit grauem Grund; zweispaltige Tabelle für Eigenschaften.
 - **Werte:** Stat Padding-inline 12px; Spaltenmin. 96px; Meta-Zeilen 48px, Spalten 2fr/3fr
 - **Prüfung:** Review: keine Fläche oder Radius an .sb-stat.
-- **Entscheidung:** D36 · **Quelle:** `systems/sebaro/spec/02-components.md §3.6, §3.8, §10; css/sebaro.css Z. 674-682, 715-723`
+- **Entscheidung:** D36, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/02-components.md §3.6, §3.8, §10; css/sebaro.css Z. 674-682, 715-723`
 
 ### DAT-04 Diagramme: grau, das Jetzt in Kobalt, Schrift als HTML  ·  entschieden  ·  alle
 
@@ -1308,7 +1308,7 @@ Zeichne Diagramme grau: Balken in border-strong, eine Linie 2 px in derselben F
 - **Prüfung:** Höchstens ein Element in accent je Diagramm; kein <text> in .sb-chart__shapes; Beschriftung bei 390 px 14 px; Diagramm in Graustufen lesbar.
 - **Entscheidung:** D37, D83, D91 · **Quelle:** `DECISIONS.md D91 (G1a, G2a, G3a); systems/sebaro/spec/01-foundations.md §8; spec/02-components.md §3.7; palettes/sebaro.json dataviz`
 
-### DAT-05 Tabellen scrollbar und ohne Streifen  ·  vorläufig  ·  alle
+### DAT-05 Tabellen scrollbar und ohne Streifen  ·  entschieden  ·  alle
 
 Leg Tabellen in <div class='sb-table-wrap' role='region' aria-labelledby tabindex='0'>, damit sie auf Telefonen per Tastatur scrollen. Kopfzeile in label mit border-strong-Linie, Zeilen mit Haarlinien, Zahlen .sb-num am Ende, caption am Anfang in caption/text-muted. Keine Zebrastreifen.
 
@@ -1319,9 +1319,9 @@ Leg Tabellen in <div class='sb-table-wrap' role='region' aria-labelledby tabinde
 - **Nicht so:** Graue Streifen; Tabelle ohne caption.
 - **Werte:** Zellen-Padding 12px
 - **Prüfung:** axe scrollable-region-focusable; jede Tabelle hat caption.
-- **Entscheidung:** – · **Quelle:** `systems/sebaro/spec/02-components.md §3.9; css/sebaro.css Z. 725-732`
+- **Entscheidung:** D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/02-components.md §3.9; css/sebaro.css Z. 725-732`
 
-### DAT-06 Personen als Initialen im Kreis  ·  vorläufig  ·  alle
+### DAT-06 Personen als Initialen im Kreis  ·  entschieden  ·  alle
 
 Zeig Personen als Initialen im Kreis (40 px, klein 32 px) mit 1-px-border-strong-Ring, ohne Füllung. Das Element trägt den Namen als aria-label, die Initialen sind aria-hidden.
 
@@ -1332,9 +1332,9 @@ Zeig Personen als Initialen im Kreis (40 px, klein 32 px) mit 1-px-border-stro
 - **Nicht so:** Farbige Avatar-Scheiben.
 - **Werte:** 40px / 32px; Ring 1px
 - **Prüfung:** axe; Review.
-- **Entscheidung:** – · **Quelle:** `systems/sebaro/spec/02-components.md §3.13; css/sebaro.css Z. 804-811`
+- **Entscheidung:** D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/02-components.md §3.13; css/sebaro.css Z. 804-811`
 
-### DAT-07 Leerer Zustand: „Noch keine …“, Aktion unten  ·  vorläufig  ·  alle
+### DAT-07 Leerer Zustand: „Noch keine …“, Aktion unten  ·  entschieden  ·  alle
 
 Bau leere Zustände anfangsbündig: optionaler Spot (128 × 96), Titel „Noch keine <Sache>“ und ein Satz, wie sich die Ansicht füllt. Die passende Hauptaktion steht in der unteren Leiste, nie in der leeren Fläche. Kein Maskottchen, kein Witz.
 
@@ -1345,7 +1345,7 @@ Bau leere Zustände anfangsbündig: optionaler Spot (128 × 96), Titel „Noch k
 - **Nicht so:** Großer Knopf mitten im Leerraum; lustige Figur; zentrierter Text.
 - **Werte:** Spot 128 × 96px
 - **Prüfung:** Keine sb-primary-action innerhalb .sb-empty.
-- **Entscheidung:** D39 · **Quelle:** `systems/sebaro/spec/02-components.md §3.14; spec/07-voice.md §4.2; css/sebaro.css Z. 813-817`
+- **Entscheidung:** D39, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/02-components.md §3.14; spec/07-voice.md §4.2; css/sebaro.css Z. 813-817`
 
 ### DAT-08 Mehrfachauswahl mit Ortslinie und Haken  ·  entschieden  ·  desktop, web
 
@@ -1505,7 +1505,7 @@ Schreib Datenschutz- und Prüfaussagen als konkrete, zählbare Fakten: „ohne A
 - **Prüfung:** grep -rniE 'tracking|100 ?% privat|dsgvo-konform|eu-server|in der cloud' (erlaubt nur „Tracker“ als gezählter Fakt).
 - **Entscheidung:** D40, D90 · **Quelle:** `DECISIONS.md D40, D90; systems/sebaro/spec/07-voice.md §3.1 (place), §4.6, §6.2; shared/FACTS-CONTRACT.md 1.2 §5.5`
 
-### TXT-03 Titel sind kurze Substantive  ·  vorläufig  ·  alle
+### TXT-03 Titel sind kurze Substantive  ·  entschieden  ·  alle
 
 Benenne Bildschirme mit kurzen Substantiven. Überschriften in Satzform gibt es nur auf Websites.
 
@@ -1515,7 +1515,7 @@ Benenne Bildschirme mit kurzen Substantiven. Überschriften in Satzform gibt es 
 - **So:** „Heute“, „Verlauf“, „Statistik“, „Einstellungen“, „Gewohnheit bearbeiten“; Web: „Software, die man versteht.“
 - **Nicht so:** „Dein Dashboard“; Themen-Namen.
 - **Prüfung:** Review der Bildschirmtitel.
-- **Entscheidung:** D32 · **Quelle:** `systems/sebaro/spec/07-voice.md §3.3`
+- **Entscheidung:** D32, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/07-voice.md §3.3`
 
 ### TXT-04 Zahlen, Einheiten, Datum, Uhrzeit  ·  entschieden  ·  alle
 
@@ -1530,19 +1530,19 @@ Setz zwischen Zahl und Einheit ein geschütztes Leerzeichen U+00A0, nie U+202F o
 - **Prüfung:** grep U+202F/U+2009 = 0; grep -nE '[0-9] (%|Tage|Gläser|Min\.|Std\.)' findet fehlende U+00A0 (check_site.py TEXT).
 - **Entscheidung:** D22, D85, D87, D11 · **Quelle:** `DECISIONS.md D22, D85, D87; systems/sebaro/spec/01-foundations.md §2.5 Regel 4; spec/07-voice.md §3.4, §3.5; spec/09-platform-web.md §6.1; spec/08-platform-android.md §16`
 
-### TXT-05 Satzzeichen, keine Versalien, neutral gendern  ·  vorläufig  ·  alle
+### TXT-05 Satzzeichen, keine Versalien, Menschen neutral ansprechen  ·  entschieden  ·  alle
 
-Nutze deutsche Anführungszeichen „…“ und ‚…‘ und den Halbgeviertstrich für Bereiche und als Gedankenstrich. Keine Versal-Labels, keine Eyebrows, keine gesperrten Großbuchstaben; inklusiv mit neutralen Formen ohne Stern oder Doppelpunkt. Abkürzungen nur „Std.“ und „Min.“, dazu Wochentage mit zwei Buchstaben ohne Punkt („Mo“, „Di“) nur an Diagrammachsen und in Kalenderköpfen; alles andere schreibst du aus.
+Nutze deutsche Anführungszeichen „…“ und ‚…‘ und den Halbgeviertstrich für Bereiche und als Gedankenstrich. Keine Versal-Labels, keine Eyebrows, keine gesperrten Großbuchstaben. Sprich Gruppen von Menschen mit einem neutralen Wort an („Teilnehmende“, „Mitglieder“, „alle, die …“); wo keins gut passt, mit beiden Formen („Nutzerinnen und Nutzer“). Nie ein Zeichen im Wort: kein Stern, kein Doppelpunkt, kein Unterstrich, kein Mediopunkt, kein Binnen-I; das Amtliche Regelwerk (Fassung vom 1. Juli 2024) zählt solche Zeichen nicht zum Kern der Rechtschreibung. Abkürzungen nur „Std.“ und „Min.“, dazu Wochentage mit zwei Buchstaben ohne Punkt („Mo“, „Di“) nur an Diagrammachsen und in Kalenderköpfen; alles andere schreibst du aus.
 
-*EN:* German quotes „…“ ‚…‘, en dash for ranges and as dash; no all-caps or eyebrow labels; inclusive neutral forms without gender star/colon; abbreviations only „Std.“, „Min.“ and two-letter weekdays without a period on chart axes and calendar heads; spell out everything else (no „ca.“, no „z. B.“ in UI).
+*EN:* German quotes „…“ ‚…‘, en dash for ranges and as dash; no all-caps or eyebrow labels; groups of people with a neutral word („Teilnehmende“, „Mitglieder“), else both forms („Nutzerinnen und Nutzer“), never a sign inside the word (gender star, colon, underscore, middle dot, Binnen-I; Amtliches Regelwerk, version of 1 July 2024); abbreviations only „Std.“, „Min.“ and two-letter weekdays without a period on chart axes and calendar heads; spell out everything else (no „ca.“, no „z. B.“ in UI).
 
-- **Warum:** Ruhiges, lesbares Deutsch; ẞ wäre nur in Versaltext nötig, den sebaro nicht nutzt. D82, Wortlaut „Abkürzungen … Vorschlag folgen“: neben „Std.“ und „Min.“ Wochentage mit zwei Buchstaben, nur an Achsen und in Kalendern, wo der Platz knapp und die Bedeutung eindeutig ist.
-- **So:** „Teilnehmende“, „alle, die …“, „08:00–22:00“; Achse „So Mo Di Mi Do Fr Sa“; Tageskopf „Samstag, 10. Oktober“.
-- **Nicht so:** "…" gerade Anführungszeichen, text-transform: uppercase, „NEU“, „Nutzer*innen“; „Sa.“ oder „Sa“ im Fließtext; „ca. 40 Min.“; „z. B.“ in der Oberfläche.
-- **Prüfung:** grep text-transform: uppercase und gerade Anführungszeichen in UI-Texten; grep * und : in Personenbezeichnungen.
-- **Entscheidung:** D82 · **Quelle:** `DECISIONS.md D82; systems/sebaro/spec/01-foundations.md §2.5 Regel 5; spec/07-voice.md §3.6–§3.11`
+- **Warum:** Ruhiges, lesbares Deutsch; ẞ wäre nur in Versaltext nötig, den sebaro nicht nutzt. D82, Wortlaut „Abkürzungen … Vorschlag folgen“: neben „Std.“ und „Min.“ Wochentage mit zwei Buchstaben, nur an Achsen und in Kalendern, wo der Platz knapp und die Bedeutung eindeutig ist. D98 (V6), nach der Rückfrage „was sagt der duden zum gendern in deutschland und was ist die sprachlich korrekte form“, Antwort „Neutral, sonst beide (Empfohlen)“: Das Amtliche Regelwerk des Rats für deutsche Rechtschreibung (Fassung vom 1. Juli 2024) zählt Zeichen im Wort nicht zum Kern der Rechtschreibung; ein neutrales Wort und beide Formen sind korrekt. Die Oberfläche sagt meist „du“; Gruppen stehen vor allem in Hilfetexten, beim Teilen und auf Websites.
+- **So:** „Teilnehmende“, „Mitglieder“, „alle, die …“, „Nutzerinnen und Nutzer“; „08:00–22:00“; Achse „So Mo Di Mi Do Fr Sa“; Tageskopf „Samstag, 10. Oktober“.
+- **Nicht so:** "…" gerade Anführungszeichen, text-transform: uppercase, „NEU“; ein Zeichen im Wort für Menschen (Stern, Doppelpunkt, Unterstrich oder Mediopunkt vor „innen“, ein großes I mitten im Wort); „alle Nutzer“, wo ein neutrales Wort oder beide Formen passen; „Sa.“ oder „Sa“ im Fließtext; „ca. 40 Min.“; „z. B.“ in der Oberfläche.
+- **Prüfung:** Werkstatt: python3 tools/check_demo.py meldet TXT8 (Fehler, Gruppe content) für jedes Wort für Menschen mit einem Zeichen darin, im sichtbaren und versteckten Text und in Feldwerten jeder Demoseite; Texte außerhalb der Demos: grep -nE '[a-zäöüß][*∗:_·][iI]n|[a-zäöüß]In(nen)?([^a-zA-Zäöüß]|$)' und jeden Treffer ansehen (auch Code wie :invalid oder Namen wie LinkedIn treffen). Dazu grep text-transform: uppercase und gerade Anführungszeichen in UI-Texten.
+- **Entscheidung:** D82, D98 · **Quelle:** `DECISIONS.md D82, D98 (V6); systems/sebaro/spec/01-foundations.md §2.5 Regel 5; spec/07-voice.md §3.6–§3.11, §3 Regel 9, §7; shared/DEMO-CHECK.md §4.3 (TXT8)`
 
-### TXT-06 Fließtext höchstens 70 Zeichen  ·  vorläufig  ·  alle
+### TXT-06 Fließtext höchstens 70 Zeichen  ·  entschieden  ·  alle
 
 Begrenz Lesetext auf 60–75 Zeichen je Zeile mit max-inline-size: var(--sb-size-measure-prose) (70 ch). Listenzeilen bleiben volle Breite. In sb-prose: 12 px Stapel, H2 40 px und H3 32 px Abstand oben; besuchte Links nur hier.
 
@@ -1553,9 +1553,9 @@ Begrenz Lesetext auf 60–75 Zeichen je Zeile mit max-inline-size: var(--sb-siz
 - **Nicht so:** Absatz über die volle Breite eines 1440-px-Fensters.
 - **Werte:** --sb-size-measure-prose 70ch; Stapel 12px; H2 40px; H3 32px
 - **Prüfung:** Absätze haben max-inline-size ≤ 70ch.
-- **Entscheidung:** – · **Quelle:** `systems/sebaro/spec/01-foundations.md §2.5 Regel 2; spec/02-components.md §5; css/sebaro.css Z. 39, 90-98`
+- **Entscheidung:** D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/01-foundations.md §2.5 Regel 2; spec/02-components.md §5; css/sebaro.css Z. 39, 90-98`
 
-### TXT-07 Fehlermeldung: was falsch, was tun  ·  vorläufig  ·  alle
+### TXT-07 Fehlermeldung: was falsch, was tun  ·  entschieden  ·  alle
 
 Sag in jeder Fehlermeldung, was falsch ist und was die Person tun kann, mit Zahlen, wo es eine Grenze gibt. Keine Schuld, keine Codes in der ersten Zeile; technische Details gehören in ein aufklappbares „Details“.
 
@@ -1565,7 +1565,7 @@ Sag in jeder Fehlermeldung, was falsch ist und was die Person tun kann, mit Zahl
 - **So:** „Notiz ist zu lang (134 / 120).“; „Name fehlt.“; „Export hat nicht geklappt. Deine Einträge sind unverändert. Versuch es noch einmal oder wähl einen anderen Ort.“
 - **Nicht so:** „Ungültige Eingabe“, „Leider ist ein Fehler aufgetreten“, „Fehler 0x80…“, „Ups“.
 - **Prüfung:** Review aller Fehlertexte.
-- **Entscheidung:** – · **Quelle:** `systems/sebaro/spec/07-voice.md §4.1; spec/02-components.md §2.1; spec/08-platform-android.md §14`
+- **Entscheidung:** D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/07-voice.md §4.1; spec/02-components.md §2.1; spec/08-platform-android.md §14`
 
 ### TXT-08 Code in sebaro Mono mit drei gedämpften Tönen  ·  entschieden  ·  alle
 
@@ -1748,7 +1748,7 @@ Lass jeden Beleg nennen, wer geprüft hat („Eigene Prüfung, automatisch“, �
 - **Prüfung:** check_demo.py-Strings „Eigene Prüfung, automatisch“, „Eigene Prüfung, von Hand“, „Nicht geprüft:“.
 - **Entscheidung:** D40 · **Quelle:** `DECISIONS.md D40; systems/sebaro/spec/03-signature.md §5.1 (4); spec/10-facts.md §9`
 
-### BEL-05 Aufbau einer Notiz, drei Formen  ·  vorläufig  ·  alle
+### BEL-05 Aufbau einer Notiz, drei Formen  ·  entschieden  ·  alle
 
 Baue jede Notiz in fester Reihenfolge: Ergebnis, Methode, Nachweise und Gründe, Abflüsse, Grenzen („Nicht geprüft: …“), Absender, „Alle Prüfungen“. Zeig Fakten in drei Formen: Kompaktzeile (grau, „ · “ getrennt), Vollform als Aussage-Zeilen in fester Reihenfolge, Prüfliste „Wie geprüft?“. Eine Teilmenge ist erlaubt, ein Widerspruch oder fehlender Abfluss nie.
 
@@ -1759,21 +1759,21 @@ Baue jede Notiz in fester Reihenfolge: Ergebnis, Methode, Nachweise und Gründe,
 - **Nicht so:** Grenzen in text-muted; Prüf-IDs sichtbar; andere Reihenfolge; Prüfliste als Tabelle bei 390 px.
 - **Werte:** caption 14; Datum TT.MM.JJJJ; Prüfliste mit 1-px-Haarlinie; Zusammenfassung „4 bestanden · 1 übersprungen · 1 offen“
 - **Prüfung:** check_demo.py --system sebaro (facts.html).
-- **Entscheidung:** D40, D15, D21 · **Quelle:** `systems/sebaro/spec/10-facts.md §1, §3.3, §4.1–§4.3; spec/03-signature.md §5.3`
+- **Entscheidung:** D40, D15, D21, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/10-facts.md §1, §3.3, §4.1–§4.3; spec/03-signature.md §5.3`
 
-### BEL-06 Belegtext generiert, nie getippt  ·  vorläufig  ·  alle
+### BEL-06 Belegtext generiert, nie getippt  ·  entschieden  ·  alle
 
-Erzeug alles nach der Aussage mit tools/check_facts.py --notes und render es zur Bauzeit (oder in Demos mit sb-facts.js); tipp Notiztext nie selbst. Nummeriere je Seite einmal in der Reihenfolge des ersten Auftretens; eine Aussage mit denselben Fakten behält ihre Nummer. Die Aussage nennt genau den Faktwert, nicht mehr.
+Belege sind freiwillig. Zeigst du welche, erzeug alles nach der Aussage mit tools/check_facts.py --notes und render es zur Bauzeit (oder in Demos mit sb-facts.js); tipp Notiztext nie selbst. Nummeriere je Seite einmal in der Reihenfolge des ersten Auftretens; eine Aussage mit denselben Fakten behält ihre Nummer. Die Aussage nennt genau den Faktwert, nicht mehr.
 
-*EN:* Note text is generated by check_facts.py --notes, never typed; one numbering per page by first appearance; same facts keep their number; the claim states exactly the fact value.
+*EN:* Evidence is optional; when shown, note text is generated by check_facts.py --notes, never typed; one numbering per page by first appearance; same facts keep their number; the claim states exactly the fact value.
 
-- **Warum:** Der Prüfer ist die einzige Quelle jeder Tatsache; wahre, prüfbare Belege.
+- **Warum:** Der Prüfer ist die einzige Quelle jeder Tatsache; wahre, prüfbare Belege. D98 (V5), Antwort „Freiwillig, aber erzeugt (Empfohlen)“, eine Lesart von D40.
 - **So:** python3 tools/check_facts.py facts.json --notes --today "$(date +%F)" --app-version "$VERSION"; data-sb-needs-note='studio:1,2'.
 - **Nicht so:** Methode oder Datum in den Code schreiben; Aussage größer als der Wert („komplett privat“); doppelte Nummern.
 - **Prüfung:** Notes neu erzeugen und gegen die ausgelieferte Datei diffen; check_demo.py TXT6.
-- **Entscheidung:** D14, D36 · **Quelle:** `systems/sebaro/spec/10-facts.md §1, §3.2, §9; spec/03-signature.md §5.1 (6); spec/09-platform-web.md §10-§11`
+- **Entscheidung:** D14, D36, D98 · **Quelle:** `DECISIONS.md D98 (V5); systems/sebaro/spec/10-facts.md §1, §3.2, §9; spec/03-signature.md §5.1 (6); spec/09-platform-web.md §10-§11`
 
-### BEL-07 Fußnoten-Popover unter 1024 px  ·  vorläufig  ·  web, mobile
+### BEL-07 Fußnoten-Popover unter 1024 px  ·  entschieden  ·  web, mobile
 
 Unter 1024 px darf die Ziffer die Note zusätzlich in einem nicht-modalen Popover am unteren Rand öffnen (Popover API, ein #sb-note-popover je Seite): zitierte Aussage, Notiz, „Schließen“. Escape, Tippen daneben und Android-Zurück schließen; der Fokus kehrt zur Ziffer zurück. Ohne Skript springt der Link zur Note; die Liste bleibt immer sichtbar.
 
@@ -1784,7 +1784,7 @@ Unter 1024 px darf die Ziffer die Note zusätzlich in einem nicht-modalen Popov
 - **Nicht so:** Modaler Dialog oder Sheet für Belege; Liste nur noch im Popover.
 - **Werte:** < 1024 px (Skript 63.99rem); max-block-size 60dvh; „Schließen“ 48 px
 - **Prüfung:** Playwright bei 390 px: Popover öffnet, Escape schließt, Fokus zurück auf die Ziffer.
-- **Entscheidung:** D36 · **Quelle:** `systems/sebaro/spec/03-signature.md §5.3; spec/09-platform-web.md §9; spec/02-components.md §6; demo/assets/sb-notes.js`
+- **Entscheidung:** D36, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/03-signature.md §5.3; spec/09-platform-web.md §9; spec/02-components.md §6; demo/assets/sb-notes.js`
 
 ### BEL-08 Fakten-Werkzeug freiwillig, Vertrag nicht  ·  entschieden  ·  alle
 
@@ -1798,7 +1798,7 @@ Nutz das Fakten-Werkzeug in Produkt-Repos freiwillig. Zeigt eine App Fakten, gil
 - **Prüfung:** python3 tools/check_facts.py <facts.json> Exit 0 in der Produkt-CI.
 - **Entscheidung:** D40, D14 · **Quelle:** `DECISIONS.md D40; systems/sebaro/spec/03-signature.md §5.1 (7); spec/11-checklist.md §2`
 
-### BEL-09 Veraltet und Beispieldaten kennzeichnen  ·  vorläufig  ·  alle
+### BEL-09 Veraltet und Beispieldaten kennzeichnen  ·  entschieden  ·  alle
 
 Ersetz bei veralteten Fakten jede Aussage durch den Hinweis „Nicht für diese Version geprüft (geprüft für <v> am <Datum>)“ mit warning-Glyphe; auf Websites entfallen Ziffern und Sätze ganz. Markier jede Anzeige mit Demo- oder erfundenen Daten mit „Beispieldaten“ neben dem Titel.
 
@@ -1809,20 +1809,20 @@ Ersetz bei veralteten Fakten jede Aussage durch den Hinweis „Nicht für diese 
 - **Nicht so:** Alte Aussagen mit neuer Version zeigen; Demo-Belege ohne Marker.
 - **Werte:** Marker 1 px border-strong, Radius 4, caption
 - **Prüfung:** Negativtest mit data-sb-running-version; jeder Demo-Faktenblock enthält „Beispieldaten“.
-- **Entscheidung:** D21, D24 · **Quelle:** `systems/sebaro/spec/10-facts.md §2, §4.4; spec/02-components.md §3.2; spec/11-checklist.md §2`
+- **Entscheidung:** D21, D24, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/10-facts.md §2, §4.4; spec/02-components.md §3.2; spec/11-checklist.md §2`
 
-### BEL-10 Hinweis direkt unter der Aktion  ·  vorläufig  ·  alle
+### BEL-10 Hinweis direkt unter der Aktion  ·  entschieden  ·  alle
 
-Schreib unter jede Aktion mit Datenweg einen Hinweis „<Auslöser>. Ziel: <wohin>.“ in caption, text-muted, direkt darunter. Bleiben die Daten lokal: „Bleibt auf diesem Gerät.“ Nie im Tooltip.
+Schreib unter jede Aktion mit Datenweg immer einen Hinweis „<Auslöser>. Ziel: <wohin>.“ in caption, text-muted, direkt darunter. Bleiben die Daten lokal, steht dort trotzdem „Bleibt auf diesem Gerät.“ Nie im Tooltip.
 
-*EN:* Under each action with a data path: hint „<Trigger>. Ziel: <to>.“ (caption, text-muted); local only: „Bleibt auf diesem Gerät.“; never in a tooltip.
+*EN:* Under each action with a data path, always: hint „<Trigger>. Ziel: <to>.“ (caption, text-muted); local only, still: „Bleibt auf diesem Gerät.“; never in a tooltip.
 
-- **Warum:** Die Folge einer Handlung steht dort, wo sie ausgelöst wird (D21).
+- **Warum:** Die Folge einer Handlung steht dort, wo sie ausgelöst wird (D21). D98 (V4), Antwort „Immer (Empfohlen)“: auch, wenn die Daten auf dem Gerät bleiben.
 - **So:** „Nur auf deinen Befehl. Ziel: CSV-Datei an einem Ort deiner Wahl.“ zentriert 8 px unter der Hauptaktion.
-- **Nicht so:** Hinweis im Tooltip oder auf einer anderen Seite.
+- **Nicht so:** Hinweis im Tooltip oder auf einer anderen Seite; keine Zeile, weil die Daten ja auf dem Gerät bleiben.
 - **Werte:** 8 px unter der Hauptaktion
 - **Prüfung:** Review aller Aktionen mit Datenweg.
-- **Entscheidung:** D21 · **Quelle:** `systems/sebaro/spec/10-facts.md §3.4; spec/08-platform-android.md §5`
+- **Entscheidung:** D21, D98 · **Quelle:** `DECISIONS.md D98 (V4); systems/sebaro/spec/10-facts.md §3.4; spec/08-platform-android.md §5`
 
 ## Zeichen (ZEI)
 
@@ -1917,7 +1917,7 @@ Färb ein Zeichen nie um, dreh, streck oder umrande es nicht und leg es nicht au
 - **Prüfung:** python3 tools/inline_assets.py --check; signs.py check.
 - **Entscheidung:** D10, D40, D57, D85 · **Quelle:** `systems/sebaro/spec/03-signature.md §4.3, §4.6; spec/05-brand.md §10, §11; DECISIONS.md D85`
 
-### ZEI-08 Neues Zeichen: Ablauf und Prüfung  ·  vorläufig  ·  alle
+### ZEI-08 Neues Zeichen: Ablauf und Prüfung  ·  entschieden  ·  alle
 
 Für eine neue App oder Variante: Zweckgruppe wählen, Kürzel aus drei Buchstaben nach der Regel bilden (erster Buchstabe, nächster Konsonant, letzter Buchstabe; zweiteilig: beide Initialen und nächster Konsonant des zweiten Teils), Symbol in signs_r3.py zeichnen, bei 64/24/16 px ansehen, signs.py check und sheet laufen lassen (ZEI-12), Brand-Ausgaben neu bauen und ansehen. Der Inhaber wählt; vor einer Veröffentlichung ist eine Markenrecherche Pflicht.
 
@@ -1928,9 +1928,9 @@ Für eine neue App oder Variante: Zweckgruppe wählen, Kürzel aus drei Buchstab
 - **Nicht so:** Strenge Treffer per Ausnahme freigeben; Zeichen außerhalb signs.json; Freigabe ohne Inhaber-Blick.
 - **Werte:** Kürzel 3 Buchstaben; d16 ≥ 0.10; Set-Minimum 0.1949 (16 px) / 0.2137 (Basis); strenger Treffer ≥ 0.53; Kapazität mindestens 511 weitere Symbole (Schätzung, 2026-10-20)
 - **Prüfung:** .venv/bin/python tools/signs.py check sebaro Exit 0; brand_assets.py check Exit 0; SG90 (menschliche Sichtprüfung) bleibt offen; Markenrecherche vor der Veröffentlichung.
-- **Entscheidung:** D33, D61, D63, D47, D50, D58, D85, D86, D88 · **Quelle:** `systems/sebaro/spec/05-brand.md §2.4, §2.5; shared/SIGNS-GUIDE.md §8; spec/11-checklist.md §3; DECISIONS.md D33, D85, D86, D88`
+- **Entscheidung:** D33, D61, D63, D47, D50, D58, D85, D86, D88, D98 · **Quelle:** `systems/sebaro/spec/05-brand.md §2.4, §2.5; shared/SIGNS-GUIDE.md §8; spec/11-checklist.md §3; DECISIONS.md D33, D85, D86, D88, D98`
 
-### ZEI-09 Wortmarke und Lockup  ·  vorläufig  ·  alle
+### ZEI-09 Wortmarke und Lockup  ·  entschieden  ·  alle
 
 Setz die Wortmarke „sebaro“ aus sebaro Sans ohne veränderte Buchstaben: hell wght 670, Laufweite 0, Farbe text; dunkel wght 700, +0,01 em. Das Lockup aus Kachel und Wortmarke hat feste Abstände und rundum eine x-Höhe Schutzraum; nie direkt auf ein unruhiges Foto.
 
@@ -1941,7 +1941,7 @@ Setz die Wortmarke „sebaro“ aus sebaro Sans ohne veränderte Buchstaben: hel
 - **Nicht so:** Alternative Glyphen, eigene Laufweite, Schatten, Glow, Verlauf, Drehen, Strecken; Wortmarke sebaro mit der Kachel eines anderen Produkts.
 - **Werte:** Hell #1C1E22 / dunkel #EBEDEF (15.31 / 15.43); Kachel 1.2 F, Abstand 0.4 F, Kachelmitte 0.345 F über Grundlinie; gestapelt 1.6 F; Schutzraum 0.524 F / 0.25 × Kante; Minimum In-App-Kachel 32 px, Wortmarke 16 px Tintenhöhe, gestapeltes Lockup 48 px
 - **Prüfung:** brand_assets.py check; Konstruktionszeichnungen wordmark-light-cut.svg / -dark-cut.svg und Lockup-Schutzraum.
-- **Entscheidung:** D38, D40, D44, D36, D68, D71 · **Quelle:** `systems/sebaro/spec/05-brand.md §3 (Quelle fonts/sebaro-sans/src/sebaroSans[wdth,wght].ttf), §4, §11`
+- **Entscheidung:** D38, D40, D44, D36, D68, D71, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/05-brand.md §3 (Quelle fonts/sebaro-sans/src/sebaroSans[wdth,wght].ttf), §4, §11`
 
 ### ZEI-10 Favicon: Symbol allein auf voller Kachel  ·  entschieden  ·  web, desktop
 
@@ -1956,7 +1956,7 @@ Zeig im Favicon nur das Symbol ohne Kürzel auf vollflächiger Gruppenkachel mit
 - **Prüfung:** brand_assets.py check (BA13, BA25, BA36).
 - **Entscheidung:** D53, D57, D85 · **Quelle:** `systems/sebaro/spec/05-brand.md §2.2, §7; shared/BRAND-ASSETS.md §4.4`
 
-### ZEI-11 App-Icons und Benachrichtigung generiert  ·  vorläufig  ·  alle
+### ZEI-11 App-Icons und Benachrichtigung generiert  ·  entschieden  ·  alle
 
 Erzeuge Launcher-, Store-, PWA- und Tauri-Icons nur mit brand_assets.py aus signs.json. Das adaptive Icon trägt Symbol und Kürzel im 66-dp-Sicherheitskreis; Tauri erzeugt seine Sätze mit cargo tauri icon aus icon-1024.png. Das Benachrichtigungs-Icon ist das 16-px-Symbol, weiß, nur Alpha, nie ein UI-Icon.
 
@@ -1967,7 +1967,7 @@ Erzeuge Launcher-, Store-, PWA- und Tauri-Icons nur mit brand_assets.py aus sign
 - **Nicht so:** bell als Benachrichtigungs-Icon; App-Icon von Hand exportieren oder skalieren; Platzhalter-Icon behalten.
 - **Werte:** 108-dp-Fläche, sichtbar 72 dp, Sicherheitskreis 66 dp; Benachrichtigung 22 von 24 dp; Play 512 px; PWA 192/512; Apple 180; Tauri 1024; .ico mit 6 Größen
 - **Prüfung:** brand_assets.py check sebaro; src-tauri/icons enthält icon.icns, icon.ico; Launcher-Masken auf Gerät nicht verifiziert.
-- **Entscheidung:** D10, D53, D57 · **Quelle:** `systems/sebaro/spec/05-brand.md §6; spec/04-icons.md §13; spec/08-platform-android.md §11; shared/ADOPTION.md §5 Schritt 3`
+- **Entscheidung:** D10, D53, D57, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/05-brand.md §6; spec/04-icons.md §13; spec/08-platform-android.md §11; shared/ADOPTION.md §5 Schritt 3`
 
 ### ZEI-12 Zeichenprüfung gegen Formen, nicht gegen Buchstaben  ·  entschieden  ·  alle
 
@@ -2011,7 +2011,7 @@ Zeichne Icons, Logos und App-Icons als SVG im Code, nie mit einem Bildgenerator.
 - **Prüfung:** Keine Rasterdateien in Icon-/Zeichen-Slots; icons.py build --check Exit 0 (0 drifted).
 - **Entscheidung:** D10, D85 · **Quelle:** `DECISIONS.md D10, D85; systems/sebaro/spec/04-icons.md Kopf, §9`
 
-### ICO-02 Eine ruhige Linie: 1,75, rund, konstruiert  ·  vorläufig  ·  alle
+### ICO-02 Eine ruhige Linie: 1,75, rund, konstruiert  ·  entschieden  ·  alle
 
 Zeichne Icons als Linie in einer Stärke mit runden Enden und Ecken: 1,75 auf dem 24er-Master, 1,5 auf dem 16er-Master, 2 bei Spots. Gerade Segmente nur in 0, 30, 45, 60, 90, 120, 135, 150 Grad, Kurven als Kreisbögen, höchstens 5 Teile, feste Lücken und Containerradien.
 
@@ -2022,7 +2022,7 @@ Zeichne Icons als Linie in einer Stärke mit runden Enden und Ecken: 1,75 auf de
 - **Nicht so:** Zweite Strichstärke, eckige Enden, Perspektive, Schattierung, Verläufe, Deckkraftstufen, 37°-Schrägen, Bézier-Gekrakel.
 - **Werte:** Strich 24: 1.75, 16: 1.5, Spot: 2; Arbeitsbereich 24: 2–22, 16: 1–15, Spot Rand 4; Raster 0.125 (Spots 0.25); Kreis-Keyline r 9.125 bei (12,12); Quadrat 3.875–20.125; Teile ≤ 5; Lücke 2.25 / 2.0 / 2.5; Radius 2 (≥ 8) / 1, 1.25 (≥ 6) / 0.75, 3 (≥ 12) / 1.5
 - **Prüfung:** python3 tools/icons.py lint sebaro --strict Exit 0 (ICN304–308; 6 begründete Waiver in §15); Kontaktbogen hell/dunkel bei 100 % und 3×.
-- **Entscheidung:** D10, D38, D40, D44 · **Quelle:** `systems/sebaro/spec/04-icons.md §0, §1.1 (gemessen an fonts/desktop/sebaroSans-*.ttf), §1.4, §1.5, §2`
+- **Entscheidung:** D10, D38, D40, D44, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/04-icons.md §0, §1.1 (gemessen an fonts/desktop/sebaroSans-*.ttf), §1.4, §1.5, §2`
 
 ### ICO-03 Ein Icon zeigt eine Funktion, sonst nichts  ·  entschieden  ·  alle
 
@@ -2037,7 +2037,7 @@ Ein Icon beschreibt eine Funktion: kein Gegenstand als Leitbild, kein Zierdetail
 - **Prüfung:** Review-Checkliste spec/04 §10; tools/color.py contrast; keine Hex-Literale in Komponenten.
 - **Entscheidung:** D29, D32, D36, D40, D58, D6 · **Quelle:** `systems/sebaro/spec/04-icons.md §1, §1.3, §1.4, §10, §11, §14; spec/05-brand.md §11`
 
-### ICO-04 Größen, 16er-Master und Sprite  ·  vorläufig  ·  alle
+### ICO-04 Größen, 16er-Master und Sprite  ·  entschieden  ·  alle
 
 Nutze Icons aus dem eingebetteten Sprite als <svg class='sb-icon' aria-hidden='true' focusable='false'><use href='#name'/></svg> in 16, 20 oder 24 px. Bei 16 px nimmst du den eigenen 16er-Master (#name--16), sonst den 24er mit angepasstem Strich; über 48 px zeichnest du einen Spot.
 
@@ -2048,9 +2048,9 @@ Nutze Icons aus dem eingebetteten Sprite als <svg class='sb-icon' aria-hidden='t
 - **Nicht so:** --16-Symbole ohne .sb-icon--16; 24er-Icons per CSS auf 16 px verkleinern; externes <use> unter file://.
 - **Werte:** --sb-size-icon-sm 16, -md 20, -lg 24; stroke-width viewBox: 16 Master 1.5, 16 aus 24 2.25, 20: 1.8, 24: 1.75, 32: 1.5, 48: 1.125, Spot 2; 25 Namen mit 16er-Master; Spot 128 × 96
 - **Prüfung:** Größenklassen im Markup; 16-px-Zoom im Kontaktbogen.
-- **Entscheidung:** D38, D56 · **Quelle:** `systems/sebaro/spec/04-icons.md §3, §6; spec/09-platform-web.md §14; icons/dist/sprite.css`
+- **Entscheidung:** D38, D56, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/04-icons.md §3, §6; spec/09-platform-web.md §14; icons/dist/sprite.css`
 
-### ICO-05 Gefüllt nur für Auswahl und Status  ·  vorläufig  ·  alle
+### ICO-05 Gefüllt nur für Auswahl und Status  ·  entschieden  ·  alle
 
 Nutze gefüllte Icons nur für den aktuellen Navigationspunkt, einen eingeschalteten Schalter (bell, thumbs-up) und die vier Statusglyphen bei 16 px. Alles andere bleibt Umriss; Umschalten verschiebt das Icon nie.
 
@@ -2061,7 +2061,7 @@ Nutze gefüllte Icons nur für den aktuellen Navigationspunkt, einen eingeschalt
 - **Nicht so:** Gefüllte Icons als Deko in Listen oder Tasten; alle Nav-Icons gefüllt.
 - **Werte:** Gefüllt 24: 14 Icons; gefüllt 16: info, warning, error, success; Box ±0.25 (ICN308); ein <path> je Datei
 - **Prüfung:** Umschalten Umriss/gefüllt ohne Versatz; ICN308.
-- **Entscheidung:** D36, D48 · **Quelle:** `systems/sebaro/spec/04-icons.md §5`
+- **Entscheidung:** D36, D48, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/04-icons.md §5`
 
 ### ICO-06 Pfeile und Zeichen sind Icons  ·  entschieden  ·  alle
 
@@ -2076,7 +2076,7 @@ Setz Pfeile, Chevrons und das Zeichen für externe Links in der Oberfläche imme
 - **Prüfung:** grep -n '[←→›↗]' in Seiten und UI-Texten = 0; RTL-Spiegelung (autoMirror).
 - **Entscheidung:** D38, D56, D52, D68 · **Quelle:** `DECISIONS.md D38, D56 (2), D68; systems/sebaro/spec/01-foundations.md §2.1; spec/04-icons.md §7.4; spec/08-platform-android.md §10`
 
-### ICO-07 Spots zeigen nur einen Zustand  ·  vorläufig  ·  alle
+### ICO-07 Spots zeigen nur einen Zustand  ·  entschieden  ·  alle
 
 Nutze Spot-Illustrationen (128 × 96, Strich 2) nur für einen echten Zustand, einen je Leerzustand über der Überschrift. Nur zwei neutrale Farben: Tinte text-muted und Ton border; nie Marken-, Status-, Produkt- oder Hauptaktionsfarbe. Spots sind aria-hidden.
 
@@ -2087,7 +2087,7 @@ Nutze Spot-Illustrationen (128 × 96, Strich 2) nur für einen echten Zustand, e
 - **Nicht so:** Reihe von Spots; Maskottchen; Linien im Ton (border auf bg nur 1,47 : 1 im Dunkelmodus).
 - **Werte:** viewBox 128 × 96; Strich 2; Rand 4; Raster 0.25; Lücke 2.5; Radius 3 (≥ 12) / 1.5; text-muted auf bg 5.05 / 6.76
 - **Prüfung:** aria-hidden='true'; Ton im Dunkelmodus sichtbar; Überschrift und Satz tragen die Bedeutung.
-- **Entscheidung:** D36 · **Quelle:** `systems/sebaro/spec/04-icons.md §8`
+- **Entscheidung:** D36, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/04-icons.md §8`
 
 ### ICO-08 Tastenzeichen kommen aus der Schrift  ·  entschieden  ·  desktop, web
 
@@ -2118,30 +2118,30 @@ Lass in generierten Bildern keinen Text entstehen: keine Buchstaben, Ziffern, Ps
 - **Prüfung:** QA-Rubrik spec/06 §7; abgelehnte Versuche in images/rejected/ mit Grund.
 - **Entscheidung:** D9, D85 · **Quelle:** `DECISIONS.md D9, D85; systems/sebaro/spec/06-imagery.md §3, §7; spec/05-brand.md §8, §11`
 
-### BIL-02 Bilder sind optional und erklären Inhalt  ·  vorläufig  ·  alle
+### BIL-02 Bilder sind optional und erklären Inhalt  ·  entschieden  ·  alle
 
-Setz Bilder nur ein, wenn sie Inhalt erklären; auf Websites sind sie optional. Der erste Bildschirm (W1) bleibt Typografie, Belegziffern und Hauptaktion; Apps nutzen SVG-Spots statt Rasterbildern; nie generierte Raster in Zeichen- oder Icon-Slots.
+Setz Bilder nur ein, wenn sie Inhalt erklären; auf Websites sind sie optional. Der erste Bildschirm einer App-Website (W1) hat nur Überschrift, Satz (mit Belegziffern) und Hauptaktion, kein Bild; Bildschirmfotos stehen darunter im Raster (WEB-08); Apps nutzen SVG-Spots statt Rasterbildern; nie generierte Raster in Zeichen- oder Icon-Slots.
 
-*EN:* Images are optional and only illustrate content; W1 first screen stays typography; apps use SVG spots; never AI raster in sign or icon slots.
+*EN:* Images are optional and only illustrate content; the first screen of an app website (W1) has only heading, sentence and primary action, screenshots below in a grid (WEB-08); apps use SVG spots; never AI raster in sign or icon slots.
 
-- **Warum:** Identität ist code-gezeichnet (D10); kein Gegenstand als Markenidee (D29, D32).
+- **Warum:** Identität ist code-gezeichnet (D10); kein Gegenstand als Markenidee (D29, D32). D98 (V8), Antwort „Nur Text und Taste (Empfohlen)“.
 - **So:** Artikelillustration oder optionales Studio-Bild im Über- oder Projekte-Bereich.
-- **Nicht so:** Hero-Bild im W1; Wasserglas als Tagwerk-Identität; generiertes Bild, wo ein Spot den Zustand genauer zeigt.
+- **Nicht so:** Hero-Bild oder Bildschirmfoto im W1; Wasserglas als Tagwerk-Identität; generiertes Bild, wo ein Spot den Zustand genauer zeigt.
 - **Prüfung:** Review: hat jedes Bild einen Inhaltszweck?
-- **Entscheidung:** D9, D10, D29, D32 · **Quelle:** `systems/sebaro/spec/06-imagery.md §1, §7, §9; AGENTS.md §6`
+- **Entscheidung:** D9, D10, D29, D32, D98 · **Quelle:** `DECISIONS.md D98 (V8); systems/sebaro/spec/06-imagery.md §1, §7, §9; AGENTS.md §6`
 
-### BIL-03 Fineliner-Linie, getönt in beiden Modi  ·  vorläufig  ·  alle
+### BIL-03 Fineliner-Linie, getönt in beiden Modi  ·  entschieden  ·  alle
 
 Generiere Bilder im Stil sebaro-line-v1 (gleichmäßige 0,3-mm-Linie, nur Umrisse) oder sebaro-steps-v1 (wortlose Anleitung), ohne Schraffur, Füllung, Farbe, Schatten, Textur und Gesichter. Töne die Linie danach in text (Inhalt) oder text-muted (Deko) über bg, für Hell und Dunkel. WebP unter 300 KB, nie hochskaliert.
 
 *EN:* Generated images use the verbatim style blocks sebaro-line-v1 or sebaro-steps-v1 (uniform outline, no fills/colour/shadow/faces), tinted afterwards to text / text-muted over bg for both schemes; WebP < 300 KB; never upscale.
 
-- **Warum:** Kein Verlauf, Glow oder Farbe darf mit den Funktionsfarben konkurrieren; beide Modi sind gleichwertig.
+- **Warum:** Kein Verlauf, Glow oder Farbe darf mit den Funktionsfarben konkurrieren; beide Modi sind gleichwertig. D98 (V9), Antwort „Fineliner ohne Farbe (Empfohlen)“.
 - **So:** Stilblock + Motiv + Constraints + Guard über compose.py; post.py line …; <figure> mit .sb-illustration-light/-dark (6 Regeln aus pages.css ins Produkt übernehmen).
 - **Nicht so:** Freie Prompts ohne Stilblock; bunte Illustration; nur ein Modus; Hand-Edits an abgeleiteten Dateien.
 - **Werte:** Linie 0,3 mm (Prompt); WebP < 300 KB; Artikel 672 CSS px; Studio ≈ 480 CSS px; Master 1536 × 1024; MaxFilter(5) Studio / MaxFilter(3) Artikel
 - **Prüfung:** images/pipeline/verify.py; Ansicht bei 1× und 2× in beiden Modi.
-- **Entscheidung:** D9, D20 · **Quelle:** `systems/sebaro/spec/06-imagery.md §2–§6`
+- **Entscheidung:** D9, D20, D98 · **Quelle:** `DECISIONS.md D98 (V9); systems/sebaro/spec/06-imagery.md §2–§6`
 
 ### BIL-04 Herkunft, Kennzeichnung, Alt-Text  ·  vorläufig  ·  alle
 
@@ -2223,7 +2223,7 @@ Gib jedem bedienbaren Element :focus-visible mit demselben Ring: 2 px in focus,
 - **Prüfung:** Tab durch die Seite: jedes Element zeigt den Ring; grep outline: none.
 - **Entscheidung:** D5, D85, D46 · **Quelle:** `DECISIONS.md D5, D85; systems/sebaro/spec/01-foundations.md §1.3, §5.3; spec/02-components.md §0.2, §8; spec/08-platform-android.md §3`
 
-### ZUG-03 Ziele mindestens 48 px  ·  vorläufig  ·  alle
+### ZUG-03 Ziele mindestens 48 px  ·  entschieden  ·  alle
 
 Gib jeder Bedienung 48 px Höhe oder eine 48-px-Trefferfläche. Nur auf Zeigerseiten dürfen Inline-Links, „Alle Prüfungen“, Brotkrumen und Fußnotenziffern 24 px haben, kompakte Werkzeugtasten und auf dem Desktop Zeilen in Bäumen, Listen, Menüs und Palette 32 px (D67); unter (pointer: coarse) und unter 1024 px werden sie 48 px.
 
@@ -2234,9 +2234,9 @@ Gib jeder Bedienung 48 px Höhe oder eine 48-px-Trefferfläche. Nur auf Zeigers
 - **Nicht so:** 32-px-Icon-Tasten in einer App; 40-dp-Icon-Tasten.
 - **Werte:** --sb-size-target-touch 48px; --sb-size-target-pointer 24px; --sb-size-control-sm 32; -md 48; -lg 56; Grenze 1023.98px / (pointer: coarse)
 - **Prüfung:** check_demo.py targets; axe target-size; mit pointer: coarse emulieren.
-- **Entscheidung:** D67 · **Quelle:** `systems/sebaro/spec/01-foundations.md §4; spec/02-components.md §0.3, §10; css/sebaro.css Z. 1010-1016; DECISIONS.md D67 (2)`
+- **Entscheidung:** D67, D98 · **Quelle:** `systems/sebaro/spec/01-foundations.md §4; spec/02-components.md §0.3, §10; css/sebaro.css Z. 1010-1016; DECISIONS.md D67 (2), D98`
 
-### ZUG-04 Jede Bedienung hat einen Namen  ·  vorläufig  ·  alle
+### ZUG-04 Jede Bedienung hat einen Namen  ·  entschieden  ·  alle
 
 Gib jeder Bedienung eine sichtbare Beschriftung oder ein deutsches aria-label, das die Handlung nennt. Icon-Tasten sind 48 × 48 mit 24-px-Icon in text-muted, Umschalt-Icons zeigen aria-pressed. Dekorative Icons tragen aria-hidden='true' focusable='false'. Fokusreihenfolge = DOM-Reihenfolge.
 
@@ -2247,9 +2247,9 @@ Gib jeder Bedienung eine sichtbare Beschriftung oder ein deutsches aria-label, d
 - **Nicht so:** Icon-Taste ohne Namen; „calendar-icon“ vorlesen lassen; tabindex > 0.
 - **Werte:** 48 × 48 px; Icon 24 px
 - **Prüfung:** axe button-name in beiden Modi; grep sb-icon-button ohne aria-label = 0; TalkBack/VoiceOver nicht verifiziert.
-- **Entscheidung:** – · **Quelle:** `systems/sebaro/spec/02-components.md §1.5, §8; spec/04-icons.md §11; spec/07-voice.md §4.8; css/sebaro.css Z. 334-342`
+- **Entscheidung:** D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/02-components.md §1.5, §8; spec/04-icons.md §11; spec/07-voice.md §4.8; css/sebaro.css Z. 334-342`
 
-### ZUG-05 Erzwungene Farben bedacht  ·  vorläufig  ·  web, desktop
+### ZUG-05 Erzwungene Farben bedacht  ·  entschieden  ·  web, desktop
 
 Lass unter forced-colors: active bedeutungstragende Kanten (Ortslinien, gewählte Chips, Segment- und Schrittkanten, offene Aussage-Zeilen, angezielte Belege) zu CanvasText werden, den Hauptaktionsrand zu ButtonText, den Fokusring zu Highlight; Felder bekommen einen CanvasText-Rahmen, Links bleiben unterstrichen, Statusglyphen behalten ihre Form. Ein eigenes Hochkontrast-Schema baut sebaro nicht.
 
@@ -2259,9 +2259,9 @@ Lass unter forced-colors: active bedeutungstragende Kanten (Ortslinien, gewählt
 - **So:** @media (forced-colors: active) { … border-color: CanvasText }; Ränder als border/outline.
 - **Nicht so:** Ortsmarkierung nur als background-color oder box-shadow; ein eigenes Hochkontrast-Theme oder eine Einstellung „Hoher Kontrast“.
 - **Prüfung:** Chromium-Emulation forced-colors (laut spec/02 §9 nicht verifiziert).
-- **Entscheidung:** D7, D88 · **Quelle:** `systems/sebaro/spec/01-foundations.md §5.3, §9; spec/02-components.md §8; spec/09-platform-web.md §5; DECISIONS.md D7, D88`
+- **Entscheidung:** D7, D88, D98 · **Quelle:** `systems/sebaro/spec/01-foundations.md §5.3, §9; spec/02-components.md §8; spec/09-platform-web.md §5; DECISIONS.md D7, D88, D98`
 
-### ZUG-06 Tastatur: Sprunglink, Escape, Fokus zurück  ·  vorläufig  ·  alle
+### ZUG-06 Tastatur: Sprunglink, Escape, Fokus zurück  ·  entschieden  ·  alle
 
 Setz als erstes fokussierbares Element den Sprunglink „Zum Inhalt“ (#inhalt), sichtbar erst bei Fokus. Prüf auf jedem Bildschirm Öffnen und Schließen per Tastatur, Escape, Fokusrückgabe, alle Rücksprünge, das Merken des Farbschemas und das Aufklappen der Aussage-Zeilen; bei 390 und 1440 px darf nichts abgeschnitten sein oder springen.
 
@@ -2272,7 +2272,7 @@ Setz als erstes fokussierbares Element den Sprunglink „Zum Inhalt“ (#inhalt)
 - **Nicht so:** Kein Sprunglink; nur automatisch prüfen und fertig melden.
 - **Werte:** Sprunglink 48px; Breiten 390 und 1440 px
 - **Prüfung:** Tab nach dem Laden zeigt den Sprunglink; manueller Durchlauf mit Screenshots beider Modi.
-- **Entscheidung:** – · **Quelle:** `systems/sebaro/spec/02-components.md §5; spec/11-checklist.md §1; css/sebaro.css Z. 56-64`
+- **Entscheidung:** D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/02-components.md §5; spec/11-checklist.md §1; css/sebaro.css Z. 56-64`
 
 ### ZUG-07 Erklärung zur Barrierefreiheit ehrlich  ·  vorläufig  ·  alle
 
@@ -2347,7 +2347,7 @@ Bau einen Einführungsschritt in der Form des leeren Zustands, anfangsbündig: S
 
 Was nur für Websites gilt: Laden, die Taste „Hell oder Dunkel“, Fußzeile mit „Darstellung“, Formulare, Seitenzahlen, Teilen, Sprachen und Druck.
 
-### WEB-01 Ladereihenfolge im Kopf  ·  vorläufig  ·  web, desktop
+### WEB-01 Ladereihenfolge im Kopf  ·  entschieden  ·  web, desktop
 
 Lade in dieser Reihenfolge: theme-init.js (vor den Stylesheets), bei Startbildschirm sb-start.js, dann fonts/fonts.css, tokens.css, icons/sprite.css, css/sebaro.css. Leg sprite.svg einmal inline oben in den body und die Verhaltensskripte ans Ende des body.
 
@@ -2357,9 +2357,9 @@ Lade in dieser Reihenfolge: theme-init.js (vor den Stylesheets), bei Startbildsc
 - **So:** <script src='assets/theme-init.js'></script> vor dem ersten <link rel='stylesheet'>.
 - **Nicht so:** theme-init.js am Ende des body (heller Blitz); sprite.css weglassen.
 - **Prüfung:** Seite mit gespeichertem 'dark' laden: kein heller Blitz.
-- **Entscheidung:** – · **Quelle:** `systems/sebaro/spec/09-platform-web.md §1, §2; demo/components.html Z. 7-14`
+- **Entscheidung:** D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/09-platform-web.md §1, §2; demo/components.html Z. 7-14`
 
-### WEB-02 Modus folgt dem System, Wahl nur bei Abweichung  ·  vorläufig  ·  web
+### WEB-02 Modus folgt dem System, Wahl nur bei Abweichung  ·  entschieden  ·  web
 
 Folge auf Websites beim ersten Besuch prefers-color-scheme und speichere nichts. Ein Druck auf „Hell oder Dunkel“ wechselt in den anderen Modus und speichert localStorage sb-theme; ist der neue Modus gleich dem System, werden Attribut und Speicher entfernt. Sag „Hell ist an.“ / „Dunkel ist an.“ (englische Seiten „Light is on.“ / „Dark is on.“) in einem versteckten role='status' an. Setz data-theme nie fest ins Markup; jede Dunkelregel gilt für beide Selektoren.
 
@@ -2370,21 +2370,21 @@ Folge auf Websites beim ersten Besuch prefers-color-scheme und speichere nichts.
 - **Nicht so:** <html data-theme='dark'> im Markup; @media dark in Komponenten-CSS; Ansage beim Laden.
 - **Werte:** localStorage sb-theme; <html data-theme='light|dark'>
 - **Prüfung:** check_demo THM1–THM3; zweimal drücken: data-theme weg, sb-theme leer; grep prefers-color-scheme in Komponenten-CSS = 0.
-- **Entscheidung:** D36, D75, D87 · **Quelle:** `systems/sebaro/spec/03-signature.md §6.2; spec/09-platform-web.md §2, §6, §6.1; spec/01-foundations.md §9; shared/TOKEN-CONTRACT.md §9; demo/assets/theme-button.js`
+- **Entscheidung:** D36, D75, D87, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/03-signature.md §6.2; spec/09-platform-web.md §2, §6, §6.1; spec/01-foundations.md §9; shared/TOKEN-CONTRACT.md §9; demo/assets/theme-button.js`
 
-### WEB-03 Fußzeile mit den Pflichtlinks  ·  vorläufig  ·  web
+### WEB-03 Fußzeile mit den Pflichtlinks  ·  entschieden  ·  web
 
-Schließ jede Website mit einer Fußzeile: Tintenlinie oben, Copyright-Zeile in caption/text-muted, Links „Impressum“, „Datenschutz“, „Barrierefreiheit“ und „GitHub“ mit external-link--16, dann „Darstellung“ mit der Wahl „Farbton: Kühl · Warm“ (FAR-15).
+Schließ jede Website mit einer Fußzeile: Tintenlinie oben, Copyright-Zeile in caption/text-muted, Links „Impressum“, „Datenschutz“ und „Barrierefreiheit“ immer, „GitHub“ mit external-link--16 nur, wenn das Produkt ein öffentliches Repository hat; dazu immer „Darstellung“ mit der Wahl „Farbton: Kühl · Warm“ (FAR-15).
 
-*EN:* Site footer: ink line on top, caption copyright, links Impressum, Datenschutz, Barrierefreiheit, GitHub (+ external-link icon), then „Darstellung“ with „Farbton: Kühl · Warm“ (FAR-15).
+*EN:* Site footer: ink line on top, caption copyright, links Impressum, Datenschutz, Barrierefreiheit always, GitHub (+ external-link icon) only when the product has a public repository; always „Darstellung“ with „Farbton: Kühl · Warm“ (FAR-15).
 
-- **Warum:** Pflichtlinks immer am selben Ort; extern endet im Icon (D56 (2)); Ebenenlinie D46. D91 Z3a: Die Wahl des Farbtons steht im Fuß unter „Darstellung“; der Kopf behält nur „Hell oder Dunkel“.
+- **Warum:** Pflichtlinks immer am selben Ort; extern endet im Icon (D56 (2)); Ebenenlinie D46. D91 Z3a: Die Wahl des Farbtons steht im Fuß unter „Darstellung“; der Kopf behält nur „Hell oder Dunkel“. D98 (V10), Antwort „Nur bei öffentlichem Code (Empfohlen)“: „GitHub“ ist der einzige Link, der fehlen darf.
 - **So:** <footer class='sb-site-footer'>…<ul class='sb-site-footer__links'>…</ul><section class='sb-site-footer__display' aria-labelledby='d' data-sb-tone-choice hidden><h2 id='d'>Darstellung</h2><fieldset class='sb-segmented'><legend>Farbton</legend>…
-- **Nicht so:** Impressum nur im Menü; Fußzeile mit grauem Grund; die Wahl des Farbtons im Kopf.
-- **Prüfung:** Review jeder Seite.
-- **Entscheidung:** D56, D46, D91 · **Quelle:** `systems/sebaro/spec/02-components.md §5; spec/07-voice.md §5; spec/09-platform-web.md §6.2; css/sebaro.css .sb-site-footer`
+- **Nicht so:** Impressum nur im Menü; Fußzeile mit grauem Grund; die Wahl des Farbtons im Kopf; ein Link „GitHub“ ohne öffentlichen Code.
+- **Prüfung:** Review jeder Seite: Impressum, Datenschutz und Barrierefreiheit im Fuß; GitHub nur bei öffentlichem Repository.
+- **Entscheidung:** D56, D46, D91, D98 · **Quelle:** `DECISIONS.md D98 (V10); systems/sebaro/spec/02-components.md §5; spec/07-voice.md §4.8, §5; spec/09-platform-web.md §4.1, §6.2; css/sebaro.css .sb-site-footer`
 
-### WEB-04 Druck: nur Inhalt  ·  vorläufig  ·  web
+### WEB-04 Druck: nur Inhalt  ·  entschieden  ·  web
 
 Blende beim Drucken Navigation, Sprachwechsel, „Hell oder Dunkel“, Sprunglink, Doku-Navigation, Seitenzahlen und „Weiter“, jede Aktionszone, die Links im Fuß, „Darstellung“ und Fußnoten-Popover aus; externe Links im Inhalt zeigen ihre Adresse in Klammern. Papier ist immer hell (WEB-11).
 
@@ -2394,7 +2394,7 @@ Blende beim Drucken Navigation, Sprachwechsel, „Hell oder Dunkel“, Sprunglin
 - **So:** Die Druckregeln von sebaro.css übernehmen; sb-print.js am Ende jeder Seite (WEB-11).
 - **Nicht so:** Gedruckte Bedienknöpfe, Seitenzahlen oder Fußlinks.
 - **Prüfung:** Druckvorschau hell und dunkel.
-- **Entscheidung:** D91 · **Quelle:** `css/sebaro.css (@media print); systems/sebaro/spec/09-platform-web.md §18.3; spec/03-signature.md §5.3`
+- **Entscheidung:** D91, D98 · **Quelle:** `DECISIONS.md D98; css/sebaro.css (@media print); systems/sebaro/spec/09-platform-web.md §18.3; spec/03-signature.md §5.3`
 
 ### WEB-05 Formular: das Ergebnis ersetzt das Formular  ·  entschieden  ·  web
 
@@ -2503,7 +2503,7 @@ Leg jeden Compose-Bildschirm in SebaroAppTheme ohne Produkt und bau ihn mit SbSc
 - **Prüfung:** Lint A1, A8; extract_compose.py --compile (BOM 2024.12.01 und 2026.08.00).
 - **Entscheidung:** D40, D46, D54, D39 · **Quelle:** `systems/sebaro/spec/08-platform-android.md §2.2, §4, §12; AGENTS.md §3`
 
-### MOB-02 Material 3 nur gezähmt  ·  vorläufig  ·  mobile
+### MOB-02 Material 3 nur gezähmt  ·  entschieden  ·  mobile
 
 Nutze keine Stock-M3-Buttons, FABs, NavigationBar, TopAppBar, Badges oder AlertDialogs. Neutralisiere die tonale Elevation (surfaceTint = bg, shadowElevation 0 dp). Switch, Radio, Checkbox und Slider sind erlaubt in sebaro-Farben (an = accent, nie Lindgrün), Chips nur mit 3-dp-Kante, Fortschrittsanzeigen nur für Netzarbeit über 1 s.
 
@@ -2514,7 +2514,7 @@ Nutze keine Stock-M3-Buttons, FABs, NavigationBar, TopAppBar, Badges oder AlertD
 - **Nicht so:** BadgedBox, ElevatedCard für Listen, Card mit tonalElevation, Color(0xFF…) in Screens.
 - **Werte:** Chip-Kante 3 dp; Feldlinie 1 dp / Fehler 2 dp; Fortschritt > 1 s; Color(0x nur in dist/SebaroTheme.kt
 - **Prüfung:** lint-sebaro-android.sh A1–A9 Exit 0 (Grep, an einer echten App nicht geprüft).
-- **Entscheidung:** D39, D40, D46, D36 · **Quelle:** `systems/sebaro/spec/08-platform-android.md §14, §15; spec/01-foundations.md §6`
+- **Entscheidung:** D39, D40, D46, D36, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/08-platform-android.md §14, §15; spec/01-foundations.md §6`
 
 ### MOB-03 Haptik nur auf dem Handy, nur bei Touch, nur zweimal  ·  entschieden  ·  mobile
 
@@ -2794,7 +2794,7 @@ Setz Felder im Inspektor kompakt (sb-field--compact): die Beschriftung am Anfang
 
 Wie Code und Prüfungen die Regeln absichern: Tokens, Markup, Prüfungen.
 
-### TEC-01 Nur Tokens, nie Rohfarben  ·  vorläufig  ·  alle
+### TEC-01 Nur Tokens, nie Rohfarben  ·  entschieden  ·  alle
 
 Nutze Farben und Maße nur über Tokens: CSS var(--sb-*) und var(--sb-x-sebaro-*), Compose SebaroTheme, Swift Color.sb*. Keine Hex-, rgb()-, hsl()- oder Namensfarben. Die einzige Quelle ist palettes/sebaro.json → tokens/tokens.json → dist/.
 
@@ -2805,7 +2805,7 @@ Nutze Farben und Maße nur über Tokens: CSS var(--sb-*) und var(--sb-x-sebaro-*
 - **Nicht so:** color: #66696E;
 - **Werte:** grep -nE '#[0-9A-Fa-f]{3,8}\b' auf Komponenten-CSS → 0 Treffer; Color(0x nur in dist/SebaroTheme.kt
 - **Prüfung:** sh lint-colour.sh <css> <pages> Exit 0 (L5); check_site.py CSS.
-- **Entscheidung:** D4 · **Quelle:** `systems/sebaro/spec/01-foundations.md Einleitung, §10; spec/09-platform-web.md §5; css/sebaro.css Z. 3-4`
+- **Entscheidung:** D4, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/01-foundations.md Einleitung, §10; spec/09-platform-web.md §5; css/sebaro.css Z. 3-4`
 
 ### TEC-02 Markup trägt den Zustand, Skripte verbessern  ·  entschieden  ·  web, desktop
 
@@ -2819,7 +2819,7 @@ Trag jeden Zustand dort ein, wo HTML/ARIA ihn kennt (aria-current, -pressed, -ch
 - **Prüfung:** check_demo.py --csp ohne Fehler; kein --selected/--active/--open-Selektor; grep 'data-state=' in neuem Markup = 0; grep fetch( in Skripten = 0.
 - **Entscheidung:** D85 · **Quelle:** `systems/sebaro/spec/02-components.md §0.1, §7; spec/03-signature.md §16; spec/09-platform-web.md §4, §10`
 
-### TEC-03 Farbprüfung je Ansicht  ·  vorläufig  ·  web, desktop
+### TEC-03 Farbprüfung je Ansicht  ·  entschieden  ·  web, desktop
 
 Markiere jede Ansicht mit data-sb-view="<name>" und, wo es keine Hauptaktion gibt, mit data-sb-primary-expected="0". Die Farbprüfung muss Hauptaktion = erwartete Zahl, 0 Farben ohne Rolle und 0 Text auf Farbfläche melden.
 
@@ -2830,9 +2830,9 @@ Markiere jede Ansicht mit data-sb-view="<name>" und, wo es keine Hauptaktion gib
 - **Nicht so:** Ansichten ohne Markierung; Ergebnis behaupten ohne Lauf.
 - **Werte:** Standard-Erwartung Hauptaktion 1; Kacheln zählen als „App-Zeichen“; Farben mit eigenem Job zählen nur in ihrem Teil: Diff-Flächen auf der Diff-Zeile, Kategorie in .sb-category, Markierung in mark / .sb-mark, Diagrammfarben in .sb-chart und .sb-scale-cell, Codefarben im Code; Hover- und Druckflächen sind neutral
 - **Prüfung:** sbColourCount(view).pass === true; Lücken: Pseudo-Elemente und Fokus-Outlines werden nicht gelesen.
-- **Entscheidung:** D36 · **Quelle:** `systems/sebaro/spec/03-signature.md §1.4 (Colour count); demo/assets/sb-colour-count.js; shared/DEMO-CHECK.md 1.3 §3.4; tools/check_demo.py (colour)`
+- **Entscheidung:** D36, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/03-signature.md §1.4 (Colour count); demo/assets/sb-colour-count.js; shared/DEMO-CHECK.md 1.3 §3.4; tools/check_demo.py (colour)`
 
-### TEC-04 Musterseiten-Teile nie ausliefern  ·  vorläufig  ·  alle
+### TEC-04 Musterseiten-Teile nie ausliefern  ·  entschieden  ·  alle
 
 Liefer demo.css, pages.css, sb-colour-count.js, alle demo-*-Klassen (auch demo-static), sb-phone/sb-phone--auto und die Zustandshaken .is-hover, .is-pressed, .is-focus, .is-visited, .is-active nie in Produkte aus. data-sb-follow und data-sb-demo-progress sind Demo-Haken; Produkte nutzen Router und echte Arbeit. Statt demo-stack, demo-form, demo-row nehmen Produkte sb-stack, sb-form-grid, sb-cluster (RAU-07).
 
@@ -2842,9 +2842,9 @@ Liefer demo.css, pages.css, sb-colour-count.js, alle demo-*-Klassen (auch demo-s
 - **So:** export_system.py in ein eigenes Ziel; Zustandsmatrix im Guide mit is-hover.
 - **Nicht so:** <div class='sb-phone'> in einer echten App; is-active per JS setzen; Demo-Ordner kopieren.
 - **Prüfung:** grep -rn 'demo-\|sb-phone\|is-hover\|is-pressed\|is-focus' src/ im Produkt = 0.
-- **Entscheidung:** D80 · **Quelle:** `systems/sebaro/spec/02-components.md §0.1, §4.11, §5.1, §7; spec/09-platform-web.md §4.1, §16; systems/sebaro/AGENTS.md §2`
+- **Entscheidung:** D80, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/02-components.md §0.1, §4.11, §5.1, §7; spec/09-platform-web.md §4.1, §16; systems/sebaro/AGENTS.md §2`
 
-### TEC-05 Tailwind nur für Layout  ·  vorläufig  ·  web, desktop
+### TEC-05 Tailwind nur für Layout  ·  entschieden  ·  web, desktop
 
 Nutz in Tailwind-v4-Projekten die sebaro-Klassen für die Signatur-Bausteine (sb-primary-action, sb-note-ref, sb-claim-row …) und Utilities nur fürs Layout drumherum. bg-primary-action* nur im Hauptaktions-Bauteil; nie bg-accent, bg-success oder bg-*-subtle hinter Text; die gelöschten Tailwind-Defaults kommen nicht zurück.
 
@@ -2855,9 +2855,9 @@ Nutz in Tailwind-v4-Projekten die sebaro-Klassen für die Signatur-Bausteine (sb
 - **Nicht so:** class='bg-blue-500 rounded-lg shadow-md'
 - **Werte:** Breakpoints sm 640, lg 1024 (md und xl gestrichen, TOKEN-CONTRACT 1.7); Container-Abfragen statt weiterer Breakpoints (RAU-03)
 - **Prüfung:** grep -rnE 'bg-(accent|link|success|warning|danger|info)|-subtle' src/ = 0 außerhalb Schalter, Radio, Regler.
-- **Entscheidung:** D36, D80 · **Quelle:** `systems/sebaro/spec/09-platform-web.md §8`
+- **Entscheidung:** D36, D80, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/09-platform-web.md §8`
 
-### TEC-06 Fertig erst, wenn alle Prüfungen gelaufen sind  ·  vorläufig  ·  alle
+### TEC-06 Fertig erst, wenn alle Prüfungen gelaufen sind  ·  entschieden  ·  alle
 
 Melde Arbeit erst fertig, wenn jeder Prüfbefehl mit Exit 0 endet und du alle Screenshots in beiden Modi angesehen hast. Warnungen, Waiver, übersprungene und nicht verfügbare Prüfungen schreibst du mit Grund in CHECKS.md.
 
@@ -2868,7 +2868,7 @@ Melde Arbeit erst fertig, wenn jeder Prüfbefehl mit Exit 0 endet und du alle Sc
 - **Nicht so:** „Tests grün“ bei übersprungenen Tests melden.
 - **Werte:** 16 Screenshots; Unittests 0 Skips (venv)
 - **Prüfung:** CHECKS.md mit Befehl, Datum, Exit, Ergebnis.
-- **Entscheidung:** D15, D23 · **Quelle:** `systems/sebaro/spec/11-checklist.md §4; AGENTS.md §9`
+- **Entscheidung:** D15, D23, D98 · **Quelle:** `DECISIONS.md D98; systems/sebaro/spec/11-checklist.md §4; AGENTS.md §9`
 
 ### TEC-07 Apps benennen auf --sb-* um  ·  entschieden  ·  desktop, web
 

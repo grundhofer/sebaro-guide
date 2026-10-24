@@ -28,7 +28,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 
 Rule status: **entschieden** = owner decision, binding. **vorläufig** = an agent's decision, valid until the owner
 changes it. **offen** = proposal only, do not build it as a rule. `D<n>` refers to row n of the decision log in the
-workshop repository sebaroDesign (private; the guide covers D1–D97). A rule id (e.g. `AKT-01`) is stable; cite it
+workshop repository sebaroDesign (private; the guide covers D1–D98). A rule id (e.g. `AKT-01`) is stable; cite it
 in code reviews, commit messages and ADRs.
 
 ## 2 The ten rules most often broken
@@ -132,7 +132,7 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
    button.sb-menu__back[role="menuitem"]`, accessible name „Zurück zu <parent>“ / „Back to <parent>“ from the script's
    message table); the back row, ← and Escape go back one level. No level covers items of another level any more; this
    replaces the D94 overlap. Every menu and submenu needs a name (`aria-label`). Never build your own submenu
-   placement. EBE-07 stays vorläufig: D95 decides only this part of the menu pattern.
+   placement. D95 decided this part of the menu pattern; D98 confirmed the rest (EBE-07 is entschieden).
    In the same workshop round, without a new decision: `tokens.css` ends with a generated `@media print` block with
    the light values (TOKEN-CONTRACT 1.9), so pages print light without scripts too; keep loading `sb-print.js` (it opens
    closed answers; its theme half is now redundant and stays until its removal is checked) (WEB-11). The studio share
@@ -154,11 +154,37 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
    checks in Chromium only; WebKit and Firefox come only with a new decision row. (c) No new decision: Tauri loads
    sebaro Sans and Mono as WOFF2 on every platform since D77; only the look on Windows (WebView2) and Linux
    (WebKitGTK) is checked later.
-   Nothing waits for the owner's choice now (`docs/ausblick.html#entscheidung` has no entries; a „vorläufig“ rule is
-   not an entry there). The five rules decided only in part (EBE-04, WEB-03, WEB-04, DSK-01 by D91, EBE-07 by D91 and
-   D95) stay vorläufig; never present them as decided. Still open, do not present as decided: Compose versions of the
-   new web parts and charts (not built: ask before building one in Compose). Nothing of this is tested on real iOS
-   devices, WebKit, Firefox, screen readers or real Tauri windows. See `docs/ausblick.html#offen`.
+   Settled by the owner with D98 (2026-10-23, synced from workshop `47b42db`): 70 of the 73 vorläufig rules are
+   entschieden, ten after a question each (V1–V10) and 59 as a package, as built. The answers that changed a text:
+   groups of people get a neutral word („Teilnehmende“, „Mitglieder“), else both forms („Nutzerinnen und Nutzer“),
+   never a sign inside the word (gender star, colon, underscore, middle dot, Binnen-I; Amtliches Regelwerk, version of
+   1 July 2024), checked by `TXT8` of the workshop's `check_demo.py` (TXT-05); a website footer always has
+   „Impressum“, „Datenschutz“ and „Barrierefreiheit“, „GitHub“ only when the product has a public repository (this
+   guide keeps it, its code is public) (WEB-03); with required fields empty the primary action stays enabled, its press
+   says „<Beschriftung> fehlt.“ at each and moves focus to the first; `sb-form.js` does this for `required` fields,
+   Compose and SwiftUI have no helper for it (STA-03); in a tree arrows only move focus, Enter, Space or a click opens
+   (NAV-11); no numbers on sidebar, tabs or bottom navigation, only in the list head and the state sentence (HAL-05,
+   DAT-01); the data-path line under every action, also „Bleibt auf diesem Gerät.“ (BEL-10); evidence is optional but
+   generated when shown (BEL-06); the first screen of an app website has only heading, sentence and primary action,
+   screenshots below (BIL-02); a sketch page shows at least two ways per question (HAL-08); the iOS form sheet is the
+   one exception to pickers-only sheets (EBE-04, MOB-07). Confirmed as written: a tap on Android is the short grey
+   fill, no ripple (FAR-08), and generated images stay fineliner without colour (BIL-03).
+   Five questions wait for the owner's choice (`docs/ausblick.html#entscheidung`; a „vorläufig“ rule is not an entry
+   there), none answered by a rule, so leave each as built and never decide it yourself: from workshop `190cbda`,
+   Android at 200 % text (cut words in the bottom navigation, the working primary action, the phone dialog's scrim),
+   inputs on the phone (the select's menu with checks, ← → only in the segmented control, cut segment words) and
+   charts on the phone (fixed dp, growing with the text as on the web, or the current mix; heatmap tab stops, touch
+   hint, English chart words); from `47b42db`, whether required fields show before the press and how, and novalis'
+   sidebar start width (240 px in sebaro, 256 px in novalis today; decided at adoption, D89). Only three rules stay
+   vorläufig, by D98: BIL-04 and ZUG-07 until a legal check before the first publication of a product (the marking of
+   generated images, the accessibility statement), DSK-01 until a run in a real Tauri webview with novalis (D89); never
+   present them as decided. Compose (workshop `190cbda`, no owner
+   decision): charts batch 1 (`SbBarChart`, `SbStats` with the sparkline, `SbShareRows`, `SbGoalRing`, `SbHeatmap`) and
+   the fields `SbTextField`, `SbSearchField`, `SbSelectField`, `SbSegmented` and `SbTabs` now exist, rendered on the
+   JVM with the workshop's new render tool (`extract_compose.py --render`), not on a device. Still not built in
+   Compose, ask before building one: calendar, about head, small display set, sticky group head, timeline, line, series,
+   deviation and histogram charts, board, audio, video, map, quote, code, diff. Nothing of this is tested on real
+   Android or iOS devices, WebKit, Firefox, screen readers or real Tauri windows. See `docs/ausblick.html#offen`.
 
 ## 4 Where the system files come from
 
@@ -194,7 +220,7 @@ node tools/og.mjs --check --png-bytes  # fresh render equals the committed snipp
 python3 tools/sync_from_design.py --check          # docs/sebaro/ equals a fresh export of the workshop commit
 # with a sebaroDesign checkout, its demo check on every page, run from there (absolute page path):
 #   python3 tools/check_demo.py <abs path>/docs/<page>.html --page web --skip content --no-write
-python3 tools/release.py 2.8.0         # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.7.0 is the last release)
+python3 tools/release.py 2.9.0         # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.8.0 is the last release)
 ```
 
 The workshop's demo check (1.3.0) measures one- and two-character text on screen pixels; on `regeln.html` it reports
@@ -207,7 +233,11 @@ says „colour skipped“; the tool has no option for another path, so this is a
 workaround in `docs/`; run on a scratch copy with the script placed there, it flags only the deliberate „Nicht so“
 view `TEC-03-bad` on `regeln.html`); and a single file gets the warm tone only with `--tones warm`, so run every
 page a second time with `--tones warm` (and `regeln.html` again with `--skip content,contrast`). Say both in your
-report.
+report. `--skip content` also skips `TXT8` (a sign inside a word for people, D98, TXT-05), so grep the German copy
+yourself: `grep -nE '[a-zäöüß][*∗:_·][iI]n|[a-zäöüß]In(nen)?([^a-zA-Zäöüß]|$)' docs/*.html src/rule-examples/*.html`
+and look at every hit (code such as `:invalid` and names such as `LinkedIn` hit too; it also finds the singular
+Binnen-I after endings `TXT8` does not know, see the note of TXT-05); the guide's own copy has none, also not in its
+„Nicht so“ examples.
 
 `check_site.py` groups: PAGE, LINK, NET, CSS, TOKEN (every `var(--sb-*)` exists in `tokens.css` / `sebaro.css`), STYLE,
 SWATCH, LICENSE, TEXT, CHANGE, OG, TERM, RULES; the docstring explains each.
@@ -296,5 +326,5 @@ hand with `tools/sync_from_design.py`.
 The guide shows sebaro as built and checked in sebaroDesign; Chromium screenshots do not verify real Android/iOS
 devices, Windows rendering, WebKit/Tauri webviews or screen readers. All example data on the pages is invented.
 The owner answered the round-6 sketch (63 questions, private, never linked from here) with D91 and the open readings
-after it with D92 to D97; what is still open, and what is built but untested (real iOS devices, real Tauri windows),
+after it with D92 to D97, and confirmed 70 of the 73 vorläufig rules with D98; what is still open, and what is built but untested (real iOS devices, real Tauri windows),
 is collected on `docs/ausblick.html`.

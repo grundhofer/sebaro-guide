@@ -26,8 +26,10 @@ This product uses the sebaro design system. Before building or changing any UI:
    head, timeline, table sort and sum row (`sb-table__sort`, `tfoot`), calendar, quote, intro step, about head, audio,
    video, place map, website patterns (form result, page numbers, FAQ, docs groups, screenshots, share image, language
    switch, print), charts (`sb-chart`, heatmap with classed scales: at most 4 sequential steps, 5 diverging), iOS (SwiftUI package) and the
-   desktop window parts. Count partial states („2 offen“), never „teils offen“ (STA-09). Compose versions of the new
-   web parts and charts do not exist yet: ask before building one. Settled with D92 and D93: the heatmap „heute“ is
+   desktop window parts. Count partial states („2 offen“), never „teils offen“ (STA-09). In Compose only the first
+   charts (bars, stats with sparkline, share rows, goal ring, heatmap) and the text, search and select fields, the
+   segmented control and tabs exist (rendered in the workshop, not on a device); ask before building any other new
+   part in Compose. Settled with D92 and D93: the heatmap „heute“ is
    a 4 px cobalt frame with a 1 px ground joint inside, drawn by `sebaro.css` (legend „Rahmen: heute“), „Konflikt“
    always carries the warning glyph, sortable tables scroll sideways inside `sb-table-wrap` on phones and never stack
    (DAT-11, STA-08, DAT-14). Confirmed with D93: the light/dark places of item 6 and ⌘K / Ctrl+K of item 7.
@@ -45,6 +47,12 @@ This product uses the sebaro design system. Before building or changing any UI:
    over three lines fails the build for that page: shorten the page's title, never the image's (WEB-09). CI checks in
    Chromium only (D96 (b)). Tauri loads sebaro Sans and Mono as WOFF2 since D77; only the look on Windows and Linux is
    checked later (SCH-02).
+   Decided with D98 (70 rules confirmed): name groups of people with a neutral word („Teilnehmende“), else both forms
+   („Nutzerinnen und Nutzer“), never a sign inside the word (TXT-05); the footer has „Impressum“, „Datenschutz“,
+   „Barrierefreiheit“ always, „GitHub“ only when the product has a public repository (WEB-03); with required fields
+   empty the primary action stays enabled, its press says „<Beschriftung> fehlt.“ at each and moves focus to the first
+   (`sb-form.js` on websites; STA-03); no numbers on sidebar, tabs or bottom navigation (HAL-05); the data-path line
+   under every action, also „Bleibt auf diesem Gerät.“ (BEL-10). BIL-04, ZUG-07 and DSK-01 stay vorläufig.
    Without a decision, in the D95 workshop round: pages print light from `tokens.css` alone since token contract
    1.9; keep `sb-print.js` for the closed answers (WEB-11).
 10. Ship the export's `LICENSE.md` unchanged (D76). If a rule does not fit, cite its id (e.g. `AKT-01`) and ask the
