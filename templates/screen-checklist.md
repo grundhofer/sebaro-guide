@@ -1,7 +1,7 @@
 # Screen checklist
 
 Walk this for every screen in **light and dark**, at **390 px and 1440 px** (desktop apps: smallest and a wide window).
-Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D99.
+Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D101.
 
 ## Colour and hierarchy
 - [ ] Cobalt only for current place, links and focus; lime only for the one primary action (FAR, AKT)
@@ -83,8 +83,11 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
 - [ ] Touch targets ≥ 48 px (desktop rows 32 px with pointer) (ZUG, RAU)
 - [ ] Keyboard: open/close, Escape, focus enters and returns; screen-reader names on icon-only controls (ZUG)
 - [ ] No clipping, no horizontal scrolling at 390 px
-- [ ] Large text (200 % on a 360 px phone): rooms grow, words wrap at spaces, only a single too-long word is
-      hyphenated, nothing is cut; Android dialogs dim with the palette scrim (ZUG-09, EBE-03, D99)
+- [ ] Large text (200 % on 320, 360 and 390 px): rooms grow, words wrap at spaces, only a single too-long word is
+      hyphenated, nothing is cut, no page scrolls sideways (wide parts scroll in their own frame); segments become a
+      select, steps show only the current word, file names break only after - . _ /, a part that alone does not fit
+      also inside (`sb-fit.js`, `sb-file-name`); Android dialogs dim with the palette scrim (ZUG-09, EBE-03, D99, D100,
+      D101)
 
 ## Content and evidence
 - [ ] No claim without proof; outflows stay visible; unknown = „nicht belegt“ (BEL)

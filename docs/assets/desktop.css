@@ -8,10 +8,15 @@
 
 /* ------------------------------------------------------------------ section footers: rules and platform hints */
 .g-desktop-facts { margin-block-start: var(--sb-space-6); max-inline-size: 52em; }
-.g-desktop-facts > div { grid-template-columns: minmax(0, 1fr); align-items: start; gap: var(--sb-space-1); padding-block: var(--sb-space-3); }
-@media (min-width: 640px) { .g-desktop-facts > div { grid-template-columns: 9em minmax(0, 1fr); gap: var(--sb-space-4); } }
+/* sebaro's meta list is a wrapping flex row since workshop 0f40a10 (D99 (1)): the label column is a flex basis, not a
+   grid track; below 640 px the label stands above the value */
+.g-desktop-facts > div { align-items: start; gap: var(--sb-space-1) var(--sb-space-4); padding-block: var(--sb-space-3); }
+.g-desktop-facts dt { flex: 1 1 100%; }
+.g-desktop-facts dd { flex: 1 1 100%; }
+@media (min-width: 640px) { .g-desktop-facts dt { flex: 0 1 9em; } .g-desktop-facts dd { flex: 1 1 0%; } }
 .g-desktop-facts dt { padding-block-start: var(--sb-space-0-5); }
 .g-desktop-rulelist { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--sb-space-1); }
+.g-desktop-rulelist > li { overflow-wrap: anywhere; }   /* a long title breaks at 200 % text (D100 (5)); the status keeps its line */
 .g-desktop-rulelist a { font-family: var(--sb-font-family-mono); font-size: 0.875em; font-weight: var(--sb-type-code-weight); }
 /* status = glyph + word (STA-01), as on regeln.html */
 .g-desktop-status { display: inline-flex; align-items: center; gap: var(--sb-space-1); vertical-align: bottom; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
@@ -21,7 +26,7 @@
 .g-desktop-built + .g-desktop-marks { margin-block-start: var(--sb-space-2); }
 .g-desktop-sub { margin: var(--sb-space-10) 0 var(--sb-space-2); font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
 .g-desktop-text { margin: 0 0 var(--sb-space-4); max-inline-size: 42em; color: var(--sb-color-text-muted); }
-.g-desktop-list-plain { margin: 0; padding-inline-start: var(--sb-space-6); display: grid; gap: var(--sb-space-2); max-inline-size: 52em; }
+.g-desktop-list-plain { margin: 0; padding-inline-start: var(--sb-space-6); display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-2); max-inline-size: 52em; }
 .g-desktop-gap { margin-block-start: var(--sb-space-6); }
 .g-desktop-caption { margin: var(--sb-space-1) var(--sb-space-4) var(--sb-space-2); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 
@@ -36,6 +41,8 @@
 /* WORKAROUND, remove when sebaroDesign fixes it: below 480 px the window zone turns into a column, and the message's
    flex-basis (260 px, meant as a width) becomes a 260 px height of empty space under the error sentence */
 @container sb-window (max-width: 479.98px) { .g-desktop-zoneonly .sb-primary-action-bar__message { flex-basis: auto; } }
+/* at 200 % text the sentence's longest word set the zone wider than the frame (D100 (5)); it may break inside a word */
+.g-desktop-zoneonly .sb-primary-action-bar__message { overflow-wrap: anywhere; }
 /* the start replays inside its frame: sb-start.js needs a positioned scope with .sb-start as a direct child */
 .g-desktop-start { position: relative; overflow: hidden; }
 /* tab panels and the editor sit inside sb-window__content */

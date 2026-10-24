@@ -4,6 +4,9 @@
 
 /* ------------------------------------------------------------------ header and footer */
 .g-header__suffix { font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); color: var(--sb-color-text-muted); }
+/* D100 (5): at 200 % text on 320 px the lockup is wider than the row; „Guide“ then goes under „sebaro“ */
+.g-header .sb-lockup { min-inline-size: 0; }
+.g-header__name { display: inline-flex; flex-wrap: wrap; column-gap: var(--sb-space-2); min-inline-size: 0; }
 .g-nav { row-gap: 0; }
 /* D92 (6): „Plattformen“ stands for web, app, ios and desktop. On one of those pages it carries aria-current="true"
  * (an item of the set, not the page) and the same place line as aria-current="page" in sebaro.css (NAV-01). */
@@ -12,6 +15,8 @@
 /* every page listed in the footer, on a line of its own above the version line */
 .g-footer__pages { flex-basis: 100%; }
 .g-footer code { font-size: 0.875em; }
+/* a flex item takes its longest word as its minimum; the version line wraps instead (D100 (5)) */
+.g-footer > p { min-inline-size: 0; }
 /* NAV-07 order is lockup, navigation, theme button (no language switch: the guide is German only). Lockup plus
  * "Guide" (168 px) and the button (160 px) need 368 px with the gutters; on narrower pages the button label wraps
  * onto two lines instead of pushing the page sideways (measured at 320 px). */
@@ -46,20 +51,38 @@
 .g-rule__more { margin-block-start: var(--sb-space-6); }
 .g-rule__more > summary { display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-pointer); cursor: pointer; color: var(--sb-color-text); text-decoration: underline; text-decoration-color: var(--sb-color-link); text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
 .g-rule__facts { margin-block-start: var(--sb-space-3); max-inline-size: 48em; }
+/* D100 (5): at 200 % text the id column leaves title and status too little room; from 24rem down (384 px at 100 %, 768 px
+ * at 200 %, since a media query's rem follows the reader's text size) title and status line take the whole width */
+@media (max-width: 24rem) { .g-rule__title, .g-rule__meta { grid-column: 1 / -1; } }
 
 /* ------------------------------------------------------------------ examples: right and wrong side by side */
 .g-examples { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--sb-space-6); align-items: start; }
-.g-ex { display: grid; gap: var(--sb-space-3); min-inline-size: 0; }
+.g-ex { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-3); min-inline-size: 0; }
 .g-ex__label { display: inline-flex; align-items: center; gap: var(--sb-space-1); margin: 0; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
 .g-ex--do .g-ex__label { color: var(--sb-color-success); }
 .g-ex--dont .g-ex__label { color: var(--sb-color-danger); }
 .g-ex__stage { box-sizing: border-box; min-inline-size: 0; padding: var(--sb-space-6) var(--sb-space-4); border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container); background: var(--sb-color-bg); overflow-x: auto; }
 .g-ex--do .g-ex__stage { border-block-start: var(--sb-border-width-strong) solid var(--sb-color-success); }
 .g-ex--dont .g-ex__stage { border-block-start: var(--sb-border-width-strong) solid var(--sb-color-danger); }
+/* D100 (5), D99 (1): a stage is narrower than the screen its specimen stands for. A phone frame in it stands for a
+ * screen of at least 320 px (so does a video and a window screenshot): once the text is large (12rem is 320 px from 167 % text on) it keeps that width and the
+ * stage scrolls sideways in its own frame, instead of squeezing the view to a column no phone has (provisional,
+ * agent); guide.js gives a stage that scrolls tabindex, role and name. A word that alone does not fit its line breaks
+ * there (sb-fit.js gives that word, and only it, a hyphen) instead of being cut by a frame */
+.g-ex__stage :is(.sb-phone, .g-rx-frame--phone, .g-rx-window-bad, .g-rx-c-frame:not(.g-rx-c-frame--wide), .sb-video, .sb-shots--window) { min-inline-size: min(320px, 12rem); }
+/* the same for what a stage shows as a whole: its content keeps at least the width of the smallest phone, except a
+ * part that scrolls by itself (table, code, wide window) or is narrow on purpose (a column that shows breaking) */
+.g-ex__stage > :not(.sb-table-wrap, .sb-code, .g-rx-winscroll, .g-rx-narrow, .g-rx-narrowtext, .g-rx-d-tight) { min-inline-size: min(320px, 12rem); }
+.g-ex__stage { position: relative; }   /* positioned: an absolute part inside (visually hidden words) scrolls with the stage instead of widening the page */
+/* a stage breaks a word only where it alone does not fit its line (sebaro's break-word), never at any letter (that
+ * squeezed toasts and buttons to columns of letters). Where a frame of an example cuts its content (overflow: hidden)
+ * and a word is the only content of its part, that part may break the word instead of being cut (OVF4, D101 (9)):
+ * the copy button of a code block at 320 px and 200 % */
+.g-ex__stage .sb-code__copy { max-inline-size: 100%; overflow-wrap: anywhere; }
 .g-ex__note { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); max-inline-size: 42em; }
 
 /* ------------------------------------------------------------------ specimens: sources, swatches, page cards */
-.g-source { margin-block-start: var(--sb-space-3); }
+.g-source { margin-block-start: var(--sb-space-3); min-inline-size: 0; }   /* an open block never widens a grid parent: its code scrolls in its own frame (D100 (5)) */
 .g-source > summary { display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-pointer); cursor: pointer; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .g-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: var(--sb-space-6) var(--sb-spacing-group); align-items: start; }
 .g-mark-proposal { display: inline-flex; align-items: center; gap: var(--sb-space-1); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
@@ -93,8 +116,21 @@
   .g-table-stack tr > :is(td, th)[data-label]:not(:first-child)::before { content: attr(data-label) ": "; color: var(--sb-color-text-muted); font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); }
 }
 
-/* long names in inline code break instead of pushing a column or the page sideways (code blocks keep their lines) */
-main :is(code, .sb-code-inline):not(pre code) { overflow-wrap: anywhere; }
+/* long names in inline code break instead of pushing a column or the page sideways (code blocks keep their lines); a
+ * file name (sb-file-name) breaks only after - . _ / where the page wrote <wbr>, an identifier (sb-id) never (D101 (6), D80) */
+main :is(code, .sb-code-inline):not(pre code, .sb-file-name, .sb-id) { overflow-wrap: anywhere; }
+/* a meta-list value whose one word is wider than the whole row (a path, a command, an address) goes under its label and
+ * breaks there instead of widening the page (D100 (5)): the flex item's minimum is clamped to the row. Workshop request:
+ * sebaro.css .sb-meta-list has no such clamp yet */
+main .sb-meta-list > div > :is(dt, dd) { max-inline-size: 100%; }
+/* the changelog's 7rem date column leaves its entry about 48 px at 200 % text on 360 px, so names and words broke into
+ * letters; from 22rem down (352 px at 100 %, 704 px at 200 %) the date stands above its entry, as the timeline does
+ * (D100 (5); provisional, agent; workshop request: sebaro.css .sb-changelog has no such form yet) */
+@media (max-width: 22rem) { main .sb-changelog li { grid-template-columns: minmax(0, 1fr); row-gap: var(--sb-space-1); } }
+/* a tree outside a window keeps its one-line rows and its status words (D67 (2), sb-row__meta never shrinks); at
+ * 200 % text its box scrolls sideways in its own frame instead of the page (D100 (5)); a box that scrolls has
+ * tabindex="0", role="region" and a name, so the keyboard reaches it */
+main .demo-box:has(> .sb-tree) { overflow-x: auto; }
 
 /* ------------------------------------------------------------------ filter bar on regeln.html */
 .g-filter { display: flex; flex-wrap: wrap; align-items: end; gap: var(--sb-space-4) var(--sb-space-6); margin-block: var(--sb-space-6) 0; }

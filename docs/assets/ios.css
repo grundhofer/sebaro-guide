@@ -5,7 +5,7 @@
  * larger text size for the Dynamic Type example. */
 
 .g-ios-text { margin: var(--sb-space-6) 0 0; max-inline-size: 42em; }
-.g-ios-list { margin: var(--sb-space-6) 0 0; padding-inline-start: var(--sb-space-6); display: grid; gap: var(--sb-space-2); max-inline-size: 52em; }
+.g-ios-list { margin: var(--sb-space-6) 0 0; padding-inline-start: var(--sb-space-6); display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-2); max-inline-size: 52em; }
 .sb-section > .sb-code, .sb-section > .g-app-screens + .sb-code { margin-block-start: var(--sb-space-6); max-inline-size: 52em; }
 .g-ios-checks { max-inline-size: 52em; }
 

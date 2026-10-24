@@ -36,6 +36,18 @@ body.sb-page {
   margin: 0; background: var(--sb-color-bg); color: var(--sb-color-text);
   font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking);
   font-synthesis: none; -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
+  /* large text (D100 (5), D101 (9), (10)): a word, a name or inline code that alone does not fit its line breaks there,
+     without a hyphen, so no page scrolls sideways; sb-fit.js wraps such a word, and only that word, in
+     span.sb-hyphenate (hyphens: auto there) unless it is a name or code. Identifiers (.sb-id, D80) never break */
+  overflow-wrap: break-word;
+}
+.sb-hyphenate { -webkit-hyphens: auto; hyphens: auto; }
+/* machine values never take a hyphen, not even inside a part that hyphenates (spec/07 §3.1, D101 (10)) */
+code, kbd, samp, var { -webkit-hyphens: none; hyphens: none; }
+/* sb-fit.js measures a word in a hidden copy of this class (spec/02 §7); never shown, removed in the same task */
+.sb-fit-probe {
+  position: absolute; inset-block-start: 0; inset-inline-start: 0; display: block; margin: 0; padding: 0; border: 0;
+  visibility: hidden; pointer-events: none; white-space: normal; overflow-wrap: normal; text-transform: none;
 }
 button, input, select, textarea { font: inherit; letter-spacing: inherit; color: inherit; }
 h1 { font: var(--sb-type-display); letter-spacing: var(--sb-type-display-tracking); }
@@ -434,6 +446,7 @@ body.sb-page { container: sb-page sb-content / inline-size; }
   min-block-size: var(--sb-size-control-md); box-sizing: border-box; margin: 0;
   font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking);
   text-align: center; cursor: pointer;
+  overflow-wrap: anywhere;   /* large text (D99 (1)): the words wrap and the button grows; a word wider than the button breaks (sb-fit.js hyphenates it) */
   transition: background-color var(--sb-motion-duration-short) var(--sb-motion-easing-standard);
 }
 
@@ -466,7 +479,7 @@ body.sb-page { container: sb-page sb-content / inline-size; }
   opacity: 0; pointer-events: none; transition: transform var(--sb-motion-duration-medium) linear;
 }
 .sb-primary-action[aria-busy="true"] .sb-primary-action__bar { opacity: 1; }
-.sb-primary-action__label { display: inline-flex; align-items: center; gap: var(--sb-spacing-inline); }
+.sb-primary-action__label { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--sb-spacing-inline); min-inline-size: 0; }
 .sb-primary-action[data-sb-state] > .sb-icon { display: none; }   /* done: the label brings its check icon; retry: „Noch mal versuchen“ alone */
 .sb-primary-action[data-sb-progress="indeterminate"] .sb-primary-action__bar { transform: none; opacity: 0.4; transition: none; }
 @media (prefers-reduced-motion: no-preference) {
@@ -590,7 +603,11 @@ body.sb-page { container: sb-page sb-content / inline-size; }
 .sb-field:has(:disabled) .sb-field__label { color: var(--sb-color-text-muted); }
 .sb-field__control:has(> :disabled) { border-block-end-color: var(--sb-color-border); }
 .sb-field__control > :disabled { color: var(--sb-color-text-muted); cursor: not-allowed; }
-.sb-field__row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 132px); gap: var(--sb-space-3); }
+/* two fields in one row: wide + 132 px; at large text the short field goes under the wide one instead of hiding its
+   value behind its suffix (D99 (1)) */
+.sb-field__row { display: flex; flex-wrap: wrap; gap: var(--sb-space-3); }
+.sb-field__row > * { flex: 1 1 12rem; min-inline-size: 0; }
+.sb-field__row > :last-child { flex: 0 1 132px; min-inline-size: min(100%, 8.25rem); }
 
 /* search: a field with the search icon at the start and a clear button when filled */
 .sb-search:has(> .sb-icon-button) { padding-inline-end: 0; }
@@ -600,7 +617,7 @@ body.sb-page { container: sb-page sb-content / inline-size; }
 
 /* select: native select without its arrow, the chevron icon at the end */
 .sb-select { position: relative; padding-inline-end: 0; }
-.sb-select > select { -webkit-appearance: none; appearance: none; padding-inline-end: var(--sb-space-12); cursor: pointer; }
+.sb-select > select { -webkit-appearance: none; appearance: none; padding-inline-end: calc(var(--sb-space-3) + var(--sb-size-icon-lg) + var(--sb-space-2)); cursor: pointer; }   /* the chevron's room, not more: at 200 % text 48 px of rem would cut the chosen words (D99 (1)) */
 .sb-select > select option { background: var(--sb-color-surface-raised); color: var(--sb-color-text); }
 .sb-select > .sb-icon { position: absolute; inset-inline-end: var(--sb-space-3); pointer-events: none; color: var(--sb-color-text-muted); }
 
@@ -681,10 +698,12 @@ body.sb-page { container: sb-page sb-content / inline-size; }
   min-block-size: var(--sb-size-target-touch); padding: 0 var(--sb-space-1); box-sizing: border-box; pointer-events: none;
   border-block-end: var(--sb-border-width-strong) solid transparent; border-block-start: var(--sb-border-width-strong) solid transparent;
   font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); color: var(--sb-color-text);
-  /* large text (D99 (1)): the words wrap between words and the face grows; a word that alone does not fit is
-     hyphenated (by the page's lang), else broken, never cut by the frame. `min-inline-size: 0` lets the face shrink
-     below its widest word, so `break-word` (not `anywhere`, which breaks without a hyphen) can act */
-  min-inline-size: 0; text-align: center; hyphens: auto; overflow-wrap: break-word;
+  /* large text (D99 (1), D101 (9)): the words wrap between words and the face grows; a word that alone does not fit
+     breaks without a hyphen, and sb-fit.js hyphenates that word (span.sb-hyphenate); never cut by the frame.
+     `min-inline-size: 0` and `anywhere` let the face and its word (an anonymous flex item) shrink below the widest
+     word, which `break-word` cannot (without the script „Stündlich“ ran 16 px past its face at 200 %). Once an option
+     does not fit its column, sb-fit.js shows the control as a select (D100 (3), below) */
+  min-inline-size: 0; text-align: center; overflow-wrap: anywhere;
 }
 .sb-segmented__face .sb-icon { display: none; flex: none; }
 .sb-segmented__option:hover .sb-segmented__face, .sb-segmented__option.is-hover .sb-segmented__face { background: var(--sb-color-hover-fill); }
@@ -703,10 +722,15 @@ body.sb-page { container: sb-page sb-content / inline-size; }
 .sb-segmented:disabled .sb-segmented__option + .sb-segmented__option,
 .sb-segmented__options:not(:has(input:enabled)) > .sb-segmented__option + .sb-segmented__option { border-inline-start-color: var(--sb-color-border); }
 .sb-segmented:disabled > legend, .sb-segmented:not(:has(input:enabled)) > legend { color: var(--sb-color-text-muted); }
+/* large text (D100 (3)): sb-fit.js turns a control whose option does not fit its column (Compose's measure) into a
+   select with the same options and the legend as its label; the radios stay the form's value, hidden */
+.sb-segmented__select { display: none; }
+.sb-segmented[data-sb-fit="select"] > .sb-segmented__options { display: none; }
+.sb-segmented[data-sb-fit="select"] > .sb-segmented__select { display: flex; }
 
 /* range (slider): rail in border-strong, chosen range in accent, ring handles; the script keeps the fill in step */
 .sb-range { display: grid; gap: var(--sb-space-1); min-inline-size: 0; }
-.sb-range__head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--sb-space-3); }
+.sb-range__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0 var(--sb-space-3); }   /* the value goes under the label at large text (D99 (1)) */
 .sb-range__label { font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
 .sb-range__value { font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); font-weight: var(--sb-type-caption-weight); font-variant-numeric: var(--sb-type-numeric-variant); color: var(--sb-color-text-muted); }
 .sb-range__track { position: relative; block-size: var(--sb-size-target-touch); --sb-range-from: 0; --sb-range-to: 0.5; }
@@ -772,7 +796,7 @@ body.sb-page { container: sb-page sb-content / inline-size; }
 
 /* status: glyph in the status colour + the word in text (never colour alone; spec/01 §1.5) */
 .sb-status {
-  display: inline-flex; align-items: center; gap: var(--sb-space-1); margin: 0; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: var(--sb-space-1); margin: 0;   /* the words wrap beside the glyph at large text (D99 (1)) */
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text);
 }
 .sb-status > .sb-icon { flex: none; }
@@ -830,7 +854,8 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
 .sb-tag, .sb-demo-marker {
   display: inline-flex; align-items: center; gap: var(--sb-space-1); padding: 1px var(--sb-space-2); box-sizing: border-box;
   border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-small);
-  color: var(--sb-color-text); white-space: nowrap;
+  color: var(--sb-color-text);
+  max-inline-size: 100%; min-inline-size: 0; overflow-wrap: anywhere;   /* stays one piece where it fits; a word wider than its place breaks at large text, never cut (D99 (1)) */
 }
 .sb-tag { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }   /* weight 400: a tag is a fact, not an emphasis (fix stage AD15) */
 .sb-demo-marker { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
@@ -884,7 +909,7 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
    collections) take --item: a 1 px border-strong edge, the 3 px place line only on the current card (D83 (3),
    FOR-05). Radius 12 for both */
 .sb-card {
-  position: relative; display: grid; gap: var(--sb-space-2); align-content: start;
+  position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-2); align-content: start;
   padding: var(--sb-spacing-inset-container); box-sizing: border-box;
   background: var(--sb-elevation-level-1-surface); border: var(--sb-elevation-level-1-border-width) solid var(--sb-elevation-level-1-border-color);
   border-radius: var(--sb-radius-container);
@@ -980,7 +1005,9 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
 .sb-big-number { display: flex; flex-direction: column; gap: var(--sb-space-1); margin: 0; }
 .sb-big-number__value { font: var(--sb-type-display); letter-spacing: var(--sb-type-display-tracking); font-variant-numeric: var(--sb-type-numeric-variant); }
 .sb-big-number__label { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
-.sb-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: var(--sb-space-2) 0; margin: 0; padding: 0; list-style: none; }
+/* the column grows with the text: 5rem (80 px at 100 %) for the value plus the stat's sides and hairline, so a value
+   such as „31 Tage“ keeps one line and at large text or on a narrow phone fewer stats stand in a row (D99 (1)) */
+.sb-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(5rem + 2 * var(--sb-space-3) + var(--sb-border-width-hairline))), 1fr)); gap: var(--sb-space-2) 0; margin: 0; padding: 0; list-style: none; }
 /* stats are columns divided by hairlines, like the W1 app grid: no fill, no frame, no card (fix stage AD10) */
 .sb-stat {
   display: flex; flex-direction: column; gap: var(--sb-space-0-5); margin: 0; padding: 0 var(--sb-space-3); box-sizing: border-box;
@@ -1023,10 +1050,29 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
   color: var(--sb-color-text-muted); white-space: nowrap;
 }
 .sb-chart__ticks { grid-area: ticks; justify-items: end; padding-inline-end: var(--sb-space-2); }
-.sb-chart__ends { grid-area: ends; justify-items: start; padding-inline-start: var(--sb-space-2); }
-.sb-chart__ticks > li, .sb-chart__ends > li { grid-area: 1 / 1; align-self: end; translate: 0 50%; }
+.sb-chart__ends { grid-area: ends; grid-template-columns: minmax(0, max-content); justify-items: start; padding-inline-start: var(--sb-space-2); }
+.sb-chart__ticks > li, .sb-chart__ends > li { grid-area: 1 / 1; align-self: end; translate: 0 calc(50% + var(--sb-chart-shift, 0px)); }
+/* line ends of several series (D101 (7), (8)): „<span class=sb-chart__end-name>Wasser </span>90 %“. sb-fit.js moves
+   ends that would touch apart (--sb-chart-shift) and, once a name cannot stand at its line, sets data-sb-fit="values":
+   the legend names the series (also two) and the ends keep the last value */
+.sb-chart[data-sb-fit="values"] .sb-chart__end-name { display: none; }
 .sb-chart__end--current { color: var(--sb-color-text); font-weight: var(--sb-type-title-weight); }
-.sb-chart__end--series { color: var(--sb-color-text); }
+/* while the names stand at the line ends (and always without sb-fit.js), the area keeps at least half the plot and
+   the ends take what is left: a name wraps there, an overlong one breaks, instead of widening the page; the value
+   keeps its unit („72&nbsp;%“). With data-sb-fit="values" the ends hold only the values and take what they need */
+.sb-chart:not([data-sb-fit="values"]) .sb-chart__plot:has(.sb-chart__end--series) { grid-template-columns: max-content minmax(50%, 1fr) minmax(0, max-content); }
+.sb-chart__end--series { color: var(--sb-color-text); white-space: normal; max-inline-size: 100%; }
+.sb-chart[data-sb-fit="measure"] .sb-chart__end--series { white-space: nowrap; max-inline-size: none; }   /* sb-fit.js measures, never shown */
+/* without sb-fit.js (no data-sb-fit-ready on the root) a series chart narrower than 20em of its text takes the values
+   form by itself: the legend names the series (also a hidden two-series legend), the ends keep the values. The figure
+   is a container (sb-chart): its width comes from its parent, so not in a shrink-to-fit box without a width.
+   With the script the measure decides (provisional, agent) */
+.sb-chart:has(.sb-chart__end--series) { container: sb-chart / inline-size; }
+@container sb-chart (width < 20em) {
+  :root:not([data-sb-fit-ready]) .sb-chart__end-name { display: none; }
+  :root:not([data-sb-fit-ready]) .sb-chart__legend[data-sb-fit-legend] { display: flex; }
+  :root:not([data-sb-fit-ready]) .sb-chart .sb-chart__plot:has(.sb-chart__end--series) { grid-template-columns: max-content minmax(0, 1fr) max-content; }
+}
 
 /* x: one slot per data point, equal width; the slot row lines up with the bars and with the points of a line,
    which sit at slot centres. --current is the current period (title weight, like its accent bar) */
@@ -1037,6 +1083,7 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
 .sb-chart__slots > li { display: grid; justify-items: center; min-inline-size: 0; }
 .sb-chart__slots--start > li { justify-items: start; white-space: nowrap; }   /* a month over its weeks: data-sb-span (G2a) */
 .sb-chart__label { color: var(--sb-color-text-muted); }
+.sb-chart__slots > li[data-sb-fit="hidden"] { visibility: hidden; }   /* a label that would run into the next, left out by sb-fit.js (D99 (2)) */
 .sb-chart__value { color: var(--sb-color-text); }
 .sb-chart__slots > [aria-current] > * { color: var(--sb-color-text); font-weight: var(--sb-type-title-weight); }
 /* histogram class boundaries (G5a): N + 1 labels centred on the edges of N bins, the unit once below */
@@ -1090,13 +1137,14 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
   display: flex; flex-wrap: wrap; gap: var(--sb-space-1) var(--sb-space-4); margin: 0; padding: 0; list-style: none;
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking);
 }
+.sb-chart__legend[hidden] { display: none; }   /* a two-series legend that sb-fit.js shows at large text (D101 (8)) */
 .sb-chart__legend > li { display: inline-flex; align-items: center; gap: var(--sb-space-2); }
 .sb-chart .sb-chart__key { display: block; flex: none; inline-size: var(--sb-size-icon-lg); block-size: var(--sb-space-2); overflow: visible; }
 
 /* labelled rows (G4b): name and value as text, the fill on a grey track that is the whole (100 %);
    several unlabelled overlapping series only with .sb-chart__fill--1…6 and direct labels */
 .sb-chart__rows { display: grid; gap: var(--sb-space-2); margin: 0; padding: 0; list-style: none; }
-.sb-chart__row { display: grid; grid-template-columns: 8rem minmax(0, 1fr); align-items: center; column-gap: var(--sb-space-3); }
+.sb-chart__row { display: grid; grid-template-columns: minmax(0, min(8rem, 40%)) minmax(0, 1fr);   /* the name column grows with the text up to 40 %, then the name wraps (D99 (2)) */ align-items: center; column-gap: var(--sb-space-3); }
 .sb-chart__name { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
 .sb-chart__name b { font-weight: var(--sb-type-label-weight); font-variant-numeric: var(--sb-type-numeric-variant); }
 .sb-chart .sb-chart__row > svg { display: block; inline-size: 100%; block-size: var(--sb-space-3); overflow: visible; }
@@ -1251,18 +1299,28 @@ svg .sb-chart__value--current { font-weight: var(--sb-type-title-weight); }
 
 /* meta list: "Erinnerung · alle 2 Stunden" rows */
 .sb-meta-list { margin: 0; padding: 0; }
+/* large text (D99 (1)): label and value share the row 2 : 3 while their widest words fit; else the label stands above
+   the value (a wrapping flex row, no script), as SbMetaList */
 .sb-meta-list > div {
-  display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); align-items: center; gap: var(--sb-space-3);
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1) var(--sb-space-3);
   min-block-size: var(--sb-size-target-touch); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border);
 }
 .sb-meta-list > div:first-child { border-block-start: 0; }
 .sb-meta-list dt { color: var(--sb-color-text-muted); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
-.sb-meta-list dd { margin: 0; font-variant-numeric: var(--sb-type-numeric-variant); }
+.sb-meta-list dt { flex: 2 1 0%; }
+.sb-meta-list dd { flex: 3 1 0%; margin: 0; font-variant-numeric: var(--sb-type-numeric-variant); }
 /* --labels: a fixed label column (10 rem) for long values (paths, versions, sentences); rows grow with the value */
-.sb-meta-list--labels > div { grid-template-columns: minmax(0, 10rem) minmax(0, 1fr); align-items: baseline; padding-block: var(--sb-space-3); box-sizing: border-box; }
+.sb-meta-list--labels > div { align-items: baseline; padding-block: var(--sb-space-3); box-sizing: border-box; }
+.sb-meta-list--labels dt { flex: 0 1 10rem; }
+.sb-meta-list--labels dd { flex: 1 1 0%; }
 
 /* an identifier (rule number, version, build id) never breaks at its hyphen or dot */
 .sb-id { white-space: nowrap; hyphens: none; }
+/* a file name (D100 (6), D101 (6)): its own mark, not sb-id. It breaks only after - . _ / and without a hyphen: the
+   page writes <wbr> after each of them (the name stays whole for screen readers and a copy, <wbr> adds no character);
+   only a part that alone is wider than the line breaks inside, by break-word (never anywhere, which breaks parts that
+   fit) */
+.sb-file-name { white-space: normal; overflow-wrap: break-word; -webkit-hyphens: none; hyphens: none; }
 
 /* table: hairline rows, tabular figures, numbers end-aligned; wrap in .sb-table-wrap to scroll on phones */
 .sb-table-wrap { max-inline-size: 100%; overflow-x: auto; }
@@ -1279,7 +1337,7 @@ svg .sb-chart__value--current { font-weight: var(--sb-type-title-weight); }
    div.sb-code > .sb-code__bar + pre (spec/02 §3.10); a bare pre.sb-code (generated Markdown, no bar) gets the same
    padding and scroll so it is never broken, but it has no copy button */
 .sb-code { margin: 0; border-radius: var(--sb-radius-container); background: var(--sb-color-surface-sunken); color: var(--sb-color-text); overflow: hidden; }
-.sb-code__bar { display: flex; align-items: center; justify-content: space-between; gap: var(--sb-space-2); padding: 0 var(--sb-space-1) 0 var(--sb-space-4); border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+.sb-code__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sb-space-2); padding: 0 var(--sb-space-1) 0 var(--sb-space-4); border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
 .sb-code__lang { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .sb-code__copy {
   display: inline-flex; align-items: center; gap: var(--sb-space-1); min-block-size: var(--sb-size-target-touch); padding: 0 var(--sb-space-3); margin: 0;
@@ -1288,7 +1346,7 @@ svg .sb-chart__value--current { font-weight: var(--sb-type-title-weight); }
 }
 .sb-code__copy .sb-icon { color: var(--sb-color-text-muted); }
 .sb-code__copy:hover, .sb-code__copy.is-hover { background: var(--sb-color-pressed-fill); }
-.sb-code pre, pre.sb-code { margin: 0; padding: var(--sb-space-4); overflow-x: auto; font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); tab-size: 4; }
+.sb-code pre, pre.sb-code { box-sizing: border-box; max-inline-size: 100%; margin: 0; padding: var(--sb-space-4); overflow-x: auto; font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); tab-size: 4; }
 .sb-code pre:focus-visible { outline-offset: calc(-1 * var(--sb-focus-width)); }
 .sb-code code { font: inherit; letter-spacing: inherit; }
 .sb-code-inline { padding: 0 var(--sb-space-1); border-radius: var(--sb-radius-small); background: var(--sb-color-surface-sunken); color: var(--sb-color-text); font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); }
@@ -1327,8 +1385,8 @@ kbd, .sb-kbd {
 
 /* progress: only for remote work over 1 s (spec/07 §4.5). Linear on <progress>: ink value on a hairline-grey track */
 .sb-progress { display: grid; gap: var(--sb-space-1); }
-.sb-progress__head { display: flex; justify-content: space-between; gap: var(--sb-space-3); margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: var(--sb-type-numeric-variant); }
-.sb-progress__head span:last-child { color: var(--sb-color-text-muted); }
+.sb-progress__head { display: flex; flex-wrap: wrap; align-items: start; justify-content: space-between; gap: 0 var(--sb-space-3); margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: var(--sb-type-numeric-variant); }
+.sb-progress__head > span:last-child { color: var(--sb-color-text-muted); }
 .sb-progress progress, progress.sb-progress__bar {
   -webkit-appearance: none; appearance: none; display: block; inline-size: 100%; block-size: 4px; margin: 0;
   border: 0; border-radius: 0; background: var(--sb-color-border); overflow: hidden;   /* square ends (D85: no pill outside avatar, switch, radio, thumb) */
@@ -1339,16 +1397,29 @@ kbd, .sb-kbd {
 /* steps: segments in a row; done = ink (data-sb-state="done"; data-state="done" is a deprecated alias kept for one
    version, D85), current = aria-current="step": 3 px accent edge (the current place) + weight, next = grey */
 .sb-progress__steps { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: var(--sb-space-1); margin: 0; padding: 0; list-style: none; }
-/* large text (D99 (1)): the word goes under the check when it does not fit beside it; a word wider than its step is
-   hyphenated (by the page's lang), else broken, never drawn over the next step */
+/* large text (D99 (1), D101 (9)): the word (span.sb-progress__word) goes under the check when it does not fit beside
+   it; a word wider than its step breaks without a hyphen and sb-fit.js hyphenates it (.sb-hyphenate), never drawn over
+   the next step */
 .sb-progress__step {
   display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1); padding-block-start: var(--sb-space-2);
-  hyphens: auto; overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   border-block-start: var(--sb-border-width-strong) solid var(--sb-color-border);
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
 }
 .sb-progress__step:is([data-sb-state="done"], [data-state="done"]) { border-block-start-color: var(--sb-color-text); color: var(--sb-color-text); }
 .sb-progress__step[aria-current="step"] { border-block-start-color: var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
+.sb-progress__word { min-inline-size: 0; }
+/* the short form (D100 (1), D101 (1), (2)): once a step's word does not fit its column on two lines, even with hyphens,
+   sb-fit.js sets data-sb-fit="short": every bar stays, the checks stay under the done steps, the words are visually
+   hidden (read with their states) and the current word stands once on its own line under the bars, start-aligned
+   (p.sb-progress__now, aria-hidden, written by the script) */
+.sb-progress__steps[data-sb-fit="short"] .sb-progress__word {
+  position: absolute; inline-size: 1px; block-size: 1px; margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+.sb-progress__now { display: none; margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
+.sb-progress__now[data-sb-state="done"] { color: var(--sb-color-text); font-weight: var(--sb-type-caption-weight); }
+.sb-progress__steps[data-sb-fit="short"] + .sb-progress__now { display: block; }
 /* circular, determinate: SVG ring (pathLength 100) with the value as HTML text in the middle (as the goal ring). The
    box is 3rem (48 px at 100 %) and grows with the text size, and further for a wide value: the text's sides keep
    0.5rem + 0.05em from the box, so the corners of the figures stay about 2 px (× text size) clear of the ring's inner
@@ -1356,6 +1427,9 @@ kbd, .sb-kbd {
 .sb-progress-ring {
   position: relative; display: inline-grid; place-items: center; box-sizing: border-box;
   min-inline-size: var(--sb-space-12); aspect-ratio: 1; padding-inline: calc(var(--sb-space-2) + 0.05em);
+  /* never stretched by its parent (a grid, a flex row or column, a block): as wide and as high as its value needs;
+     where it sits is the parent's alignment */
+  inline-size: fit-content; block-size: fit-content;
   font: var(--sb-type-mobile-label-small); letter-spacing: var(--sb-type-mobile-label-small-tracking);
 }
 .sb-progress-ring svg { position: absolute; inset: 0; display: block; inline-size: 100%; block-size: 100%; overflow: visible; }
@@ -1582,8 +1656,8 @@ kbd, .sb-kbd {
 
 /* breadcrumb, pager, changelog */
 .sb-breadcrumb ol { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1); margin: 0; padding: 0; list-style: none; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
-.sb-breadcrumb li { display: inline-flex; align-items: center; gap: var(--sb-space-1); }
-.sb-breadcrumb a { display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-pointer); }
+.sb-breadcrumb li { display: inline-flex; align-items: center; gap: var(--sb-space-1); min-inline-size: 0; overflow-wrap: anywhere; }
+.sb-breadcrumb a { display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-pointer); min-inline-size: 0; }
 .sb-breadcrumb .sb-icon { color: var(--sb-color-text-muted); }
 .sb-breadcrumb [aria-current="page"] { color: var(--sb-color-text-muted); font-weight: var(--sb-type-caption-weight); }
 .sb-pager {
@@ -1696,11 +1770,22 @@ kbd, .sb-kbd {
 /* timeline (D91 B4b; spec/02 §3.18): the form of sb-changelog. Date grey in a fixed column, the kind as a grey 16 px glyph (the
    warning glyph only for an event that asks for something, always with its word), a hairline between entries, no
    vertical stroke. Newest first. 48 px for two lines; in windows one line is 32 px (48 under touch) */
-.sb-timeline { margin: 0; padding: 0; list-style: none; }
+/* the list is a container (sb-timeline, width from its parent: not in a shrink-to-fit box without a width) */
+.sb-timeline { margin: 0; padding: 0; list-style: none; container: sb-timeline / inline-size; }
 .sb-timeline__item {
-  position: relative; display: grid; grid-template-columns: 7rem var(--sb-size-icon-sm) minmax(0, 1fr); column-gap: var(--sb-space-2);
+  position: relative; display: grid; grid-template-columns: 7rem var(--sb-size-icon-sm) minmax(0, 1fr); column-gap: var(--sb-space-2);   /* the date column grows with the text (D99 (1)) */
   align-items: start; min-block-size: var(--sb-size-control-md); padding: var(--sb-space-1) var(--sb-space-2); box-sizing: border-box;
   border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border);
+}
+/* once the title's column would be narrower than the date's (7rem; large text on a phone), the date stands on its own
+   line above glyph and title, as SbTimelineEntry (spec/08 §14); 16rem + 16px = the date column twice, the sides, the
+   gaps and the glyph */
+@container sb-timeline (width < calc(16rem + 16px)) {
+  .sb-timeline__item { grid-template-columns: var(--sb-size-icon-sm) minmax(0, 1fr); }
+  .sb-timeline__date { grid-column: 1 / -1; }
+}
+@supports not (container-type: inline-size) {
+  .sb-timeline__item { grid-template-columns: minmax(0, min(7rem, 40%)) var(--sb-size-icon-sm) minmax(0, 1fr); }
 }
 .sb-timeline__item:first-child { border-block-start: 0; }
 .sb-timeline__date { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant); }
@@ -1885,13 +1970,13 @@ a.sb-pagination__page:hover, a.sb-pagination__page.is-hover { text-decoration: u
   font-weight: var(--sb-type-mobile-title-weight);
 }
 .sb-bottom-nav__item:focus-visible { outline-offset: calc(-1 * var(--sb-focus-width)); }
-.sb-bottom-nav__label { hyphens: auto; overflow-wrap: anywhere; text-align: center; }   /* D99 (1): „Einstel-lungen“ */
+.sb-bottom-nav__label { overflow-wrap: anywhere; text-align: center; }   /* D99 (1), D101 (9): sb-fit.js hyphenates the overlong word, „Einstel-lungen“ */
 
 /* side navigation (tablet >= 840, desktop windows >= 1024): rows of 48, icon + word, 3 px start edge on the current one */
 .sb-side-nav { inline-size: 240px; max-inline-size: 100%; box-sizing: border-box; border-inline-end: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color); }
 .sb-side-nav ul { margin: 0; padding: 0; list-style: none; }
 .sb-side-nav__item {
-  display: flex; align-items: center; gap: var(--sb-space-3);
+  display: flex; align-items: center; gap: var(--sb-space-3); overflow-wrap: anywhere;
   min-block-size: var(--sb-size-target-touch); padding-inline: calc(var(--sb-space-4) - var(--sb-border-width-strong)) var(--sb-space-3); box-sizing: border-box;
   border-inline-start: var(--sb-border-width-strong) solid transparent;
   color: var(--sb-color-text-muted); text-decoration: none;
@@ -2001,7 +2086,7 @@ html.sb-starting > body > .sb-start, .sb-starting > .sb-start {
 
 /* menu: overflow menu, rows of 48; a destructive row shows the danger word with its icon */
 .sb-menu {
-  display: grid; min-inline-size: 200px; max-inline-size: 320px; margin: 0; padding: var(--sb-space-1) 0; box-sizing: border-box; list-style: none;
+  display: grid; grid-template-columns: minmax(0, 1fr); min-inline-size: 200px; max-inline-size: 320px; margin: 0; padding: var(--sb-space-1) 0; box-sizing: border-box; list-style: none;
   border: var(--sb-elevation-overlay-border-width) solid var(--sb-elevation-overlay-border-color); border-radius: var(--sb-radius-container);
   background: var(--sb-elevation-overlay-surface); color: var(--sb-color-text); box-shadow: var(--sb-elevation-overlay-shadow);
 }
@@ -2009,7 +2094,7 @@ html.sb-starting > body > .sb-start, .sb-starting > .sb-start {
   display: flex; align-items: center; gap: var(--sb-space-3); inline-size: 100%;
   min-block-size: var(--sb-size-target-touch); padding: 0 var(--sb-space-4); margin: 0; box-sizing: border-box;
   border: 0; background: transparent; color: var(--sb-color-text); cursor: pointer; text-align: start;
-  font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking);
+  font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); overflow-wrap: anywhere;   /* large text: the words wrap, the row grows (D99 (1)) */
 }
 .sb-menu__item .sb-icon { color: var(--sb-color-text-muted); }
 .sb-menu__item:hover, .sb-menu__item.is-hover { background: var(--sb-color-hover-fill); }
@@ -2698,7 +2783,12 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
 /* compact facts line, full-form wrapper, per-action hint, stale notice */
 .sb-facts-line { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--sb-space-1); margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .sb-facts-line__name { font-weight: var(--sb-type-label-weight); color: var(--sb-color-text); }
-.sb-facts-line__cell { display: inline-flex; align-items: center; gap: var(--sb-space-1); white-space: nowrap; }
+/* a cell stays whole on its line; one wider than the line wraps inside (no script); sb-fit.js makes the line a list
+   once a cell does not fit one line (D101 (11)): the name, then each cell on its own line, no „·“, same type */
+.sb-facts-line__cell { display: inline-flex; align-items: center; gap: var(--sb-space-1); min-inline-size: 0; }
+.sb-facts-line[data-sb-fit="measure"] > .sb-facts-line__cell { flex-shrink: 0; white-space: nowrap; }
+.sb-facts-line[data-sb-fit="list"] { flex-direction: column; align-items: flex-start; gap: var(--sb-space-3); }
+.sb-facts-line[data-sb-fit="list"] .sb-facts-line__sep { display: none; }
 .sb-facts-line__sep { color: var(--sb-color-text-muted); }
 .sb-facts-line__cell:has(> .sb-stale-notice) { white-space: normal; }   /* stale form: the notice wraps (spec/10 §4.1) */
 /* the place in the facts (D82, spec/10 §4.1, §4.2; sb-facts.js): the pin before „<City> (<CC>)“ in the compact line

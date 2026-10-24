@@ -1,14 +1,14 @@
 <div class="g-examples g-rx-c-one">
 <div class="g-ex g-ex--do"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>So</p><div class="g-ex__stage">
 <div class="g-rx-c-stack">
-<p class="g-rx-c-caption">Astro und Shiki: Theme „sebaro“ (spec/09 §17), dazu <code>tokens.css</code> auf der Seite und Shikis <code>pre</code> in <code>sb-code</code></p>
+<p class="g-rx-c-caption">Astro und Shiki: Theme „sebaro“ (spec/09 §17), dazu <code class="sb-file-name">tokens.<wbr>css</code> auf der Seite und Shikis <code>pre</code> in <code>sb-code</code></p>
 <div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">JavaScript, astro.config.mjs</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="Astro-Konfiguration mit Theme sebaro"><code><span class="sb-tok-keyword">import</span> { defineConfig } <span class="sb-tok-keyword">from</span> <span class="sb-tok-string">"astro/config"</span>;
 <span class="sb-tok-keyword">import</span> sebaroTheme <span class="sb-tok-keyword">from</span> <span class="sb-tok-string">"./sebaro-shiki.json"</span>;   <span class="sb-tok-comment">// das Theme-JSON darunter</span>
 
 <span class="sb-tok-keyword">export</span> <span class="sb-tok-keyword">default</span> defineConfig({
   markdown: { shikiConfig: { theme: sebaroTheme } },
 });</code></pre></div>
-<details class="g-source"><summary>Theme-JSON <code>sebaro-shiki.json</code> (Shiki, VS Code, Monaco, Sublime)</summary><div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">JSON, sebaro-shiki.json</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="Shiki-Theme sebaro als JSON"><code>{
+<details class="g-source"><summary>Theme-JSON <code class="sb-file-name">sebaro-<wbr>shiki.<wbr>json</code> (Shiki, VS Code, Monaco, Sublime)</summary><div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">JSON, sebaro-shiki.json</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">Kopieren</span></button></div><pre tabindex="0" role="region" aria-label="Shiki-Theme sebaro als JSON"><code>{
   "name": <span class="sb-tok-string">"sebaro"</span>,
   "displayName": <span class="sb-tok-string">"sebaro (spec/01 §1.8, D67)"</span>,
   "type": <span class="sb-tok-string">"light"</span>,
@@ -181,7 +181,7 @@
 }
 Text(zeile, style = SebaroTheme.typography.code)</code></pre></div>
 </div>
-</div><p class="g-ex__note">highlight.js, Prism und eigene <code>sb-tok-*</code>-Spans färbt <code>sebaro.css</code> von selbst; für alles andere gibt es diese fertigen Teile. Sie nutzen nur <code>var(--sb-*)</code>, so folgen Hell und Dunkel dem Modus ohne zweites Theme. Geprüft ist nur Shiki 1.29.2; den CodeMirror-Teil haben die Agenten nur gelesen, nicht ausgeführt.</p></div>
+</div><p class="g-ex__note">highlight.js, Prism und eigene <code>sb-tok-*</code>-Spans färbt <code class="sb-file-name">sebaro.<wbr>css</code> von selbst; für alles andere gibt es diese fertigen Teile. Sie nutzen nur <code>var(--sb-*)</code>, so folgen Hell und Dunkel dem Modus ohne zweites Theme. Geprüft ist nur Shiki 1.29.2; den CodeMirror-Teil haben die Agenten nur gelesen, nicht ausgeführt.</p></div>
 <div class="g-ex g-ex--dont"><p class="g-ex__label"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#close--16"/></svg>Nicht so</p><div class="g-ex__stage">
 <div class="g-rx-c-stack">
 <div class="sb-code"><div class="sb-code__bar"><span class="sb-code__lang">HTML</span></div><pre tabindex="0" role="region" aria-label="HTML: zusätzliches highlight.js-Theme"><code><span class="sb-tok-comment">&lt;!-- zweites Farbschema neben sebaro.css --&gt;</span>

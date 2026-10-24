@@ -90,7 +90,7 @@
 /* rule ids are links in a row: 24 px targets (WCAG 2.5.8; ZUG-03 allows 24 px for inline links on pointer pages) */
 .g-bauteile-index__rules a { display: inline-flex; align-items: center; min-block-size: 24px; margin-inline-end: var(--sb-space-1); }
 .g-bauteile-more { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); white-space: nowrap; }
-.g-bauteile-gaps { display: grid; gap: var(--sb-space-3); margin: 0; padding-inline-start: var(--sb-space-6); max-inline-size: 48em; }
+.g-bauteile-gaps { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-3); margin: 0; padding-inline-start: var(--sb-space-6); max-inline-size: 48em; }
 
 /* the code-tone table in the code entry */
 .g-bauteile-tokens { margin-block-start: var(--sb-space-4); }

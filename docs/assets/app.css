@@ -43,24 +43,27 @@
 .g-app-anchor { position: relative; }
 
 /* ------------------------------------------------------------------ Vorschlag: one onboarding step */
-.g-app-intro { display: grid; justify-items: start; gap: var(--sb-space-3); padding: var(--sb-space-4) var(--sb-spacing-gutter); }
+.g-app-intro { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: start; gap: var(--sb-space-3); padding: var(--sb-space-4) var(--sb-spacing-gutter); }
 .g-app-intro > .sb-icon--spot { color: var(--sb-color-text-muted); --sb-icon-tone: var(--sb-color-border); }
 .g-app-intro__title { margin: 0; font: var(--sb-type-mobile-headline); letter-spacing: var(--sb-type-mobile-headline-tracking); }
 .g-app-intro__text { margin: 0; }
 .g-app-intro .sb-progress { justify-self: stretch; }
+.g-app-intro > * { max-inline-size: 100%; }   /* a word wider than the screen breaks (D100 (5)) instead of running out of the frame */
 
 /* ------------------------------------------------------------------ Vorschlag: multi-select rows on the phone */
 .g-app-pick { border-inline-start: var(--sb-border-width-strong) solid transparent; padding-inline-start: calc(var(--sb-spacing-gutter) - var(--sb-border-width-strong)); }
 .g-app-pick:has(input:checked) { border-inline-start-color: var(--sb-color-accent); }
 .g-app-pick:has(input:checked) .sb-checkbox span { font-weight: var(--sb-type-title-weight); }
 .g-app-pick .sb-checkbox { min-block-size: var(--sb-size-target-touch); }
+.g-app-pick .sb-checkbox { max-inline-size: 100%; }
+.g-app-pick .sb-checkbox > span { min-inline-size: 0; }   /* at 200 % text a long name breaks instead of running out of the frame (D100 (5)) */
 
 /* Vorschlag: a bottom bar for a destructive action of a selection (never the primary action bar) */
 .g-app-bar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-3); padding: var(--sb-space-3) var(--sb-spacing-gutter); }
 
 /* ------------------------------------------------------------------ Vorschlag: system surfaces, only hinted at */
 .g-app-notif, .g-app-sysdialog {
-  box-sizing: border-box; display: grid; gap: var(--sb-space-1); inline-size: 100%;
+  box-sizing: border-box; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-1); inline-size: 100%;
   border: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-sheet); background: var(--sb-color-bg);
 }
 .g-app-notif { padding: var(--sb-space-3) var(--sb-space-4); }

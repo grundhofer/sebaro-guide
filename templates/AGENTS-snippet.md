@@ -27,8 +27,8 @@ This product uses the sebaro design system. Before building or changing any UI:
    video, place map, website patterns (form result, page numbers, FAQ, docs groups, screenshots, share image, language
    switch, print), charts (`sb-chart`, heatmap with classed scales: at most 4 sequential steps, 5 diverging), iOS (SwiftUI package) and the
    desktop window parts. Count partial states („2 offen“), never „teils offen“ (STA-09). In Compose every new part
-   and every chart has a wrapper (rendered in the workshop, not on a device); only the sortable table and the intro
-   step have none, ask before building them in Compose. Settled with D92 and D93: the heatmap „heute“ is
+   and every chart has a wrapper (rendered in the workshop, not on a device), since D100 also the sortable table
+   (`SbSortableTable`) and the intro step (`SbIntroStep`). Settled with D92 and D93: the heatmap „heute“ is
    a 4 px cobalt frame with a 1 px ground joint inside, drawn by `sebaro.css` (legend „Rahmen: heute“), „Konflikt“
    always carries the warning glyph, sortable tables scroll sideways inside `sb-table-wrap` on phones and never stack
    (DAT-11, STA-08, DAT-14). Confirmed with D93: the light/dark places of item 6 and ⌘K / Ctrl+K of item 7.
@@ -57,6 +57,13 @@ This product uses the sebaro design system. Before building or changing any UI:
    on the web); Compose charts grow only where text sits (ZUG-09, DAT-04). Voluntary fields carry a grey
    „(optional)“ (`<span class="sb-optional">(optional)</span>` in the label; Compose and Swift `optional`), never an
    asterisk (EIN-01). Android dialogs dim with the palette scrim (EBE-03).
+   Decided with D100 and D101: the segmented control becomes a select on the web too, and at large text the steps show
+   only the current word, the facts line becomes a list and a chart with several series shows its legend; load
+   `sebaro/js/sb-fit.js` at the end of the body for all of it. No page scrolls sideways at 200 % text on 320 to 390 px:
+   only a word that alone does not fit gets a hyphen, names and code break without one, file names are
+   `<code class="sb-file-name">` with `<wbr>` after - . _ /, identifiers (`sb-id`) never break, wide parts scroll in
+   their own frame, a deliberate ellipsis carries `data-sb-truncate` (ZUG-09, STA-06, EIN-04, TXT-15, ZEI-13, DAT-10).
+   The page writes „(optional)“ itself; a field that always holds a value carries none (EIN-01).
    Without a decision, in the D95 workshop round: pages print light from `tokens.css` alone since token contract
    1.9; keep `sb-print.js` for the closed answers (WEB-11).
 10. Ship the export's `LICENSE.md` unchanged (D76). If a rule does not fit, cite its id (e.g. `AKT-01`) and ask the

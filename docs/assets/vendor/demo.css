@@ -34,14 +34,14 @@
 .demo-cell--full { flex-basis: 100%; }   /* a cell on a line of its own (the window specimen keeps its view at 640 px and more) */
 .demo-cell--fixed { inline-size: 320px; max-inline-size: 100%; justify-items: stretch; }
 .demo-label { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
-.demo-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--sb-space-8) var(--sb-spacing-group); align-items: start; }
-.demo-columns--3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.demo-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: var(--sb-space-8) var(--sb-spacing-group); align-items: start; }
+.demo-columns--3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
 .demo-columns--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); }
 .demo-chart { inline-size: 400px; max-inline-size: 100%; }
 .demo-wide { inline-size: 520px; max-inline-size: 100%; }
 .demo-box { padding: var(--sb-space-2) 0; border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container); background: var(--sb-color-bg); }
 .demo-box--pad { padding: var(--sb-space-4); }
-.demo-stack { display: grid; gap: var(--sb-spacing-stack); }
+.demo-stack { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-spacing-stack); }
 .demo-cards { margin: 0; padding: 0; list-style: none; }
 .demo-count { margin: var(--sb-space-2) 0 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant); max-inline-size: 390px; }
 
@@ -56,11 +56,11 @@
 /* ------------------------------------------------------------------ phone frame (demo only, spec/09 §4.1) */
 .sb-phone {
   position: relative; display: flex; flex-direction: column; box-sizing: border-box; flex: none;
-  inline-size: 390px; max-inline-size: 100%; block-size: 844px; overflow: hidden;
+  inline-size: 390px; max-inline-size: 100%; block-size: auto; min-block-size: 844px; overflow: hidden;   /* grows with large text (D99 (1)) instead of cutting its view */
   border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-sheet);
   background: var(--sb-color-bg);
 }
-.sb-phone--auto { block-size: auto; }
+.sb-phone--auto { block-size: auto; min-block-size: 0; }
 .sb-phone > .sb-view { flex: 1 1 auto; }
 /* frames are stand-ins: the bottom block sits at the end of the frame, it does not stick to the page's viewport */
 .sb-phone .sb-bottom-block, .demo-window .sb-bottom-block { position: relative; }
@@ -88,7 +88,7 @@
 
 /* overlays shown in place: a scrim stage for the dialog, static popover and sheet specimens */
 .demo-stage {
-  position: relative; display: grid; place-items: center; box-sizing: border-box; inline-size: 100%; max-inline-size: 720px; min-block-size: 360px;
+  position: relative; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; box-sizing: border-box; inline-size: 100%; max-inline-size: 720px; min-block-size: 360px;
   padding: var(--sb-space-6) var(--sb-spacing-gutter); overflow: hidden;
   border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container); background: var(--sb-color-bg);
 }
@@ -109,7 +109,7 @@
 .demo-header-specimen { margin-block-end: var(--sb-space-2); border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container); overflow: hidden; }
 /* round 3 (D48, D52): a fixed progress share for the static state cell; the start replay frame */
 .demo-progress-60 { --sb-progress: 0.6; }
-.demo-start-frame { block-size: 520px; }
+.demo-start-frame { min-block-size: 520px; }
 
 /* ------------------------------------------------------------------ window frame (D80; the „Fenster“ specimens, spec/02 §4.17) */
 /* a window drawn inside a page: the frame stands in for the OS window edge (like .sb-phone) */

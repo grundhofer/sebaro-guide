@@ -63,3 +63,45 @@
     Array.prototype.forEach.call(table.querySelectorAll("td"), function (td) { role(td, "cell"); });
   });
 })();
+
+// 5) D100 (5): at large text a rule example's stage or a data specimen may scroll sideways in its own frame (a phone
+//    frame keeps 320 px, a window row keeps its status word). While it scrolls, it gets tabindex="0", role="region"
+//    and a name, so the keyboard reaches what lies past its edge; when it fits again, they go. A frame whose page
+//    already gives it a tabindex is left alone.
+(function () {
+  var frames = document.querySelectorAll(".g-ex__stage, .g-daten-specimen");
+  if (!frames.length) return;
+  function nameOf(el) {
+    var ex = el.closest(".g-ex"), rule = el.closest(".g-rule"), item = el.closest("[aria-labelledby]");
+    var label = ex && ex.querySelector(".g-ex__label");
+    if (label) return "Beispiel" + (rule ? " " + rule.id : "") + ": " + label.textContent.trim();
+    var h = item && document.getElementById(item.getAttribute("aria-labelledby"));
+    return "Beispiel: " + (h ? h.textContent.trim() : "Muster");
+  }
+  function check(el) {
+    var mine = el.hasAttribute("data-g-scroll-focus");
+    if (!mine && el.hasAttribute("tabindex")) return;
+    var scrolls = el.scrollWidth > el.clientWidth + 1;
+    if (scrolls && !mine) {
+      el.setAttribute("tabindex", "0");
+      el.setAttribute("data-g-scroll-focus", "");
+      if (!el.hasAttribute("role")) { el.setAttribute("role", "region"); el.setAttribute("data-g-scroll-role", ""); }
+      if (!el.hasAttribute("aria-label") && !el.hasAttribute("aria-labelledby")) { el.setAttribute("aria-label", nameOf(el)); el.setAttribute("data-g-scroll-name", ""); }
+    } else if (!scrolls && mine && document.activeElement !== el) {
+      el.removeAttribute("tabindex");
+      el.removeAttribute("data-g-scroll-focus");
+      if (el.hasAttribute("data-g-scroll-role")) { el.removeAttribute("role"); el.removeAttribute("data-g-scroll-role"); }
+      if (el.hasAttribute("data-g-scroll-name")) { el.removeAttribute("aria-label"); el.removeAttribute("data-g-scroll-name"); }
+    }
+  }
+  var pending = false;
+  function all() { pending = false; Array.prototype.forEach.call(frames, check); }
+  function later() { if (!pending) { pending = true; requestAnimationFrame(all); } }
+  if (typeof ResizeObserver === "function") {
+    var ro = new ResizeObserver(later);
+    Array.prototype.forEach.call(frames, function (el) { ro.observe(el); if (el.firstElementChild) ro.observe(el.firstElementChild); });
+  }
+  window.addEventListener("resize", later);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(later);
+  later();
+})();

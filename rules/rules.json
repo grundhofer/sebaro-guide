@@ -1,11 +1,11 @@
 {
  "$schema": "./rules.schema.json",
- "version": "2.9.0",
+ "version": "2.10.0",
  "date": "2026-10-24",
  "source": {
   "repo": "sebaroDesign",
   "system": "sebaro",
-  "decisions": "D1-D99"
+  "decisions": "D1-D101"
  },
  "areas": [
   {
@@ -330,8 +330,8 @@
    "id": "HAL-08",
    "area": "haltung",
    "title": "Skizze vor Ausbau",
-   "rule": "Zeig dem Inhaber vor jedem Ausbau eine Skizzenseite mit gerenderten Bildschirmen, je Frage mindestens zwei Wege, einer als Vorschlag markiert. Gebaut wird erst, was er gewählt hat; seine Antwort steht als I-Zeile mit Wortlaut in DECISIONS.md.",
-   "rule_en": "Before any build, show the owner a rendered sketch page (at least two ways per question, one marked as proposal); build only what he picked and record his words as an I-row.",
+   "rule": "Zeig dem Inhaber vor jedem Ausbau eine Skizzenseite mit gerenderten Bildschirmen, je Frage mindestens zwei Wege, einer als Vorschlag markiert. Gebaut wird erst, was der Inhaber gewählt hat; die Antwort steht als I-Zeile mit Wortlaut in DECISIONS.md.",
+   "rule_en": "Before any build, show the owner a rendered sketch page (at least two ways per question, one marked as proposal); build only what they picked and record their words as an I-row.",
    "why": "D35 (O): „Runde 1 baute vier komplette Systeme, bevor du eines gesehen hast.“ Seitdem folgen die Runden 2–5 diesem Ablauf; D45 (I) nennt „Skizze vor Ausbau nach D35“. Antwortformat wie „1b 2b 3b“ (D56). D98 bestätigt die Regel mit „mindestens zwei Wegen“.",
    "do": "Offene Punkte im Guide als „offen“ führen, bis eine I-Zeile existiert.",
    "dont": "Komplette Systeme vor einer Wahl bauen; I-Zeilen selbst schreiben; offene Inhaberfragen selbst beantworten.",
@@ -846,25 +846,26 @@
    "id": "SCH-06",
    "area": "schrift",
    "title": "Überschriften umbrechen, nie abschneiden",
-   "rule": "Lass Überschriften umbrechen und trenn sie von Hand (&shy;), nie automatisch und nie mit Auslassungspunkten. Einzige Ausnahme ist der Titel der oberen Leiste in Compose: Ein einzelnes Wort, das bei großer Schrift allein nicht in die Zeile passt, trennt er selbst (ZUG-09, D99 (1)). Bezeichner und Code in Überschriften brechen nie; unter 640 px nutzt die Seitenüberschrift die mobile Display-Rolle 32/40.",
-   "rule_en": "Headings wrap with manual hyphenation (&shy;), never auto-hyphenate or ellipsis (only exception: the Compose top-bar title hyphenates a single word that alone does not fit at large text, ZUG-09, D99 (1)); identifiers never break; below 640 px h1 uses mobile display 32/40.",
-   "why": "Abgeschnittene Überschriften verstecken Inhalt; automatische Trennung zerreißt Produktnamen; 40 px würde bei 390 px dreizeilig.",
-   "do": "h1, h2, h3 { hyphens: manual; }",
-   "dont": "text-overflow: ellipsis an Titeln; hyphens: auto an Überschriften im Web.",
+   "rule": "Lass Überschriften umbrechen und trenn sie von Hand (&shy;), nie mit Auslassungspunkten. Automatisch getrennt wird nur ein einzelnes Wort, das allein nicht in die Zeile passt (ZUG-09): im Web gibt sb-fit.js nur diesem Wort einen Trennstrich, in Compose der Titel der oberen Leiste. Namen und Code in Überschriften brechen bei großer Schrift am Zeilenende ohne Trennstrich, Kennungen nie; unter 640 px nutzt die Seitenüberschrift die mobile Display-Rolle 32/40.",
+   "rule_en": "Headings wrap with manual hyphenation (&shy;), never an ellipsis; only a single word that alone does not fit its line is hyphenated automatically (ZUG-09: sb-fit.js on the web, the top-bar title in Compose); names and code in headings break at the line end without a hyphen at large text, identifiers never; below 640 px h1 uses mobile display 32/40.",
+   "why": "Abgeschnittene Überschriften verstecken Inhalt; automatische Trennung zerreißt Produktnamen; 40 px würde bei 390 px dreizeilig. D101 (9), (10), Antworten „Nur zu lange trennen (Empfohlen)“ und „Am Zeilenende, ohne Strich (Empfohlen)“: Ein Wort oder Code, der bei großer Schrift nicht in die Zeile passt, liefe sonst über den Rand; Code in einer Überschrift bricht wie im Text, ohne Strich.",
+   "do": "h1, h2, h3 { hyphens: manual; }; ein Produktname in einer Überschrift als <span translate='no'>RetroBeam</span>, Code als <code>remember</code>; sb-fit.js am Ende des body.",
+   "dont": "text-overflow: ellipsis an Titeln; hyphens: auto für eine ganze Überschrift; ein Trennstrich in Code oder einem Namen.",
    "numbers": "Grenze 639.98px; mobile display 32/40",
    "decisions": [
     "D28",
     "D98",
-    "D99"
+    "D99",
+    "D101"
    ],
-   "source": "DECISIONS.md D98, D99 (1); css/sebaro.css Z. 37-38, 79-81; systems/sebaro/spec/02-components.md §10; spec/01-foundations.md §2.5 Regel 1",
+   "source": "DECISIONS.md D98, D99 (1), D101 (9), (10); css/sebaro.css Z. 37-38, 79-81; systems/sebaro/spec/02-components.md §10; spec/01-foundations.md §2.5 Regel 1; spec/07-voice.md §3.1; spec/09-platform-web.md §3.1",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Keine ellipsis an h1–h6; Review bei 390 px.",
    "example_hint": "Langer deutscher Titel mit &shy; auf 320 px Breite getrennt; falsch: „Gewohnheitsstatisti…“.",
-   "note": "spec/09 §3 nannte einmal hyphens: auto; die gebaute CSS (manual) gilt. Fließtext trennt ebenfalls nicht automatisch (TXT-15, D82). Seit D99 (1), das den Titel ausdrücklich nennt, trennt in Compose der Titel der oberen Leiste ein einzelnes Wort, das bei großer Schrift allein nicht in die Zeile passt, automatisch (ZUG-09); Überschriften im Web trennen weiter nur von Hand.",
+   "note": "spec/09 §3 nannte einmal hyphens: auto; die gebaute CSS (manual) gilt. Seit D101 (9) legt sb-fit.js im Web span.sb-hyphenate nur um das eine zu lange Wort, die übrigen Wörter der Überschrift bleiben ohne automatische Trennung; ohne Skript bricht ein solches Wort ohne Strich. Code in Überschriften ist eine Ausnahme zu „Bezeichner brechen nie“ (D101 (10)); Kennungen (sb-id) brechen weiter nie, Dateinamen nur nach - . _ / (TXT-15). translate='no' als Zeichen eines Produktnamens ist vorläufig vom Agenten gewählt. Fließtext trennt nur von Hand (TXT-15, D82).",
    "changed": "2026-10-24"
   },
   {
@@ -1856,7 +1857,7 @@
    "title": "Seitenleiste ab Tablet und Fenster",
    "rule": "Ab 840 dp (Tablet) bzw. 1024 px (Desktop-Fenster, Tauri) wird die Navigation zur Seitenleiste sb-side-nav: 240 px breit, Zeilen 48 px (in Desktop-Apps und Web-Apps mit Fenster 32 px, D67) mit Icon 24 + 12 px + Wort 14/20, Startabstand 16; aktueller Ort mit 3-px-Kante am Anfang; 2-px-Tintenlinie an der Endkante der Leiste.",
    "rule_en": "Side nav from 840 dp (tablet) / 1024 px (desktop, Tauri): 240 px, 48 px rows (32 px in desktop/windowed web apps, D67), icon 24 + 12 + label 14/20, 3 px start edge on current, 2 px ink line at its end edge.",
-   "why": "Icon + Wort (D36) und Ortslinie (D48) auch auf großen Fenstern; Maße sind Agentenspezifikation.",
+   "why": "Icon + Wort (D36) und Ortslinie (D48) auch auf großen Fenstern; Maße sind Agentenspezifikation. D100 (2), Antwort „240 px wie sebaro (Empfohlen)“: Auch novalis bekommt bei der Übernahme diese Breite.",
    "do": "<nav class='sb-side-nav' aria-label='…'><ul><li><a class='sb-side-nav__item' aria-current='page'>; Tablet-Compose: NavigationRail ohne Indikator, Labels immer.",
    "dont": "Icon-only-Rail; gefüllte Auswahlfläche; graue Leistenfläche.",
    "numbers": "≥ 840 dp / ≥ 1024 px; Breite 240 px; Zeile 48 px (Desktop-Fenster 32 px, D67 (2)); Icon 24; Abstand 12; Label 14/20; Startabstand 16; Ortslinie 3 px; Endkante 2 px Tinte",
@@ -1866,16 +1867,17 @@
     "D46",
     "D67",
     "D81",
-    "D98"
+    "D98",
+    "D100"
    ],
-   "source": "DECISIONS.md D98; systems/sebaro/spec/03-signature.md §3.1, §10.1; spec/02-components.md §4.3; spec/09-platform-web.md §13; css/sebaro.css Z. 860-873",
+   "source": "DECISIONS.md D98, D100 (2); shared/ADOPTION.md §5; systems/sebaro/spec/03-signature.md §3.1, §10.1; spec/02-components.md §4.3; spec/09-platform-web.md §13; css/sebaro.css Z. 860-873",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Breitfenster-Screenshot; Graustufen: aktueller Eintrag an Linie, Füllung und Gewicht erkennbar.",
    "example_hint": "Fenster mit Seitenleiste und breiter Aktionszone; falsch: Icon-Rail ohne Wörter mit blauer Fläche.",
-   "note": "novalis nutzt 256 px. Im Rahmen data-sb-density=\"window\" sind die Zeilen 32 px mit 20-px-Icon (spec/02 §4.12); im sb-window ist die Seitenleiste ausblendbar (DSK-04).",
+   "note": "novalis bekommt bei der Übernahme (D89) diese 240 px statt der heutigen 256 px, im Fenster als Startbreite, ziehbar von 200 bis 360 px (D100 (2), DSK-07). Im Rahmen data-sb-density=\"window\" sind die Zeilen 32 px mit 20-px-Icon (spec/02 §4.12); im sb-window ist die Seitenleiste ausblendbar (DSK-04).",
    "changed": "2026-10-24"
   },
   {
@@ -2162,16 +2164,17 @@
    "title": "Gesperrt bleibt lesbar, ohne Lindgrün und Deckkraft",
    "rule": "Zeig gesperrte Bedienelemente mit Beschriftung in text-muted, Rand in border und cursor: not-allowed; die gesperrte Hauptaktion mit surface-sunken, border-strong-Rand und text-muted-Label, ganz ohne Lindgrün. Senk nie die Deckkraft. Sperr eine Taste nur, solange ihre Aktion gerade gar nicht geht. Fehlt in einem Formular etwas, bleibt die Hauptaktion drückbar und lindgrün: Ihr Druck sendet nichts, sagt an jedem leeren Pflichtfeld „<Beschriftung> fehlt.“ und setzt den Fokus auf das erste davon. Pflichtfelder sind der Normalfall und tragen kein Zeichen; ein freiwilliges Feld trägt an seiner Beschriftung ein graues „(optional)“ (EIN-01).",
    "rule_en": "Disabled = text-muted label, border boundary, not-allowed cursor; disabled primary action = surface-sunken fill, border-strong outline, text-muted label, no lime; never opacity; disabled only while the action cannot work at all; with required fields empty the primary action stays enabled, its press sends nothing, says „<Label> fehlt.“ at each empty required field and moves focus to the first (sb-form.js on websites); required is the norm and unmarked, a voluntary field carries a grey „(optional)“ at its label (EIN-01).",
-   "why": "Mit Deckkraft fällt der Kontrast unter die Grenze; Lindgrün heißt „weiter“ und darf das nicht versprechen; stumme Sackgassen vermeiden. D98 (V2), Antwort „Drückbar, sagt was fehlt (Empfohlen)“: Eine gesperrte Taste sagt nicht, was fehlt; die Meldung am Feld und der Fokus darauf sagen es. D99 (3), Antwort „„optional“ an freiwilligen (Empfohlen)“: Pflichtfelder sind der Normalfall; vor dem Druck zeigt das graue „(optional)“ an den übrigen Feldern, was leer bleiben darf, ohne Sternchen.",
+   "why": "Mit Deckkraft fällt der Kontrast unter die Grenze; Lindgrün heißt „weiter“ und darf das nicht versprechen; stumme Sackgassen vermeiden. D98 (V2), Antwort „Drückbar, sagt was fehlt (Empfohlen)“: Eine gesperrte Taste sagt nicht, was fehlt; die Meldung am Feld und der Fokus darauf sagen es. D99 (3), Antwort „„optional“ an freiwilligen (Empfohlen)“: Pflichtfelder sind der Normalfall; vor dem Druck zeigt das graue „(optional)“ an den übrigen Feldern, was leer bleiben darf, ohne Sternchen. D100 (4), Antwort „Alle drei bestätigen (Empfohlen)“: Die Seite schreibt „(optional)“ selbst, ein Feld mit immer einem Wert trägt keins, eine Auswahl ist nur mit „Keine“ freiwillig (EIN-01).",
    "do": "<button class='sb-primary-action' disabled> nur, solange die Aktion gar nicht geht; fehlt eine Eingabe, bleibt die Taste aktiv und ihr Druck zeigt „Nachricht fehlt.“ unter dem Feld (p.sb-field__error mit Fehlerglyphe, aria-invalid, aria-describedby) mit dem Fokus auf dem ersten fehlenden Feld; auf Websites macht das sb-form.js an required-Feldern; ein freiwilliges Feld (ohne required) trägt <span class='sb-optional'>(optional)</span> in seiner Beschriftung, außer es hat immer einen Wert (EIN-01), und bekommt nie eine Meldung.",
    "dont": "opacity: .4; blasses Lindgrün; Statusfarbe für gesperrt; eine gesperrte Hauptaktion, weil ein Feld noch leer ist; ein Sternchen an Pflichtfeldern oder eine Legende „* Pflichtfeld“.",
    "numbers": "Label text-muted auf surface-sunken 4.61 hell / 7.31 dunkel",
    "decisions": [
     "D80",
     "D98",
-    "D99"
+    "D99",
+    "D100"
    ],
-   "source": "DECISIONS.md D98 (V2), D99 (3); systems/sebaro/spec/01-foundations.md §1.4 Regel 5; spec/02-components.md §0.2, §1.1, §2.1, §5.4.1; spec/07-voice.md §3 Regel 12; demo/assets/sb-form.js; css/sebaro.css Z. 253-256, 325-330",
+   "source": "DECISIONS.md D98 (V2), D99 (3), D100 (4); systems/sebaro/spec/01-foundations.md §1.4 Regel 5; spec/02-components.md §0.2, §1.1, §2.1, §5.4.1; spec/07-voice.md §3 Regel 12; demo/assets/sb-form.js; css/sebaro.css Z. 253-256, 325-330",
    "platforms": [
     "alle"
    ],
@@ -2230,24 +2233,26 @@
    "id": "STA-06",
    "area": "status",
    "title": "Laden: lokal still, entfernt benannt, Fortschritt in Tinte",
-   "rule": "Zeig bei lokaler Arbeit weder Kreisel noch Text. Bei Netzarbeit über 1 s „Wird geladen …“ mit Anzeige, über 10 s dazu, was passiert. Linearer Fortschritt ist ein natives <progress> in Tinte auf border-Spur, der Ring ein Kreis mit role='progressbar', mindestens 48 px groß, mit dem Wert als Text in der Mitte, der mit der Schrift und mit einem breiten Wert wächst, Schritte haben eine 3-px-Oberkante. Skelette sind statisch grau und tragen das Wort; kein Schimmer, kein Konfetti.",
-   "rule_en": "Local work: no spinner; remote > 1 s: „Wird geladen …“ + indicator, > 10 s say what happens; progress = native <progress> ink on border track, ring role=progressbar of at least 48 px with its value as HTML text after the SVG, growing with the text size and a wide value, steps with 3 px top edge and aria-current=step; static skeletons with words, no shimmer or confetti.",
-   "why": "Ein kurzer Kreisel flackert nur (spec/07 §4.5); Fortschritt ist Information, kein Status, daher Tinte; Schimmer wäre Bewegung beim Laden. Fortschritt der Hauptaktion zeigt die Taste selbst (D48).",
-   "do": "<progress value='60' max='100' aria-labelledby='pg'></progress>; „Board wird synchronisiert …“; aria-busy='true' + loader-Icon statt des führenden Icons, Beschriftung bleibt; Ring: <div class='sb-progress-ring' role='progressbar' …><svg viewBox='0 0 48 48' aria-hidden='true'>…</svg><span class='sb-progress-ring__text' aria-hidden='true'>60&nbsp;%</span></div>.",
+   "rule": "Zeig bei lokaler Arbeit weder Kreisel noch Text. Bei Netzarbeit über 1 s „Wird geladen …“ mit Anzeige, über 10 s dazu, was passiert. Linearer Fortschritt ist ein natives <progress> in Tinte auf border-Spur, der Ring ein Kreis mit role='progressbar', mindestens 48 px groß, mit dem Wert als Text in der Mitte, der mit der Schrift und mit einem breiten Wert wächst und nie gestreckt wird. Schritte haben eine 3-px-Oberkante; passt bei großer Schrift ein Schrittwort auch mit Trennstrich nicht auf zwei Zeilen in seine Spalte, bleiben alle Balken und die Haken unter den erledigten, und nur das Wort des aktuellen Schritts steht in einer eigenen Zeile über die ganze Breite darunter, am Anfang ausgerichtet (2 bis 4 Schritte); „Schritt 2 von 4“ bleibt. Skelette sind statisch grau und tragen das Wort; kein Schimmer, kein Konfetti.",
+   "rule_en": "Local work: no spinner; remote > 1 s: „Wird geladen …“ + indicator, > 10 s say what happens; progress = native <progress> ink on border track, ring role=progressbar of at least 48 px with its value as HTML text after the SVG, growing with the text size and a wide value, steps with 3 px top edge and aria-current=step; once a step word does not fit its column on two lines at large text, every bar and check stays and only the current step's word stands on its own line across the full width under them, start-aligned (2 to 4 steps), „Schritt 2 von 4“ stays; static skeletons with words, no shimmer or confetti.",
+   "why": "Ein kurzer Kreisel flackert nur (spec/07 §4.5); Fortschritt ist Information, kein Status, daher Tinte; Schimmer wäre Bewegung beim Laden. Fortschritt der Hauptaktion zeigt die Taste selbst (D48). D100 (1) und D101 (1), (2), Antworten „Nur aktuelles Wort (Empfohlen)“, „2 Zeilen, 2–4 Schritte (Empfohlen)“ und „Eigene Zeile unter allen (Empfohlen)“: Mit vier Schritten trennte die Anzeige bei 200 % ihre Wörter über drei Zeilen; Screenreader hören weiter jedes Wort mit seinem Zustand.",
+   "do": "<progress value='60' max='100' aria-labelledby='pg'></progress>; „Board wird synchronisiert …“; aria-busy='true' + loader-Icon statt des führenden Icons, Beschriftung bleibt; Ring: <div class='sb-progress-ring' role='progressbar' …><svg viewBox='0 0 48 48' aria-hidden='true'>…</svg><span class='sb-progress-ring__text' aria-hidden='true'>60&nbsp;%</span></div>; Schritte: <li class='sb-progress__step' aria-current='step'><span class='sb-progress__word'>Ziel</span></li>, sb-fit.js setzt bei großer Schrift data-sb-fit='short' und schreibt das aktuelle Wort in p.sb-progress__now; Compose SbSteps.",
    "dont": "Spinner beim lokalen Speichern; blauer Fortschrittsbalken; schimmerndes Skelett ohne Text; der Wert als <text> im SVG des Rings (die alte, veraltete Form).",
-   "numbers": "Schwellen 1 s und 10 s; Balken 4px (11.80 / 10.43 : 1); Ring mindestens 48 px (3rem), „100 %“ 53 px; Schrittkante 3px; höchstens 1 Freude-Moment je Ablauf",
+   "numbers": "Schwellen 1 s und 10 s; Balken 4px (11.80 / 10.43 : 1); Ring mindestens 48 px (3rem), „100 %“ 53 px; Schrittkante 3px; kurze Form der Schritte bei 2 bis 4 Schritten, sobald ein Wort im Titelgewicht nicht auf zwei Zeilen passt; höchstens 1 Freude-Moment je Ablauf",
    "decisions": [
     "D48",
-    "D98"
+    "D98",
+    "D100",
+    "D101"
    ],
-   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §0.2, §1.7, §3.12; spec/07-voice.md §4.5; spec/01-foundations.md §7; css/sebaro.css Z. 769-802 und .sb-progress-ring",
+   "source": "DECISIONS.md D98, D100 (1), D101 (1), (2); systems/sebaro/spec/02-components.md §0.2, §1.7, §3.12; spec/07-voice.md §4.5; spec/01-foundations.md §7; css/sebaro.css Z. 769-802 und .sb-progress-ring; demo/assets/sb-fit.js; spec/08-platform-android.md §14.7",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Jeder Ladezustand hängt an einem Netzaufruf über 1 s; keine @keyframes für Skelette.",
-   "example_hint": "Linearer Balken, Ring, Schritte „Schritt 2 von 3“ und Skelett mit „Wird geladen …“; falsch: Vollbild-Spinner beim Speichern.",
-   "note": "Seit dem Werkstatt-Commit 0861d3f, ohne eigene Entscheidung: Der Wert im Ring ist HTML-Text nach dem SVG, der Ring wächst mit ihm und mit der Schrift (bei 200 % Schrift 96 px). Die alte Form mit dem Wert als <text> im SVG zeigt sebaro.css noch, sie ist veraltet.",
+   "example_hint": "Linearer Balken, Ring, Schritte „Schritt 2 von 3“ und „Schritt 2 von 4“ (bei großer Schrift nur das aktuelle Wort) und Skelett mit „Wird geladen …“; falsch: Vollbild-Spinner beim Speichern.",
+   "note": "Seit dem Werkstatt-Commit 0861d3f, ohne eigene Entscheidung: Der Wert im Ring ist HTML-Text nach dem SVG, der Ring wächst mit ihm und mit der Schrift (bei 200 % Schrift 96 px). Die alte Form mit dem Wert als <text> im SVG zeigt sebaro.css noch, sie ist veraltet. Seit dem Werkstatt-Commit 0f40a10 setzt sich der Ring selbst in seine Größe (inline-size und block-size fit-content), statt in einem Raster oder einer Flex-Reihe gestreckt zu werden, und der Wert im Kopf eines Balkens rückt bei großer Schrift unter seine Beschriftung. Die kurze Form der Schritte gibt es seitdem im Web (sb-fit.js) und in Compose (SbSteps): Bei 200 % Schrift auf 360 px nehmen vier Schritte und die drei der Einführung sie, bei 100 % keine. Sind alle Schritte erledigt, steht das Wort des letzten darunter (vorläufig vom Agenten). Ohne Skript brechen die Wörter um wie vorher.",
    "changed": "2026-10-24"
   },
   {
@@ -2331,24 +2336,25 @@
    "id": "EIN-01",
    "area": "eingaben",
    "title": "Feld: Beschriftung oben, graue Fläche, Grundlinie",
-   "rule": "Setz über jedes Feld eine sichtbare <label for> (label 14/20). Das Feld ist eine surface-sunken-Fläche mit 1-px-border-strong-Grundlinie, oben 8 px gerundet, mindestens 48 px hoch, ohne Rahmen. Hilfetext und Fehler hängen per aria-describedby am Input; ein Zähler steht am Ende in Tabellenziffern. Pflichtfelder sind der Normalfall und tragen kein Zeichen. Ein freiwilliges Feld trägt hinter seiner Beschriftung ein graues „(optional)“ (sb-optional: text-muted, nicht fett, in der Zeile der Beschriftung), nie ein Sternchen; ohne Sternchen braucht es auch keine Legende „Pflichtfeld“.",
-   "rule_en": "Visible <label for> above; field = surface-sunken area with 1 px border-strong baseline, top radius 8, min 48 px, no frame; help and error linked via aria-describedby; counters end-aligned tabular; required is the norm and unmarked, a voluntary field ends its label with a grey „(optional)“ (sb-optional), never an asterisk, no „Pflichtfeld“ legend.",
-   "why": "Skizze A „Farbe ist Funktion“; Screenreader lesen Hilfe und Fehler beim Fokus. Auf versenktem Grund hätte die Grundlinie nur 3,05 : 1, deshalb nie ein Feld auf eigenem sunken-Grund. D99 (3), Antwort „„optional“ an freiwilligen (Empfohlen)“: Pflichtfelder sind der Normalfall; freiwillige Felder tragen an der Beschriftung ein graues „(optional)“, englisch „(optional)“, keine Sternchen, in Web, Compose und Swift.",
+   "rule": "Setz über jedes Feld eine sichtbare <label for> (label 14/20). Das Feld ist eine surface-sunken-Fläche mit 1-px-border-strong-Grundlinie, oben 8 px gerundet, mindestens 48 px hoch, ohne Rahmen. Hilfetext und Fehler hängen per aria-describedby am Input; ein Zähler steht am Ende in Tabellenziffern. Pflichtfelder sind der Normalfall und tragen kein Zeichen. Ein freiwilliges Feld trägt hinter seiner Beschriftung ein graues „(optional)“ (sb-optional: text-muted, nicht fett, in der Zeile der Beschriftung), nie ein Sternchen; ohne Sternchen braucht es auch keine Legende „Pflichtfeld“. Die Seite schreibt „(optional)“ selbst in die Beschriftung; ein Feld, das immer einen Wert hat (Auswahl mit gewählter Möglichkeit, Segmente, Schalter), trägt keins, und eine Auswahl ist nur freiwillig, wenn „Keine“ eine ihrer Möglichkeiten ist.",
+   "rule_en": "Visible <label for> above; field = surface-sunken area with 1 px border-strong baseline, top radius 8, min 48 px, no frame; help and error linked via aria-describedby; counters end-aligned tabular; required is the norm and unmarked, a voluntary field ends its label with a grey „(optional)“ (sb-optional), never an asterisk, no „Pflichtfeld“ legend; the page writes the suffix itself, a field that always holds a value carries none, a select is voluntary only with „Keine“ among its options.",
+   "why": "Skizze A „Farbe ist Funktion“; Screenreader lesen Hilfe und Fehler beim Fokus. Auf versenktem Grund hätte die Grundlinie nur 3,05 : 1, deshalb nie ein Feld auf eigenem sunken-Grund. D99 (3), Antwort „„optional“ an freiwilligen (Empfohlen)“: Pflichtfelder sind der Normalfall; freiwillige Felder tragen an der Beschriftung ein graues „(optional)“, englisch „(optional)“, keine Sternchen, in Web, Compose und Swift. D100 (4), Antwort „Alle drei bestätigen (Empfohlen)“: Die drei Feinheiten, die der Agent dazu gewählt hatte, gelten.",
    "do": "<div class='sb-field'><label class='sb-field__label' for='n'>Name</label><div class='sb-field__control'><input id='n' aria-describedby='n-help'></div><p class='sb-field__help' id='n-help'>…</p></div>; freiwillig: <label class='sb-field__label' for='notiz'>Notiz <span class='sb-optional'>(optional)</span></label>; Compose SbTextField(…, optional = true), Swift SbTextField(…, optional: true).",
    "dont": "Platzhalter als einzige Beschriftung; umrandetes Feld; Hilfetext ohne Verknüpfung; „Name *“ und „* Pflichtfeld“; „(Pflicht)“ oder „freiwillig“ an der Beschriftung.",
    "numbers": "Höhe 48px (Input 46px); Padding 0 12px; Grundlinie 1px; Radius 8px oben; Hilfe caption 14/20 text-muted; „(optional)“ text-muted im Gewicht von body, so groß wie die Beschriftung",
    "decisions": [
     "D98",
-    "D99"
+    "D99",
+    "D100"
    ],
-   "source": "DECISIONS.md D98, D99 (3); systems/sebaro/spec/02-components.md §2.1; spec/07-voice.md §3 Regel 12, §7; css/sebaro.css Z. 354-381 und .sb-optional; demo/mobile.html Z. 343",
+   "source": "DECISIONS.md D98, D99 (3), D100 (4); systems/sebaro/spec/02-components.md §2.1; spec/07-voice.md §3 Regel 12, §7; css/sebaro.css Z. 354-381 und .sb-optional; demo/mobile.html Z. 343",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "axe label; jede __help/__error-ID wird von aria-describedby referenziert; kein Sternchen: grep -rnE '\\*\\s*</(label|legend)>|\\* ?Pflichtfeld' über die Seiten findet nichts.",
    "example_hint": "Formular M4: Name, Tagesziel, Notiz (optional) mit Zähler „0 / 120“; falsch: nur Platzhalter in umrandeten Feldern, Sternchen und „* Pflichtfeld“.",
-   "note": "Vorläufig vom Agenten gewählt, nicht Teil von D99: Im Web schreibt die Seite „(optional)“ selbst in die Beschriftung, kein Skript fügt es hinzu; ein Feld, das immer einen Wert hat (Auswahl mit gewählter Möglichkeit, Segmente, Schalter), trägt kein „(optional)“; eine Auswahl ist nur freiwillig, wenn „Keine“ eine ihrer Möglichkeiten ist. Screenreader bekommen im Web „Notiz (optional)“, in Compose „Notiz, optional“ (im Semantikbaum geprüft), in Swift „Notiz, optional“ (nur im Code gelesen); gehört mit einem Screenreader ist keins davon. D99 selbst sagt nur „(optional)“ und keine Sternchen; dass auch „(Pflicht)“, „freiwillig“ und eine Legende „Pflichtfeld“ nicht an die Beschriftung gehören, steht in spec/07 §3 Regel 12, die die Werkstatt nach D99 geschrieben hat.",
+   "note": "Mit D100 (4) bestätigt, vorher vom Agenten gewählt: Im Web schreibt die Seite „(optional)“ selbst in die Beschriftung, kein Skript fügt es hinzu; ein Feld, das immer einen Wert hat, trägt keins; eine Auswahl ist nur mit „Keine“ freiwillig. Bei großer Schrift rückt in einer Zeile mit zwei Feldern (sb-field__row) das kurze Feld unter das breite (ZUG-09). Screenreader bekommen im Web „Notiz (optional)“, in Compose „Notiz, optional“ (im Semantikbaum geprüft), in Swift „Notiz, optional“ (nur im Code gelesen); gehört mit einem Screenreader ist keins davon. D99 selbst sagt nur „(optional)“ und keine Sternchen; dass auch „(Pflicht)“, „freiwillig“ und eine Legende „Pflichtfeld“ nicht an die Beschriftung gehören, steht in spec/07 §3 Regel 12, die die Werkstatt nach D99 geschrieben hat.",
    "changed": "2026-10-24"
   },
   {
@@ -2400,42 +2406,44 @@
    "id": "EIN-04",
    "area": "eingaben",
    "title": "Chips und Segmente: Kante statt Füllung",
-   "rule": "Nutz Segmente nur für 2–4 kurze Optionen, die eine Ansicht ändern („Woche · Monat · Jahr“), sonst Radiozeilen. Filterchips sind <button aria-pressed> mit 36-px-Rahmen im 48-px-Ziel. Gewählt heißt bei beiden: 3-px-accent-Unterkante, Haken, Titelgewicht, link-Farbe; nie gefüllt. Passen die Wörter einer segmentierten Auswahl bei großer Schrift nicht auf zwei Zeilen in ihre Spalten, wird sie zum Auswahlfeld (ZUG-09). In Compose wählen ← und → in der Reihe, ↑ und ↓ verlassen sie.",
-   "rule_en": "Segmented control for 2–4 short options; filter chips <button aria-pressed>, 36 px frame in 48 px target; chosen = 3 px accent bottom edge + check + weight; never filled; a segmented control whose words do not fit their columns on two lines at large text becomes a select (ZUG-09); in Compose ← → choose, ↑ ↓ leave the row.",
-   "why": "Gefüllte Segmente oder Chips setzen Farbe als Fläche hinter Text; die Ortslinie ist der einzige Auswahl-Job (D48). D99 (1) und (5), Antworten „Zweizeilig, ganze Wörter (Empfohlen)“ und „Alle wie gebaut (Empfohlen)“: Segmente, deren Wörter nicht passen, werden zum Auswahlfeld; die Tasten in Compose bleiben, wie sie gebaut sind.",
-   "do": "<div class='sb-chips' role='group' aria-label='Kategorie filtern' data-sb-single>; Eingabechip mit Knopf „<Wert> entfernen“; <fieldset class='sb-segmented'><legend>Zeitraum</legend>; Compose SbSegmented (zeigt bei zu großer Schrift selbst SbSelectField).",
+   "rule": "Nutz Segmente nur für 2–4 kurze Optionen, die eine Ansicht ändern („Woche · Monat · Jahr“), sonst Radiozeilen. Filterchips sind <button aria-pressed> mit 36-px-Rahmen im 48-px-Ziel. Gewählt heißt bei beiden: 3-px-accent-Unterkante, Haken, Titelgewicht, link-Farbe; nie gefüllt. Passt bei großer Schrift ein Wort einer segmentierten Auswahl nicht auf zwei Zeilen in seine Spalte, wird sie zum Auswahlfeld, in Compose und im Web; der Wert im Formular bleibt derselbe (ZUG-09). In Compose wählen ← und → in der Reihe, ↑ und ↓ verlassen sie.",
+   "rule_en": "Segmented control for 2–4 short options; filter chips <button aria-pressed>, 36 px frame in 48 px target; chosen = 3 px accent bottom edge + check + weight; never filled; a segmented control whose words do not fit their columns on two lines at large text becomes a select, in Compose and on the web, the form value unchanged (ZUG-09); in Compose ← → choose, ↑ ↓ leave the row.",
+   "why": "Gefüllte Segmente oder Chips setzen Farbe als Fläche hinter Text; die Ortslinie ist der einzige Auswahl-Job (D48). D99 (1) und (5), Antworten „Zweizeilig, ganze Wörter (Empfohlen)“ und „Alle wie gebaut (Empfohlen)“: Segmente, deren Wörter nicht passen, werden zum Auswahlfeld; die Tasten in Compose bleiben, wie sie gebaut sind. D100 (3), Antwort „Ja, wie Compose (Empfohlen)“: Auch im Web wird sie zum Auswahlfeld; ohne Skript brechen die Wörter um.",
+   "do": "<div class='sb-chips' role='group' aria-label='Kategorie filtern' data-sb-single>; Eingabechip mit Knopf „<Wert> entfernen“; <fieldset class='sb-segmented'><legend>Zeitraum</legend>; Compose SbSegmented (zeigt bei zu großer Schrift selbst SbSelectField); Web: sb-fit.js zeigt dann ein natives <select> mit denselben Wörtern, die Legende als seine Beschriftung, und die Radios bleiben der Wert im Formular.",
    "dont": "Blau gefülltes Segment; farbig gefüllter Chip.",
    "numbers": "Segmente 2–4, Höhe 48px, Rand 1px; Chip-Rahmen 36px, Ziel 48px; Kante 3px",
    "decisions": [
     "D48",
     "D98",
-    "D99"
+    "D99",
+    "D100"
    ],
-   "source": "DECISIONS.md D98, D99 (1), (5); systems/sebaro/spec/02-components.md §2.7, §2.9; spec/08-platform-android.md §14, §14.13; css/sebaro.css Z. 457-477, 513-541",
+   "source": "DECISIONS.md D98, D99 (1), (5), D100 (3); systems/sebaro/spec/02-components.md §2.7, §2.9; spec/08-platform-android.md §14, §14.13; css/sebaro.css Z. 457-477, 513-541; demo/assets/sb-fit.js",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Keine background-Farbe für :checked/aria-pressed; axe button-name an sb-chip__remove.",
    "example_hint": "Filter „Alle · Gesundheit · Lernen“ und Segmente „Woche · Monat · Jahr“; falsch: gefülltes aktives Segment.",
-   "note": "Im Web wird die segmentierte Auswahl noch nicht zum Auswahlfeld; ihre Wörter brechen bei großer Schrift zwischen den Wörtern um und werden notfalls getrennt („Stünd-lich“). Im Web wählen auch ↑ und ↓. In Compose wird sie auf einem 360-dp-Handy bei „Aus · Stündlich · Alle 2 Std.“ ab 125 % Schrift zum Auswahlfeld, bei „Woche · Monat · Jahr“ zwischen 170 und 200 % (auf dem Rechner gemessen, nicht auf einem Gerät).",
+   "note": "Im Web misst sb-fit.js wie Compose (das breiteste Wort jeder Möglichkeit im Titelgewicht gegen ihre Spalte, oder mehr als zwei Zeilen); bei 200 % Schrift auf 360 px werden „Aus · Stündlich · Alle 2 Std.“ und „Woche · Monat · Jahr“ zum Auswahlfeld, bei 100 % keins. Gesperrte Möglichkeiten bleiben gesperrt, der Fokus wandert mit, und ein Formular, das zurückgesetzt wird, zeigt im Auswahlfeld wieder den alten Wert. Solange das Auswahlfeld steht, hat die Gruppe keine eigene Rolle, damit die Legende nur einmal genannt wird (vorläufig vom Agenten). Ohne Skript brechen die Wörter um, getrennt wird nur ein zu langes Wort. Im Web wählen auch ↑ und ↓. In Compose wird sie auf einem 360-dp-Handy bei „Aus · Stündlich · Alle 2 Std.“ ab 125 % Schrift zum Auswahlfeld, bei „Woche · Monat · Jahr“ zwischen 170 und 200 % (auf dem Rechner gemessen, nicht auf einem Gerät). Mit einem Screenreader gehört ist keins davon.",
    "changed": "2026-10-24"
   },
   {
    "id": "EIN-05",
    "area": "eingaben",
    "title": "Suche und Auswahlliste nativ",
-   "rule": "Bau das Suchfeld mit search-Icon am Anfang, <input type='search'> (Browser-Kreuz ausgeblendet) und gefüllt einer Icon-Taste „Suche leeren“; das Label darf versteckt sein, wenn der Platzhalter die Aufgabe nennt. Auswahllisten sind natives <select> mit chevron-down; lange Listen in Apps als Sheet mit Radiozeilen. In Compose öffnet die Auswahl ihre Möglichkeiten im sebaro-Menü mit Haken.",
-   "rule_en": "Search: leading search icon, type=search, native clear hidden, „Suche leeren“ icon button when filled, label may be visually hidden; select = native <select> with chevron-down; long app lists as a sheet with radio rows; in Compose the select opens its options in the sebaro menu with checks.",
-   "why": "Natives Verhalten ist zugänglich und plattformtreu; ein eigener Leeren-Knopf statt Browser-Kreuz hält das Feld einheitlich. D99 (5), Antwort „Alle wie gebaut (Empfohlen)“: Die Auswahl in Compose bleibt im sebaro-Menü mit Haken.",
+   "rule": "Bau das Suchfeld mit search-Icon am Anfang, <input type='search'> (Browser-Kreuz ausgeblendet) und gefüllt einer Icon-Taste „Suche leeren“; das Label darf versteckt sein, wenn der Platzhalter die Aufgabe nennt. Auswahllisten sind natives <select> mit chevron-down, auch dort, wo eine segmentierte Auswahl bei großer Schrift zum Auswahlfeld wird (EIN-04); lange Listen in Apps als Sheet mit Radiozeilen. In Compose öffnet die Auswahl ihre Möglichkeiten im sebaro-Menü mit Haken.",
+   "rule_en": "Search: leading search icon, type=search, native clear hidden, „Suche leeren“ icon button when filled, label may be visually hidden; select = native <select> with chevron-down, also where a segmented control becomes a select at large text (EIN-04); long app lists as a sheet with radio rows; in Compose the select opens its options in the sebaro menu with checks.",
+   "why": "Natives Verhalten ist zugänglich und plattformtreu; ein eigener Leeren-Knopf statt Browser-Kreuz hält das Feld einheitlich. D99 (5), Antwort „Alle wie gebaut (Empfohlen)“: Die Auswahl in Compose bleibt im sebaro-Menü mit Haken. D100 (3), Antwort „Ja, wie Compose (Empfohlen)“: Im Web zeigt sb-fit.js für zu enge Segmente dieses native Auswahlfeld.",
    "do": "<div class='sb-field__control sb-search'>…<button class='sb-icon-button' aria-label='Suche leeren'>; <div class='sb-field__control sb-select'><select>…</select>",
    "dont": "Suchfeld ganz ohne Label; Dropdown aus divs.",
    "numbers": "Icon 24px text-muted",
    "decisions": [
     "D98",
-    "D99"
+    "D99",
+    "D100"
    ],
-   "source": "DECISIONS.md D98, D99 (5); systems/sebaro/spec/02-components.md §2.2, §2.3; spec/08-platform-android.md §14.12; demo/components.html Z. 389-391",
+   "source": "DECISIONS.md D98, D99 (5), D100 (3); systems/sebaro/spec/02-components.md §2.2, §2.3; spec/08-platform-android.md §14.12; demo/components.html Z. 389-391",
    "platforms": [
     "alle"
    ],
@@ -2541,7 +2549,7 @@
    "status": "entschieden",
    "check": "Höchstens ein Element in accent je Diagramm; kein <text> in .sb-chart__shapes; Beschriftung bei 390 px 14 px; Diagramm in Graustufen lesbar.",
    "example_hint": "Balken „Gläser je Tag“ mit Schrift als HTML und eine Sparkline nach ihrer Zahl; falsch: bunte Balken mit Schrift im Bild ohne Werte.",
-   "note": "Die alte Form mit Schrift im SVG bleibt in sebaro.css eine Version lang als veraltet stehen. In Compose gibt es jetzt jede Diagrammform als Baustein (SbBarChart, SbStats mit Sparkline, SbShareRows, SbGoalRing, SbHeatmap, SbLineChart, SbSeriesChart, SbHistogram, SbDeviationChart), auf dem Rechner gezeichnet, nicht auf einem Gerät. Dort wachsen Diagramme mit der Schrift nur, wo Text drinsteht (Namens- und Kopfspalten, Zielring, Fortschrittsring); Flächen, Abstände und Linien bleiben feste dp (D99 (2), Antwort „Nur wo Text drinsteht (Empfohlen)“). Beschriftungen unter Balken, die sich bei großer Schrift berühren würden, entfallen, gelesen von hinten, die letzten bleiben stehen. Die englischen Diagrammwörter in Compose bleiben (D99 (8)).",
+   "note": "Die alte Form mit Schrift im SVG bleibt in sebaro.css eine Version lang als veraltet stehen. In Compose gibt es jetzt jede Diagrammform als Baustein (SbBarChart, SbStats mit Sparkline, SbShareRows, SbGoalRing, SbHeatmap, SbLineChart, SbSeriesChart, SbHistogram, SbDeviationChart), auf dem Rechner gezeichnet, nicht auf einem Gerät. Dort wachsen Diagramme mit der Schrift nur, wo Text drinsteht (Namens- und Kopfspalten, Zielring, Fortschrittsring); Flächen, Abstände und Linien bleiben feste dp (D99 (2), Antwort „Nur wo Text drinsteht (Empfohlen)“). Beschriftungen unter einem Diagramm, die sich bei großer Schrift berühren würden, entfallen von vorn, die letzten bleiben stehen; im Web macht das seit dem Werkstatt-Commit 0f40a10 sb-fit.js genauso, ohne eigene Entscheidung und vorläufig vom Agenten gewählt (wie Compose, D99 (2)). Die englischen Diagrammwörter in Compose bleiben (D99 (8)).",
    "changed": "2026-10-24"
   },
   {
@@ -2664,24 +2672,27 @@
    "id": "DAT-10",
    "area": "daten",
    "title": "Mehrere Reihen und Skalen im Diagramm",
-   "rule": "Beschrifte jede Reihe direkt am Ende ihrer Linie. Ab drei Reihen steht zusätzlich eine Legende über dem Diagramm, in der Reihenfolge der Linienenden, und die Reihen unterscheiden sich auch in der Linienart (durchgezogen, gestrichelt, gepunktet), nie nur in der Farbe. Fortlaufende Werte zeigst du in Stufen der fortlaufenden Skala, Werte mit einer bedeutsamen Mitte in Stufen der zweiseitigen Skala mit neutraler, als Wort genannter Mitte: die Farbe in der Zelle, die Zahlen jeder Stufe in der Legende. Mehr ist weiter weg vom Grund, im Hellen dunkler, im Dunkeln heller. Die Stufen bleiben unterscheidbar (DAT-11).",
-   "rule_en": "Label every series at its line end; from three series add a legend above the chart (in the order of the line ends) and line styles (solid, dashed, dotted), never colour alone; continuous values in classes of the sequential scale, values with a meaningful middle in classes of the diverging scale with a neutral middle named in words; colour in the cell, the number range of each class in the legend; more is farther from the ground in both modes; classes stay distinguishable (DAT-11).",
-   "why": "Inhaber D83 (10) auf die Rückfrage „Ja, Empfehlung übernehmen“: direkt beschriften, Legende erst ab drei Reihen mit Linienart, Regeln für fortlaufende und zweiseitige Skalen. D91: Legende über dem Diagramm (G9a), in der Heatmap Farbe in der Zelle und Zahlen in der Legende (G6a), im Dunkeln heißt mehr weiter weg vom Grund (G10a). Zu G6a der Inhaber: „aber die färben der legende müssen unterscheidbar bleiben. Bitte eine sinnvolle Regel aufstellen, die unterschiede im beispiel Funktionieren nicht.“ Die Regel dazu ist DAT-11.",
-   "do": "Zwei Linien nur mit Namen am Ende; drei Linien mit <ul class='sb-chart__legend'> darüber (sb-chart__key mit Linienart); Heatmap mit <ul class='sb-scale-legend'> „0–2 · 3–4 · 5–6 · 7 und mehr · keine Angabe“.",
-   "dont": "Legende bei zwei Reihen statt Beschriftung; Legende unter dem Diagramm oder nur in der Bildunterschrift; drei Reihen nur in Farben; Regenbogen- oder Verlaufsskala; Zahl auf der farbigen Zelle; zweiseitige Skala für Werte ohne Mitte; im Dunkeln „mehr ist dunkler“.",
+   "rule": "Beschrifte jede Reihe direkt am Ende ihrer Linie. Ab drei Reihen steht zusätzlich eine Legende über dem Diagramm, in der Reihenfolge der Linienenden, und die Reihen unterscheiden sich auch in der Linienart (durchgezogen, gestrichelt, gepunktet), nie nur in der Farbe. Können die Namen am Linienende nicht mehr bei ihrer Linie stehen (bei großer Schrift, bei jeder Schriftgröße gemessen), nennt die Legende über dem Diagramm die Reihen, auch bei zwei, und am Linienende bleibt nur der letzte Wert. Fortlaufende Werte zeigst du in Stufen der fortlaufenden Skala, Werte mit einer bedeutsamen Mitte in Stufen der zweiseitigen Skala mit neutraler, als Wort genannter Mitte: die Farbe in der Zelle, die Zahlen jeder Stufe in der Legende. Mehr ist weiter weg vom Grund, im Hellen dunkler, im Dunkeln heller. Die Stufen bleiben unterscheidbar (DAT-11).",
+   "rule_en": "Label every series at its line end; from three series add a legend above the chart (in the order of the line ends) and line styles (solid, dashed, dotted), never colour alone; once the names cannot stand at their line ends (large text, measured at every size) the legend above names the series, also two, and each end keeps only its last value; continuous values in classes of the sequential scale, values with a meaningful middle in classes of the diverging scale with a neutral middle named in words; colour in the cell, the number range of each class in the legend; more is farther from the ground in both modes; classes stay distinguishable (DAT-11).",
+   "why": "Inhaber D83 (10) auf die Rückfrage „Ja, Empfehlung übernehmen“: direkt beschriften, Legende erst ab drei Reihen mit Linienart, Regeln für fortlaufende und zweiseitige Skalen. D91: Legende über dem Diagramm (G9a), in der Heatmap Farbe in der Zelle und Zahlen in der Legende (G6a), im Dunkeln heißt mehr weiter weg vom Grund (G10a). Zu G6a der Inhaber: „aber die färben der legende müssen unterscheidbar bleiben. Bitte eine sinnvolle Regel aufstellen, die unterschiede im beispiel Funktionieren nicht.“ Die Regel dazu ist DAT-11. D100 (8) und D101 (7), (8), Antworten „Reihennamen als Legende (Empfohlen)“, „Gemessen, Wert bleibt (Empfohlen)“ und „Ja, gleiche Regel (Empfohlen)“: Bei 200 % Schrift standen die Namen weit unter dem Ende ihrer Linie.",
+   "do": "Zwei Linien mit Namen am Ende (<li class='sb-chart__end--series'><span class='sb-chart__end-name'>Wasser </span>90&nbsp;%</li>) und einer Legende mit hidden data-sb-fit-legend, die sb-fit.js zeigt, sobald die Namen nicht mehr bei ihren Linien stehen; drei Linien mit <ul class='sb-chart__legend'> darüber (sb-chart__key mit Linienart); Heatmap mit <ul class='sb-scale-legend'> „0–2 · 3–4 · 5–6 · 7 und mehr · keine Angabe“.",
+   "dont": "Legende bei zwei Reihen statt Beschriftung, solange die Namen bei ihren Linien stehen können; Legende unter dem Diagramm oder nur in der Bildunterschrift; drei Reihen nur in Farben; Regenbogen- oder Verlaufsskala; Zahl auf der farbigen Zelle; zweiseitige Skala für Werte ohne Mitte; im Dunkeln „mehr ist dunkler“.",
    "numbers": "Legende ab 3 Reihen, über dem Diagramm; Linienarten 1 und 4 durchgezogen, 2 und 5 gestrichelt (6 4), 3 und 6 gepunktet (0 5); fortlaufend 4 Stufen (--sb-dataviz-sequential-1 … -4), zweiseitig 5 Stufen (--sb-dataviz-diverging-1 … -5, Mitte = border)",
    "decisions": [
     "D83",
-    "D91"
+    "D91",
+    "D100",
+    "D101"
    ],
-   "source": "DECISIONS.md D83 (10), D91 (G6a, G9a, G10a); systems/sebaro/spec/01-foundations.md §8, §8.1; spec/02-components.md §3.7",
+   "source": "DECISIONS.md D83 (10), D91 (G6a, G9a, G10a), D100 (8), D101 (7), (8); systems/sebaro/spec/01-foundations.md §8, §8.1; spec/02-components.md §3.7; spec/08-platform-android.md §14.22; demo/assets/sb-fit.js",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Graustufen-Screenshot: jede Reihe an Beschriftung und Linienart erkennbar; Legende genau ab drei Reihen und über dem Diagramm; jede Stufe der Legende nennt ihren Zahlenbereich.",
-   "example_hint": "Drei Linien mit Legende darüber und drei Linienarten; falsch: drei Linien nur in Farben, ohne Beschriftung.",
-   "changed": "2026-10-21"
+   "example_hint": "Zwei Linien mit Namen am Ende, bei großer Schrift mit Legende, und drei Linien mit Legende darüber und drei Linienarten; falsch: drei Linien nur in Farben, ohne Beschriftung.",
+   "note": "Gebaut seit dem Werkstatt-Commit 0f40a10: im Web von sb-fit.js (data-sb-fit='values' an der Abbildung: die Legende zeigt sich, die Namen am Ende nicht), in Compose von SbSeriesChart; die Muster der Werkstatt zeigen bei 200 % Schrift auf 360 px die Legende, bei 100 % keine. Die Namen bleiben am Ende, solange jedes Ende „Name 90 %“ einzeilig in die halbe Breite des Diagramms passt und bei seiner Linie steht; Enden, die sich berühren würden, rücken auseinander. Ohne Skript nimmt ein Diagramm mit mehreren Reihen, das schmaler als 20em ist, die Form mit Legende von selbst. Beides ist vorläufig vom Agenten gewählt. Die Linie mit nur einer Reihe hat keine Namen am Ende; dort gilt das nicht.",
+   "changed": "2026-10-24"
   },
   {
    "id": "DAT-11",
@@ -2763,27 +2774,29 @@
    "id": "DAT-14",
    "area": "daten",
    "title": "Tabellen: Pfeil nur an der sortierten Spalte, Summe im Fuß",
-   "rule": "Mach einen sortierbaren Spaltenkopf zur Taste (sb-table__sort). Nur die Spalte, nach der sortiert ist, trägt aria-sort, Titelgewicht und den Pfeil arrow-up--16 oder arrow-down--16; die anderen zeigen nur ihr Wort. Der erste Druck sortiert Zahlen und Daten absteigend, Wörter aufsteigend, der nächste kehrt um. Eine Summe steht im Tabellenfuß (tfoot) unter ihrer Spalte, getrennt durch die Linie in border-strong, in body-strong; fehlt ein Wert, heißt die Zeile „Summe der bekannten …“ und die Lücke bleibt „keine Angabe“, nie 0. Am Handy scrollt eine sortierbare Tabelle in ihrem eigenen Kasten (sb-table-wrap) seitlich, nie die Seite; sie stapelt ihre Zeilen nicht zu Blöcken.",
-   "rule_en": "Sortable heads are buttons (sb-table__sort); only the sorted column carries aria-sort, title weight and the arrow icon; the first press sorts numbers and dates descending, words ascending, the next reverses; totals in tfoot below their column (border-strong line, body-strong); with a missing value the row reads „Summe der bekannten …“ and the gap stays „keine Angabe“, never 0. On phones a sortable table scrolls sideways inside its own box (sb-table-wrap), never the page; it does not stack its rows into blocks.",
-   "why": "Inhaber D91: Sortierpfeil nur an der sortierten Spalte (B5a), Summenzeile im Tabellenfuß (B6a). Doppelpfeile an jeder Spalte wären Lärm; ein Pfeil sagt, wonach sortiert ist. Eine fehlende Zahl als 0 zu zählen, wäre falsch (D82, TXT-14). D92 (7), Antwort „Seitlich scrollen (Empfohlen)“: Sortierbare Tabellen scrollen am Handy in ihrem eigenen Kasten seitlich statt sich zu stapeln; nie die Seite. D94 (2), Antwort „2 wie vorgeschlagen“: Sortierköpfe 48 px auf Seiten und am Handy, 32 px nur im Fenster, dort bei Touch wieder 48 px.",
-   "do": "<th scope='col' class='sb-num' aria-sort='descending'><button class='sb-table__sort' type='button'><svg …arrow-down--16/>Betrag</button></th>; <tfoot><tr><th scope='row' colspan='2'>Summe</th><td class='sb-num'>1.797,20 €</td></tr></tfoot>; sb-table.js sagt „Sortiert nach Betrag, absteigend“.",
+   "rule": "Mach einen sortierbaren Spaltenkopf zur Taste (sb-table__sort). Nur die Spalte, nach der sortiert ist, trägt aria-sort, Titelgewicht und den Pfeil arrow-up--16 oder arrow-down--16; die anderen zeigen nur ihr Wort. Der erste Druck sortiert Zahlen und Daten absteigend, Wörter aufsteigend, der nächste kehrt um. Eine Summe steht im Tabellenfuß (tfoot) unter ihrer Spalte, getrennt durch die Linie in border-strong, in body-strong; fehlt ein Wert, heißt die Zeile „Summe der bekannten …“ und die Lücke bleibt „keine Angabe“, nie 0. Am Handy scrollt eine sortierbare Tabelle in ihrem eigenen Kasten (sb-table-wrap) seitlich, nie die Seite; sie stapelt ihre Zeilen nicht zu Blöcken. In Compose gilt dasselbe mit SbSortableTable: Sie sortiert selbst, scrollt bei schmaler Breite in ihrem eigenen Rahmen und nennt TalkBack „Sortiert nach <Spalte>, absteigend“.",
+   "rule_en": "Sortable heads are buttons (sb-table__sort); only the sorted column carries aria-sort, title weight and the arrow icon; the first press sorts numbers and dates descending, words ascending, the next reverses; totals in tfoot below their column (border-strong line, body-strong); with a missing value the row reads „Summe der bekannten …“ and the gap stays „keine Angabe“, never 0. On phones a sortable table scrolls sideways inside its own box (sb-table-wrap), never the page; it does not stack its rows into blocks. Compose: SbSortableTable sorts itself the same way, scrolls inside its own frame when narrow and tells TalkBack „Sortiert nach <Spalte>, absteigend“.",
+   "why": "Inhaber D91: Sortierpfeil nur an der sortierten Spalte (B5a), Summenzeile im Tabellenfuß (B6a). Doppelpfeile an jeder Spalte wären Lärm; ein Pfeil sagt, wonach sortiert ist. Eine fehlende Zahl als 0 zu zählen, wäre falsch (D82, TXT-14). D92 (7), Antwort „Seitlich scrollen (Empfohlen)“: Sortierbare Tabellen scrollen am Handy in ihrem eigenen Kasten seitlich statt sich zu stapeln; nie die Seite. D94 (2), Antwort „2 wie vorgeschlagen“: Sortierköpfe 48 px auf Seiten und am Handy, 32 px nur im Fenster, dort bei Touch wieder 48 px. D100 (8) und D101 (3), (4), Antworten „Sortierbare Tabelle (Empfohlen)“, „Scrollt im eigenen Rahmen (Empfohlen)“ und „Baustein sortiert (Empfohlen)“: Compose bekommt die Tabelle mit denselben Regeln wie das Web.",
+   "do": "<th scope='col' class='sb-num' aria-sort='descending'><button class='sb-table__sort' type='button'><svg …arrow-down--16/>Betrag</button></th>; <tfoot><tr><th scope='row' colspan='2'>Summe</th><td class='sb-num'>1.797,20 €</td></tr></tfoot>; sb-table.js sagt „Sortiert nach Betrag, absteigend“; Compose SbSortableTable(…, sortIndex, sortDescending, onSort), die App hält Spalte und Richtung.",
    "dont": "Doppelpfeile an jeder sortierbaren Spalte; aria-sort an mehreren Spalten; Summe als Kennzahl unter der Tabelle; ein fehlender Wert als 0 in der Summe; Summenzeile mit grauer Fläche; Summenzeile, die beim Sortieren mitwandert; sortierbare Tabelle, die sich am Handy zu Blöcken stapelt; eine Tabelle, die die ganze Seite seitlich scrollen lässt.",
    "numbers": "Sortierkopf 48 px auf Seiten und Handys, 32 px nur im Fenster (data-sb-density='window'), bei Touch wieder 48 px; Pfeil 16 px; Linie über dem Fuß border-strong",
    "decisions": [
     "D82",
     "D91",
     "D92",
-    "D94"
+    "D94",
+    "D100",
+    "D101"
    ],
-   "source": "DECISIONS.md D91 (B5a, B6a), D82, D92 (7), D94 (2); systems/sebaro/spec/02-components.md §3.9, §7 (sb-table.js)",
+   "source": "DECISIONS.md D91 (B5a, B6a), D82, D92 (7), D94 (2), D100 (8), D101 (3), (4); systems/sebaro/spec/02-components.md §3.9, §7 (sb-table.js); spec/08-platform-android.md §14.30",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "axe; genau ein th mit aria-sort je Tabelle; die Summenzeile bleibt beim Sortieren unten; Tab auf den Kopf, Eingabe sortiert. Bei 390 px: die Tabelle scrollt im Kasten, die Seite hat keinen seitlichen Bildlauf.",
    "example_hint": "Ausgaben nach Betrag sortiert mit Summe im Fuß; falsch: Doppelpfeile überall und eine Lücke als 0.",
-   "note": "Die Höhen außerhalb von Fenstern waren eine Korrektur der Agenten nach der Prüfung des Baus; der Inhaber hat sie mit D94 angenommen. Die Compose-Fassung fehlt noch.",
-   "changed": "2026-10-22"
+   "note": "Die Höhen außerhalb von Fenstern waren eine Korrektur der Agenten nach der Prüfung des Baus; der Inhaber hat sie mit D94 angenommen. In Compose gibt es seit dem Werkstatt-Commit 0f40a10 SbSortableTable: Sie sortiert wie sb-table.js (Zahlen und Daten zuerst absteigend, Wörter aufsteigend nach der Sprache, Lücken zuletzt, gleiche Zeilen in ihrer Folge, die Summenzeile unten), scrollt bei schmaler Breite in ihrem eigenen Rahmen, und der sortierte Kopf sagt TalkBack seinen Zustand statt einer Statuszeile. Vorläufig vom Agenten: die Namen sortIndex, sortDescending und onSort, die stehende Bildunterschrift beim Scrollen und der Zustand am Kopf. Auf dem Rechner gezeichnet und im Semantikbaum geprüft, nicht auf einem Gerät und nicht mit TalkBack selbst.",
+   "changed": "2026-10-24"
   },
   {
    "id": "DAT-15",
@@ -3199,24 +3212,26 @@
    "id": "TXT-15",
    "area": "text",
    "title": "Fließtext ohne automatische Silbentrennung",
-   "rule": "Lass Fließtext ohne automatische Silbentrennung im Flattersatz laufen (hyphens: manual). Ein langes Kompositum in einer schmalen Spalte bekommt von Hand einen weichen Trennstrich an seiner Fuge (&shy;). Zahl und Einheit, Namen, Code und IDs brechen nie.",
-   "rule_en": "Running text is ragged right without automatic hyphenation (hyphens: manual, Compose leaves Hyphens unset); a long compound in a narrow column gets a manual soft hyphen at its joint (&shy;); never break inside number + unit, a name, code or an ID.",
-   "why": "Inhaber D82: Silbentrennung im Fließtext wird eine Regel mit Beispiel. Automatische Trennung zerreißt Produktnamen und Fachwörter und hängt von der Wortliste des Browsers ab; Blocksatz reißt Löcher in schmale Spalten.",
-   "do": "<p>Die Erinnerungs&shy;einstellungen findest du …</p>; <code class='sb-id'>DAT-02</code> bricht nicht.",
-   "dont": "hyphens: auto im Fließtext; text-align: justify; Umbruch zwischen „60“ und „%“; „sebaro Sans“ getrennt.",
+   "rule": "Lass Fließtext ohne automatische Silbentrennung im Flattersatz laufen (hyphens: manual). Ein langes Kompositum in einer schmalen Spalte bekommt von Hand einen weichen Trennstrich an seiner Fuge (&shy;). Automatisch getrennt wird nur ein Wort, das allein nicht in die Zeile passt (ZUG-09). Zahl und Einheit und Kennungen brechen nie; Namen und Code brechen bei großer Schrift ohne Trennstrich am Zeilenende, Dateinamen (sb-file-name) nur nach - . _ /; erst ein Teil, der allein nicht in die Zeile passt, bricht auch in sich.",
+   "rule_en": "Running text is ragged right without automatic hyphenation (hyphens: manual, Compose leaves Hyphens unset); a long compound in a narrow column gets a manual soft hyphen at its joint (&shy;); only a word that alone does not fit its line is hyphenated automatically (ZUG-09); never break inside number + unit or an identifier; names and code break at the line end without a hyphen at large text, file names (sb-file-name) only after - . _ /, and only a part that alone does not fit its line breaks inside too.",
+   "why": "Inhaber D82: Silbentrennung im Fließtext wird eine Regel mit Beispiel. Automatische Trennung zerreißt Produktnamen und Fachwörter und hängt von der Wortliste des Browsers ab; Blocksatz reißt Löcher in schmale Spalten. D100 (6) und D101 (6), (9), (10), Antworten „Nach - . _ / (Empfohlen)“, „Eigene Markierung (Empfohlen)“, „Nur zu lange trennen (Empfohlen)“ und „Am Zeilenende, ohne Strich (Empfohlen)“: Bei großer Schrift muss ein zu langes Wort, ein Name oder Code brechen dürfen, sonst scrollt die Seite seitlich (D100 (5)); ein Dateiname bricht an seinen Fugen, eine Kennung wie „DAT-02“ bleibt ganz (D80).",
+   "do": "<p>Die Erinnerungs&shy;einstellungen findest du …</p>; <code class='sb-id'>DAT-02</code> bricht nie; <code class='sb-file-name'>tagwerk-<wbr>2026-<wbr>10-<wbr>10.<wbr>csv</code> bricht nur nach - . _ /, die Seite schreibt <wbr> selbst; Compose sbFileName(name) im Hinweis und in der Metaliste.",
+   "dont": "hyphens: auto im Fließtext; text-align: justify; Umbruch zwischen „60“ und „%“; „sebaro Sans“ getrennt; ein Dateiname als sb-id (bricht nie) oder mit overflow-wrap: anywhere (bricht auch Teile, die passen).",
    "numbers": "hyphens: manual; Messung max. 70 ch (TXT-06)",
    "decisions": [
     "D82",
-    "D99"
+    "D99",
+    "D100",
+    "D101"
    ],
-   "source": "DECISIONS.md D82, D99 (1); systems/sebaro/spec/07-voice.md §3.1 (hyphenation); spec/01-foundations.md §2.5 Regel 1",
+   "source": "DECISIONS.md D82, D99 (1), D100 (6), D101 (6), (9), (10); systems/sebaro/spec/07-voice.md §3.1 (hyphenation); spec/01-foundations.md §2.5 Regel 1; spec/02-components.md §3.11, §5; spec/09-platform-web.md §3.1; demo/assets/sb-fit.js",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "grep -n 'hyphens: auto\\|text-align: justify' in Produkt-CSS = 0; Review bei 390 px.",
    "example_hint": "Schmale Spalte mit weichem Trennstrich in „Erinnerungseinstellungen“; falsch: Blocksatz mit automatischer Trennung.",
-   "note": "Ausnahme seit D99 (1), nur für Wörter in Bedienelementen: Passt bei großer Schrift ein einzelnes Wort allein nicht in seine Zeile (untere Navigation, Segmente, Schrittanzeige, in Compose auch Kurzmeldung und Titel), trennt sebaro es automatisch nach der Sprache (ZUG-09). sebaro.css setzt hyphens: auto deshalb an diesen Bauteilen selbst; die Prüfung gilt für das eigene CSS eines Produkts. Fließtext trennt weiter nur von Hand.",
+   "note": "Seit D101 (9) gilt die Ausnahme für jedes Wort, das allein nicht in seine Zeile passt, nicht nur in Bedienelementen: Im Web legt sb-fit.js span.sb-hyphenate nur um dieses Wort (hyphens: auto nach der Sprache der Seite); ohne Skript bricht es ohne Strich (body.sb-page hat overflow-wrap: break-word). Nie in Code, sb-id, sb-file-name, einem Namen mit translate='no' oder einem Wort mit eigenen weichen Trennstrichen. Die Prüfung oben gilt für das eigene CSS eines Produkts. In Compose trennt SbWrapText ein zu langes Wort; ein Dateiname mit sbFileName bricht nur nach - . _ / und wird von TalkBack so gelesen, wie er geschrieben ist (D100 (7)). Ein markierter Dateiname enthält in Compose unsichtbare Umbruchstellen, die eine Kopie aus einer SelectionContainer mitnimmt (bekannte Grenze der Werkstatt).",
    "changed": "2026-10-24"
   },
   {
@@ -3835,24 +3850,25 @@
    "id": "ZEI-13",
    "area": "zeichen",
    "title": "Kopf der Seite „Über“: Kachel links, Text daneben",
-   "rule": "Setz die 64-px-Kachel an den Anfang des Kopfs der Seite „Über“ und daneben Name (title, eine Überschrift), Einzeiler und die graue Zeile „Version 1.4.0 vom 20.10.2026“ mit der Version in sebaro Mono. Wird der Platz schmaler als Kachel und 12 rem, rutscht der Text unter die Kachel. Die Kachel ist für Screenreader ausgeblendet, weil der Name daneben steht; darunter folgt die kurze Zeile der Fakten. Nie zentriert.",
-   "rule_en": "About head (sb-about-head): the 64 px sign tile at the start, beside it the name (title role, a heading), the one-liner and the grey line „Version 1.4.0 vom 20.10.2026“ (version in sebaro Mono); the text moves under the tile below tile + 12 rem; the tile is aria-hidden because the name stands beside it; the compact facts line follows; never centred.",
-   "why": "Inhaber D91: Über-Kopf mit der Kachel links (B10a). Eine Leserichtung mit Listen und Zeilen (RAU-04); der Name steht neben dem Zeichen, das ihn trägt (ZEI-06).",
+   "rule": "Setz die 64-px-Kachel an den Anfang des Kopfs der Seite „Über“ und daneben Name (title, eine Überschrift), Einzeiler und die graue Zeile „Version 1.4.0 vom 20.10.2026“ mit der Version in sebaro Mono. Wird der Platz schmaler als Kachel und 12 rem, rutscht der Text unter die Kachel. Die Kachel ist für Screenreader ausgeblendet, weil der Name daneben steht; darunter folgt die kurze Zeile der Fakten. Passt eine ihrer Zellen nicht mehr in eine Zeile, wird die Zeile zur Liste: der Name in einer eigenen Zeile, darunter jede Zelle in einer eigenen Zeile, ohne „·“, Schrift und Farbe bleiben. Nie zentriert.",
+   "rule_en": "About head (sb-about-head): the 64 px sign tile at the start, beside it the name (title role, a heading), the one-liner and the grey line „Version 1.4.0 vom 20.10.2026“ (version in sebaro Mono); the text moves under the tile below tile + 12 rem; the tile is aria-hidden because the name stands beside it; the compact facts line follows and becomes a list once one of its cells no longer fits one line (the name on its own line, each cell on its own line below, no „·“, same type and colours); never centred.",
+   "why": "Inhaber D91: Über-Kopf mit der Kachel links (B10a). Eine Leserichtung mit Listen und Zeilen (RAU-04); der Name steht neben dem Zeichen, das ihn trägt (ZEI-06). D101 (11), (12), Antworten „Zelle passt nicht, ohne · (Empfohlen)“ und „Ja, gleiche Liste (Empfohlen)“: Bei großer Schrift brach die Zeile mitten in ihren Zellen.",
    "do": "<div class='sb-about-head'><span class='sb-sign-tile sb-sign-tile--64' aria-hidden='true'>…</span><div class='sb-about-head__text'><h2 class='sb-about-head__name'>Tagwerk</h2><p class='sb-about-head__line'>Gewohnheiten ohne Konto</p><p class='sb-about-head__meta'>Version <span class='sb-mono'>1.4.0</span> vom <time datetime='2026-10-20'>20.10.2026</time></p></div></div>",
    "dont": "Gestapelt und zentriert; die Kachel mit eigenem Namen für Screenreader neben dem sichtbaren Namen; die Version in sebaro Sans; eine Kachel kleiner als 64 px.",
-   "numbers": "Kachel 64 px mit Kürzel; Text mindestens 12 rem; Name title 20/28; Meta caption, text-muted",
+   "numbers": "Kachel 64 px mit Kürzel; Text mindestens 12 rem; Name title 20/28; Meta caption, text-muted; Faktenliste 12 px (12 dp) zwischen den Einträgen",
    "decisions": [
     "D85",
-    "D91"
+    "D91",
+    "D101"
    ],
-   "source": "DECISIONS.md D91 (B10a); systems/sebaro/spec/02-components.md §3.24; spec/07-voice.md §4.11",
+   "source": "DECISIONS.md D91 (B10a), D101 (11), (12); systems/sebaro/spec/02-components.md §3.24; spec/07-voice.md §4.11; spec/10-facts.md §4.1; spec/08-platform-android.md §14.17; demo/assets/sb-fit.js",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
-   "check": "Screenreader liest den Namen einmal; bei 320 px steht der Text unter der Kachel, nichts wird abgeschnitten.",
+   "check": "Screenreader liest den Namen einmal; bei 320 px steht der Text unter der Kachel, nichts wird abgeschnitten; bei 200 % Schrift auf 360 px steht die Faktenzeile als Liste.",
    "example_hint": "Über-Kopf von Tagwerk mit Kachel links; falsch: gestapelt und zentriert.",
-   "note": "In Compose gibt es SbAboutHead mit der kurzen Faktenzeile SbFactsLine, auf dem Rechner gezeichnet, nicht auf einem Gerät.",
+   "note": "In Compose gibt es SbAboutHead mit der kurzen Faktenzeile SbFactsLine, auf dem Rechner gezeichnet, nicht auf einem Gerät. Die Liste macht im Web sb-fit.js (data-sb-fit='list'), in Compose SbFactsLine; ohne Skript bricht eine Zelle in sich um, statt über den Rand zu laufen. Vorläufig vom Agenten: 12 px zwischen den Einträgen, und der Hinweis „Nicht für diese Version geprüft …“ zählt als Zelle, deshalb steht eine veraltete Faktenzeile am Handy schon bei normaler Schrift als Liste.",
    "changed": "2026-10-24"
   },
   {
@@ -4421,23 +4437,25 @@
    "id": "ZUG-09",
    "area": "zugang",
    "title": "Große Schrift: Der Platz wächst, nichts wird abgeschnitten",
-   "rule": "Lass bei großer Schrift den Platz mit dem Text wachsen, schneid nie Text ab. Passt ein Wort nicht mehr in seinen Platz (untere Navigation, Segmente, Schrittanzeige, Kurzmeldung, Titel), wird der Platz größer und der Text bricht an Leerzeichen auf zwei Zeilen um; nur ein einzelnes Wort, das allein nicht in die Zeile passt, wird getrennt. Eine segmentierte Auswahl, deren Wörter so nicht passen, wird zum Auswahlfeld. Diagramme in Compose wachsen nur dort, wo Text drinsteht; Flächen, Abstände und Linien bleiben feste dp.",
-   "rule_en": "At large text the room grows with the text, never cut text: where a word no longer fits (bottom navigation, segments, steps, toast, title) the room grows and the text wraps at spaces onto two lines; only a single word that alone does not fit its line is hyphenated; a segmented control whose words still do not fit becomes a select; Compose charts grow only where text sits, areas, gaps and lines stay fixed dp.",
-   "why": "Inhaber D99 (1), Antwort „Zweizeilig, ganze Wörter (Empfohlen)“, und D99 (2), Antwort „Nur wo Text drinsteht (Empfohlen)“. Vorher schnitt die untere Navigation in Compose bei 200 % Schrift „Statisti“ ab, die Wörter der Segmente wurden in ihren Spalten abgeschnitten, und im Web schob „Hell oder Dunkel“ den Kopf auf 558 px Breite. Wer große Schrift braucht, braucht jedes Wort ganz.",
-   "do": "Web: sebaro.css macht es selbst (der Website-Kopf unter 640 px als umbrechende Zeile mit „Hell oder Dunkel“ in eigener Reihe, die Kurzmeldung setzt „Rückgängig“ unter den Satz, die Schrittanzeige das Wort unter den Haken, Segmente und untere Navigation trennen ein zu langes Wort, „Einstel-lungen“); die Seite nennt ihre Sprache in <html lang='de'>, damit die Trennung sie kennt. Compose: SbWrapText, SbNavigationBar, SbSteps, SbToast, SbTopBar, SbPrimaryAction, SbSegmented (zeigt selbst SbSelectField).",
-   "dont": "white-space: nowrap, maxLines = 1, text-overflow: ellipsis oder eine feste Höhe an diesen Stellen; die Schrift an einer Stelle begrenzen; ein Wort trennen, das ganz in die Zeile passt („Glas ein-getragen“); Flächen und Linien eines Diagramms in Compose mit der Schrift wachsen lassen.",
-   "numbers": "geprüft bei 200 % Schrift auf 360 px (Web, Chromium) und bei Schriftgröße 2,0 auf 360 dp (Compose, auf dem Rechner); Segmente werden in Compose zum Auswahlfeld bei „Aus · Stündlich · Alle 2 Std.“ ab 125 %, bei „Woche · Monat · Jahr“ zwischen 170 und 200 %; Heatmap-Zellen am Handy etwa 30 dp (DAT-11)",
+   "rule": "Lass bei großer Schrift den Platz mit dem Text wachsen, schneid nie Text ab, und lass keine Seite seitlich scrollen. Passt ein Wort nicht mehr in seinen Platz (untere Navigation, Segmente, Schrittanzeige, Kurzmeldung, Titel), wird der Platz größer und der Text bricht an Leerzeichen auf zwei Zeilen um; nur ein einzelnes Wort, das allein nicht in die Zeile passt, bekommt einen Trennstrich. Namen und Code brechen am Zeilenende ohne Trennstrich, Dateinamen nur nach - . _ /, Kennungen nie. Eine segmentierte Auswahl, deren Wörter so nicht passen, wird zum Auswahlfeld, in Compose und im Web. Passt ein Schrittwort nicht auf zwei Zeilen, zeigt die Schrittanzeige nur das Wort des aktuellen Schritts unter den Balken (STA-06). Die Faktenzeile wird zur Liste (ZEI-13), ein Diagramm mit mehreren Reihen nennt sie in der Legende (DAT-10), und zwei Felder in einer Zeile rücken untereinander. Breite Muster und Tabellen scrollen in ihrem eigenen Rahmen. Diagramme in Compose wachsen nur dort, wo Text drinsteht; Flächen, Abstände und Linien bleiben feste dp.",
+   "rule_en": "At large text the room grows with the text, never cut text, and no page scrolls sideways: where a word no longer fits (bottom navigation, segments, steps, toast, title) the room grows and the text wraps at spaces onto two lines; only a single word that alone does not fit its line gets a hyphen; names and code break at the line end without a hyphen, file names only after - . _ /, identifiers never; a segmented control whose words still do not fit becomes a select, in Compose and on the web; once a step word does not fit two lines, the steps show only the current word under the bars (STA-06); the facts line becomes a list (ZEI-13), a chart with several series names them in its legend (DAT-10), two fields in one row go one under the other; wide specimens and tables scroll in their own frame; Compose charts grow only where text sits, areas, gaps and lines stay fixed dp.",
+   "why": "Inhaber D99 (1), Antwort „Zweizeilig, ganze Wörter (Empfohlen)“, und D99 (2), Antwort „Nur wo Text drinsteht (Empfohlen)“. Vorher schnitt die untere Navigation in Compose bei 200 % Schrift „Statisti“ ab, die Wörter der Segmente wurden in ihren Spalten abgeschnitten, und im Web schob „Hell oder Dunkel“ den Kopf auf 558 px Breite. Wer große Schrift braucht, braucht jedes Wort ganz. D100 (1), (3), (5), (6), (7), Antworten „Nur aktuelles Wort (Empfohlen)“, „Ja, wie Compose (Empfohlen)“, „Umbrechen, Muster rahmen (Empfohlen)“, „Nach - . _ / (Empfohlen)“ und „TalkBack vollständig (Empfohlen)“, und D101 (6), (9) bis (11), Antworten „Eigene Markierung (Empfohlen)“, „Nur zu lange trennen (Empfohlen)“, „Am Zeilenende, ohne Strich (Empfohlen)“ und „Zelle passt nicht, ohne · (Empfohlen)“: Bei 200 % Schrift auf 360 px scrollten drei Musterseiten der Werkstatt seitlich, Dateinamen brachen mitten im Namen, und die Schrittanzeige trennte „Erin-ne-rung“ über drei Zeilen.",
+   "do": "Web: sebaro.css und sb-fit.js machen es selbst. sebaro.css: der Website-Kopf unter 640 px als umbrechende Zeile mit „Hell oder Dunkel“ in eigener Reihe, die Kurzmeldung setzt „Rückgängig“ unter den Satz, body.sb-page bricht ein zu langes Wort, einen Namen oder Code ohne Strich, sb-field__row setzt das kurze Feld unter das breite. sb-fit.js (am Ende des body): eine zu enge segmentierte Auswahl wird zum Auswahlfeld (die Radios bleiben der Wert im Formular), die Schritte zeigen nur das aktuelle Wort (jedes Wort in span.sb-progress__word), die Faktenzeile wird zur Liste, das Diagramm mit mehreren Reihen zeigt die Legende, und nur ein zu langes Wort bekommt einen Trennstrich (span.sb-hyphenate). Dateinamen als <code class='sb-file-name'>tagwerk-<wbr>2026-<wbr>10-<wbr>10.<wbr>csv</code>, ein Produktname mit translate='no', Kennungen als sb-id; eine gewollte Kürzung (Zeilen, Pfad und Reiter im Fenster) trägt data-sb-truncate. Die Seite nennt ihre Sprache in <html lang='de'>, damit die Trennung sie kennt. Compose: SbWrapText (ein normaler BasicText, TalkBack liest ihn Buchstabe für Buchstabe und Wort für Wort), SbNavigationBar, SbSteps, SbToast, SbTopBar, SbPrimaryAction, SbSegmented (zeigt selbst SbSelectField), SbFactsLine, SbSeriesChart, sbFileName im Hinweis und in der Metaliste.",
+   "dont": "white-space: nowrap, maxLines = 1, text-overflow: ellipsis oder eine feste Höhe an diesen Stellen; eine Kürzung mit „…“ ohne data-sb-truncate; eine Seite, die bei großer Schrift seitlich scrollt; die Schrift an einer Stelle begrenzen; ein Wort trennen, das ganz in die Zeile passt („Glas ein-getragen“); einen Trennstrich in Code, einem Namen oder einem Dateinamen; einen Dateinamen als sb-id; Flächen und Linien eines Diagramms in Compose mit der Schrift wachsen lassen.",
+   "numbers": "geprüft bei 200 % Schrift auf 320, 360 und 390 px in Hell und Dunkel (Web, Chromium, die Grundschrift des Browsers verdoppelt) und bei Schriftgröße 2,0 auf 360 dp (Compose, auf dem Rechner); eine segmentierte Auswahl wird zum Auswahlfeld, sobald eines ihrer Wörter im Titelgewicht nicht in seine Spalte passt (in Compose bei „Aus · Stündlich · Alle 2 Std.“ ab 125 %, bei „Woche · Monat · Jahr“ zwischen 170 und 200 %; im Web hängt es von der Spalte ab, bei „Aus · Stündlich · Alle 2 Std.“ auf der Werkstattseite mobile.html bei 320 px ab etwa 106 %, bei 360 px ab etwa 119 %, bei 390 px ab etwa 131 %, im Guide in Chromium gemessen), zurück erst, wenn die Wörter 4 px schmaler passen; Schritte in kurzer Form bei 2 bis 4 Schritten; Faktenliste 12 px (12 dp) zwischen den Einträgen; Heatmap-Zellen am Handy etwa 30 dp (DAT-11)",
    "decisions": [
-    "D99"
+    "D99",
+    "D100",
+    "D101"
    ],
-   "source": "DECISIONS.md D99 (1), (2); systems/sebaro/SYSTEM.md §5; spec/08-platform-android.md §14.10, §16; spec/02-components.md §2.7, §3.12, §4.2, §4.8; spec/03-signature.md §6.5; spec/09-platform-web.md §4.1, §4.3, §4.5; css/sebaro.css; CHECKS.md §27",
+   "source": "DECISIONS.md D99 (1), (2), D100 (1), (3), (5) bis (7), D101 (1), (2), (6), (9) bis (12); systems/sebaro/SYSTEM.md §5; spec/02-components.md §2.1, §2.7, §3.7, §3.12, §4.2, §5, §7; spec/07-voice.md §3.1; spec/08-platform-android.md §14.7, §14.10, §14.17, §14.18, §16; spec/09-platform-web.md §3.1, §4.1; spec/10-facts.md §4.1; css/sebaro.css; demo/assets/sb-fit.js; shared/DEMO-CHECK.md §3.5; CHECKS.md §27, §28",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
-   "check": "Web in Chromium bei 360 px mit html { font-size: 200% }: kein Text außerhalb seines Kastens, keine Seite breiter als das Fenster (Kopf, Kurzmeldung, Schritte, Segmente, untere Navigation). Compose: extract_compose.py --render bei Schriftgröße 2,0 und jedes Bild ansehen.",
-   "example_hint": "Untere Navigation, Schritte, Segmente und Kurzmeldung auf wenig Platz: „Einstel-lungen“ getrennt, „Erinnerung“ unter dem Haken, „Alle 2 Std.“ auf zwei Zeilen; falsch: abgeschnittene Wörter in Navigation und Segmenten.",
-   "note": "Im Web noch nicht gebaut: Die segmentierte Auswahl wird dort nicht zum Auswahlfeld; ihre Wörter brechen bei 200 % zwischen den Wörtern um und werden notfalls getrennt („Stünd-lich“, „Alle“ / „2 Std.“); in einer Spalte von etwa 230 px bei 200 % (das Beispiel hier auf 360 px) schneidet der Rand das letzte Segment noch ab. Mit vier Schritten trennt die Schrittanzeige bei 200 % ihre Wörter über drei Zeilen („Erin-ne-rung“), D99 spricht von zwei Zeilen; wie es dort sein soll, ist eine Frage an den Inhaber. Fließtext und Überschriften im Web trennen weiter nur von Hand (TXT-15, SCH-06). Dateinamen in einem Hinweis brechen bei 200 % weiter mitten im Namen. Drei Musterseiten der Werkstatt scrollen bei 200 % auf 360 px noch seitlich. Nicht geprüft: Silbentrennung auf Geräten, die nicht lineare Schriftskala ab Android 14, Firefox und WebKit, die Textgröße eines Handy-Browsers (im Web ist nur die Grundschrift vergrößert).",
+   "check": "check_demo.py 1.4.0 der Werkstatt auf jeder Seite: OVF3 (bei 200 % Schrift auf 320, 360 und 390 px, hell und dunkel, ist keine Seite breiter als das Fenster) und OVF4 (kein Rahmen schneidet Text ab; ausgenommen sind ein Kasten, der scrollt, und eine Kürzung mit text-overflow: ellipsis und data-sb-truncate); dazu jede Seite bei 200 % ansehen. Compose: extract_compose.py --render bei Schriftgröße 2,0 und jedes Bild ansehen.",
+   "example_hint": "Untere Navigation, Schritte, Segmente und Kurzmeldung auf wenig Platz: „Einstel-lungen“ getrennt, „Erinnerung“ unter dem Haken, die Segmente werden zum Auswahlfeld, „Rückgängig“ steht unter dem Satz; falsch: mit „…“ gekürzte Wörter in der Navigation.",
+   "note": "Im Web macht sb-fit.js die Wechsel (Auswahlfeld, kurze Schritte, Faktenliste, Legende, Trennstrich) und misst bei jeder Größe, nach einem Wechsel von Hell und Dunkel oder Farbton und sobald die Schrift geladen ist neu; ohne das Skript brechen die Wörter um und keine Seite scrollt seitlich, die Teile behalten aber ihre breite Form. Vorläufig vom Agenten gewählt (in der Werkstatt benannt): die 4 px beim Zurückwechseln, translate='no' als Zeichen eines Namens, data-sb-truncate als einzige Ausnahme für eine gewollte Kürzung, die Gruppe der Segmente ohne eigene Rolle, solange das Auswahlfeld steht. TalkBack liest Text in Compose jetzt ganz, auch Buchstabe für Buchstabe und Wort für Wort, und Dateinamen so, wie sie geschrieben sind (D100 (7)); geprüft im Semantikbaum, nicht mit TalkBack selbst; dafür kann im allerersten Bild der Trennstrich fehlen. OVF4 sieht Text in einem Eingabe- oder Auswahlfeld nicht (im geschlossenen Auswahlfeld wird „Gesundheit“ bei 320 px und 200 % noch um wenige Pixel abgeschnitten) und keinen Text, den clip-path schneidet. In diesem Guide scrollen breite Muster der Regelbeispiele bei großer Schrift in ihrem Rahmen: Ein Handyrahmen behält dort mindestens 320 px (vorläufig vom Agenten). Nicht geprüft: Silbentrennung auf Geräten, die Schriftgröße eines Handys, Androids Schriftskalierung und der Seitenzoom (nur die Grundschrift des Browsers), Firefox und WebKit, Screenreader.",
    "changed": "2026-10-24"
   },
   {
@@ -4498,23 +4516,25 @@
    "title": "Einführung anfangsbündig, höchstens drei Schritte",
    "rule": "Bau einen Einführungsschritt in der Form des leeren Zustands, anfangsbündig: Spot (128 × 96), Titel, ein bis zwei Sätze in text-muted und der leise Ausweg „Einführung überspringen“ als Textaktion. Die Schritte („Schritt 1 von 3“) stehen direkt unter der Kopfleiste; höchstens drei Schritte, kein Konto. Die Hauptaktion unten heißt „Weiter: <Ziel>“; im DOM steht der Ausweg vor ihr.",
    "rule_en": "An intro step has the form of the empty state, start-aligned (sb-intro): spot 128 × 96, title, one or two text-muted sentences and the quiet way out „Einführung überspringen“ as a text action; steps „Schritt 1 von 3“ directly under the top bar; at most three steps, no account; the primary action reads „Weiter: <Ziel>“ and comes after the way out in the DOM.",
-   "why": "Inhaber D91: Einführungsschritt anfangsbündig wie der leere Zustand (B9a); D83 (6): „Weiter“ in Einführungen nur mit Ziel; D83 (5): Hauptaktion zuletzt. Zentriert wäre eine zweite Leserichtung neben den Listen (RAU-04).",
-   "do": "<div class='sb-intro'><svg class='sb-icon sb-icon--spot' width='128' height='96' aria-hidden='true'><use href='#onboarding--spot'/></svg><h2 class='sb-intro__title'>Ohne Konto, auf diesem Gerät</h2><p class='sb-intro__text'>…</p><button class='sb-text-action' type='button'>Einführung überspringen</button></div>; Hauptaktion „Weiter: Erste Gewohnheit“.",
+   "why": "Inhaber D91: Einführungsschritt anfangsbündig wie der leere Zustand (B9a); D83 (6): „Weiter“ in Einführungen nur mit Ziel; D83 (5): Hauptaktion zuletzt. Zentriert wäre eine zweite Leserichtung neben den Listen (RAU-04). D100 (8) und D101 (5), Antworten „Einführungsschritt (Empfohlen)“ und „Wie im Web (Empfohlen)“: Compose bekommt den Schritt als eigenen Baustein, gleich aufgebaut wie im Web.",
+   "do": "<div class='sb-intro'><svg class='sb-icon sb-icon--spot' width='128' height='96' aria-hidden='true'><use href='#onboarding--spot'/></svg><h2 class='sb-intro__title'>Ohne Konto, auf diesem Gerät</h2><p class='sb-intro__text'>…</p><button class='sb-text-action' type='button'>Einführung überspringen</button></div>; Hauptaktion „Weiter: Erste Gewohnheit“; Compose SbIntroStep(…) mit SbSteps unter der Kopfleiste und der Hauptaktion unten.",
    "dont": "Zentrierter Text; mehr als drei Schritte; „Weiter“ ohne Ziel; ein Konto in der Einführung; Überspringen als Hauptaktion oder versteckt.",
    "numbers": "Spot 128 × 96; Titel 20/28; höchstens 3 Schritte; Ausweg 48 px",
    "decisions": [
     "D83",
-    "D91"
+    "D91",
+    "D100",
+    "D101"
    ],
-   "source": "DECISIONS.md D91 (B9a), D83 (5), (6); systems/sebaro/spec/02-components.md §3.23",
+   "source": "DECISIONS.md D91 (B9a), D83 (5), (6), D100 (8), D101 (5); systems/sebaro/spec/02-components.md §3.23; spec/08-platform-android.md §14.31",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Tab-Reihenfolge: „Einführung überspringen“ vor „Weiter: …“; Text linksbündig bei 390 px.",
    "example_hint": "Schritt 1 von 3 mit Spot, Titel und Ausweg, unten „Weiter: Erste Gewohnheit“; falsch: zentriert mit „Weiter“ ohne Ziel.",
-   "note": "Compose deckt die Form mit SbEmptyState; ein eigener Baustein fehlt noch.",
-   "changed": "2026-10-21"
+   "note": "In Compose gibt es seit dem Werkstatt-Commit 0f40a10 den eigenen Baustein SbIntroStep mit Bild, Titel, Text und „Einführung überspringen“, wie im Web; der Bildschirm setzt SbSteps unter die Kopfleiste und „Weiter: <Ziel>“ unten. Bei großer Schrift zeigen auch die drei Schritte der Einführung nur das aktuelle Wort (STA-06). Auf dem Rechner gezeichnet, nicht auf einem Gerät; wird „Einführung überspringen“ zweizeilig, steht die Unterstreichung unter jeder Zeile.",
+   "changed": "2026-10-24"
   },
   {
    "id": "WEB-01",

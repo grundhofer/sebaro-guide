@@ -79,17 +79,17 @@
 }
 .g-rx-c-rows--menu { max-inline-size: 380px; }
 .g-rx-c-row32 {
-  display: flex; align-items: center; gap: var(--sb-space-3); min-block-size: var(--sb-size-control-sm); overflow: hidden;
+  display: flex; flex-wrap: wrap; align-items: center; column-gap: var(--sb-space-3); min-block-size: var(--sb-size-control-sm); overflow: hidden;
   padding-inline: var(--sb-space-3); box-sizing: border-box; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking);
   border-inline-start: var(--sb-border-width-strong) solid transparent;
 }
-.g-rx-c-row32__name { flex: 1 1 auto; min-inline-size: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.g-rx-c-row32__name { flex: 1 1 4em; min-inline-size: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .g-rx-c-row32__meta {
-  flex: none; display: inline-flex; align-items: center; gap: var(--sb-space-0-5);
+  flex: 0 1 auto; min-inline-size: 0; display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-0-5);
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
 }
 .g-rx-c-row32 > .sb-status { flex: none; }
-.g-rx-c-row32--squeezed > .sb-status { inline-size: 3.75em; overflow: hidden; }       /* wrong: the status gets cut */
+.g-rx-c-row32--squeezed > .sb-status { display: block; inline-size: 3.75em; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }       /* wrong: the status gets cut (a deliberate cut, the row carries data-sb-truncate) */
 .g-rx-c-row32 > a { flex: 1 1 auto; align-self: stretch; display: flex; align-items: center; color: var(--sb-color-text-muted); text-decoration: none; }
 .g-rx-c-row32--current { border-inline-start-color: var(--sb-color-accent); }
 .g-rx-c-row32--current > a { color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
@@ -119,6 +119,8 @@
   padding-block-end: var(--sb-space-2); border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border);
 }
 .g-rx-c-anatomy > li > p, .g-rx-c-anatomy--bad > p { margin: 0; }
+/* large text (D100 (5)): from 22rem down the part's name stands above its text */
+@media (max-width: 22rem) { .g-rx-c-anatomy > li { grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-1); } }
 .g-rx-c-anatomy__n { color: var(--sb-color-text-muted); }
 .g-rx-c-anatomy--bad { color: var(--sb-color-text-muted); }                           /* wrong: everything grey */
 .g-rx-c-mobilepage {
@@ -201,6 +203,7 @@ progress.g-rx-c-product-progress::-moz-progress-bar { background: var(--sb-tile-
   padding: var(--sb-space-2) var(--sb-space-3); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
 }
 .g-rx-c-tab > img, .g-rx-c-tab > .g-rx-c-fav16 { flex: none; }
+.g-rx-c-tab > span:not(.g-rx-c-fav16) { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; }   /* a browser tab cuts its title with „…“ (the tab bar carries data-sb-truncate) */
 .g-rx-c-tab--current { background: var(--sb-color-bg); color: var(--sb-color-text); border-radius: var(--sb-radius-control) var(--sb-radius-control) 0 0; }
 .g-rx-c-fav16 { display: inline-block; inline-size: 16px; block-size: 16px; line-height: 0; }
 .g-rx-c-fav16 > svg { display: block; inline-size: 100%; block-size: 100%; }
@@ -248,7 +251,7 @@ progress.g-rx-c-product-progress::-moz-progress-bar { background: var(--sb-tile-
 /* ------------------------------------------------------------------ Bilder */
 .g-rx-c-figure { display: grid; gap: var(--sb-space-2); justify-items: start; margin: 0; min-inline-size: 0; color: var(--sb-color-text); }
 .g-rx-c-figure figcaption { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
-.g-rx-c-ill { inline-size: 100%; max-inline-size: 320px; block-size: auto; }
+.g-rx-c-ill { inline-size: 100%; max-inline-size: 320px; block-size: auto; overflow: visible; }
 .g-rx-c-ill__frame, .g-rx-c-ill__bead, .g-rx-c-ill__line { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .g-rx-c-ill__fake { fill: var(--sb-color-text-muted); stroke: none; font-size: 11px; font-style: italic; }
 .g-rx-c-ill--muted { color: var(--sb-color-text-muted); }
@@ -313,15 +316,15 @@ progress.g-rx-c-product-progress::-moz-progress-bar { background: var(--sb-tile-
   border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container);
 }
 .g-rx-c-desk__title {
-  display: flex; align-items: center; gap: var(--sb-space-3); min-block-size: var(--sb-size-target-touch); padding: var(--sb-space-2) var(--sb-space-4);
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1) var(--sb-space-3); min-block-size: var(--sb-size-target-touch); padding: var(--sb-space-2) var(--sb-space-4);
   border-block-end: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color);
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking);
 }
 .g-rx-c-desk__dots { display: inline-flex; gap: var(--sb-space-1); flex: none; }
 .g-rx-c-desk__dots > i { display: block; inline-size: 12px; block-size: 12px; border-radius: 50%; border: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); }
-.g-rx-c-desk__path { min-inline-size: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: var(--sb-color-text-muted); }
+.g-rx-c-desk__path { flex: 0 1 auto; min-inline-size: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: var(--sb-color-text-muted); }
 .g-rx-c-desk__path strong { color: var(--sb-color-text); }
-.g-rx-c-desk__keys { margin-inline-start: auto; color: var(--sb-color-text-muted); white-space: nowrap; }
+.g-rx-c-desk__keys { margin-inline-start: auto; color: var(--sb-color-text-muted); }
 .g-rx-c-desk__body { display: flex; min-block-size: 200px; }
 .g-rx-c-desk__nav.sb-side-nav { flex: none; inline-size: 220px; padding-block: var(--sb-space-2); }
 .g-rx-c-desk__main { flex: 1 1 auto; min-inline-size: 0; }

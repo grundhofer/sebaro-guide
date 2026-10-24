@@ -56,7 +56,7 @@
 .g-rx-wrong-plate p { margin: 0; }
 .g-rx-wrong-plate__name { font: var(--sb-type-title); letter-spacing: 0.2em; }
 .g-rx-wrong-plate__row {
-  display: flex; justify-content: space-between; gap: var(--sb-space-3); margin-block-start: var(--sb-space-2); padding-block-start: var(--sb-space-2);
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sb-space-3);   /* wraps at large text instead of being cut by the plate (D100 (5)) */ margin-block-start: var(--sb-space-2); padding-block-start: var(--sb-space-2);
   border-block-start: var(--sb-border-width-control) solid var(--sb-color-border-strong);
 }
 
@@ -93,13 +93,13 @@
 .sb-secondary-action.g-rx-wrong-greybtn { justify-self: start; border-color: transparent; background: var(--sb-color-surface-sunken); }
 
 /* HAL-07: three frames with one header tile and one link style */
-.g-rx-tri { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); gap: var(--sb-space-3); inline-size: 100%; }
+.g-rx-tri { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, max(140px, 8.75rem)), 1fr)); gap: var(--sb-space-3); inline-size: 100%; }   /* 140 px at 100 %, a frame per row at large text (D100 (5)) */
 .g-rx-pframe {
   display: grid; align-content: start; min-inline-size: 0; overflow: hidden; box-sizing: border-box;
   border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container); background: var(--sb-color-bg);
 }
 .g-rx-pframe__head {
-  display: flex; align-items: center; gap: var(--sb-space-2); min-block-size: var(--sb-size-target-touch); padding: var(--sb-space-1) var(--sb-space-3); box-sizing: border-box;
+  display: flex; align-items: center; gap: var(--sb-space-2); overflow-wrap: anywhere;   /* the name is a bare word beside the tile: at large text it breaks where it alone does not fit, instead of being cut by the frame (D101 (9)) */ min-block-size: var(--sb-size-target-touch); padding: var(--sb-space-1) var(--sb-space-3); box-sizing: border-box;
   border-block-end: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color);
   font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking);
 }
@@ -269,11 +269,16 @@
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking);
 }
 .g-rx-fly__block > .sb-icon { color: var(--sb-color-text-muted); }
-.g-rx-fly__block--far { transform: translateX(28%); border-color: var(--sb-color-border); color: var(--sb-color-text-muted); }
-.g-rx-fly__block--near { transform: translateX(12%); }
+.g-rx-fly__block--far { margin-inline-end: 28%; transform: translateX(28%); border-color: var(--sb-color-border); color: var(--sb-color-text-muted); }
+.g-rx-fly__block--near { margin-inline-end: 12%; transform: translateX(12%); }   /* the margin keeps the moved text inside the frame at large text */
 .g-rx-durations { display: grid; gap: var(--sb-space-3); inline-size: 100%; }
 .g-rx-dur { display: grid; grid-template-columns: auto auto minmax(0, 1fr); align-items: center; gap: var(--sb-space-3); }
 .g-rx-dur .sb-secondary-action { padding-inline: var(--sb-space-4); min-inline-size: 6.5rem; }
+/* large text (D100 (5)): from 22rem down (352 px at 100 %, 704 px at 200 %) the caption goes under button and tone */
+@media (max-width: 22rem) { .g-rx-dur { grid-template-columns: auto minmax(0, 1fr); } .g-rx-dur > .g-rx-cap { grid-column: 1 / -1; } }
+/* the same from 22rem down: the three state buttons (FAR-08) stand under each other and a line type's name stands above its
+ * specimen (FOR-02), so a button keeps its word instead of a column a few letters wide (provisional, agent) */
+@media (max-width: 22rem) { .g-rx-states, .g-rx-legend > div { grid-template-columns: minmax(0, 1fr); } }
 .g-rx-tone {
   display: block; inline-size: var(--sb-space-12); block-size: var(--sb-space-8); box-sizing: border-box;
   border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-control); background: var(--sb-color-bg);

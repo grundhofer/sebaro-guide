@@ -31,13 +31,15 @@
 /* ------------------------------------------------------------------ mobile.html: app views in phone frames */
 .demo-screens { box-sizing: border-box; max-inline-size: var(--sb-size-container-max); margin-inline: auto; padding: 0 var(--sb-spacing-gutter) var(--sb-spacing-section); }
 .demo-screens__list { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--sb-space-12) var(--sb-space-10); margin: 0; padding: 0; list-style: none; }
-.demo-screen { display: grid; gap: var(--sb-space-2); inline-size: 390px; max-inline-size: 100%; }
+/* the track may shrink below 390 px (provisional, agent; D100 (5)): a phone 320 px wide shows 320 px, so the frame
+   follows the screen instead of pushing the page sideways at large text */
+.demo-screen { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-2); inline-size: 390px; max-inline-size: 100%; }
 .demo-screen__title { margin: 0; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
 .demo-screen .demo-count { margin: 0; }
 /* a phone screen is 390 x 844; a longer screen (M4) shows its whole content and the bottom block at its end */
 .demo-screens .sb-phone, .demo-facts .sb-phone:not(.sb-phone--auto) { block-size: auto; min-block-size: 844px; }
 @media (min-width: 1024px) { .demo-screens { padding-inline: var(--sb-spacing-gutter-wide); } }
-/* at phone width the frame is the screen: no side margins, no frame corners, exactly 390 px wide */
+/* at phone width the frame is the screen: no side margins, no frame corners, the screen's width (390 px or less) */
 @media (max-width: 429px) {
   .demo-screens { padding-inline: 0; }
   .demo-screens .demo-intro, .demo-screen__title, .demo-screen .demo-count { padding-inline: var(--sb-spacing-gutter); }
@@ -47,7 +49,6 @@
 /* content blocks inside an app view: the gutter and the stack of a form */
 .demo-pad { padding: var(--sb-space-2) var(--sb-spacing-gutter) var(--sb-space-1); }
 .demo-form { display: grid; gap: var(--sb-space-4); padding: var(--sb-space-2) var(--sb-spacing-gutter) var(--sb-space-3); }
-.demo-form .sb-field__row { grid-template-columns: minmax(0, 1fr) minmax(0, 132px); }
 .demo-switches { display: grid; }
 .demo-actions-start { display: flex; flex-wrap: wrap; gap: var(--sb-space-3); padding: var(--sb-space-6) var(--sb-spacing-gutter) var(--sb-space-4); }
 .demo-detail { display: grid; gap: var(--sb-space-6); padding: var(--sb-space-2) var(--sb-spacing-gutter) var(--sb-space-2); }
@@ -62,7 +63,8 @@
 .demo-overlay { position: relative; display: flex; flex-direction: column; flex: 1 1 auto; }
 .demo-overlay__under { display: flex; flex-direction: column; flex: 1 1 auto; }
 .demo-overlay__scrim { position: absolute; inset: 0; z-index: var(--sb-layer-overlay); background: var(--sb-color-scrim); }
-.demo-overlay__dialog { position: absolute; inset: 0; z-index: var(--sb-layer-modal); display: grid; place-items: center; padding: var(--sb-spacing-gutter); }
+/* a dialog taller than the screen (large text) scrolls inside it, as on a phone (D99 (1)) */
+.demo-overlay__dialog { position: absolute; inset: 0; z-index: var(--sb-layer-modal); display: grid; grid-template-columns: minmax(0, 1fr); place-items: safe center; padding: var(--sb-spacing-gutter); overflow-y: auto; }
 .demo-overlay__dialog > .sb-dialog { position: relative; inset: auto; margin: 0; inline-size: 100%; }
 /* the toast sits right above the bottom block, as a real snackbar does */
 .demo-toast { padding: 0 var(--sb-spacing-gutter) var(--sb-space-3); }
@@ -75,7 +77,7 @@
 
 /* ------------------------------------------------------------------ article.html */
 .demo-article { box-sizing: border-box; max-inline-size: var(--sb-size-container-max); margin-inline: auto; padding: 0 var(--sb-spacing-gutter) var(--sb-spacing-section); }
-.demo-article__head { display: grid; gap: var(--sb-space-3); padding-block: var(--sb-space-6) var(--sb-space-6); }
+.demo-article__head { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-3); padding-block: var(--sb-space-6) var(--sb-space-6); }
 .demo-article__head h1 { margin: 0; }
 .demo-article__meta { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .demo-article__toc { margin-block-end: var(--sb-space-8); }
@@ -83,11 +85,13 @@
 .demo-article .sb-prose > .sb-code, .demo-article .sb-prose > .sb-callout, .demo-article .sb-prose > .sb-table-wrap, .demo-article .sb-prose > figure { margin-block-start: var(--sb-space-6); }
 .demo-article .sb-prose > .sb-code + *, .demo-article .sb-prose > .sb-callout + *, .demo-article .sb-prose > .sb-table-wrap + *, .demo-article .sb-prose > figure + * { margin-block-start: var(--sb-space-6); }
 .demo-article .sb-prose img { inline-size: 100%; block-size: auto; vertical-align: top; }
-/* at phone width the table wraps (German hyphenation) instead of scrolling sideways; code names never break */
-.demo-article .sb-table code { white-space: nowrap; hyphens: none; }
+/* at phone width the table wraps instead of scrolling sideways; code names break only at the line end, without a
+   hyphen (D101 (10)); an overlong word is hyphenated by sb-fit.js (D101 (9)); what still does not fit scrolls in the
+   table's own frame (D100 (5)) */
+.demo-article .sb-table code { overflow-wrap: break-word; hyphens: none; }
 @media (max-width: 639px) {
   .demo-article .sb-table { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
-  .demo-article .sb-table td { hyphens: auto; }
+  .demo-article .sb-table td { overflow-wrap: anywhere; }   /* a word may set a column narrower than itself; sb-fit.js then hyphenates it */
 }
 .demo-article .sb-pager { margin-block-start: var(--sb-space-12); max-inline-size: var(--sb-size-measure-prose); }
 @media (min-width: 1024px) {
@@ -101,7 +105,7 @@
 .demo-facts { box-sizing: border-box; max-inline-size: var(--sb-size-container-max); margin-inline: auto; padding: 0 var(--sb-spacing-gutter) var(--sb-spacing-section); }
 .demo-product { padding-block: var(--sb-spacing-section); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
 .demo-product__head { display: flex; align-items: center; gap: var(--sb-space-4); margin: 0 0 var(--sb-space-6); }
-.demo-product__head h2 { margin: 0; }
+.demo-product__head h2 { margin: 0; min-inline-size: 0; }   /* the name breaks at large text instead of pushing the page (D100 (5)) */
 .demo-product h3 { margin: 0 0 var(--sb-space-3); font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); color: var(--sb-color-text-muted); }
 .demo-product__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-10); align-items: start; }
 .demo-product__part { min-inline-size: 0; }

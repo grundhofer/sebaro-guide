@@ -14,9 +14,14 @@
 .g-ausblick-item__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sb-space-2) var(--sb-space-3); margin-block-end: var(--sb-space-3); }
 .g-ausblick-item__head h3 { margin: 0; }
 .g-ausblick-facts { max-inline-size: 52em; }
-.g-ausblick-facts > div { grid-template-columns: 7rem minmax(0, 1fr); align-items: baseline; padding-block: var(--sb-space-3); }
+/* sebaro's meta list is a wrapping flex row since workshop 0f40a10 (D99 (1)): a 7rem label beside the value, the label
+   above it below 480 px (and whenever the value's widest word no longer fits beside it) */
+.g-ausblick-facts > div { align-items: baseline; padding-block: var(--sb-space-3); }
+.g-ausblick-facts dt { flex: 0 1 7rem; }
+.g-ausblick-facts dd { flex: 1 1 0%; }
 @media (max-width: 479px) {
-  .g-ausblick-facts > div { grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-1); }
+  .g-ausblick-facts > div { gap: var(--sb-space-1); }
+  .g-ausblick-facts dt, .g-ausblick-facts dd { flex: 1 1 100%; }
 }
 
 /* owner checklist: rows that grow with their text */
@@ -25,6 +30,11 @@
 .g-ausblick-checklist .sb-list-row { scroll-margin-block-start: var(--sb-space-4); }
 .g-ausblick-checklist .sb-list-row:target { border-block-start: var(--sb-border-width-strong) solid var(--sb-color-accent); }
 .g-ausblick-checklist :is(.sb-status, .sb-tag) { flex: none; margin-block-start: var(--sb-space-0-5); }
+/* D100 (5): the row is a wrapping flex row, so at large text the status goes under the text once the text would get
+ * less than 12rem, instead of squeezing it into a column of single letters (the grid's auto column did) */
+.g-ausblick-checklist .sb-list-row { display: flex; flex-wrap: wrap; column-gap: var(--sb-space-3); }
+.g-ausblick-checklist .sb-list-row__main { flex: 1 1 12rem; }
+.g-ausblick-checklist .sb-list-row > :is(.sb-status, .sb-tag) { max-inline-size: 100%; white-space: normal; }
 
 .g-ausblick-steps { margin: 0; padding-inline-start: var(--sb-space-6); max-inline-size: 42em; }
 .g-ausblick-steps li + li { margin-block-start: var(--sb-space-2); }

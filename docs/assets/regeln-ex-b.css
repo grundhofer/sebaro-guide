@@ -32,14 +32,14 @@
 .g-rx-lines > li { display: grid; grid-template-columns: minmax(0, 1fr); align-items: baseline; gap: var(--sb-space-1) var(--sb-space-3); }
 @media (min-width: 640px) { .g-rx-lines > li { grid-template-columns: 10rem minmax(0, 1fr); } }
 .g-rx-lines > li > .sb-text-action { justify-self: start; }
-.g-rx-site { display: grid; gap: var(--sb-space-3); padding: var(--sb-space-6) var(--sb-spacing-gutter); }
+.g-rx-site { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-3); padding: var(--sb-space-6) var(--sb-spacing-gutter); }
 .g-rx-site p { margin: 0; }
 .g-rx-site__title { font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
 .g-rx-site .sb-section__actions { margin-block-start: var(--sb-space-2); }
 .g-rx-site .sb-notes { margin-block-start: var(--sb-space-6); }
 .g-rx-pad { padding: var(--sb-space-2) var(--sb-spacing-gutter) var(--sb-space-3); }
 .g-rx-dialog-host { min-block-size: 0; }
-.sb-phone.g-rx-start-frame { block-size: 440px; }
+.sb-phone.g-rx-start-frame { block-size: auto; min-block-size: 440px; }   /* grows with large text (D99 (1)) */
 
 /* the same site header in three container widths (NAV-06, NAV-07): the system switches the header by viewport width;
    these container rules repeat its three layouts so that the specimens show them side by side */
@@ -119,7 +119,7 @@
 .sb-bottom-block.g-rx-noline { border-block-start-color: transparent; }
 .sb-primary-action-bar.g-rx-center { display: flex; justify-content: center; }
 .g-rx-center .sb-primary-action { inline-size: auto; }
-.sb-primary-action-bar.g-rx-bar-row { display: flex; gap: var(--sb-space-3); }
+.sb-primary-action-bar.g-rx-bar-row { display: flex; flex-wrap: wrap; gap: var(--sb-space-3); }
 .g-rx-bar-row .sb-primary-action { flex: 1 1 auto; inline-size: auto; }
 .g-rx-dangerlink {
   display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-touch); padding: 0; margin: 0; border: 0; background: transparent;
@@ -157,7 +157,7 @@
 .g-rx-dot--neutral { background: var(--sb-color-text-muted); }
 .g-rx-dot--success { background: var(--sb-color-success); }
 .g-rx-dot--danger { background: var(--sb-color-danger); }
-.g-rx-word { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); white-space: nowrap; }
+.g-rx-word { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }   /* wraps at large text instead of running out of its frame (D100 (5)) */
 .g-rx-word--success { color: var(--sb-color-success); }
 .g-rx-word--danger { color: var(--sb-color-danger); }
 .g-rx-badge {
@@ -219,8 +219,8 @@ progress.sb-progress__bar.g-rx-progress-blue::-moz-progress-bar { background: va
 .sb-avatar.g-rx-avatar--accent { border-color: var(--sb-color-accent); background: var(--sb-color-accent); color: var(--sb-color-on-accent); }
 .sb-avatar.g-rx-avatar--success { border-color: var(--sb-color-success); background: var(--sb-color-success); color: var(--sb-color-on-success); }
 .sb-avatar.g-rx-avatar--danger { border-color: var(--sb-color-danger); background: var(--sb-color-danger); color: var(--sb-color-on-danger); }
-.g-rx-empty-center { display: grid; justify-items: center; gap: var(--sb-space-3); padding: var(--sb-space-10) var(--sb-spacing-gutter); text-align: center; }
-.g-rx-empty-center p { margin: 0; }
+.g-rx-empty-center { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: var(--sb-space-3); padding: var(--sb-space-10) var(--sb-spacing-gutter); text-align: center; }
+.g-rx-empty-center p { margin: 0; max-inline-size: 100%; }   /* a centred line never gets wider than the frame at large text (D100 (5)) */
 .g-rx-empty-center__title { font: var(--sb-type-mobile-headline); letter-spacing: var(--sb-type-mobile-headline-tracking); }
 
 .g-rx-mini-switch {
@@ -247,7 +247,7 @@ progress.sb-progress__bar.g-rx-progress-blue::-moz-progress-bar { background: va
    rule page. Docked side parts need 722 px of window (D81), so a window specimen keeps that width and its stage
    scrolls sideways on a phone instead of showing the overlay state without sb-window.js. */
 
-.g-rx-winscroll { max-inline-size: 100%; overflow-x: auto; }
+.g-rx-winscroll { position: relative; max-inline-size: 100%; overflow-x: auto; }   /* holds the window's visually hidden words, which would else widen the page */
 .demo-window-frame.g-rx-winwide { min-inline-size: 740px; }
 .g-rx-wincol { grid-column: 2; display: grid; grid-template-rows: minmax(0, 1fr) auto; min-inline-size: 0; }
 .g-rx-wincol > .sb-bottom-block { position: static; }
@@ -276,6 +276,7 @@ progress.sb-progress__bar.g-rx-progress-blue::-moz-progress-bar { background: va
 .g-rx-indent { padding-inline-start: var(--sb-space-6); }
 .g-rx-rating { display: inline-flex; align-items: center; gap: var(--sb-space-1); margin: 0; font-variant-numeric: var(--sb-type-numeric-variant); }
 .g-rx-narrowtext { max-inline-size: 13rem; margin: 0; hyphens: manual; }
+.g-rx-narrowtext + .g-rx-narrowtext { margin-block-start: var(--sb-space-3); }
 .g-rx-iconrail { display: grid; gap: var(--sb-space-1); justify-content: start; }
 
 /* DAT-10: three series with direct labels, a legend and line styles (D83 (10)); the chart is drawn at natural size */

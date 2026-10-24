@@ -214,6 +214,9 @@ def block_head(_attrs: dict) -> str:
         '<script defer src="sebaro/js/sb-tone.js"></script>',
         '<script defer src="sebaro/js/sb-print.js"></script>',
         '<script defer src="assets/guide.js"></script>',
+        # D100 (3), (5), D101 (1), (9), (11): large text (segments to a select, short steps, facts list, series legend,
+        # a hyphen only for an overlong word); deferred after guide.js, so it measures the finished chrome
+        '<script defer src="sebaro/js/sb-fit.js"></script>',
     ])
 
 
@@ -246,7 +249,8 @@ def block_header(attrs: dict) -> str:
         '<header class="sb-site-header g-header">',
         '  <a class="sb-lockup" href="index.html">',
         f'    <span class="sb-sign-tile sb-sign-tile--32" aria-hidden="true">{tile_svg("studio", "32")}</span>',
-        '    <span class="sb-wordmark">sebaro</span><span class="g-header__suffix">Guide</span>',
+        # D100 (5): at 200 % text on 320 px „Guide“ goes under „sebaro“ instead of pushing the page sideways
+        '    <span class="g-header__name"><span class="sb-wordmark">sebaro</span><span class="g-header__suffix">Guide</span></span>',
         '  </a>',
         # NAV-07: DOM order lockup, navigation, language, theme button; the guide is German only, so no language switch
         '  <div class="sb-site-header__links">',
@@ -277,7 +281,8 @@ def block_footer(_attrs: dict) -> str:
         f'System sebaro, Token-Vertrag {esc(str(contracts.get("tokens", "?")))} · '
         f'aus sebaroDesign <code class="sb-code-inline">{esc(commit)}</code> · '
         # D96 (a), WEB-09: the share images end with the host; the page says it too (no text the page lacks)
-        f'online unter {esc(SITE_URL.split("://", 1)[1].rstrip("/"))}</p>',
+        # the host is a name (D101 (10)): it breaks at the line end without a hyphen, here after the slash first
+        f'online unter <span translate="no">{esc(SITE_URL.split("://", 1)[1].rstrip("/")).replace("/", "/<wbr>")}</span></p>',
         '  <ul class="sb-site-footer__links">',
         '    <li><a href="rules.json">rules.json</a></li>',
         '    <li><a href="llms.txt">llms.txt</a></li>',

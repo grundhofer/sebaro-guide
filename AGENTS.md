@@ -28,7 +28,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 
 Rule status: **entschieden** = owner decision, binding. **vorläufig** = an agent's decision, valid until the owner
 changes it. **offen** = proposal only, do not build it as a rule. `D<n>` refers to row n of the decision log in the
-workshop repository sebaroDesign (private; the guide covers D1–D99). A rule id (e.g. `AKT-01`) is stable; cite it
+workshop repository sebaroDesign (private; the guide covers D1–D101). A rule id (e.g. `AKT-01`) is stable; cite it
 in code reviews, commit messages and ADRs.
 
 ## 2 The ten rules most often broken
@@ -190,20 +190,36 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
    new decision: the progress ring's value is HTML text after the SVG (`<span class="sb-progress-ring__text"
    aria-hidden="true">60&nbsp;%</span>`) and the ring grows with it and the text; the value as SVG `<text>` is a
    deprecated alias (STA-06).
-   Two questions wait for the owner's choice (`docs/ausblick.html#entscheidung`; a „vorläufig“ rule is not an entry
-   there), none answered by a rule, so leave each as built and never decide it yourself: novalis' sidebar start width
-   (240 px in sebaro, 256 px in novalis today; decided at adoption, D89), and from `f8bdbee` four steps at 200 % text
-   (two rows, only the current step's word, or as now, words hyphenated over three lines). Only three rules stay
-   vorläufig, by D98: BIL-04 and ZUG-07 until a legal check before the first publication of a product (the marking of
-   generated images, the accessibility statement), DSK-01 until a run in a real Tauri webview with novalis (D89); never
-   present them as decided. Compose (workshop `190cbda`, `8a002e0`, `0861d3f`, parts 1 to 3, no owner decision): every
-   new web component and every chart has a Compose wrapper (all charts, calendar, sticky group head, timeline, about
-   head with the facts line, the small display set, quote, code block, diff, place, board, audio row, video), rendered
-   on the JVM with the workshop's render tool (`extract_compose.py --render`), not on a device; audio row and video are
-   stateless, the app binds its own player (Media3 compiled in the workshop, real playback not checked). Not built in
-   Compose, ask before building one: the sortable table and the intro step (an app composes it from `SbSteps`, text
-   and `SbTextAction`). Nothing of this is tested on real Android or iOS devices, with TalkBack or VoiceOver, in
-   WebKit, Firefox or real Tauri windows. See `docs/ausblick.html#offen`.
+   Settled by the owner with D100 and D101 (2026-10-24, synced from workshop `0f40a10`), the two open questions and
+   the build's follow-up questions: at large text a step indicator (2 to 4 steps) whose word does not fit its column on
+   two lines, hyphen included, keeps every bar and check and shows only the current step's word on its own line under
+   them, start-aligned; „Schritt 2 von 4“ stays (STA-06; each word in `span.sb-progress__word`). novalis takes sebaro's
+   240 px sidebar at adoption (NAV-04, D89). On the web too a segmented control whose word does not fit becomes a select
+   (`js/sb-fit.js`; the radios stay the form value; EIN-04, EIN-05). The three „(optional)“ details are decided, no
+   longer provisional: the page writes the suffix itself, a field that always holds a value carries none, a select is
+   voluntary only with „Keine“ among its options (EIN-01, STA-03). No page scrolls sideways at large text: long words and
+   code wrap, wide specimens and tables scroll in their own frame; only a word that alone does not fit its line gets a
+   hyphen (`span.sb-hyphenate` from `sb-fit.js`), names and code break at the line end without one, code in headings
+   too (ZUG-09, SCH-06, TXT-15). File names are `<code class="sb-file-name">` with `<wbr>` after - . _ / and break only
+   there, a part that alone does not fit its line also inside (D100 (6)); identifiers (`sb-id`, D80) never break. The facts line becomes a list once a cell no longer fits one line
+   (ZEI-13); a chart with several series shows its legend, also for two, once the names cannot stand at their line
+   ends, and the ends keep only their last value (DAT-10). TalkBack reads Compose text completely (`SbWrapText` is a
+   normal `BasicText`, D100 (7)). Compose now has `SbSortableTable` (sorts like `sb-table.js`, scrolls in its own frame,
+   „Sortiert nach <Spalte>, absteigend“; DAT-14) and `SbIntroStep` (as the web's intro step; STR-03); with them every
+   new D91 component and every chart has its Compose wrapper; inline code and keys still have none (the workshop names
+   them as open), and the sheet width from 640 dp is not built in Compose (`docs/app.html`). A deliberate
+   ellipsis (window rows, the window path, document tabs, D67 (2)) carries `data-sb-truncate`. The workshop's
+   `check_demo.py` 1.4.0 checks it on every page: `OVF3` (page width at 200 % text on 320, 360 and 390 px, light and dark)
+   and `OVF4` (text cut by a frame). Provisional agent choices, named as such in the rules: the 4 px hysteresis of the
+   select, `translate="no"` as the mark of a name, 12 px between facts list entries, the last step's word once all are
+   done, the API names of `SbSortableTable`. No question waits for the owner's choice (`docs/ausblick.html#entscheidung`
+   is empty; a „vorläufig“ rule is not an entry there). Only three rules stay vorläufig, by D98: BIL-04 and ZUG-07 until
+   a legal check before the first publication of a product (the marking of generated images, the accessibility
+   statement), DSK-01 until a run in a real Tauri webview with novalis (D89); never present them as decided. Compose is
+   rendered on the JVM with the workshop's render tool (`extract_compose.py --render`) and probed in the semantics tree,
+   not on a device and not with TalkBack itself; audio row and video are stateless, the app binds its own player.
+   Nothing of this is tested on real Android or iOS devices, with TalkBack or VoiceOver, in WebKit, Firefox or real
+   Tauri windows; `OVF4` does not see text inside an input or select. See `docs/ausblick.html#offen`.
 
 ## 4 Where the system files come from
 
@@ -239,10 +255,10 @@ node tools/og.mjs --check --png-bytes  # fresh render equals the committed snipp
 python3 tools/sync_from_design.py --check          # docs/sebaro/ equals a fresh export of the workshop commit
 # with a sebaroDesign checkout, its demo check on every page, run from there (absolute page path):
 #   python3 tools/check_demo.py <abs path>/docs/<page>.html --page web --skip content --no-write
-python3 tools/release.py 2.10.0        # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.9.0 is the last release)
+python3 tools/release.py 2.11.0        # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.10.0 is the last release)
 ```
 
-The workshop's demo check (1.3.0) measures one- and two-character text on screen pixels; on `regeln.html` it reports
+The workshop's demo check (1.4.0) measures one- and two-character text on screen pixels; on `regeln.html` it reports
 the deliberately unreadable cells of the „Nicht so“ specimens inside `g-ex--dont` (DAT-11's heatmap, one pill) as CTR1
 errors, which it cannot tell from real faults. Run `regeln.html` also with `--skip contrast` (a documented group of the
 tool; axe still checks contrast) and say so; every other page runs without it.
@@ -257,6 +273,14 @@ yourself: `grep -nE '[a-zäöüß][*∗:_·][iI]n|[a-zäöüß]In(nen)?([^a-zA-Z
 and look at every hit (code such as `:invalid` and names such as `LinkedIn` hit too; it also finds the singular
 Binnen-I after endings `TXT8` does not know, see the note of TXT-05); the guide's own copy has none, also not in its
 „Nicht so“ examples.
+Since 1.4.0 the same command loads every page once more at 200 % text on 320, 360 and 390 px (in the 390 px run of each
+scheme, Chromium's `Page.setFontSizes`; `--large-text` names other widths) and reports `OVF3` (the page is wider than
+the screen) and `OVF4` (a frame with `overflow: hidden` or `clip` cuts a text; exempt are a scroll container on the
+way and an ellipsis that is both `text-overflow: ellipsis` and marked `data-sb-truncate`). Every guide page passes
+both, in light and dark (the warm-tone runs of `--tones warm` check axe, contrast and colour, not the 200 % pass);
+never weaken them with a local workaround. To see real 200 % text yourself, set
+the font sizes with CDP before `goto` and take viewport screenshots after scrolling (full-page screenshots lose the
+setting). `OVF4` does not see text inside an input or a select.
 
 `check_site.py` groups: PAGE, LINK, NET, CSS, TOKEN (every `var(--sb-*)` exists in `tokens.css` / `sebaro.css`), STYLE,
 SWATCH, LICENSE, TEXT, CHANGE, OG, TERM, RULES; the docstring explains each.
@@ -307,17 +331,30 @@ hand with `tools/sync_from_design.py`.
     its `data-label`. Give each `td` a `data-label` equal to its column header; `guide.js` adds missing table roles.
     The wrapper must take its width from its parent (not a shrink-to-fit grid or flex item). Never on a sortable
     table (DAT-14, D92 (7): it scrolls sideways inside its `sb-table-wrap`) and never in markup meant to be copied.
-  - Inline code in `main` breaks with `overflow-wrap: anywhere`; code blocks keep their lines.
+  - Inline code in `main` breaks with `overflow-wrap: anywhere`, except a file name (`code.sb-file-name`, `<wbr>` after
+    - . _ /, D101 (6)) and an identifier (`sb-id`, D80); code blocks keep their lines.
+  - Large text (D100 (5), ZUG-09): grids and lists in guide CSS take `minmax(0, 1fr)` or `min-inline-size: 0`, so a
+    long word never sets their width; a rule's head puts title and status under the id from 24rem down (a media query's
+    rem follows the reader's text size); a `g-ex__stage` is positioned, and a word in it breaks only where it alone does
+    not fit its line (sebaro's `overflow-wrap: break-word`, never `anywhere`, which would break words that fit);
+    a `sb-changelog` in `main` puts the date above its entry from 22rem down; in a stage a phone frame, a window shot,
+    a video and the stage's direct content keep `min(320px, 12rem)`, so at large text they scroll in the stage instead
+    of squeezing to a column no phone has (provisional, agent; the cost: their right part is read by scrolling the
+    stage). `guide.js`
+    gives a `g-ex__stage` or `g-daten-specimen` that scrolls sideways `tabindex="0"`, `role="region"` and a name, and
+    takes them away when it fits again. Every `sb-row` and every `sb-window` root carries `data-sb-truncate` (D67 (2)), so
+    does a deliberate „Nicht so“ ellipsis; any other `text-overflow: ellipsis` is a fault `OVF4` reports.
 - **Header and footer from `build.py`** (`guide:header`, `guide:footer`, D92 (6)): the header shows `PAGES` except
   web, app, ios and desktop, which stand under one entry „Plattformen“ (`plattformen.html`, an overview page; no menu
   button, spec/03 §6.1). On a platform page that entry carries `aria-current="true"` with the place line from
   `guide.css`. The footer lists every page (`g-footer__pages`), `llms.txt` too. Measured: the navigation needs two
   rows at 390 px, three at 320 px, one at 1440 px; no page scrolls sideways.
 - **Every page gets from `build.py`** (`guide:og`, `guide:head`, `guide:footer`): the canonical and og tags of its share
-  image (above); `sebaro/js/sb-tone.js` and `sebaro/js/sb-print.js`
-  in the head, and the footer section „Darstellung“ with the „Farbton“ radios (`name="sb-tone"`, inside a `<form>`
+  image (above); `sebaro/js/sb-tone.js`, `sebaro/js/sb-print.js` and, after `assets/guide.js`, `sebaro/js/sb-fit.js`
+  (deferred, so it measures the finished page) in the head, and the footer section „Darstellung“ with the „Farbton“ radios (`name="sb-tone"`, inside a `<form>`
   so they never join the radio group of a rule example) and a `data-sb-tone-status` element. A page never loads
-  `sb-tone.js` or `sb-print.js` a second time. Guide chrome must hold in `data-sb-tone="warm"` too (token-only CSS does).
+  `sb-tone.js`, `sb-print.js` or `sb-fit.js` a second time. The footer's host is a name (`translate="no"`, `<wbr>` after
+  the slash), so it breaks at the line end without a hyphen. Guide chrome must hold in `data-sb-tone="warm"` too (token-only CSS does).
 - **Marker blocks nest:** `build.py` pairs `<!-- guide:x -->` / `<!-- /guide:x -->` with a stack and fills markers at
   any depth (e.g. `guide:tile` in a rule fragment). Use a `guide:tile` marker instead of pasting a tile SVG; an
   unclosed or crossed marker stops the build.
@@ -346,6 +383,9 @@ The guide shows sebaro as built and checked in sebaroDesign; Chromium screenshot
 devices, Windows rendering, WebKit/Tauri webviews or screen readers. All example data on the pages is invented.
 The owner answered the round-6 sketch (63 questions, private, never linked from here) with D91 and the open readings
 after it with D92 to D97, confirmed 70 of the 73 vorläufig rules with D98 and answered the four workshop questions on large
-text, inputs and charts on the phone and required fields with D99; what is still open, and what is built but untested (real iOS devices, real Tauri windows),
-is collected on `docs/ausblick.html`. At 200 % text on 360 px the guide's own pages still scroll sideways (the footer
-and wide specimens; `docs/ausblick.html#p-g-grosse-schrift`).
+text, inputs and charts on the phone and required fields with D99, and the steps, the novalis sidebar, page width at large text, the Compose sortable table and intro step with D100 and D101; what is still open, and what is built but untested (real iOS devices, real Tauri windows),
+is collected on `docs/ausblick.html`; D100 and D101 answered the last two open questions, so none waits now. Since 2.10.0
+no guide page scrolls sideways at 200 % text on 320, 360 and 390 px and no frame cuts a text (`OVF3`, `OVF4`;
+`docs/ausblick.html#p-g-grosse-schrift`); some sebaro components still squeeze their text into very narrow columns at
+that size without cutting it (list rows with a trailing status, the board in a window, the primary action's 3rem sides;
+a workshop request, `docs/ausblick.html#p-grosse-schrift-bauteile`).

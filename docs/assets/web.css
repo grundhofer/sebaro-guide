@@ -57,7 +57,7 @@
 .g-web-h-title { margin: 0 0 var(--sb-space-3); font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
 .g-web-meta { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .g-web-lead { margin: 0; max-inline-size: 42em; color: var(--sb-color-text-muted); }
-.g-web-stack { display: grid; gap: var(--sb-space-4); justify-items: start; }
+.g-web-stack { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-4); justify-items: start; }
 .g-web-stack > * { margin: 0; max-inline-size: 100%; }
 .g-web-stack > .sb-field, .g-web-stack > .sb-notes, .g-web-stack > .sb-table-wrap { justify-self: stretch; }
 .g-web-frame .sb-prose > h4 { margin-block-start: var(--sb-space-10); font: var(--sb-type-headline); letter-spacing: var(--sb-type-headline-tracking); }
@@ -79,7 +79,7 @@
   .g-web-split { grid-template-columns: 220px minmax(0, 1fr); column-gap: var(--sb-space-12); }
   .g-web-split > .sb-toc { position: sticky; inset-block-start: var(--sb-space-4); }
 }
-.g-web-head { display: grid; gap: var(--sb-space-3); margin-block-end: var(--sb-space-8); }
+.g-web-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-3); margin-block-end: var(--sb-space-8); }
 .g-web-head > * { margin: 0; }
 
 /* product head on the app page: tile 64 and the name */
@@ -123,10 +123,11 @@
 .g-web-og__title { font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
 
 /* ------------------------------------------------------------------ cookie banner (only as „Nicht so“) */
-.g-web-cookie { display: grid; gap: var(--sb-space-3); padding: var(--sb-space-4); border-block-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color); }
+.g-web-cookie { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-3); padding: var(--sb-space-4); border-block-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color); }
 .g-web-cookie p { margin: 0; }
 .g-web-cookie__actions { display: flex; flex-wrap: wrap; gap: var(--sb-space-3); }
-.g-web-cookie__page { display: grid; gap: var(--sb-space-2); padding: var(--sb-space-4) var(--sb-space-4) var(--sb-space-8); }
+.g-web-cookie__actions > * { max-inline-size: 100%; }   /* at 200 % text the buttons wrap their words inside the frame (D100 (5)) */
+.g-web-cookie__page { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-2); padding: var(--sb-space-4) var(--sb-space-4) var(--sb-space-8); }
 .g-web-cookie__page p { margin: 0; }
 
 /* ------------------------------------------------------------------ the start replay frame */

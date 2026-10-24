@@ -2,7 +2,7 @@
   "$comment": "written by tools/sync_from_design.py; do not edit",
   "system": "sebaro",
   "product": "studio",
-  "sebaroDesignCommit": "f8bdbeed72824ecb15599a0ac8cae42a4f5c3ede",
+  "sebaroDesignCommit": "0f40a106398b1b7e73d18f9b607f639223c0a1af",
   "sebaroDesignUncommitted": false,
   "exportTool": "export_system.py 1.5.0",
   "contracts": {
@@ -16,8 +16,8 @@
   "excludedProducts": 1,
   "droppedFiles": 4,
   "vendorSpecimens": {
-    "demo.css": "3645e6835109399b7a52d630fbc309a68b9803610ceec2fbb03f09813cb91a33",
-    "pages.css": "285e37ae76a963ac6668296a669f807aef04bbc0cef2215df7cca76c52271b6e",
+    "demo.css": "9573c1382a57321d04d7f1e30c838344e4e97901d3604b543f768847f18fdd69",
+    "pages.css": "295e02b6dd2c01606a3fe48a18958af8046ad8e3800eb6194b7933ceace4ca2b",
     "sb-colour-count.js": "a43c89cd5f5bc7365283791e1513268d3e32f0dd5526ef31a6c4eef03c4ca59e"
   }
 }

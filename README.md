@@ -14,7 +14,7 @@ Verhalten, Funktion und die Gedanken dahinter, jede Regel mit Beispiel.
 | [Daten](https://grundhofer.github.io/sebaro-guide/daten.html) | jede Datenart einmal dargestellt |
 | [Plattformen](https://grundhofer.github.io/sebaro-guide/plattformen.html) | die vier Plattformseiten auf einen Blick und was je Plattform anders ist; im Kopf stehen sie unter „Plattformen“ (D92) |
 | [Web](https://grundhofer.github.io/sebaro-guide/web.html) · [App](https://grundhofer.github.io/sebaro-guide/app.html) · [iOS](https://grundhofer.github.io/sebaro-guide/ios.html) · [Desktop](https://grundhofer.github.io/sebaro-guide/desktop.html) | Beispielseiten mit allen typischen Fällen je Plattform |
-| [Gedanken](https://grundhofer.github.io/sebaro-guide/gedanken.html) | Haltung, Geschichte in sechs Runden, die Entscheidungen D72–D99, Abwägungen |
+| [Gedanken](https://grundhofer.github.io/sebaro-guide/gedanken.html) | Haltung, Geschichte in sechs Runden, die Entscheidungen D72–D101, Abwägungen |
 | [Ausblick](https://grundhofer.github.io/sebaro-guide/ausblick.html) | was auf eine Wahl des Inhabers wartet, was offen ist, später kommt oder erledigt ist |
 
 ## Für Agenten
@@ -26,7 +26,7 @@ Produkts.
 
 ## Woher die Werte kommen
 
-Die Quellen von sebaro (Paletten, Verträge, Generatoren, Prüfungen und das Entscheidungsprotokoll D1–D99) liegen in
+Die Quellen von sebaro (Paletten, Verträge, Generatoren, Prüfungen und das Entscheidungsprotokoll D1–D101) liegen in
 der Werkstatt **sebaroDesign**, einem privaten Repository. Dieser Guide schreibt keine Farbe, Schrift und kein Icon ab:
 `docs/sebaro/` ist ein geprüfter Web-Export (`tools/sync_from_design.py`), jede Datei mit Prüfsumme. Regeln ändern sich
 nur in `rules/rules.json`; `tools/build.py` erzeugt daraus die Regelseite, `guide/RULES.md` und `docs/llms.txt`.
@@ -74,7 +74,7 @@ Werte; Korrektur für Wortlaut und Beispiele.
 
 ## Stand
 
-Alle Beispieldaten sind erfunden. Geprüft ist im Browser (Chromium) in Hell und Dunkel bei 390 und 1440 px; echte
+Alle Beispieldaten sind erfunden. Geprüft ist im Browser (Chromium) in Hell und Dunkel bei 390 und 1440 px und bei 200 % Schrift auf 320, 360 und 390 px; echte
 Geräte, Windows, WebKit und Screenreader kommen später (D79); die CI prüft vorerst nur in Chromium (D96). Was auf eine Wahl des Inhabers wartet, steht im
 [Ausblick](https://grundhofer.github.io/sebaro-guide/ausblick.html).
 

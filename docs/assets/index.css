@@ -2,6 +2,9 @@
 .g-index-core { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; max-inline-size: 48em; }
 .g-index-core > li { display: grid; grid-template-columns: var(--sb-space-16) minmax(0, 1fr); column-gap: var(--sb-space-4); align-items: center; padding-block: var(--sb-space-4); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
 .g-index-core > li:first-child { border-block-start: 0; }
+/* D100 (5): at large text the mark column would leave the sentence a column of a few letters; from 24rem down (384 px
+ * at 100 %, 768 px at 200 %, a media query's rem follows the reader's text size) the mark stands above the sentence */
+@media (max-width: 24rem) { .g-index-core > li { grid-template-columns: minmax(0, 1fr); row-gap: var(--sb-space-2); } }
 .g-index-core p { margin: 0; }
 .g-index-core a { margin-inline-start: var(--sb-space-1); font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); }
 /* reference swatches (g-swatch, FAR-13) with the visible word "Farbfeld" under them */
