@@ -335,19 +335,20 @@ body.sb-page { container: sb-page sb-content / inline-size; }
 
 /* ===================================================================== 3 header and footer (spec/03 §6) */
 
+/* below 640 px a wrapping row (D99 (1)): lockup and „Hell oder Dunkel“ side by side while both fit, else the button on
+   its own row at the start; then the words and DE / EN. Large text never pushes the header past the page */
 .sb-site-header {
-  display: grid; align-items: center; column-gap: var(--sb-space-2);
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  grid-template-areas: "lockup . theme" "links links links";
+  display: flex; flex-wrap: wrap; align-items: center; column-gap: var(--sb-space-2);
   min-block-size: var(--sb-space-16); padding: var(--sb-space-2) var(--sb-spacing-gutter); box-sizing: border-box;
   border-block-end: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color); background: var(--sb-color-bg);
 }
-.sb-lockup { grid-area: lockup; display: inline-flex; align-items: center; gap: var(--sb-space-2); min-block-size: var(--sb-size-target-touch); color: var(--sb-color-text); text-decoration: none; }
+.sb-lockup { grid-area: lockup; margin-inline-end: auto; display: inline-flex; align-items: center; gap: var(--sb-space-2); min-block-size: var(--sb-size-target-touch); color: var(--sb-color-text); text-decoration: none; }
 .sb-lockup:hover .sb-wordmark, .sb-lockup.is-hover .sb-wordmark { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
 .sb-wordmark { font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
 /* below 640 px row 2 holds the four words and DE / EN: 4 px between the groups and no gap inside the language
    switch (each link keeps its 48 px target) keep it at 348 (light) / 352 (dark) of 358 px at 390 px (D83 (4), spec/03 §6.5) */
-.sb-site-header__links { grid-area: links; display: flex; flex-wrap: wrap; align-items: center; column-gap: var(--sb-space-1); }
+.sb-site-header > .sb-theme-button { order: 1; flex: 0 1 auto; }   /* the flex row's order; the grid of 640 px and more places by area */
+.sb-site-header__links { grid-area: links; order: 2; flex: 1 1 100%; display: flex; flex-wrap: wrap; align-items: center; column-gap: var(--sb-space-1); }
 .sb-site-nav { display: flex; flex-wrap: wrap; align-items: center; column-gap: 0; }
 .sb-site-nav a, .sb-language-switch a {
   display: inline-flex; align-items: center; justify-content: center;
@@ -363,7 +364,7 @@ body.sb-page { container: sb-page sb-content / inline-size; }
   grid-area: theme; display: inline-flex; align-items: center; justify-content: center; flex: none;
   min-block-size: var(--sb-size-target-touch); padding: 0 var(--sb-space-4); box-sizing: border-box;
   border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-control);
-  background: transparent; color: var(--sb-color-text); cursor: pointer; white-space: nowrap;
+  background: transparent; color: var(--sb-color-text); cursor: pointer; text-align: center;   /* wraps between words only when alone in its row is too narrow (D99 (1)) */
   font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking);
   transition: background-color var(--sb-motion-duration-short) var(--sb-motion-easing-standard);
 }
@@ -373,7 +374,7 @@ body.sb-page { container: sb-page sb-content / inline-size; }
    rows (D83 (4) measured at 390 px) */
 @supports not (container-type: inline-size) {
   @media (min-width: 640px) {
-    .sb-site-header { grid-template-columns: auto minmax(0, 1fr) auto auto; grid-template-areas: "lockup . lang theme" "nav nav nav nav"; }
+    .sb-site-header { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; grid-template-areas: "lockup . lang theme" "nav nav nav nav"; }
     .sb-site-header__links { display: contents; }
     .sb-site-nav { grid-area: nav; column-gap: var(--sb-space-1); }
     .sb-language-switch { grid-area: lang; gap: var(--sb-space-1); }
@@ -385,7 +386,7 @@ body.sb-page { container: sb-page sb-content / inline-size; }
   }
 }
 @container sb-page (width >= 640px) {
-  .sb-site-header { grid-template-columns: auto minmax(0, 1fr) auto auto; grid-template-areas: "lockup . lang theme" "nav nav nav nav"; }
+  .sb-site-header { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; grid-template-areas: "lockup . lang theme" "nav nav nav nav"; }
   .sb-site-header__links { display: contents; }
   .sb-site-nav { grid-area: nav; column-gap: var(--sb-space-1); }
   .sb-language-switch { grid-area: lang; gap: var(--sb-space-1); }
@@ -561,6 +562,9 @@ body.sb-page { container: sb-page sb-content / inline-size; }
 /* field: a grey area with a baseline, no frame (sketch A); error = 2 px danger baseline + glyph + message in text */
 .sb-field { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-1); min-inline-size: 0; }
 .sb-field__label { font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); color: var(--sb-color-text); }
+/* a voluntary field (D99 (3)): „(optional)“ after the label's words, in the label (or legend) on the same line, grey and
+   not bold; required is the norm and never marked, never an asterisk. The author writes it into the markup */
+.sb-optional { font-weight: var(--sb-type-body-weight); color: var(--sb-color-text-muted); }
 .sb-field__control {
   display: flex; align-items: center; gap: var(--sb-space-2);
   min-block-size: var(--sb-size-control-md); padding: 0 var(--sb-space-3); box-sizing: border-box;
@@ -676,9 +680,13 @@ body.sb-page { container: sb-page sb-content / inline-size; }
   flex: 1; display: flex; align-items: center; justify-content: center; gap: var(--sb-space-1);
   min-block-size: var(--sb-size-target-touch); padding: 0 var(--sb-space-1); box-sizing: border-box; pointer-events: none;
   border-block-end: var(--sb-border-width-strong) solid transparent; border-block-start: var(--sb-border-width-strong) solid transparent;
-  font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); white-space: nowrap; color: var(--sb-color-text);
+  font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); color: var(--sb-color-text);
+  /* large text (D99 (1)): the words wrap between words and the face grows; a word that alone does not fit is
+     hyphenated (by the page's lang), else broken, never cut by the frame. `min-inline-size: 0` lets the face shrink
+     below its widest word, so `break-word` (not `anywhere`, which breaks without a hyphen) can act */
+  min-inline-size: 0; text-align: center; hyphens: auto; overflow-wrap: break-word;
 }
-.sb-segmented__face .sb-icon { display: none; }
+.sb-segmented__face .sb-icon { display: none; flex: none; }
 .sb-segmented__option:hover .sb-segmented__face, .sb-segmented__option.is-hover .sb-segmented__face { background: var(--sb-color-hover-fill); }
 .sb-segmented__option > input:checked + .sb-segmented__face { border-block-end-color: var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
 .sb-segmented__option > input:checked + .sb-segmented__face .sb-icon { display: block; }
@@ -1331,19 +1339,29 @@ kbd, .sb-kbd {
 /* steps: segments in a row; done = ink (data-sb-state="done"; data-state="done" is a deprecated alias kept for one
    version, D85), current = aria-current="step": 3 px accent edge (the current place) + weight, next = grey */
 .sb-progress__steps { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: var(--sb-space-1); margin: 0; padding: 0; list-style: none; }
+/* large text (D99 (1)): the word goes under the check when it does not fit beside it; a word wider than its step is
+   hyphenated (by the page's lang), else broken, never drawn over the next step */
 .sb-progress__step {
-  display: flex; align-items: center; gap: var(--sb-space-1); padding-block-start: var(--sb-space-2);
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1); padding-block-start: var(--sb-space-2);
+  hyphens: auto; overflow-wrap: anywhere;
   border-block-start: var(--sb-border-width-strong) solid var(--sb-color-border);
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
 }
 .sb-progress__step:is([data-sb-state="done"], [data-state="done"]) { border-block-start-color: var(--sb-color-text); color: var(--sb-color-text); }
 .sb-progress__step[aria-current="step"] { border-block-start-color: var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
-/* circular, determinate: SVG ring (pathLength 100) with the value in the middle */
-.sb-progress-ring { position: relative; display: inline-grid; place-items: center; inline-size: 48px; block-size: 48px; }
-.sb-progress-ring svg { display: block; inline-size: 100%; block-size: 100%; overflow: visible; }
+/* circular, determinate: SVG ring (pathLength 100) with the value as HTML text in the middle (as the goal ring). The
+   box is 3rem (48 px at 100 %) and grows with the text size, and further for a wide value: the text's sides keep
+   0.5rem + 0.05em from the box, so the corners of the figures stay about 2 px (× text size) clear of the ring's inner
+   edge („100 %“ 53 px at 100 %, as SbProgressRing, spec/08 §14.20). The SVG scales with the box, its stroke with it */
+.sb-progress-ring {
+  position: relative; display: inline-grid; place-items: center; box-sizing: border-box;
+  min-inline-size: var(--sb-space-12); aspect-ratio: 1; padding-inline: calc(var(--sb-space-2) + 0.05em);
+  font: var(--sb-type-mobile-label-small); letter-spacing: var(--sb-type-mobile-label-small-tracking);
+}
+.sb-progress-ring svg { position: absolute; inset: 0; display: block; inline-size: 100%; block-size: 100%; overflow: visible; }
 .sb-progress-ring__track { fill: none; stroke: var(--sb-color-border); stroke-width: 4; }
 .sb-progress-ring__value { fill: none; stroke: var(--sb-color-text); stroke-width: 4; }   /* butt caps, like the linear bar (D85) */
-.sb-progress-ring__text { fill: var(--sb-color-text); font: var(--sb-type-mobile-label-small); letter-spacing: var(--sb-type-mobile-label-small-tracking); font-variant-numeric: var(--sb-type-numeric-variant); }
+.sb-progress-ring__text { position: relative; color: var(--sb-color-text); fill: currentColor; line-height: 1; white-space: nowrap; font-variant-numeric: var(--sb-type-numeric-variant); }
 .sb-loading { display: inline-flex; align-items: center; gap: var(--sb-space-2); margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .sb-loading .sb-icon { color: var(--sb-color-text); }
 /* skeleton: static grey bars for remote content over 1 s, always with the words; no shimmer (spec/01 §7) */
@@ -1401,7 +1419,11 @@ kbd, .sb-kbd {
 .sb-calendar__day:focus-visible { outline: var(--sb-focus-ring); outline-offset: calc(-1 * var(--sb-focus-width)); }
 .sb-calendar__date {
   position: relative; display: inline-grid; place-items: center; box-sizing: border-box;
-  inline-size: calc(var(--sb-calendar-cell) - var(--sb-space-2)); block-size: calc(var(--sb-calendar-cell) - var(--sb-space-2));
+  /* 8 px smaller than its cell; with larger text it grows before the number reaches the dot or the frame: sideways
+     to two figures + 4 px (never past its cell), downwards to one line + 12 px (× text size). At 100 % both minimums
+     are at most the 40 / 32 px of the cell rule, so nothing moves (as SbCalendar, spec/08 §14.14; provisional, agent) */
+  inline-size: min(100%, max(calc(var(--sb-calendar-cell) - var(--sb-space-2)), calc(2ch + var(--sb-space-1) + 2 * var(--sb-border-width-control))));
+  min-block-size: max(calc(var(--sb-calendar-cell) - var(--sb-space-2)), calc(1lh + var(--sb-space-1) + var(--sb-space-2)));
   padding-block-end: var(--sb-space-1); border: var(--sb-border-width-control) solid transparent; border-radius: var(--sb-radius-control);
   font-weight: var(--sb-type-body-weight); color: var(--sb-color-text);
 }
@@ -1416,7 +1438,7 @@ kbd, .sb-kbd {
   content: ""; position: absolute; inset-block-end: var(--sb-space-1); inset-inline-start: calc(50% - 3px);
   inline-size: 6px; block-size: 6px; border-radius: var(--sb-radius-pill); background: var(--sb-color-text-muted);
 }
-[data-sb-density="window"] .sb-calendar__month { --sb-calendar-cell: calc(var(--sb-size-target-touch) - var(--sb-space-2)); }
+[data-sb-density="window"] .sb-calendar__month { --sb-calendar-cell: max(calc(var(--sb-size-target-touch) - var(--sb-space-2)), 40px); }   /* 40 px also with larger text */
 @media (pointer: coarse) { [data-sb-density="window"] .sb-calendar__month { --sb-calendar-cell: var(--sb-size-target-touch); } }
 .sb-calendar__agenda { min-inline-size: 0; }
 .sb-calendar__agenda-title { margin: 0 0 var(--sb-space-1); font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
@@ -1425,7 +1447,7 @@ kbd, .sb-kbd {
 .sb-calendar__entry {
   display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); column-gap: var(--sb-space-2); align-items: baseline;
   min-block-size: var(--sb-size-target-touch); padding-block: var(--sb-space-3); box-sizing: border-box;
-  border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border);
+  border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); overflow-wrap: anywhere;   /* a long word wraps at 200 %, never cut */
 }
 .sb-calendar__entry:first-child { border-block-start: 0; }
 .sb-calendar__entry > time {
@@ -1457,7 +1479,7 @@ kbd, .sb-kbd {
    steps and the bottom zone; spot from the icon set, title, one or two sentences, a quiet way out („Einführung
    überspringen“, a text action, before the primary action in the DOM, D83 (5)); the bottom zone says „Weiter: <Ziel>“
    (D83 (6)) */
-.sb-view__content:has(> .sb-intro:only-child) { display: flex; flex-direction: column; justify-content: center; }
+.sb-view__content:has(> .sb-intro:only-child) { display: flex; flex-direction: column; justify-content: safe center; }   /* safe: a tall intro at large text starts at the top instead of running up over the steps (D99 (1)) */
 .sb-intro { display: grid; justify-items: start; gap: var(--sb-space-2); padding: var(--sb-space-8) var(--sb-spacing-gutter); }
 .sb-intro > .sb-icon--spot { margin-block-end: var(--sb-space-2); color: var(--sb-color-text-muted); --sb-icon-tone: var(--sb-color-border); }
 .sb-intro__title { margin: 0; font: var(--sb-type-mobile-title); letter-spacing: var(--sb-type-mobile-title-tracking); }
@@ -1863,7 +1885,7 @@ a.sb-pagination__page:hover, a.sb-pagination__page.is-hover { text-decoration: u
   font-weight: var(--sb-type-mobile-title-weight);
 }
 .sb-bottom-nav__item:focus-visible { outline-offset: calc(-1 * var(--sb-focus-width)); }
-.sb-bottom-nav__label { overflow-wrap: anywhere; text-align: center; }
+.sb-bottom-nav__label { hyphens: auto; overflow-wrap: anywhere; text-align: center; }   /* D99 (1): „Einstel-lungen“ */
 
 /* side navigation (tablet >= 840, desktop windows >= 1024): rows of 48, icon + word, 3 px start edge on the current one */
 .sb-side-nav { inline-size: 240px; max-inline-size: 100%; box-sizing: border-box; border-inline-end: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color); }
@@ -1957,15 +1979,17 @@ html.sb-starting > body > .sb-start, .sb-starting > .sb-start {
    („Rückgängig“); never for errors, never instead of the delete dialog. Lifetime (6 s, paused under the pointer or
    while focus is inside) and entry: sbToast.show() in sb-controls.js; a toast in the markup without it stays put */
 .sb-toast {
-  display: flex; align-items: center; justify-content: space-between; gap: var(--sb-space-3);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sb-space-3);
   max-inline-size: 560px; min-block-size: var(--sb-size-target-touch); padding: var(--sb-space-1) var(--sb-space-1) var(--sb-space-1) var(--sb-space-4); box-sizing: border-box;
   border: var(--sb-elevation-overlay-border-width) solid var(--sb-elevation-overlay-border-color); border-radius: var(--sb-radius-container);
   background: var(--sb-elevation-overlay-surface); color: var(--sb-color-text); box-shadow: var(--sb-elevation-overlay-shadow);
   font-variant-numeric: var(--sb-type-numeric-variant);
 }
-.sb-toast p { margin: 0; flex: 1 1 auto; min-inline-size: 0; }
+/* large text (D99 (1)): the action stays beside the message while the message's widest word fits there, else it goes
+   under the message at the end and the toast grows; the message wraps between words */
+.sb-toast p { margin: 0; flex: 1 1 0; min-inline-size: min-content; }
 .sb-toast[hidden] { display: none; }
-.sb-toast__action { flex: none; }
+.sb-toast__action { flex: none; margin-inline-start: auto; }
 
 /* tooltip: pointer only, never the only place of information */
 .sb-tooltip {

@@ -1,7 +1,7 @@
 # Screen checklist
 
 Walk this for every screen in **light and dark**, at **390 px and 1440 px** (desktop apps: smallest and a wide window).
-Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D98.
+Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D99.
 
 ## Colour and hierarchy
 - [ ] Cobalt only for current place, links and focus; lime only for the one primary action (FAR, AKT)
@@ -29,6 +29,8 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
 - [ ] Required fields empty: the primary action stays enabled, its press sends nothing, says „<Beschriftung> fehlt.“
       at each and moves focus to the first (`sb-form.js` on websites); disabled only while the action cannot work at
       all (STA-03, D98)
+- [ ] Required fields carry no mark; voluntary fields end their label with a grey „(optional)“ (`sb-optional`), never
+      an asterisk or a „Pflichtfeld“ legend (EIN-01, D99)
 - [ ] Toast only for a reversible result outside the primary action, fixed duration, never for errors (EBE)
 - [ ] Motion only in answer to an action: new content enters from below (8 px, 200 ms); only a fade with reduced
       motion / „Bewegung immer reduzieren“ (BEW)
@@ -81,6 +83,8 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
 - [ ] Touch targets ≥ 48 px (desktop rows 32 px with pointer) (ZUG, RAU)
 - [ ] Keyboard: open/close, Escape, focus enters and returns; screen-reader names on icon-only controls (ZUG)
 - [ ] No clipping, no horizontal scrolling at 390 px
+- [ ] Large text (200 % on a 360 px phone): rooms grow, words wrap at spaces, only a single too-long word is
+      hyphenated, nothing is cut; Android dialogs dim with the palette scrim (ZUG-09, EBE-03, D99)
 
 ## Content and evidence
 - [ ] No claim without proof; outflows stay visible; unknown = „nicht belegt“ (BEL)

@@ -10,6 +10,10 @@
 //   [data-sb-echo="<field name>"] slots (filled with the sent value as text; a select gives its option's words) and
 //   [data-sb-echo-time] (the time of sending in the form's language), the next step as a link; a link with
 //   [data-sb-form-again] shows the empty form again.
+//   Required is the norm (D99 (3)): every field that must be filled has `required`; a field without it is voluntary
+//   and its label (a radio group: its legend) ends in <span class="sb-optional">(optional)</span>, written by the
+//   author in the page's language, so it shows without this script too. The script neither adds nor reads the suffix
+//   and never checks a field without `required`.
 // Flow (D48, D83 (2), D78)
 //   submit with an empty required field (D98 V2, STA-03): nothing is sent and the button stays as it is; each empty
 //        required field gets aria-invalid and „<label> fehlt.“ in a p.sb-field__error right under its control (its id

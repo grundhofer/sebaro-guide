@@ -1,11 +1,11 @@
 {
  "$schema": "./rules.schema.json",
- "version": "2.8.0",
+ "version": "2.9.0",
  "date": "2026-10-24",
  "source": {
   "repo": "sebaroDesign",
   "system": "sebaro",
-  "decisions": "D1-D98"
+  "decisions": "D1-D99"
  },
  "areas": [
   {
@@ -641,8 +641,8 @@
    "status": "entschieden",
    "check": "Jede Kategorie zeigt ihr Wort; check_palette.py (Kategorie C1–C5) mit Exit 0; Graustufen-Screenshot: Kategorie am Wort, Markierung an der Kante erkennbar; der aktuelle Treffer hat die 3-px-Kante und die Zahl in Worten.",
    "example_hint": "Zeilen mit Kategoriepunkt und Wort, ein Satz mit Markierung und aktuellem Treffer; falsch: farbige Punkte ohne Wort und ein lindgrün hinterlegter Treffer.",
-   "note": "Kategorie und Markierung gibt es als Bauteil bisher nur im Web; Compose und SwiftUI lesen dieselben Tokens (SebaroTheme.categories, SebaroTheme.mark), eigene Bausteine fehlen noch.",
-   "changed": "2026-10-21"
+   "note": "Kategorie und Markierung gibt es als Bauteil im Web und in Compose (SbCategory, SbMarkedText; auf dem Rechner gezeichnet, nicht auf einem Gerät). SwiftUI liest dieselben Tokens, eigene Bausteine fehlen dort noch.",
+   "changed": "2026-10-24"
   },
   {
    "id": "FAR-14",
@@ -846,24 +846,25 @@
    "id": "SCH-06",
    "area": "schrift",
    "title": "Überschriften umbrechen, nie abschneiden",
-   "rule": "Lass Überschriften umbrechen und trenn sie von Hand (&shy;), nie automatisch und nie mit Auslassungspunkten. Bezeichner und Code in Überschriften brechen nie; unter 640 px nutzt die Seitenüberschrift die mobile Display-Rolle 32/40.",
-   "rule_en": "Headings wrap with manual hyphenation (&shy;), never auto-hyphenate or ellipsis; identifiers never break; below 640 px h1 uses mobile display 32/40.",
+   "rule": "Lass Überschriften umbrechen und trenn sie von Hand (&shy;), nie automatisch und nie mit Auslassungspunkten. Einzige Ausnahme ist der Titel der oberen Leiste in Compose: Ein einzelnes Wort, das bei großer Schrift allein nicht in die Zeile passt, trennt er selbst (ZUG-09, D99 (1)). Bezeichner und Code in Überschriften brechen nie; unter 640 px nutzt die Seitenüberschrift die mobile Display-Rolle 32/40.",
+   "rule_en": "Headings wrap with manual hyphenation (&shy;), never auto-hyphenate or ellipsis (only exception: the Compose top-bar title hyphenates a single word that alone does not fit at large text, ZUG-09, D99 (1)); identifiers never break; below 640 px h1 uses mobile display 32/40.",
    "why": "Abgeschnittene Überschriften verstecken Inhalt; automatische Trennung zerreißt Produktnamen; 40 px würde bei 390 px dreizeilig.",
    "do": "h1, h2, h3 { hyphens: manual; }",
-   "dont": "text-overflow: ellipsis an Titeln; hyphens: auto an Überschriften.",
+   "dont": "text-overflow: ellipsis an Titeln; hyphens: auto an Überschriften im Web.",
    "numbers": "Grenze 639.98px; mobile display 32/40",
    "decisions": [
     "D28",
-    "D98"
+    "D98",
+    "D99"
    ],
-   "source": "DECISIONS.md D98; css/sebaro.css Z. 37-38, 79-81; systems/sebaro/spec/02-components.md §10; spec/01-foundations.md §2.5 Regel 1",
+   "source": "DECISIONS.md D98, D99 (1); css/sebaro.css Z. 37-38, 79-81; systems/sebaro/spec/02-components.md §10; spec/01-foundations.md §2.5 Regel 1",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Keine ellipsis an h1–h6; Review bei 390 px.",
    "example_hint": "Langer deutscher Titel mit &shy; auf 320 px Breite getrennt; falsch: „Gewohnheitsstatisti…“.",
-   "note": "spec/09 §3 nannte einmal hyphens: auto; die gebaute CSS (manual) gilt. Fließtext trennt ebenfalls nicht automatisch (TXT-15, D82).",
+   "note": "spec/09 §3 nannte einmal hyphens: auto; die gebaute CSS (manual) gilt. Fließtext trennt ebenfalls nicht automatisch (TXT-15, D82). Seit D99 (1), das den Titel ausdrücklich nennt, trennt in Compose der Titel der oberen Leiste ein einzelnes Wort, das bei großer Schrift allein nicht in die Zeile passt, automatisch (ZUG-09); Überschriften im Web trennen weiter nur von Hand.",
    "changed": "2026-10-24"
   },
   {
@@ -1249,25 +1250,26 @@
    "id": "EBE-03",
    "area": "ebenen",
    "title": "Dialog: nativ, modal, über Scrim",
-   "rule": "Öffne Bestätigungen als natives <dialog> mit showModal() über dem Scrim: bg, 2-px-Tintenrahmen, Radius 16, Innenabstand 24, höchstens 560 px. Titel ist die Frage, Text die Folge, Aktionen rechtsbündig. Escape, Zurück und Tippen auf den Scrim brechen ab; im Dialog gibt es nie eine Hauptaktion. Den Scrim gibt es nur hinter modalen Dialogen und Sheets.",
-   "rule_en": "Confirm dialogs: native <dialog> showModal over the scrim, bg + 2 px ink, radius 16, padding 24, max 560 px; question title; actions end-aligned; Escape/back/scrim cancel; never a primary action; scrim only behind modal dialogs and sheets.",
-   "why": "D39: Löschen bleibt mit Bestätigungsdialog; D46: Linien statt Schatten. Der 45-%-Scrim färbte das Lindgrün oliv, darum hell 32 % (Fix-Stufe 2026-10-16).",
-   "do": "<dialog class='sb-dialog' aria-labelledby aria-describedby><form method='dialog'>…; Compose SbConfirmDialog.",
-   "dont": "AlertDialog mit Tonal-Elevation; Schatten; Scrim über Bildern, Hero oder Ladezuständen.",
+   "rule": "Öffne Bestätigungen als natives <dialog> mit showModal() über dem Scrim: bg, 2-px-Tintenrahmen, Radius 16, Innenabstand 24, höchstens 560 px. Titel ist die Frage, Text die Folge, Aktionen rechtsbündig. Escape, Zurück und Tippen auf den Scrim brechen ab; im Dialog gibt es nie eine Hauptaktion. Den Scrim gibt es nur hinter modalen Dialogen und Sheets, auf jeder Plattform mit dem Wert der Palette, auch auf Android, nie mit dem Abdunkeln des Systems.",
+   "rule_en": "Confirm dialogs: native <dialog> showModal over the scrim, bg + 2 px ink, radius 16, padding 24, max 560 px; question title; actions end-aligned; Escape/back/scrim cancel; never a primary action; scrim only behind modal dialogs and sheets, with the palette value on every platform, Android included, never the system dim.",
+   "why": "D39: Löschen bleibt mit Bestätigungsdialog; D46: Linien statt Schatten. Der 45-%-Scrim färbte das Lindgrün oliv, darum hell 32 % (Fix-Stufe 2026-10-16). D99 (4), Antwort „Palettenwert überall (Empfohlen)“: Der Lösch-Dialog am Handy dunkelte mit dem Schwarz des Systems ab (60 %), die Website mit dem Wert der Palette (hell 32 %); jetzt dunkelt auch Android mit dem Wert der Palette ab.",
+   "do": "<dialog class='sb-dialog' aria-labelledby aria-describedby><form method='dialog'>…; Compose SbConfirmDialog (zeichnet den Scrim der Palette selbst, das Fenster des Systems dunkelt nicht ab) und SbBottomSheet (scrimColor aus der Palette).",
+   "dont": "AlertDialog mit Tonal-Elevation; Schatten; Scrim über Bildern, Hero oder Ladezuständen; am Handy das Abdunkeln des Systems (60 % Schwarz) hinter dem Dialog.",
    "numbers": "Radius 16 (--sb-radius-sheet); Padding 24 (--sb-space-6); max. 560 px (Handy: Breite − 2 × 16); Tastenabstand 12, 24 darüber; rein 8 px in 200 ms, raus 120 ms; --sb-color-scrim hell #1C1E2252 (32 %), dunkel #00000099 (60 %)",
    "decisions": [
     "D39",
-    "D46"
+    "D46",
+    "D99"
    ],
-   "source": "systems/sebaro/spec/02-components.md §4.6; spec/03-signature.md §7.3–§7.5; spec/08-platform-android.md §8; palettes/sebaro.json modes.light.scrim",
+   "source": "DECISIONS.md D99 (4); systems/sebaro/spec/02-components.md §4.6; spec/03-signature.md §7.3–§7.5; spec/08-platform-android.md §8; palettes/sebaro.json modes.light.scrim",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
-   "check": "Farbprüfung des Dialogs „Hauptaktion 0“; Fokus kehrt nach Escape zum Auslöser zurück; --sb-color-scrim nur in Dialog/Sheet.",
+   "check": "Farbprüfung des Dialogs „Hauptaktion 0“; Fokus kehrt nach Escape zum Auslöser zurück; --sb-color-scrim nur in Dialog/Sheet. Compose: in der Ecke hinter SbConfirmDialog liegt der Scrim der Palette über bg (Werkstatt, auf dem Rechner gezeichnet und gemessen).",
    "example_hint": "Echter sb-dialog hinter „Gewohnheit löschen“ über abgedunkeltem Formular; falsch: Schattenkasten mit lindgrüner „OK“-Taste.",
-   "note": "spec/01 §1.2 nennt veraltet hellen Scrim #1C1E2273 (45 %); Palette und Tokens (#1C1E2252) gelten. Ausblenddauer 120 ms ist Agentenspezifikation.",
-   "changed": "2026-10-19"
+   "note": "spec/01 §1.2 nennt veraltet hellen Scrim #1C1E2273 (45 %); Palette und Tokens (#1C1E2252) gelten. Ausblenddauer 120 ms ist Agentenspezifikation. Der Scrim von SbConfirmDialog ist auf dem Rechner gezeichnet und mit einem Test geprüft, nicht auf einem Gerät (Systemleisten, Tastatur, Fensteranimation).",
+   "changed": "2026-10-24"
   },
   {
    "id": "EBE-04",
@@ -2158,24 +2160,25 @@
    "id": "STA-03",
    "area": "status",
    "title": "Gesperrt bleibt lesbar, ohne Lindgrün und Deckkraft",
-   "rule": "Zeig gesperrte Bedienelemente mit Beschriftung in text-muted, Rand in border und cursor: not-allowed; die gesperrte Hauptaktion mit surface-sunken, border-strong-Rand und text-muted-Label, ganz ohne Lindgrün. Senk nie die Deckkraft. Sperr eine Taste nur, solange ihre Aktion gerade gar nicht geht. Fehlt in einem Formular etwas, bleibt die Hauptaktion drückbar und lindgrün: Ihr Druck sendet nichts, sagt an jedem leeren Pflichtfeld „<Beschriftung> fehlt.“ und setzt den Fokus auf das erste davon.",
-   "rule_en": "Disabled = text-muted label, border boundary, not-allowed cursor; disabled primary action = surface-sunken fill, border-strong outline, text-muted label, no lime; never opacity; disabled only while the action cannot work at all; with required fields empty the primary action stays enabled, its press sends nothing, says „<Label> fehlt.“ at each empty required field and moves focus to the first (sb-form.js on websites).",
-   "why": "Mit Deckkraft fällt der Kontrast unter die Grenze; Lindgrün heißt „weiter“ und darf das nicht versprechen; stumme Sackgassen vermeiden. D98 (V2), Antwort „Drückbar, sagt was fehlt (Empfohlen)“: Eine gesperrte Taste sagt nicht, was fehlt; die Meldung am Feld und der Fokus darauf sagen es.",
-   "do": "<button class='sb-primary-action' disabled> nur, solange die Aktion gar nicht geht; fehlt eine Eingabe, bleibt die Taste aktiv und ihr Druck zeigt „Nachricht fehlt.“ unter dem Feld (p.sb-field__error mit Fehlerglyphe, aria-invalid, aria-describedby) mit dem Fokus auf dem ersten fehlenden Feld; auf Websites macht das sb-form.js an required-Feldern.",
-   "dont": "opacity: .4; blasses Lindgrün; Statusfarbe für gesperrt; eine gesperrte Hauptaktion, weil ein Feld noch leer ist.",
+   "rule": "Zeig gesperrte Bedienelemente mit Beschriftung in text-muted, Rand in border und cursor: not-allowed; die gesperrte Hauptaktion mit surface-sunken, border-strong-Rand und text-muted-Label, ganz ohne Lindgrün. Senk nie die Deckkraft. Sperr eine Taste nur, solange ihre Aktion gerade gar nicht geht. Fehlt in einem Formular etwas, bleibt die Hauptaktion drückbar und lindgrün: Ihr Druck sendet nichts, sagt an jedem leeren Pflichtfeld „<Beschriftung> fehlt.“ und setzt den Fokus auf das erste davon. Pflichtfelder sind der Normalfall und tragen kein Zeichen; ein freiwilliges Feld trägt an seiner Beschriftung ein graues „(optional)“ (EIN-01).",
+   "rule_en": "Disabled = text-muted label, border boundary, not-allowed cursor; disabled primary action = surface-sunken fill, border-strong outline, text-muted label, no lime; never opacity; disabled only while the action cannot work at all; with required fields empty the primary action stays enabled, its press sends nothing, says „<Label> fehlt.“ at each empty required field and moves focus to the first (sb-form.js on websites); required is the norm and unmarked, a voluntary field carries a grey „(optional)“ at its label (EIN-01).",
+   "why": "Mit Deckkraft fällt der Kontrast unter die Grenze; Lindgrün heißt „weiter“ und darf das nicht versprechen; stumme Sackgassen vermeiden. D98 (V2), Antwort „Drückbar, sagt was fehlt (Empfohlen)“: Eine gesperrte Taste sagt nicht, was fehlt; die Meldung am Feld und der Fokus darauf sagen es. D99 (3), Antwort „„optional“ an freiwilligen (Empfohlen)“: Pflichtfelder sind der Normalfall; vor dem Druck zeigt das graue „(optional)“ an den übrigen Feldern, was leer bleiben darf, ohne Sternchen.",
+   "do": "<button class='sb-primary-action' disabled> nur, solange die Aktion gar nicht geht; fehlt eine Eingabe, bleibt die Taste aktiv und ihr Druck zeigt „Nachricht fehlt.“ unter dem Feld (p.sb-field__error mit Fehlerglyphe, aria-invalid, aria-describedby) mit dem Fokus auf dem ersten fehlenden Feld; auf Websites macht das sb-form.js an required-Feldern; ein freiwilliges Feld (ohne required) trägt <span class='sb-optional'>(optional)</span> in seiner Beschriftung, außer es hat immer einen Wert (EIN-01), und bekommt nie eine Meldung.",
+   "dont": "opacity: .4; blasses Lindgrün; Statusfarbe für gesperrt; eine gesperrte Hauptaktion, weil ein Feld noch leer ist; ein Sternchen an Pflichtfeldern oder eine Legende „* Pflichtfeld“.",
    "numbers": "Label text-muted auf surface-sunken 4.61 hell / 7.31 dunkel",
    "decisions": [
     "D80",
-    "D98"
+    "D98",
+    "D99"
    ],
-   "source": "DECISIONS.md D98 (V2); systems/sebaro/spec/01-foundations.md §1.4 Regel 5; spec/02-components.md §0.2, §1.1, §5.4.1; demo/assets/sb-form.js; css/sebaro.css Z. 253-256, 325-330",
+   "source": "DECISIONS.md D98 (V2), D99 (3); systems/sebaro/spec/01-foundations.md §1.4 Regel 5; spec/02-components.md §0.2, §1.1, §2.1, §5.4.1; spec/07-voice.md §3 Regel 12; demo/assets/sb-form.js; css/sebaro.css Z. 253-256, 325-330",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
-   "check": "grep opacity: nicht für disabled; Farbprüfung zählt gesperrte Taste nicht als Hauptaktion. Formular mit leeren Pflichtfeldern absenden: nichts wird gesendet, jedes leere Feld sagt „… fehlt.“, der Fokus steht auf dem ersten (Werkstatt: tools/tests/test_form.py, nur Chromium).",
+   "check": "grep opacity: nicht für disabled; Farbprüfung zählt gesperrte Taste nicht als Hauptaktion. Formular mit leeren Pflichtfeldern absenden: nichts wird gesendet, jedes leere Feld sagt „… fehlt.“, der Fokus steht auf dem ersten, ein Feld ohne required bekommt keine Meldung (Werkstatt: tools/tests/test_form.py und eine Probe mit einem freiwilligen Feld, nur Chromium).",
    "example_hint": "Haupt-, Neben-, Gefahr- und Icon-Taste jeweils aktiv und gesperrt; falsch: halbtransparente lindgrüne Taste.",
-   "note": "Die Vertragstokens opacity.* sind seit TOKEN-CONTRACT 1.7 gestrichen (D80: ungenutzte Tokens streichen); gesperrt heißt eine Graustufe heller, nie Deckkraft (spec/02 §0.2). Auf Websites prüft sb-form.js leere required-Felder selbst (seit dem Werkstatt-Commit 47b42db); andere Fehler meldet der Browser (reportValidity) oder der Server. Compose und SwiftUI haben dafür keinen Baustein: Die Ansicht setzt Fehler und Fokus selbst (spec/08 §14.12, spec/12 §7), dort nicht gebaut und nicht geprüft.",
+   "note": "Die Vertragstokens opacity.* sind seit TOKEN-CONTRACT 1.7 gestrichen (D80: ungenutzte Tokens streichen); gesperrt heißt eine Graustufe heller, nie Deckkraft (spec/02 §0.2). Auf Websites prüft sb-form.js leere required-Felder selbst (seit dem Werkstatt-Commit 47b42db); andere Fehler meldet der Browser (reportValidity) oder der Server. Compose und SwiftUI haben dafür keinen Baustein: Die Ansicht setzt Fehler und Fokus selbst (spec/08 §14.12, spec/12 §7), dort nicht gebaut und nicht geprüft. „(optional)“ an freiwilligen Feldern haben beide seit D99 (SbTextField und SbSelectField mit optional = true, in Swift SbTextField mit optional: true).",
    "changed": "2026-10-24"
   },
   {
@@ -2227,23 +2230,24 @@
    "id": "STA-06",
    "area": "status",
    "title": "Laden: lokal still, entfernt benannt, Fortschritt in Tinte",
-   "rule": "Zeig bei lokaler Arbeit weder Kreisel noch Text. Bei Netzarbeit über 1 s „Wird geladen …“ mit Anzeige, über 10 s dazu, was passiert. Linearer Fortschritt ist ein natives <progress> in Tinte auf border-Spur, der Ring ein 48-px-SVG mit role='progressbar', Schritte haben eine 3-px-Oberkante. Skelette sind statisch grau und tragen das Wort; kein Schimmer, kein Konfetti.",
-   "rule_en": "Local work: no spinner; remote > 1 s: „Wird geladen …“ + indicator, > 10 s say what happens; progress = native <progress> ink on border track, 48 px ring role=progressbar, steps with 3 px top edge and aria-current=step; static skeletons with words, no shimmer or confetti.",
+   "rule": "Zeig bei lokaler Arbeit weder Kreisel noch Text. Bei Netzarbeit über 1 s „Wird geladen …“ mit Anzeige, über 10 s dazu, was passiert. Linearer Fortschritt ist ein natives <progress> in Tinte auf border-Spur, der Ring ein Kreis mit role='progressbar', mindestens 48 px groß, mit dem Wert als Text in der Mitte, der mit der Schrift und mit einem breiten Wert wächst, Schritte haben eine 3-px-Oberkante. Skelette sind statisch grau und tragen das Wort; kein Schimmer, kein Konfetti.",
+   "rule_en": "Local work: no spinner; remote > 1 s: „Wird geladen …“ + indicator, > 10 s say what happens; progress = native <progress> ink on border track, ring role=progressbar of at least 48 px with its value as HTML text after the SVG, growing with the text size and a wide value, steps with 3 px top edge and aria-current=step; static skeletons with words, no shimmer or confetti.",
    "why": "Ein kurzer Kreisel flackert nur (spec/07 §4.5); Fortschritt ist Information, kein Status, daher Tinte; Schimmer wäre Bewegung beim Laden. Fortschritt der Hauptaktion zeigt die Taste selbst (D48).",
-   "do": "<progress value='60' max='100' aria-labelledby='pg'></progress>; „Board wird synchronisiert …“; aria-busy='true' + loader-Icon statt des führenden Icons, Beschriftung bleibt.",
-   "dont": "Spinner beim lokalen Speichern; blauer Fortschrittsbalken; schimmerndes Skelett ohne Text.",
-   "numbers": "Schwellen 1 s und 10 s; Balken 4px (11.80 / 10.43 : 1); Ring 48px; Schrittkante 3px; höchstens 1 Freude-Moment je Ablauf",
+   "do": "<progress value='60' max='100' aria-labelledby='pg'></progress>; „Board wird synchronisiert …“; aria-busy='true' + loader-Icon statt des führenden Icons, Beschriftung bleibt; Ring: <div class='sb-progress-ring' role='progressbar' …><svg viewBox='0 0 48 48' aria-hidden='true'>…</svg><span class='sb-progress-ring__text' aria-hidden='true'>60&nbsp;%</span></div>.",
+   "dont": "Spinner beim lokalen Speichern; blauer Fortschrittsbalken; schimmerndes Skelett ohne Text; der Wert als <text> im SVG des Rings (die alte, veraltete Form).",
+   "numbers": "Schwellen 1 s und 10 s; Balken 4px (11.80 / 10.43 : 1); Ring mindestens 48 px (3rem), „100 %“ 53 px; Schrittkante 3px; höchstens 1 Freude-Moment je Ablauf",
    "decisions": [
     "D48",
     "D98"
    ],
-   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §0.2, §1.7, §3.12; spec/07-voice.md §4.5; spec/01-foundations.md §7; css/sebaro.css Z. 769-802",
+   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §0.2, §1.7, §3.12; spec/07-voice.md §4.5; spec/01-foundations.md §7; css/sebaro.css Z. 769-802 und .sb-progress-ring",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Jeder Ladezustand hängt an einem Netzaufruf über 1 s; keine @keyframes für Skelette.",
    "example_hint": "Linearer Balken, Ring, Schritte „Schritt 2 von 3“ und Skelett mit „Wird geladen …“; falsch: Vollbild-Spinner beim Speichern.",
+   "note": "Seit dem Werkstatt-Commit 0861d3f, ohne eigene Entscheidung: Der Wert im Ring ist HTML-Text nach dem SVG, der Ring wächst mit ihm und mit der Schrift (bei 200 % Schrift 96 px). Die alte Form mit dem Wert als <text> im SVG zeigt sebaro.css noch, sie ist veraltet.",
    "changed": "2026-10-24"
   },
   {
@@ -2327,22 +2331,24 @@
    "id": "EIN-01",
    "area": "eingaben",
    "title": "Feld: Beschriftung oben, graue Fläche, Grundlinie",
-   "rule": "Setz über jedes Feld eine sichtbare <label for> (label 14/20). Das Feld ist eine surface-sunken-Fläche mit 1-px-border-strong-Grundlinie, oben 8 px gerundet, mindestens 48 px hoch, ohne Rahmen. Hilfetext und Fehler hängen per aria-describedby am Input; ein Zähler steht am Ende in Tabellenziffern.",
-   "rule_en": "Visible <label for> above; field = surface-sunken area with 1 px border-strong baseline, top radius 8, min 48 px, no frame; help and error linked via aria-describedby; counters end-aligned tabular.",
-   "why": "Skizze A „Farbe ist Funktion“; Screenreader lesen Hilfe und Fehler beim Fokus. Auf versenktem Grund hätte die Grundlinie nur 3,05 : 1, deshalb nie ein Feld auf eigenem sunken-Grund.",
-   "do": "<div class='sb-field'><label class='sb-field__label' for='n'>Name</label><div class='sb-field__control'><input id='n' aria-describedby='n-help'></div><p class='sb-field__help' id='n-help'>…</p></div>",
-   "dont": "Platzhalter als einzige Beschriftung; umrandetes Feld; Hilfetext ohne Verknüpfung.",
-   "numbers": "Höhe 48px (Input 46px); Padding 0 12px; Grundlinie 1px; Radius 8px oben; Hilfe caption 14/20 text-muted",
+   "rule": "Setz über jedes Feld eine sichtbare <label for> (label 14/20). Das Feld ist eine surface-sunken-Fläche mit 1-px-border-strong-Grundlinie, oben 8 px gerundet, mindestens 48 px hoch, ohne Rahmen. Hilfetext und Fehler hängen per aria-describedby am Input; ein Zähler steht am Ende in Tabellenziffern. Pflichtfelder sind der Normalfall und tragen kein Zeichen. Ein freiwilliges Feld trägt hinter seiner Beschriftung ein graues „(optional)“ (sb-optional: text-muted, nicht fett, in der Zeile der Beschriftung), nie ein Sternchen; ohne Sternchen braucht es auch keine Legende „Pflichtfeld“.",
+   "rule_en": "Visible <label for> above; field = surface-sunken area with 1 px border-strong baseline, top radius 8, min 48 px, no frame; help and error linked via aria-describedby; counters end-aligned tabular; required is the norm and unmarked, a voluntary field ends its label with a grey „(optional)“ (sb-optional), never an asterisk, no „Pflichtfeld“ legend.",
+   "why": "Skizze A „Farbe ist Funktion“; Screenreader lesen Hilfe und Fehler beim Fokus. Auf versenktem Grund hätte die Grundlinie nur 3,05 : 1, deshalb nie ein Feld auf eigenem sunken-Grund. D99 (3), Antwort „„optional“ an freiwilligen (Empfohlen)“: Pflichtfelder sind der Normalfall; freiwillige Felder tragen an der Beschriftung ein graues „(optional)“, englisch „(optional)“, keine Sternchen, in Web, Compose und Swift.",
+   "do": "<div class='sb-field'><label class='sb-field__label' for='n'>Name</label><div class='sb-field__control'><input id='n' aria-describedby='n-help'></div><p class='sb-field__help' id='n-help'>…</p></div>; freiwillig: <label class='sb-field__label' for='notiz'>Notiz <span class='sb-optional'>(optional)</span></label>; Compose SbTextField(…, optional = true), Swift SbTextField(…, optional: true).",
+   "dont": "Platzhalter als einzige Beschriftung; umrandetes Feld; Hilfetext ohne Verknüpfung; „Name *“ und „* Pflichtfeld“; „(Pflicht)“ oder „freiwillig“ an der Beschriftung.",
+   "numbers": "Höhe 48px (Input 46px); Padding 0 12px; Grundlinie 1px; Radius 8px oben; Hilfe caption 14/20 text-muted; „(optional)“ text-muted im Gewicht von body, so groß wie die Beschriftung",
    "decisions": [
-    "D98"
+    "D98",
+    "D99"
    ],
-   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §2.1; css/sebaro.css Z. 354-381; demo/mobile.html Z. 343",
+   "source": "DECISIONS.md D98, D99 (3); systems/sebaro/spec/02-components.md §2.1; spec/07-voice.md §3 Regel 12, §7; css/sebaro.css Z. 354-381 und .sb-optional; demo/mobile.html Z. 343",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
-   "check": "axe label; jede __help/__error-ID wird von aria-describedby referenziert.",
-   "example_hint": "Formular M4: Name, Tagesziel, Notiz mit Zähler „0 / 120“; falsch: nur Platzhalter in umrandeten Feldern.",
+   "check": "axe label; jede __help/__error-ID wird von aria-describedby referenziert; kein Sternchen: grep -rnE '\\*\\s*</(label|legend)>|\\* ?Pflichtfeld' über die Seiten findet nichts.",
+   "example_hint": "Formular M4: Name, Tagesziel, Notiz (optional) mit Zähler „0 / 120“; falsch: nur Platzhalter in umrandeten Feldern, Sternchen und „* Pflichtfeld“.",
+   "note": "Vorläufig vom Agenten gewählt, nicht Teil von D99: Im Web schreibt die Seite „(optional)“ selbst in die Beschriftung, kein Skript fügt es hinzu; ein Feld, das immer einen Wert hat (Auswahl mit gewählter Möglichkeit, Segmente, Schalter), trägt kein „(optional)“; eine Auswahl ist nur freiwillig, wenn „Keine“ eine ihrer Möglichkeiten ist. Screenreader bekommen im Web „Notiz (optional)“, in Compose „Notiz, optional“ (im Semantikbaum geprüft), in Swift „Notiz, optional“ (nur im Code gelesen); gehört mit einem Screenreader ist keins davon. D99 selbst sagt nur „(optional)“ und keine Sternchen; dass auch „(Pflicht)“, „freiwillig“ und eine Legende „Pflichtfeld“ nicht an die Beschriftung gehören, steht in spec/07 §3 Regel 12, die die Werkstatt nach D99 geschrieben hat.",
    "changed": "2026-10-24"
   },
   {
@@ -2394,39 +2400,42 @@
    "id": "EIN-04",
    "area": "eingaben",
    "title": "Chips und Segmente: Kante statt Füllung",
-   "rule": "Nutz Segmente nur für 2–4 kurze Optionen, die eine Ansicht ändern („Woche · Monat · Jahr“), sonst Radiozeilen. Filterchips sind <button aria-pressed> mit 36-px-Rahmen im 48-px-Ziel. Gewählt heißt bei beiden: 3-px-accent-Unterkante, Haken, Titelgewicht, link-Farbe; nie gefüllt.",
-   "rule_en": "Segmented control for 2–4 short options; filter chips <button aria-pressed>, 36 px frame in 48 px target; chosen = 3 px accent bottom edge + check + weight; never filled.",
-   "why": "Gefüllte Segmente oder Chips setzen Farbe als Fläche hinter Text; die Ortslinie ist der einzige Auswahl-Job (D48).",
-   "do": "<div class='sb-chips' role='group' aria-label='Kategorie filtern' data-sb-single>; Eingabechip mit Knopf „<Wert> entfernen“; <fieldset class='sb-segmented'><legend>Zeitraum</legend>",
+   "rule": "Nutz Segmente nur für 2–4 kurze Optionen, die eine Ansicht ändern („Woche · Monat · Jahr“), sonst Radiozeilen. Filterchips sind <button aria-pressed> mit 36-px-Rahmen im 48-px-Ziel. Gewählt heißt bei beiden: 3-px-accent-Unterkante, Haken, Titelgewicht, link-Farbe; nie gefüllt. Passen die Wörter einer segmentierten Auswahl bei großer Schrift nicht auf zwei Zeilen in ihre Spalten, wird sie zum Auswahlfeld (ZUG-09). In Compose wählen ← und → in der Reihe, ↑ und ↓ verlassen sie.",
+   "rule_en": "Segmented control for 2–4 short options; filter chips <button aria-pressed>, 36 px frame in 48 px target; chosen = 3 px accent bottom edge + check + weight; never filled; a segmented control whose words do not fit their columns on two lines at large text becomes a select (ZUG-09); in Compose ← → choose, ↑ ↓ leave the row.",
+   "why": "Gefüllte Segmente oder Chips setzen Farbe als Fläche hinter Text; die Ortslinie ist der einzige Auswahl-Job (D48). D99 (1) und (5), Antworten „Zweizeilig, ganze Wörter (Empfohlen)“ und „Alle wie gebaut (Empfohlen)“: Segmente, deren Wörter nicht passen, werden zum Auswahlfeld; die Tasten in Compose bleiben, wie sie gebaut sind.",
+   "do": "<div class='sb-chips' role='group' aria-label='Kategorie filtern' data-sb-single>; Eingabechip mit Knopf „<Wert> entfernen“; <fieldset class='sb-segmented'><legend>Zeitraum</legend>; Compose SbSegmented (zeigt bei zu großer Schrift selbst SbSelectField).",
    "dont": "Blau gefülltes Segment; farbig gefüllter Chip.",
    "numbers": "Segmente 2–4, Höhe 48px, Rand 1px; Chip-Rahmen 36px, Ziel 48px; Kante 3px",
    "decisions": [
     "D48",
-    "D98"
+    "D98",
+    "D99"
    ],
-   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §2.7, §2.9; spec/08-platform-android.md §14; css/sebaro.css Z. 457-477, 513-541",
+   "source": "DECISIONS.md D98, D99 (1), (5); systems/sebaro/spec/02-components.md §2.7, §2.9; spec/08-platform-android.md §14, §14.13; css/sebaro.css Z. 457-477, 513-541",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Keine background-Farbe für :checked/aria-pressed; axe button-name an sb-chip__remove.",
    "example_hint": "Filter „Alle · Gesundheit · Lernen“ und Segmente „Woche · Monat · Jahr“; falsch: gefülltes aktives Segment.",
+   "note": "Im Web wird die segmentierte Auswahl noch nicht zum Auswahlfeld; ihre Wörter brechen bei großer Schrift zwischen den Wörtern um und werden notfalls getrennt („Stünd-lich“). Im Web wählen auch ↑ und ↓. In Compose wird sie auf einem 360-dp-Handy bei „Aus · Stündlich · Alle 2 Std.“ ab 125 % Schrift zum Auswahlfeld, bei „Woche · Monat · Jahr“ zwischen 170 und 200 % (auf dem Rechner gemessen, nicht auf einem Gerät).",
    "changed": "2026-10-24"
   },
   {
    "id": "EIN-05",
    "area": "eingaben",
    "title": "Suche und Auswahlliste nativ",
-   "rule": "Bau das Suchfeld mit search-Icon am Anfang, <input type='search'> (Browser-Kreuz ausgeblendet) und gefüllt einer Icon-Taste „Suche leeren“; das Label darf versteckt sein, wenn der Platzhalter die Aufgabe nennt. Auswahllisten sind natives <select> mit chevron-down; lange Listen in Apps als Sheet mit Radiozeilen.",
-   "rule_en": "Search: leading search icon, type=search, native clear hidden, „Suche leeren“ icon button when filled, label may be visually hidden; select = native <select> with chevron-down; long app lists as a sheet with radio rows.",
-   "why": "Natives Verhalten ist zugänglich und plattformtreu; ein eigener Leeren-Knopf statt Browser-Kreuz hält das Feld einheitlich.",
+   "rule": "Bau das Suchfeld mit search-Icon am Anfang, <input type='search'> (Browser-Kreuz ausgeblendet) und gefüllt einer Icon-Taste „Suche leeren“; das Label darf versteckt sein, wenn der Platzhalter die Aufgabe nennt. Auswahllisten sind natives <select> mit chevron-down; lange Listen in Apps als Sheet mit Radiozeilen. In Compose öffnet die Auswahl ihre Möglichkeiten im sebaro-Menü mit Haken.",
+   "rule_en": "Search: leading search icon, type=search, native clear hidden, „Suche leeren“ icon button when filled, label may be visually hidden; select = native <select> with chevron-down; long app lists as a sheet with radio rows; in Compose the select opens its options in the sebaro menu with checks.",
+   "why": "Natives Verhalten ist zugänglich und plattformtreu; ein eigener Leeren-Knopf statt Browser-Kreuz hält das Feld einheitlich. D99 (5), Antwort „Alle wie gebaut (Empfohlen)“: Die Auswahl in Compose bleibt im sebaro-Menü mit Haken.",
    "do": "<div class='sb-field__control sb-search'>…<button class='sb-icon-button' aria-label='Suche leeren'>; <div class='sb-field__control sb-select'><select>…</select>",
    "dont": "Suchfeld ganz ohne Label; Dropdown aus divs.",
    "numbers": "Icon 24px text-muted",
    "decisions": [
-    "D98"
+    "D98",
+    "D99"
    ],
-   "source": "DECISIONS.md D98; systems/sebaro/spec/02-components.md §2.2, §2.3; demo/components.html Z. 389-391",
+   "source": "DECISIONS.md D98, D99 (5); systems/sebaro/spec/02-components.md §2.2, §2.3; spec/08-platform-android.md §14.12; demo/components.html Z. 389-391",
    "platforms": [
     "alle"
    ],
@@ -2522,17 +2531,18 @@
    "decisions": [
     "D37",
     "D83",
-    "D91"
+    "D91",
+    "D99"
    ],
-   "source": "DECISIONS.md D91 (G1a, G2a, G3a); systems/sebaro/spec/01-foundations.md §8; spec/02-components.md §3.7; palettes/sebaro.json dataviz",
+   "source": "DECISIONS.md D91 (G1a, G2a, G3a), D99 (2), (8); systems/sebaro/spec/01-foundations.md §8; spec/02-components.md §3.7; spec/08-platform-android.md §14.10, §14.22–§14.24; palettes/sebaro.json dataviz",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Höchstens ein Element in accent je Diagramm; kein <text> in .sb-chart__shapes; Beschriftung bei 390 px 14 px; Diagramm in Graustufen lesbar.",
    "example_hint": "Balken „Gläser je Tag“ mit Schrift als HTML und eine Sparkline nach ihrer Zahl; falsch: bunte Balken mit Schrift im Bild ohne Werte.",
-   "note": "Die alte Form mit Schrift im SVG bleibt in sebaro.css eine Version lang als veraltet stehen. Diagramme in Compose sind noch nicht gebaut.",
-   "changed": "2026-10-21"
+   "note": "Die alte Form mit Schrift im SVG bleibt in sebaro.css eine Version lang als veraltet stehen. In Compose gibt es jetzt jede Diagrammform als Baustein (SbBarChart, SbStats mit Sparkline, SbShareRows, SbGoalRing, SbHeatmap, SbLineChart, SbSeriesChart, SbHistogram, SbDeviationChart), auf dem Rechner gezeichnet, nicht auf einem Gerät. Dort wachsen Diagramme mit der Schrift nur, wo Text drinsteht (Namens- und Kopfspalten, Zielring, Fortschrittsring); Flächen, Abstände und Linien bleiben feste dp (D99 (2), Antwort „Nur wo Text drinsteht (Empfohlen)“). Beschriftungen unter Balken, die sich bei großer Schrift berühren würden, entfallen, gelesen von hinten, die letzten bleiben stehen. Die englischen Diagrammwörter in Compose bleiben (D99 (8)).",
+   "changed": "2026-10-24"
   },
   {
    "id": "DAT-05",
@@ -2677,26 +2687,27 @@
    "id": "DAT-11",
    "area": "daten",
    "title": "Stufen einer Farbskala bleiben unterscheidbar",
-   "rule": "Gib einer fortlaufenden Farbskala höchstens vier Stufen, einer zweiseitigen höchstens fünf, nie einen Verlauf; mehr Werte fasst du in diese Stufen. Die erste Stufe (bei der zweiseitigen Skala jede Stufe eines Arms) hebt sich mit mindestens 3 : 1 von jedem Grund ab; Nachbarstufen liegen mindestens 1,6 : 1 und ΔE OK 0,10 auseinander, auch unter jeder Farbsehschwäche; jede Stufe liegt mindestens ΔE OK 0,08 von accent und primary-action. „keine Angabe“ ist die leere Zelle mit Rahmen, nie Stufe 1. In der Heatmap steht der Wert jedes Tages als Text für Screenreader, bei Fokus und beim Zeigen. Heute trägt einen Rahmen in Kobalt, der zur Zelle gehört: 4 px accent auf ihrer Kante, rund wie die Zelle, und innen eine 1-px-Fuge in bg zwischen Rahmen und Füllung, damit er sich auf jeder Stufe mit mindestens 3 : 1 abhebt. Der Fokusring liegt davon abgesetzt außen (2 px, 2 px Abstand, eckig); die Zellen stehen 6 px auseinander.",
-   "rule_en": "A sequential scale has at most 4 classes, a diverging one 5, never a gradient; class 1 (every class of a diverging arm) ≥ 3:1 against every ground; neighbours ≥ 1.6:1 and ≥ ΔE OK 0.10 apart, also under protanopia, deuteranopia and tritanopia; every class ≥ ΔE OK 0.08 from accent and primary-action; „keine Angabe“ is the empty framed cell, never class 1; heatmap values as text for assistive technology, on focus and pointing; today is a cobalt frame that is part of the cell (4 px accent on the cell's edge, rounded like the cell, with a 1 px bg joint inside between frame and fill, ≥ 3:1 on every class), unlike the focus ring detached outside it (2 px, offset 2 px, square); cells 6 px apart.",
-   "why": "Der Inhaber hat zur Heatmap (D91 G6a) eine messbare Regel verlangt: „die färben der legende müssen unterscheidbar bleiben. Bitte eine sinnvolle Regel aufstellen, die unterschiede im beispiel Funktionieren nicht.“ In der Skizze lagen sieben Stufen nur 1,37 bis 1,55 : 1 auseinander und die erste nur 1,06 bis 1,31 : 1 über dem Grund. Mit vier Stufen gemessen: Nachbarn 1,61 bis 1,65 : 1, die erste Stufe mindestens 3,03 : 1 auf jedem Grund, auch mit dem warmen Farbton. D92 (3), Antwort „Bestätigen (Empfohlen)“: Die Schwellen sind bestätigt, sebaro höchstens 4 Stufen, zweiseitig 5. D92 (2), Antwort „Kobalt-Rahmen“: „heute“ ist ein Rahmen in Kobalt wie in der Skizze, statt der gebauten Ortslinie; „er muss sich sichtbar vom Fokusring unterscheiden“. D93 (1), auf „mir ist der rahmen etwas zu schwach“ nach dem Vergleichsbild „B · breiter Rahmen (Empfohlen)“: Kobalt direkt auf der Füllung hob sich nur 1,1 bis 2,4 : 1 von ihr ab, unter WCAG 1.4.11. Mit der Fuge in Grundfarbe hat die Markierung auf jeder Stufe mindestens 3 : 1 (Fuge gegen Füllung ab 3,34 : 1, Kobalt gegen den Grund ab 6 : 1), hell, dunkel und warm.",
+   "rule": "Gib einer fortlaufenden Farbskala höchstens vier Stufen, einer zweiseitigen höchstens fünf, nie einen Verlauf; mehr Werte fasst du in diese Stufen. Die erste Stufe (bei der zweiseitigen Skala jede Stufe eines Arms) hebt sich mit mindestens 3 : 1 von jedem Grund ab; Nachbarstufen liegen mindestens 1,6 : 1 und ΔE OK 0,10 auseinander, auch unter jeder Farbsehschwäche; jede Stufe liegt mindestens ΔE OK 0,08 von accent und primary-action. „keine Angabe“ ist die leere Zelle mit Rahmen, nie Stufe 1. In der Heatmap steht der Wert jedes Tages als Text für Screenreader, bei Fokus und beim Zeigen. Heute trägt einen Rahmen in Kobalt, der zur Zelle gehört: 4 px accent auf ihrer Kante, rund wie die Zelle, und innen eine 1-px-Fuge in bg zwischen Rahmen und Füllung, damit er sich auf jeder Stufe mit mindestens 3 : 1 abhebt. Der Fokusring liegt davon abgesetzt außen (2 px, 2 px Abstand, eckig); die Zellen stehen 6 px auseinander. Am Handy (Compose) ist jeder Tag ein eigener Tab-Halt, Tippen zeigt den Wert ohne Fokusring, am Rand führen die Pfeiltasten hinaus; die Zellen bleiben etwa 30 dp, weil sie Anzeige sind und kein Bedienelement, und unter der Heatmap steht von selbst „Tipp auf einen Tag, um seinen Wert zu sehen.“, den Satz kann die App ersetzen.",
+   "rule_en": "A sequential scale has at most 4 classes, a diverging one 5, never a gradient; class 1 (every class of a diverging arm) ≥ 3:1 against every ground; neighbours ≥ 1.6:1 and ≥ ΔE OK 0.10 apart, also under protanopia, deuteranopia and tritanopia; every class ≥ ΔE OK 0.08 from accent and primary-action; „keine Angabe“ is the empty framed cell, never class 1; heatmap values as text for assistive technology, on focus and pointing; today is a cobalt frame that is part of the cell (4 px accent on the cell's edge, rounded like the cell, with a 1 px bg joint inside between frame and fill, ≥ 3:1 on every class), unlike the focus ring detached outside it (2 px, offset 2 px, square); cells 6 px apart; on phones (Compose) one Tab stop per day, a tap shows the value without a focus ring, arrows lead out at the edge, cells about 30 dp (a display, not a control), and under the heatmap the fixed hint „Tipp auf einen Tag, um seinen Wert zu sehen.“ / „Tap a day to see its value.“, which the app may replace.",
+   "why": "Der Inhaber hat zur Heatmap (D91 G6a) eine messbare Regel verlangt: „die färben der legende müssen unterscheidbar bleiben. Bitte eine sinnvolle Regel aufstellen, die unterschiede im beispiel Funktionieren nicht.“ In der Skizze lagen sieben Stufen nur 1,37 bis 1,55 : 1 auseinander und die erste nur 1,06 bis 1,31 : 1 über dem Grund. Mit vier Stufen gemessen: Nachbarn 1,61 bis 1,65 : 1, die erste Stufe mindestens 3,03 : 1 auf jedem Grund, auch mit dem warmen Farbton. D92 (3), Antwort „Bestätigen (Empfohlen)“: Die Schwellen sind bestätigt, sebaro höchstens 4 Stufen, zweiseitig 5. D92 (2), Antwort „Kobalt-Rahmen“: „heute“ ist ein Rahmen in Kobalt wie in der Skizze, statt der gebauten Ortslinie; „er muss sich sichtbar vom Fokusring unterscheiden“. D93 (1), auf „mir ist der rahmen etwas zu schwach“ nach dem Vergleichsbild „B · breiter Rahmen (Empfohlen)“: Kobalt direkt auf der Füllung hob sich nur 1,1 bis 2,4 : 1 von ihr ab, unter WCAG 1.4.11. Mit der Fuge in Grundfarbe hat die Markierung auf jeder Stufe mindestens 3 : 1 (Fuge gegen Füllung ab 3,34 : 1, Kobalt gegen den Grund ab 6 : 1), hell, dunkel und warm. D99 (5) bis (7), Antworten „Alle wie gebaut (Empfohlen)“, „30 dp lassen (Empfohlen)“ und „Fester Satz fürs Tippen (Empfohlen)“: Die Eigenheiten der Heatmap am Handy bleiben, wie sie gebaut sind, die Zellen etwa 30 dp, und ein fester Satz sagt, dass man tippen kann.",
    "do": "<ul class='sb-scale-legend'><li><span class='sb-scale-cell sb-scale-cell--seq-1' aria-hidden='true'></span>0–2</li>…<li><span class='sb-scale-cell sb-scale-cell--none' aria-hidden='true'></span>keine Angabe</li><li><span class='sb-scale-cell sb-heatmap__today-key' aria-hidden='true'></span>Rahmen: heute</li></ul>; Zelle <td><span class='sb-scale-cell sb-scale-cell--seq-3'></span><span class='sb-visually-hidden'>Dienstag, 29.09.: 6 Gläser</span></td>; heute <td aria-current='date'><span class='sb-scale-cell sb-scale-cell--seq-2'></span><span class='sb-visually-hidden'>Samstag, 10.10., heute: 4 Gläser</span></td>; Rahmen und Fuge für heute zeichnet sebaro.css (border: calc(var(--sb-border-width-strong) + var(--sb-border-width-hairline)) solid var(--sb-color-accent) und innen 1 px var(--sb-color-bg)), nie eigenes CSS; sb-chart.js für Pfeiltasten und Anzeige.",
    "dont": "Sieben feine Stufen oder ein Verlauf; eine erste Stufe fast wie der Grund; ein Tag ohne Daten in Stufe 1; Zahlen auf der Farbfläche; Kobaltrahmen direkt auf der Farbe (1,1 : 1); heute als abgesetzter 2-px-Ring, der wie der Fokusring aussieht; heute als Linie unter der Zelle.",
-   "numbers": "fortlaufend höchstens 4 Stufen, zweiseitig 5; Stufe 1 ab 3,0 : 1 zu bg, surface, surface-raised und surface-sunken; Nachbarn ab 1,6 : 1 und ΔE OK 0,10 (normal, Protanopie, Deuteranopie, Tritanopie); zu accent und primary-action ab ΔE OK 0,08; gemessen fortlaufend hell 1,61–1,64 : 1, dunkel 1,64–1,65 : 1, zweiseitig Arme 1,62–1,64 : 1; heute: Rahmen 4 px accent (border-width-strong + border-width-hairline) auf der Zellkante, innen 1 px Fuge in bg; Fuge gegen Füllung gemessen hell 3,35–14,70 : 1, dunkel 3,53–15,76 : 1, warm hell 3,34–14,68 : 1, warm dunkel 3,54–15,84 : 1 (Stufe 1 bis 4); Kobalt gegen bg und surface ab 6,15 : 1; vorher Kobalt direkt auf der Füllung 1,11–2,38 : 1; in Zwangsfarben Rahmen CanvasText, Fuge Canvas; Fokus 2 px focus, 2 px außen; Zellabstand 6 px; Legende „Rahmen: heute“",
+   "numbers": "fortlaufend höchstens 4 Stufen, zweiseitig 5; Stufe 1 ab 3,0 : 1 zu bg, surface, surface-raised und surface-sunken; Nachbarn ab 1,6 : 1 und ΔE OK 0,10 (normal, Protanopie, Deuteranopie, Tritanopie); zu accent und primary-action ab ΔE OK 0,08; gemessen fortlaufend hell 1,61–1,64 : 1, dunkel 1,64–1,65 : 1, zweiseitig Arme 1,62–1,64 : 1; heute: Rahmen 4 px accent (border-width-strong + border-width-hairline) auf der Zellkante, innen 1 px Fuge in bg; Fuge gegen Füllung gemessen hell 3,35–14,70 : 1, dunkel 3,53–15,76 : 1, warm hell 3,34–14,68 : 1, warm dunkel 3,54–15,84 : 1 (Stufe 1 bis 4); Kobalt gegen bg und surface ab 6,15 : 1; vorher Kobalt direkt auf der Füllung 1,11–2,38 : 1; in Zwangsfarben Rahmen CanvasText, Fuge Canvas; Fokus 2 px focus, 2 px außen; Zellabstand 6 px; Legende „Rahmen: heute“; Handy (Compose): Zellen etwa 30 dp, ein Tab-Halt je Tag, Hinweis „Tipp auf einen Tag, um seinen Wert zu sehen.“ (englisch „Tap a day to see its value.“)",
    "decisions": [
     "D91",
     "D92",
-    "D93"
+    "D93",
+    "D99"
    ],
-   "source": "DECISIONS.md D91 (G6a, G7a, G10a), D92 (2), (3), D93 (1); systems/sebaro/spec/01-foundations.md §8, §8.1; spec/02-components.md §3.7 (Heatmap); spec/03-signature.md §10.2, §10.3; palettes/sebaro.json dataviz (maxClasses); shared/PALETTE-CONTRACT.md 2.6; tools/check_palette.py",
+   "source": "DECISIONS.md D91 (G6a, G7a, G10a), D92 (2), (3), D93 (1), D99 (5), (6), (7); spec/08-platform-android.md §14.11; systems/sebaro/spec/01-foundations.md §8, §8.1; spec/02-components.md §3.7 (Heatmap); spec/03-signature.md §10.2, §10.3; palettes/sebaro.json dataviz (maxClasses); shared/PALETTE-CONTRACT.md 2.6; tools/check_palette.py",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
-   "check": "python3 tools/check_palette.py palettes/sebaro.json mit Exit 0 (die fünf Punkte sind Fehler, keine Warnungen; die Grenzen 4 und 5 von sebaro stehen als dataviz.maxClasses in der Palette und werden mitgeprüft); Heatmap mit Tab und Pfeiltasten: die Anzeige nennt Tag und Wert. Fokus auf heute und auf den Nachbartag: Rahmen mit Fuge auf der Zelle, Ring abgesetzt außen; heute auf jeder Stufe in hell, dunkel und warm: Fuge gegen Füllung ab 3 : 1.",
+   "check": "python3 tools/check_palette.py palettes/sebaro.json mit Exit 0 (die fünf Punkte sind Fehler, keine Warnungen; die Grenzen 4 und 5 von sebaro stehen als dataviz.maxClasses in der Palette und werden mitgeprüft); Heatmap mit Tab und Pfeiltasten: die Anzeige nennt Tag und Wert. Fokus auf heute und auf den Nachbartag: Rahmen mit Fuge auf der Zelle, Ring abgesetzt außen; heute auf jeder Stufe in hell, dunkel und warm: Fuge gegen Füllung ab 3 : 1. Compose: SbHeatmap zeigt den Hinweis unter dem Gitter (auf dem Rechner gezeichnet).",
    "example_hint": "Heatmap mit vier Stufen, einer Legende mit Zahlen und dem Kobaltrahmen mit Fuge für heute; falsch: sieben feine Stufen ohne Zahlen, heute als abgesetzter Ring wie der Fokus und ein Kobaltrahmen direkt auf der Farbe.",
-   "note": "Der Palettenvertrag erlaubt fortlaufend 5 Stufen; seit Palettenvertrag 2.6 nennt die Palette von sebaro ihre Grenzen (dataviz.maxClasses: fortlaufend 4, zweiseitig 5), und check_palette.py prüft sie. Die Fuge ist eine harte 1-px-Linie nach innen in einer flachen Farbe, kein Schatten (EBE-01). Gemessen ist nur der Kontrast nach WCAG 2 in Chromium; APCA und eine Simulation der Farbsehschwächen für die Fuge fehlen.",
-   "changed": "2026-10-23"
+   "note": "Der Palettenvertrag erlaubt fortlaufend 5 Stufen; seit Palettenvertrag 2.6 nennt die Palette von sebaro ihre Grenzen (dataviz.maxClasses: fortlaufend 4, zweiseitig 5), und check_palette.py prüft sie. Die Fuge ist eine harte 1-px-Linie nach innen in einer flachen Farbe, kein Schatten (EBE-01). Gemessen ist nur der Kontrast nach WCAG 2 in Chromium; APCA und eine Simulation der Farbsehschwächen für die Fuge fehlen. Die Heatmap in Compose ist auf dem Rechner gezeichnet und mit einem Test geprüft, nicht auf einem Gerät und nicht mit TalkBack.",
+   "changed": "2026-10-24"
   },
   {
    "id": "DAT-12",
@@ -2719,8 +2730,8 @@
    "status": "entschieden",
    "check": "Jede Form hat ihre Werte als Text (Zeilen, Zahlen auf den Säulen oder „Werte als Tabelle“); Graustufen-Screenshot: die Abweichung bleibt an Vorzeichen und Pfeil erkennbar.",
    "example_hint": "Anteile als Zeilen, Abweichung mit Mitte als Wort, Zielring; falsch: Torte in Kachelfarben und rot-grüne Abweichung.",
-   "note": "Ein Stapel nur für 2 bis 3 Teile, deren Summe die Aussage ist, ist kein Bauteil. Diagramme in Compose sind noch nicht gebaut.",
-   "changed": "2026-10-21"
+   "note": "Ein Stapel nur für 2 bis 3 Teile, deren Summe die Aussage ist, ist kein Bauteil. In Compose gibt es jede Diagrammform als Baustein (DAT-04), auf dem Rechner gezeichnet, nicht auf einem Gerät.",
+   "changed": "2026-10-24"
   },
   {
    "id": "DAT-13",
@@ -2745,8 +2756,8 @@
    "status": "entschieden",
    "check": "Bei 390 px: Positionsleiste da, Tab erreicht jede Spalte, die Seite ist nicht breiter als das Fenster; im Fenster schmaler als 640 px nennt „Neue Karte“ die Spalte.",
    "example_hint": "Board in 390 px mit Positionsleiste und „Neue Karte in …“; falsch: gerahmte Spalten auf grauem Grund.",
-   "note": "Leiste, sichtbare Kante der nächsten Spalte und Spaltenname in der Hauptaktion waren die Antwort der Agenten auf die Schwächen aus der Skizze; der Inhaber hat sie mit D94 angenommen. Die Compose-Fassung fehlt noch; auf echten Geräten nicht geprüft.",
-   "changed": "2026-10-22"
+   "note": "Leiste, sichtbare Kante der nächsten Spalte und Spaltenname in der Hauptaktion waren die Antwort der Agenten auf die Schwächen aus der Skizze; der Inhaber hat sie mit D94 angenommen. In Compose gibt es SbBoard (unter 640 dp eigener Breite wischen mit der Leiste, darüber Spalten nebeneinander), auf dem Rechner gezeichnet; auf echten Geräten nicht geprüft.",
+   "changed": "2026-10-24"
   },
   {
    "id": "DAT-14",
@@ -2797,8 +2808,8 @@
    "status": "entschieden",
    "check": "In einer scrollenden Liste: Linie nur am stehenden Kopf; ohne Skript und ohne scroll-state steht der Kopf ohne Linie; die Zeitleiste hat keine senkrechte Linie.",
    "example_hint": "Scrollende Liste nach Tagen mit stehendem Kopf und eine Zeitleiste; falsch: Zeitleiste mit Strich und bunten Punkten.",
-   "note": "Compose-Fassungen fehlen noch.",
-   "changed": "2026-10-21"
+   "note": "In Compose gibt es SbStickyListHeader und SbTimelineEntry, auf dem Rechner gezeichnet, nicht auf einem Gerät. Vorläufig vom Agenten: In Compose schiebt der nächste Gruppenkopf den stehenden hinaus, im Web gleitet er darüber.",
+   "changed": "2026-10-24"
   },
   {
    "id": "DAT-16",
@@ -2822,8 +2833,8 @@
    "status": "entschieden",
    "check": "axe; ein Tab-Halt im Raster; Pfeiltasten und Bild auf/ab wechseln Tag und Monat; ohne Skript zeigt die Seite Monat, heute, den gewählten Tag und seine Liste.",
    "example_hint": "Oktober mit heute, gewähltem Tag und grauen Punkten, darunter die Tagesliste; falsch: bunte Punkte im Raster und eine gefüllte Auswahl.",
-   "note": "Compose-Fassung fehlt noch.",
-   "changed": "2026-10-21"
+   "note": "In Compose gibt es SbCalendar, auf dem Rechner gezeichnet, nicht auf einem Gerät. Bei großer Schrift hält der Tag im Web die Zahl vom Punkt des Eintrags frei und wächst mit dem Text, wie SbCalendar (vorläufig vom Agenten); ein langer Eintrag in der Tagesliste bricht um, statt abgeschnitten zu werden.",
+   "changed": "2026-10-24"
   },
   {
    "id": "DAT-17",
@@ -2924,26 +2935,27 @@
    "id": "TXT-04",
    "area": "text",
    "title": "Zahlen, Einheiten, Datum, Uhrzeit",
-   "rule": "Setz zwischen Zahl und Einheit ein geschütztes Leerzeichen U+00A0, nie U+202F oder U+2009. Tausender „10.000“ (de) / „10,000“ (en), Bereiche mit Halbgeviertstrich ohne Leerzeichen („08:00–22:00“), Brüche „5 / 8“. Datum „Samstag, 10. Oktober“ in Tagesköpfen, „10.10.2026“ in Notizen (en „2026-10-10“), Uhrzeit 24-stündig „08:12“; nie nur „vor 3 Tagen“. Zahlen und Daten formatierst du je Sprache mit Intl bzw. Locale, nie durch Zusammenkleben.",
-   "rule_en": "U+00A0 between number and unit (never U+202F/U+2009; replace them where Intl writes them); thousands 10.000 / 10,000; ranges 08:00–22:00; fractions 5 / 8; dates „Samstag, 10. Oktober“, 10.10.2026 (en 2026-10-10); 24 h times; never relative dates alone; format per language with Intl / Locale (TEC-10).",
-   "why": "D22 (seit D85 vom Inhaber bestätigt): keine der Schriften enthält U+202F, viele kein U+2009; ein fehlendes Zeichen zieht eine Systemschrift nach. D87: Zahlen- und Datumsformate je Sprache. Volle Daten sind eindeutig und belegbar.",
-   "do": "60&nbsp;%; <time datetime='2026-10-10'>10.10.2026</time>; Intl.NumberFormat(lang) und danach U+202F/U+2009 durch U+00A0 ersetzen; Android <string name='glasses'>%1$d&#160;Gläser</string>.",
+   "rule": "Setz zwischen Zahl und Einheit ein geschütztes Leerzeichen U+00A0, nie U+202F oder U+2009. Tausender „10.000“ (de) / „10,000“ (en), Bereiche mit Halbgeviertstrich ohne Leerzeichen („08:00–22:00“), Brüche „5 / 8“. Datum „Samstag, 10. Oktober“ in Tagesköpfen, „10.10.2026“ in Notizen (en „2026-10-10“), Uhrzeit 24-stündig „08:12“; nie nur „vor 3 Tagen“. Zahlen und Daten formatierst du je Sprache mit Intl bzw. Locale, nie durch Zusammenkleben. Auch in Diagrammen steht ein Datum im Format der Sprache, englisch „from 28 Sep“ und „Wednesday, 21 Oct“, Tag und Monat mit U+00A0 verbunden.",
+   "rule_en": "U+00A0 between number and unit (never U+202F/U+2009; replace them where Intl writes them); thousands 10.000 / 10,000; ranges 08:00–22:00; fractions 5 / 8; dates „Samstag, 10. Oktober“, 10.10.2026 (en 2026-10-10); 24 h times; never relative dates alone; format per language with Intl / Locale (TEC-10); chart dates too, English „from 28 Sep“, „Wednesday, 21 Oct“ (day and month joined by U+00A0).",
+   "why": "D22 (seit D85 vom Inhaber bestätigt): keine der Schriften enthält U+202F, viele kein U+2009; ein fehlendes Zeichen zieht eine Systemschrift nach. D87: Zahlen- und Datumsformate je Sprache. Volle Daten sind eindeutig und belegbar. D99 (8), Antwort „So, Datum englisch (Empfohlen)“: Die englischen Diagrammwörter bleiben, Daten folgen im Englischen dem Format der Sprache („from 28 Sep“).",
+   "do": "60&nbsp;%; <time datetime='2026-10-10'>10.10.2026</time>; Intl.NumberFormat(lang) und danach U+202F/U+2009 durch U+00A0 ersetzen; Android <string name='glasses'>%1$d&#160;Gläser</string>; Compose SbMessages.shortDate und dayDate („28.09.“, „Mittwoch, 21.10.“; englisch „28 Sep“, „Wednesday, 21 Oct“).",
    "dont": "„60%“, Umbruch zwischen „60“ und „%“, „10 000“, 12-Stunden-Format, Zähler als Badge.",
    "numbers": "U+00A0; verboten U+202F, U+2009",
    "decisions": [
     "D22",
     "D85",
     "D87",
-    "D11"
+    "D11",
+    "D99"
    ],
-   "source": "DECISIONS.md D22, D85, D87; systems/sebaro/spec/01-foundations.md §2.5 Regel 4; spec/07-voice.md §3.4, §3.5; spec/09-platform-web.md §6.1; spec/08-platform-android.md §16",
+   "source": "DECISIONS.md D22, D85, D87, D99 (8); systems/sebaro/SYSTEM.md §5 und CHECKS.md §27.2.4 (Tag und Monat mit U+00A0); systems/sebaro/spec/01-foundations.md §2.5 Regel 4; spec/07-voice.md §3.4, §3.5; spec/09-platform-web.md §6.1; spec/08-platform-android.md §16",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "grep U+202F/U+2009 = 0; grep -nE '[0-9] (%|Tage|Gläser|Min\\.|Std\\.)' findet fehlende U+00A0 (check_site.py TEXT).",
    "example_hint": "Schmale Spalte, in der „60 %“ nicht umbricht; falsch: „60“ am Zeilenende und „%“ in der nächsten Zeile.",
-   "changed": "2026-10-20"
+   "changed": "2026-10-24"
   },
   {
    "id": "TXT-05",
@@ -3194,16 +3206,18 @@
    "dont": "hyphens: auto im Fließtext; text-align: justify; Umbruch zwischen „60“ und „%“; „sebaro Sans“ getrennt.",
    "numbers": "hyphens: manual; Messung max. 70 ch (TXT-06)",
    "decisions": [
-    "D82"
+    "D82",
+    "D99"
    ],
-   "source": "DECISIONS.md D82; systems/sebaro/spec/07-voice.md §3.1 (hyphenation); spec/01-foundations.md §2.5 Regel 1",
+   "source": "DECISIONS.md D82, D99 (1); systems/sebaro/spec/07-voice.md §3.1 (hyphenation); spec/01-foundations.md §2.5 Regel 1",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "grep -n 'hyphens: auto\\|text-align: justify' in Produkt-CSS = 0; Review bei 390 px.",
    "example_hint": "Schmale Spalte mit weichem Trennstrich in „Erinnerungseinstellungen“; falsch: Blocksatz mit automatischer Trennung.",
-   "changed": "2026-10-20"
+   "note": "Ausnahme seit D99 (1), nur für Wörter in Bedienelementen: Passt bei großer Schrift ein einzelnes Wort allein nicht in seine Zeile (untere Navigation, Segmente, Schrittanzeige, in Compose auch Kurzmeldung und Titel), trennt sebaro es automatisch nach der Sprache (ZUG-09). sebaro.css setzt hyphens: auto deshalb an diesen Bauteilen selbst; die Prüfung gilt für das eigene CSS eines Produkts. Fließtext trennt weiter nur von Hand.",
+   "changed": "2026-10-24"
   },
   {
    "id": "TXT-16",
@@ -3249,8 +3263,8 @@
    "status": "entschieden",
    "check": "Kein Grund und kein Radius an .sb-quote; Graustufen-Screenshot: Zitatlinie und Ebenenlinie stehen an verschiedenen Orten.",
    "example_hint": "Absatz, Zitat mit Linie und Quelle darunter; falsch: Zitat im grauen Kasten mit Kobaltkante und Kursivschrift.",
-   "note": "Compose-Fassung fehlt noch.",
-   "changed": "2026-10-21"
+   "note": "In Compose gibt es SbQuote, auf dem Rechner gezeichnet, nicht auf einem Gerät; ein Link in der Quelle ist dort nicht gebaut (vorläufig vom Agenten).",
+   "changed": "2026-10-24"
   },
   {
    "id": "BEL-01",
@@ -3838,8 +3852,8 @@
    "status": "entschieden",
    "check": "Screenreader liest den Namen einmal; bei 320 px steht der Text unter der Kachel, nichts wird abgeschnitten.",
    "example_hint": "Über-Kopf von Tagwerk mit Kachel links; falsch: gestapelt und zentriert.",
-   "note": "Compose-Fassung fehlt noch.",
-   "changed": "2026-10-21"
+   "note": "In Compose gibt es SbAboutHead mit der kurzen Faktenzeile SbFactsLine, auf dem Rechner gezeichnet, nicht auf einem Gerät.",
+   "changed": "2026-10-24"
   },
   {
    "id": "ICO-01",
@@ -4188,8 +4202,8 @@
    "status": "entschieden",
    "check": "Netzwerk-Log: keine Anfrage vor dem Druck; Taste und Regler mit der Tastatur erreichbar; ohne Skript spielt die Bedienung des Browsers.",
    "example_hint": "Zwei Audio-Zeilen, eine mit Fehlersatz; falsch: Balken ohne Regler und Play-Icon ohne Namen.",
-   "note": "Compose-Fassung fehlt noch.",
-   "changed": "2026-10-21"
+   "note": "In Compose gibt es SbAudioRow. Sie spielt nichts selbst ab, die App bindet ihren Player daran (in der Werkstatt mit Media3 kompiliert). Auf dem Rechner gezeichnet; echte Wiedergabe auf einem Gerät und TalkBack sind nicht geprüft.",
+   "changed": "2026-10-24"
   },
   {
    "id": "BIL-07",
@@ -4214,8 +4228,8 @@
    "status": "entschieden",
    "check": "Netzwerk-Log: vor dem Druck nur das Vorschaubild (im Dunkeln zwei), das Video danach; axe video-caption; nach dem Druck liegt der Fokus auf dem Video.",
    "example_hint": "Video mit hellem und dunklem Vorschaubild und der Taste „Abspielen“; falsch: Play-Dreieck ohne Wort direkt auf dem Bild.",
-   "note": "Der Satz zum Vorschaubild war die Antwort der Agenten auf „braucht einen Alt-Text“; der Inhaber hat ihn mit D94 angenommen. Die eigene Tastenfläche und die genannte Zahl der Anfragen beantworten die übrigen Schwächen aus der Skizze. Compose-Fassung fehlt noch.",
-   "changed": "2026-10-22"
+   "note": "Der Satz zum Vorschaubild war die Antwort der Agenten auf „braucht einen Alt-Text“; der Inhaber hat ihn mit D94 angenommen. Die eigene Tastenfläche und die genannte Zahl der Anfragen beantworten die übrigen Schwächen aus der Skizze. In Compose gibt es SbVideo. Es spielt nichts selbst ab, die App bindet ihren Player daran (in der Werkstatt mit Media3 kompiliert). Auf dem Rechner gezeichnet; echte Wiedergabe auf einem Gerät und TalkBack sind nicht geprüft.",
+   "changed": "2026-10-24"
   },
   {
    "id": "ZUG-01",
@@ -4402,6 +4416,29 @@
    "check": "Je Plattform die vier Aufgaben nur mit Tastatur durchgehen; node tools/check_a11y.mjs im CI; Bildvergleich je Produkt erst ab dessen fertigem Release-Stand (D79).",
    "example_hint": "Checkliste der vier Aufgaben mit Prüfzuständen; falsch: „Barrierefrei“ als Siegel ohne Prüfungen.",
    "changed": "2026-10-20"
+  },
+  {
+   "id": "ZUG-09",
+   "area": "zugang",
+   "title": "Große Schrift: Der Platz wächst, nichts wird abgeschnitten",
+   "rule": "Lass bei großer Schrift den Platz mit dem Text wachsen, schneid nie Text ab. Passt ein Wort nicht mehr in seinen Platz (untere Navigation, Segmente, Schrittanzeige, Kurzmeldung, Titel), wird der Platz größer und der Text bricht an Leerzeichen auf zwei Zeilen um; nur ein einzelnes Wort, das allein nicht in die Zeile passt, wird getrennt. Eine segmentierte Auswahl, deren Wörter so nicht passen, wird zum Auswahlfeld. Diagramme in Compose wachsen nur dort, wo Text drinsteht; Flächen, Abstände und Linien bleiben feste dp.",
+   "rule_en": "At large text the room grows with the text, never cut text: where a word no longer fits (bottom navigation, segments, steps, toast, title) the room grows and the text wraps at spaces onto two lines; only a single word that alone does not fit its line is hyphenated; a segmented control whose words still do not fit becomes a select; Compose charts grow only where text sits, areas, gaps and lines stay fixed dp.",
+   "why": "Inhaber D99 (1), Antwort „Zweizeilig, ganze Wörter (Empfohlen)“, und D99 (2), Antwort „Nur wo Text drinsteht (Empfohlen)“. Vorher schnitt die untere Navigation in Compose bei 200 % Schrift „Statisti“ ab, die Wörter der Segmente wurden in ihren Spalten abgeschnitten, und im Web schob „Hell oder Dunkel“ den Kopf auf 558 px Breite. Wer große Schrift braucht, braucht jedes Wort ganz.",
+   "do": "Web: sebaro.css macht es selbst (der Website-Kopf unter 640 px als umbrechende Zeile mit „Hell oder Dunkel“ in eigener Reihe, die Kurzmeldung setzt „Rückgängig“ unter den Satz, die Schrittanzeige das Wort unter den Haken, Segmente und untere Navigation trennen ein zu langes Wort, „Einstel-lungen“); die Seite nennt ihre Sprache in <html lang='de'>, damit die Trennung sie kennt. Compose: SbWrapText, SbNavigationBar, SbSteps, SbToast, SbTopBar, SbPrimaryAction, SbSegmented (zeigt selbst SbSelectField).",
+   "dont": "white-space: nowrap, maxLines = 1, text-overflow: ellipsis oder eine feste Höhe an diesen Stellen; die Schrift an einer Stelle begrenzen; ein Wort trennen, das ganz in die Zeile passt („Glas ein-getragen“); Flächen und Linien eines Diagramms in Compose mit der Schrift wachsen lassen.",
+   "numbers": "geprüft bei 200 % Schrift auf 360 px (Web, Chromium) und bei Schriftgröße 2,0 auf 360 dp (Compose, auf dem Rechner); Segmente werden in Compose zum Auswahlfeld bei „Aus · Stündlich · Alle 2 Std.“ ab 125 %, bei „Woche · Monat · Jahr“ zwischen 170 und 200 %; Heatmap-Zellen am Handy etwa 30 dp (DAT-11)",
+   "decisions": [
+    "D99"
+   ],
+   "source": "DECISIONS.md D99 (1), (2); systems/sebaro/SYSTEM.md §5; spec/08-platform-android.md §14.10, §16; spec/02-components.md §2.7, §3.12, §4.2, §4.8; spec/03-signature.md §6.5; spec/09-platform-web.md §4.1, §4.3, §4.5; css/sebaro.css; CHECKS.md §27",
+   "platforms": [
+    "alle"
+   ],
+   "status": "entschieden",
+   "check": "Web in Chromium bei 360 px mit html { font-size: 200% }: kein Text außerhalb seines Kastens, keine Seite breiter als das Fenster (Kopf, Kurzmeldung, Schritte, Segmente, untere Navigation). Compose: extract_compose.py --render bei Schriftgröße 2,0 und jedes Bild ansehen.",
+   "example_hint": "Untere Navigation, Schritte, Segmente und Kurzmeldung auf wenig Platz: „Einstel-lungen“ getrennt, „Erinnerung“ unter dem Haken, „Alle 2 Std.“ auf zwei Zeilen; falsch: abgeschnittene Wörter in Navigation und Segmenten.",
+   "note": "Im Web noch nicht gebaut: Die segmentierte Auswahl wird dort nicht zum Auswahlfeld; ihre Wörter brechen bei 200 % zwischen den Wörtern um und werden notfalls getrennt („Stünd-lich“, „Alle“ / „2 Std.“); in einer Spalte von etwa 230 px bei 200 % (das Beispiel hier auf 360 px) schneidet der Rand das letzte Segment noch ab. Mit vier Schritten trennt die Schrittanzeige bei 200 % ihre Wörter über drei Zeilen („Erin-ne-rung“), D99 spricht von zwei Zeilen; wie es dort sein soll, ist eine Frage an den Inhaber. Fließtext und Überschriften im Web trennen weiter nur von Hand (TXT-15, SCH-06). Dateinamen in einem Hinweis brechen bei 200 % weiter mitten im Namen. Drei Musterseiten der Werkstatt scrollen bei 200 % auf 360 px noch seitlich. Nicht geprüft: Silbentrennung auf Geräten, die nicht lineare Schriftskala ab Android 14, Firefox und WebKit, die Textgröße eines Handy-Browsers (im Web ist nur die Grundschrift vergrößert).",
+   "changed": "2026-10-24"
   },
   {
    "id": "STR-01",

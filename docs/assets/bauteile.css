@@ -30,6 +30,7 @@
 .g-bauteile-states--wide > .g-bauteile-state > .sb-secondary-action,
 .g-bauteile-states--wide > .g-bauteile-state > .sb-danger-action,
 .g-bauteile-states--wide > .g-bauteile-state > .demo-anchor,
+.g-bauteile-states--wide > .g-bauteile-state > .sb-progress-ring,
 .g-bauteile-start { justify-self: start; }
 
 /* fixed-width demo frames (vendor demo.css) keep their width in a state cell; the generic max 100 % above would win.

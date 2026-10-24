@@ -28,7 +28,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 
 Rule status: **entschieden** = owner decision, binding. **vorläufig** = an agent's decision, valid until the owner
 changes it. **offen** = proposal only, do not build it as a rule. `D<n>` refers to row n of the decision log in the
-workshop repository sebaroDesign (private; the guide covers D1–D98). A rule id (e.g. `AKT-01`) is stable; cite it
+workshop repository sebaroDesign (private; the guide covers D1–D99). A rule id (e.g. `AKT-01`) is stable; cite it
 in code reviews, commit messages and ADRs.
 
 ## 2 The ten rules most often broken
@@ -169,22 +169,41 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
    screenshots below (BIL-02); a sketch page shows at least two ways per question (HAL-08); the iOS form sheet is the
    one exception to pickers-only sheets (EBE-04, MOB-07). Confirmed as written: a tap on Android is the short grey
    fill, no ripple (FAR-08), and generated images stay fineliner without colour (BIL-03).
-   Five questions wait for the owner's choice (`docs/ausblick.html#entscheidung`; a „vorläufig“ rule is not an entry
-   there), none answered by a rule, so leave each as built and never decide it yourself: from workshop `190cbda`,
-   Android at 200 % text (cut words in the bottom navigation, the working primary action, the phone dialog's scrim),
-   inputs on the phone (the select's menu with checks, ← → only in the segmented control, cut segment words) and
-   charts on the phone (fixed dp, growing with the text as on the web, or the current mix; heatmap tab stops, touch
-   hint, English chart words); from `47b42db`, whether required fields show before the press and how, and novalis'
-   sidebar start width (240 px in sebaro, 256 px in novalis today; decided at adoption, D89). Only three rules stay
+   Settled by the owner with D99 (2026-10-24, synced from workshop `f8bdbee`), the answers to the four workshop
+   questions: at large text the room grows and the text wraps at spaces onto two lines; only a single word that alone
+   does not fit its line is hyphenated, nothing is cut (bottom navigation, segments, steps, toast, title); a segmented
+   control whose words still do not fit becomes a select; Compose charts grow only where text sits, areas, gaps and
+   lines stay fixed dp (ZUG-09, new; DAT-04). Voluntary fields carry a grey „(optional)“ after their label, never an
+   asterisk (so no „Pflichtfeld“ legend either; that wording, and no „(Pflicht)“ or „freiwillig“, is the workshop's
+   spec/07 §3 rule 12, written after D99): on the web `Notiz <span class="sb-optional">(optional)</span>` in the label,
+   Compose `SbTextField(…, optional = true)` and `SbSelectField(…, optional = true)`, Swift `SbTextField(…, optional:
+   true)` (EIN-01, STA-03). Provisional agent choices, not D99: the page writes the suffix itself (no script adds it),
+   a field that always holds a value carries none, a select is voluntary only with „Keine“ among its options. Android
+   dialogs dim with the palette scrim (light 32 %), never the system dim (EBE-03). As built: the Compose select opens
+   in the sebaro menu with checks, ← → choose in a segmented row and ↑ ↓ leave it (EIN-04, EIN-05); the phone heatmap
+   has one Tab stop per day, a tap shows the value without a focus ring, arrows lead out at the edge, cells stay about
+   30 dp, and „Tipp auf einen Tag, um seinen Wert zu sehen.“ / „Tap a day to see its value.“ stands under it (DAT-11);
+   English chart words stay and dates follow the language („from 28 Sep“, TXT-04). On the web `sebaro.css` does the
+   large-text part itself for the header (below 640 px a wrapping row), toast, steps, segments and bottom navigation;
+   the web segmented control does **not** become a select yet (its words wrap and hyphenate), and in the workshop
+   `web.html`, `article.html` and `facts.html` still scroll sideways at 200 % on 360 px. In the same sync, without a
+   new decision: the progress ring's value is HTML text after the SVG (`<span class="sb-progress-ring__text"
+   aria-hidden="true">60&nbsp;%</span>`) and the ring grows with it and the text; the value as SVG `<text>` is a
+   deprecated alias (STA-06).
+   Two questions wait for the owner's choice (`docs/ausblick.html#entscheidung`; a „vorläufig“ rule is not an entry
+   there), none answered by a rule, so leave each as built and never decide it yourself: novalis' sidebar start width
+   (240 px in sebaro, 256 px in novalis today; decided at adoption, D89), and from `f8bdbee` four steps at 200 % text
+   (two rows, only the current step's word, or as now, words hyphenated over three lines). Only three rules stay
    vorläufig, by D98: BIL-04 and ZUG-07 until a legal check before the first publication of a product (the marking of
    generated images, the accessibility statement), DSK-01 until a run in a real Tauri webview with novalis (D89); never
-   present them as decided. Compose (workshop `190cbda`, no owner
-   decision): charts batch 1 (`SbBarChart`, `SbStats` with the sparkline, `SbShareRows`, `SbGoalRing`, `SbHeatmap`) and
-   the fields `SbTextField`, `SbSearchField`, `SbSelectField`, `SbSegmented` and `SbTabs` now exist, rendered on the
-   JVM with the workshop's new render tool (`extract_compose.py --render`), not on a device. Still not built in
-   Compose, ask before building one: calendar, about head, small display set, sticky group head, timeline, line, series,
-   deviation and histogram charts, board, audio, video, map, quote, code, diff. Nothing of this is tested on real
-   Android or iOS devices, WebKit, Firefox, screen readers or real Tauri windows. See `docs/ausblick.html#offen`.
+   present them as decided. Compose (workshop `190cbda`, `8a002e0`, `0861d3f`, parts 1 to 3, no owner decision): every
+   new web component and every chart has a Compose wrapper (all charts, calendar, sticky group head, timeline, about
+   head with the facts line, the small display set, quote, code block, diff, place, board, audio row, video), rendered
+   on the JVM with the workshop's render tool (`extract_compose.py --render`), not on a device; audio row and video are
+   stateless, the app binds its own player (Media3 compiled in the workshop, real playback not checked). Not built in
+   Compose, ask before building one: the sortable table and the intro step (an app composes it from `SbSteps`, text
+   and `SbTextAction`). Nothing of this is tested on real Android or iOS devices, with TalkBack or VoiceOver, in
+   WebKit, Firefox or real Tauri windows. See `docs/ausblick.html#offen`.
 
 ## 4 Where the system files come from
 
@@ -220,7 +239,7 @@ node tools/og.mjs --check --png-bytes  # fresh render equals the committed snipp
 python3 tools/sync_from_design.py --check          # docs/sebaro/ equals a fresh export of the workshop commit
 # with a sebaroDesign checkout, its demo check on every page, run from there (absolute page path):
 #   python3 tools/check_demo.py <abs path>/docs/<page>.html --page web --skip content --no-write
-python3 tools/release.py 2.9.0         # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.8.0 is the last release)
+python3 tools/release.py 2.10.0        # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.9.0 is the last release)
 ```
 
 The workshop's demo check (1.3.0) measures one- and two-character text on screen pixels; on `regeln.html` it reports
@@ -326,5 +345,7 @@ hand with `tools/sync_from_design.py`.
 The guide shows sebaro as built and checked in sebaroDesign; Chromium screenshots do not verify real Android/iOS
 devices, Windows rendering, WebKit/Tauri webviews or screen readers. All example data on the pages is invented.
 The owner answered the round-6 sketch (63 questions, private, never linked from here) with D91 and the open readings
-after it with D92 to D97, and confirmed 70 of the 73 vorläufig rules with D98; what is still open, and what is built but untested (real iOS devices, real Tauri windows),
-is collected on `docs/ausblick.html`.
+after it with D92 to D97, confirmed 70 of the 73 vorläufig rules with D98 and answered the four workshop questions on large
+text, inputs and charts on the phone and required fields with D99; what is still open, and what is built but untested (real iOS devices, real Tauri windows),
+is collected on `docs/ausblick.html`. At 200 % text on 360 px the guide's own pages still scroll sideways (the footer
+and wide specimens; `docs/ausblick.html#p-g-grosse-schrift`).

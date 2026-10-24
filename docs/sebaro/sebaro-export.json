@@ -15,7 +15,7 @@
   "kotlinNamespace": null,
   "launcherOnly": false,
   "sebaroDesign": {
-    "commit": "47b42dbf8337bb6abe5d66a12cd08609798d27f3",
+    "commit": "f8bdbeed72824ecb15599a0ac8cae42a4f5c3ede",
     "uncommittedChanges": false
   },
   "contracts": {
@@ -97,9 +97,9 @@
     {
       "path": "css/sebaro.css",
       "source": "systems/sebaro/css/sebaro.css",
-      "sourceSha256": "9faf9273b931188c0b36820dc947c8868005290c7cb585e4a66fe7c8b1bcef8f",
-      "sha256": "9faf9273b931188c0b36820dc947c8868005290c7cb585e4a66fe7c8b1bcef8f",
-      "bytes": 227389
+      "sourceSha256": "83b19ae9c98c855d671d031b82b003dda2ed5eaa1b25ec1156d619c8dee6058e",
+      "sha256": "83b19ae9c98c855d671d031b82b003dda2ed5eaa1b25ec1156d619c8dee6058e",
+      "bytes": 230459
     },
     {
       "path": "fonts/fonts.css",
@@ -818,9 +818,9 @@
     {
       "path": "js/sb-form.js",
       "source": "systems/sebaro/demo/assets/sb-form.js",
-      "sourceSha256": "f5cb256b54b04dd1e0940480778b206949de008e7396a6ba475c956350520e15",
-      "sha256": "f5cb256b54b04dd1e0940480778b206949de008e7396a6ba475c956350520e15",
-      "bytes": 14310
+      "sourceSha256": "0d45cba8e2b869d9b5106c926cb4586349504e85795f014a5382a3e1aabef3ab",
+      "sha256": "0d45cba8e2b869d9b5106c926cb4586349504e85795f014a5382a3e1aabef3ab",
+      "bytes": 14710
     },
     {
       "path": "js/sb-print.js",
@@ -840,7 +840,7 @@
       "path": "README.md",
       "source": null,
       "sourceSha256": null,
-      "sha256": "1650d3b2a90470e18c37c9ccea8bb8187d4ffa123c90018604d2c2fb32ce86f6",
+      "sha256": "5a604a71f40e7e30b3032d97776b12de95f99d2118d0527c8164ad5485dee02b",
       "bytes": 14161,
       "transform": "generated"
     }

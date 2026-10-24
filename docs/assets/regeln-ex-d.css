@@ -195,3 +195,12 @@
 
 .g-ex--dont .g-rx-d-dotbtn { position: relative; display: inline-grid; place-items: center; inline-size: 40px; block-size: 40px; }
 .g-ex--dont .g-rx-d-dotbtn__dot { position: absolute; inset-block-start: 6px; inset-inline-end: 6px; inline-size: 10px; block-size: 10px; border-radius: 50%; background: #EA4335; }
+
+/* ------------------------------------------------------------------ large text, D99 (1) (ZUG-09)
+   The specimens sit in a narrow column instead of at 200 % text: sebaro sizes type in rem, so only the root font
+   size could enlarge it, and the rule page must not change that. Little room has the same effect on the words. */
+.g-rx-d-tight { display: grid; gap: var(--sb-space-2); inline-size: 248px; max-inline-size: 100%; }
+.g-rx-d-tight > .demo-label { margin: var(--sb-space-2) 0 0; }
+.g-rx-d-tight > .demo-label:first-child { margin-block-start: 0; }
+.g-ex--dont .g-rx-d-cut .sb-bottom-nav__label,
+.g-ex--dont .g-rx-d-cut .sb-segmented__face { white-space: nowrap; overflow: hidden; hyphens: manual; max-inline-size: 100%; }
