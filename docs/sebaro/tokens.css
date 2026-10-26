@@ -1,8 +1,8 @@
 /* generated — do not edit.
- * sebaroDesign token contract 1.9 · draft "sebaro" · palette "sebaro"
- * source: systems/sebaro/tokens/tokens.json (sha256 1fa205d732288097)
- *         palettes/sebaro.json (sha256 df4c9637763f69d3)
- * builder: tools/build_tokens.py 1.9.0 · spec: shared/TOKEN-CONTRACT.md
+ * sebaroDesign token contract 1.10 · draft "sebaro" · palette "sebaro"
+ * source: systems/sebaro/tokens/tokens.json (sha256 278cd39531d62d2a)
+ *         palettes/sebaro.json (sha256 3f718c41c545ea72)
+ * builder: tools/build_tokens.py 1.10.1 · spec: shared/TOKEN-CONTRACT.md
  */
 
 /* 1. Mode-independent tokens. */
@@ -83,9 +83,20 @@
   --sb-x-sebaro-layer-line-width: 2px;
   --sb-x-sebaro-danger-bevel-size: 12px;
   --sb-x-sebaro-enter-distance: 8px;
+  --sb-x-sebaro-enter-fade-duration: 200ms;
   --sb-x-sebaro-start-tile-size: 96px;
   --sb-x-sebaro-link-underline-width: 2px;
   --sb-x-sebaro-mark-edge-width: 2px;
+  --sb-x-sebaro-pane-sidebar: 240px;
+  --sb-x-sebaro-pane-sidebar-min: 200px;
+  --sb-x-sebaro-pane-sidebar-max: 360px;
+  --sb-x-sebaro-pane-inspector: 280px;
+  --sb-x-sebaro-pane-inspector-min: 240px;
+  --sb-x-sebaro-pane-inspector-max: 400px;
+  --sb-x-sebaro-board-column: 240px;
+  --sb-x-sebaro-traffic-light-room: 80px;
+  --sb-x-sebaro-editor-size: 1rem;
+  --sb-x-sebaro-editor-line-height: 1.6;
 }
 
 /* 2. Light mode (default). [data-theme="light"] also works on any subtree. */
@@ -780,6 +791,16 @@
     --sb-motion-duration-medium: 1ms;
     --sb-motion-duration-long: 1ms;
   }
+}
+
+/* 7a. The app setting „Bewegung immer reduzieren“ (TOKEN-CONTRACT 1.10 §8.7): html[data-sb-motion="reduce"],
+       or the attribute on a container for its part of the page, collapses the same durations as
+       section 7. */
+:root[data-sb-motion="reduce"],
+[data-sb-motion="reduce"] {
+  --sb-motion-duration-short: 1ms;
+  --sb-motion-duration-medium: 1ms;
+  --sb-motion-duration-long: 1ms;
 }
 
 /* 8. Print: paper is light whatever the screen shows (TOKEN-CONTRACT 1.9 §9.1, W8a). The light values of

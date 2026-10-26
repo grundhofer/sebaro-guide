@@ -76,10 +76,14 @@
 .g-app-sysdialog__title { font: var(--sb-type-mobile-title); letter-spacing: var(--sb-type-mobile-title-tracking); }
 .g-app-sysdialog__actions { flex-direction: column; align-items: stretch; gap: var(--sb-space-2); }
 .g-app-sysdialog__actions span { display: flex; align-items: center; justify-content: center; min-block-size: var(--sb-size-target-touch); border: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-pill); }
-.g-app-system-ground { box-sizing: border-box; display: grid; align-content: start; gap: var(--sb-space-4); padding: var(--sb-space-6) var(--sb-space-3); }
+.g-app-system-ground { box-sizing: border-box; display: grid; align-content: start; gap: var(--sb-space-4); padding: var(--sb-space-6) var(--sb-space-3); container: g-app-launcher / inline-size; }
 .g-app-system-ground__time { margin: 0; font: var(--sb-type-mobile-display); letter-spacing: var(--sb-type-mobile-display-tracking); font-variant-numeric: var(--sb-type-numeric-variant); }
 
 .g-app-launcher { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sb-space-6) var(--sb-space-2); margin: 0; padding: var(--sb-space-6) var(--sb-space-3); list-style: none; }
+/* large text (D99 (1), D102 lane narrow): an app's name gets a whole line once four columns would squeeze it, two
+ * columns below 12em of the screen, one below 10em (320 px at 200 %: „Reminder“ stays whole) */
+@container g-app-launcher (width < 12em) { .g-app-launcher { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@container g-app-launcher (width < 10em) { .g-app-launcher { grid-template-columns: minmax(0, 1fr); } }
 .g-app-launcher > li { display: grid; justify-items: center; align-content: start; gap: var(--sb-space-1); min-inline-size: 0; text-align: center; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); overflow-wrap: anywhere; }
 
 /* Vorschlag: home-screen widget, a level-1 layer (bg + 2 px ink line, radius 12) */

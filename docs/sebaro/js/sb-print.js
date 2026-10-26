@@ -1,19 +1,16 @@
-// sb-print.js: paper is always light (D91 W8a; spec/09 §18.3). Classic script, CSP-safe, writes no words.
-// Before printing it sets html[data-theme="light"], whatever the screen shows (the system's dark mode or the stored
-// „Hell oder Dunkel“ choice), and opens every closed <details> outside navigation (frequent questions, a closed table
-// of contents row is navigation and stays off paper); after printing it puts both back. It never touches the stored
-// choice (sb-theme) and fires no sb-theme-change. The print rules of css/sebaro.css hide navigation and action zones.
-// Since 2026-10-22 tokens.css carries a generated @media print block with the light values (TOKEN-CONTRACT 1.9), so the
-// theme part of this script is redundant; it goes once that is checked on the demo pages (spec/09 §18.3). The
-// <details> part stays.
+// sb-print.js: what a printed page needs besides its print CSS (D91 W8a; spec/09 §18.3). Classic script, CSP-safe,
+// writes no words. Before printing it opens every closed <details> outside navigation (frequent questions; a closed
+// table of contents row is navigation and stays off paper); after printing it closes them again. The colours need no
+// script: tokens.css carries a generated @media print block with the light values (TOKEN-CONTRACT 1.9 §9.1), the
+// illustration pair of spec/06 §8 has its print rule, and sb-media.js shows the light poster while printing. Until
+// 2026-10-25 this script also set html[data-theme="light"] before printing; checked on the demo pages in dark and with
+// a stored dark choice, that half did nothing the CSS does not, and it went (OR-11, CHECKS.md §29.5). The print rules
+// of css/sebaro.css hide navigation and action zones.
 (function () {
-  var root = document.documentElement;
-  var saved = null;
-  var opened = [];
+  var opened = null;
   window.addEventListener("beforeprint", function () {
-    if (saved) return;
-    saved = { theme: root.getAttribute("data-theme") };
-    root.setAttribute("data-theme", "light");
+    if (opened) return;
+    opened = [];
     document.querySelectorAll("details:not([open])").forEach(function (d) {
       if (d.closest("nav")) return;
       d.open = true;
@@ -21,10 +18,8 @@
     });
   });
   window.addEventListener("afterprint", function () {
-    if (!saved) return;
-    if (saved.theme === null) root.removeAttribute("data-theme"); else root.setAttribute("data-theme", saved.theme);
+    if (!opened) return;
     opened.forEach(function (d) { d.open = false; });
-    opened = [];
-    saved = null;
+    opened = null;
   });
 })();

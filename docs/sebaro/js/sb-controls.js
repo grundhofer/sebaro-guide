@@ -7,17 +7,44 @@
 //                           sets html[data-sb-motion="reduce"] and stores sb-motion (read again by theme-init.js);
 //                           a menuitemcheckbox with data-sb-motion-setting (window menu „Darstellung“, F4b) is the
 //                           same setting, and every control of it keeps the same aria-checked
+//   [data-sb-language-choice] the language of a page without a language URL (D102 (50), RB-29; spec/09 §18.2): a
+//                           group of radios (one per language, value = the language code) that looks like „DE / EN“;
+//                           a choice sets <html lang> without a reload, stores sb-lang (theme-init.js applies it before
+//                           first paint on <html data-sb-language="stored">), keeps every such group in step and fires
+//                           "sb-language-change" on document (detail { lang }), on which the app swaps its words.
+//                           Each group needs a radio name of its own; a group whose name another radio shares is
+//                           renamed, with a console warning. Inside [data-sb-language-root] (a specimen) it sets that
+//                           element's lang instead and stores nothing (provisional, agent)
 //   [data-sb-demo-progress] specimen of D48: the primary action shows its own progress („ok“ or „fail“ run)
 //   .sb-chip[aria-pressed]  aria-pressed; one chosen chip per [data-sb-single] group (filter "Alle")
-//   [data-sb-opens="id"]    opens <dialog id> as a modal; the dialog's form method="dialog" closes it
+//   [data-sb-opens="id"]    opens <dialog id> as a modal; the dialog's form method="dialog" closes it; a press on the
+//                           scrim of a dialog.sb-dialog cancels it like Escape ("cancel", then close), unless the
+//                           press began inside it or a field of it has changed since it opened (NV-L8; provisional,
+//                           agent)
 //   .sb-range__track        keeps the accent fill between the handles (--sb-range-from / --sb-range-to, 0..1)
 //   [data-sb-indeterminate] sets checkbox.indeterminate (no HTML attribute exists for it)
 //   .sb-tabs [role="tab"]   aria-selected + hidden on the tab panels (not for aria-disabled="true")
 //   .sb-code__copy          copies the code of its block; the label says „Kopiert“ for 2 s
 //   .sb-toc[data-sb-follow] the current entry (aria-current="location") follows the reading position
+//   .sb-toc--overlay        the contents as an overlay over a reader (D102 (34)): nav.sb-toc.sb-toc--overlay[popover]
+//                           opened by its popovertarget button: aria-expanded follows it, it stands under the button
+//                           (above it without room), focus goes to the current entry, ArrowDown / ArrowUp / Home / End
+//                           move between the entries, Tab out of it closes it; choosing an entry makes it the current
+//                           one (aria-current="location") and closes the overlay, then the link jumps and focus moves to
+//                           the target (tabindex="-1" where it is not focusable); with data-sb-follow the current entry, on opening, is the last
+//                           heading above the reader's top + 96 px
+//   jump targets            D102 (32): a jump target in .sb-prose keeps its place line (:target in sebaro.css) until the
+//                           next action: the next key (not a lone modifier) or press marks it data-sb-past; a new jump,
+//                           or a press on the link to the same place, shows the line again
+//   .sb-callout__hide       „Ausblenden“ (D102 (39)): fires "sb-callout-hide" (cancelable) on the callout, then hides it;
+//                           focus goes to the next control after it (else the one before)
 //   .sb-toast               sbToast.show(toast) / sbToast.hide(toast) and [data-sb-toast-show="id"]: the toast enters
-//                           (.sb-enter), stays 6 s, pauses while the pointer is over it or focus is inside, Escape
-//                           closes it; .sb-toast__action fires "sb-toast-action" on the toast, then it closes (D78)
+//                           (.sb-enter), stays 6 s, pauses while the pointer is over it or focus is inside (only a toast
+//                           with an action can hold focus), Escape closes it from anywhere on the page, without taking
+//                           the key from what has focus, unless a modal dialog, an open popover (menu, contents) or
+//                           the palette has it (NV-F5); show() unhides the toast empty and writes its sentence two
+//                           frames later, so a screen reader hears a live region that was already there (NV-F9);
+//                           .sb-toast__action fires "sb-toast-action" on the toast, then it closes (D78)
 // Keyboard and pointer of menus, tabs, tooltips, sheets and search fields are sb-menu.js, sb-tabs.js, sb-tooltip.js,
 // sb-sheet.js and sb-search.js; windows are sb-tree.js and sb-window.js (spec/02 §7, D80).
 // State attributes (D85): ARIA where ARIA has the state (aria-busy, aria-current="step"), data-sb-state for the rest
@@ -89,6 +116,11 @@
       });
       return;
     }
+    var calloutHide = closestIn(event, ".sb-callout__hide");
+    if (calloutHide) {
+      hideCallout(calloutHide.closest(".sb-callout"));
+      return;
+    }
     var toastAction = closestIn(event, ".sb-toast__action");
     if (toastAction) {
       var owner = toastAction.closest(".sb-toast");
@@ -122,6 +154,47 @@
     try { if (reduce) localStorage.setItem("sb-motion", "reduce"); else localStorage.removeItem("sb-motion"); } catch (e) {}
     document.querySelectorAll("[data-sb-motion-setting]").forEach(function (s) { s.setAttribute("aria-checked", String(reduce)); });
   }
+
+  // D102 (50): the language as a stored choice
+  function languageRoot(el) { return (el && el.closest("[data-sb-language-root]")) || document.documentElement; }
+  // WA-R3: radios of one name are one group for the browser, so a second language group with the same name would
+  // show no choice after the first is used; such a group gets a name of its own (and the page a warning)
+  var languageNames = 0;
+  function ownName(group) {
+    var radios = group.querySelectorAll("input[type='radio']");
+    var name = radios.length ? radios[0].name : "";
+    var shared = Array.prototype.some.call(document.querySelectorAll("input[type='radio']"), function (r) {
+      return r.name === name && !group.contains(r);
+    });
+    if (!radios.length || (name && !shared)) return;
+    var fresh;
+    do { fresh = "sb-language-choice-" + (++languageNames); } while (document.getElementsByName(fresh).length);
+    radios.forEach(function (r) { r.name = fresh; });
+    if (name) console.warn("sb-controls.js: two [data-sb-language-choice] groups share the radio name \"" + name + "\"; one is now \"" + fresh + "\" (spec/03 §6.6)");
+  }
+  function syncLanguage(root) {
+    var lang = (root.getAttribute("lang") || "").toLowerCase();
+    document.querySelectorAll("[data-sb-language-choice]").forEach(function (group) {
+      if (languageRoot(group) !== root) return;
+      ownName(group);
+      group.querySelectorAll("input[type='radio']").forEach(function (input) {
+        var v = input.value.toLowerCase();
+        input.checked = v === lang || v === lang.split("-")[0];
+      });
+    });
+  }
+  function setLanguage(input) {
+    var root = languageRoot(input), lang = input.value;
+    if (root.getAttribute("lang") === lang) return;
+    root.setAttribute("lang", lang);
+    if (root === document.documentElement) { try { localStorage.setItem("sb-lang", lang); } catch (e) {} }
+    syncLanguage(root);
+    (root === document.documentElement ? document : root).dispatchEvent(new CustomEvent("sb-language-change", { bubbles: true, detail: { lang: lang } }));
+  }
+  document.addEventListener("change", function (event) {
+    var input = event.target instanceof Element ? event.target.closest("[data-sb-language-choice] input[type='radio']") : null;
+    if (input && input.checked) setLanguage(input);
+  });
 
   function icon(href, cls) {
     var NS = "http://www.w3.org/2000/svg", svg = document.createElementNS(NS, "svg"), use = document.createElementNS(NS, "use");
@@ -159,7 +232,9 @@
         button.setAttribute("data-sb-state", "retry");
         if (message) {
           message.appendChild(icon("#error--16", "sb-icon sb-icon--16"));
-          message.appendChild(document.createTextNode(button.getAttribute("data-sb-fail") || t(button, "failed")));
+          var sentence = document.createElement("span");   // the glyph and one span with the sentence (NV-F3, spec/02 §1.1)
+          sentence.textContent = button.getAttribute("data-sb-fail") || t(button, "failed");
+          message.appendChild(sentence);
         }
         button.setAttribute("data-sb-demo-progress", "ok");
         return;
@@ -172,24 +247,59 @@
     }, 1800);
   }
 
+  // D102 (39), NV-B20: „Ausblenden“ of a callout. "sb-callout-hide" (cancelable, bubbles) tells the product, which keeps
+  // the choice; unless it is cancelled the callout gets hidden and focus, which was on the button, moves to the next
+  // control after the callout (else the one before it), never to the page's start (provisional, agent).
+  var FOCUSABLE = "a[href], button:not([disabled]), input:not([disabled]):not([type='hidden']), select:not([disabled]), " +
+    "textarea:not([disabled]), summary, [tabindex]:not([tabindex='-1'])";
+  function hideCallout(callout) {
+    if (!callout || !callout.dispatchEvent(new CustomEvent("sb-callout-hide", { bubbles: true, cancelable: true }))) return;
+    var all = Array.prototype.filter.call(document.querySelectorAll(FOCUSABLE), function (el) {
+      return !callout.contains(el) && el.getClientRects().length > 0;
+    });
+    var after = all.filter(function (el) { return callout.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING; });
+    var before = all.filter(function (el) { return callout.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_PRECEDING; });
+    var focusWasInside = callout.contains(document.activeElement);
+    callout.hidden = true;
+    var next = after[0] || before[before.length - 1];
+    if (focusWasInside && next) next.focus({ preventScroll: true });
+  }
+
   // D78: the toast's lifetime. 6 s, the same for every toast (spec/02 §4.8); never used for errors, which stay next to
   // what failed. The timer stops while the pointer is over the toast or focus is inside it and runs on with the time
   // that was left; Escape closes it; focus that was inside goes back to where it came from.
+  // NV-F9 (provisional, agent): a live region that enters the accessibility tree together with its text is often not
+  // announced (WebKit / VoiceOver); show() therefore unhides the toast with its sentence taken out and puts the
+  // sentence back two animation frames later, when the empty region is already in the tree. The toast keeps its size
+  // meanwhile (the sentence's box stays, only its text is out), and its action stays in place. Not checked with
+  // VoiceOver here.
   var TOAST_MS = 6000;
+  function toastSentence(toast) { return toast.querySelector("p, .sb-toast__text"); }
   window.sbToast = {
     show: function (toast) {
       if (!toast) return;
-      var s = toast._sbToast || (toast._sbToast = { timer: 0, left: 0, since: 0, hold: { pointer: false, focus: false }, from: null });
+      var s = toast._sbToast || (toast._sbToast = { timer: 0, left: 0, since: 0, hold: { pointer: false, focus: false }, from: null, words: null, frame: 0 });
       clearTimeout(s.timer);
+      cancelAnimationFrame(s.frame);
       s.from = document.activeElement;
+      var sentence = toastSentence(toast);
+      if (sentence && s.words === null) {
+        s.words = document.createDocumentFragment();
+        while (sentence.firstChild) s.words.appendChild(sentence.firstChild);
+        sentence.style.minBlockSize = "1lh";   // the line stays while its words are out (CSSOM, CSP-safe)
+      }
       toast.hidden = false;
       toast.classList.remove("sb-enter"); void toast.offsetWidth; toast.classList.add("sb-enter");
+      s.frame = requestAnimationFrame(function () {
+        s.frame = requestAnimationFrame(function () { putBack(toast); });
+      });
       s.left = TOAST_MS;
       run(toast);
     },
     hide: function (toast) {
       var s = toast && toast._sbToast;
-      if (s) clearTimeout(s.timer);
+      if (s) { clearTimeout(s.timer); cancelAnimationFrame(s.frame); }
+      if (toast && s) putBack(toast);
       if (!toast || toast.hidden) return;
       var focusInside = toast.contains(document.activeElement);
       toast.hidden = true;
@@ -197,6 +307,13 @@
       if (focusInside && s && s.from && document.contains(s.from)) s.from.focus({ preventScroll: true });
     }
   };
+  function putBack(toast) {
+    var s = toast._sbToast, sentence = toastSentence(toast);
+    if (!s || s.words === null || !sentence) return;
+    sentence.appendChild(s.words);
+    sentence.style.minBlockSize = "";
+    s.words = null;
+  }
   function run(toast) {
     var s = toast._sbToast;
     clearTimeout(s.timer);
@@ -221,10 +338,22 @@
     var x = closestIn(event, ".sb-toast");
     if (x && !(event.relatedTarget instanceof Node && x.contains(event.relatedTarget))) hold(x, "focus", false);
   });
+  // NV-F5 (provisional, agent): a toast without an action never gets focus, so Escape is heard on the whole page, in the
+  // capture phase (a palette, search or dialog that stops its Escape would otherwise keep the toast open) and never
+  // consumed (no preventDefault, no stopPropagation): an editor or field gets its Escape as before. Escape that belongs
+  // to an open modal dialog (sheet, palette, confirmation) or an open popover (menu, contents overlay, note, tooltip)
+  // leaves the toast alone, unless it comes from inside the toast itself.
+  function escapeTaken() {
+    try { return !!document.querySelector("dialog:modal, :popover-open"); } catch (e) { return !!document.querySelector("dialog[open]"); }
+  }
   document.addEventListener("keydown", function (event) {
-    var x = event.key === "Escape" ? closestIn(event, ".sb-toast") : null;
-    if (x && x._sbToast) window.sbToast.hide(x);
-  });
+    if (event.key !== "Escape" || event.isComposing) return;
+    var inside = closestIn(event, ".sb-toast");
+    if (inside) { if (inside._sbToast) window.sbToast.hide(inside); return; }
+    if (escapeTaken()) return;
+    var shown = document.querySelectorAll(".sb-toast:not([hidden])");
+    for (var i = 0; i < shown.length; i++) if (shown[i]._sbToast) window.sbToast.hide(shown[i]);
+  }, true);
 
   function syncRange(track) {
     var inputs = track.querySelectorAll("input[type='range']");
@@ -257,12 +386,147 @@
     update();
   }
 
+  // D102 (32): the place line of a jump target lasts until the next action
+  function currentTarget() {
+    var id = location.hash.slice(1), el = null;
+    try { el = id ? document.getElementById(decodeURIComponent(id)) : null; } catch (e) { el = null; }
+    return el && el.closest(".sb-prose") ? el : null;
+  }
+  function leaveTarget() { var el = currentTarget(); if (el) el.setAttribute("data-sb-past", ""); }
+  document.addEventListener("keydown", function (event) {
+    if (!/^(Shift|Control|Alt|AltGraph|Meta|CapsLock|Fn|OS)$/.test(event.key)) leaveTarget();
+  }, true);
+  document.addEventListener("pointerdown", leaveTarget, true);
+  window.addEventListener("hashchange", function () { var el = currentTarget(); if (el) el.removeAttribute("data-sb-past"); });
+  document.addEventListener("click", function (event) {
+    var a = closestIn(event, "a[href^='#']");
+    if (!a || a.hash !== location.hash) return;                    // a new jump: hashchange shows the line
+    var el = currentTarget();
+    if (el) el.removeAttribute("data-sb-past");                     // the same place again: show it again
+  });
+
+  // D102 (34): the contents as an overlay over a reader (sb-menu's surface, sb-toc's rows); without the Popover API the
+  // overlay stays a list in the page
+  var POPOVER = typeof HTMLElement.prototype.showPopover === "function";
+  function overlayButton(toc) {
+    return toc.id ? document.querySelector("[popovertarget='" + CSS.escape(toc.id) + "']") : null;
+  }
+  function overlayLinks(toc) { return Array.prototype.slice.call(toc.querySelectorAll("a[href]")); }
+  function scrollerOf(el) {
+    for (var p = el && el.parentElement; p && p !== document.body; p = p.parentElement) {
+      var o = getComputedStyle(p).overflowY;
+      if ((o === "auto" || o === "scroll") && p.scrollHeight > p.clientHeight) return p;
+    }
+    return null;
+  }
+  function followOverlay(toc) {
+    var links = overlayLinks(toc).filter(function (a) { return a.hash; });
+    var targets = links.map(function (a) { try { return document.getElementById(decodeURIComponent(a.hash.slice(1))); } catch (e) { return null; } });
+    if (!links.length || targets.some(function (t) { return !t; })) return;
+    var box = scrollerOf(targets[0]), top = (box ? box.getBoundingClientRect().top : 0) + 96, current = 0;
+    targets.forEach(function (t, i) { if (t.getBoundingClientRect().top <= top) current = i; });
+    links.forEach(function (a, i) { if (i === current) a.setAttribute("aria-current", "location"); else a.removeAttribute("aria-current"); });
+  }
+  function placeOverlay(toc) {
+    var button = overlayButton(toc);
+    if (!button) return;
+    var b = button.getBoundingClientRect(), m = 8, vw = document.documentElement.clientWidth, vh = window.innerHeight;
+    var w = toc.offsetWidth, h = toc.offsetHeight, rtl = getComputedStyle(button).direction === "rtl";
+    var left = rtl ? b.right - w : b.left;
+    left = Math.max(m, Math.min(left, vw - w - m));
+    var below = b.bottom + 4, top = below + h <= vh - m || b.top - 4 - h < m ? below : b.top - 4 - h;
+    toc.style.left = Math.round(left) + "px";
+    toc.style.top = Math.round(Math.max(m, top)) + "px";
+  }
+  document.addEventListener("toggle", function (event) {
+    var toc = event.target;
+    if (!(toc instanceof Element) || !toc.matches(".sb-toc--overlay[popover]")) return;
+    var button = overlayButton(toc), open = event.newState === "open";
+    if (button) button.setAttribute("aria-expanded", String(open));
+    if (!open) return;
+    if (toc.hasAttribute("data-sb-follow")) followOverlay(toc);
+    placeOverlay(toc);
+    var links = overlayLinks(toc);
+    var first = toc.querySelector("a[aria-current]") || links[0];
+    if (first) first.focus({ preventScroll: true });
+  }, true);
+  document.addEventListener("keydown", function (event) {
+    var toc = closestIn(event, ".sb-toc--overlay[popover]");
+    if (!toc || !/^(ArrowDown|ArrowUp|Home|End)$/.test(event.key)) return;
+    var links = overlayLinks(toc), i = links.indexOf(document.activeElement);
+    if (!links.length) return;
+    event.preventDefault();
+    var next = event.key === "Home" ? 0 : event.key === "End" ? links.length - 1
+      : event.key === "ArrowDown" ? (i + 1) % links.length : (i - 1 + links.length) % links.length;
+    links[next].focus();
+  });
+  document.addEventListener("focusout", function (event) {
+    var toc = POPOVER ? closestIn(event, ".sb-toc--overlay[popover]") : null;
+    if (!toc || !toc.matches(":popover-open")) return;
+    var to = event.relatedTarget;
+    if (to instanceof Node && toc.contains(to)) return;
+    if (to) toc.hidePopover();                                      // Tab out of it; a press outside closes it anyway
+    if (to && to !== document.activeElement) to.focus({ preventScroll: true });
+  });
+  document.addEventListener("click", function (event) {
+    var a = POPOVER ? closestIn(event, ".sb-toc--overlay[popover] a[href]") : null;
+    if (!a) return;
+    var toc = a.closest(".sb-toc--overlay");
+    overlayLinks(toc).forEach(function (l) { if (l === a) l.setAttribute("aria-current", "location"); else l.removeAttribute("aria-current"); });
+    if (toc.matches(":popover-open")) toc.hidePopover();            // then the jump, and focus moves to its target
+    var target = null;
+    try { target = a.hash ? document.getElementById(decodeURIComponent(a.hash.slice(1))) : null; } catch (e) { target = null; }
+    if (!target) return;
+    if (!target.matches("a[href], button, input, select, textarea, summary, [tabindex]")) target.setAttribute("tabindex", "-1");
+    setTimeout(function () { target.focus({ preventScroll: true }); }, 0);   // after the browser's own jump
+  });
+  function replaceOpenOverlays() { if (POPOVER) document.querySelectorAll(".sb-toc--overlay[popover]:popover-open").forEach(placeOverlay); }
+  window.addEventListener("resize", replaceOpenOverlays);
+  window.addEventListener("scroll", replaceOpenOverlays, { passive: true, capture: true });
+
+  // .sb-dialog: a press on the scrim cancels like Escape (NV-L8, spec/02 §4.6; provisional, agent). Only a press that
+  // begins and ends on the scrim (a selection dragged out of a field does not close), never a keyboard "click", and not
+  // while a field has changed since the dialog opened (its values are taken when focus first enters it, which
+  // showModal() does at once). A sheet (sb-sheet.js) and the palette (sb-window.js) have their own
+  function sbDialog(el) { return el instanceof HTMLDialogElement && el.classList.contains("sb-dialog") && el.open ? el : null; }
+  function outsideBox(dlg, event) {
+    var r = dlg.getBoundingClientRect();
+    return event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom;
+  }
+  function fieldValues(dlg) {
+    return Array.prototype.map.call(dlg.querySelectorAll("input, textarea, select"), function (f) {
+      return f.type === "checkbox" || f.type === "radio" ? String(f.checked) : f.value;
+    }).join("\u0000");
+  }
+  var scrimDown = null;
+  document.addEventListener("focusin", function (event) {
+    var dlg = event.target instanceof Element ? sbDialog(event.target.closest("dialog")) : null;
+    if (dlg && dlg._sbValues == null) dlg._sbValues = fieldValues(dlg);
+  }, true);
+  document.addEventListener("close", function (event) {
+    if (event.target instanceof HTMLDialogElement) event.target._sbValues = null;
+  }, true);
+  document.addEventListener("pointerdown", function (event) {
+    var dlg = sbDialog(event.target);
+    scrimDown = dlg && outsideBox(dlg, event) ? dlg : null;
+  }, true);
+  document.addEventListener("click", function (event) {
+    var dlg = sbDialog(event.target), down = scrimDown;
+    scrimDown = null;
+    if (!dlg || dlg !== down || event.detail === 0 || !outsideBox(dlg, event)) return;
+    if (dlg._sbValues != null && fieldValues(dlg) !== dlg._sbValues) return;   // an input dialog keeps changed text
+    if (dlg.dispatchEvent(new Event("cancel", { cancelable: true }))) dlg.close();
+  });
+
   function init() {
-    document.querySelectorAll(".sb-toc[data-sb-follow]").forEach(followToc);
+    document.querySelectorAll(".sb-toc[data-sb-follow]:not(.sb-toc--overlay)").forEach(followToc);
     document.querySelectorAll(".sb-range__track").forEach(syncRange);
     document.querySelectorAll("[data-sb-indeterminate]").forEach(function (box) { box.indeterminate = true; });
     var reduceSet = document.documentElement.getAttribute("data-sb-motion") === "reduce";
     document.querySelectorAll("[data-sb-motion-setting]").forEach(function (s) { s.setAttribute("aria-checked", String(reduceSet)); });
+    var roots = [];
+    document.querySelectorAll("[data-sb-language-choice]").forEach(function (g) { var r = languageRoot(g); if (roots.indexOf(r) < 0) roots.push(r); });
+    roots.forEach(syncLanguage);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();

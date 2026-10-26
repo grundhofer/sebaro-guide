@@ -1,7 +1,7 @@
 {
   "generated": "generated — do not edit · tools/icons.py 1.1.0",
   "system": "sebaro",
-  "source_sha256": "edeb7542ded76240",
+  "source_sha256": "76b61467e7650441",
   "grammar": {
     "name": "Line 1.75 round",
     "summary": "1.75 stroke at 24 (1.5 on 16 masters, 2 on spots), round caps and joins, container radius 2 (below 8: 1), straight segments at 0/30/45/60/90/120/135/150 plus circular arcs and free curves, clear gap >= 2.25, at most 4 parts beside the main outline, no signature detail; filled only for selected navigation, toggles that are on and the four status icons at 16 px",
@@ -36,7 +36,7 @@
     "web": "<svg class=\"sb-icon sb-icon--24\" aria-hidden=\"true\" focusable=\"false\"><use href=\"sprite.svg#NAME\"/></svg>",
     "compose": "Icon(SebaroIcons.Outline.Name, contentDescription = null)"
   },
-  "count": 77,
+  "count": 116,
   "icons": [
     {
       "name": "arrow-down",
@@ -77,7 +77,9 @@
         "SebaroIcons.Outline32.ArrowDown"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_arrow_down_24"
+      ]
     },
     {
       "name": "arrow-left",
@@ -120,7 +122,9 @@
         "SebaroIcons.Outline32.ArrowLeft"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_arrow_left_24"
+      ]
     },
     {
       "name": "arrow-right",
@@ -165,7 +169,9 @@
         "SebaroIcons.Outline32.ArrowRight"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_arrow_right_24"
+      ]
     },
     {
       "name": "arrow-up",
@@ -208,7 +214,9 @@
         "SebaroIcons.Outline32.ArrowUp"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_arrow_up_24"
+      ]
     },
     {
       "name": "back-to-text",
@@ -253,7 +261,9 @@
         "SebaroIcons.Outline32.BackToText"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_back_to_text_24"
+      ]
     },
     {
       "name": "bell",
@@ -301,7 +311,10 @@
         "SebaroIcons.Filled16.Bell"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_bell_24",
+        "ic_sb_bell_filled_24"
+      ]
     },
     {
       "name": "board",
@@ -343,7 +356,9 @@
         "SebaroIcons.Outline32.Board"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_board_24"
+      ]
     },
     {
       "name": "book",
@@ -387,7 +402,9 @@
         "SebaroIcons.Outline32.Book"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_book_24"
+      ]
     },
     {
       "name": "calendar",
@@ -426,7 +443,99 @@
         "SebaroIcons.Outline32.Calendar"
       ],
       "compose_cuts": {},
+      "android": [
+        "ic_sb_calendar_24"
+      ]
+    },
+    {
+      "name": "camera",
+      "canonical": null,
+      "de": null,
+      "category": "media",
+      "aliases": [
+        "photo"
+      ],
+      "tags": {
+        "de": [
+          "Kamera",
+          "Foto aufnehmen",
+          "Scannen mit der Kamera"
+        ],
+        "en": [
+          "camera",
+          "take photo"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "camera"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Camera",
+        "SebaroIcons.Outline16.Camera",
+        "SebaroIcons.Outline20.Camera",
+        "SebaroIcons.Outline32.Camera"
+      ],
+      "compose_cuts": {},
       "android": []
+    },
+    {
+      "name": "changed",
+      "canonical": null,
+      "de": null,
+      "category": "status",
+      "aliases": [
+        "unsaved"
+      ],
+      "tags": {
+        "de": [
+          "geändert",
+          "ungesichert",
+          "nicht gesichert",
+          "Punkt"
+        ],
+        "en": [
+          "changed",
+          "unsaved",
+          "modified"
+        ]
+      },
+      "variants": {
+        "outline": [
+          16,
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "changed",
+        "changed--16"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Changed",
+        "SebaroIcons.Outline16.Changed",
+        "SebaroIcons.Outline20.Changed",
+        "SebaroIcons.Outline32.Changed"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_changed_24"
+      ]
     },
     {
       "name": "chart-bar",
@@ -474,7 +583,10 @@
         "SebaroIcons.Filled16.ChartBar"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_chart_bar_24",
+        "ic_sb_chart_bar_filled_24"
+      ]
     },
     {
       "name": "chat",
@@ -516,7 +628,9 @@
         "SebaroIcons.Outline32.Chat"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_chat_24"
+      ]
     },
     {
       "name": "check",
@@ -607,7 +721,9 @@
         "SebaroIcons.Outline32.ChevronDown"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_chevron_down_24"
+      ]
     },
     {
       "name": "chevron-left",
@@ -650,7 +766,9 @@
         "SebaroIcons.Outline32.ChevronLeft"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_chevron_left_24"
+      ]
     },
     {
       "name": "chevron-right",
@@ -694,7 +812,9 @@
         "SebaroIcons.Outline32.ChevronRight"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_chevron_right_24"
+      ]
     },
     {
       "name": "chevron-up",
@@ -738,7 +858,9 @@
         "SebaroIcons.Outline32.ChevronUp"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_chevron_up_24"
+      ]
     },
     {
       "name": "clock",
@@ -783,7 +905,9 @@
         "SebaroIcons.Outline32.Clock"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_clock_24"
+      ]
     },
     {
       "name": "close",
@@ -824,7 +948,9 @@
         "SebaroIcons.Outline32.Close"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_close_24"
+      ]
     },
     {
       "name": "code",
@@ -863,7 +989,9 @@
         "SebaroIcons.Outline32.Code"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_code_24"
+      ]
     },
     {
       "name": "copy",
@@ -902,6 +1030,98 @@
         "SebaroIcons.Outline16.Copy",
         "SebaroIcons.Outline20.Copy",
         "SebaroIcons.Outline32.Copy"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_copy_24"
+      ]
+    },
+    {
+      "name": "crop",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [
+        "trim"
+      ],
+      "tags": {
+        "de": [
+          "Zuschneiden",
+          "Ränder",
+          "Ausschnitt"
+        ],
+        "en": [
+          "crop",
+          "trim"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "crop"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Crop",
+        "SebaroIcons.Outline16.Crop",
+        "SebaroIcons.Outline20.Crop",
+        "SebaroIcons.Outline32.Crop"
+      ],
+      "compose_cuts": {},
+      "android": []
+    },
+    {
+      "name": "dice",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [
+        "roll"
+      ],
+      "tags": {
+        "de": [
+          "Würfeln",
+          "Würfel",
+          "Zufall"
+        ],
+        "en": [
+          "dice",
+          "roll",
+          "die"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [
+          24
+        ],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "dice",
+        "dice--filled"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Dice",
+        "SebaroIcons.Outline16.Dice",
+        "SebaroIcons.Outline20.Dice",
+        "SebaroIcons.Outline32.Dice",
+        "SebaroIcons.Filled.Dice",
+        "SebaroIcons.Filled16.Dice"
       ],
       "compose_cuts": {},
       "android": []
@@ -946,7 +1166,9 @@
         "SebaroIcons.Outline32.Download"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_download_24"
+      ]
     },
     {
       "name": "edit",
@@ -985,7 +1207,55 @@
         "SebaroIcons.Outline32.Edit"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_edit_24"
+      ]
+    },
+    {
+      "name": "emoji",
+      "canonical": null,
+      "de": null,
+      "category": "people",
+      "aliases": [
+        "reaction",
+        "smiley"
+      ],
+      "tags": {
+        "de": [
+          "Emoji",
+          "Reaktion",
+          "Emoji wählen"
+        ],
+        "en": [
+          "emoji",
+          "reaction",
+          "smiley"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "emoji"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Emoji",
+        "SebaroIcons.Outline16.Emoji",
+        "SebaroIcons.Outline20.Emoji",
+        "SebaroIcons.Outline32.Emoji"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_emoji_24"
+      ]
     },
     {
       "name": "empty-stats",
@@ -1070,7 +1340,62 @@
         "SebaroIcons.Filled16.Error"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_error_24",
+        "ic_sb_error_filled_24"
+      ]
+    },
+    {
+      "name": "exercise",
+      "canonical": null,
+      "de": null,
+      "category": "content",
+      "aliases": [
+        "workout"
+      ],
+      "tags": {
+        "de": [
+          "Übung",
+          "Training",
+          "Sport",
+          "Hantel"
+        ],
+        "en": [
+          "exercise",
+          "workout",
+          "training"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [
+          24
+        ],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "exercise",
+        "exercise--filled"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Exercise",
+        "SebaroIcons.Outline16.Exercise",
+        "SebaroIcons.Outline20.Exercise",
+        "SebaroIcons.Outline32.Exercise",
+        "SebaroIcons.Filled.Exercise",
+        "SebaroIcons.Filled16.Exercise"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_exercise_24",
+        "ic_sb_exercise_filled_24"
+      ]
     },
     {
       "name": "external-link",
@@ -1114,7 +1439,103 @@
         "SebaroIcons.Outline32.ExternalLink"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_external_link_24"
+      ]
+    },
+    {
+      "name": "eye",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [
+        "preview"
+      ],
+      "tags": {
+        "de": [
+          "Vorschau",
+          "Leseansicht",
+          "Auge",
+          "anzeigen"
+        ],
+        "en": [
+          "eye",
+          "preview",
+          "reading view",
+          "show"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "eye"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Eye",
+        "SebaroIcons.Outline16.Eye",
+        "SebaroIcons.Outline20.Eye",
+        "SebaroIcons.Outline32.Eye"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_eye_24"
+      ]
+    },
+    {
+      "name": "eye-off",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [
+        "hidden",
+        "conceal"
+      ],
+      "tags": {
+        "de": [
+          "verdeckt",
+          "Auge aus",
+          "nicht zeigen",
+          "blind"
+        ],
+        "en": [
+          "hidden",
+          "eye off",
+          "conceal"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "eye-off"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.EyeOff",
+        "SebaroIcons.Outline16.EyeOff",
+        "SebaroIcons.Outline20.EyeOff",
+        "SebaroIcons.Outline32.EyeOff"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_eye_off_24"
+      ]
     },
     {
       "name": "facts",
@@ -1189,7 +1610,9 @@
         "SebaroIcons.Outline32.File"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_file_24"
+      ]
     },
     {
       "name": "file-text",
@@ -1230,7 +1653,9 @@
         "SebaroIcons.Outline32.FileText"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_file_text_24"
+      ]
     },
     {
       "name": "filter",
@@ -1266,6 +1691,50 @@
         "SebaroIcons.Outline16.Filter",
         "SebaroIcons.Outline20.Filter",
         "SebaroIcons.Outline32.Filter"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_filter_24"
+      ]
+    },
+    {
+      "name": "flash",
+      "canonical": null,
+      "de": null,
+      "category": "media",
+      "aliases": [
+        "torch"
+      ],
+      "tags": {
+        "de": [
+          "Blitz",
+          "Blitzlicht",
+          "Licht"
+        ],
+        "en": [
+          "flash",
+          "flashlight"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "flash"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Flash",
+        "SebaroIcons.Outline16.Flash",
+        "SebaroIcons.Outline20.Flash",
+        "SebaroIcons.Outline32.Flash"
       ],
       "compose_cuts": {},
       "android": []
@@ -1313,7 +1782,9 @@
         "SebaroIcons.Outline32.Flask"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_flask_24"
+      ]
     },
     {
       "name": "folder",
@@ -1357,7 +1828,139 @@
         "SebaroIcons.Filled16.Folder"
       ],
       "compose_cuts": {},
+      "android": [
+        "ic_sb_folder_24",
+        "ic_sb_folder_filled_24"
+      ]
+    },
+    {
+      "name": "folder-open",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [
+        "open"
+      ],
+      "tags": {
+        "de": [
+          "Ordner öffnen",
+          "Öffnen",
+          "geöffneter Ordner"
+        ],
+        "en": [
+          "open folder",
+          "open"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "folder-open"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.FolderOpen",
+        "SebaroIcons.Outline16.FolderOpen",
+        "SebaroIcons.Outline20.FolderOpen",
+        "SebaroIcons.Outline32.FolderOpen"
+      ],
+      "compose_cuts": {},
       "android": []
+    },
+    {
+      "name": "fullscreen",
+      "canonical": null,
+      "de": null,
+      "category": "navigation",
+      "aliases": [
+        "expand-view"
+      ],
+      "tags": {
+        "de": [
+          "Vollbild",
+          "Vollbild an"
+        ],
+        "en": [
+          "fullscreen",
+          "enter full screen"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "fullscreen"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Fullscreen",
+        "SebaroIcons.Outline16.Fullscreen",
+        "SebaroIcons.Outline20.Fullscreen",
+        "SebaroIcons.Outline32.Fullscreen"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_fullscreen_24"
+      ]
+    },
+    {
+      "name": "gif",
+      "canonical": null,
+      "de": null,
+      "category": "content",
+      "aliases": [
+        "animated-image"
+      ],
+      "tags": {
+        "de": [
+          "GIF",
+          "bewegtes Bild",
+          "GIF suchen"
+        ],
+        "en": [
+          "gif",
+          "animated image"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "gif"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Gif",
+        "SebaroIcons.Outline16.Gif",
+        "SebaroIcons.Outline20.Gif",
+        "SebaroIcons.Outline32.Gif"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_gif_24"
+      ]
     },
     {
       "name": "globe",
@@ -1399,7 +2002,101 @@
         "SebaroIcons.Outline32.Globe"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_globe_24"
+      ]
+    },
+    {
+      "name": "grip",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [
+        "drag-handle"
+      ],
+      "tags": {
+        "de": [
+          "Griff",
+          "Ziehen",
+          "Verschieben"
+        ],
+        "en": [
+          "grip",
+          "drag handle",
+          "reorder"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "grip"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Grip",
+        "SebaroIcons.Outline16.Grip",
+        "SebaroIcons.Outline20.Grip",
+        "SebaroIcons.Outline32.Grip"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_grip_24"
+      ]
+    },
+    {
+      "name": "heart",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [
+        "like",
+        "appreciation"
+      ],
+      "tags": {
+        "de": [
+          "Herz",
+          "Gefällt mir",
+          "Dank",
+          "Wertschätzung"
+        ],
+        "en": [
+          "heart",
+          "like",
+          "appreciation"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "heart"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Heart",
+        "SebaroIcons.Outline16.Heart",
+        "SebaroIcons.Outline20.Heart",
+        "SebaroIcons.Outline32.Heart"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_heart_24"
+      ]
     },
     {
       "name": "help",
@@ -1438,7 +2135,9 @@
         "SebaroIcons.Outline32.Help"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_help_24"
+      ]
     },
     {
       "name": "history",
@@ -1484,7 +2183,10 @@
         "SebaroIcons.Filled16.History"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_history_24",
+        "ic_sb_history_filled_24"
+      ]
     },
     {
       "name": "home",
@@ -1529,7 +2231,10 @@
         "SebaroIcons.Filled16.Home"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_home_24",
+        "ic_sb_home_filled_24"
+      ]
     },
     {
       "name": "image",
@@ -1569,7 +2274,9 @@
         "SebaroIcons.Outline32.Image"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_image_24"
+      ]
     },
     {
       "name": "info",
@@ -1618,7 +2325,10 @@
         "SebaroIcons.Filled16.Info"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_info_24",
+        "ic_sb_info_filled_24"
+      ]
     },
     {
       "name": "keyboard",
@@ -1657,6 +2367,46 @@
         "SebaroIcons.Outline16.Keyboard",
         "SebaroIcons.Outline20.Keyboard",
         "SebaroIcons.Outline32.Keyboard"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_keyboard_24"
+      ]
+    },
+    {
+      "name": "line-numbers",
+      "canonical": null,
+      "de": null,
+      "category": "content",
+      "aliases": [],
+      "tags": {
+        "de": [
+          "Zeilennummern",
+          "Zeilen zählen"
+        ],
+        "en": [
+          "line numbers"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "line-numbers"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.LineNumbers",
+        "SebaroIcons.Outline16.LineNumbers",
+        "SebaroIcons.Outline20.LineNumbers",
+        "SebaroIcons.Outline32.LineNumbers"
       ],
       "compose_cuts": {},
       "android": []
@@ -1699,7 +2449,9 @@
         "SebaroIcons.Outline32.Link"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_link_24"
+      ]
     },
     {
       "name": "loader",
@@ -1737,6 +2489,53 @@
         "SebaroIcons.Outline16.Loader",
         "SebaroIcons.Outline20.Loader",
         "SebaroIcons.Outline32.Loader"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_loader_24"
+      ]
+    },
+    {
+      "name": "lock",
+      "canonical": null,
+      "de": null,
+      "category": "status",
+      "aliases": [
+        "locked",
+        "hold"
+      ],
+      "tags": {
+        "de": [
+          "Sperren",
+          "gesperrt",
+          "festhalten",
+          "Schloss"
+        ],
+        "en": [
+          "lock",
+          "locked",
+          "hold"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "lock"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Lock",
+        "SebaroIcons.Outline16.Lock",
+        "SebaroIcons.Outline20.Lock",
+        "SebaroIcons.Outline32.Lock"
       ],
       "compose_cuts": {},
       "android": []
@@ -1780,7 +2579,9 @@
         "SebaroIcons.Outline32.Mail"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_mail_24"
+      ]
     },
     {
       "name": "menu",
@@ -1819,7 +2620,55 @@
         "SebaroIcons.Outline32.Menu"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_menu_24"
+      ]
+    },
+    {
+      "name": "microphone",
+      "canonical": null,
+      "de": null,
+      "category": "devices",
+      "aliases": [
+        "mic",
+        "voice"
+      ],
+      "tags": {
+        "de": [
+          "Mikrofon",
+          "Aufnehmen",
+          "Spracheingabe"
+        ],
+        "en": [
+          "microphone",
+          "record",
+          "voice input"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "microphone"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Microphone",
+        "SebaroIcons.Outline16.Microphone",
+        "SebaroIcons.Outline20.Microphone",
+        "SebaroIcons.Outline32.Microphone"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_microphone_24"
+      ]
     },
     {
       "name": "minus",
@@ -1841,6 +2690,7 @@
       },
       "variants": {
         "outline": [
+          16,
           24
         ],
         "filled": [],
@@ -1851,7 +2701,8 @@
       "source": "own",
       "license": "sebaro",
       "sprite": [
-        "minus"
+        "minus",
+        "minus--16"
       ],
       "compose": [
         "SebaroIcons.Outline.Minus",
@@ -1860,7 +2711,9 @@
         "SebaroIcons.Outline32.Minus"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_minus_24"
+      ]
     },
     {
       "name": "monitor",
@@ -1901,7 +2754,9 @@
         "SebaroIcons.Outline32.Monitor"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_monitor_24"
+      ]
     },
     {
       "name": "moon",
@@ -1943,7 +2798,9 @@
         "SebaroIcons.Outline32.Moon"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_moon_24"
+      ]
     },
     {
       "name": "more-horizontal",
@@ -1986,7 +2843,9 @@
         "SebaroIcons.Outline32.MoreHorizontal"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_more_horizontal_24"
+      ]
     },
     {
       "name": "more-vertical",
@@ -2025,6 +2884,50 @@
         "SebaroIcons.Outline16.MoreVertical",
         "SebaroIcons.Outline20.MoreVertical",
         "SebaroIcons.Outline32.MoreVertical"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_more_vertical_24"
+      ]
+    },
+    {
+      "name": "move-to-folder",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [
+        "move"
+      ],
+      "tags": {
+        "de": [
+          "Verschieben",
+          "In Ordner verschieben",
+          "Verschieben nach"
+        ],
+        "en": [
+          "move to folder",
+          "move"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "mirror",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "move-to-folder"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.MoveToFolder",
+        "SebaroIcons.Outline16.MoveToFolder",
+        "SebaroIcons.Outline20.MoveToFolder",
+        "SebaroIcons.Outline32.MoveToFolder"
       ],
       "compose_cuts": {},
       "android": []
@@ -2100,6 +3003,48 @@
       "android": []
     },
     {
+      "name": "pages",
+      "canonical": null,
+      "de": null,
+      "category": "content",
+      "aliases": [
+        "documents"
+      ],
+      "tags": {
+        "de": [
+          "Seiten",
+          "mehrere Seiten",
+          "Dokument mit Seiten"
+        ],
+        "en": [
+          "pages",
+          "multiple pages"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "pages"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Pages",
+        "SebaroIcons.Outline16.Pages",
+        "SebaroIcons.Outline20.Pages",
+        "SebaroIcons.Outline32.Pages"
+      ],
+      "compose_cuts": {},
+      "android": []
+    },
+    {
       "name": "pause",
       "canonical": "pause",
       "de": "Pause",
@@ -2135,7 +3080,9 @@
         "SebaroIcons.Outline32.Pause"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_pause_24"
+      ]
     },
     {
       "name": "pending",
@@ -2180,7 +3127,9 @@
         "SebaroIcons.Outline32.Pending"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_pending_24"
+      ]
     },
     {
       "name": "pin",
@@ -2227,7 +3176,9 @@
         "SebaroIcons.Outline32.Pin"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_pin_24"
+      ]
     },
     {
       "name": "play",
@@ -2272,7 +3223,10 @@
         "SebaroIcons.Filled16.Play"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_play_24",
+        "ic_sb_play_filled_24"
+      ]
     },
     {
       "name": "plus",
@@ -2364,6 +3318,191 @@
         "SebaroIcons.Outline32.Progress"
       ],
       "compose_cuts": {},
+      "android": [
+        "ic_sb_progress_24"
+      ]
+    },
+    {
+      "name": "qr-code",
+      "canonical": null,
+      "de": null,
+      "category": "content",
+      "aliases": [
+        "qr"
+      ],
+      "tags": {
+        "de": [
+          "QR-Code",
+          "Einladen per QR",
+          "Code zum Beitreten"
+        ],
+        "en": [
+          "qr code",
+          "invite",
+          "join code"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "qr-code"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.QrCode",
+        "SebaroIcons.Outline16.QrCode",
+        "SebaroIcons.Outline20.QrCode",
+        "SebaroIcons.Outline32.QrCode"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_qr_code_24"
+      ]
+    },
+    {
+      "name": "quote",
+      "canonical": null,
+      "de": null,
+      "category": "content",
+      "aliases": [
+        "thought"
+      ],
+      "tags": {
+        "de": [
+          "Zitat",
+          "Satz",
+          "Gedanke",
+          "Anführungszeichen"
+        ],
+        "en": [
+          "quote",
+          "sentence",
+          "thought"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [
+          24
+        ],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "quote",
+        "quote--filled"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Quote",
+        "SebaroIcons.Outline16.Quote",
+        "SebaroIcons.Outline20.Quote",
+        "SebaroIcons.Outline32.Quote",
+        "SebaroIcons.Filled.Quote",
+        "SebaroIcons.Filled16.Quote"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_quote_24",
+        "ic_sb_quote_filled_24"
+      ]
+    },
+    {
+      "name": "rank",
+      "canonical": null,
+      "de": null,
+      "category": "content",
+      "aliases": [
+        "medal"
+      ],
+      "tags": {
+        "de": [
+          "Platz",
+          "Rang",
+          "Rangfolge",
+          "Platz 1 von n"
+        ],
+        "en": [
+          "rank",
+          "place",
+          "medal",
+          "top topic"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "rank"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Rank",
+        "SebaroIcons.Outline16.Rank",
+        "SebaroIcons.Outline20.Rank",
+        "SebaroIcons.Outline32.Rank"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_rank_24"
+      ]
+    },
+    {
+      "name": "redo",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [],
+      "tags": {
+        "de": [
+          "Wiederholen",
+          "Wiederherstellen",
+          "Rückgängig aufheben"
+        ],
+        "en": [
+          "redo"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "mirror",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "redo"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Redo",
+        "SebaroIcons.Outline16.Redo",
+        "SebaroIcons.Outline20.Redo",
+        "SebaroIcons.Outline32.Redo"
+      ],
+      "compose_cuts": {},
       "android": []
     },
     {
@@ -2407,7 +3546,9 @@
         "SebaroIcons.Outline32.Refresh"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_refresh_24"
+      ]
     },
     {
       "name": "repeat",
@@ -2430,21 +3571,229 @@
         "outline": [
           24
         ],
-        "filled": [],
+        "filled": [
+          24
+        ],
         "spot": false
       },
       "rtl": "none",
-      "status": "review",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
-        "repeat"
+        "repeat",
+        "repeat--filled"
       ],
       "compose": [
         "SebaroIcons.Outline.Repeat",
         "SebaroIcons.Outline16.Repeat",
         "SebaroIcons.Outline20.Repeat",
-        "SebaroIcons.Outline32.Repeat"
+        "SebaroIcons.Outline32.Repeat",
+        "SebaroIcons.Filled.Repeat",
+        "SebaroIcons.Filled16.Repeat"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_repeat_24",
+        "ic_sb_repeat_filled_24"
+      ]
+    },
+    {
+      "name": "replace",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [],
+      "tags": {
+        "de": [
+          "Ersetzen",
+          "Suchen und Ersetzen"
+        ],
+        "en": [
+          "replace",
+          "find and replace"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "mirror",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "replace"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Replace",
+        "SebaroIcons.Outline16.Replace",
+        "SebaroIcons.Outline20.Replace",
+        "SebaroIcons.Outline32.Replace"
+      ],
+      "compose_cuts": {},
+      "android": []
+    },
+    {
+      "name": "rotate",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [
+        "rotate-clockwise"
+      ],
+      "tags": {
+        "de": [
+          "Drehen",
+          "Drehen nach rechts",
+          "um 90 Grad drehen"
+        ],
+        "en": [
+          "rotate",
+          "rotate clockwise"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "rotate"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Rotate",
+        "SebaroIcons.Outline16.Rotate",
+        "SebaroIcons.Outline20.Rotate",
+        "SebaroIcons.Outline32.Rotate"
+      ],
+      "compose_cuts": {},
+      "android": []
+    },
+    {
+      "name": "save",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [],
+      "tags": {
+        "de": [
+          "Sichern",
+          "Speichern"
+        ],
+        "en": [
+          "save"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "save"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Save",
+        "SebaroIcons.Outline16.Save",
+        "SebaroIcons.Outline20.Save",
+        "SebaroIcons.Outline32.Save"
+      ],
+      "compose_cuts": {},
+      "android": []
+    },
+    {
+      "name": "save-as",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [],
+      "tags": {
+        "de": [
+          "Sichern unter",
+          "Speichern unter",
+          "Kopie sichern"
+        ],
+        "en": [
+          "save as"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "save-as"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.SaveAs",
+        "SebaroIcons.Outline16.SaveAs",
+        "SebaroIcons.Outline20.SaveAs",
+        "SebaroIcons.Outline32.SaveAs"
+      ],
+      "compose_cuts": {},
+      "android": []
+    },
+    {
+      "name": "scan",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [
+        "capture"
+      ],
+      "tags": {
+        "de": [
+          "Scannen",
+          "Dokument scannen",
+          "Erfassen"
+        ],
+        "en": [
+          "scan",
+          "scan document"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "scan"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Scan",
+        "SebaroIcons.Outline16.Scan",
+        "SebaroIcons.Outline20.Scan",
+        "SebaroIcons.Outline32.Scan"
       ],
       "compose_cuts": {},
       "android": []
@@ -2489,7 +3838,9 @@
         "SebaroIcons.Outline32.Search"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_search_24"
+      ]
     },
     {
       "name": "settings",
@@ -2536,6 +3887,52 @@
         "SebaroIcons.Filled16.Settings"
       ],
       "compose_cuts": {},
+      "android": [
+        "ic_sb_settings_24",
+        "ic_sb_settings_filled_24"
+      ]
+    },
+    {
+      "name": "shake",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [
+        "shake-phone"
+      ],
+      "tags": {
+        "de": [
+          "Schütteln",
+          "Telefon schütteln",
+          "Bewegung"
+        ],
+        "en": [
+          "shake",
+          "shake phone",
+          "motion"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "shake"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Shake",
+        "SebaroIcons.Outline16.Shake",
+        "SebaroIcons.Outline20.Shake",
+        "SebaroIcons.Outline32.Shake"
+      ],
+      "compose_cuts": {},
       "android": []
     },
     {
@@ -2573,7 +3970,9 @@
         "SebaroIcons.Outline32.Share"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_share_24"
+      ]
     },
     {
       "name": "shield",
@@ -2614,12 +4013,58 @@
         "SebaroIcons.Outline32.Shield"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_shield_24"
+      ]
+    },
+    {
+      "name": "shuffle",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [
+        "random"
+      ],
+      "tags": {
+        "de": [
+          "Mischen",
+          "Zufällige Reihenfolge",
+          "durchmischen"
+        ],
+        "en": [
+          "shuffle",
+          "random order"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "shuffle"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Shuffle",
+        "SebaroIcons.Outline16.Shuffle",
+        "SebaroIcons.Outline20.Shuffle",
+        "SebaroIcons.Outline32.Shuffle"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_shuffle_24"
+      ]
     },
     {
       "name": "sidebar",
       "canonical": "sidebar",
-      "de": "Seitenleiste ein/aus (novalis ⌘\\)",
+      "de": "Seitenleiste ein und aus",
       "category": "navigation",
       "aliases": [],
       "tags": {
@@ -2654,7 +4099,9 @@
         "SebaroIcons.Outline32.Sidebar"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_sidebar_24"
+      ]
     },
     {
       "name": "skipped",
@@ -2695,7 +4142,54 @@
         "SebaroIcons.Outline32.Skipped"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_skipped_24"
+      ]
+    },
+    {
+      "name": "slots",
+      "canonical": null,
+      "de": null,
+      "category": "content",
+      "aliases": [
+        "reels"
+      ],
+      "tags": {
+        "de": [
+          "Walzen",
+          "Slots",
+          "Zufallswahl mit Walzen"
+        ],
+        "en": [
+          "slots",
+          "slot machine",
+          "reels"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "slots"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Slots",
+        "SebaroIcons.Outline16.Slots",
+        "SebaroIcons.Outline20.Slots",
+        "SebaroIcons.Outline32.Slots"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_slots_24"
+      ]
     },
     {
       "name": "smartphone",
@@ -2736,7 +4230,96 @@
         "SebaroIcons.Outline32.Smartphone"
       ],
       "compose_cuts": {},
+      "android": [
+        "ic_sb_smartphone_24"
+      ]
+    },
+    {
+      "name": "sort",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [
+        "order"
+      ],
+      "tags": {
+        "de": [
+          "Sortieren",
+          "Reihenfolge",
+          "Sortierung"
+        ],
+        "en": [
+          "sort",
+          "order"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "sort"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Sort",
+        "SebaroIcons.Outline16.Sort",
+        "SebaroIcons.Outline20.Sort",
+        "SebaroIcons.Outline32.Sort"
+      ],
+      "compose_cuts": {},
       "android": []
+    },
+    {
+      "name": "sound",
+      "canonical": null,
+      "de": null,
+      "category": "devices",
+      "aliases": [
+        "volume"
+      ],
+      "tags": {
+        "de": [
+          "Ton",
+          "Ton an",
+          "Lautstärke"
+        ],
+        "en": [
+          "sound",
+          "volume",
+          "audio"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "sound"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Sound",
+        "SebaroIcons.Outline16.Sound",
+        "SebaroIcons.Outline20.Sound",
+        "SebaroIcons.Outline32.Sound"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_sound_24"
+      ]
     },
     {
       "name": "star",
@@ -2783,7 +4366,10 @@
         "SebaroIcons.Filled16.Star"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_star_24",
+        "ic_sb_star_filled_24"
+      ]
     },
     {
       "name": "success",
@@ -2835,7 +4421,10 @@
         "SebaroIcons.Filled16.Success"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_success_24",
+        "ic_sb_success_filled_24"
+      ]
     },
     {
       "name": "sun",
@@ -2877,7 +4466,9 @@
         "SebaroIcons.Outline32.Sun"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_sun_24"
+      ]
     },
     {
       "name": "target",
@@ -2916,6 +4507,50 @@
         "SebaroIcons.Outline16.Target",
         "SebaroIcons.Outline20.Target",
         "SebaroIcons.Outline32.Target"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_target_24"
+      ]
+    },
+    {
+      "name": "text-size",
+      "canonical": null,
+      "de": null,
+      "category": "content",
+      "aliases": [
+        "font-size"
+      ],
+      "tags": {
+        "de": [
+          "Textgröße",
+          "Schriftgröße",
+          "Schrift größer"
+        ],
+        "en": [
+          "text size",
+          "font size"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "text-size"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.TextSize",
+        "SebaroIcons.Outline16.TextSize",
+        "SebaroIcons.Outline20.TextSize",
+        "SebaroIcons.Outline32.TextSize"
       ],
       "compose_cuts": {},
       "android": []
@@ -2966,7 +4601,10 @@
         "SebaroIcons.Filled16.ThumbsUp"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_thumbs_up_24",
+        "ic_sb_thumbs_up_filled_24"
+      ]
     },
     {
       "name": "timer",
@@ -2989,24 +4627,32 @@
         "outline": [
           24
         ],
-        "filled": [],
+        "filled": [
+          24
+        ],
         "spot": false
       },
       "rtl": "none",
-      "status": "review",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
-        "timer"
+        "timer",
+        "timer--filled"
       ],
       "compose": [
         "SebaroIcons.Outline.Timer",
         "SebaroIcons.Outline16.Timer",
         "SebaroIcons.Outline20.Timer",
-        "SebaroIcons.Outline32.Timer"
+        "SebaroIcons.Outline32.Timer",
+        "SebaroIcons.Filled.Timer",
+        "SebaroIcons.Filled16.Timer"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_timer_24",
+        "ic_sb_timer_filled_24"
+      ]
     },
     {
       "name": "today",
@@ -3016,13 +4662,14 @@
       "aliases": [],
       "tags": {
         "de": [
-          "Heute",
-          "Liste von heute",
-          "Tagesliste"
+          "Heute abhaken",
+          "datierte Aufgabe",
+          "fällig"
         ],
         "en": [
-          "today",
-          "today list"
+          "check off today",
+          "dated task",
+          "due"
         ]
       },
       "variants": {
@@ -3051,7 +4698,10 @@
         "SebaroIcons.Filled16.Today"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_today_24",
+        "ic_sb_today_filled_24"
+      ]
     },
     {
       "name": "trash",
@@ -3093,7 +4743,9 @@
         "SebaroIcons.Outline32.Trash"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_trash_24"
+      ]
     },
     {
       "name": "undo",
@@ -3131,7 +4783,9 @@
         "SebaroIcons.Outline32.Undo"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_undo_24"
+      ]
     },
     {
       "name": "user",
@@ -3177,7 +4831,10 @@
         "SebaroIcons.Filled16.User"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_user_24",
+        "ic_sb_user_filled_24"
+      ]
     },
     {
       "name": "users",
@@ -3218,7 +4875,9 @@
         "SebaroIcons.Outline32.Users"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_users_24"
+      ]
     },
     {
       "name": "warning",
@@ -3268,7 +4927,10 @@
         "SebaroIcons.Filled16.Warning"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_warning_24",
+        "ic_sb_warning_filled_24"
+      ]
     },
     {
       "name": "watch",
@@ -3308,7 +4970,230 @@
         "SebaroIcons.Outline32.Watch"
       ],
       "compose_cuts": {},
+      "android": [
+        "ic_sb_watch_24"
+      ]
+    },
+    {
+      "name": "wheel",
+      "canonical": null,
+      "de": null,
+      "category": "content",
+      "aliases": [
+        "wheel-of-fortune"
+      ],
+      "tags": {
+        "de": [
+          "Glücksrad",
+          "Rad",
+          "Zufallswahl"
+        ],
+        "en": [
+          "wheel",
+          "spinner",
+          "random pick"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "wheel"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Wheel",
+        "SebaroIcons.Outline16.Wheel",
+        "SebaroIcons.Outline20.Wheel",
+        "SebaroIcons.Outline32.Wheel"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_wheel_24"
+      ]
+    },
+    {
+      "name": "wrap",
+      "canonical": null,
+      "de": null,
+      "category": "content",
+      "aliases": [
+        "word-wrap"
+      ],
+      "tags": {
+        "de": [
+          "Zeilenumbruch",
+          "Umbrechen",
+          "Zeilen umbrechen"
+        ],
+        "en": [
+          "wrap",
+          "word wrap",
+          "soft wrap"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "mirror",
+      "status": "draft",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "wrap"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.Wrap",
+        "SebaroIcons.Outline16.Wrap",
+        "SebaroIcons.Outline20.Wrap",
+        "SebaroIcons.Outline32.Wrap"
+      ],
+      "compose_cuts": {},
       "android": []
+    },
+    {
+      "name": "zoom-fit",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [
+        "fit"
+      ],
+      "tags": {
+        "de": [
+          "Einpassen",
+          "An Fenster anpassen",
+          "ganze Seite"
+        ],
+        "en": [
+          "fit",
+          "zoom to fit",
+          "fit page"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "zoom-fit"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.ZoomFit",
+        "SebaroIcons.Outline16.ZoomFit",
+        "SebaroIcons.Outline20.ZoomFit",
+        "SebaroIcons.Outline32.ZoomFit"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_zoom_fit_24"
+      ]
+    },
+    {
+      "name": "zoom-in",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [
+        "enlarge"
+      ],
+      "tags": {
+        "de": [
+          "Vergrößern",
+          "Zoom ein",
+          "Hineinzoomen"
+        ],
+        "en": [
+          "zoom in",
+          "enlarge"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "zoom-in"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.ZoomIn",
+        "SebaroIcons.Outline16.ZoomIn",
+        "SebaroIcons.Outline20.ZoomIn",
+        "SebaroIcons.Outline32.ZoomIn"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_zoom_in_24"
+      ]
+    },
+    {
+      "name": "zoom-out",
+      "canonical": null,
+      "de": null,
+      "category": "actions",
+      "aliases": [
+        "reduce"
+      ],
+      "tags": {
+        "de": [
+          "Verkleinern",
+          "Zoom aus",
+          "Herauszoomen"
+        ],
+        "en": [
+          "zoom out",
+          "reduce"
+        ]
+      },
+      "variants": {
+        "outline": [
+          24
+        ],
+        "filled": [],
+        "spot": false
+      },
+      "rtl": "none",
+      "status": "stable",
+      "source": "own",
+      "license": "sebaro",
+      "sprite": [
+        "zoom-out"
+      ],
+      "compose": [
+        "SebaroIcons.Outline.ZoomOut",
+        "SebaroIcons.Outline16.ZoomOut",
+        "SebaroIcons.Outline20.ZoomOut",
+        "SebaroIcons.Outline32.ZoomOut"
+      ],
+      "compose_cuts": {},
+      "android": [
+        "ic_sb_zoom_out_24"
+      ]
     }
   ]
 }

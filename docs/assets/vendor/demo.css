@@ -33,6 +33,9 @@
 .demo-cell--wide { flex: 1 1 320px; justify-items: stretch; }
 .demo-cell--full { flex-basis: 100%; }   /* a cell on a line of its own (the window specimen keeps its view at 640 px and more) */
 .demo-cell--fixed { inline-size: 320px; max-inline-size: 100%; justify-items: stretch; }
+.demo-narrow { inline-size: 280px; max-inline-size: 100%; justify-items: stretch; }   /* narrow columns at large text (D102 lane narrow) */
+.demo-narrow--260 { inline-size: 260px; }
+.demo-narrow--300 { inline-size: 300px; }
 .demo-label { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .demo-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: var(--sb-space-8) var(--sb-spacing-group); align-items: start; }
 .demo-columns--3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
@@ -83,7 +86,7 @@
    open in the page flow, with role="group" + a name instead of role="dialog" (it is not modal and traps nothing),
    no entry motion, and the width of its column (a dialog at most its 560 px). Demo pages only; never shipped */
 .demo-static:is(.sb-dialog, .sb-sheet, .sb-menu, .sb-toast, .sb-note-popover) { position: relative; inset: auto; margin: 0; max-inline-size: 100%; box-sizing: border-box; }
-.demo-static.sb-dialog { inline-size: min(560px, 100%); }
+.demo-static.sb-dialog { inline-size: min(35rem, 100%); max-block-size: none; overflow: visible; }
 .demo-static.sb-sheet { inline-size: 100%; }
 
 /* overlays shown in place: a scrim stage for the dialog, static popover and sheet specimens */
@@ -107,6 +110,15 @@
 
 /* the page's header specimen is a <div>: one banner landmark per page */
 .demo-header-specimen { margin-block-end: var(--sb-space-2); border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container); overflow: hidden; }
+/* D102 (45), (48), (50): a web app without a window, its header, its small settings view and its footer in one frame */
+.demo-webapp { margin-block-end: var(--sb-space-2); border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container); overflow: hidden; background: var(--sb-color-bg); }
+/* on a phone the frame spans the page like the app would, so header, view and footer get the app's own gutters */
+@container sb-page (width < 640px) { .demo-webapp { margin-inline: calc(-1 * var(--sb-spacing-gutter)); border-inline: 0; border-radius: 0; } }
+.demo-webapp__view { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-4); max-inline-size: 30rem; padding: var(--sb-space-6) var(--sb-spacing-gutter); }
+@container sb-page (width >= 1024px) { .demo-webapp__view { padding-inline: var(--sb-spacing-gutter-wide); } }   /* the header's and the footer's gutter */
+.demo-webapp__view > h4 { margin: 0; }
+.demo-webapp__group { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-1); min-inline-size: 0; margin: 0; }
+.demo-webapp__group > .sb-field__help { margin: 0; }
 /* round 3 (D48, D52): a fixed progress share for the static state cell; the start replay frame */
 .demo-progress-60 { --sb-progress: 0.6; }
 .demo-start-frame { min-block-size: 520px; }
@@ -143,15 +155,19 @@
 /* ------------------------------------------------------------------ round 6 stage 2b specimens (D91) */
 /* the scroll box of the sticky group head specimen (D91 B3b): the head sticks inside it */
 .demo-scrollbox { block-size: 260px; overflow-y: auto; border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container); background: var(--sb-color-bg); }
-/* the illustration pair of spec/06 §8 for the screenshot grid specimen (D91 W5b). The same six lines as pages.css,
+/* the illustration pair of spec/06 §8 for the screenshot grid specimen (D91 W5b). The same lines as pages.css,
    which the component sheet does not load; sebaro.css has no mode rules by design, so the pair rules stay page CSS */
 .sb-illustration-dark { display: none; }
-@media (prefers-color-scheme: dark) {
+/* the dark picture only on screen: paper is light (spec/09 §18.3), so print keeps the light one whatever the screen
+   shows, without a script (OR-11) */
+@media screen and (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .sb-illustration-light { display: none; }
   :root:not([data-theme="light"]) .sb-illustration-dark { display: block; }
 }
-:root[data-theme="dark"] .sb-illustration-light { display: none; }
-:root[data-theme="dark"] .sb-illustration-dark { display: block; }
+@media screen {
+  :root[data-theme="dark"] .sb-illustration-light { display: none; }
+  :root[data-theme="dark"] .sb-illustration-dark { display: block; }
+}
 /* the window chrome a page cannot have (D91 F1a, F9a): the operating system's parts drawn for the „Fenster“ specimens.
    Neutral rings and greys only; the real lights and buttons are drawn by the system in its own colours. */
 .demo-window-frame--os { position: relative; }
@@ -172,5 +188,33 @@
 .demo-window-pair { display: flex; flex-wrap: wrap; gap: var(--sb-space-6); align-items: flex-start; }
 .demo-window-pair > * { flex: 1 1 22rem; min-inline-size: 0; }
 .demo-window-frame--short .sb-window__content { min-block-size: 6rem; }
+.demo-window-frame--tall .sb-window__content { min-block-size: 16rem; }   /* room for a lone empty state in the middle (D102 lane desktop) */
 .demo-window-frame--clip { overflow: hidden; }   /* the zone's ground stays inside the frame's rounded corners */
 .demo-window-frame--resize { resize: horizontal; overflow: hidden; min-inline-size: min(320px, 100%); }   /* drag the corner: the window narrows */
+
+/* ------------------------------------------------------------------ D104 specimens (spec/02 §3.29, §4.25) */
+/* the free canvas: the app gives each card, group and pointer its place through the CSSOM; the specimen has no script
+   for it and places them in rem here, so the whole area grows with the text (spec/02 §3.29) */
+.demo-canvas { inline-size: 56rem; block-size: 22rem; }
+.demo-canvas__g1 { inset-inline-start: 1.5rem; inset-block-start: 1.5rem; inline-size: 26rem; block-size: 18rem; }
+.demo-canvas__c1 { inset-inline-start: 3rem; inset-block-start: 5rem; }
+.demo-canvas__c2 { inset-inline-start: 3rem; inset-block-start: 11.5rem; }
+.demo-canvas__c3 { inset-inline-start: 31rem; inset-block-start: 3rem; }
+.demo-canvas__c4 { inset-inline-start: 33rem; inset-block-start: 14rem; }
+.demo-canvas__p1 { inset-inline-start: 34rem; inset-block-start: 8.5rem; }
+.demo-canvas__p2 { inset-inline-start: 13rem; inset-block-start: 15.5rem; }
+/* the wide app views of „Zusammenarbeit“: a little room around the board on a wide view; a narrow board keeps its
+   own gutters (its swipe layout), so the view adds none there */
+.demo-view-pad { padding-block: var(--sb-space-3); }
+@container sb-view (width >= 640px) { .demo-view-pad { padding-inline: var(--sb-space-4); } }
+/* the reader's HTML pages: headings and the page number of a specimen page */
+.sb-reader__sheet > h4 { margin: 0 0 var(--sb-space-2); font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
+.sb-reader__sheet > p { margin: 0 0 var(--sb-space-2); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
+.sb-reader__sheet > .demo-sheet-no { margin: var(--sb-space-4) 0 0; text-align: center; color: var(--sb-color-text-muted); }
+
+/* ------------------------------------------------------------------ D104 lane desktop-editor (spec/02 §4.26) */
+/* the completion list under a line of an editor: the line in the editor's size (spec/01 §1.8.2), the list 4 px under
+   it where the product would place it at the caret */
+.demo-completion { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: start; gap: var(--sb-space-1); max-inline-size: 36rem; padding: var(--sb-space-4); border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container); }
+.demo-completion__text { margin: 0; font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); font-size: var(--sb-x-sebaro-editor-size); line-height: var(--sb-x-sebaro-editor-line-height); }
+.demo-completion__caret { border-inline-end: 2px solid var(--sb-color-accent); }

@@ -5,6 +5,9 @@
 // "warm" is stored; "cool" removes the key, like the theme button returns to the system mode). theme-init.js applies
 // the stored tone before first paint. A visually hidden role="status" element ([data-sb-tone-status]) announces the
 // result. Classic script, no modules (pages open from file://), CSP-safe.
+// The menu „Darstellung“ of a window carries the same choice as „Farbton ›“ right after „Hell oder Dunkel ›“ (D102 (8)):
+// menuitemradio items with data-sb-tone-item="cool" | "warm"; a click applies the tone like the radios, and every item
+// keeps its aria-checked (a click on the chosen one keeps it chosen).
 // Messages follow the language of the status element (its closest [lang], else <html lang>): German is the default,
 // English is built in; a page adds a language with window.sbMessages = { "sb-tone": { fr: { … } } } before this
 // script (D87, spec/09 §6.1).
@@ -29,19 +32,28 @@
       group.hidden = false;
       group.querySelectorAll('input[name="sb-tone"]').forEach(function (input) { input.checked = input.value === tone; });
     });
+    document.querySelectorAll("[data-sb-tone-item]").forEach(function (item) {
+      item.setAttribute("aria-checked", String(item.getAttribute("data-sb-tone-item") === tone));
+    });
+  }
+  function apply(tone) {
+    if (tone === "warm") root.dataset.sbTone = "warm"; else delete root.dataset.sbTone;
+    try { if (tone === "warm") localStorage.setItem("sb-tone", "warm"); else localStorage.removeItem("sb-tone"); } catch (e) {}
+    sync();
+    var status = document.querySelector("[data-sb-tone-status]");
+    if (status) status.textContent = messages(status)[tone];
+    document.dispatchEvent(new CustomEvent("sb-tone-change", { detail: { tone: tone } }));
   }
   function init() {
     sync();
     document.addEventListener("change", function (event) {
       var input = event.target;
       if (!input.matches || !input.matches('[data-sb-tone-choice] input[name="sb-tone"]')) return;
-      var tone = input.value === "warm" ? "warm" : "cool";
-      if (tone === "warm") root.dataset.sbTone = "warm"; else delete root.dataset.sbTone;
-      try { if (tone === "warm") localStorage.setItem("sb-tone", "warm"); else localStorage.removeItem("sb-tone"); } catch (e) {}
-      sync();
-      var status = document.querySelector("[data-sb-tone-status]");
-      if (status) status.textContent = messages(status)[tone];
-      document.dispatchEvent(new CustomEvent("sb-tone-change", { detail: { tone: tone } }));
+      apply(input.value === "warm" ? "warm" : "cool");
+    });
+    document.addEventListener("click", function (event) {
+      var item = event.target instanceof Element ? event.target.closest("[data-sb-tone-item]") : null;
+      if (item) apply(item.getAttribute("data-sb-tone-item") === "warm" ? "warm" : "cool");
     });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();

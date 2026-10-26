@@ -248,10 +248,14 @@ progress.sb-progress__bar.g-rx-progress-blue::-moz-progress-bar { background: va
    scrolls sideways on a phone instead of showing the overlay state without sb-window.js. */
 
 .g-rx-winscroll { position: relative; max-inline-size: 100%; overflow-x: auto; }   /* holds the window's visually hidden words, which would else widen the page */
-.demo-window-frame.g-rx-winwide { min-inline-size: 740px; }
+.demo-window-frame.g-rx-winwide { min-inline-size: max(740px, 46.25rem); }   /* grows with the text (46.25rem = 740 px at 100 %): at 200 % it is the
+   same window seen at double size, a developer check (D104 (33)), so its rows wrap as in a real window instead of
+   being squeezed beside docked panes or cut with data-sb-truncate (D102 (35)) */
+.g-rx-winwide .sb-window__body > .sb-window__sidebar { inline-size: max(var(--sb-x-sebaro-pane-sidebar), 15rem); }      /* the panes grow with it */
+.g-rx-winwide .sb-window__body > .sb-window__inspector { inline-size: max(var(--sb-x-sebaro-pane-inspector), 17.5rem); }
 .g-rx-wincol { grid-column: 2; display: grid; grid-template-rows: minmax(0, 1fr) auto; min-inline-size: 0; }
 .g-rx-wincol > .sb-bottom-block { position: static; }
-.g-rx-wincol > .sb-window__content { overflow: visible; }
+.g-rx-wincol > .sb-window__content { grid-column: 1; overflow: visible; }   /* sebaro places the content in the body's column 2; inside this column it is the only one */
 .g-rx-sidefoot {
   display: grid; gap: var(--sb-space-1); margin: auto 0 0; padding: var(--sb-space-2) var(--sb-space-4);
   border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border);
@@ -262,6 +266,7 @@ progress.sb-progress__bar.g-rx-progress-blue::-moz-progress-bar { background: va
 .g-rx-squeeze .sb-window__content { padding: var(--sb-space-4); }
 .g-rx-treebox { inline-size: 100%; max-inline-size: 360px; padding-block: var(--sb-space-2); box-sizing: border-box; }
 .g-rx-rowsbox { inline-size: 100%; max-inline-size: 420px; box-sizing: border-box; }
+.g-rx-vlist { min-inline-size: 16em; }   /* TXT-09: a virtualised list stands in a window; at 200 % on a phone-wide stage the name would get no room beside the status, so the box keeps a window's width and the stage scrolls (D104 (33)) */
 .g-rx-menubox { display: flex; }
 .g-rx-sidebox.sb-side-nav { border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container); padding-block: var(--sb-space-1); }
 .sb-tooltip.g-rx-tipshow { position: static; justify-self: start; }
@@ -275,7 +280,10 @@ progress.sb-progress__bar.g-rx-progress-blue::-moz-progress-bar { background: va
 .g-rx-plainlist { margin: 0; padding: 0; list-style: none; }
 .g-rx-indent { padding-inline-start: var(--sb-space-6); }
 .g-rx-rating { display: inline-flex; align-items: center; gap: var(--sb-space-1); margin: 0; font-variant-numeric: var(--sb-type-numeric-variant); }
-.g-rx-narrowtext { max-inline-size: 13rem; margin: 0; hyphens: manual; }
+.g-rx-narrowtext { margin: 0; hyphens: manual; }
+/* TXT-15: the column stands for a phone and is narrow on purpose (data-sb-narrow-ok, check_demo.py 1.8.0): narrower
+ * than „Erinnerungseinstellungen“ at every text size, so its manual hyphen is needed at every screen width */
+.g-rx-narrowtext { max-inline-size: 10rem; }
 .g-rx-narrowtext + .g-rx-narrowtext { margin-block-start: var(--sb-space-3); }
 .g-rx-iconrail { display: grid; gap: var(--sb-space-1); justify-content: start; }
 
@@ -310,7 +318,9 @@ mark.g-rx-hit-lime { padding: 0 var(--sb-space-0-5); background: var(--sb-color-
 .g-rx-pill-shape { border-radius: var(--sb-radius-pill); }
 .g-rx-btn.g-rx-swatchbtn { inline-size: var(--sb-size-control-lg); padding: 0; }
 .g-rx-stars { display: inline-flex; gap: var(--sb-space-0-5); margin: 0; color: var(--sb-color-warning); }
-.g-rx-autohyph { hyphens: auto; text-align: justify; }
+/* TXT-15 „Nicht so“: the lines a browser makes with hyphens: auto and justify, set as fixed lines (each line justified),
+ * so the wrong example looks the same in every browser and at every text size and no live word is mis-hyphenated */
+.g-rx-badhyph { max-inline-size: 10rem; text-align: justify; text-align-last: justify; }
 .g-rx-glyph-warn { color: var(--sb-color-warning); }
 /* RAU-03: the same view at two widths on one screen; sb-view--wide is a size container (spec/02 §5.3) */
 .g-rx-viewbox--360 { max-inline-size: 360px; }
@@ -324,3 +334,4 @@ mark.g-rx-hit-lime { padding: 0 var(--sb-space-0-5); background: var(--sb-color-
 }
 /* DSK-04 „Nicht so“: a 760 px window, so the three fixed columns leave the text about 236 px */
 .demo-window-frame.g-rx-winfixed { inline-size: 760px; max-inline-size: none; }
+.g-rx-jumpbox { padding-inline-start: calc(var(--sb-space-3) + var(--sb-border-width-strong)); }   /* NAV-08: room for the place line a jump target draws before the text, which the stage would else clip */

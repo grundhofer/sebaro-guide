@@ -8,3 +8,28 @@
 try { var t = localStorage.getItem("sb-theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
 try { if (localStorage.getItem("sb-motion") === "reduce") document.documentElement.dataset.sbMotion = "reduce"; } catch (e) {}
 try { if (localStorage.getItem("sb-tone") === "warm") document.documentElement.dataset.sbTone = "warm"; } catch (e) {}
+// And the language of a page without a language URL (D102 (50), RB-29; spec/09 §18.2): only on <html
+// data-sb-language="stored">, sb-lang (a language code such as "de" or "en", stored by the choice in sb-controls.js)
+// becomes <html lang>. A page with a URL per language never has the attribute, so its lang stays the server's.
+try {
+  if (document.documentElement.getAttribute("data-sb-language") === "stored") {
+    var l = localStorage.getItem("sb-lang");
+    if (l && /^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$/.test(l)) document.documentElement.lang = l;
+  }
+} catch (e) {}
+// The browser and title-bar colour (RB-30, BRAND-ASSETS 1.7): the head snippet of brand_assets.py names the two grounds
+// as <meta name="theme-color" media="(prefers-color-scheme: …)">; with a stored choice the chosen one applies to both
+// schemes, and every "sb-theme-change" (theme-button.js, sb-window.js) moves them along. Pages without the tags: no-op.
+(function () {
+  function sync() {
+    var t = document.documentElement.dataset.theme;
+    Array.prototype.forEach.call(document.querySelectorAll('meta[name="theme-color"][media]'), function (m) {
+      var own = m.getAttribute("data-sb-media") || m.getAttribute("media");
+      m.setAttribute("data-sb-media", own);
+      m.setAttribute("media", !t ? own : ((t === "dark") === /dark/.test(own) ? "all" : "not all"));
+    });
+  }
+  sync();
+  document.addEventListener("DOMContentLoaded", sync);
+  document.addEventListener("sb-theme-change", sync);
+})();

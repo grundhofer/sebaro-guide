@@ -21,12 +21,18 @@
 .g-daten-more { margin: 0; max-inline-size: var(--sb-size-measure-prose); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 
 /* sample lines: value on the left, what it is on the right */
-.g-daten-samples { display: grid; gap: var(--sb-space-2); margin: 0; padding: 0; list-style: none; }
+.g-daten-samples { display: grid; gap: var(--sb-space-2); margin: 0; padding: 0; list-style: none; container: g-daten-samples / inline-size; }
 .g-daten-samples li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--sb-space-3); align-items: baseline; }
+/* large text (D99 (1), D102 lane narrow): below 22em of the list (352 px at 100 %, 704 px at 200 %) value and label
+ * stand one under the other instead of squeezing their words into half a column each */
+@container g-daten-samples (width < 22em) { .g-daten-samples li { grid-template-columns: minmax(0, 1fr); gap: 0; } }
 .g-daten-samples__value { font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); font-variant-numeric: var(--sb-type-numeric-variant); overflow-wrap: anywhere; }
 .g-daten-samples__label { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 
 /* ------------------------------------------------------------------ text */
+/* the narrow column of „Silbentrennung“ stands for a phone and is narrow on purpose, so its titles need their manual
+ * hyphens at every screen width; the markup carries data-sb-narrow-ok (check_demo.py 1.8.0: OVF6 counts its squeezed
+ * words in one info line instead of reporting them; an unneeded break is still an error) */
 .g-daten-narrow { box-sizing: border-box; inline-size: 11rem; max-inline-size: 100%; padding: var(--sb-space-3) var(--sb-space-3) var(--sb-space-3) 0; border-inline-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
 .g-daten-title-sample + .g-daten-title-sample { margin-block-start: var(--sb-space-3); }
 .g-daten-title-sample { margin: 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
@@ -52,6 +58,7 @@
 /* ------------------------------------------------------------------ code tones under the code block (FAR-11, D69) */
 .g-daten-tones { margin-block-start: var(--sb-space-4); }
 .g-daten-tones li { grid-template-columns: 6rem minmax(0, 1fr); }
+@container g-daten-samples (width < 22em) { .g-daten-tones li { grid-template-columns: minmax(0, 1fr); gap: 0; } }
 
 /* ------------------------------------------------------------------ media */
 .g-daten-figure { margin: 0; }

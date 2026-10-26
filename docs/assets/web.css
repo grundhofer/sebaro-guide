@@ -36,7 +36,7 @@
   min-block-size: var(--sb-size-control-sm); padding: var(--sb-space-1) var(--sb-space-4); box-sizing: border-box;
   border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border);
 }
-.g-web-frame__path { min-inline-size: 0; font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); color: var(--sb-color-text-muted); overflow-wrap: anywhere; }
+.g-web-frame__path { min-inline-size: 0; font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); color: var(--sb-color-text-muted); overflow-wrap: break-word; }
 .g-web-frame__state { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .g-web-frame__page { position: relative; container-type: inline-size; }
 /* at phone width the frame is the browser window: edge to edge, exactly as wide as the screen */

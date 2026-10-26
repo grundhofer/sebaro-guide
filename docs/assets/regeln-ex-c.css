@@ -106,7 +106,7 @@
 .g-rx-c-plainrows--pad { padding-block-start: var(--sb-space-2); }
 .g-rx-c-tinted { background: var(--sb-color-success-subtle); color: var(--sb-color-text-on-success-subtle); }   /* wrong: tinted row */
 .g-rx-c-notes-2col.sb-notes { max-inline-size: none; }
-.g-rx-c-notes-2col .sb-notes__list { display: block; columns: 2; column-gap: var(--sb-space-6); }            /* wrong: two columns */
+.g-rx-c-notes-2col .sb-notes__list { display: block; columns: 11em 2; column-gap: var(--sb-space-6); }            /* wrong: two columns (one at large text, so the notes' words are not squeezed) */
 .g-rx-c-notes-2col .sb-note { break-inside: avoid; margin-block-end: var(--sb-space-3); }
 .g-rx-c-ref-blue { font: var(--sb-type-caption); }
 .g-rx-c-ref-blue a { color: var(--sb-color-accent); text-decoration-color: var(--sb-color-accent); text-decoration-thickness: 1px; }   /* wrong: blue digit, thin line */
@@ -270,7 +270,7 @@ progress.g-rx-c-product-progress::-moz-progress-bar { background: var(--sb-tile-
   border: var(--sb-border-width-hairline) dashed var(--sb-color-text-muted); border-radius: var(--sb-radius-small);
 }
 .sb-icon-button.g-rx-c-btn32 { inline-size: var(--sb-size-control-sm); block-size: var(--sb-size-control-sm); }   /* wrong on a phone */
-.g-rx-c-sidenav.sb-side-nav { inline-size: 200px; padding-block: var(--sb-space-2); border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-inline-end: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color); }
+.g-rx-c-sidenav.sb-side-nav { inline-size: max(200px, 7.5em); padding-block: var(--sb-space-2); border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-inline-end: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color); }
 .g-rx-c-bgplace { background: var(--sb-color-accent-subtle); color: var(--sb-color-text-on-accent-subtle); }   /* wrong: place as a fill only */
 /* forced colours, simulated with tokens: fills vanish, text turns to one colour, sebaro's place line turns to text colour */
 .g-rx-c-forced .sb-side-nav, .g-rx-c-forced .sb-side-nav * { background: transparent !important; color: var(--sb-color-text) !important; }

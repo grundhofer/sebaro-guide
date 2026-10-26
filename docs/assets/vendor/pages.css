@@ -12,12 +12,16 @@
 
 /* the illustration pair for pages opened from file:// (spec/06 §8): the opaque light and dark renders */
 .sb-illustration-dark { display: none; }
-@media (prefers-color-scheme: dark) {
+/* the dark picture only on screen: paper is light (spec/09 §18.3), so print keeps the light one whatever the screen
+   shows, without a script (OR-11) */
+@media screen and (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .sb-illustration-light { display: none; }
   :root:not([data-theme="light"]) .sb-illustration-dark { display: block; }
 }
-:root[data-theme="dark"] .sb-illustration-light { display: none; }
-:root[data-theme="dark"] .sb-illustration-dark { display: block; }
+@media screen {
+  :root[data-theme="dark"] .sb-illustration-light { display: none; }
+  :root[data-theme="dark"] .sb-illustration-dark { display: block; }
+}
 
 /* review lines (colour count) collected at the end of a website page: demo chrome, not part of the site */
 .demo-review { padding: var(--sb-space-6) var(--sb-spacing-gutter) var(--sb-space-8); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
@@ -104,8 +108,8 @@
 /* ------------------------------------------------------------------ facts.html */
 .demo-facts { box-sizing: border-box; max-inline-size: var(--sb-size-container-max); margin-inline: auto; padding: 0 var(--sb-spacing-gutter) var(--sb-spacing-section); }
 .demo-product { padding-block: var(--sb-spacing-section); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
-.demo-product__head { display: flex; align-items: center; gap: var(--sb-space-4); margin: 0 0 var(--sb-space-6); }
-.demo-product__head h2 { margin: 0; min-inline-size: 0; }   /* the name breaks at large text instead of pushing the page (D100 (5)) */
+.demo-product__head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-4); margin: 0 0 var(--sb-space-6); }
+.demo-product__head h2 { flex: 1 1 0; margin: 0; min-inline-size: min(100%, 12rem); }   /* the name breaks at large text instead of pushing the page (D100 (5)); with less than 12rem beside the tile it goes under it (D102 lane narrow) */
 .demo-product h3 { margin: 0 0 var(--sb-space-3); font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); color: var(--sb-color-text-muted); }
 .demo-product__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-10); align-items: start; }
 .demo-product__part { min-inline-size: 0; }

@@ -1,5 +1,6 @@
 // sb-tree.js: keyboard and pointer behaviour of the sebaro tree (spec/02 §4.14; ARIA APG tree view pattern; D67 (2),
-// (9), D80). Classic script (pages open from file://), CSP-safe: no inline handlers, no eval, no styles.
+// (9), D80). Classic script (pages open from file://), CSP-safe: no inline handlers, no eval, no style attributes in
+// markup (the indent of a deep row is set through the CSSOM, like sb-window.js sets a pane's width).
 // Progressive enhancement: the markup already carries the state (aria-expanded on parent rows, hidden on the groups of
 // closed ones, aria-selected on the chosen row, tabindex 0 on one row); without this script the tree shows that state
 // and only loses the interaction.
@@ -11,6 +12,11 @@
 //   Enter, Space   chooses the row (aria-selected; one per tree) and fires "sb-tree-select" (bubbles, detail.item)
 //   letters        typeahead: the next visible row whose name starts with what was typed (within 500 ms)
 //   pointer        a click chooses the row; a click on the twist (.sb-tree__twist) or a double click opens / closes it
+//   folders        a folder without a view of its own (data-sb-folder-toggle on the row or the tree, D102 (17)):
+//                  choosing it also opens or closes it (click, Enter, Space; provisional, agent: a toggle)
+//   ⌘↓ (macOS)     opens the row like Enter (a folder opens, never closes), as in the Finder (D102 (17))
+//   indent         sebaro.css indents levels 1–8 by 16 px each; a row deeper than 8 gets --sb-tree-indent = level − 1
+//                  here, so every level keeps its 16 px (NV-B6), also for rows added or moved later
 // The tree writes no words, so it has no message table (D87).
 (function () {
   "use strict";
@@ -56,6 +62,15 @@
     rows(tree).forEach(function (r) { r.setAttribute("aria-selected", String(r === row)); });
     row.dispatchEvent(new CustomEvent("sb-tree-select", { bubbles: true, detail: { item: row } }));
   }
+  function folderToggles(tree, row) {
+    return isParent(row) && (row.hasAttribute("data-sb-folder-toggle") || tree.hasAttribute("data-sb-folder-toggle"));
+  }
+  function isMac() {
+    var p = document.documentElement.getAttribute("data-sb-platform");
+    if (p) return p === "mac";
+    var ua = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || navigator.userAgent || "";
+    return /mac|iphone|ipad|ipod/i.test(ua);
+  }
   function nameOf(row) {
     var n = row.querySelector(".sb-row__name");
     return (n || row).textContent.trim().toLowerCase();
@@ -80,7 +95,14 @@
     var row = event.target instanceof Element ? event.target.closest(".sb-tree [role='treeitem']") : null;
     if (!row || event.target !== row) return;
     var tree = row.closest("[role='tree']");
-    if (!tree || event.altKey || event.ctrlKey || event.metaKey) return;
+    if (!tree) return;
+    if (event.key === "ArrowDown" && event.metaKey && !event.altKey && !event.ctrlKey && !event.shiftKey && isMac()) {
+      if (isParent(row)) setOpen(row, true);   // ⌘↓ opens: a folder, a document by choosing it
+      if (!folderToggles(tree, row)) choose(tree, row);
+      event.preventDefault();
+      return;
+    }
+    if (event.altKey || event.ctrlKey || event.metaKey) return;
     var list = visibleRows(tree), i = list.indexOf(row), handled = true;
     switch (event.key) {
       case "ArrowDown": focusRow(tree, list[i + 1]); break;
@@ -95,7 +117,7 @@
         if (isOpen(row)) setOpen(row, false);
         else focusRow(tree, parentOf(tree, row));
         break;
-      case "Enter": case " ": choose(tree, row); break;
+      case "Enter": case " ": choose(tree, row); if (folderToggles(tree, row)) setOpen(row, !isOpen(row)); break;
       default:
         handled = false;
         if (event.key.length === 1 && /\S/.test(event.key)) { typeahead(tree, row, event.key); handled = true; }
@@ -109,16 +131,32 @@
     var tree = row.closest("[role='tree']");
     if (!tree) return;
     if (event.target.closest(".sb-tree__twist") && isParent(row)) setOpen(row, !isOpen(row));
-    else choose(tree, row);
+    else { choose(tree, row); if (folderToggles(tree, row) && event.detail < 2) setOpen(row, !isOpen(row)); }
     focusRow(tree, row);
   });
   document.addEventListener("dblclick", function (event) {
     var row = event.target instanceof Element ? event.target.closest(".sb-tree [role='treeitem']") : null;
-    if (row && isParent(row) && !event.target.closest(".sb-tree__twist")) setOpen(row, !isOpen(row));
+    // a toggling folder already turned with each click of the double click
+    var tree = row && row.closest("[role='tree']");
+    if (row && tree && isParent(row) && !event.target.closest(".sb-tree__twist") && !folderToggles(tree, row)) setOpen(row, !isOpen(row));
   });
+
+  // levels 1–8 have their rule in sebaro.css (also without this script); deeper rows get the same 16 px per level here
+  var CSS_LEVELS = 8;
+  function indent(tree) {
+    rows(tree).forEach(function (r) {
+      var level = parseInt(r.getAttribute("aria-level"), 10);
+      if (isFinite(level) && level > CSS_LEVELS) r.style.setProperty("--sb-tree-indent", String(level - 1));
+      else if (r.style.getPropertyValue("--sb-tree-indent")) r.style.removeProperty("--sb-tree-indent");
+    });
+  }
 
   function init() {
     document.querySelectorAll(".sb-tree[role='tree']").forEach(function (tree) {
+      indent(tree);
+      if (typeof MutationObserver === "function") {
+        new MutationObserver(function () { indent(tree); }).observe(tree, { childList: true, subtree: true, attributes: true, attributeFilter: ["aria-level"] });
+      }
       rows(tree).forEach(function (r) { if (isParent(r)) { var g = groupOf(r); if (g) g.hidden = !isOpen(r); } });
       var shown = visibleRows(tree);
       var start = shown.filter(function (r) { return r.getAttribute("aria-selected") === "true"; })[0] ||

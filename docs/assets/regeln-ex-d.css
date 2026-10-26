@@ -33,7 +33,7 @@
 
 /* MOB-07: the iOS form sheet, drawn */
 .g-rx-d-iossheet { border-block-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color); }
-.g-rx-d-iossheet__head { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--sb-space-2); padding: var(--sb-space-2) var(--sb-space-4); border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+.g-rx-d-iossheet__head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--sb-space-2); padding: var(--sb-space-2) var(--sb-space-4); border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
 .g-rx-d-iossheet__head > :last-child:not(.g-rx-d-iossheet__title) { justify-self: end; }
 .g-rx-d-iossheet__title { margin: 0; font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); text-align: center; }
 .g-rx-d-iossheet .sb-bottom-block { position: static; }
@@ -41,8 +41,9 @@
  * „Abbrechen“ to a column of single letters (provisional, agent) */
 @media (max-width: 22rem) { .g-rx-d-iossheet__head { grid-template-columns: minmax(0, 1fr); justify-items: start; } .g-rx-d-iossheet__title { text-align: start; } }
 
-/* MOB-08: the largest accessibility size, simulated by zooming the row */
-.g-rx-d-ax5 { zoom: 1.6; }
+/* MOB-08: the largest accessibility size, simulated by zooming the row; only while the page's own text is not large
+ * already (from 24rem up: 384 px at 100 %, 768 px at 200 %), so the simulation never multiplies the reader's text size */
+@media (min-width: 24rem) { .g-rx-d-ax5 { zoom: 1.6; } }
 
 /* DAT-12, WEB-07: two specimens side by side */
 .g-rx-d-grid2 > .g-rx-part { align-content: start; }
@@ -165,16 +166,18 @@
 .g-ex--dont .g-rx-d-glassbar { display: flex; justify-content: space-around; align-items: center; margin: 120px 16px 16px; padding: 8px; border-radius: 28px; background: rgba(240, 240, 245, 0.7); backdrop-filter: blur(12px); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); color: #8E8E93; }
 .g-ex--dont .g-rx-d-glassbar__pill { display: grid; place-items: center; padding: 6px 18px; border-radius: 18px; background: rgba(0, 122, 255, 0.15); color: #007AFF; }
 
-.g-ex--dont .g-rx-d-swipe { position: relative; display: flex; overflow: hidden; }
+.g-ex--dont .g-rx-d-swipe { position: relative; display: flex; flex-wrap: wrap; overflow: hidden; }
 .g-ex--dont .g-rx-d-swipe__row { flex: 0 0 70%; padding: 16px; border-block-end: 1px solid #DADCE0; }
-.g-ex--dont .g-rx-d-swipe__red { flex: 1 1 auto; min-inline-size: 0; display: grid; place-items: center; overflow-wrap: anywhere; background: #C5221F; color: #FFFFFF; font: var(--sb-type-body-strong); }   /* at large text the word breaks instead of being cut by the row (D101 (9)) */
+.g-ex--dont .g-rx-d-swipe__red { flex: 1 1 5em; min-inline-size: min(100%, 5em); display: grid; place-items: center; overflow-wrap: anywhere; background: #C5221F; color: #FFFFFF; font: var(--sb-type-body-strong); }   /* at large text the red part goes under the row instead of squeezing its word (D101 (9), D102 lane narrow) */
 
 .g-ex--dont .g-rx-d-tealbar { background: #0F8186; color: #FFFFFF; }
 .g-ex--dont .g-rx-d-tealbar .sb-window__name { color: #FFFFFF; }
 .g-ex--dont .g-rx-d-ownbtns { display: flex; gap: 8px; margin-inline-start: auto; }
 .g-ex--dont .g-rx-d-ownbtns i { inline-size: 14px; block-size: 14px; border-radius: 50%; background: #FFFFFF; opacity: 0.85; }
 
-.g-ex--dont .g-rx-d-grip { display: grid; grid-template-columns: 160px 12px minmax(0, 1fr); max-inline-size: 520px; block-size: 120px; border: 1px solid #C4C7CC; }
+.g-ex--dont .g-rx-d-grip { display: grid; grid-template-columns: 160px 12px minmax(0, 1fr); max-inline-size: 520px; min-block-size: 120px; border: 1px solid #C4C7CC; }
+/* large text (from 24rem down: 768 px at 200 %): side, handle and content one under the other, the handle a stripe */
+@media (max-width: 24rem) { .g-ex--dont .g-rx-d-grip { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 12px auto; } }
 .g-ex--dont .g-rx-d-grip__side, .g-ex--dont .g-rx-d-grip__main { padding: 12px; }
 .g-ex--dont .g-rx-d-grip__handle { background: repeating-linear-gradient(0deg, #1A73E8 0 4px, #8AB4F8 4px 8px); }
 
@@ -207,3 +210,11 @@
 .g-rx-d-tight > .demo-label:first-child { margin-block-start: 0; }
 .g-ex--dont .g-rx-d-cut .sb-bottom-nav__label,
 .g-ex--dont .g-rx-d-cut .sb-segmented__face { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; hyphens: manual; max-inline-size: 100%; }
+
+/* ------------------------------------------------------------------ MOB-09: a phone notification, drawn (a picture of
+   the system's surface: hairline frame on bg, the app line in caption, title in body-strong, actions as words) */
+.g-rx-notif { box-sizing: border-box; max-inline-size: 360px; padding: var(--sb-space-3) var(--sb-space-4); border: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container); background: var(--sb-color-bg); }
+.g-rx-notif > p { margin: 0; }
+.g-rx-notif__app { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.g-rx-notif > .g-rx-notif__title { margin-block-start: var(--sb-space-1); font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
+.g-rx-notif > .g-rx-notif__actions { display: flex; flex-wrap: wrap; gap: var(--sb-space-1) var(--sb-space-6); margin-block-start: var(--sb-space-2); font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }

@@ -107,10 +107,12 @@
 .g-grundlagen-scale__bar { display: block; inline-size: var(--g-size); block-size: var(--sb-space-3); background: var(--sb-color-border-strong); }
 .g-grundlagen-scale__px { justify-self: end; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant); }
 /* D100 (5): three columns no longer fit from 20rem down (320 px at 100 %, 640 px at 200 %; a media query's rem follows
- * the reader's text size): name and value on one line, the bar under them */
+ * the reader's text size): name, value and bar each on their own line, so the token name is never squeezed beside the
+ * value (D102 lane narrow, OVF6) */
 @media (max-width: 20rem) {
-  .g-grundlagen-scale > li { grid-template-columns: minmax(0, 1fr) auto; row-gap: var(--sb-space-1); padding-block: var(--sb-space-2); }
-  .g-grundlagen-scale__bar { grid-column: 1 / -1; grid-row: 2; max-inline-size: 100%; }
+  .g-grundlagen-scale > li { grid-template-columns: minmax(0, 1fr); row-gap: var(--sb-space-1); padding-block: var(--sb-space-2); }
+  .g-grundlagen-scale__px { justify-self: start; }
+  .g-grundlagen-scale__bar { max-inline-size: 100%; }
   .g-grundlagen-scale > li > .g-grundlagen-mono { min-inline-size: 0; }
 }
 

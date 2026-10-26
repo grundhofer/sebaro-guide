@@ -1,15 +1,15 @@
 /* generated — do not edit.
- * sebaroDesign token contract 1.9 · draft "sebaro" · palette "sebaro"
- * source: systems/sebaro/tokens/tokens.json (sha256 1fa205d732288097)
- *         palettes/sebaro.json (sha256 df4c9637763f69d3)
- * builder: tools/build_tokens.py 1.9.0 · spec: shared/TOKEN-CONTRACT.md
+ * sebaroDesign token contract 1.10 · draft "sebaro" · palette "sebaro"
+ * source: systems/sebaro/tokens/tokens.json (sha256 278cd39531d62d2a)
+ *         palettes/sebaro.json (sha256 3f718c41c545ea72)
+ * builder: tools/build_tokens.py 1.10.1 · spec: shared/TOKEN-CONTRACT.md
  *
  * Tailwind CSS v4 bridge. Import order:
  *   @import "tailwindcss";
  *   @import "./tokens.css";
  *   @import "./tokens.tailwind.css";
- * `@theme inline` makes every utility read var(--sb-*) at the element, so light/dark, [data-theme]
- * subtrees and [data-product] accents switch without a rebuild. Tailwind's default colours, radii,
+ * `@theme inline` makes every utility read var(--sb-*) at the element, so light/dark and
+ * [data-theme] subtrees switch without a rebuild. Tailwind's default colours, radii,
  * shadows, easings and breakpoints are cleared: bg-blue-500, rounded-lg or shadow-md do not exist.
  * Print needs nothing here: tokens.css repeats the light values in @media print (1.9) and the
  * utilities read them through var(--sb-*).

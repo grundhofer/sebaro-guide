@@ -28,7 +28,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 
 Rule status: **entschieden** = owner decision, binding. **vorläufig** = an agent's decision, valid until the owner
 changes it. **offen** = proposal only, do not build it as a rule. `D<n>` refers to row n of the decision log in the
-workshop repository sebaroDesign (private; the guide covers D1–D101). A rule id (e.g. `AKT-01`) is stable; cite it
+workshop repository sebaroDesign (private; the guide covers D1–D106). A rule id (e.g. `AKT-01`) is stable; cite it
 in code reviews, commit messages and ADRs.
 
 ## 2 The ten rules most often broken
@@ -37,7 +37,8 @@ in code reviews, commit messages and ADRs.
    Tile colours only inside the app's sign tile. Everything else is grey with hairlines. (FAR-01, FAR-03, STA-01, ZEI-01)
 2. **At most one lime primary action per view, at the bottom of the area it acts on** (D74), in the 56 px action zone,
    labelled verb + thing, and **last** in every action group (D83). (AKT-01, AKT-02, AKT-04, AKT-11)
-3. **Deleting always asks** in a dialog; only destructive actions carry the 45° cut. (AKT-07, AKT-08, FOR-04)
+3. **Deleting always asks** in a dialog; only destructive actions (and a final step that deletes nothing, D102) carry
+   the 45° cut. (AKT-07, AKT-08, FOR-04)
 4. **Layers are separated by a 2 px ink line**, never by a tinted ground or a shadow. (EBE-01, EBE-02)
 5. **The current place is a 3 px cobalt line** plus weight/shape; app navigation shows icon + word. (NAV-01, NAV-02)
 6. **Links**: word in text colour with a 2 px cobalt underline; external links end in the `external-link` icon. (LNK-01, LNK-02)
@@ -93,8 +94,8 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
      640 px (EBE-04);
    - iOS: SwiftUI package (own bottom bar, system navigation bar, no row swipe, own delete dialog, form sheet with
      „Sichern“ at the bottom, `SbHaptics`, Dynamic Type without a cap) (MOB-05 to MOB-08);
-   - desktop windows: title bar per system, small windows, draggable dividers, „Menü“ key with submenus, 14 fixed
-     shortcuts, F6, document tabs, drop target, several windows, notifications, update word, window ground, compact
+   - desktop windows: title bar per system, small windows, draggable dividers, „Menü“ key with submenus, 15 fixed
+     shortcuts (14 of D91, Zurück / Vor of D102), F6, document tabs, drop target, several windows, notifications, update word, window ground, compact
      inspector (DSK-06 to DSK-15).
 
    Settled by the owner with D92 (2026-10-21): „Konflikt“ always carries the warning glyph, in rows, trees and the
@@ -135,7 +136,7 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
    placement. D95 decided this part of the menu pattern; D98 confirmed the rest (EBE-07 is entschieden).
    In the same workshop round, without a new decision: `tokens.css` ends with a generated `@media print` block with
    the light values (TOKEN-CONTRACT 1.9), so pages print light without scripts too; keep loading `sb-print.js` (it opens
-   closed answers; its theme half is now redundant and stays until its removal is checked) (WEB-11). The studio share
+   closed answers; its theme half was removed in workshop `68ba334`, after a print check in Chromium) (WEB-11). The studio share
    image has a light ground (WEB-09). Compose caught up: `SbStatus(…, glyph = SbStatusGlyph.Warning)` for „Konflikt“,
    `SbStatusGlyph.Pending` in the neutral tone for a „2 offen“ that only informs (STA-01, STA-09), `SbToneChoice` and
    `SbMotionSetting` with `SebaroAppTheme(mode, reduceMotion, tone)` (MOB-01, MOB-04, BEW-04), the wrappers' words from
@@ -212,14 +213,58 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
    `check_demo.py` 1.4.0 checks it on every page: `OVF3` (page width at 200 % text on 320, 360 and 390 px, light and dark)
    and `OVF4` (text cut by a frame). Provisional agent choices, named as such in the rules: the 4 px hysteresis of the
    select, `translate="no"` as the mark of a name, 12 px between facts list entries, the last step's word once all are
-   done, the API names of `SbSortableTable`. No question waits for the owner's choice (`docs/ausblick.html#entscheidung`
-   is empty; a „vorläufig“ rule is not an entry there). Only three rules stay vorläufig, by D98: BIL-04 and ZUG-07 until
+   done, the API names of `SbSortableTable`. After D101 no question waited for the owner's choice (a „vorläufig“ rule is never an
+   entry on `docs/ausblick.html#entscheidung`). Only three rules stay vorläufig, by D98: BIL-04 and ZUG-07 until
    a legal check before the first publication of a product (the marking of generated images, the accessibility
    statement), DSK-01 until a run in a real Tauri webview with novalis (D89); never present them as decided. Compose is
    rendered on the JVM with the workshop's render tool (`extract_compose.py --render`) and probed in the semantics tree,
    not on a device and not with TalkBack itself; audio row and video are stateless, the app binds its own player.
    Nothing of this is tested on real Android or iOS devices, with TalkBack or VoiceOver, in WebKit, Firefox or real
    Tauri windows; `OVF4` does not see text inside an input or select. See `docs/ausblick.html#offen`.
+   Settled by the owner with D102, D103 and D104 (2026-10-25, synced from workshop `68ba334`), the 52 questions from
+   the first adoptions (novalis, RetroBeam) and the 45 after them, all as proposed. Windows (D102 (1)–(17)): a grey
+   counter line before the state sentence, a failed command's sentence in the action zone (STA-07); changed and pinned
+   document tabs, reordering also without a pointer, tabs that never shrink below their name (up to 15 rem), ⌫ alone
+   never closes (DSK-10); an app's own menu items in one fixed group, „Farbton ›“ after „Hell oder Dunkel ›“, items
+   without a target disabled, the native context menu on macOS (DSK-08, AKT-10); 15 fixed shortcuts with Zurück / Vor
+   on ⌘← / ⌘→, the table means characters, ⌘+ / ⌘− change only the content in a desktop app (DSK-09). Texts (D102
+   (18)–(25)): the copy toast without „Rückgängig“ (EBE-05), „In den Papierkorb legen …“ with a trash (AKT-08), German
+   words with a product glossary as the only exception (TXT-01), „Details“ under an error sentence (TXT-07), „Weiter:
+   <Ziel>“ allowed in every fixed flow (AKT-04), no emoji in interface text and a calm remaining time (HAL-05). Patterns: only
+   virtualised lists or tables of fixed row height cut names (`data-sb-truncate`, D102 (35), TXT-09); a final step
+   that deletes nothing asks and carries the 45° cut without the trash icon (FOR-04, AKT-07); the board's column action
+   and least column width (DAT-13). Web apps without a window: header without the four words with „Einstellungen“,
+   footer without „Darstellung“, DE / EN as a choice, one share image for access links, „GitHub“ required under the AGPL,
+   the hand-written data-path hint (NAV-06, WEB-03, WEB-09, WEB-10, BEL-10); the fade under reduced motion is 200 ms
+   under both settings (BEW-04). Also from D102: `data-sb-start="nostore"` for a product that stores nothing (STR-01),
+   callout actions with „Ausblenden“ (STA-05), the contents over a reader and a jump target's place line (NAV-08), the
+   ellipsis „…“ after a space, „Suchen …“ (TXT-05). D104 also decided the search in the palette's frame, the find bar, the reader, the
+   collaboration patterns (votes, hidden cards, free canvas, pointers, invite and wheel dialogs), chips at 32 px in a
+   window, weekday heads with two letters where every second one leaves the view (DAT-11, DAT-16), icons that stay fixed
+   while text grows (ICO-04), group-head tools in the sidebar (NAV-04), the editor's means (DSK-03, TEC-08) and phone
+   notifications (new MOB-09). **D103 is a priority for future decisions:** where accessibility stands against another
+   goal it loses, and the proposal is the simpler form or the one that serves the other goal (D104 (0)); the existing
+   ZUG rules, D93 and D99–D102 stay (ZUG-01, the area intro of „Zugang“).
+   Settled by the owner with D105 (2026-10-26, synced from workshop `ef6121d`), the 46 questions after D104, all as
+   proposed and built: the second icon sheet (`eye-off`, `eye` before „Vorschau“, `quote`, `exercise`, filled
+   `repeat` / `timer`, the dot `changed--16` on a changed document tab, DSK-10); the wheel turns at most 200 ms (BEW-01);
+   private notifications carry only their title, everywhere (MOB-09); an own recording row, stepper and half-hour
+   time sheet, Compose only (BIL-06, new EIN-06); editor line numbers without a thousands separator (TXT-04); a phone
+   editor shows „Sichern“ only while something is unsaved (AKT-01, NAV-05), sets every file in sebaro Mono on
+   Android's EditText, emphasis 600 where Markdown is in sebaro Sans (DSK-03); the dialog before closing with unsaved
+   changes, a neutral confirm when nothing is lost, removing an entry from an unsaved form with an undo toast (AKT-11,
+   AKT-08, EBE-05); „Keine Werbe-SDKs · Keine Werbe-ID“ (BEL-01); an instant result without check or pulse, haptics
+   switchable by the app (AKT-05, MOB-03); shake only as an extra way (new MOB-10); no text on a picture (FAR-02); a
+   countdown without a ring (HAL-05); no own spots (DAT-07, ICO-07); an app's own state words with the fixed glyphs
+   (STA-02); the data-path hint of a menu row's action in its dialog (BEL-10); the value tile of a die and the
+   „erwartet“ line, Compose only (DAT-03, DAT-12); „Einstellungen“ in a sidebar foot that never scrolls (NAV-04).
+   D106 (the same day, 24 questions after the D105 build, all as proposed) settles five provisional points of that
+   build: „Abbrechen“ · „Verwerfen“ · „Sichern“ (AKT-11), check and cross on the die (DAT-03), the „erwartet“ line
+   with a `bg` joint (DAT-12), „Ohne Werbung“, „werbefrei“ and „ad-free“ on no surface at all (BEL-01), the grey
+   markers show emphasis in the phone's Mono editor (DSK-03). The rest of D106 (widgets on the home screen, camera and
+   image patterns, four new app signs, 19 icons) is being built in the workshop and has no guide rule yet
+   (`docs/ausblick.html#p-d106-bau`). No question waits for the owner. The new web patterns of D102 to D105 are not yet
+   shown as components on `docs/bauteile.html` (`docs/ausblick.html#p-g-neue-muster`).
 
 ## 4 Where the system files come from
 
@@ -232,7 +277,7 @@ never edits colours, fonts, icons or brand files by hand. `docs/sebaro/` is a **
 |---|---|
 | Website, web app (plain CSS, Astro, React, Tailwind v4) | copy `docs/sebaro/` into your project as one folder, never edit inside it; wiring in `docs/sebaro/README.md` |
 | Tauri / macOS / Android (Compose) / iOS (SwiftUI) | with a sebaroDesign checkout: `python3 tools/export_system.py sebaro --target tauri|macos|android|ios --out <dir> --product <id>` then `--verify <dir>` |
-| Packages (planned, D88) | private GitHub Packages built on a workshop version tag: `@grundhofer/sebaro` (npm, web and Tauri) and a Maven artifact for Android (Compose). Their version follows the token contract, now 1.9, so `1.9.x`; the first is `1.9.0` (there is never a `1.8.0`). The workflow is set up; no package is published yet (the workshop CI is blocked; a self-hosted runner comes later, D95). Until then use the export. |
+| Packages (planned, D88) | private GitHub Packages built on a workshop version tag: `@grundhofer/sebaro` (npm, web and Tauri) and a Maven artifact for Android (Compose). Their version follows the token contract, now 1.10 (since 2026-10-25), so `1.10.x`; the first is `1.10.0` (1.9 was never published). The workflow is set up; no package is published yet (the workshop CI is blocked; a self-hosted runner comes later, D95). Until then use the export. |
 
 Fonts are self-hosted (D18, D66, D68, D71): sebaro Sans + sebaro Mono, the only two families, as variable WOFF2 with
 the key glyphs (⌘ ⇧ ⌥ ⌃ ↩ ⎋ ⌫ ⇥ ↑ ↓ ← →) included, for web and for Tauri on every platform (D77); OFL texts in
@@ -255,10 +300,10 @@ node tools/og.mjs --check --png-bytes  # fresh render equals the committed snipp
 python3 tools/sync_from_design.py --check          # docs/sebaro/ equals a fresh export of the workshop commit
 # with a sebaroDesign checkout, its demo check on every page, run from there (absolute page path):
 #   python3 tools/check_demo.py <abs path>/docs/<page>.html --page web --skip content --no-write
-python3 tools/release.py 2.11.0        # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.10.0 is the last release)
+python3 tools/release.py 2.12.0        # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.11.0 is the last release)
 ```
 
-The workshop's demo check (1.4.0) measures one- and two-character text on screen pixels; on `regeln.html` it reports
+The workshop's demo check (1.8.0) measures one- and two-character text on screen pixels; on `regeln.html` it reports
 the deliberately unreadable cells of the „Nicht so“ specimens inside `g-ex--dont` (DAT-11's heatmap, one pill) as CTR1
 errors, which it cannot tell from real faults. Run `regeln.html` also with `--skip contrast` (a documented group of the
 tool; axe still checks contrast) and say so; every other page runs without it.
@@ -280,7 +325,15 @@ way and an ellipsis that is both `text-overflow: ellipsis` and marked `data-sb-t
 both, in light and dark (the warm-tone runs of `--tones warm` check axe, contrast and colour, not the 200 % pass);
 never weaken them with a local workaround. To see real 200 % text yourself, set
 the font sizes with CDP before `goto` and take viewport screenshots after scrolling (full-page screenshots lose the
-setting). `OVF4` does not see text inside an input or a select.
+setting). `OVF4` does not see text inside an input or a select (since 1.5.0 `OVF5` warns about field text wider than
+its field). Since 1.6.0 `OVF6` also reports a word broken inside itself where it would fit its line or the part that
+squeezes it (at 100 % and in the 200 % pass); every guide page passes it too. Since 1.8.0 a part narrow on purpose
+carries `data-sb-narrow-ok`: its squeezed words are counted in one info line instead of reported, an unneeded break
+stays an error (`docs/ausblick.html#p-w-ovf6-schmal`); the narrow columns of SCH-06, TXT-15 and the data page carry it
+and are narrow on every screen. Use it only where the narrowness is the content. `build.py` renders file names and
+markup fragments of rule texts as code (`code.sb-file-name` with `<wbr>`, never before an extension of one to four
+letters or digits, as the workshop's `sbExtensionDot`), so `sb-fit.js` never hyphenates them; hand-written file names
+on the pages follow the same rule.
 
 `check_site.py` groups: PAGE, LINK, NET, CSS, TOKEN (every `var(--sb-*)` exists in `tokens.css` / `sebaro.css`), STYLE,
 SWATCH, LICENSE, TEXT, CHANGE, OG, TERM, RULES; the docstring explains each.
@@ -332,18 +385,29 @@ hand with `tools/sync_from_design.py`.
     The wrapper must take its width from its parent (not a shrink-to-fit grid or flex item). Never on a sortable
     table (DAT-14, D92 (7): it scrolls sideways inside its `sb-table-wrap`) and never in markup meant to be copied.
   - Inline code in `main` breaks with `overflow-wrap: anywhere`, except a file name (`code.sb-file-name`, `<wbr>` after
-    - . _ /, D101 (6)) and an identifier (`sb-id`, D80); code blocks keep their lines.
+    - . _ / but not before a short extension, D101 (6); the extension rule is provisional, workshop `ef6121d`) and an identifier (`sb-id`, D80); code blocks keep their lines.
   - Large text (D100 (5), ZUG-09): grids and lists in guide CSS take `minmax(0, 1fr)` or `min-inline-size: 0`, so a
     long word never sets their width; a rule's head puts title and status under the id from 24rem down (a media query's
     rem follows the reader's text size); a `g-ex__stage` is positioned, and a word in it breaks only where it alone does
     not fit its line (sebaro's `overflow-wrap: break-word`, never `anywhere`, which would break words that fit);
-    a `sb-changelog` in `main` puts the date above its entry from 22rem down; in a stage a phone frame, a window shot,
-    a video and the stage's direct content keep `min(320px, 12rem)`, so at large text they scroll in the stage instead
-    of squeezing to a column no phone has (provisional, agent; the cost: their right part is read by scrolling the
-    stage). `guide.js`
+    a `sb-changelog` in `main` puts the date above its entry from 22rem down; in a stage a phone frame, a window shot
+    and a video keep `min(320px, 12rem)`, and so does the whole content of a stage marked `g-ex__stage--screen` (a
+    specimen that stands for a screen or a window and does not reflow below 320 px: dialogs, sheets, palettes, headers,
+    views, lists in a window, and specimens whose code bar or action zone would else cut a word), so at large text they
+    scroll in the stage instead of squeezing to a column no phone has (provisional, agent); a wide window shot
+    (`g-rx-winwide`) is `max(740px, 46.25rem)` wide and its sidebar and inspector grow the same way, so at 200 % it is
+    the window at double size (D104 (33)); below 24rem a stage keeps 8 px at its sides. Every other stage reflows as
+    far as its content can. Code blocks, tables, charts, drawings of fixed width and some deliberate „Nicht so“
+    specimens still scroll in their stage at 200 % (36 rule examples at 320 px, 23 at 360, 15 at 390, listed at
+    `docs/ausblick.html#p-g-rahmen-scrollen`); the page never scrolls and `OVF4` finds no frame that cuts a text. A menu
+    row whose word would break beside its keys gets the keys under the word from the exported `sb-fit.js` (workshop
+    `ef6121d`, `docs/ausblick.html#p-w-menue-kuerzel`); the guide adds no width of its own. `guide.js`
     gives a `g-ex__stage` or `g-daten-specimen` that scrolls sideways `tabindex="0"`, `role="region"` and a name, and
-    takes them away when it fits again. Every `sb-row` and every `sb-window` root carries `data-sb-truncate` (D67 (2)), so
-    does a deliberate „Nicht so“ ellipsis; any other `text-overflow: ellipsis` is a fault `OVF4` reports.
+    takes them away when it fits again. `data-sb-truncate` marks only a deliberate ellipsis (D102 (35)): a virtualised
+    list (the TXT-09 example, whose box keeps a window's width of 16em), the window path, the document tab list and a
+    deliberate „Nicht so“ ellipsis (TXT-09, DSK-01, DSK-04); as in the workshop (spec/02 §4.13) no window root under
+    „So“ carries it, so every other row wraps. Any other
+    `text-overflow: ellipsis` is a fault `OVF4` reports.
 - **Header and footer from `build.py`** (`guide:header`, `guide:footer`, D92 (6)): the header shows `PAGES` except
   web, app, ios and desktop, which stand under one entry „Plattformen“ (`plattformen.html`, an overview page; no menu
   button, spec/03 §6.1). On a platform page that entry carries `aria-current="true"` with the place line from
@@ -383,9 +447,12 @@ The guide shows sebaro as built and checked in sebaroDesign; Chromium screenshot
 devices, Windows rendering, WebKit/Tauri webviews or screen readers. All example data on the pages is invented.
 The owner answered the round-6 sketch (63 questions, private, never linked from here) with D91 and the open readings
 after it with D92 to D97, confirmed 70 of the 73 vorläufig rules with D98 and answered the four workshop questions on large
-text, inputs and charts on the phone and required fields with D99, and the steps, the novalis sidebar, page width at large text, the Compose sortable table and intro step with D100 and D101; what is still open, and what is built but untested (real iOS devices, real Tauri windows),
-is collected on `docs/ausblick.html`; D100 and D101 answered the last two open questions, so none waits now. Since 2.10.0
-no guide page scrolls sideways at 200 % text on 320, 360 and 390 px and no frame cuts a text (`OVF3`, `OVF4`;
-`docs/ausblick.html#p-g-grosse-schrift`); some sebaro components still squeeze their text into very narrow columns at
-that size without cutting it (list rows with a trailing status, the board in a window, the primary action's 3rem sides;
-a workshop request, `docs/ausblick.html#p-grosse-schrift-bauteile`).
+text, inputs and charts on the phone and required fields with D99, and the steps, the novalis sidebar, page width at large text, the Compose sortable table and intro step with D100 and D101, the questions of the first adoptions with D102 to D104 (D103 sets the priority for future trade-offs) and
+the apps' waiting lists with D105 and D106; what is still open, and what is built but untested (real iOS and Android
+devices, real Tauri windows), is collected on `docs/ausblick.html`; no question waits for the owner, D106 is being built.
+No guide page scrolls sideways at 200 % text on 320, 360 and 390 px, no frame cuts a text and, since 2.11.0, no word
+breaks inside itself where it would fit (`OVF3`, `OVF4`, `OVF6`; `docs/ausblick.html#p-g-grosse-schrift`); the workshop
+built the narrow-column parts after D102. Rule examples that still scroll in their own frame at 200 % are listed at
+`docs/ausblick.html#p-g-rahmen-scrollen`. The four workshop requests of 2.11.0 (menu rows with keys, a board column
+head with a long one-word name, deliberately narrow columns in `OVF6`, the calendar's day numbers at 200 % on 320 px)
+are built in workshop `ef6121d` and used here; none of them is checked in WebKit, Firefox or a Tauri window.

@@ -10,7 +10,7 @@
 //         <div class="sb-calendar__head"><p class="sb-calendar__title" id="c1-title" aria-live="polite">Oktober 2026</p>
 //           <div class="sb-calendar__nav"><button class="sb-icon-button" type="button" data-sb-calendar-step="-1"
 //             aria-label="Voriger Monat">…</button><button … data-sb-calendar-step="1" aria-label="Nächster Monat">…</button></div></div>
-//         <table class="sb-calendar__grid" role="grid" aria-labelledby="c1-title">… thead with two-letter heads, tbody
+//         <table class="sb-calendar__grid" role="grid" aria-labelledby="c1-title">… thead with two-letter heads (once a day's column is narrower than two letters sebaro.css leaves every second one out of sight, D104 (21)), tbody
 //           with td.sb-calendar__day[data-sb-date][tabindex], aria-current="date" on today, aria-selected="true" on the
 //           chosen day …</table>
 //       </div>

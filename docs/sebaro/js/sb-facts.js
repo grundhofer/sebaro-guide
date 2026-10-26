@@ -8,7 +8,7 @@
 //   <script type="application/json" data-sb-facts="<id>"> facts.json </script>
 //   <script type="application/json" data-sb-notes="<id>"> <id>.notes.json </script>
 // Targets: any element with data-sb-render="<form>" and data-sb-product="<id>":
-//   name           the product name from the file; title: name and version ("Tagwerk 1.4.0")
+//   name           the product name from the file; title: name and version ("<name> 1.4.0")
 //   facts-line     (a) compact form; data-sb-full-href = link of the "n nicht belegt" cell
 //   claim-rows     (b) full form as claim rows; data-sb-refs="accounts,tracking.adIds,…" (default: every fact, in the
 //                  fixed order of spec/10 §4.2), data-sb-device (device rows first), data-sb-open="<refs>" (expanded),

@@ -96,8 +96,7 @@ GLYPH_ICONS = {"→": ("arrow-right--16", "zu"), "←": ("arrow-left--16", "link
 GLYPH_WORDS_EN = {**GLYPH_WORDS, "≥": "at least", "≤": "at most"}
 
 
-def text(s: str, lang: str = "de") -> str:
-    """Escape rule text for HTML and replace characters the fonts lack."""
+def _plain(s: str, lang: str) -> str:
     out = esc(s)
     for ch, word in (GLYPH_WORDS_EN if lang == "en" else GLYPH_WORDS).items():
         out = out.replace(ch, word)
@@ -105,6 +104,47 @@ def text(s: str, lang: str = "de") -> str:
         out = out.replace(ch, f'<svg class="sb-icon sb-icon--16" role="img" aria-label="{label}" focusable="false">'
                               f'<use href="#{name}"/></svg>')
     return out.replace("Delta- ", "Delta-")
+
+
+# Machine values inside rule text (D101 (6), (10), TXT-08): rules.json keeps plain text for agents; the HTML marks a
+# file name or path as <code class="sb-file-name"> with <wbr> after - . _ / (it breaks only there, never with a
+# hyphen), and a markup fragment or an attribute as <code>, so sb-fit.js never hyphenates them (D102 lane narrow, OVF6).
+_FILE_RE = (r"(?<![\w/.-])(?:[\w-]+/)*[\w-]+(?:\.[\w-]+)*\."
+            r"(?:py|mjs|js|json|css|html|md|kt|swift|txt|sh|toml|rs|svg|png|webp|woff2|webm)(?![\w/])")
+_MARKUP_RE = r"<[a-z][^<>]*>(?:[^<>]*</[a-z]+>)?|[a-z][\w:-]*=(?:\"[^\"]*\"|'[^']*')"
+_MACHINE = re.compile(f"(?P<file>{_FILE_RE})|(?P<markup>{_MARKUP_RE})")
+
+
+def _extension_dot(s: str) -> int:
+    """Index of the dot before an extension of one to four letters or digits („.csv“, „.md“), else -1: no break goes
+    there, so the extension stays with the last part (the workshop's sbExtensionDot, spec/02 §3.11)."""
+    dot = s.rfind(".")
+    if dot <= 0:
+        return -1
+    ext = s[dot + 1:]
+    return dot if 1 <= len(ext) <= 4 and all(c.isalnum() for c in ext) else -1
+
+
+def _file_name(s: str) -> str:
+    out = []
+    dot = _extension_dot(s)
+    for i, ch in enumerate(s):
+        out.append(esc(ch))
+        if ch in "-._/" and i < len(s) - 1 and i != dot:
+            out.append("<wbr>")
+    return '<code class="sb-file-name">' + "".join(out) + "</code>"
+
+
+def text(s: str, lang: str = "de") -> str:
+    """Escape rule text for HTML, mark file names and markup as code, and replace characters the fonts lack."""
+    s = s or ""
+    out, pos = [], 0
+    for m in _MACHINE.finditer(s):
+        out.append(_plain(s[pos:m.start()], lang))
+        out.append(_file_name(m.group("file")) if m.group("file") else f"<code>{esc(m.group('markup'))}</code>")
+        pos = m.end()
+    out.append(_plain(s[pos:], lang))
+    return "".join(out)
 
 
 def icon(name: str, size: int = 16) -> str:

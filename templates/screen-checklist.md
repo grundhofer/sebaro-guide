@@ -1,7 +1,7 @@
 # Screen checklist
 
 Walk this for every screen in **light and dark**, at **390 px and 1440 px** (desktop apps: smallest and a wide window).
-Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D101.
+Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D106.
 
 ## Colour and hierarchy
 - [ ] Cobalt only for current place, links and focus; lime only for the one primary action (FAR, AKT)
@@ -88,9 +88,16 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
       select, steps show only the current word, file names break only after - . _ /, a part that alone does not fit
       also inside (`sb-fit.js`, `sb-file-name`); Android dialogs dim with the palette scrim (ZUG-09, EBE-03, D99, D100,
       D101)
+- [ ] No word breaks inside itself where it would fit its line or its part (`check_demo.py` OVF6); only a virtualised
+      list cuts names, with `data-sb-truncate` and the full name in `title`; weekday heads keep two letters; icons
+      stay fixed while text grows (ZUG-09, TXT-09, DAT-16, ICO-04, D102, D104)
+- [ ] A file name never breaks before an extension of one to four letters or digits („10.csv“ stays whole); a column
+      narrow on purpose carries `data-sb-narrow-ok` (ZUG-09, TXT-15, D105)
 
 ## Content and evidence
 - [ ] No claim without proof; outflows stay visible; unknown = „nicht belegt“ (BEL)
+- [ ] No ads: „Keine Werbe-SDKs · Keine Werbe-ID“; never „Ohne Werbung“, „werbefrei“ or „ad-free“, also not in store
+      texts, on the website or in headings (BEL-01, D105, D106)
 - [ ] Websites: footnote digits are text, notes 1..n in one column with backlinks; apps: claim rows (BEL)
 - [ ] No invented demo data shipped; no foreign network requests (WEB)
 - [ ] Website footer: „Impressum“, „Datenschutz“, „Barrierefreiheit“ always; „GitHub“ only with a public repository (WEB-03, D98)

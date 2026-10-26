@@ -64,6 +64,30 @@ This product uses the sebaro design system. Before building or changing any UI:
    `<code class="sb-file-name">` with `<wbr>` after - . _ /, identifiers (`sb-id`) never break, wide parts scroll in
    their own frame, a deliberate ellipsis carries `data-sb-truncate` (ZUG-09, STA-06, EIN-04, TXT-15, ZEI-13, DAT-10).
    The page writes „(optional)“ itself; a field that always holds a value carries none (EIN-01).
+   Decided with D102 to D104: only a virtualised list or table of fixed row height cuts names with an ellipsis
+   (`data-sb-truncate`, full name in `title`); every other row wraps (TXT-09). 15 fixed shortcuts, Zurück / Vor on
+   ⌘← / ⌘→ (DSK-09); ⌘+ / ⌘− change only the content's text size in a desktop app; icons and tiles stay fixed at every
+   text size (ZUG-09, ICO-04). With a trash: „In den Papierkorb legen …“; a final step that deletes nothing asks like a
+   deletion and carries the 45° cut without the trash icon (AKT-08, FOR-04). „Weiter: <Ziel>“ allowed in every fixed flow
+   (AKT-04); German words, an English product term only from the product's glossary (TXT-01); the ellipsis „…“ after a space,
+   „Suchen …“ (TXT-05); technical details under
+   an expandable „Details“ (TXT-07); no emoji in interface text, a calm remaining time „noch 3 Min.“ is allowed
+   (HAL-05). A web app without a window: header without the four words, „Einstellungen“ to a small settings view,
+   footer without „Darstellung“, DE / EN as a choice without a URL per language (NAV-06, WEB-03, WEB-10). Phone
+   notifications: the thing as title, one calm sentence, at most two actions with a target, private content only its
+   title on the lock screen (MOB-09). D103: in a future trade-off between accessibility and another goal,
+   accessibility loses; the existing rules stay.
+   Decided with D105 (D106 settles five of its provisional points): private notifications carry only their title,
+   everywhere (MOB-09); a phone editor shows „Sichern“ at the bottom only while something is unsaved (AKT-01); the
+   dialog before closing with unsaved changes is „Abbrechen“ · „Verwerfen“ · „Sichern“, „Sichern“ last, never
+   „Sichern unter …“ (AKT-11); a question that loses nothing confirms with a secondary action (AKT-08); an entry
+   removed from an unsaved form's list goes without a dialog, with „<Eintrag> entfernen“ and an undo toast (EBE-05);
+   an app without ads says „Keine Werbe-SDKs · Keine Werbe-ID“, never „Ohne Werbung“, „werbefrei“ or „ad-free“ on any
+   surface (BEL-01); an instant result shows no check and plays no pulse (AKT-05, MOB-03); shake only as an extra
+   way, switchable (MOB-10); no text on a picture (FAR-02); a countdown without a ring (HAL-05); no own spots for
+   empty lists (DAT-07); editor line numbers without a thousands separator (TXT-04); „Einstellungen“ in a sidebar
+   foot that never scrolls (NAV-04); a phone editor sets every file in sebaro Mono (DSK-03); stepper and half-hour
+   time sheet on the phone (EIN-06); the changed tab carries the dot `changed--16` (DSK-10).
    Without a decision, in the D95 workshop round: pages print light from `tokens.css` alone since token contract
    1.9; keep `sb-print.js` for the closed answers (WEB-11).
 10. Ship the export's `LICENSE.md` unchanged (D76). If a rule does not fit, cite its id (e.g. `AKT-01`) and ask the

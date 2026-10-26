@@ -64,15 +64,26 @@
 .g-ex__stage { box-sizing: border-box; min-inline-size: 0; padding: var(--sb-space-6) var(--sb-space-4); border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container); background: var(--sb-color-bg); overflow-x: auto; }
 .g-ex--do .g-ex__stage { border-block-start: var(--sb-border-width-strong) solid var(--sb-color-success); }
 .g-ex--dont .g-ex__stage { border-block-start: var(--sb-border-width-strong) solid var(--sb-color-danger); }
-/* D100 (5), D99 (1): a stage is narrower than the screen its specimen stands for. A phone frame in it stands for a
- * screen of at least 320 px (so does a video and a window screenshot): once the text is large (12rem is 320 px from 167 % text on) it keeps that width and the
- * stage scrolls sideways in its own frame, instead of squeezing the view to a column no phone has (provisional,
- * agent); guide.js gives a stage that scrolls tabindex, role and name. A word that alone does not fit its line breaks
+/* D100 (5), D99 (1), D102 lane narrow: a stage is narrower than the screen its specimen stands for. Until 2.10.0 a phone
+ * frame, a window shot, a video and the stage's direct content kept min(320px, 12rem) and scrolled in the stage at
+ * large text; since the workshop's narrow-column parts (sebaro.css after D102: list rows, board, actions, dialogs,
+ * changelog, top bar and menus stack instead of squeezing their words) most specimens reflow in the stage's own
+ * width, so the minimum stays only where they do not (the two rules below). A part that cannot reflow scrolls in its
+ * own frame (a table, code, a wide window, the menus below); guide.js gives a stage that scrolls tabindex, role and name. A word that alone does not fit its line breaks
  * there (sb-fit.js gives that word, and only it, a hyphen) instead of being cut by a frame */
+/* a phone frame stands for a screen of at least 320 px (so does a window shot and a video): it keeps that width at large
+ * text (12rem is 320 px from 167 % text on) and the stage scrolls, instead of squeezing the view to a column no phone
+ * has (provisional, agent, since 2.10.0) */
 .g-ex__stage :is(.sb-phone, .g-rx-frame--phone, .g-rx-window-bad, .g-rx-c-frame:not(.g-rx-c-frame--wide), .sb-video, .sb-shots--window) { min-inline-size: min(320px, 12rem); }
-/* the same for what a stage shows as a whole: its content keeps at least the width of the smallest phone, except a
- * part that scrolls by itself (table, code, wide window) or is narrow on purpose (a column that shows breaking) */
-.g-ex__stage > :not(.sb-table-wrap, .sb-code, .g-rx-winscroll, .g-rx-narrow, .g-rx-narrowtext, .g-rx-d-tight) { min-inline-size: min(320px, 12rem); }
+/* a stage whose specimen stands for a screen (a dialog, a sheet, a palette, a header, a window or a view drawn
+ * without a phone frame) keeps the same minimum for its whole content: g-ex__stage--screen, set in the example where
+ * the content does not reflow below 320 px (measured with the workshop's OVF4 and OVF6 at 200 %, guide 2.11.0); every
+ * other stage reflows in its own width (provisional, agent) */
+.g-ex__stage--screen > :not(.sb-table-wrap, .sb-code, .g-rx-winscroll, .g-rx-narrow, .g-rx-narrowtext, .g-rx-d-tight) { min-inline-size: min(320px, 12rem); }
+/* on a narrow screen at large text (24rem is 768 px at 200 %, 384 px at 100 %) the stage keeps 8 px at its sides
+ * instead of 16 px that grow with the text (32 px at 200 %), so a specimen gets nearly the width of a phone's
+ * content at 320 px (provisional, agent, 2.11.0) */
+@media (max-width: 24rem) { .g-ex__stage { padding-inline: min(var(--sb-space-4), 8px); } }
 .g-ex__stage { position: relative; }   /* positioned: an absolute part inside (visually hidden words) scrolls with the stage instead of widening the page */
 /* a stage breaks a word only where it alone does not fit its line (sebaro's break-word), never at any letter (that
  * squeezed toasts and buttons to columns of letters). Where a frame of an example cuts its content (overflow: hidden)
@@ -127,6 +138,10 @@ main .sb-meta-list > div > :is(dt, dd) { max-inline-size: 100%; }
  * letters; from 22rem down (352 px at 100 %, 704 px at 200 %) the date stands above its entry, as the timeline does
  * (D100 (5); provisional, agent; workshop request: sebaro.css .sb-changelog has no such form yet) */
 @media (max-width: 22rem) { main .sb-changelog li { grid-template-columns: minmax(0, 1fr); row-gap: var(--sb-space-1); } }
+/* the contents of the page frame keep their 200 px (demo.css); at 200 % a long word („Mehrfachauswahl“) breaks in its
+ * link instead of scrolling the list sideways: sb-toc's link is a flex box, whose text otherwise keeps its widest
+ * word; sb-fit.js then gives that word, and only that word, its hyphen (ZUG-09) */
+.demo-toc.sb-toc a { overflow-wrap: anywhere; }
 /* a tree outside a window keeps its one-line rows and its status words (D67 (2), sb-row__meta never shrinks); at
  * 200 % text its box scrolls sideways in its own frame instead of the page (D100 (5)); a box that scrolls has
  * tabindex="0", role="region" and a name, so the keyboard reaches it */

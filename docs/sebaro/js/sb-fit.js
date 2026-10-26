@@ -34,7 +34,8 @@
 //      names stand at the line ends; else data-sb-fit="values": the legend names the series (a two-series chart writes
 //      its legend with hidden and data-sb-fit-legend; the script shows it), every end keeps only its last value. Ends
 //      that would touch are moved apart in both forms (--sb-chart-shift). Slot labels under any chart that would run
-//      into each other are left out from the front, so the latest stay (as Compose, D99 (2)).
+//      into each other are left out from the front, so the latest stay (as Compose, D99 (2)). The head of a deviation
+//      chart („weniger · 0 = 7 Std. · mehr“) whose words would touch gets data-sb-fit="stack": one word per line (OR-2).
 //   5. Hyphens only for a word that alone does not fit its line (D101 (9), spec/07 §3): every word is first allowed to
 //      break only without a hyphen (overflow-wrap: break-word, sebaro.css); a word the browser had to break inside
 //      is wrapped, and only that word, in span.sb-hyphenate[data-sb-fit-word] (hyphens: auto, by the page's lang),
@@ -42,7 +43,25 @@
 //      adds no character; it is taken away again before each measure. Never in code, pre, kbd, samp, .sb-id (D80),
 //      .sb-file-name (D101 (6)), a name marked translate="no" (a product name breaks at the line end without a hyphen,
 //      D101 (10); provisional, agent), [data-sb-truncate] or a word with soft hyphens (the author's own break points,
-//      SCH-06).
+//      SCH-06). A word that runs across inline elements („<b>Woch</b>enrückblick“, a palette's marked hit) is one
+//      word: measured and wrapped whole, its elements inside the span (review of the desktop lane, DSK-R4). A word
+//      after „/“ that the browser broke only because it gives no break after the slash („kompakt/komfortabel“) first
+//      gets a <wbr data-sb-fit-wbr> after the slash and goes whole onto its own line; hyphens only if it still does
+//      not fit there (the guide's OVF6 request; provisional, agent).
+//   6. Top bar (spec/02 §4.1, D102 lane narrow; provisional, agent): once a word of the title or subtitle would break
+//      beside the back button and the actions, data-sb-fit="stack" puts the heading on its own line under them (a
+//      large title).
+//   7. Actions (spec/02 §1, D102 lane narrow; provisional, agent): a primary, secondary or danger action whose word would
+//      break beside its icon but fits the action gets data-sb-fit="stack": the icon stands above the words; so does one
+//      whose words wrap in a line narrower than 2em beside the icon (D102 lane patterns).
+//   8. Menu items with keys (spec/02 §4.10, guide 2.11.0 request; provisional, agent): a menu item whose word would
+//      break beside its shortcut (.sb-keys) but fits the item without it gets data-sb-fit="stack": the keys go on the
+//      line under the words (sebaro.css). A closed menu has no size; it is measured when it opens (its items change
+//      size, ResizeObserver).
+//   9. Dialog actions (spec/02 §4.6, NV-L; provisional, agent): once the actions of an sb-dialog no longer fit one line
+//      and wrap, data-sb-fit="stack" on .sb-dialog__actions gives each its own row at the full width, in their order
+//      (the verb last); measured in the one-line form whenever the row changes size (a dialog that opens gets its
+//      size, ResizeObserver). Without the script they wrap end-aligned.
 (function () {
   "use strict";
   var HYST = 4;   // px: a part goes back to its wide form only when it fits this much narrower (provisional, agent)
@@ -296,6 +315,127 @@
     }
   }
 
+  // ------------------------------------------------------------------ 4c the deviation head (OR-2)
+  // „weniger · 0 = 7 Std. · mehr“ over the bars: while the three words stand beside each other with 8 px between them
+  // (the grid's gap) in one line, nothing changes; else data-sb-fit="stack" puts each on its own line, towards its
+  // side, the midpoint centred on the zero line (sebaro.css; as Compose, spec/08 §14.24). Measured in the one-line form.
+  function fitHead(p) {
+    var kids = Array.prototype.slice.call(p.children);
+    if (kids.length !== 3 || !p.clientWidth) return;
+    p.removeAttribute("data-sb-fit");
+    var gap = px(getComputedStyle(p).columnGap);
+    var boxes = kids.map(function (k) { var r = document.createRange(); r.selectNodeContents(k); return r.getBoundingClientRect(); });
+    var rtl = getComputedStyle(p).direction === "rtl";
+    if (rtl) boxes.reverse();
+    var touch = boxes.some(function (b, i) { return i > 0 && b.left < boxes[i - 1].right + gap - 0.5; }) ||
+      kids.some(function (k) { return k.getClientRects().length > 1 || k.scrollWidth > k.clientWidth + 0.5; });
+    if (touch) p.setAttribute("data-sb-fit", "stack");
+  }
+
+  // ------------------------------------------------------------------ 4d the top bar (D102 lane narrow)
+  // A bar with a back button or actions: while every word of its title and subtitle fits the heading's line beside
+  // them, nothing changes; once a word would have to break there, data-sb-fit="stack" puts the heading on its own line
+  // under the back button and the actions (sebaro.css), where it has the whole bar. Measured in the one-line form,
+  // with the hyphen spans of the last pass taken away; without the script the heading wraps under them below 9rem.
+  function fitTopBar(bar) {
+    var heading = bar.querySelector(":scope > .sb-top-bar__heading");
+    if (!heading || !bar.clientWidth) return;
+    if (!bar.querySelector(":scope > .sb-icon-button:first-child, :scope > .sb-top-bar__actions")) { bar.removeAttribute("data-sb-fit"); return; }
+    unwrapWords(heading);
+    bar.removeAttribute("data-sb-fit");
+    var range = document.createRange(), need = false;
+    Array.prototype.forEach.call(heading.querySelectorAll(".sb-top-bar__title, .sb-top-bar__subtitle"), function (el) {
+      var tw = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      for (var n = tw.nextNode(); n && !need; n = tw.nextNode()) {
+        var m;
+        BREAK_AFTER.lastIndex = 0;
+        while ((m = BREAK_AFTER.exec(n.data)) && !need) {
+          range.setStart(n, m.index);
+          range.setEnd(n, m.index + m[0].length);
+          var tops = [];
+          Array.prototype.forEach.call(range.getClientRects(), function (r) {
+            if (r.width > 0 && !tops.some(function (t) { return Math.abs(t - r.top) < 2; })) tops.push(r.top);
+          });
+          if (tops.length > 1) need = true;
+        }
+      }
+    });
+    if (need) bar.setAttribute("data-sb-fit", "stack");
+  }
+
+  // ------------------------------------------------------------------ 4e an action with an icon (D102 lane narrow)
+  // A primary, secondary or danger action with its icon beside its words: once a word would have to break beside the
+  // icon but fits the action's own width, data-sb-fit="stack" puts the icon above the words (sebaro.css), so „GIF
+  // suchen“ wraps between words; measured in the one-line form. The bottom bar's full-width action too (until the
+  // review of the D102 lane narrow it did this in CSS whenever its words took two lines, which changed 100 %).
+  function brokenWords(el, room) {
+    var range = document.createRange(), tw = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), found = false;
+    for (var n = tw.nextNode(); n && !found; n = tw.nextNode()) {
+      if (n.parentElement && n.parentElement.closest(".sb-visually-hidden")) continue;
+      var m;
+      BREAK_AFTER.lastIndex = 0;
+      while ((m = BREAK_AFTER.exec(n.data)) && !found) {
+        range.setStart(n, m.index);
+        range.setEnd(n, m.index + m[0].length);
+        var tops = [], w = 0;
+        Array.prototype.forEach.call(range.getClientRects(), function (r) {
+          if (r.width <= 0) return;
+          w += r.width;
+          if (!tops.some(function (t) { return Math.abs(t - r.top) < 2; })) tops.push(r.top);
+        });
+        if (tops.length > 1 && w <= room + 0.5) found = true;
+      }
+    }
+    return found;
+  }
+  // the words take more than one line (their text boxes stand at more than one height)
+  function wraps(el) {
+    var range = document.createRange(), tw = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), tops = [];
+    for (var n = tw.nextNode(); n; n = tw.nextNode()) {
+      if (!n.data.trim() || (n.parentElement && n.parentElement.closest(".sb-visually-hidden"))) continue;
+      range.selectNodeContents(n);
+      Array.prototype.forEach.call(range.getClientRects(), function (r) {
+        if (r.width > 0 && !tops.some(function (t) { return Math.abs(t - r.top) < 2; })) tops.push(r.top);
+      });
+    }
+    return tops.length > 1;
+  }
+  function fitAction(btn) {
+    var icon = btn.clientWidth && btn.querySelector(":scope > .sb-icon");
+    if (!icon) return;
+    unwrapWords(btn);
+    btn.removeAttribute("data-sb-fit");
+    var cs = getComputedStyle(btn), room = btn.clientWidth - px(cs.paddingLeft) - px(cs.paddingRight);
+    // D102 lane patterns (provisional, agent): also when the words wrap and the line beside the icon is narrower than
+    // two of the action's letters (2em; a busy action's spinner in a narrow dialog at 200 %): above the words the
+    // icon gives them the action's whole width, even where a long word still has to break there
+    var beside = room - icon.getBoundingClientRect().width - px(cs.columnGap);
+    if (brokenWords(btn, room) || (beside < 2 * px(cs.fontSize) && wraps(btn))) btn.setAttribute("data-sb-fit", "stack");
+  }
+
+  // ------------------------------------------------------------------ 4f a menu item with keys (guide 2.11.0 request)
+  // An item with a shortcut at its end: while every word fits the room beside the keys, nothing changes; once a word
+  // would have to break there but fits the item's own width beside its check slot or icon, data-sb-fit="stack" puts
+  // the keys under the words („Bearbeiten“ beside ⌘E at 200 % on 320 px). Measured in the one-line form.
+  function fitMenuKeys(item) {
+    if (!item.clientWidth || !item.querySelector(":scope > .sb-keys")) { if (item.hasAttribute("data-sb-fit")) item.removeAttribute("data-sb-fit"); return; }
+    unwrapWords(item);
+    item.removeAttribute("data-sb-fit");
+    var cs = getComputedStyle(item), room = item.clientWidth - px(cs.paddingLeft) - px(cs.paddingRight);
+    var lead = item.querySelector(":scope > .sb-menu__check:first-child, :scope > .sb-icon:first-child");
+    if (lead) room -= lead.getBoundingClientRect().width + px(cs.columnGap);
+    if (brokenWords(item, room)) item.setAttribute("data-sb-fit", "stack");
+  }
+
+  // ------------------------------------------------------------------ 4g dialog actions that wrap
+  function fitDialogActions(row) {
+    var kids = Array.prototype.filter.call(row.children, function (k) { return k.getClientRects().length > 0; });
+    if (!row.clientWidth || kids.length < 2) { if (row.hasAttribute("data-sb-fit")) row.removeAttribute("data-sb-fit"); return; }
+    row.removeAttribute("data-sb-fit");
+    var top = kids[0].getBoundingClientRect().top;
+    if (kids.some(function (k) { return Math.abs(k.getBoundingClientRect().top - top) > 1; })) row.setAttribute("data-sb-fit", "stack");
+  }
+
   // ------------------------------------------------------------------ 5 hyphens only for an overlong word
   var BREAK_AFTER = /[^ \t\n\r\f​\-‐–—\/]+[\-‐–—\/]?/g;
   function blockWidth(el, cache) {
@@ -313,52 +453,157 @@
   function unwrapOne(span) {
     var parent = span.parentNode;
     if (!parent) return;
+    if (span.children.length) {   // a word across inline elements (a palette's marked hit): its elements stay
+      var first = span.firstChild, last = span.lastChild, before = span.previousSibling, after = span.nextSibling;
+      while (span.firstChild) parent.insertBefore(span.firstChild, span);
+      parent.removeChild(span);
+      if (last && last.nodeType === 3 && after && after.nodeType === 3) { last.data += after.data; parent.removeChild(after); }
+      if (first && first.nodeType === 3 && before && before.nodeType === 3) { before.data += first.data; parent.removeChild(first); }
+      return;
+    }
     var t = document.createTextNode(span.textContent), prev = span.previousSibling, next = span.nextSibling;
     parent.replaceChild(t, span);
     if (next && next.nodeType === 3) { t.data += next.data; parent.removeChild(next); }
     if (prev && prev.nodeType === 3) { prev.data += t.data; parent.removeChild(t); }
   }
+  // the break opportunity after „/“ of the last pass (below) goes too, and its two text pieces join again
+  function unwrapBreak(w) {
+    var parent = w.parentNode, before = w.previousSibling, after = w.nextSibling;
+    if (!parent) return;
+    parent.removeChild(w);
+    if (before && after && before.nodeType === 3 && after.nodeType === 3) { before.data += after.data; parent.removeChild(after); }
+  }
   function unwrapWords(root) {
     Array.prototype.forEach.call(root.querySelectorAll("span[data-sb-fit-word]"), unwrapOne);
+    Array.prototype.forEach.call(root.querySelectorAll("wbr[data-sb-fit-wbr]"), unwrapBreak);
     Array.prototype.forEach.call(root.querySelectorAll("span[data-sb-fit-text]"), unwrapOne);
+  }
+  // A word may run across inline elements („<b>Woch</b>enrückblick“, a palette's marked hit, D102 (6)): its pieces
+  // in neighbouring text nodes of the same line box with no break between them are one word (as OVF6 counts them).
+  // Such a word is measured whole and wrapped whole, so the browser hyphenates „Wochen-rückblick“, not the piece
+  // „enrück-blick“; when the word starts or ends inside an element that holds more than the word, it gets no
+  // hyphens and keeps the break without one (review of the desktop lane, DSK-R4)
+  var NOT_IN_WORD = "[role=\"doc-noteref\"], [role=\"doc-backlink\"], sup, sub";
+  var LEAD = /^[^ \t\n\r\f​\-‐–—\/]+[\-‐–—\/]?/, TAIL = /[^ \t\n\r\f​\-‐–—\/]+$/;
+  function lineBoxOf(el) {
+    var b = el;
+    while (b && b !== document.body && /^(inline|contents)$/.test(getComputedStyle(b).display)) b = b.parentElement;
+    return b;
+  }
+  // the range's ends lifted out of the inline elements the word fills from their start / to their end, so the range
+  // holds whole elements of one parent; false when an end sits inside an element that holds more than the word
+  function liftEnds(range) {
+    var host = range.commonAncestorContainer, n = range.startContainer;
+    if (n.parentNode !== host) {
+      if (range.startOffset !== 0) return false;
+      while (n.parentNode !== host) { if (n.previousSibling) return false; n = n.parentNode; }
+      range.setStartBefore(n);
+    }
+    n = range.endContainer;
+    if (n.parentNode !== host) {
+      if (range.endOffset !== n.data.length) return false;
+      while (n.parentNode !== host) { if (n.nextSibling) return false; n = n.parentNode; }
+      range.setEndAfter(n);
+    }
+    return host.nodeType === 1 && !/(flex|grid)$/.test(getComputedStyle(host).display);
   }
   function hyphenPass(root) {
     root = root || document.body;
     if (!root.isConnected) return;
     while (root.matches && root.matches("span[data-sb-fit-word], span[data-sb-fit-text]")) root = root.parentElement;
     unwrapWords(root);
-    var found = [], skip = new WeakMap(), widths = new WeakMap(), range = document.createRange();
-    var tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-    for (var n = tw.nextNode(); n; n = tw.nextNode()) {
-      var el = n.parentElement;
-      if (!el || !/\S{4}/.test(n.data)) continue;
-      if (!skip.has(el)) skip.set(el, !!el.closest(NO_HYPHENS));
-      if (skip.get(el)) continue;
+    var range = document.createRange(), found = measureWords(root, range);
+    // Chromium gives no break after „/“ between letters, so in „kompakt/komfortabel“ break-word cuts the second word
+    // although it would fit its own line after the slash (the guide's OVF6 request, review of the D105 lane narrow-
+    // tools-docs, NTD-R2): such a piece first gets a <wbr> after the slash and the words are measured again; only a
+    // piece that still does not fit its line then gets hyphens (provisional, agent)
+    var slashed = found.filter(function (f) { return f.afterSlash; });
+    if (slashed.length) {
+      for (var j = slashed.length - 1; j >= 0; j--) breakAfterSlash(slashed[j]);
+      found = measureWords(root, range);
+    }
+    wrapWords(found, range);
+  }
+  function carry(node) {   // a text run of a flex or grid container stays one item: a carrier span around it
+    var host = node.parentNode;
+    if (host && host.nodeType === 1 && !host.hasAttribute("data-sb-fit-text") &&
+        /(flex|grid)$/.test(getComputedStyle(host).display)) {
+      var carrier = document.createElement("span");
+      carrier.setAttribute("data-sb-fit-text", "");
+      host.replaceChild(carrier, node);
+      carrier.appendChild(node);
+    }
+  }
+  function breakAfterSlash(f) {
+    var wbr = document.createElement("wbr"), n = f.node;
+    wbr.setAttribute("data-sb-fit-wbr", "");
+    if (f.start > 0) {
+      carry(n);
+      var rest = n.splitText(f.start);
+      n.parentNode.insertBefore(wbr, rest);
+      return;
+    }
+    // the piece starts an inline element („kompakt/<b>komfort</b>abel“): the break goes before that element
+    var t = n;
+    while (!t.previousSibling && t.parentNode && t.parentNode !== f.box && /^(inline|contents)$/.test(getComputedStyle(t.parentNode).display)) t = t.parentNode;
+    if (t.parentNode) t.parentNode.insertBefore(wbr, t);
+  }
+  function measureWords(root, range) {
+    var found = [], skip = new WeakMap(), widths = new WeakMap(), boxes = new WeakMap();
+    var nodes = [], tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    for (var t0 = tw.nextNode(); t0; t0 = tw.nextNode()) nodes.push(t0);
+    var skipped = function (el) { if (!skip.has(el)) skip.set(el, !!el.closest(NO_HYPHENS)); return skip.get(el); };
+    var box = function (el) { if (!boxes.has(el)) boxes.set(el, lineBoxOf(el)); return boxes.get(el); };
+    // the neighbour text node that carries the same word on: same line box, not skipped, no break at the seam; a
+    // note digit („Cookies¹“, sb-note-ref) or a raised / lowered index is no part of the word
+    var joins = function (o, lb) {
+      return !!o && !!o.parentElement && o.data.length > 0 && !skipped(o.parentElement) && box(o.parentElement) === lb &&
+        !o.parentElement.closest(NOT_IN_WORD);
+    };
+    for (var i0 = 0; i0 < nodes.length; i0++) {
+      var n = nodes[i0], el = n.parentElement;
+      if (!el || !/\S/.test(n.data) || skipped(el)) continue;
+      var lb = box(el), prev = nodes[i0 - 1], next = nodes[i0 + 1];
       var fs = px(getComputedStyle(el).fontSize), bw = blockWidth(el, widths), m;
       BREAK_AFTER.lastIndex = 0;
       while ((m = BREAK_AFTER.exec(n.data))) {
-        var word = m[0];
-        if (word.length < 4 || word.indexOf("\u00ad") >= 0 || word.length * fs * 0.85 < bw) continue;
-        range.setStart(n, m.index);
-        range.setEnd(n, m.index + word.length);
+        var word = m[0], start = m.index, end = m.index + word.length, endNode = n, endAt = end, whole = word;
+        // a piece that carries on the word of the text before is handled with that word
+        if (start === 0 && joins(prev, lb) && TAIL.test(prev.data)) continue;
+        // a word that carries on into the next text nodes: take their leading pieces
+        for (var k = i0 + 1; endAt === endNode.data.length && !/[\-‐–—\/]$/.test(whole) && joins(nodes[k], lb); k++) {
+          var lead = LEAD.exec(nodes[k].data);
+          if (!lead) break;
+          whole += lead[0]; endNode = nodes[k]; endAt = lead[0].length;
+        }
+        if (whole.length < 4 || whole.indexOf("\u00ad") >= 0 || whole.length * fs * 0.85 < bw) continue;
+        range.setStart(n, start);
+        range.setEnd(endNode, endAt);
         var tops = [];
         Array.prototype.forEach.call(range.getClientRects(), function (r) {
           if (r.width > 0 && !tops.some(function (t) { return Math.abs(t - r.top) < 2; })) tops.push(r.top);
         });
         // break-word breaks inside a word only when it alone does not fit its line: that word, and no other
-        if (tops.length > 1) found.push({ node: n, start: m.index, end: m.index + word.length });
+        if (tops.length > 1) found.push({ node: n, start: start, endNode: endNode, end: endAt, box: lb,
+          afterSlash: start > 0 ? n.data.charAt(start - 1) === "/" : !!prev && joins(prev, lb) && /\/$/.test(prev.data) });
       }
     }
+    return found;
+  }
+  function wrapWords(found, range) {
     // wrap from the back, so the offsets of earlier words in the same text stay right
     for (var i = found.length - 1; i >= 0; i--) {
-      var f = found[i], span = document.createElement("span"), host = f.node.parentNode;
-      if (host && host.nodeType === 1 && !host.hasAttribute("data-sb-fit-text") &&
-          /(flex|grid)$/.test(getComputedStyle(host).display)) {
-        var carrier = document.createElement("span");
-        carrier.setAttribute("data-sb-fit-text", "");
-        host.replaceChild(carrier, f.node);
-        carrier.appendChild(f.node);
+      var f = found[i], span = document.createElement("span");
+      if (f.endNode !== f.node) {   // a word across inline elements
+        range.setStart(f.node, f.start);
+        range.setEnd(f.endNode, f.end);
+        if (!liftEnds(range)) continue;
+        span.className = "sb-hyphenate";
+        span.setAttribute("data-sb-fit-word", "");
+        range.surroundContents(span);
+        continue;
       }
+      carry(f.node);
       span.className = "sb-hyphenate";
       span.setAttribute("data-sb-fit-word", "");
       range.setStart(f.node, f.start);
@@ -371,7 +616,9 @@
   var PARTS = [
     [".sb-segmented", fitSegmented], [".sb-progress__steps", fitSteps], [".sb-facts-line", fitFacts],
     [".sb-chart", function (fig) { if (fig.querySelector(".sb-chart__end--series")) fitSeries(fig); }],
-    [".sb-chart__slots", fitSlots]
+    [".sb-chart__slots", fitSlots], [".sb-chart__diverging-head", fitHead], [".sb-top-bar", fitTopBar],
+    [":is(.sb-primary-action, .sb-secondary-action, .sb-danger-action)", fitAction], [".sb-menu__item", fitMenuKeys],
+    [".sb-dialog__actions", fitDialogActions]
   ];
   var queue = new Set(), whole = false, frame = 0, lastKey = "";
   var ro = typeof ResizeObserver === "function" ? new ResizeObserver(function (entries) {

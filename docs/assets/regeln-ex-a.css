@@ -6,7 +6,7 @@
 
 /* ------------------------------------------------------------------ shared helpers */
 .g-rx-stack { display: grid; gap: var(--sb-spacing-stack); justify-items: start; min-inline-size: 0; }
-.g-rx-stack--stretch { justify-items: stretch; }
+.g-rx-stack--stretch { justify-items: stretch; grid-template-columns: minmax(0, 1fr); }   /* a long word never widens the column past its stage (ZUG-09) */
 .g-rx-stack--group { gap: var(--sb-spacing-group); }
 .g-rx-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-3); }
 .g-rx-cap { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
@@ -78,7 +78,7 @@
 }
 .sb-top-bar.g-rx-wrong-head { background: var(--sb-color-accent); color: var(--sb-color-on-accent); }
 .g-rx-wrong-head .sb-top-bar__subtitle { color: var(--sb-color-on-accent); }
-.g-rx-wrong-cards { display: grid; gap: var(--sb-space-2); margin: 0; padding: var(--sb-space-2) var(--sb-space-3); list-style: none; }
+.g-rx-wrong-cards { container: sb-list / inline-size; display: grid; gap: var(--sb-space-2); margin: 0; padding: var(--sb-space-2) var(--sb-space-3); list-style: none; }
 .g-rx-wrong-cards > .sb-list-row { border-radius: var(--sb-radius-container); background: var(--sb-color-accent-subtle); }
 .g-rx-wrong-cards > .sb-list-row + .sb-list-row::before { content: none; }
 .g-rx-wrong-chip {
@@ -143,7 +143,7 @@
 .sb-list-row__meta.g-rx-wrong-subtle { color: var(--sb-color-text-subtle); }
 .sb-secondary-action.g-rx-wrong-hairline { border-color: var(--sb-color-border); }
 .sb-field__control.g-rx-wrong-hairfield { border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-control); background: transparent; }
-.g-rx-states { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sb-space-2) var(--sb-space-3); inline-size: 100%; }
+.g-rx-states { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); gap: var(--sb-space-2) var(--sb-space-3); inline-size: 100%; }
 .g-rx-states > div { display: grid; gap: var(--sb-space-1); justify-items: start; min-inline-size: 0; }
 .g-rx-states .sb-secondary-action { padding-inline: var(--sb-space-3); }
 .g-rx-rowframe { inline-size: 100%; border-block: var(--sb-border-width-hairline) solid var(--sb-color-border); }
@@ -173,12 +173,16 @@
 .g-rx-t-numeric { font: var(--sb-type-numeric); letter-spacing: var(--sb-type-numeric-tracking); font-variant-numeric: var(--sb-type-numeric-variant); }
 .g-rx-wrong-hint { margin: 0; font-size: calc(var(--sb-type-body-size) + 2px); font-style: italic; line-height: 1.4; color: var(--sb-color-text-muted); }
 .g-rx-wrong-notrack { letter-spacing: 0; }
-.g-rx-narrow { inline-size: 320px; max-inline-size: 100%; box-sizing: border-box; padding: var(--sb-space-3); border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-control); }
+/* SCH-06: the narrow column stands for a phone and is narrow on purpose (data-sb-narrow-ok, check_demo.py 1.8.0), so
+ * the title needs its manual hyphen at every screen width; 20rem grows with the text (320 px at 100 %), so at large
+ * text the long word still breaks only at its soft hyphen; on a narrower screen the column keeps its width and
+ * scrolls in the stage like a phone frame, since at 200 % on 320 px no word of the title would fit its line */
+.g-rx-narrow { inline-size: 20rem; box-sizing: border-box; padding: var(--sb-space-3); border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-control); }
 .g-rx-pagetitle { margin: 0; font: var(--sb-type-mobile-display); letter-spacing: var(--sb-type-mobile-display-tracking); hyphens: manual; }
 .g-rx-wrong-ellipsis { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 
 /* ------------------------------------------------------------------ Raum */
-.g-rx-spaced { display: grid; grid-template-columns: minmax(0, 1fr) 5.5rem; column-gap: var(--sb-space-3); inline-size: 100%; max-inline-size: 420px; }
+.g-rx-spaced { display: grid; grid-template-columns: minmax(min(100%, 7em), 1fr) minmax(0, 5.5rem); column-gap: var(--sb-space-3); inline-size: 100%; max-inline-size: 420px; }
 .g-rx-gap { position: relative; display: block; inline-size: var(--sb-space-2); box-sizing: border-box; border: var(--sb-border-width-hairline) solid var(--sb-color-text-muted); border-inline-start: 0; }
 .g-rx-gap > span { position: absolute; inset-inline-start: var(--sb-space-4); inset-block-start: 50%; translate: 0 -50%; white-space: nowrap; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); line-height: 1; }
 .g-rx-gap--stack { block-size: var(--sb-spacing-stack); }

@@ -2,7 +2,7 @@
 // Classic script (pages open from file://), CSP-safe: no inline handlers, no eval.
 // Markup carries the state: the clear button is in the markup and hidden while the field is empty:
 //   <div class="sb-field__control sb-search"><svg class="sb-icon" …><use href="#search"/></svg>
-//     <input id="q" type="search" placeholder="Gewohnheit suchen…">
+//     <input id="q" type="search" placeholder="Gewohnheit suchen …">
 //     <button class="sb-icon-button" type="button" aria-label="Suche leeren" hidden>…close icon…</button></div>
 // What the script adds:
 //   - the button „Suche leeren“ shows while the field has text and hides when it is empty;

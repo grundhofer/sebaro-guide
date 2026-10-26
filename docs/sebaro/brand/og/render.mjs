@@ -37,14 +37,16 @@
 // Versions (CHANGELOG):
 //   1.0.0  2026-10-23  first version (D96 (a)): template, page list 1.0, head tags, self-checks; the workshop's
 //                      brand/src/og/*.html are written with --html-only from brand/src/og/*.pages.json.
+//   1.0.1  2026-10-25  the meta line draws a host with umlauts as written („bücher.example“), not in its punycode
+//                      form (URL.host gave „xn--bcher-kva.example“); the head tags keep the URL's ASCII form (OR-14).
 import { createRequire } from "node:module";
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, realpathSync, rmSync, unlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { domainToUnicode, fileURLToPath, pathToFileURL } from "node:url";
 import zlib from "node:zlib";
 
-export const VERSION = "1.0.0";
+export const VERSION = "1.0.1";
 const SIZE = { width: 1200, height: 630 };
 const MAX_TITLE_LINES = 3;
 const UMBRELLA = "studio";        // the umbrella brand's product (export_system.py UMBRELLA_PRODUCT): lockup in the head
@@ -255,6 +257,14 @@ export function fill(template, view) {
 }
 
 // ------------------------------------------------------------------------- one page
+// The host as people read it (OR-14): URL.host is the ASCII (punycode) form, so an umlaut host would be drawn as
+// „xn--…“; domainToUnicode gives it back as written, the port stays. A host it cannot read stays as URL gives it.
+export function shownHost(origin) {
+  const u = new URL(origin);
+  const host = domainToUnicode(u.hostname) || u.hostname;
+  return u.port ? `${host}:${u.port}` : host;
+}
+
 function href(fromDir, file) {     // both real paths, so a symbolic link (macOS /var -> /private/var) adds no detour
   return path.relative(realpathSync(fromDir), realpathSync(file)).split(path.sep).map(encodeURIComponent).join("/");
 }
@@ -268,7 +278,7 @@ export function viewOf(L, doc, page, htmlDir, pagesName) {
   const meta = [];
   if (page.readingMinutes) meta.push(w.minutes(page.readingMinutes));
   if (page.date) meta.push(`${w[page.dateKind ?? "updated"]} ${w.date(page.date)}`);
-  meta.push(new URL(site.origin).host);
+  meta.push(shownHost(site.origin));
   const crumb = (page.path ?? []).map((text, i) => ({ text, sep: i > 0 }));
   const umbrella = product === UMBRELLA;
   return {

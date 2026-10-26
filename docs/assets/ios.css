@@ -18,6 +18,10 @@
 
 /* sbFormSheet: the sheet lies over the screen it came from; 2 px ink line along its top edge and its 16 pt corners */
 .g-ios-sheet-phone { padding-block-start: var(--sb-space-3); }
+/* the system navigation bar of the sheet: „Abbrechen“ and the title share the line while the title keeps 9rem, else
+ * the title takes its own line under „Abbrechen“ (as sebaro's top bar does without its script; D99 (1), OVF6) */
+.g-ios-sheet > .sb-top-bar { flex-wrap: wrap; }
+.g-ios-sheet > .sb-top-bar > .sb-top-bar__heading { flex: 1 1 9rem; }
 .g-ios-sheet {
   border-block-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color);
   border-start-start-radius: var(--sb-radius-sheet); border-start-end-radius: var(--sb-radius-sheet);

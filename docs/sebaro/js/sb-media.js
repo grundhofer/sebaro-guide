@@ -41,7 +41,7 @@
 //   keyboard reaches its controls. No autoplay, ever. What loads when: the poster with the page (one request to the
 //   product's own server, D18; in dark mode a second one for data-sb-poster-dark), the video only after the press
 //   (preload="none"). data-sb-poster-dark is the poster in dark mode (follows <html data-theme> and the system
-//   setting, and "sb-theme-change").
+//   setting, and "sb-theme-change"); while the page prints the light poster stands (beforeprint / afterprint).
 // Motion (D80): none of its own. The slider fill moves while a medium plays because the user started it; nothing moves
 // on load. Words per language (D87, spec/09 §6.1): MESSAGES; window.sbMessages["sb-media"] adds a language.
 (function () {
@@ -151,7 +151,9 @@
   }
 
   // ------------------------------------------------------------------ video
+  var printing = false;   // paper is light (spec/09 §18.3): the light poster while the page prints (OR-11)
   function dark() {
+    if (printing) return false;
     var theme = document.documentElement.getAttribute("data-theme");
     if (theme === "dark") return true;
     if (theme === "light") return false;
@@ -190,6 +192,8 @@
 
   function themeChanged() { document.querySelectorAll(".sb-video__media[data-sb-poster-dark]").forEach(poster); }
   document.addEventListener("sb-theme-change", themeChanged);
+  window.addEventListener("beforeprint", function () { printing = true; themeChanged(); });
+  window.addEventListener("afterprint", function () { printing = false; themeChanged(); });
   if (window.matchMedia) {
     var mq = window.matchMedia("(prefers-color-scheme: dark)");
     if (mq.addEventListener) mq.addEventListener("change", themeChanged);
