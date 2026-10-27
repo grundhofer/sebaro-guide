@@ -1,7 +1,7 @@
 {
   "generated": "generated — do not edit · tools/icons.py 1.1.0",
   "system": "sebaro",
-  "source_sha256": "76b61467e7650441",
+  "source_sha256": "d4298ad26b6060bc",
   "grammar": {
     "name": "Line 1.75 round",
     "summary": "1.75 stroke at 24 (1.5 on 16 masters, 2 on spots), round caps and joins, container radius 2 (below 8: 1), straight segments at 0/30/45/60/90/120/135/150 plus circular arcs and free curves, clear gap >= 2.25, at most 4 parts beside the main outline, no signature detail; filled only for selected navigation, toggles that are on and the four status icons at 16 px",
@@ -474,7 +474,7 @@
         "spot": false
       },
       "rtl": "none",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -487,7 +487,9 @@
         "SebaroIcons.Outline32.Camera"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_camera_24"
+      ]
     },
     {
       "name": "changed",
@@ -1063,7 +1065,7 @@
         "spot": false
       },
       "rtl": "none",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -1076,7 +1078,9 @@
         "SebaroIcons.Outline32.Crop"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_crop_24"
+      ]
     },
     {
       "name": "dice",
@@ -1108,7 +1112,7 @@
         "spot": false
       },
       "rtl": "none",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -1124,7 +1128,10 @@
         "SebaroIcons.Filled16.Dice"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_dice_24",
+        "ic_sb_dice_filled_24"
+      ]
     },
     {
       "name": "download",
@@ -1724,7 +1731,7 @@
         "spot": false
       },
       "rtl": "none",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -1737,7 +1744,9 @@
         "SebaroIcons.Outline32.Flash"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_flash_24"
+      ]
     },
     {
       "name": "flask",
@@ -1860,7 +1869,7 @@
         "spot": false
       },
       "rtl": "none",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -1873,7 +1882,9 @@
         "SebaroIcons.Outline32.FolderOpen"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_folder_open_24"
+      ]
     },
     {
       "name": "fullscreen",
@@ -2396,7 +2407,7 @@
         "spot": false
       },
       "rtl": "none",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -2409,7 +2420,9 @@
         "SebaroIcons.Outline32.LineNumbers"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_line_numbers_24"
+      ]
     },
     {
       "name": "link",
@@ -2525,7 +2538,7 @@
         "spot": false
       },
       "rtl": "none",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -2538,7 +2551,9 @@
         "SebaroIcons.Outline32.Lock"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_lock_24"
+      ]
     },
     {
       "name": "mail",
@@ -2917,7 +2932,7 @@
         "spot": false
       },
       "rtl": "mirror",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -2930,7 +2945,9 @@
         "SebaroIcons.Outline32.MoveToFolder"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_move_to_folder_24"
+      ]
     },
     {
       "name": "offline",
@@ -3029,7 +3046,7 @@
         "spot": false
       },
       "rtl": "none",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -3042,7 +3059,9 @@
         "SebaroIcons.Outline32.Pages"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_pages_24"
+      ]
     },
     {
       "name": "pause",
@@ -3490,7 +3509,7 @@
         "spot": false
       },
       "rtl": "mirror",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -3503,7 +3522,9 @@
         "SebaroIcons.Outline32.Redo"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_redo_24"
+      ]
     },
     {
       "name": "refresh",
@@ -3622,7 +3643,7 @@
         "spot": false
       },
       "rtl": "mirror",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -3635,7 +3656,9 @@
         "SebaroIcons.Outline32.Replace"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_replace_24"
+      ]
     },
     {
       "name": "rotate",
@@ -3664,7 +3687,7 @@
         "spot": false
       },
       "rtl": "none",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -3677,7 +3700,9 @@
         "SebaroIcons.Outline32.Rotate"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_rotate_24"
+      ]
     },
     {
       "name": "save",
@@ -3702,7 +3727,7 @@
         "spot": false
       },
       "rtl": "none",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -3715,7 +3740,9 @@
         "SebaroIcons.Outline32.Save"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_save_24"
+      ]
     },
     {
       "name": "save-as",
@@ -3741,7 +3768,7 @@
         "spot": false
       },
       "rtl": "none",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -3754,7 +3781,9 @@
         "SebaroIcons.Outline32.SaveAs"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_save_as_24"
+      ]
     },
     {
       "name": "scan",
@@ -3783,7 +3812,7 @@
         "spot": false
       },
       "rtl": "none",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -3796,7 +3825,9 @@
         "SebaroIcons.Outline32.Scan"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_scan_24"
+      ]
     },
     {
       "name": "search",
@@ -3920,7 +3951,7 @@
         "spot": false
       },
       "rtl": "none",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -3933,7 +3964,9 @@
         "SebaroIcons.Outline32.Shake"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_shake_24"
+      ]
     },
     {
       "name": "share",
@@ -4261,7 +4294,7 @@
         "spot": false
       },
       "rtl": "none",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -4274,7 +4307,9 @@
         "SebaroIcons.Outline32.Sort"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_sort_24"
+      ]
     },
     {
       "name": "sound",
@@ -4540,7 +4575,7 @@
         "spot": false
       },
       "rtl": "none",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -4553,7 +4588,9 @@
         "SebaroIcons.Outline32.TextSize"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_text_size_24"
+      ]
     },
     {
       "name": "thumbs-up",
@@ -5047,7 +5084,7 @@
         "spot": false
       },
       "rtl": "mirror",
-      "status": "draft",
+      "status": "stable",
       "source": "own",
       "license": "sebaro",
       "sprite": [
@@ -5060,7 +5097,9 @@
         "SebaroIcons.Outline32.Wrap"
       ],
       "compose_cuts": {},
-      "android": []
+      "android": [
+        "ic_sb_wrap_24"
+      ]
     },
     {
       "name": "zoom-fit",

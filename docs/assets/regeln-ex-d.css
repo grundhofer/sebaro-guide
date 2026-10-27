@@ -218,3 +218,62 @@
 .g-rx-notif__app { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .g-rx-notif > .g-rx-notif__title { margin-block-start: var(--sb-space-1); font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
 .g-rx-notif > .g-rx-notif__actions { display: flex; flex-wrap: wrap; gap: var(--sb-space-1) var(--sb-space-6); margin-block-start: var(--sb-space-2); font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
+
+/* ------------------------------------------------------------------ MOB-11: home-screen widgets, drawn (D106 (6)–(10),
+   D107 (4)): bg with the 2 px ink line, corners 16 px, the number in display with tabular figures, the unit in
+   body-strong, title, sentence and values in text-muted. The cells keep their px size at any text size (the workshop's
+   gallery cells, 176 × 88 and 328 × 184 dp; the medium one narrower only where its stage is). As SbWidget.kt does
+   (§33.3): above 100 % text the small widget drops its sentence and the medium one its list, and no text grows past
+   125 % (min(rem size, px size × 1.25)). --g-rx-d-big is 1 above 100 % (the sign of 1rem − 16px, resolved when the
+   value is computed), read by a style query. */
+@property --g-rx-d-big { syntax: "<number>"; inherits: true; initial-value: 0; }
+.g-rx-d-widgets { display: flex; flex-wrap: wrap; gap: var(--sb-space-4); align-items: start; }
+.g-rx-d-widgets > .g-rx-part { inline-size: 176px; max-inline-size: 100%; }
+.g-rx-d-widgets > .g-rx-part--medium { inline-size: 328px; }
+.g-rx-d-widget {
+  --g-rx-d-big: max(0, sign(1rem - 16px));
+  box-sizing: border-box; display: grid; align-content: center; gap: 4px; min-block-size: 88px; margin: 0;
+  padding: 12px 16px; border: var(--sb-elevation-level-1-border); border-radius: var(--sb-radius-sheet);
+  background: var(--sb-color-bg); color: var(--sb-color-text);
+}
+.g-rx-d-widget--medium { align-content: start; min-block-size: 184px; }
+.g-rx-d-widget--pressed { background: var(--sb-color-pressed-fill); }
+.g-rx-d-widget p { margin: 0; }
+.g-rx-d-widget__title { font: var(--sb-type-mobile-label); font-size: min(0.875rem, 17.5px); letter-spacing: var(--sb-type-mobile-label-tracking); color: var(--sb-color-text-muted); }
+.g-rx-d-widget__num { font: var(--sb-type-mobile-display); font-size: min(2rem, 40px); letter-spacing: var(--sb-type-mobile-display-tracking); font-variant-numeric: var(--sb-type-numeric-variant); }
+.g-rx-d-widget__unit { font: var(--sb-type-mobile-body-strong); font-size: min(1rem, 20px); letter-spacing: var(--sb-type-mobile-body-strong-tracking); }
+.g-rx-d-widget__text { font: var(--sb-type-mobile-caption); font-size: min(0.875rem, 17.5px); letter-spacing: var(--sb-type-mobile-caption-tracking); color: var(--sb-color-text-muted); }
+.g-rx-d-widget__rows { margin: 8px 0 0; padding: 0; list-style: none; }
+.g-rx-d-widget__rows > li {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 12px; padding-block: 4px;
+  border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border);
+  font: var(--sb-type-mobile-caption); font-size: min(0.875rem, 17.5px); letter-spacing: var(--sb-type-mobile-caption-tracking);
+}
+.g-rx-d-widget__value { color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant); }
+@container style(--g-rx-d-big: 1) {
+  .g-rx-d-widget:not(.g-rx-d-widget--medium) > .g-rx-d-widget__text, .g-rx-d-widget__rows { display: none; }
+}
+
+/* ------------------------------------------------------------------ BIL-08, MOB-12: a photo, drawn. The photo keeps its
+   own colours in either mode (data-theme="light" on its group: a picture is never dimmed or tinted, D106 (24)); the
+   marks on it take the mode's colours: 2 px accent on a 2 px bg seam at both sides (D106 (22)), in px at any size. */
+.g-rx-d-photo { display: block; inline-size: 100%; block-size: auto; border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-control); }
+.g-rx-d-photo__table { fill: var(--sb-color-border-strong); }
+.g-rx-d-photo__page { fill: var(--sb-color-bg); }
+.g-rx-d-photo__text { fill: none; stroke: var(--sb-color-border-strong); stroke-width: 2; stroke-linecap: round; }
+.g-rx-d-mark-seam { fill: none; stroke: var(--sb-color-bg); stroke-width: 6px; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.g-rx-d-mark-line { fill: none; stroke: var(--sb-color-accent); stroke-width: 2px; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.g-rx-d-mark-handle { fill: var(--sb-color-bg); stroke: var(--sb-color-accent); stroke-width: 2px; vector-effect: non-scaling-stroke; }
+.g-rx-d-mark-handle--chosen { fill: var(--sb-color-accent); }
+.g-rx-d-photos { display: flex; flex-wrap: wrap; gap: var(--sb-space-3); margin: 0; padding: 0; list-style: none; }
+.g-rx-d-photos > li { display: grid; gap: var(--sb-space-1); inline-size: 4.5rem; }
+.g-rx-d-photos__name { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.g-rx-d-photo--big { max-inline-size: 15rem; }
+.g-ex--dont .g-rx-d-photos--dimmed .g-rx-d-photo { opacity: 0.55; }
+
+/* MOB-12: the viewfinder in its dark area (D106 (16), (17), (20)) */
+.g-rx-d-cam { display: grid; gap: var(--sb-space-3); padding: var(--sb-space-4); }
+.g-rx-d-cam > p { margin: 0; }
+.g-rx-d-cam__strip { display: flex; flex-wrap: wrap; gap: var(--sb-space-2); margin: 0; padding: 0; list-style: none; }
+.g-rx-d-cam__strip > li { inline-size: 40px; }
+.g-rx-d-cam__strip > li.g-rx-d-cam__new { padding-block-end: var(--sb-space-1); border-block-end: var(--sb-border-width-strong) solid var(--sb-color-accent); }

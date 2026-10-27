@@ -28,7 +28,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 
 Rule status: **entschieden** = owner decision, binding. **vorläufig** = an agent's decision, valid until the owner
 changes it. **offen** = proposal only, do not build it as a rule. `D<n>` refers to row n of the decision log in the
-workshop repository sebaroDesign (private; the guide covers D1–D106). A rule id (e.g. `AKT-01`) is stable; cite it
+workshop repository sebaroDesign (private; the guide covers D1–D107). A rule id (e.g. `AKT-01`) is stable; cite it
 in code reviews, commit messages and ADRs.
 
 ## 2 The ten rules most often broken
@@ -261,10 +261,25 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
    D106 (the same day, 24 questions after the D105 build, all as proposed) settles five provisional points of that
    build: „Abbrechen“ · „Verwerfen“ · „Sichern“ (AKT-11), check and cross on the die (DAT-03), the „erwartet“ line
    with a `bg` joint (DAT-12), „Ohne Werbung“, „werbefrei“ and „ad-free“ on no surface at all (BEL-01), the grey
-   markers show emphasis in the phone's Mono editor (DSK-03). The rest of D106 (widgets on the home screen, camera and
-   image patterns, four new app signs, 19 icons) is being built in the workshop and has no guide rule yet
-   (`docs/ausblick.html#p-d106-bau`). No question waits for the owner. The new web patterns of D102 to D105 are not yet
-   shown as components on `docs/bauteile.html` (`docs/ausblick.html#p-g-neue-muster`).
+   markers show emphasis in the phone's Mono editor (DSK-03).
+   Built with the rest of D106 and settled by D107 (2026-10-26, synced from workshop `3829e6f`, export tool 1.9.0):
+   the 19 icons of the D105 sheet are released as drawn (`shake`, the filled `dice` and the others; no draft is left
+   in the set, each has an Android drawable `ic_sb_<name>_24`; ICO-05, MOB-10). Android home-screen widgets (new
+   MOB-11): bg with the 2 dp ink line, corners 16 dp, small 2 × 1 (number, unit, sentence) and medium 4 × 2 (title,
+   number, sentence, at most three rows), sebaro Sans through RemoteViews XML layouts without Glance (D107 (3); an app
+   with Glance places them with `AndroidRemoteViews`), the whole widget one key that opens the app (D107 (4)),
+   pressed-fill, text up to 125 % and then the sentence or the list goes; the layouts ship in the Android export's
+   `res/` with `SbWidget.kt`, which fits the content to the launcher's cell (provisional). Camera and image patterns
+   (new MOB-12, BIL-08), Compose only, no camera library: the viewfinder with the primary action „Seite aufnehmen“,
+   camera and full-screen page view always dark (`SbDarkArea`, D107 (6)), corners with 48 dp handles and a way without
+   dragging, the page view as the D104 reader, a capture confirmed by count and small picture (the small pictures only
+   to look at, D107 (7)), a live frame that jumps (the app sends at most five outlines a second, D107 (5)), filters as
+   three words, the user's photos as they are and marks on them in accent on a bg seam. Four more Android apps have
+   signs in the workshop's registry (D106 (1)–(4)); the guide never shows a sign of an unreleased app, and the
+   registry writes a name as the app does (D107 (2); ZEI-08). No question waits for the owner (the workshop's
+   SYSTEM.md §5 has none open). Nothing of D106 is checked on a device, in a launcher, with a real camera or with
+   TalkBack. The new web patterns of D102 to D105 are not yet shown as components on `docs/bauteile.html`
+   (`docs/ausblick.html#p-g-neue-muster`).
 
 ## 4 Where the system files come from
 
@@ -300,7 +315,7 @@ node tools/og.mjs --check --png-bytes  # fresh render equals the committed snipp
 python3 tools/sync_from_design.py --check          # docs/sebaro/ equals a fresh export of the workshop commit
 # with a sebaroDesign checkout, its demo check on every page, run from there (absolute page path):
 #   python3 tools/check_demo.py <abs path>/docs/<page>.html --page web --skip content --no-write
-python3 tools/release.py 2.12.0        # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.11.0 is the last release)
+python3 tools/release.py 2.13.0        # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.12.0 is the last release)
 ```
 
 The workshop's demo check (1.8.0) measures one- and two-character text on screen pixels; on `regeln.html` it reports
@@ -448,8 +463,9 @@ devices, Windows rendering, WebKit/Tauri webviews or screen readers. All example
 The owner answered the round-6 sketch (63 questions, private, never linked from here) with D91 and the open readings
 after it with D92 to D97, confirmed 70 of the 73 vorläufig rules with D98 and answered the four workshop questions on large
 text, inputs and charts on the phone and required fields with D99, and the steps, the novalis sidebar, page width at large text, the Compose sortable table and intro step with D100 and D101, the questions of the first adoptions with D102 to D104 (D103 sets the priority for future trade-offs) and
-the apps' waiting lists with D105 and D106; what is still open, and what is built but untested (real iOS and Android
-devices, real Tauri windows), is collected on `docs/ausblick.html`; no question waits for the owner, D106 is being built.
+the apps' waiting lists with D105 to D107 (D106 and D107 are built: widgets, camera and photos for Android only);
+what is still open, and what is built but untested (real iOS and Android devices, launchers, a real camera, real Tauri
+windows), is collected on `docs/ausblick.html`; no question waits for the owner.
 No guide page scrolls sideways at 200 % text on 320, 360 and 390 px, no frame cuts a text and, since 2.11.0, no word
 breaks inside itself where it would fit (`OVF3`, `OVF4`, `OVF6`; `docs/ausblick.html#p-g-grosse-schrift`); the workshop
 built the narrow-column parts after D102. Rule examples that still scroll in their own frame at 200 % are listed at

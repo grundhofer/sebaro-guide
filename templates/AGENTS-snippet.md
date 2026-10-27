@@ -88,6 +88,12 @@ This product uses the sebaro design system. Before building or changing any UI:
    empty lists (DAT-07); editor line numbers without a thousands separator (TXT-04); „Einstellungen“ in a sidebar
    foot that never scrolls (NAV-04); a phone editor sets every file in sebaro Mono (DSK-03); stepper and half-hour
    time sheet on the phone (EIN-06); the changed tab carries the dot `changed--16` (DSK-10).
+   Decided with D106 and D107: the 19 icons of the D105 sheet are released, `shake` and the filled `dice` included
+   (ICO-05, MOB-10); an Android home-screen widget is an XML layout without Glance, small 2 × 1 or medium 4 × 2, bg
+   with the ink line, one key that opens the app, text up to 125 % (MOB-11); a camera that takes pages has the primary
+   action „Seite aufnehmen“, is always dark (so is the full-screen page view), moves corners also without dragging and
+   confirms a capture by count and small picture (MOB-12); the user's photos stay as they are, marks on them are
+   accent on a bg seam (BIL-08). Widget and camera exist only for Android (Compose and XML layouts).
    Without a decision, in the D95 workshop round: pages print light from `tokens.css` alone since token contract
    1.9; keep `sb-print.js` for the closed answers (WEB-11).
 10. Ship the export's `LICENSE.md` unchanged (D76). If a rule does not fit, cite its id (e.g. `AKT-01`) and ask the

@@ -2,9 +2,9 @@
   "$comment": "written by tools/sync_from_design.py; do not edit",
   "system": "sebaro",
   "product": "studio",
-  "sebaroDesignCommit": "ef6121d33acf918e544afc323e61a3be8ecb18bf",
+  "sebaroDesignCommit": "3829e6f0d7ac08d63856f72fc6d6dd36cf503140",
   "sebaroDesignUncommitted": false,
-  "exportTool": "export_system.py 1.8.0",
+  "exportTool": "export_system.py 1.9.0",
   "contracts": {
     "tokens": "1.10",
     "palette": "2.6",
@@ -14,7 +14,7 @@
     "facts": "1.2"
   },
   "excludedProducts": 7,
-  "droppedFiles": 8,
+  "droppedFiles": 24,
   "vendorSpecimens": {
     "demo.css": "f3799e577d99107a312fb9652a5371c90be95eb8fb7741d370f002aff9903806",
     "pages.css": "8be66eb464522a4b3b256e6528cfe23f96f85ef9d9866c00528e70bbe165f617",

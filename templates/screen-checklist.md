@@ -1,7 +1,7 @@
 # Screen checklist
 
 Walk this for every screen in **light and dark**, at **390 px and 1440 px** (desktop apps: smallest and a wide window).
-Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D106.
+Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D107.
 
 ## Colour and hierarchy
 - [ ] Cobalt only for current place, links and focus; lime only for the one primary action (FAR, AKT)
@@ -36,6 +36,11 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
       motion / „Bewegung immer reduzieren“ (BEW)
 - [ ] The start shows the tile only while really loading and moves it into the header; on the web only on the first
       visit per tab (STR)
+- [ ] Android home-screen widget: bg with the ink line, small 2 × 1 or medium 4 × 2, sebaro Sans through the XML
+      layout (no Glance), the whole widget one key, pressed-fill, text up to 125 %, nothing cut in its cell (MOB-11)
+- [ ] Camera: „Seite aufnehmen“ as the primary action, camera and full-screen page view always dark, corners also
+      without dragging, a capture confirmed by count and small picture, no flash or sound; the user's photos as they
+      are, marks on them in accent on a bg seam (MOB-12, BIL-08)
 
 ## Light or dark (D75)
 - [ ] Website: the labelled button „Hell oder Dunkel“ in the header, after the navigation and the language switch (NAV, WEB)
