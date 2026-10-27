@@ -16,7 +16,7 @@
   "launcherOnly": false,
   "excludedProducts": 7,
   "sebaroDesign": {
-    "commit": "0ce41672a4cc28a25423129ec8d5443f28965e59",
+    "commit": "331e1acab436606f71f2fad543a871f10ef30cb9",
     "uncommittedChanges": false
   },
   "contracts": {
@@ -911,7 +911,7 @@
     {
       "path": "editor/sebaro-shiki.json",
       "source": "systems/sebaro/spec/09-platform-web.md",
-      "sourceSha256": "7a6e6dd34e834fceb001d715c331ae2e14effd2995eb8bfeb1419546849503eb",
+      "sourceSha256": "0d4fd48d399a788233cfd9d36decea37173700b9d5c67b77a669409f48cfce0c",
       "sha256": "2ff8751c0cbf3e1f7327671a3f15ed5cde8f12cef41dd6dddec0c1140400f5df",
       "bytes": 3794,
       "transform": "the blocks marked sb:editor file=\"sebaro-shiki.json\" of spec/09-platform-web.md §17, joined in their order"
@@ -919,9 +919,9 @@
     {
       "path": "editor/sebaro-codemirror.ts",
       "source": "systems/sebaro/spec/09-platform-web.md",
-      "sourceSha256": "7a6e6dd34e834fceb001d715c331ae2e14effd2995eb8bfeb1419546849503eb",
-      "sha256": "2c0b4bc16aa6081924b642545973b28fe5f0802836225c29150d8ea8c5d96bb2",
-      "bytes": 12808,
+      "sourceSha256": "0d4fd48d399a788233cfd9d36decea37173700b9d5c67b77a669409f48cfce0c",
+      "sha256": "5def1514e00f08baecb3afd0c5bc08fbb52da8ff4041089c2ea22592a103c92f",
+      "bytes": 12826,
       "transform": "the blocks marked sb:editor file=\"sebaro-codemirror.ts\" of spec/09-platform-web.md §17, joined in their order"
     },
     {

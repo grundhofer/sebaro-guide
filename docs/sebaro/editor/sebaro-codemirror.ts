@@ -144,8 +144,8 @@ export const sebaroDiffLine = {
 };
 class SebaroDiffSign extends GutterMarker {
   constructor(readonly sign: string) { super(); }
-  eq(other: SebaroDiffSign) { return other.sign === this.sign; }
-  toDOM() { return document.createTextNode(this.sign); }
+  override eq(other: SebaroDiffSign) { return other.sign === this.sign; }
+  override toDOM() { return document.createTextNode(this.sign); }
 }
 export const sebaroDiffSigns = { inserted: new SebaroDiffSign("+"), deleted: new SebaroDiffSign("\u2212") };   // + and − (U+2212)
 // the product's gutter: gutter({ class: "sb-cm-diff-gutter", lineMarker: (view, line) => sign of that line or null })
