@@ -136,6 +136,7 @@
       findCount: "Treffer {n} von {m}",
       findNone: "Kein Treffer",
       lineRange: "Gib eine Zeile von 1 bis {m} ein.",
+      lineOf: "von {m}",
       zoomValue: "{z}\u00a0%",
       // visible key words off macOS, spoken names (screen readers); macOS shows the font's key glyphs (D68). Pos1, Ende,
       // Bild auf and Bild ab are words on every system, macOS too (D102 (12): the fonts have no ↖ ↘ ⇞ ⇟)
@@ -157,6 +158,7 @@
       findCount: "Match {n} of {m}",
       findNone: "No match",
       lineRange: "Enter a line from 1 to {m}.",
+      lineOf: "of {m}",
       zoomValue: "{z}\u00a0%",
       keyWords: { Mod: "Ctrl", Ctrl: "Ctrl", Shift: "Shift", Alt: "Alt", Enter: "Enter", Escape: "Esc", Backspace: "Backspace", Delete: "Del", Tab: "Tab", Space: "Space", Home: "Home", End: "End", PageUp: "Page Up", PageDown: "Page Down" },
       keySpoken: { Mod: "Command", Ctrl: "Control", Shift: "Shift", Alt: "Option", Enter: "Return", Escape: "Escape", Backspace: "Delete", Delete: "Forward delete", Tab: "Tab", Space: "Space", Up: "Up arrow", Down: "Down arrow", Left: "Left arrow", Right: "Right arrow", Comma: "Comma", Period: "Period", Plus: "Plus", Minus: "Minus", Backslash: "Backslash", Slash: "Slash", Home: "Home", End: "End", PageUp: "Page up", PageDown: "Page down" },
@@ -680,8 +682,23 @@
       : mode === "replace" ? findRow(bar, "replace") && findRow(bar, "replace").querySelector("input") : findInput(bar);
     if (focus) { focus.focus(); if (typeof focus.select === "function") focus.select(); }
   }
+  // „von n“ follows the document while the row is open: the app writes the new count into data-sb-lines, and the
+  // suffix and a shown range error follow (spec/02 §4.25.2)
+  function findLines(bar) {
+    var row = findRow(bar, "line"), max = parseInt(bar.getAttribute("data-sb-lines"), 10);
+    if (!row || !isFinite(max)) return;
+    var suffix = row.querySelector(".sb-field__suffix"), err = row.querySelector(".sb-field__error");
+    // line numbers without a thousands separator (D105 (45)): the number goes in as text
+    if (suffix) suffix.textContent = t(suffix, "lineOf", { m: String(max) });
+    if (err && !err.hidden) (err.querySelector("span") || err).textContent = t(err, "lineRange", { m: String(max) });
+  }
   function findOpen(bar, from, mode) {
     bar._sbFrom = from && from !== document.body && !bar.contains(from) ? from : bar._sbFrom || null;
+    if (!bar._sbLines && typeof MutationObserver === "function") {
+      bar._sbLines = new MutationObserver(function () { findLines(bar); });
+      bar._sbLines.observe(bar, { attributes: true, attributeFilter: ["data-sb-lines"] });
+    }
+    findLines(bar);   // a count written before the first open (or while the bar was hidden) is not stale either
     var was = bar.hidden;
     bar.hidden = false;
     findMode(bar, mode || (was ? "find" : bar.getAttribute("data-sb-find-mode") || "find"));
@@ -724,7 +741,7 @@
       input.setAttribute("aria-invalid", "true");
       if (err) {
         var words = err.querySelector("span") || err;
-        words.textContent = t(err, "lineRange", { m: isFinite(max) ? max : 1 });
+        words.textContent = t(err, "lineRange", { m: String(isFinite(max) ? max : 1) });
         err.hidden = false;
         if (err.id) input.setAttribute("aria-describedby", err.id);
       }
@@ -1141,6 +1158,9 @@
     var lr = list.getBoundingClientRect(), r = item.getBoundingClientRect(), cs = getComputedStyle(list);
     var padStart = parseFloat(cs.scrollPaddingInlineStart) || 0, rtl = cs.direction === "rtl";
     var startEdge = rtl ? lr.right - padStart : lr.left + padStart, endEdge = rtl ? lr.left : lr.right;
+    // D108 (4): the pinned tab stays at the row's start (sticky), so another tab is revealed after its end, not under it
+    var pin = list.querySelector(".sb-doc-tabs__item--pinned");
+    if (pin && pin !== item) { var pr = pin.getBoundingClientRect(); startEdge = rtl ? Math.min(startEdge, pr.left) : Math.max(startEdge, pr.right); }
     var delta = 0;
     if (!rtl) { if (r.left < startEdge) delta = r.left - startEdge; else if (r.right > endEdge) delta = Math.min(r.right - endEdge, r.left - startEdge); }
     else { if (r.right > startEdge) delta = r.right - startEdge; else if (r.left < endEdge) delta = Math.max(r.left - endEdge, r.right - startEdge); }

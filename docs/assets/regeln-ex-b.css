@@ -30,7 +30,7 @@
 .g-rx-arrow { color: var(--sb-color-text-muted); }
 .g-rx-lines { display: grid; gap: var(--sb-space-1); margin: 0; padding: 0; list-style: none; }
 .g-rx-lines > li { display: grid; grid-template-columns: minmax(0, 1fr); align-items: baseline; gap: var(--sb-space-1) var(--sb-space-3); }
-@media (min-width: 640px) { .g-rx-lines > li { grid-template-columns: 10rem minmax(0, 1fr); } }
+@media (min-width: 40rem) { .g-rx-lines > li { grid-template-columns: 10rem minmax(0, 1fr); } }
 .g-rx-lines > li > .sb-text-action { justify-self: start; }
 .g-rx-site { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-3); padding: var(--sb-space-6) var(--sb-spacing-gutter); }
 .g-rx-site p { margin: 0; }
@@ -47,6 +47,9 @@
   container-type: inline-size; box-sizing: border-box; inline-size: 100%; overflow: hidden;
   border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container);
 }
+/* while the text is large (a screen of 1024 px or more that holds less than 64rem) the box is also the page of its
+   header, so sebaro.css' own header rules follow the box; at 100 % nothing changes */
+@media (min-width: 1024px) and (max-width: 63.99rem) { .g-rx-hdrbox { container-name: sb-page; } }
 .g-rx-hdrbox--390 { max-inline-size: calc(390px + 2 * var(--sb-border-width-hairline)); }
 .g-rx-hdrbox--800 { max-inline-size: 800px; }
 .g-rx-hdrbox .sb-site-header {
@@ -71,6 +74,9 @@
   }
   .g-rx-hdrbox .sb-site-nav { margin-inline-start: var(--sb-space-10); }
 }
+/* the lockup keeps its word whole: at 200 % on 1280 px the one-row box is wider than 1024 px, so it keeps one row,
+   and the navigation wraps between its words instead of squeezing „sebaro“ to letters */
+@media (min-width: 1024px) and (max-width: 63.99rem) { .g-rx-hdrbox .sb-lockup { min-inline-size: max-content; } }
 .g-rx-hdrbox .g-rx-hdr-tools { grid-area: theme; display: flex; align-items: center; }
 
 /* a fixed range share for the static slider (08:00 to 22:00 of 0 to 24); sb-controls.js overrides it when loaded */

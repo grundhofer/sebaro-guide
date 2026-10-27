@@ -15,7 +15,7 @@
   display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-pointer);
   font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); color: var(--sb-color-text);
 }
-@media (pointer: coarse), (max-width: 1023px) { .g-web-rules a { min-block-size: var(--sb-size-target-touch); } }
+@media (pointer: coarse), (max-width: 63.99rem) { .g-web-rules a { min-block-size: var(--sb-size-target-touch); } }
 .g-web-points { margin: var(--sb-space-6) 0 0; padding-inline-start: 1.25em; max-inline-size: 42em; }
 .g-web-points li + li { margin-block-start: var(--sb-space-1); }
 .g-web-text { margin: var(--sb-space-6) 0 0; max-inline-size: 42em; }
@@ -39,13 +39,17 @@
 .g-web-frame__path { min-inline-size: 0; font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); color: var(--sb-color-text-muted); overflow-wrap: break-word; }
 .g-web-frame__state { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .g-web-frame__page { position: relative; container-type: inline-size; }
+/* while the text is large (a screen of 1024 px or more that holds less than 64rem) the frame is the page of what it
+ * shows (as demo.css' demo-page-frame): its header and sections switch by the frame, not by the screen, so at 200 % on
+ * 1024 px a header in the frame never takes the one-row form of a 1024 px page; at 100 % nothing changes */
+@media (min-width: 1024px) and (max-width: 63.99rem) { .g-web-frame__page { container-name: sb-page sb-content; } }
 /* at phone width the frame is the browser window: edge to edge, exactly as wide as the screen */
-@media (max-width: 429px) {
+@media (max-width: 26.81rem) {
   .g-web-frame { margin-inline: calc(-1 * var(--sb-spacing-gutter)); border-inline: 0; border-radius: 0; }
 }
 /* several small frames next to each other (states of one case) */
-.g-web-states { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: var(--sb-space-8) var(--sb-space-6); align-items: start; }
-.g-web-states--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); }
+.g-web-states { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, max(320px, 20rem)), 1fr)); gap: var(--sb-space-8) var(--sb-space-6); align-items: start; }
+.g-web-states--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, max(400px, 25rem)), 1fr)); }
 * + .g-web-states { margin-block-start: var(--sb-space-6); }
 .g-web-states > .g-web-frame { margin-block-start: 0; }
 

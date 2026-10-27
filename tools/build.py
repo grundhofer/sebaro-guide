@@ -153,7 +153,7 @@ def icon(name: str, size: int = 16) -> str:
 
 
 def sync_state() -> dict:
-    p = SEBARO / "GUIDE-SYNC.json"
+    p = DOCS / "GUIDE-SYNC.json"
     return json.loads(p.read_text(encoding="utf-8")) if p.is_file() else {}
 
 

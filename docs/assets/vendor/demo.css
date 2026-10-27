@@ -34,6 +34,7 @@
 .demo-cell--full { flex-basis: 100%; }   /* a cell on a line of its own (the window specimen keeps its view at 640 px and more) */
 .demo-cell--fixed { inline-size: 320px; max-inline-size: 100%; justify-items: stretch; }
 .demo-narrow { inline-size: 280px; max-inline-size: 100%; justify-items: stretch; }   /* narrow columns at large text (D102 lane narrow) */
+.demo-narrow--240 { inline-size: 240px; }
 .demo-narrow--260 { inline-size: 260px; }
 .demo-narrow--300 { inline-size: 300px; }
 .demo-label { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
@@ -190,6 +191,12 @@
 .demo-window-frame--short .sb-window__content { min-block-size: 6rem; }
 .demo-window-frame--tall .sb-window__content { min-block-size: 16rem; }   /* room for a lone empty state in the middle (D102 lane desktop) */
 .demo-window-frame--clip { overflow: hidden; }   /* the zone's ground stays inside the frame's rounded corners */
+/* the smallest window (D108 lane a): 480 × 400, the window fills the frame */
+.demo-window-frame--480x400 { max-inline-size: 480px; block-size: 400px; }
+.demo-window-frame--480x400 > .sb-window { block-size: 100%; }
+/* a frame for the start error and the last-resort notice: the notice stands in the frame instead of over the page */
+.demo-start-frame--short { position: relative; min-block-size: 240px; }
+.demo-start-frame--short > .sb-fatal.demo-static { position: absolute; z-index: auto; }
 .demo-window-frame--resize { resize: horizontal; overflow: hidden; min-inline-size: min(320px, 100%); }   /* drag the corner: the window narrows */
 
 /* ------------------------------------------------------------------ D104 specimens (spec/02 §3.29, §4.25) */
@@ -218,3 +225,8 @@
 .demo-completion { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: start; gap: var(--sb-space-1); max-inline-size: 36rem; padding: var(--sb-space-4); border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container); }
 .demo-completion__text { margin: 0; font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); font-size: var(--sb-x-sebaro-editor-size); line-height: var(--sb-x-sebaro-editor-line-height); }
 .demo-completion__caret { border-inline-end: 2px solid var(--sb-color-accent); }
+/* the new gaps after D108, lane b: a view of fixed height (a lone loading line), a card list with its own scroll frame,
+   the reader with a lone page */
+.demo-view-frame--h200 > .sb-view { min-block-size: 200px; }
+.demo-board-scroll .sb-board__cards--scroll { max-block-size: 180px; }
+.demo-reader-box { display: grid; block-size: 320px; border: var(--sb-border-width-hairline) solid var(--sb-color-border); }

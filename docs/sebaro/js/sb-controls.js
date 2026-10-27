@@ -304,7 +304,20 @@
       var focusInside = toast.contains(document.activeElement);
       toast.hidden = true;
       toast.classList.remove("sb-enter");
-      if (focusInside && s && s.from && document.contains(s.from)) s.from.focus({ preventScroll: true });
+      if (!focusInside || !s) return;
+      var from = s.from;
+      if (from && from !== document.body && document.contains(from) && !from.closest("[hidden], [inert]")) {
+        from.focus({ preventScroll: true });
+        if (document.activeElement === from) return;   // a style that hides it (display: none) lets focus() do nothing
+      }
+      // the origin is gone (its row was deleted, its view closed or hidden): focus goes to the main content of the area
+      // the toast stands in, never to the page's body (spec/02 §4.8)
+      var area = toast.closest(".sb-window, .sb-view") || document;
+      var main = null;
+      [".sb-doc-tabs__panel:not([hidden])", ".sb-window__content", ".sb-view__content", "main"].some(function (sel) { return (main = area.querySelector(sel)); });
+      if (!main) return;
+      if (!main.hasAttribute("tabindex")) main.setAttribute("tabindex", "-1");
+      main.focus({ preventScroll: true });
     }
   };
   function putBack(toast) {

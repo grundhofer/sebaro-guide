@@ -94,6 +94,16 @@ This product uses the sebaro design system. Before building or changing any UI:
    action „Seite aufnehmen“, is always dark (so is the full-screen page view), moves corners also without dragging and
    confirms a capture by count and small picture (MOB-12); the user's photos stay as they are, marks on them are
    accent on a bg seam (BIL-08). Widget and camera exist only for Android (Compose and XML layouts).
+   Decided with D108: in a window's sidebar a row's status that does not fit beside the name goes under it, starting
+   where the name starts (NAV-04, ZUG-09); with nothing open the sidebar stays with only its foot „Einstellungen“
+   (NAV-04); a Tauri app names its languages in `src-tauri/Info.plist` (DSK-08); the pinned tab stays at the start of
+   a scrolling tab row (DSK-10); the counter line keeps its place (STA-07); how it holds it is provisional: the last
+   document's parts stay invisible, `data-sb-held`.
+   Without a new decision: a chord that is also a native menu accelerator moves no focus (DSK-04, provisional); a
+   twice-cited footnote has one back link per citation and the digit focuses the note (BEL-02, provisional); an error
+   whose action is unknown says „Das hat nicht geklappt. <Was sicher ist>. Versuch es noch einmal.“ (TXT-07,
+   provisional); the editor themes come with the export under `editor/` (TEC-08); check an export with
+   `node sebaro/checks/verify-export.mjs --strict` (TEC-09).
    Without a decision, in the D95 workshop round: pages print light from `tokens.css` alone since token contract
    1.9; keep `sb-print.js` for the closed answers (WEB-11).
 10. Ship the export's `LICENSE.md` unchanged (D76). If a rule does not fit, cite its id (e.g. `AKT-01`) and ask the

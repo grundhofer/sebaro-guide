@@ -13,7 +13,7 @@
 .g-desktop-facts > div { align-items: start; gap: var(--sb-space-1) var(--sb-space-4); padding-block: var(--sb-space-3); }
 .g-desktop-facts dt { flex: 1 1 100%; }
 .g-desktop-facts dd { flex: 1 1 100%; }
-@media (min-width: 640px) { .g-desktop-facts dt { flex: 0 1 9em; } .g-desktop-facts dd { flex: 1 1 0%; } }
+@media (min-width: 40rem) { .g-desktop-facts dt { flex: 0 1 9em; } .g-desktop-facts dd { flex: 1 1 0%; } }
 .g-desktop-facts dt { padding-block-start: var(--sb-space-0-5); }
 .g-desktop-rulelist { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--sb-space-1); }
 .g-desktop-rulelist > li { overflow-wrap: anywhere; }   /* a long title breaks at 200 % text (D100 (5)); the status keeps its line */
@@ -66,7 +66,7 @@
 .g-desktop-results .g-desktop-results__where { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 
 /* ------------------------------------------------------------------ the macOS menu bar structure as lists (drawn by the system) */
-.g-desktop-menubar { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: var(--sb-space-6); margin: 0; }
+.g-desktop-menubar { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, max(200px, 12.5rem)), 1fr)); gap: var(--sb-space-6); margin: 0; }
 .g-desktop-menubar > div { min-inline-size: 0; }
 .g-desktop-menubar dt { margin: 0 0 var(--sb-space-1); font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
 .g-desktop-menubar dd { margin: 0; }
@@ -79,7 +79,7 @@
 
 /* ------------------------------------------------------------------ several windows side by side (the one behind: data-sb-window-active="false", sebaro.css) */
 .g-desktop-stackwin { display: grid; gap: var(--sb-space-6); }
-@media (min-width: 1024px) {
+@media (min-width: 64rem) {
   .g-desktop-stackwin { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: start; }
   .g-desktop-stackwin > :last-child { margin-block-start: var(--sb-space-12); }
 }

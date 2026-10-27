@@ -1,6 +1,6 @@
 /* generated — do not edit.
  * sebaroDesign token contract 1.10 · draft "sebaro" · palette "sebaro"
- * source: systems/sebaro/tokens/tokens.json (sha256 278cd39531d62d2a)
+ * source: systems/sebaro/tokens/tokens.json (sha256 7d2d13e1ba9b5b19)
  *         palettes/sebaro.json (sha256 21cebe04ae051e3a)
  * builder: tools/build_tokens.py 1.10.1 · spec: shared/TOKEN-CONTRACT.md
  */
@@ -90,9 +90,11 @@
   --sb-x-sebaro-pane-sidebar: 240px;
   --sb-x-sebaro-pane-sidebar-min: 200px;
   --sb-x-sebaro-pane-sidebar-max: 360px;
+  --sb-x-sebaro-pane-sidebar-overlay-below: 722px;
   --sb-x-sebaro-pane-inspector: 280px;
   --sb-x-sebaro-pane-inspector-min: 240px;
   --sb-x-sebaro-pane-inspector-max: 400px;
+  --sb-x-sebaro-pane-inspector-overlay-below: 1004px;
   --sb-x-sebaro-board-column: 240px;
   --sb-x-sebaro-traffic-light-room: 80px;
   --sb-x-sebaro-editor-size: 1rem;

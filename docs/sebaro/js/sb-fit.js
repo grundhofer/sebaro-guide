@@ -534,6 +534,15 @@
       carrier.appendChild(node);
     }
   }
+  // a break after „/“ only where the text before it ends in a slash that follows a word: never after the separators a
+  // name begins with („/Users“, „../a“), and a run of separators stays together („a//b“ may break after „//“, the
+  // piece after it is then measured whole) — the rule of the file names (spec/02 §3.11)
+  function slashBreak(before) {
+    if (!/\/$/.test(before)) return false;
+    var j = before.length - 1;
+    while (j >= 0 && "-._/".indexOf(before.charAt(j)) >= 0) j--;
+    return j >= 0 && !/\s/.test(before.charAt(j));
+  }
   function breakAfterSlash(f) {
     var wbr = document.createElement("wbr"), n = f.node;
     wbr.setAttribute("data-sb-fit-wbr", "");
@@ -585,7 +594,7 @@
         });
         // break-word breaks inside a word only when it alone does not fit its line: that word, and no other
         if (tops.length > 1) found.push({ node: n, start: start, endNode: endNode, end: endAt, box: lb,
-          afterSlash: start > 0 ? n.data.charAt(start - 1) === "/" : !!prev && joins(prev, lb) && /\/$/.test(prev.data) });
+          afterSlash: start > 0 ? slashBreak(n.data.slice(0, start)) : !!prev && joins(prev, lb) && slashBreak(prev.data) });
       }
     }
     return found;

@@ -715,6 +715,28 @@ kbd, .sb-kbd {
 .sb-callout__actions { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-2) var(--sb-space-3); margin-block-start: var(--sb-space-3); }
 .sb-callout__hide { gap: var(--sb-space-1); }
 .sb-callout__hide > .sb-icon { flex: none; color: var(--sb-color-text-muted); }
+/* error details in a callout (spec/02 §3.28): the callout's glyph is a column of its own, so the details stand in the
+   text column and start where the text starts, without the glyph indent they keep in a message */
+.sb-callout > .sb-details { grid-column: 2; padding-inline-start: 0; }
+/* a failed start before the window frame exists (spec/09 §13.1; provisional, agent: the name and the sizes): the error
+   callout at the start of the empty window, under the title bar's 48 px (in px: the macOS window buttons do not grow
+   with the text), as wide as a reading column */
+.sb-start-error { box-sizing: border-box; max-inline-size: 40rem; margin: 0; padding: 48px 16px 16px; }   /* px: the sides stay at their 100 % size, so the words keep the room at large text */
+/* the last-resort notice (spec/09 §13.1; provisional, agent): written by a small script of the page when the app
+   fails before its frame, its texts or its framework run. Tokens and this one class only; one layer above everything,
+   the 2 px ink layer line at its top (a layer, D46; status colour stays on glyphs, so no coloured line), 48 px around,
+   the system's message in sebaro Mono at caption size */
+.sb-fatal {
+  position: fixed; inset: 0 0 auto; z-index: calc(var(--sb-layer-tooltip) + 1); box-sizing: border-box; max-block-size: 100dvh; overflow: auto;
+  margin: 0; padding: min(var(--sb-space-12), 48px); background: var(--sb-color-bg); color: var(--sb-color-text);   /* 48 px, also at large text */
+  border-block-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color);
+  font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking);
+}
+.sb-fatal > p { margin: 0 0 var(--sb-space-3); }
+.sb-fatal > samp {
+  display: block; font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking);   /* the code role: Mono at caption size */
+  overflow-wrap: anywhere; white-space: pre-wrap;
+}
 
 /* progress: only for remote work over 1 s (spec/07 §4.5). Linear on <progress>: ink value on a hairline-grey track */
 .sb-progress { display: grid; gap: var(--sb-space-1); }
@@ -771,6 +793,7 @@ kbd, .sb-kbd {
 .sb-progress-ring__text { position: relative; color: var(--sb-color-text); fill: currentColor; line-height: 1; white-space: nowrap; font-variant-numeric: var(--sb-type-numeric-variant); }
 .sb-loading { display: inline-flex; align-items: center; gap: var(--sb-space-2); margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .sb-loading .sb-icon { color: var(--sb-color-text); }
+.sb-loading { overflow-wrap: anywhere; }   /* its words are a flex item: a long word may wrap, sb-fit.js then hyphenates it */
 /* skeleton: static grey bars for remote content over 1 s, always with the words; no shimmer (spec/01 §7) */
 .sb-skeleton { display: grid; gap: var(--sb-space-2); }
 .sb-skeleton__line { display: block; block-size: 12px; border-radius: var(--sb-radius-small); background: var(--sb-color-border); }
@@ -792,6 +815,12 @@ kbd, .sb-kbd {
 .sb-empty > .sb-icon--spot { margin-block-end: var(--sb-space-2); color: var(--sb-color-text-muted); --sb-icon-tone: var(--sb-color-border); }
 .sb-empty__title { margin: 0; font: var(--sb-type-mobile-title); letter-spacing: var(--sb-type-mobile-title-tracking); }
 .sb-empty__text { margin: 0; color: var(--sb-color-text-muted); }
+/* an empty state under a heading in an area with its own padding (a board without a column under its heading):
+   no side padding of its own, the pane form, so its title is never larger than the heading (spec/02 §3.14;
+   provisional, agent) */
+.sb-empty--section { gap: var(--sb-space-1); padding: var(--sb-space-4) 0; }
+.sb-empty--section > .sb-empty__title { font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
+.sb-empty--section > .sb-empty__text { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
 
 /* calendar (D91 B7a, Z4a; spec/02 §3.21): the month on top, the list of the chosen day below; side by side once the
    calendar itself is 640 px wide (in a window). ARIA grid with roving focus (sb-calendar.js). Today = 1 px border-strong
@@ -1075,8 +1104,8 @@ kbd, .sb-kbd {
   flex: 1 1 0; min-inline-size: max(var(--sb-x-sebaro-board-column), 240px, 15em); display: flex; flex-direction: column; gap: var(--sb-space-2);   /* the column token (240 px; a product may set it wider, never below 240 px, D102 (40)), and 15em at large text (D102 lane narrow, RB-37) */
   padding-inline: var(--sb-space-3); box-sizing: border-box;
 }
-.sb-board__column:first-child { padding-inline-start: 0; }
-.sb-board__column:last-child { padding-inline-end: 0; }
+.sb-board__column:first-child { padding-inline-start: var(--sb-border-width-hairline); }   /* a hairline, not 0: the drop line reaches 1 px past */
+.sb-board__column:last-child { padding-inline-end: var(--sb-border-width-hairline); }      /* its card, which would scroll the columns sideways */
 .sb-board__column + .sb-board__column { border-inline-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
 .sb-board__head { display: flex; align-items: center; gap: var(--sb-space-2); min-block-size: var(--sb-size-control-sm); }
 .sb-board__title {
@@ -1105,6 +1134,9 @@ kbd, .sb-kbd {
 .sb-board__title > .sb-board__name.sb-category::before { position: absolute; inset-inline-start: 0; inset-block-start: calc(0.5lh - 5px); }
 .sb-board__title > .sb-board__name.sb-category > .sb-icon { vertical-align: middle; margin-inline-end: var(--sb-space-2); }
 .sb-board__cards { display: grid; gap: var(--sb-space-2); margin: 0; padding: 0; list-style: none; }
+/* a card list with its own scroll frame (the product's overflow) keeps the drop line inside it: 1 px at the sides,
+   half the gap and the line above and below (spec/02 §3.16; provisional, agent) */
+.sb-board__cards--scroll { overflow-y: auto; margin-inline: calc(-1 * var(--sb-border-width-hairline)); padding: calc((var(--sb-space-2) + var(--sb-border-width-strong)) / 2 + var(--sb-border-width-hairline)) var(--sb-border-width-hairline); }
 .sb-board__empty { margin: 0; padding-block: var(--sb-space-2); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 /* the card on a board: title in label, a grey meta line, „Mehr“ at the end of the first line */
 .sb-board .sb-card--item {
@@ -1125,6 +1157,17 @@ kbd, .sb-kbd {
   grid-column: 1 / -1; margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking);
   color: var(--sb-color-text); overflow-wrap: break-word;
 }
+/* a description rendered from Markdown: a compact prose dress in the card's caption: 4 px between blocks, headings in
+   the caption size at the strong weight (never larger than the card's title), lists indented 1.5em as in sb-prose,
+   code blocks wrap instead of scrolling; an image is never wider than the card (the renderer writes its alt text
+   instead; spec/02 §3.16; provisional, agent) */
+.sb-board .sb-card__text > *, .sb-board .sb-card__text li > * { margin-block: 0; }
+.sb-board .sb-card__text > * + *, .sb-board .sb-card__text li + li, .sb-board .sb-card__text li > * + * { margin-block-start: var(--sb-space-1); }
+.sb-board .sb-card__text :is(h1, h2, h3, h4, h5, h6) { font: inherit; font-weight: var(--sb-type-body-strong-weight); }
+.sb-board .sb-card__text :is(ul, ol) { padding-inline-start: 1.5em; }
+.sb-board .sb-card__text blockquote { margin-inline: 0; padding-inline-start: var(--sb-space-3); border-inline-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color); }
+.sb-board .sb-card__text pre { white-space: pre-wrap; overflow-wrap: anywhere; font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); }
+.sb-board .sb-card__text img { max-inline-size: 100%; block-size: auto; }
 /* the column's own „Neue Karte in „<Spalte>““ (D102 (36), NV-A7): a secondary action at the column's foot, for a
    product whose view keeps its own primary action; it takes the column's width with 8 px sides and wraps its words, and
    in the narrow board (below 152px + 6em) it leaves out its plus icon */
@@ -1186,6 +1229,7 @@ kbd, .sb-kbd {
   .sb-board__column:first-child { padding-inline-start: 0; }
   .sb-board__column:last-child { padding-inline-end: 0; }
   .sb-board .sb-card--item { padding-inline-start: min(var(--sb-space-3), 12px); }
+  .sb-board .sb-card__text :is(ul, ol) { padding-inline-start: min(1.5em, 21px); }   /* the list indent at its 100 % size, as the card's sides */
   .sb-board .sb-card--item[aria-current="true"] { padding-inline-start: calc(min(var(--sb-space-3), 12px) - var(--sb-border-width-strong) + var(--sb-border-width-hairline)); }
 }
 /* the position bar: „Spalte 2 von 3: …“ under the two step buttons once the words would get less than 8.5em between
@@ -1686,6 +1730,8 @@ dialog.sb-sheet > form { margin: 0; }
   scroll-margin-block-start: var(--sb-space-16);
 }
 .sb-note:target, .sb-note.is-active { border-inline-start-color: var(--sb-color-accent); }
+/* a digit's jump puts focus on its note (sb-notes.js); no ring while the note's edge stands, the edge shows the place */
+.sb-note:is(:target:not([data-sb-past]), .is-active):focus { outline: 0; }
 /* narrow columns at large text (D102 lane narrow; provisional, agent): the list is a container (sb-notes); once the note's
    text would get less than about 8em beside the 48 px column of its back links, the back links stand on their own
    line above the text, which then takes the whole width */
@@ -1697,6 +1743,15 @@ dialog.sb-sheet > form { margin: 0; }
   display: block; min-inline-size: var(--sb-size-target-touch); min-block-size: var(--sb-size-target-touch);
   color: var(--sb-color-text); text-decoration: underline var(--sb-color-link) var(--sb-x-sebaro-link-underline-width); text-underline-offset: 0.2em;
   font-variant-numeric: tabular-nums;
+}
+.sb-note__back:not([href]) { text-decoration: none; }   /* a note no digit points to: its number as plain text */
+/* in a window (data-sb-density="window") the back link is a 32 px target in a 32 px column, as the window's rows and
+   tools; 48 px under touch (per D103 the denser form; provisional, agent). The two columns hold down to 40 px + 8em */
+@media not (pointer: coarse) {
+  [data-sb-density="window"] .sb-note__back { min-inline-size: var(--sb-size-control-sm); min-block-size: var(--sb-size-control-sm); }
+  @container sb-notes (width >= calc(40px + 8em)) {
+    [data-sb-density="window"] .sb-note { grid-template-columns: var(--sb-size-control-sm) minmax(0, 1fr); }
+  }
 }
 .sb-note__body { max-inline-size: 60ch; }   /* about 68 characters at 14 px (fix stage AD16) */
 .sb-note__body > p, .sb-claim-row__note > p, .sb-note-popover__body p { margin: 0 0 var(--sb-space-1); }

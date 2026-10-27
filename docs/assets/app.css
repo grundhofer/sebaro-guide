@@ -6,7 +6,7 @@
 
 /* ------------------------------------------------------------------ screen list: stacked, side by side from 900 px (D25) */
 .g-app-screens { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-12) var(--sb-space-10); align-items: start; margin: 0; padding: 0; list-style: none; }
-@media (min-width: 900px) { .g-app-screens { grid-template-columns: repeat(auto-fill, 390px); } }
+@media (min-width: 56.25rem) { .g-app-screens { grid-template-columns: repeat(auto-fill, 390px); } }
 .g-app-screen { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-2); align-content: start; min-inline-size: 0; max-inline-size: 390px; scroll-margin-block-start: var(--sb-space-4); }
 /* a screen is 390 x 844; a longer screen shows its whole content and the bottom block at its end (as mobile.html) */
 .g-app-screen > .sb-phone:not(.sb-phone--auto) { block-size: auto; min-block-size: 844px; }
@@ -21,7 +21,7 @@
 .g-app-subhead { margin: var(--sb-space-12) 0 var(--sb-space-4); font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
 
 /* at phone width the frame is the screen: no side margins, no frame corners (as pages.css does for mobile.html) */
-@media (max-width: 429px) {
+@media (max-width: 26.81rem) {
   .g-app-screen > .sb-phone {
     margin-inline: calc(-1 * var(--sb-spacing-gutter)); inline-size: calc(100% + 2 * var(--sb-spacing-gutter)); max-inline-size: none;
     border-inline: 0; border-radius: 0;
@@ -29,7 +29,7 @@
 }
 
 /* states of the primary action, each in its own small frame (one lime action per frame) */
-.g-app-states { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: var(--sb-space-6); margin: 0; padding: 0; list-style: none; }
+.g-app-states { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, max(300px, 18.75rem)), 1fr)); gap: var(--sb-space-6); margin: 0; padding: 0; list-style: none; }
 .g-app-states > li { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-2); align-content: start; min-inline-size: 0; }
 
 /* ------------------------------------------------------------------ the start as a still: the tile in the middle of bg */
@@ -118,7 +118,7 @@
 .g-app-pick .sb-list-row__meta { padding-inline-start: var(--sb-space-8); }
 /* stacked demo-window below 640 px: .sb-view's min-block-size: 100% resolves against the window and clips the bottom
    block (vendored demo.css); the stand-in grows with its content instead */
-@media (max-width: 639px) { .g-app-wide .demo-window > .sb-view { min-block-size: 0; } }
+@media (max-width: 39.99rem) { .g-app-wide .demo-window > .sb-view { min-block-size: 0; } }
 /* the class-to-Compose table restacks at phone width (g-table-stack in guide.css); its code may wrap */
 #ueberblick .sb-table code { white-space: normal; overflow-wrap: anywhere; }
 /* the four fixed tasks (ZUG-08) */

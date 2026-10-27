@@ -29,10 +29,15 @@
 .g-lead h1 { margin: 0 0 var(--sb-space-3); }
 .g-lead p { margin: 0; max-inline-size: 42em; color: var(--sb-color-text-muted); }
 .g-lead p + p { margin-block-start: var(--sb-space-2); }
-@media (min-width: 1024px) { .g-lead { padding-block-start: var(--sb-spacing-section-wide); } }
+@media (min-width: 64rem) { .g-lead { padding-block-start: var(--sb-spacing-section-wide); } }
 
 .g-toc-list { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--sb-space-1); }
 .g-toc-list a { display: inline-flex; min-block-size: var(--sb-size-target-pointer); align-items: center; }
+/* an area's count stands after its word in the page frame's contents: sb-toc's link is a block-level flex box, which
+ * put the count on a line of its own at every width; the word keeps its longest word as its least width, so a long
+ * one moves the count under it instead of being squeezed */
+.demo-toc li:has(> .g-toc__count) { display: flex; flex-wrap: wrap; align-items: center; column-gap: var(--sb-space-2); }
+.demo-toc li > .g-toc__count { flex: none; }
 .g-toc__count, .g-area__count { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant); }
 
 /* ------------------------------------------------------------------ rules (regeln.html) */
@@ -56,7 +61,7 @@
 @media (max-width: 24rem) { .g-rule__title, .g-rule__meta { grid-column: 1 / -1; } }
 
 /* ------------------------------------------------------------------ examples: right and wrong side by side */
-.g-examples { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--sb-space-6); align-items: start; }
+.g-examples { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, max(300px, 18.75rem)), 1fr)); gap: var(--sb-space-6); align-items: start; }
 .g-ex { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-3); min-inline-size: 0; }
 .g-ex__label { display: inline-flex; align-items: center; gap: var(--sb-space-1); margin: 0; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
 .g-ex--do .g-ex__label { color: var(--sb-color-success); }
@@ -95,7 +100,7 @@
 /* ------------------------------------------------------------------ specimens: sources, swatches, page cards */
 .g-source { margin-block-start: var(--sb-space-3); min-inline-size: 0; }   /* an open block never widens a grid parent: its code scrolls in its own frame (D100 (5)) */
 .g-source > summary { display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-pointer); cursor: pointer; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
-.g-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: var(--sb-space-6) var(--sb-spacing-group); align-items: start; }
+.g-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, max(260px, 16.25rem)), 1fr)); gap: var(--sb-space-6) var(--sb-spacing-group); align-items: start; }
 .g-mark-proposal { display: inline-flex; align-items: center; gap: var(--sb-space-1); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 
 /* ------------------------------------------------------------------ deliberate "Nicht so" specimens
@@ -142,10 +147,24 @@ main .sb-meta-list > div > :is(dt, dd) { max-inline-size: 100%; }
  * link instead of scrolling the list sideways: sb-toc's link is a flex box, whose text otherwise keeps its widest
  * word; sb-fit.js then gives that word, and only that word, its hyphen (ZUG-09) */
 .demo-toc.sb-toc a { overflow-wrap: anywhere; }
+/* the page frame's two columns start at 1024 px (demo.css, in px); at large text a window of 1024 px or more holds
+ * less than 64rem (1024 px at 100 %, 2048 px at 200 %), so the page keeps the one column of a narrower screen, its
+ * contents above the text: in 200 px the area counts stood on lines of their own and the text column shrank to half
+ * (D100 (5), ZUG-09; provisional, agent). Every layout query of the guide's own CSS is in rem for the same reason,
+ * and every grid's least column is max(<px>, <the same in rem>): equal at 100 %, twice as wide at 200 % */
+@media (min-width: 1024px) and (max-width: 63.99rem) {
+  .demo-layout { display: block; padding-inline: var(--sb-spacing-gutter); }
+  .demo-toc { position: static; max-block-size: none; overflow-y: visible; }
+}
 /* a tree outside a window keeps its one-line rows and its status words (D67 (2), sb-row__meta never shrinks); at
  * 200 % text its box scrolls sideways in its own frame instead of the page (D100 (5)); a box that scrolls has
  * tabindex="0", role="region" and a name, so the keyboard reaches it */
 main .demo-box:has(> .sb-tree) { overflow-x: auto; }
+/* a header specimen is the page of its header (sebaro.css switches the header by the sb-page container): in a frame
+ * narrower than the screen it takes the rows of its own width, so at 200 % on 1024 px its button is no longer cut.
+ * Only while the text is large (a screen of 1024 px or more that holds less than 64rem, as the page frame above), so
+ * at 100 % every specimen stays as it was */
+@media (min-width: 1024px) and (max-width: 63.99rem) { main .demo-header-specimen { container: sb-page / inline-size; } }
 
 /* ------------------------------------------------------------------ filter bar on regeln.html */
 .g-filter { display: flex; flex-wrap: wrap; align-items: end; gap: var(--sb-space-4) var(--sb-space-6); margin-block: var(--sb-space-6) 0; }

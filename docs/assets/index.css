@@ -18,7 +18,7 @@
 .g-index-core__type { font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
 .g-index-core__tile { justify-self: start; }
 
-.g-index-paths { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: var(--sb-space-8) var(--sb-spacing-group); margin: 0; padding: 0; list-style: none; }
+.g-index-paths { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, max(280px, 17.5rem)), 1fr)); gap: var(--sb-space-8) var(--sb-spacing-group); margin: 0; padding: 0; list-style: none; }
 .g-index-paths h3 { margin: 0 0 var(--sb-space-2); font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
 .g-index-paths p { margin: 0; color: var(--sb-color-text-muted); }
 

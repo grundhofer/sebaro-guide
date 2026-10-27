@@ -4,7 +4,7 @@
  * the deliberate "Nicht so" cases. */
 
 /* ------------------------------------------------------------------ item grid: specimen + rule + rule ids */
-.g-daten-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: var(--sb-space-10) var(--sb-spacing-group); align-items: start; }
+.g-daten-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, max(320px, 20rem)), 1fr)); gap: var(--sb-space-10) var(--sb-spacing-group); align-items: start; }
 .g-daten-item { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-3); min-inline-size: 0; padding-block-start: var(--sb-space-4); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); scroll-margin-block-start: var(--sb-space-4); }
 .g-daten-item--wide { grid-column: 1 / -1; }
 .g-daten-item > h3 { margin: 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }

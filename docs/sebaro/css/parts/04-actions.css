@@ -4,6 +4,10 @@
 .sb-view__content { flex: 1 1 auto; min-block-size: 0; padding-block-end: var(--sb-space-6); }
 /* an empty view centres its empty state between the top bar and the bottom block (fix stage AD25) */
 .sb-view__content:has(> .sb-empty:only-child) { display: flex; flex-direction: column; justify-content: center; }
+/* a lone loading line in an empty area stands where a lone empty state would: start-aligned, in the middle of the
+   height, with the empty state's padding, its sides held at 16 px (spec/02 §3.12; provisional, agent) */
+:is(.sb-view__content, .sb-window__content):has(> .sb-loading:only-child) { display: flex; flex-direction: column; align-items: flex-start; justify-content: safe center; }
+:is(.sb-view__content, .sb-window__content) > .sb-loading:only-child { box-sizing: border-box; max-inline-size: 100%; padding: var(--sb-space-8) min(var(--sb-spacing-gutter), 16px); }
 
 /* top bar: 64 px, no fill, no shadow; title headline 24/32 on top-level screens, title 20/28 on sub-screens */
 .sb-top-bar {

@@ -55,7 +55,7 @@
 .sb-row {
   position: relative; display: flex; align-items: center; gap: var(--sb-space-2);
   box-sizing: border-box; inline-size: 100%; min-inline-size: 0; min-block-size: var(--sb-size-control-sm); margin: 0;
-  padding-block: 0; padding-inline: calc(var(--sb-space-4) - var(--sb-border-width-strong)) var(--sb-space-3);
+  padding-block: 0; padding-inline: calc(var(--sb-space-4) - var(--sb-border-width-strong) + var(--sb-row-lead, 0px)) var(--sb-space-3);
   border: 0; border-inline-start: var(--sb-border-width-strong) solid transparent; background: transparent;
   color: var(--sb-color-text); text-align: start; text-decoration: none;
   font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); font-weight: var(--sb-type-body-weight);
@@ -85,12 +85,56 @@
 .sb-row__meta > .sb-status { color: var(--sb-color-text); }
 /* narrow columns at large text (NV-G10, D102 (35), D102 lane narrow; provisional, agent): a row that is not cut on
    purpose (no data-sb-truncate on it or an ancestor: not a virtualised list of fixed row height) wraps its name and puts __meta on the line
-   under it once the name would get less than 6em beside it, aligned with the name; the status word is never hidden
+   under it once the name would get less than 6em beside it, starting where the name starts (below); the status word is never hidden
    (glyph + word). A virtualised row (data-sb-truncate) stays one line with the full name in title and accessible name */
 .sb-row:not([data-sb-truncate], [data-sb-truncate] *) { flex-wrap: wrap; }
 .sb-row:not([data-sb-truncate], [data-sb-truncate] *) > :is(.sb-row__name, .sb-row__main) { flex: 1 1 0; min-inline-size: min(100%, 6em); }
 .sb-row:not([data-sb-truncate], [data-sb-truncate] *) :is(.sb-row__name, .sb-row__sub, .sb-row__text) { overflow: visible; text-overflow: clip; white-space: normal; }
 .sb-row:not([data-sb-truncate], [data-sb-truncate] *) > .sb-row__meta { white-space: normal; }
+/* a row that may wrap keeps 4 px above and below its lines (rem: 8 px at 200 %), so a wrapped name or status never
+   touches the row's edge; at 100 % a row of one, two or three lines stays 32, 48 or 64 px, so the product needs no
+   padding rule of its own (provisional, agent): the twist's 32 px stand inside the padding, and a row of three lines
+   (60 px of lines) keeps 2 px (rem) */
+.sb-row:not([data-sb-truncate], [data-sb-truncate] *) { padding-block: var(--sb-space-1); }
+/* a virtualised row whose __meta holds a status (D108 (1)): the name stays one line and cut, but once it would get
+   less than 6em beside the status, the status goes with glyph and word onto its own line under the name, as in every
+   list; only that row grows, nothing is cut and the sidebar never scrolls sideways */
+.sb-row:is([data-sb-truncate], [data-sb-truncate] *):has(> .sb-row__meta > .sb-status) { flex-wrap: wrap; }
+/* the cut name keeps its line beside the icon: at most half the name's column as its least width (6em would push it
+   under its own icon at 200 % in a 240 px sidebar) */
+.sb-row:is([data-sb-truncate], [data-sb-truncate] *):has(> .sb-row__meta > .sb-status) > :is(.sb-row__name, .sb-row__main) { flex: 1 1 0; min-inline-size: min(50%, 6em); }
+.sb-row:is([data-sb-truncate], [data-sb-truncate] *) > .sb-row__meta:has(> .sb-status) { white-space: normal; }
+/* on its own line the status may still be wider than the name's column (a 240 px sidebar at 200 %): then its words
+   wrap beside the glyph instead of the row scrolling sideways (the meta shrinks to the column) */
+.sb-row:not([data-sb-truncate], [data-sb-truncate] *) > .sb-row__meta,
+.sb-row:is([data-sb-truncate], [data-sb-truncate] *) > .sb-row__meta:has(> .sb-status) { flex-shrink: 1; min-inline-size: 0; max-inline-size: 100%; box-sizing: border-box; }
+.sb-row:is([data-sb-truncate], [data-sb-truncate] *):has(> .sb-row__meta > .sb-status) { padding-block: var(--sb-space-1); }
+:is(.sb-row:not([data-sb-truncate], [data-sb-truncate] *), .sb-row:is([data-sb-truncate], [data-sb-truncate] *):has(> .sb-row__meta > .sb-status)) > .sb-tree__twist { margin-block: calc(-1 * var(--sb-space-1)); }
+:is(.sb-row:not([data-sb-truncate], [data-sb-truncate] *), .sb-row:is([data-sb-truncate], [data-sb-truncate] *):has(> .sb-row__meta > .sb-status)):has(.sb-row__text) { padding-block: calc(var(--sb-space-1) / 2); }
+/* __meta on its own line starts where the name starts (D108 (1), in every row that may wrap): what stands before the
+   name hangs in the row's start padding, so a wrapping name also keeps its line beside its icon. --sb-row-lead is the width of those parts with their gaps (twist, icon or
+   check; in a listbox the check takes the icon's place); the padding grows by it and an empty first item (::before)
+   takes it back on the first line, so twist, icon and name stay where they were and a second line begins at the name's
+   edge. The name keeps the 8 px before __meta as its own end margin, so __meta has no start space of its own. In the
+   name's column a status word wider than the column (a 200 px sidebar at 200 %) breaks inside itself instead of the
+   row scrolling sideways */
+:is(.sb-row:not([data-sb-truncate], [data-sb-truncate] *), .sb-row:is([data-sb-truncate], [data-sb-truncate] *):has(> .sb-row__meta > .sb-status)) {
+  --sb-row-lead: calc(var(--sb-row-lead-twist, 0px) + var(--sb-row-lead-mark, 0px));
+}
+:is(.sb-row:not([data-sb-truncate], [data-sb-truncate] *), .sb-row:is([data-sb-truncate], [data-sb-truncate] *):has(> .sb-row__meta > .sb-status)):has(> .sb-tree__twist) {
+  --sb-row-lead-twist: calc(var(--sb-size-target-pointer) - var(--sb-space-1) + var(--sb-space-2));
+}
+:is(.sb-row:not([data-sb-truncate], [data-sb-truncate] *), .sb-row:is([data-sb-truncate], [data-sb-truncate] *):has(> .sb-row__meta > .sb-status)):has(> .sb-row__icon) {
+  --sb-row-lead-mark: calc(var(--sb-size-icon-md) + var(--sb-space-2));
+}
+:is(.sb-row:not([data-sb-truncate], [data-sb-truncate] *), .sb-row:is([data-sb-truncate], [data-sb-truncate] *):has(> .sb-row__meta > .sb-status)):has(> .sb-row__check):not(:has(> .sb-row__icon)) {
+  --sb-row-lead-mark: calc(var(--sb-size-icon-sm) + var(--sb-space-2));
+}
+:is(.sb-row:not([data-sb-truncate], [data-sb-truncate] *), .sb-row:is([data-sb-truncate], [data-sb-truncate] *):has(> .sb-row__meta > .sb-status))::before {
+  content: ""; flex: none; inline-size: 0; margin-inline-start: calc(-1 * var(--sb-row-lead) - var(--sb-space-2));
+}
+:is(.sb-row:not([data-sb-truncate], [data-sb-truncate] *), .sb-row:is([data-sb-truncate], [data-sb-truncate] *):has(> .sb-row__meta > .sb-status)):has(> .sb-row__meta) > :is(.sb-row__name, .sb-row__main) { margin-inline-end: var(--sb-space-2); }
+:is(.sb-row:not([data-sb-truncate], [data-sb-truncate] *), .sb-row:is([data-sb-truncate], [data-sb-truncate] *):has(> .sb-row__meta > .sb-status)) > .sb-row__meta { margin-inline-start: 0; padding-inline-start: 0; overflow-wrap: anywhere; }
 .sb-row:is(a, button, [role="option"], [role="treeitem"]) { cursor: pointer; }
 .sb-row:is(a, button, [role="option"], [role="treeitem"]):hover, .sb-row.is-hover { background: var(--sb-color-hover-fill); }
 .sb-row:is(a, button, [role="option"], [role="treeitem"]):active, .sb-row.is-pressed { background: var(--sb-color-pressed-fill); }
@@ -108,7 +152,7 @@
 .sb-tree__group[hidden] { display: none; }
 .sb-tree__row {
   --sb-tree-indent: 0;
-  padding-inline-start: calc(var(--sb-space-4) - var(--sb-border-width-strong) - var(--sb-space-1) + var(--sb-space-4) * var(--sb-tree-indent));
+  padding-inline-start: calc(var(--sb-space-4) - var(--sb-border-width-strong) - var(--sb-space-1) + var(--sb-space-4) * var(--sb-tree-indent) + var(--sb-row-lead, 0px));
 }
 .sb-tree__row[aria-level="2"] { --sb-tree-indent: 1; }
 .sb-tree__row[aria-level="3"] { --sb-tree-indent: 2; }
@@ -190,7 +234,10 @@
    on a menu item whose submenu is open (spec/02 §4.24), so the way to what is open stays visible; no link colour (cobalt
    is place, link and focus) and not the pressed state. Only with aria-haspopup: a pane toggle's aria-expanded says
    „shown“ and keeps no ground */
-.sb-secondary-action--compact[aria-haspopup]:not([aria-haspopup="false"])[aria-expanded="true"] { background: var(--sb-color-hover-fill); }
+/* the same for a compact toggle of a non-modal overlay that has no popup role to name (the contents over a reader):
+   it carries no aria-haspopup (the simplest form, per D103), only popovertarget or aria-controls with aria-expanded;
+   a pane toggle (data-sb-window-toggle) still keeps none */
+.sb-secondary-action--compact[aria-expanded="true"]:is([aria-haspopup]:not([aria-haspopup="false"]), [popovertarget], [aria-controls]:not([data-sb-window-toggle])) { background: var(--sb-color-hover-fill); }
 /* the sort choice over a tree or list (D102 (3)): two or three compact switches with their word; the chosen one is
    pressed and shows its direction as arrow-up--16 / arrow-down--16 plus the hidden word (sb-window.js) */
 .sb-sort-choice { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1); margin: 0; padding: 0 var(--sb-space-3) var(--sb-space-1); }
@@ -340,10 +387,18 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
 .sb-window__content--flush { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
 .sb-window__content--flush > .sb-doc-tabs__panel:not([hidden]) { flex: 1 1 auto; min-block-size: 0; }
 .sb-window__content--flush > .sb-doc-tabs__none { padding: var(--sb-space-6) var(--sb-space-8); }
+/* a lone empty state in flush content scrolls instead of being cut by the flush area's overflow (a small window at
+   large text; spec/02 §3.14) */
+.sb-window__content--flush:has(> .sb-empty:only-child) { overflow: auto; }
 /* a head over the content: heading and its view tools (the compact switch „Vorschau“, D102 (2)) on one line, the tools
    at the end; they wrap under the heading when it needs the room */
 .sb-window__head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-2) var(--sb-space-4); }
 .sb-window__head > .sb-window__heading { flex: 1 1 12em; min-inline-size: 0; }
+/* a heading with its grey line („4 Spalten · 9 Karten“, the place and the date): both in div.sb-window__head-text, so
+   at large text the tools wrap under the pair and never stand between heading and line (provisional, agent: the name) */
+.sb-window__head > .sb-window__head-text { flex: 1 1 12em; min-inline-size: 0; }
+.sb-window__head-text > .sb-window__meta { margin-block-end: 0; }
+.sb-window__head:has(> .sb-window__head-text > .sb-window__meta) { margin-block-end: var(--sb-space-4); }
 .sb-window__head-tools { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1); margin-inline-start: auto; }
 /* a group in the inspector (D102 (13): backlinks and other lists about the document): its heading and a list of rows */
 .sb-window__group { display: grid; gap: var(--sb-space-1); margin: 0; }
@@ -393,7 +448,12 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
   display: flex; flex-wrap: wrap; gap: 0 var(--sb-space-3); flex: 1 1 100%; min-inline-size: 0; max-inline-size: none; margin: 0;
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: var(--sb-type-numeric-variant);
   color: var(--sb-color-text-muted);
+  min-block-size: calc(var(--sb-type-caption-size) * var(--sb-type-caption-line-height));   /* empty, it keeps its line (D108 (5)) */
 }
+/* a view with nothing to count after a document (D108 (5)): the app keeps the document's last parts in the line with
+   data-sb-held, hidden, so the line keeps the height they take at this width and text size (two lines and more in a
+   narrow window at large text), not only one line (provisional, agent) */
+.sb-primary-action-bar__counts[data-sb-held] { visibility: hidden; }
 .sb-window .sb-primary-action-bar:has(.sb-primary-action-bar__message:not(:empty)) .sb-primary-action-bar__status { display: none; }
 .sb-window .sb-primary-action-bar .sb-primary-action { inline-size: auto; min-inline-size: 200px; margin-inline-start: auto; padding-inline: min(var(--sb-space-6), 24px); }
 /* overlay panes: out of the grid, over the content edge, the ink line on their inner edge stays the layer line */
@@ -413,7 +473,9 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
   }
   .sb-window__content { padding: var(--sb-space-4); }
 }
-@container sb-window (max-width: 479.98px) {
+/* below 480 px of window, or below 30em of it at large text (the em of a container query is the window's own text
+   size: a 480 px window at 200 % takes the narrow form, so the current place is not cut) */
+@container sb-window (max-width: 479.98px) or (max-width: 29.99em) {
   .sb-window__name {   /* the tile and the path name the window; the name stays for screen readers */
     position: absolute; inline-size: 1px; block-size: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
   }
@@ -605,6 +667,9 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
 /* pinned (D102 (5)): first, no cross, so the name keeps the cross's room too; no glyph (D104 (24), BA-4: the word
    and the fixed place at the front suffice; the set's `pin` is a place, D82) */
 .sb-doc-tabs__item--pinned { flex: none; min-inline-size: 0; }   /* as wide as its word: never squeezed by the others */
+/* when the row scrolls sideways, the pinned tab stays at its start with its ground and its hairline at the end, and
+   the other tabs scroll under it (D108 (4)) */
+.sb-doc-tabs__item--pinned { position: sticky; inset-inline-start: 0; z-index: 1; background: var(--sb-color-bg); }
 .sb-doc-tabs__item--pinned > .sb-doc-tabs__tab { padding-inline-end: var(--sb-space-3); }
 .sb-doc-tabs__item--pinned > .sb-doc-tabs__close { display: none; }
 /* backlinks and other lists in the inspector (D102 (13)): the rows reach the inspector's edges, so their words stand
@@ -681,7 +746,7 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
 
 /* below the smallest window (480 px; a web app in a narrow browser) the words of the title bar's text actions and of
    „Menü“ give way to their icons; .sb-window__word stays for screen readers */
-@container sb-window (max-width: 479.98px) {
+@container sb-window (max-width: 479.98px) or (max-width: 29.99em) {
   .sb-window__titlebar .sb-window__word {
     position: absolute; inline-size: 1px; block-size: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
   }
@@ -786,7 +851,11 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
 .sb-field--number { display: flex; flex-wrap: wrap; align-items: center; column-gap: var(--sb-space-2); }   /* the label goes above the number where the row is too narrow */
 .sb-field--number > .sb-field__label { overflow-wrap: normal; }
 .sb-field--number > .sb-field__control { flex: none; }
-.sb-field--number .sb-field__control > input { flex: 0 0 auto; inline-size: 4ch; text-align: end; font-variant-numeric: var(--sb-type-numeric-variant); }
+/* as many digits wide as --sb-digits (4 when the app sets none; the app sets it from the largest value, e.g. 5 for a
+   document of 12345 lines); the find bar's „Gehe zu Zeile“ takes 6, so „120:15“ (line and column) fits without
+   scrolling inside the field (provisional, agent) */
+.sb-field--number .sb-field__control > input { flex: 0 0 auto; inline-size: calc(var(--sb-digits, 4) * 1ch); text-align: end; font-variant-numeric: var(--sb-type-numeric-variant); }
+[data-sb-find-row="line"] .sb-field--number { --sb-digits: 6; }
 .sb-field--number .sb-field__suffix { white-space: nowrap; }
 .sb-find-bar { display: grid; grid-template-columns: minmax(0, 1fr); min-inline-size: 0; }
 .sb-window__content--flush > .sb-find-bar { flex: none; }   /* under the tab row, over the panel (flush content, NV-H5) */
@@ -802,6 +871,7 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
   display: grid; justify-items: center; align-content: start; gap: var(--sb-space-3); min-inline-size: 0; overflow: auto;
   padding: var(--sb-space-4); background: var(--sb-color-surface-sunken);
 }
+.sb-reader__view:has(> :only-child) { align-content: safe center; }   /* a lone page or image stands in the middle both ways */
 .sb-reader__view:focus-visible { outline: var(--sb-focus-ring); outline-offset: calc(-1 * var(--sb-focus-width)); }
 .sb-reader__sheet {
   box-sizing: border-box; inline-size: 20rem; zoom: var(--sb-reader-zoom, 1); padding: var(--sb-space-5);

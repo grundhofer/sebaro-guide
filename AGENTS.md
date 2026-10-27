@@ -28,7 +28,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 
 Rule status: **entschieden** = owner decision, binding. **vorläufig** = an agent's decision, valid until the owner
 changes it. **offen** = proposal only, do not build it as a rule. `D<n>` refers to row n of the decision log in the
-workshop repository sebaroDesign (private; the guide covers D1–D107). A rule id (e.g. `AKT-01`) is stable; cite it
+workshop repository sebaroDesign (private; the guide covers D1–D108). A rule id (e.g. `AKT-01`) is stable; cite it
 in code reviews, commit messages and ADRs.
 
 ## 2 The ten rules most often broken
@@ -280,17 +280,40 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
    SYSTEM.md §5 has none open). Nothing of D106 is checked on a device, in a launcher, with a real camera or with
    TalkBack. The new web patterns of D102 to D105 are not yet shown as components on `docs/bauteile.html`
    (`docs/ausblick.html#p-g-neue-muster`).
+   Settled by the owner with D108 (2026-10-27, synced from workshop `2b067c4`, export tool 1.11.0), six questions from
+   the new gaps of novalis and this guide, all as proposed: in a window's sidebar a row's status that does not fit
+   beside the name goes with glyph and word under the name, in the name's column (twist, icon and check hang in the
+   row's start padding, `--sb-row-lead`; a part before the name that sebaro does not know adds its width there,
+   provisional), nothing is cut and the sidebar never scrolls sideways; in 240 px at 200 % a status word wider than the
+   column („gesichert“) breaks inside itself without a hyphen, the workshop's recorded price (NAV-04, ZUG-09); with no
+   folder or collection open the sidebar stays with only its foot „Einstellungen“, its scroll area empty (NAV-04); a
+   Tauri app names its languages in `src-tauri/Info.plist` (`CFBundleLocalizations`, DSK-08); the pinned tab stays at
+   the start of a scrolling tab row (`position: sticky`, DSK-10); the counter line keeps its place when a view has
+   nothing to count, holding the last document's parts invisibly with `data-sb-held` (provisional), so the zone and the
+   primary action never jump (STA-07, AKT-01); the editor size keeps multiplying with the system text size (DSK-03).
+   In the same workshop round, without a new decision (existing rules decide; choices without a rule provisional):
+   a chord that is also a native menu accelerator counts as the menu command and moves no focus (per D103, provisional;
+   the workshop asked the guide to write it into DSK-04); after 10 s the longer loading sentence replaces the words in the
+   same `sb-loading` line (STA-06, provisional); „Das hat nicht geklappt. <Was sicher ist>. Versuch es noch einmal.“
+   for an error whose action is unknown, and a start error without the window frame (`sb-start-error`, TXT-07,
+   provisional); a footnote cited twice has one back link per citation („1“, „1b“), the digit focuses the note unless
+   the footnote popover takes the press (`sb-notes.js`, BEL-02, provisional); the action zone's message is
+   always a `<div>`; the editor themes ship in every web and tauri export as `editor/sebaro-shiki.json` and
+   `editor/sebaro-codemirror.ts` (TEC-08); every export carries `checks/verify-export.mjs` (Node 20+) to check itself
+   without the workshop (TEC-09). No question waits for the owner (the workshop's SYSTEM.md §5 has none open). None of
+   D108 is checked in WebKit or a real Tauri window, the footnote focus not with a screen reader.
 
 ## 4 Where the system files come from
 
 sebaro's sources (palettes, contracts, generators, gates) live in the workshop repository **sebaroDesign**. This guide
 never edits colours, fonts, icons or brand files by hand. `docs/sebaro/` is a **web export** made with sebaroDesign's
 `tools/export_system.py`; `docs/sebaro/sebaro-export.json` lists every file with sha256, and
-`docs/sebaro/GUIDE-SYNC.json` names the sebaroDesign commit.
+`docs/GUIDE-SYNC.json` (outside the folder, so `docs/sebaro/` is the export and nothing else) names the sebaroDesign
+commit.
 
 | Target | How to get the files |
 |---|---|
-| Website, web app (plain CSS, Astro, React, Tailwind v4) | copy `docs/sebaro/` into your project as one folder, never edit inside it; wiring in `docs/sebaro/README.md` |
+| Website, web app (plain CSS, Astro, React, Tailwind v4) | copy `docs/sebaro/` into your project as one folder, never edit inside it; wiring in `docs/sebaro/README.md`; check the copy with `node sebaro/checks/verify-export.mjs --strict` |
 | Tauri / macOS / Android (Compose) / iOS (SwiftUI) | with a sebaroDesign checkout: `python3 tools/export_system.py sebaro --target tauri|macos|android|ios --out <dir> --product <id>` then `--verify <dir>` |
 | Packages (planned, D88) | private GitHub Packages built on a workshop version tag: `@grundhofer/sebaro` (npm, web and Tauri) and a Maven artifact for Android (Compose). Their version follows the token contract, now 1.10 (since 2026-10-25), so `1.10.x`; the first is `1.10.0` (1.9 was never published). The workflow is set up; no package is published yet (the workshop CI is blocked; a self-hosted runner comes later, D95). Until then use the export. |
 
@@ -309,13 +332,13 @@ python3 tools/build.py                 # fill the marker blocks of all pages, wr
 python3 tools/check_site.py --strict   # all groups (list below); exit 0 required
 python3 tools/build.py --check         # freshness gate (CI runs this and check_site.py)
 python3 tools/sync_from_design.py --verify-local   # docs/sebaro/ untouched since the export
-npm ci && node tools/check_a11y.mjs    # axe WCAG 2.2 AA, overflow, console errors; light/dark, 390/1440 (CI runs it)
+npm ci && node tools/check_a11y.mjs    # axe WCAG 2.2 AA, overflow, console errors; light/dark, 390/1440; 200 % text at 1024/1280 (CI runs it)
 node tools/og.mjs                      # share images (D96): render src/og/pages.json to docs/og/ + src/og/head/, then build.py
 node tools/og.mjs --check --png-bytes  # fresh render equals the committed snippets and PNGs (CI runs it without --png-bytes)
 python3 tools/sync_from_design.py --check          # docs/sebaro/ equals a fresh export of the workshop commit
 # with a sebaroDesign checkout, its demo check on every page, run from there (absolute page path):
 #   python3 tools/check_demo.py <abs path>/docs/<page>.html --page web --skip content --no-write
-python3 tools/release.py 2.13.0        # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.12.0 is the last release)
+python3 tools/release.py 2.14.0        # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.13.0 is the last release)
 ```
 
 The workshop's demo check (1.8.0) measures one- and two-character text on screen pixels; on `regeln.html` it reports
@@ -463,7 +486,8 @@ devices, Windows rendering, WebKit/Tauri webviews or screen readers. All example
 The owner answered the round-6 sketch (63 questions, private, never linked from here) with D91 and the open readings
 after it with D92 to D97, confirmed 70 of the 73 vorläufig rules with D98 and answered the four workshop questions on large
 text, inputs and charts on the phone and required fields with D99, and the steps, the novalis sidebar, page width at large text, the Compose sortable table and intro step with D100 and D101, the questions of the first adoptions with D102 to D104 (D103 sets the priority for future trade-offs) and
-the apps' waiting lists with D105 to D107 (D106 and D107 are built: widgets, camera and photos for Android only);
+the apps' waiting lists with D105 to D107 (D106 and D107 are built: widgets, camera and photos for Android only) and
+the new gaps of the adoptions with D108 (built);
 what is still open, and what is built but untested (real iOS and Android devices, launchers, a real camera, real Tauri
 windows), is collected on `docs/ausblick.html`; no question waits for the owner.
 No guide page scrolls sideways at 200 % text on 320, 360 and 390 px, no frame cuts a text and, since 2.11.0, no word
@@ -472,3 +496,9 @@ built the narrow-column parts after D102. Rule examples that still scroll in the
 `docs/ausblick.html#p-g-rahmen-scrollen`. The four workshop requests of 2.11.0 (menu rows with keys, a board column
 head with a long one-word name, deliberately narrow columns in `OVF6`, the calendar's day numbers at 200 % on 320 px)
 are built in workshop `ef6121d` and used here; none of them is checked in WebKit, Firefox or a Tauri window.
+Since 2.13.0 the same holds at 200 % text on 1024 and 1280 px (`docs/ausblick.html#p-g-breite-fenster`): every layout
+query of the guide's own CSS is in rem, the page frame keeps one column below 64rem (the vendor `demo.css` grid
+switches at 1024 px), each grid's least column is `max(<px>, <rem>)`, and a header specimen is its own `sb-page`
+container while the text is large (at 100 % every specimen stays as in 2.12.0). `check_a11y.mjs` checks page width, cut text and the contents counts there (LARGE, COUNT); squeezed words
+(`OVF6`) at those widths only the workshop's check sees: run `check_demo.py … --checks overflow --viewports mobile
+--large-text 1024,1280` on every page when a layout changes.

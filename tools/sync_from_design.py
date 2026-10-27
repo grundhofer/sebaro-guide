@@ -3,11 +3,14 @@
 
 sebaroDesign is the workshop: palettes, contracts, generators and gates live there. This guide never edits colours,
 fonts, icons or brand files by hand; it re-exports them with sebaroDesign's own tools/export_system.py and records
-what it took in docs/sebaro/sebaro-export.json (with sha256 per file) plus docs/sebaro/GUIDE-SYNC.json.
+what it took in docs/sebaro/sebaro-export.json (with sha256 per file) plus docs/GUIDE-SYNC.json. The record stays
+outside docs/sebaro/, so that folder is the export and nothing else: a product that copies it as one folder passes the
+export's own `node sebaro/checks/verify-export.mjs --strict`.
 
     python3 tools/sync_from_design.py                 # export + verify + copy
     python3 tools/sync_from_design.py --check         # exit 1 if docs/sebaro/ differs from a fresh export
     python3 tools/sync_from_design.py --verify-local  # exit 1 if a file in docs/sebaro/ no longer matches its sha256
+                                                      # or is not part of the export
     python3 tools/sync_from_design.py --from-export DIR --exclude-from FILE --require-exclusions
                                                       # CI: take a web export the workshop already built (it is
                                                       # copied and verified, never changed), read exclusions from FILE
@@ -40,6 +43,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 TARGET = DOCS / "sebaro"
 VENDOR = DOCS / "assets" / "vendor"
+RECORD = DOCS / "GUIDE-SYNC.json"
 CONFIG = ROOT / "tools" / "sync.config.json"
 
 
@@ -165,7 +169,7 @@ def compare(a: Path, b: Path, ignore: set[str]) -> list[str]:
 def verify_local() -> int:
     manifest = json.loads((TARGET / "sebaro-export.json").read_text(encoding="utf-8"))
     files = manifest.get("files", [])
-    entries = files.items() if isinstance(files, dict) else [(e.get("path"), e) for e in files]
+    entries = list(files.items()) if isinstance(files, dict) else [(e.get("path"), e) for e in files]
     bad = 0
     for rel, entry in entries:
         want = entry.get("sha256") if isinstance(entry, dict) else None
@@ -176,7 +180,11 @@ def verify_local() -> int:
         elif want and sha256(p) != want:
             print(f"changed: {rel}")
             bad += 1
-    print(f"verify-local: {len(list(entries)) if not isinstance(files, dict) else len(files)} files, {bad} problems")
+    listed = {rel for rel, _ in entries} | {"sebaro-export.json"}
+    for rel in sorted(set(tree_files(TARGET)) - listed):
+        print(f"not part of the export: {rel}")
+        bad += 1
+    print(f"verify-local: {len(entries)} files, {bad} problems")
     return 1 if bad else 0
 
 
@@ -220,7 +228,7 @@ def main() -> int:
             return 1
         if args.check:
             # date stamps differ between runs; compare everything else
-            diffs = compare(out, TARGET, ignore={"sebaro-export.json", "GUIDE-SYNC.json"})
+            diffs = compare(out, TARGET, ignore={"sebaro-export.json"})
             for name in cfg.get("vendorSpecimens", []):
                 src = design / "systems" / cfg["system"] / "demo" / "assets" / name
                 if not (VENDOR / name).is_file() or not filecmp.cmp(src, VENDOR / name, shallow=False):
@@ -236,8 +244,7 @@ def main() -> int:
         VENDOR.mkdir(parents=True, exist_ok=True)
         for name in cfg.get("vendorSpecimens", []):
             shutil.copy2(design / "systems" / cfg["system"] / "demo" / "assets" / name, VENDOR / name)
-        (TARGET / "GUIDE-SYNC.json").write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n",
-                                                 encoding="utf-8")
+        RECORD.write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(f"synced sebaro from sebaroDesign {record['sebaroDesignCommit']}: "
               f"{len(tree_files(TARGET))} files, dropped {record['droppedFiles']} (excluded products)")
     return 0

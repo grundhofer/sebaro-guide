@@ -112,6 +112,8 @@
 .sb-switch:disabled .sb-switch__track { border-color: var(--sb-color-border); }
 .sb-switch:disabled .sb-switch__thumb { background: var(--sb-color-border); }
 .sb-switch-row:has(.sb-switch:disabled) { color: var(--sb-color-text-muted); }
+/* a switch row with its help sentence: the sentence 4 px under the row, inside the row's hairlines (spec/02 §2.6) */
+.sb-switch-field { display: grid; gap: var(--sb-space-1); }
 
 /* segmented control: one choice of 2-4; chosen = 3 px accent bottom edge + check + weight, never filled */
 .sb-segmented { min-inline-size: 0; margin: 0; padding: 0; border: 0; }

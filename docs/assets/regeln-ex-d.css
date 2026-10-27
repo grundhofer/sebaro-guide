@@ -40,6 +40,12 @@
 /* large text (D100 (5)): from 22rem down „Abbrechen“ and the title stand on lines of their own instead of squeezing
  * „Abbrechen“ to a column of single letters (provisional, agent) */
 @media (max-width: 22rem) { .g-rx-d-iossheet__head { grid-template-columns: minmax(0, 1fr); justify-items: start; } .g-rx-d-iossheet__title { text-align: start; } }
+/* the same once the phone frame itself is narrower than the head's words need: 2 × 16 px padding, „Abbrechen“ 98 px,
+ * the title 92 px and two 8 px gaps are 238 px at 100 %, so 15rem (240 px; 480 px at 200 %). Measured on the frame,
+ * not the screen, so it holds at 200 % on 1024 and 1280 px too; at 100 % every frame above a 352 px screen is at
+ * least 294 px wide, so nothing changes there (provisional, agent) */
+.g-rx-frame--phone:has(> .g-rx-d-iossheet__head) { container-type: inline-size; }
+@container (max-width: 15rem) { .g-rx-d-iossheet__head { grid-template-columns: minmax(0, 1fr); justify-items: start; } .g-rx-d-iossheet__title { text-align: start; } }
 
 /* MOB-08: the largest accessibility size, simulated by zooming the row; only while the page's own text is not large
  * already (from 24rem up: 384 px at 100 %, 768 px at 200 %), so the simulation never multiplies the reader's text size */
@@ -277,3 +283,10 @@
 .g-rx-d-cam__strip { display: flex; flex-wrap: wrap; gap: var(--sb-space-2); margin: 0; padding: 0; list-style: none; }
 .g-rx-d-cam__strip > li { inline-size: 40px; }
 .g-rx-d-cam__strip > li.g-rx-d-cam__new { padding-block-end: var(--sb-space-1); border-block-end: var(--sb-border-width-strong) solid var(--sb-color-accent); }
+
+/* 2.13.0, D108: an added part under a specimen; the 240 px sidebar of a
+   window with the status under the name (ZUG-09); seven document tabs in 300 px with the pinned tab staying (DSK-10).
+   The sidebar and the tab row keep their px widths at large text, as in a window */
+.g-rx-d-after { margin-block-start: var(--sb-space-6); }
+.g-rx-d-side240 { max-inline-size: 240px; margin-block-start: var(--sb-space-6); }
+.g-rx-d-pinrow { max-inline-size: 300px; margin-block-start: var(--sb-space-6); }

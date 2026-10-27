@@ -19,7 +19,7 @@
 .g-ausblick-facts > div { align-items: baseline; padding-block: var(--sb-space-3); }
 .g-ausblick-facts dt { flex: 0 1 7rem; }
 .g-ausblick-facts dd { flex: 1 1 0%; }
-@media (max-width: 479px) {
+@media (max-width: 29.99rem) {
   .g-ausblick-facts > div { gap: var(--sb-space-1); }
   .g-ausblick-facts dt, .g-ausblick-facts dd { flex: 1 1 100%; }
 }
