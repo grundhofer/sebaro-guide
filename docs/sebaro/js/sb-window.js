@@ -33,7 +33,7 @@
 //                                 setting options follow their control (aria-expanded / aria-pressed / aria-checked).
 //                                 While a palette is open its own shortcut closes it, and the shortcut of another
 //                                 overlay (an opener with data-sb-palette-open or data-sb-find-open that announces it
-//                                 in aria-keyshortcuts) closes it and opens that one (NV-M9)
+//                                 in aria-keyshortcuts) closes it and opens that one (spec/02 §4.16)
 //   fixed shortcuts (F5a)         the window shortcuts of spec/02 §4.19 press the visible control of the window that
 //                                 announces them in aria-keyshortcuts (⌘, Einstellungen, ⌘N the area's primary
 //                                 action, ⌘O, ⌘F (focuses a search field), ⌃⌘S / Strg+Alt+S Seitenleiste, ⌥⌘I /
@@ -43,7 +43,7 @@
 //                                 action zone; hidden areas are skipped; each area gets back the element that had
 //                                 focus there last (else its first control, an editor [contenteditable] counting
 //                                 as one, else the area itself); „Nächster Bereich“ from the menu or the palette
-//                                 (data-sb-area) counts from the area that had focus before it opened (NV-C7)
+//                                 (data-sb-area) counts from the area that had focus before it opened (spec/02 §4.20)
 //   .sb-window__divider (F3a)     role="separator" between sidebar / inspector and content: drag with limits
 //                                 (aria-valuemin / -max, else the pane tokens --sb-x-sebaro-pane-*; the content keeps
 //                                 480 px), ← → 8 px, ⇧ + arrow 32 px,
@@ -63,7 +63,7 @@
 //   .sb-doc-tabs (F7a)            document tabs: click or ← → Home End choose, ⌃⇥ / ⌃⇧⇥ next / previous, Entf or ⌘W
 //                                 / Strg+W close the tab (the cross is a pointer shortcut, aria-hidden), middle click
 //                                 closes; "sb-doc-tab-close" (cancelable) is fired on the tab before it goes; the
-//                                 chosen tab is scrolled into the row (NV-D3); a pinned tab (.sb-doc-tabs__item--pinned,
+//                                 chosen tab is scrolled into the row (spec/02 §4.21); a pinned tab (.sb-doc-tabs__item--pinned,
 //                                 D102 (5)) stays first and is not closed; a tab with data-sb-drag is reordered by
 //                                 dragging, [data-sb-tab-move="previous" | "next"] in the menu „Fenster“ and the
 //                                 palette moves the current tab without a pointer ("sb-move", cancelable)
@@ -72,7 +72,7 @@
 //                                 gets the cobalt frame, between rows a cobalt line; [data-sb-drop="none"] refuses
 //                                 (no frame, the forbidden cursor); Escape cancels. "sb-move" (cancelable) is fired
 //                                 on the row; by default the row moves in the tree; the free space under a tree's
-//                                 rows takes it into the top level (NV-G6). The same move runs from
+//                                 rows takes it into the top level (spec/02 §4.22). The same move runs from
 //                                 dialog[data-sb-move-dialog] („Verschieben nach …“, the way without a pointer) and
 //                                 from the folder picker dialog.sb-command-palette[data-sb-move-palette] (D102 (16):
 //                                 the folder opens and the row is shown, else the toast with „Rückgängig“). Commands
@@ -142,7 +142,7 @@
       // Bild auf and Bild ab are words on every system, macOS too (D102 (12): the fonts have no ↖ ↘ ⇞ ⇟)
       keyWords: { Mod: "Strg", Ctrl: "Strg", Shift: "Umschalt", Alt: "Alt", Enter: "Eingabe", Escape: "Esc", Backspace: "Rücktaste", Delete: "Entf", Tab: "Tab", Space: "Leertaste", Home: "Pos1", End: "Ende", PageUp: "Bild auf", PageDown: "Bild ab" },
       keySpoken: { Mod: "Befehl", Ctrl: "Control", Shift: "Umschalt", Alt: "Wahl", Enter: "Eingabe", Escape: "Escape", Backspace: "Rückschritt", Delete: "Entfernen", Tab: "Tabulator", Space: "Leertaste", Up: "Pfeil nach oben", Down: "Pfeil nach unten", Left: "Pfeil nach links", Right: "Pfeil nach rechts", Comma: "Komma", Period: "Punkt", Plus: "Plus", Minus: "Minus", Backslash: "Backslash", Slash: "Schrägstrich", Home: "Pos1", End: "Ende", PageUp: "Bild auf", PageDown: "Bild ab" },
-      // off macOS the keys are said by the names they carry there (NV-E7: English Windows said „Return“, „Delete“ and
+      // off macOS the keys are said by the names they carry there (spec/09 §6.1: English Windows said „Return“, „Delete“ and
       // „Forward delete“ for Enter, Backspace and Delete; spec/07 §4.8 has the tables)
       keySpokenOther: { Mod: "Steuerung", Ctrl: "Steuerung", Alt: "Alt", Backspace: "Rücktaste" }
     },
@@ -502,7 +502,7 @@
     if (!dlg.open) dlg.showModal();
     if (input) input.focus();
   }
-  // NV-M9 (provisional, agent): an overlay's own shortcut closes it again, the shortcut of another overlay switches to
+  // spec/02 §4.16 (provisional, agent): an overlay's own shortcut closes it again, the shortcut of another overlay switches to
   // that one. The openers are the controls that announce the chord in aria-keyshortcuts and open a palette
   // (data-sb-palette-open) or a find bar (data-sb-find-open), in the window the palette came from, else on the page
   function overlayKey(event, pal) {
@@ -526,7 +526,7 @@
     return true;
   }
   // „Nächster Bereich“ / „Vorheriger Bereich“ from a menu item or a palette option (data-sb-area): count from the area
-  // that had focus before the menu or palette opened (NV-C7), not from the title bar that holds „Menü“
+  // that had focus before the menu or palette opened (spec/02 §4.20), not from the title bar that holds „Menü“
   function runArea(el, near) {
     var win = windowOf(near);
     if (!win) return;
@@ -882,8 +882,8 @@
       el.matches("input:not([type='checkbox']):not([type='radio']):not([type='button']):not([type='submit']):not([type='range']), textarea, select"));
   }
   var AREA = ".sb-window__titlebar, .sb-window__sidebar, .sb-window__content, .sb-window__inspector, .sb-window > .sb-bottom-block";
-  // an editor (contenteditable, e.g. CodeMirror) counts as a control (NV-C7); an element with tabindex -1 does not
-  // (NV-H11): roving tab stops (tabs, tree rows, list rows) are entered on their one tabindex 0, the current tab
+  // an editor (contenteditable, e.g. CodeMirror) counts as a control (spec/02 §4.20); an element with tabindex -1 does not
+  // (spec/02 §4.20): roving tab stops (tabs, tree rows, list rows) are entered on their one tabindex 0, the current tab
   var NOT_ROVING = ":not([tabindex='-1'])";
   var TABBABLE = ["a[href]", "button:not([disabled])", "input:not([disabled]):not([type='hidden'])", "select:not([disabled])",
                   "textarea:not([disabled])", "[contenteditable]:not([contenteditable='false'])", "[tabindex]"]
@@ -909,7 +909,7 @@
     return null;
   }
   // F6 / ⇧F6: area by area, back to where focus was in each (spec/02 §4.20). from: the area to count from; „Nächster
-  // Bereich“ in a menu or the palette counts from the area that had focus before the menu or palette opened (NV-C7),
+  // Bereich“ in a menu or the palette counts from the area that had focus before the menu or palette opened (spec/02 §4.20),
   // not from the title bar that holds „Menü“
   function moveArea(win, back, from) {
     var list = areas(win);
@@ -929,7 +929,7 @@
     if (!(el instanceof Element)) return;
     var area = el.closest(AREA);
     if (area && el !== area && !el.closest(".sb-menu[popover], .sb-tooltip")) area._sbLast = el;
-    // the area the user works in: not „Menü“, a menu, the palette or another dialog, which only pass through (NV-C7)
+    // the area the user works in: not „Menü“, a menu, the palette or another dialog, which only pass through (spec/02 §4.20)
     var win = area && windowOf(area);
     if (win && !el.closest(".sb-menu[popover], .sb-tooltip, dialog") && !isWindowMenuButton(el)) win._sbArea = area;
   });
@@ -1001,7 +1001,7 @@
   function atEnd(d) { var p = dividerPane(d); return !!p && !!(d.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING); }
   function attrNum(el, name, fallback) { var v = parseInt(el.getAttribute(name), 10); return isFinite(v) ? v : fallback; }
   // the limits come from the pane tokens of tokens.css (--sb-x-sebaro-pane-sidebar / -inspector with -min, -max;
-  // NV-B5); the markup's aria-valuemin / -max / -now win where a page sets them, and the script writes the ones it
+  // spec/02 §4.23); the markup's aria-valuemin / -max / -now win where a page sets them, and the script writes the ones it
   // lacks, so the separator always says its values
   function tokenNum(name, fallback) {
     var v = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--sb-x-sebaro-pane-" + name));
@@ -1148,9 +1148,9 @@
     });
     if (focus === "tab") tab.focus({ preventScroll: true });
     else if (oldPanel) { var p = docPanel(tab); if (p) p.focus({ preventScroll: true }); }   // ⌃⇥ from inside the text: stay in the text
-    revealTab(tab);   // NV-D3: the current tab is in view, also when focus stayed in the text
+    revealTab(tab);   // spec/02 §4.21: the current tab is in view, also when focus stayed in the text
   }
-  // scroll only the tab row, sideways, so the tab stands inside it (after the row's scroll-padding, NV-H14); never the
+  // scroll only the tab row, sideways, so the tab stands inside it (after the row's scroll-padding, spec/02 §4.21); never the
   // page or the content (scrollIntoView would move them too)
   function revealTab(tab) {
     var list = tab.closest("[role='tablist']"), item = tab.closest(".sb-doc-tabs__item") || tab;
@@ -1300,7 +1300,7 @@
     var el = document.elementFromPoint(x, y);
     if (dnd.row.matches("[role='tab']")) return dropTabAt(el, x);
     var row = el && el.closest("[role='treeitem'], [role='option']");
-    // the free space under the rows of a tree takes the row into the top level (NV-G6; provisional, agent)
+    // the free space under the rows of a tree takes the row into the top level (spec/02 §4.22; provisional, agent)
     if (!row && el && el.matches("[role='tree']") && el === container(dnd.row)) return { row: el, pos: "root" };
     if (!row || row === dnd.row || container(row) !== container(dnd.row)) return null;
     var item = dnd.row.closest("li");
@@ -1676,7 +1676,7 @@
     document.querySelectorAll(".sb-doc-tabs[role='tablist']").forEach(function (list) {
       var all = docTabs(list), cur = all.filter(function (x) { return x.getAttribute("aria-selected") === "true"; })[0] || all[0];
       all.forEach(function (x) { x.tabIndex = x === cur ? 0 : -1; });
-      if (cur) revealTab(cur);   // NV-D3: the current tab in view from the start, too
+      if (cur) revealTab(cur);   // spec/02 §4.21: the current tab in view from the start, too
     });
     document.querySelectorAll("[data-sb-sort-choice] [aria-pressed]").forEach(sortShow);
     document.querySelectorAll(".sb-command-palette[data-sb-fulltext]").forEach(watchFulltext);

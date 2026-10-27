@@ -69,7 +69,7 @@
   position: absolute; inline-size: 1px; block-size: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
 }
 .sb-primary-action-bar__message .sb-icon { flex: none; margin-block-start: 4px; margin-block-start: calc((1lh - 16px) / 2); color: var(--sb-color-danger); }   /* centred on the sentence's first line at every text size: 4 px at 100 %, 16 px at 200 % (provisional, agent) */
-/* error details (D102 (23), NV-C18; spec/02 §3.28, spec/07 §4.1): one native <details> under an error's sentence,
+/* error details (D102 (23); spec/02 §3.28, spec/07 §4.1): one native <details> under an error's sentence,
    closed at first; the summary „Details“ with chevron-down--16 like the chart's „Werte als Tabelle“, the content the
    system's own text in sebaro Mono without a ground, breaking anywhere without a hyphen. Inside a message it takes a row of its own and
    starts under the sentence, not under the glyph (the 16 px glyph and its gap) */

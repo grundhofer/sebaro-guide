@@ -8,7 +8,7 @@
 .sb-prose li + li:not(.sb-note) { margin-block-start: var(--sb-space-1); }   /* footnotes keep their list's gap alone */
 .sb-prose figure { margin-inline: 0; }
 .sb-prose figcaption { margin-block-start: var(--sb-space-2); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
-/* rendered Markdown (NV-B27): an image never wider than the text column (D100 (5): no sideways scroll), its height
+/* rendered Markdown (spec/02 §5): an image never wider than the text column (D100 (5): no sideways scroll), its height
    follows; a rule (---) is the 1 px border hairline between sections, 32 px above and below (the 32 px provisional
    (agent)); a bare <table> (no class) takes the look of sb-table (section 3, rules there). Wrapped by the renderer in
    div.sb-table-wrap[role=region][tabindex=0][aria-label] (the way to use, as for sb-table) the wrap scrolls it; a table
@@ -18,7 +18,7 @@
    is not checked here (WKWebView in Tauri on macOS) */
 .sb-prose img { max-inline-size: 100%; block-size: auto; }
 .sb-prose > hr { block-size: 0; margin-block: var(--sb-space-8); border: 0; border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
-/* more of rendered Markdown (NV-K2, K3, K5, O9; provisional, agent): an h1 stands 48 px under what is before it and
+/* more of rendered Markdown (spec/02 §5; provisional, agent): an h1 stands 48 px under what is before it and
    has no space above as the first block (rem, as the rest of the prose); a nested list indents 1.5em and stands 4 px
    under its item's line; blocks inside a list item (a loose list's paragraphs) lose their outer margins and keep 8 px
    between them; a quote inside a quote carries the same ink line; a task-list item (a checkbox as its first child, or
@@ -56,7 +56,7 @@
 :is(.sb-table, .sb-prose table) :is(th, td) > :last-child { margin-block-end: 0; }
 .sb-prose :where(table:not([class])) { display: block; max-inline-size: 100%; overflow-x: auto; }
 .sb-prose :where(.sb-table-wrap > table:not([class])) { display: table; max-inline-size: none; overflow: visible; }
-/* a jump target in running text (D102 (32), NV-B27b): the block a link inside the page jumps to (a backlink's place, a
+/* a jump target in running text (D102 (32), spec/02 §5): the block a link inside the page jumps to (a backlink's place, a
    heading chosen in the contents, a footnote's digit) carries the 3 px place line at its start until the next action, a
    key or a press: sb-controls.js then marks it data-sb-past; without the script it keeps the line until the next jump
    (:target). The line stands 12 px before the text and the text does not move (the negative margin takes back the line
@@ -164,7 +164,7 @@
   .sb-toc .sb-toc__group-head { min-block-size: var(--sb-size-control-sm); }
 }
 
-/* contents as an overlay over a reader (D102 (34), NV-B31; spec/02 §4.5): nav.sb-toc.sb-toc--overlay[popover], opened by
+/* contents as an overlay over a reader (D102 (34); spec/02 §4.5): nav.sb-toc.sb-toc--overlay[popover], opened by
    a button with popovertarget and aria-expanded. The rows of sb-toc on the surface of sb-menu: overlay surface in its
    2 px ink line, radius 12, 4 px above and below, 200-320 px (12.5em-20em at large text), rows of 48 in body, hover the
    fill; in a window (data-sb-density="window") rows of 32 in label at body weight. The current entry keeps sb-toc's place

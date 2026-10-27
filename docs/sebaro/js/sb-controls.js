@@ -7,7 +7,7 @@
 //                           sets html[data-sb-motion="reduce"] and stores sb-motion (read again by theme-init.js);
 //                           a menuitemcheckbox with data-sb-motion-setting (window menu „Darstellung“, F4b) is the
 //                           same setting, and every control of it keeps the same aria-checked
-//   [data-sb-language-choice] the language of a page without a language URL (D102 (50), RB-29; spec/09 §18.2): a
+//   [data-sb-language-choice] the language of a page without a language URL (D102 (50); spec/09 §18.2): a
 //                           group of radios (one per language, value = the language code) that looks like „DE / EN“;
 //                           a choice sets <html lang> without a reload, stores sb-lang (theme-init.js applies it before
 //                           first paint on <html data-sb-language="stored">), keeps every such group in step and fires
@@ -19,7 +19,7 @@
 //   .sb-chip[aria-pressed]  aria-pressed; one chosen chip per [data-sb-single] group (filter "Alle")
 //   [data-sb-opens="id"]    opens <dialog id> as a modal; the dialog's form method="dialog" closes it; a press on the
 //                           scrim of a dialog.sb-dialog cancels it like Escape ("cancel", then close), unless the
-//                           press began inside it or a field of it has changed since it opened (NV-L8; provisional,
+//                           press began inside it or a field of it has changed since it opened (spec/02 §4.6; provisional,
 //                           agent)
 //   .sb-range__track        keeps the accent fill between the handles (--sb-range-from / --sb-range-to, 0..1)
 //   [data-sb-indeterminate] sets checkbox.indeterminate (no HTML attribute exists for it)
@@ -42,8 +42,8 @@
 //                           (.sb-enter), stays 6 s, pauses while the pointer is over it or focus is inside (only a toast
 //                           with an action can hold focus), Escape closes it from anywhere on the page, without taking
 //                           the key from what has focus, unless a modal dialog, an open popover (menu, contents) or
-//                           the palette has it (NV-F5); show() unhides the toast empty and writes its sentence two
-//                           frames later, so a screen reader hears a live region that was already there (NV-F9);
+//                           the palette has it (spec/02 §4.8); show() unhides the toast empty and writes its sentence two
+//                           frames later, so a screen reader hears a live region that was already there (spec/02 §4.8);
 //                           .sb-toast__action fires "sb-toast-action" on the toast, then it closes (D78)
 // Keyboard and pointer of menus, tabs, tooltips, sheets and search fields are sb-menu.js, sb-tabs.js, sb-tooltip.js,
 // sb-sheet.js and sb-search.js; windows are sb-tree.js and sb-window.js (spec/02 §7, D80).
@@ -232,7 +232,7 @@
         button.setAttribute("data-sb-state", "retry");
         if (message) {
           message.appendChild(icon("#error--16", "sb-icon sb-icon--16"));
-          var sentence = document.createElement("span");   // the glyph and one span with the sentence (NV-F3, spec/02 §1.1)
+          var sentence = document.createElement("span");   // the glyph and one span with the sentence (spec/02 §1.1)
           sentence.textContent = button.getAttribute("data-sb-fail") || t(button, "failed");
           message.appendChild(sentence);
         }
@@ -247,7 +247,7 @@
     }, 1800);
   }
 
-  // D102 (39), NV-B20: „Ausblenden“ of a callout. "sb-callout-hide" (cancelable, bubbles) tells the product, which keeps
+  // D102 (39), spec/02 §3.11: „Ausblenden“ of a callout. "sb-callout-hide" (cancelable, bubbles) tells the product, which keeps
   // the choice; unless it is cancelled the callout gets hidden and focus, which was on the button, moves to the next
   // control after the callout (else the one before it), never to the page's start (provisional, agent).
   var FOCUSABLE = "a[href], button:not([disabled]), input:not([disabled]):not([type='hidden']), select:not([disabled]), " +
@@ -268,7 +268,7 @@
   // D78: the toast's lifetime. 6 s, the same for every toast (spec/02 §4.8); never used for errors, which stay next to
   // what failed. The timer stops while the pointer is over the toast or focus is inside it and runs on with the time
   // that was left; Escape closes it; focus that was inside goes back to where it came from.
-  // NV-F9 (provisional, agent): a live region that enters the accessibility tree together with its text is often not
+  // spec/02 §4.8 (provisional, agent): a live region that enters the accessibility tree together with its text is often not
   // announced (WebKit / VoiceOver); show() therefore unhides the toast with its sentence taken out and puts the
   // sentence back two animation frames later, when the empty region is already in the tree. The toast keeps its size
   // meanwhile (the sentence's box stays, only its text is out), and its action stays in place. Not checked with
@@ -351,7 +351,7 @@
     var x = closestIn(event, ".sb-toast");
     if (x && !(event.relatedTarget instanceof Node && x.contains(event.relatedTarget))) hold(x, "focus", false);
   });
-  // NV-F5 (provisional, agent): a toast without an action never gets focus, so Escape is heard on the whole page, in the
+  // spec/02 §4.8 (provisional, agent): a toast without an action never gets focus, so Escape is heard on the whole page, in the
   // capture phase (a palette, search or dialog that stops its Escape would otherwise keep the toast open) and never
   // consumed (no preventDefault, no stopPropagation): an editor or field gets its Escape as before. Escape that belongs
   // to an open modal dialog (sheet, palette, confirmation) or an open popover (menu, contents overlay, note, tooltip)
@@ -497,7 +497,7 @@
   window.addEventListener("resize", replaceOpenOverlays);
   window.addEventListener("scroll", replaceOpenOverlays, { passive: true, capture: true });
 
-  // .sb-dialog: a press on the scrim cancels like Escape (NV-L8, spec/02 §4.6; provisional, agent). Only a press that
+  // .sb-dialog: a press on the scrim cancels like Escape (spec/02 §4.6; provisional, agent). Only a press that
   // begins and ends on the scrim (a selection dragged out of a field does not close), never a keyboard "click", and not
   // while a field has changed since the dialog opened (its values are taken when focus first enters it, which
   // showModal() does at once). A sheet (sb-sheet.js) and the palette (sb-window.js) have their own

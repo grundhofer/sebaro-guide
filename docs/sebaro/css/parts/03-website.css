@@ -103,7 +103,7 @@
   padding: 0 6px; box-sizing: border-box; border-block-end: var(--sb-border-width-strong) solid transparent;
   font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); color: var(--sb-color-text-muted);
 }
-/* language as a stored choice (D102 (50), RB-29; spec/09 §18.2): a page without a URL per language (a web app with one
+/* language as a stored choice (D102 (50); spec/09 §18.2): a page without a URL per language (a web app with one
    shell) shows the same group „DE / EN“ as radios in a fieldset (fieldset.sb-language-switch--choice[data-sb-language-choice],
    a visually hidden legend „Sprache“); each option is the box of a link (48 × 48, 3 px bottom edge on the chosen one,
    link colour, body-strong), the radio lies invisible over it. sb-controls.js sets <html lang> and stores sb-lang */

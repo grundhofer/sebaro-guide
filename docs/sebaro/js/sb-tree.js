@@ -16,7 +16,7 @@
 //                  choosing it also opens or closes it (click, Enter, Space; provisional, agent: a toggle)
 //   ⌘↓ (macOS)     opens the row like Enter (a folder opens, never closes), as in the Finder (D102 (17))
 //   indent         sebaro.css indents levels 1–8 by 16 px each; a row deeper than 8 gets --sb-tree-indent = level − 1
-//                  here, so every level keeps its 16 px (NV-B6), also for rows added or moved later
+//                  here, so every level keeps its 16 px (spec/02 §4.14), also for rows added or moved later
 // The tree writes no words, so it has no message table (D87).
 (function () {
   "use strict";

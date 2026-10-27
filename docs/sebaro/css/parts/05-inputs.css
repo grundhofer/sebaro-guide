@@ -202,7 +202,7 @@
   min-block-size: var(--sb-size-target-touch); padding: 0 var(--sb-space-3); margin: 0; box-sizing: border-box;
   border: 0; background: transparent; color: var(--sb-color-text); cursor: pointer; white-space: nowrap;
   font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); font-weight: var(--sb-type-caption-weight);
-  /* large text (NV-M17; provisional, agent): the inset grows with the text (0.375rem) and the chip is at least its
+  /* large text (spec/02 §2.9; provisional, agent): the inset grows with the text (0.375rem) and the chip is at least its
      label's line, both insets and the frame, so the drawn frame always holds the whole line: 48 px and 6 px at 100 %
      as before, 66 px and 12 px at 200 % (was 48 px with a 36 px frame round a 40 px line) */
   min-block-size: max(var(--sb-size-target-touch), calc(1lh + 0.75rem + 2 * var(--sb-border-width-control)));

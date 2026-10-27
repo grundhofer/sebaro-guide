@@ -26,16 +26,16 @@
 // scroll and click listeners and a pending frame, takes away the position bar the script built (a bar from the markup
 // stays, as hidden as the markup had it, with its position text and step buttons as they were), gives the
 // data-sb-board-name elements present at setup their markup text back, hides the data-sb-board-target words again and
-// forgets the board, so setup can run on it again (RB-L12).
+// forgets the board, so setup can run on it again (spec/02 §7).
 // Collaboration patterns of a web app (D104 (9), (14); spec/02 §3.29), for pages without a framework:
-//   [data-sb-votes="5"]           a fixed number of votes per person (RB-2): every .sb-vote inside it has a minus and a
+//   [data-sb-votes="5"]           a fixed number of votes per person (spec/02 §3.29): every .sb-vote inside it has a minus and a
 //                                 plus button ([data-sb-vote="-1"] / [data-sb-vote="1"]) and its number .sb-vote__count;
 //                                 a press moves one vote, never below 0 and never past the budget; minus is
 //                                 aria-disabled at 0 and every plus once no vote is left; the element named by
 //                                 data-sb-votes-status="<id>" says „Noch 3 von 5 Stimmen.“ / „Alle 5 Stimmen
 //                                 vergeben.“ (it sits inside the action zone's state sentence, a status); fires
 //                                 "sb-vote-change" (bubbles, detail { vote, count, left }) on the .sb-vote
-//   svg.sb-wheel                  the wheel (RB-7): window.sbWheel.turnTo(wheel, index) turns its .sb-wheel__disc so that
+//   svg.sb-wheel                  the wheel (spec/02 §3.29): window.sbWheel.turnTo(wheel, index) turns its .sb-wheel__disc so that
 //                                 the pointer stands on the index-th name (text inside the disc, in order), forward and
 //                                 less than one turn (the name already under the pointer: no turn), over
 //                                 motion.duration.long (sebaro.css; reduced motion: at once),
@@ -201,7 +201,7 @@
     }
     delete board.__sbBoard;
   }
-  // ---------------------------------------------------------------- votes with a budget (D104 (9), RB-2)
+  // ---------------------------------------------------------------- votes with a budget (D104 (9), spec/02 §3.29)
   function voteBox(el) { return el.closest("[data-sb-votes]"); }
   function voteSync(box) {
     var n = parseInt(box.getAttribute("data-sb-votes"), 10) || 0, used = 0;
@@ -231,7 +231,7 @@
     vote.dispatchEvent(new CustomEvent("sb-vote-change", { bubbles: true, detail: { vote: vote, count: count, left: left } }));
   });
 
-  // ---------------------------------------------------------------- the wheel (D104 (14), RB-7)
+  // ---------------------------------------------------------------- the wheel (D104 (14), spec/02 §3.29)
   function wheelNames(wheel) { return Array.prototype.slice.call(wheel.querySelectorAll(".sb-wheel__disc text")); }
   function turnTo(wheel, index) {
     var names = wheelNames(wheel), disc = wheel.querySelector(".sb-wheel__disc");

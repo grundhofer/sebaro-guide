@@ -631,9 +631,9 @@ svg .sb-chart__value--current { font-weight: var(--sb-type-title-weight); }
 .sb-file-name { white-space: normal; overflow-wrap: break-word; -webkit-hyphens: none; hyphens: none; }
 
 /* table: hairline rows, tabular figures, numbers end-aligned; wrap in .sb-table-wrap to scroll on phones.
-   The same look for a bare <table> in .sb-prose (rendered Markdown, NV-B27) and for a grid of divs with ARIA roles
+   The same look for a bare <table> in .sb-prose (rendered Markdown, spec/02 §5) and for a grid of divs with ARIA roles
    (div.sb-table[role=table] > [role=rowgroup]? > [role=row] > [role=cell | columnheader | rowheader]; a virtualised
-   table, NV-B28): the added selectors sit in :where(), so they weigh no more than .sb-table's own, and the div form
+   table, spec/02 §3.9): the added selectors sit in :where(), so they weigh no more than .sb-table's own, and the div form
    gets table display at zero weight, which the product's own layout (grid, absolute rows) replaces */
 .sb-table-wrap { max-inline-size: 100%; overflow-x: auto; }
 .sb-table { inline-size: 100%; border-collapse: collapse; font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); }
@@ -655,7 +655,7 @@ svg .sb-chart__value--current { font-weight: var(--sb-type-title-weight); }
 /* code: block on surface-sunken (radius 12) with a copy button; inline code; keys. The one form is the wrapper
    div.sb-code > .sb-code__bar + pre (spec/02 §3.10); a bare pre.sb-code (generated Markdown, no bar) gets the same
    padding and scroll so it is never broken, but it has no copy button */
-/* the margin resets of code and quote sit in :where() (NV-K6), so .sb-prose > * + * gives them the stack above */
+/* the margin resets of code and quote sit in :where() (spec/02 §5), so .sb-prose > * + * gives them the stack above */
 :where(.sb-code) { margin: 0; }
 .sb-code { border-radius: var(--sb-radius-container); background: var(--sb-color-surface-sunken); color: var(--sb-color-text); overflow: hidden; }
 .sb-code__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sb-space-2); padding: 0 var(--sb-space-1) 0 var(--sb-space-4); border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
@@ -704,11 +704,11 @@ kbd, .sb-kbd {
 .sb-callout--warning > .sb-icon { color: var(--sb-color-warning); }
 .sb-callout--error > .sb-icon { color: var(--sb-color-danger); }
 .sb-callout--success > .sb-icon { color: var(--sb-color-success); }
-/* a callout of one sentence without a title (NV-I10; provisional, agent): the sentence starts with the kind's word in
+/* a callout of one sentence without a title (spec/02 §3.11; provisional, agent): the sentence starts with the kind's word in
    body-strong and a colon, <strong class="sb-callout__kind">Achtung:</strong>, so glyph and word stay together; __text
    then stands in the first row beside the glyph (the grid places it there) and the callout has no aria-labelledby */
 .sb-callout__kind { font-weight: var(--sb-type-body-strong-weight); }
-/* actions (D102 (39), NV-B20): secondary or text actions under the text, never the primary action (never lime);
+/* actions (D102 (39), spec/02 §3.11): secondary or text actions under the text, never the primary action (never lime);
    they wrap. „Ausblenden“ (optional): the text action with close--16 before its word, last in the actions (alone in
    them when there are none; provisional, agent), the glyph in text-muted outside the underline */
 .sb-callout[hidden] { display: none; }
@@ -942,7 +942,7 @@ kbd, .sb-kbd {
    the last quoted line. It is never 3 px and never cobalt: that is the place line. Never italic. Markdown ">" output in
    .sb-prose gets the same look */
 .sb-quote { display: grid; gap: var(--sb-space-2); margin: 0; }
-:where(.sb-quote__text, .sb-prose > blockquote) { margin: 0; }   /* zero weight (NV-K6): the prose stack reaches a quote */
+:where(.sb-quote__text, .sb-prose > blockquote) { margin: 0; }   /* zero weight (spec/02 §5): the prose stack reaches a quote */
 .sb-quote__text, .sb-prose > blockquote {
   padding-inline-start: var(--sb-space-4); font-style: normal;
   border-inline-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color);
@@ -1101,7 +1101,7 @@ kbd, .sb-kbd {
   position: relative; display: flex; min-inline-size: 0; overflow-x: auto; overscroll-behavior-x: contain;
 }
 .sb-board__column {
-  flex: 1 1 0; min-inline-size: max(var(--sb-x-sebaro-board-column), 240px, 15em); display: flex; flex-direction: column; gap: var(--sb-space-2);   /* the column token (240 px; a product may set it wider, never below 240 px, D102 (40)), and 15em at large text (D102 lane narrow, RB-37) */
+  flex: 1 1 0; min-inline-size: max(var(--sb-x-sebaro-board-column), 240px, 15em); display: flex; flex-direction: column; gap: var(--sb-space-2);   /* the column token (240 px; a product may set it wider, never below 240 px, D102 (40)), and 15em at large text (D102 lane narrow, spec/02 §3.16) */
   padding-inline: var(--sb-space-3); box-sizing: border-box;
 }
 .sb-board__column:first-child { padding-inline-start: var(--sb-border-width-hairline); }   /* a hairline, not 0: the drop line reaches 1 px past */
@@ -1152,7 +1152,7 @@ kbd, .sb-kbd {
   font-variant-numeric: var(--sb-type-numeric-variant);
 }
 .sb-card__meta > .sb-icon { flex: none; color: var(--sb-color-text-muted); }
-/* a board card's description (D102 (40), NV-B35): caption in text, all of it, between the title and the grey line */
+/* a board card's description (D102 (40), spec/02 §3.16): caption in text, all of it, between the title and the grey line */
 .sb-board .sb-card__text {
   grid-column: 1 / -1; margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking);
   color: var(--sb-color-text); overflow-wrap: break-word;
@@ -1168,11 +1168,11 @@ kbd, .sb-kbd {
 .sb-board .sb-card__text blockquote { margin-inline: 0; padding-inline-start: var(--sb-space-3); border-inline-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color); }
 .sb-board .sb-card__text pre { white-space: pre-wrap; overflow-wrap: anywhere; font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); }
 .sb-board .sb-card__text img { max-inline-size: 100%; block-size: auto; }
-/* the column's own „Neue Karte in „<Spalte>““ (D102 (36), NV-A7): a secondary action at the column's foot, for a
+/* the column's own „Neue Karte in „<Spalte>““ (D102 (36), spec/02 §3.16): a secondary action at the column's foot, for a
    product whose view keeps its own primary action; it takes the column's width with 8 px sides and wraps its words, and
    in the narrow board (below 152px + 6em) it leaves out its plus icon */
 .sb-board__add { inline-size: 100%; padding-inline: min(var(--sb-space-2), 8px); white-space: normal; text-align: center; }
-/* drag states of a card (D102 (40), NV-B35; provisional, agent), as sb-row's (spec/02 §4.22): "dragging" keeps a 2 px
+/* drag states of a card (D102 (40), spec/02 §3.16; provisional, agent), as sb-row's (spec/02 §4.22): "dragging" keeps a 2 px
    ink frame on the card, "drop-before" / "drop-after" draw the 3 px place line in the middle of the gap between two
    cards, "drop-into" on .sb-board__column gives the column the 3 px accent frame inside its edge (an empty column, or
    its end below the last card);
@@ -1209,7 +1209,7 @@ kbd, .sb-kbd {
     .sb-board__column { flex: 0 0 calc(100% - var(--sb-space-12)); min-inline-size: 0; scroll-snap-align: start; scroll-snap-stop: always; }
   }
 }
-/* the swipe layout also below 40em of the board (D102 lane narrow, RB-37, OR-21; provisional, agent): 640 px at 100 %,
+/* the swipe layout also below 40em of the board (D102 lane narrow, spec/02 §3.16, OR-21; provisional, agent): 640 px at 100 %,
    1280 px at 200 %, so at large text a board in a window swipes one column at a time instead of squeezing its columns */
 @container sb-board (width < 640px) or (width < 40em) {
   .sb-board__nav:not([hidden]) {
@@ -1219,7 +1219,7 @@ kbd, .sb-kbd {
   .sb-board__columns { scroll-snap-type: x mandatory; scroll-padding-inline: var(--sb-spacing-gutter); padding: var(--sb-space-3) var(--sb-spacing-gutter); }
   .sb-board__column { flex: 0 0 calc(100% - var(--sb-space-12)); min-inline-size: 0; scroll-snap-align: start; scroll-snap-stop: always; }
 }
-/* narrow columns at large text (D102 lane narrow, RB-37; provisional, agent): in the swipe layout the cue of the next
+/* narrow columns at large text (D102 lane narrow, spec/02 §3.16; provisional, agent): in the swipe layout the cue of the next
    column, the sides of a column and a card's start side stay at their 100 % sizes (48, 12 and 12 px) instead of
    growing with the text, so the words keep the room; a card whose title would get less than about 6em beside „Mehr“
    puts the title on the line under it; the position bar puts „Spalte 2 von 3: …“ under its two step buttons */
@@ -1387,8 +1387,8 @@ kbd, .sb-kbd {
 .sb-rating__count { color: var(--sb-color-text-muted); }
 
 /* collaboration patterns of a web app (D104 (8)–(14); spec/02 §3.29). The time box is a sentence of the
-   action zone in whole minutes (RB-1: no bar, no colour, no seconds) and has no rule here. Behaviour: sb-board.js */
-/* votes with a budget (RB-2): minus, the number in table digits, plus; 48 px targets in a web app, the compact
+   action zone in whole minutes (spec/02 §3.29: no bar, no colour, no seconds) and has no rule here. Behaviour: sb-board.js */
+/* votes with a budget (spec/02 §3.29): minus, the number in table digits, plus; 48 px targets in a web app, the compact
    32 px tools only under window density; the budget is a sentence in the action zone */
 .sb-vote { grid-column: 1 / -1; justify-self: start; display: inline-flex; align-items: center; gap: var(--sb-space-1); margin: 0; }
 .sb-vote__count {
@@ -1396,11 +1396,11 @@ kbd, .sb-kbd {
   font-weight: var(--sb-type-body-strong-weight); font-variant-numeric: var(--sb-type-numeric-variant);
 }
 .sb-board .sb-card--item > .sb-vote { grid-row: auto; margin-block: calc(-1 * var(--sb-space-1)) calc(-1 * var(--sb-space-2)); }   /* after the title and the grey line, also where a narrow board puts the title under „Mehr“ */
-/* a hidden card (RB-3, blind reveal): an empty card with its writer's name; „verdeckt“ is a state, so glyph and word
+/* a hidden card (spec/02 §3.29, blind reveal): an empty card with its writer's name; „verdeckt“ is a state, so glyph and word
    (eye-off, text-muted, body weight), never grey alone */
 .sb-card--hidden .sb-card__title { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1); color: var(--sb-color-text-muted); font-weight: var(--sb-type-body-weight); }
 .sb-card--hidden .sb-card__title > .sb-icon { flex: none; inline-size: var(--sb-size-icon-md); block-size: var(--sb-size-icon-md); --sb-icon-stroke: var(--sb-icon-w20); }
-/* the free canvas (RB-4): the plain ground, no grid; it scrolls both ways. Cards, groups and pointers lie on
+/* the free canvas (spec/02 §3.29): the plain ground, no grid; it scrolls both ways. Cards, groups and pointers lie on
    .sb-canvas__plane at the places the app gives them (inset-inline-start / inset-block-start through the CSSOM, CSP-safe);
    a group is a 1 px ink-grey frame with its name, no fill. Known limit (D104 (11), per D103): at 200 % text the cards
    grow at their places and may overlap; the canvas does not rearrange them */
@@ -1414,7 +1414,7 @@ kbd, .sb-kbd {
   padding: var(--sb-space-8) var(--sb-space-2) var(--sb-space-2);
 }
 .sb-canvas__group-name { position: absolute; inset-block-start: var(--sb-space-1); inset-inline-start: var(--sb-space-3); margin: 0; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
-/* pointers of the others (RB-5): an ink arrow on the ground with the name in a box (1 px text line); no colour per
+/* pointers of the others (spec/02 §3.29): an ink arrow on the ground with the name in a box (1 px text line); no colour per
    person (D40), the name tells them apart; aria-hidden (the action zone says „2 Personen sind auf der Fläche.“). They
    glide over motion.duration.short only inside the motion guard (a named exception of spec/03 §13.2), else they jump */
 .sb-pointer { display: flex; align-items: flex-start; gap: var(--sb-space-0-5); pointer-events: none; z-index: 1; transition: none; }
@@ -1430,12 +1430,12 @@ kbd, .sb-kbd {
   border: var(--sb-border-width-hairline) solid var(--sb-color-text); border-radius: var(--sb-radius-small); background: var(--sb-color-bg);
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking);
 }
-/* dialogs that show instead of asking (RB-6 invite, RB-7 wheel; spec/02 §4.6): no primary action, „Schließen“ last.
+/* dialogs that show instead of asking (the invite and the wheel of spec/02 §3.29; spec/02 §4.6): no primary action, „Schließen“ last.
    The code stands dark on light in both modes (scanners read inverted codes badly): its box carries data-theme="light" */
 .sb-dialog__qr { display: block; inline-size: fit-content; max-inline-size: 100%; box-sizing: border-box; margin: var(--sb-space-4) auto; padding: var(--sb-space-2); border-radius: var(--sb-radius-control); background: var(--sb-color-bg); color: var(--sb-color-text); }
 .sb-dialog__qr > :is(svg, img) { display: block; inline-size: 168px; max-inline-size: 100%; block-size: auto; aspect-ratio: 1; }
 .sb-dialog__text + .sb-dialog__qr + :is(.sb-field, .sb-dialog__text) { margin-block-start: 0; }   /* the link under the code: a sentence (or a field) */
-/* the wheel (RB-7): flat in ink, no colours, no gradients, no confetti; the disc turns forward to the drawn name over
+/* the wheel (spec/02 §3.29): flat in ink, no colours, no gradients, no confetti; the disc turns forward to the drawn name over
    motion.duration.long (200 ms) only inside the motion guard (a named exception of spec/03 §13.2); reduced motion: at
    once, the name appears */
 .sb-wheel { display: block; inline-size: min(100%, 15rem); block-size: auto; margin: var(--sb-space-2) auto; color: var(--sb-color-text); }
@@ -1487,7 +1487,7 @@ kbd, .sb-kbd {
 .sb-side-nav__item:hover, .sb-side-nav__item.is-hover { background: var(--sb-color-hover-fill); color: var(--sb-color-text); }
 .sb-side-nav__item[aria-current="page"] { border-inline-start-color: var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
 .sb-side-nav__item:focus-visible { outline-offset: calc(-1 * var(--sb-focus-width)); }
-/* a place opened by a command is a button (NV-G1, D102 lane desktop): the full row, the word at the start, like a link */
+/* a place opened by a command is a button (spec/02 §4.3, D102 lane desktop): the full row, the word at the start, like a link */
 button.sb-side-nav__item {
   inline-size: 100%; margin: 0; border-block: 0; border-inline-end: 0; background: transparent;
   text-align: start; cursor: pointer;
@@ -1546,7 +1546,7 @@ button.sb-side-nav__item {
 }
 .sb-dialog:has(.sb-dialog__body) :is(.sb-dialog__title, .sb-dialog__actions) { flex: none; }
 .sb-dialog__actions[data-sb-fit="stack"] { flex-direction: column; align-items: stretch; }
-/* the input dialog (D102 (38), NV-B19): an sb-field under the title (and its text), the submit verb a secondary action */
+/* the input dialog (D102 (38), spec/02 §4.6): an sb-field under the title (and its text), the submit verb a secondary action */
 .sb-dialog__text + .sb-field { margin-block-start: var(--sb-space-4); }
 /* a failure without a field (D102 (23); spec/02 §4.6): above the actions, built like the action zone's message: the
    error glyph in danger, the sentence in one span, its „Details“ after it; empty and hidden until the dialog writes */
@@ -1620,7 +1620,7 @@ html.sb-starting > body > .sb-start, .sb-starting > .sb-start {
   font-variant-numeric: var(--sb-type-numeric-variant);
 }
 /* large text (D99 (1)): the action stays beside the message while the message's widest word fits there, else it goes
-   under the message at the end and the toast grows; the message wraps between words. At most the toast's width (NV-F7,
+   under the message at the end and the toast grows; the message wraps between words. At most the toast's width (spec/02 §4.8,
    D102 lane narrow): an overlong part of a file name (.sb-file-name breaks it only when it alone is wider than its line,
    D100 (6)) takes the whole line, the action goes under it, and the part breaks inside the toast instead of running
    past it (min-content as the minimum was wider than the toast) */

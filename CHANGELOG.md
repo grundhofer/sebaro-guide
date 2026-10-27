@@ -11,6 +11,9 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+- Abgleich mit der Werkstatt `0ce4167`: Kommentare in `docs/sebaro/` nennen jetzt den Abschnitt der Spezifikation statt einer Zeile aus einer Lückenliste; keine Regel und kein Stil ändern sich.
+- `tools/sync_from_design.py` gibt seine Ausschlussliste an den Export der Werkstatt und an dessen `--verify` weiter (über die Umgebung, nie auf der Befehlszeile), damit ein lokaler Abgleich und der Abgleich in der CI dasselbe ergeben.
+
 ## 2.13.0 · 2026-10-27
 
 Übernahme von D108 aus der Werkstatt (Commit `2b067c4`, davor `3424b2f` und `89a56bb`): die Antworten des Inhabers vom

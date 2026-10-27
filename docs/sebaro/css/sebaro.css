@@ -154,7 +154,7 @@ body.sb-page { container: sb-page sb-content / inline-size; }
 .sb-prose li + li:not(.sb-note) { margin-block-start: var(--sb-space-1); }   /* footnotes keep their list's gap alone */
 .sb-prose figure { margin-inline: 0; }
 .sb-prose figcaption { margin-block-start: var(--sb-space-2); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
-/* rendered Markdown (NV-B27): an image never wider than the text column (D100 (5): no sideways scroll), its height
+/* rendered Markdown (spec/02 §5): an image never wider than the text column (D100 (5): no sideways scroll), its height
    follows; a rule (---) is the 1 px border hairline between sections, 32 px above and below (the 32 px provisional
    (agent)); a bare <table> (no class) takes the look of sb-table (section 3, rules there). Wrapped by the renderer in
    div.sb-table-wrap[role=region][tabindex=0][aria-label] (the way to use, as for sb-table) the wrap scrolls it; a table
@@ -164,7 +164,7 @@ body.sb-page { container: sb-page sb-content / inline-size; }
    is not checked here (WKWebView in Tauri on macOS) */
 .sb-prose img { max-inline-size: 100%; block-size: auto; }
 .sb-prose > hr { block-size: 0; margin-block: var(--sb-space-8); border: 0; border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
-/* more of rendered Markdown (NV-K2, K3, K5, O9; provisional, agent): an h1 stands 48 px under what is before it and
+/* more of rendered Markdown (spec/02 §5; provisional, agent): an h1 stands 48 px under what is before it and
    has no space above as the first block (rem, as the rest of the prose); a nested list indents 1.5em and stands 4 px
    under its item's line; blocks inside a list item (a loose list's paragraphs) lose their outer margins and keep 8 px
    between them; a quote inside a quote carries the same ink line; a task-list item (a checkbox as its first child, or
@@ -202,7 +202,7 @@ body.sb-page { container: sb-page sb-content / inline-size; }
 :is(.sb-table, .sb-prose table) :is(th, td) > :last-child { margin-block-end: 0; }
 .sb-prose :where(table:not([class])) { display: block; max-inline-size: 100%; overflow-x: auto; }
 .sb-prose :where(.sb-table-wrap > table:not([class])) { display: table; max-inline-size: none; overflow: visible; }
-/* a jump target in running text (D102 (32), NV-B27b): the block a link inside the page jumps to (a backlink's place, a
+/* a jump target in running text (D102 (32), spec/02 §5): the block a link inside the page jumps to (a backlink's place, a
    heading chosen in the contents, a footnote's digit) carries the 3 px place line at its start until the next action, a
    key or a press: sb-controls.js then marks it data-sb-past; without the script it keeps the line until the next jump
    (:target). The line stands 12 px before the text and the text does not move (the negative margin takes back the line
@@ -384,7 +384,7 @@ body.sb-page { container: sb-page sb-content / inline-size; }
   .sb-toc .sb-toc__group-head { min-block-size: var(--sb-size-control-sm); }
 }
 
-/* contents as an overlay over a reader (D102 (34), NV-B31; spec/02 §4.5): nav.sb-toc.sb-toc--overlay[popover], opened by
+/* contents as an overlay over a reader (D102 (34); spec/02 §4.5): nav.sb-toc.sb-toc--overlay[popover], opened by
    a button with popovertarget and aria-expanded. The rows of sb-toc on the surface of sb-menu: overlay surface in its
    2 px ink line, radius 12, 4 px above and below, 200-320 px (12.5em-20em at large text), rows of 48 in body, hover the
    fill; in a window (data-sb-density="window") rows of 32 in label at body weight. The current entry keeps sb-toc's place
@@ -487,7 +487,7 @@ body.sb-page { container: sb-page sb-content / inline-size; }
   position: absolute; inline-size: 1px; block-size: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
 }
 .sb-primary-action-bar__message .sb-icon { flex: none; margin-block-start: 4px; margin-block-start: calc((1lh - 16px) / 2); color: var(--sb-color-danger); }   /* centred on the sentence's first line at every text size: 4 px at 100 %, 16 px at 200 % (provisional, agent) */
-/* error details (D102 (23), NV-C18; spec/02 §3.28, spec/07 §4.1): one native <details> under an error's sentence,
+/* error details (D102 (23); spec/02 §3.28, spec/07 §4.1): one native <details> under an error's sentence,
    closed at first; the summary „Details“ with chevron-down--16 like the chart's „Werte als Tabelle“, the content the
    system's own text in sebaro Mono without a ground, breaking anywhere without a hyphen. Inside a message it takes a row of its own and
    starts under the sentence, not under the glyph (the 16 px glyph and its gap) */
@@ -616,7 +616,7 @@ body.sb-page { container: sb-page sb-content / inline-size; }
   padding: 0 6px; box-sizing: border-box; border-block-end: var(--sb-border-width-strong) solid transparent;
   font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); color: var(--sb-color-text-muted);
 }
-/* language as a stored choice (D102 (50), RB-29; spec/09 §18.2): a page without a URL per language (a web app with one
+/* language as a stored choice (D102 (50); spec/09 §18.2): a page without a URL per language (a web app with one
    shell) shows the same group „DE / EN“ as radios in a fieldset (fieldset.sb-language-switch--choice[data-sb-language-choice],
    a visually hidden legend „Sprache“); each option is the box of a link (48 × 48, 3 px bottom edge on the chosen one,
    link colour, body-strong), the radio lies invisible over it. sb-controls.js sets <html lang> and stores sb-lang */
@@ -989,7 +989,7 @@ body.sb-page { container: sb-page sb-content / inline-size; }
   min-block-size: var(--sb-size-target-touch); padding: 0 var(--sb-space-3); margin: 0; box-sizing: border-box;
   border: 0; background: transparent; color: var(--sb-color-text); cursor: pointer; white-space: nowrap;
   font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); font-weight: var(--sb-type-caption-weight);
-  /* large text (NV-M17; provisional, agent): the inset grows with the text (0.375rem) and the chip is at least its
+  /* large text (spec/02 §2.9; provisional, agent): the inset grows with the text (0.375rem) and the chip is at least its
      label's line, both insets and the frame, so the drawn frame always holds the whole line: 48 px and 6 px at 100 %
      as before, 66 px and 12 px at 200 % (was 48 px with a 36 px frame round a 40 px line) */
   min-block-size: max(var(--sb-size-target-touch), calc(1lh + 0.75rem + 2 * var(--sb-border-width-control)));
@@ -1648,9 +1648,9 @@ svg .sb-chart__value--current { font-weight: var(--sb-type-title-weight); }
 .sb-file-name { white-space: normal; overflow-wrap: break-word; -webkit-hyphens: none; hyphens: none; }
 
 /* table: hairline rows, tabular figures, numbers end-aligned; wrap in .sb-table-wrap to scroll on phones.
-   The same look for a bare <table> in .sb-prose (rendered Markdown, NV-B27) and for a grid of divs with ARIA roles
+   The same look for a bare <table> in .sb-prose (rendered Markdown, spec/02 §5) and for a grid of divs with ARIA roles
    (div.sb-table[role=table] > [role=rowgroup]? > [role=row] > [role=cell | columnheader | rowheader]; a virtualised
-   table, NV-B28): the added selectors sit in :where(), so they weigh no more than .sb-table's own, and the div form
+   table, spec/02 §3.9): the added selectors sit in :where(), so they weigh no more than .sb-table's own, and the div form
    gets table display at zero weight, which the product's own layout (grid, absolute rows) replaces */
 .sb-table-wrap { max-inline-size: 100%; overflow-x: auto; }
 .sb-table { inline-size: 100%; border-collapse: collapse; font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); }
@@ -1672,7 +1672,7 @@ svg .sb-chart__value--current { font-weight: var(--sb-type-title-weight); }
 /* code: block on surface-sunken (radius 12) with a copy button; inline code; keys. The one form is the wrapper
    div.sb-code > .sb-code__bar + pre (spec/02 §3.10); a bare pre.sb-code (generated Markdown, no bar) gets the same
    padding and scroll so it is never broken, but it has no copy button */
-/* the margin resets of code and quote sit in :where() (NV-K6), so .sb-prose > * + * gives them the stack above */
+/* the margin resets of code and quote sit in :where() (spec/02 §5), so .sb-prose > * + * gives them the stack above */
 :where(.sb-code) { margin: 0; }
 .sb-code { border-radius: var(--sb-radius-container); background: var(--sb-color-surface-sunken); color: var(--sb-color-text); overflow: hidden; }
 .sb-code__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sb-space-2); padding: 0 var(--sb-space-1) 0 var(--sb-space-4); border-block-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
@@ -1721,11 +1721,11 @@ kbd, .sb-kbd {
 .sb-callout--warning > .sb-icon { color: var(--sb-color-warning); }
 .sb-callout--error > .sb-icon { color: var(--sb-color-danger); }
 .sb-callout--success > .sb-icon { color: var(--sb-color-success); }
-/* a callout of one sentence without a title (NV-I10; provisional, agent): the sentence starts with the kind's word in
+/* a callout of one sentence without a title (spec/02 §3.11; provisional, agent): the sentence starts with the kind's word in
    body-strong and a colon, <strong class="sb-callout__kind">Achtung:</strong>, so glyph and word stay together; __text
    then stands in the first row beside the glyph (the grid places it there) and the callout has no aria-labelledby */
 .sb-callout__kind { font-weight: var(--sb-type-body-strong-weight); }
-/* actions (D102 (39), NV-B20): secondary or text actions under the text, never the primary action (never lime);
+/* actions (D102 (39), spec/02 §3.11): secondary or text actions under the text, never the primary action (never lime);
    they wrap. „Ausblenden“ (optional): the text action with close--16 before its word, last in the actions (alone in
    them when there are none; provisional, agent), the glyph in text-muted outside the underline */
 .sb-callout[hidden] { display: none; }
@@ -1959,7 +1959,7 @@ kbd, .sb-kbd {
    the last quoted line. It is never 3 px and never cobalt: that is the place line. Never italic. Markdown ">" output in
    .sb-prose gets the same look */
 .sb-quote { display: grid; gap: var(--sb-space-2); margin: 0; }
-:where(.sb-quote__text, .sb-prose > blockquote) { margin: 0; }   /* zero weight (NV-K6): the prose stack reaches a quote */
+:where(.sb-quote__text, .sb-prose > blockquote) { margin: 0; }   /* zero weight (spec/02 §5): the prose stack reaches a quote */
 .sb-quote__text, .sb-prose > blockquote {
   padding-inline-start: var(--sb-space-4); font-style: normal;
   border-inline-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color);
@@ -2118,7 +2118,7 @@ kbd, .sb-kbd {
   position: relative; display: flex; min-inline-size: 0; overflow-x: auto; overscroll-behavior-x: contain;
 }
 .sb-board__column {
-  flex: 1 1 0; min-inline-size: max(var(--sb-x-sebaro-board-column), 240px, 15em); display: flex; flex-direction: column; gap: var(--sb-space-2);   /* the column token (240 px; a product may set it wider, never below 240 px, D102 (40)), and 15em at large text (D102 lane narrow, RB-37) */
+  flex: 1 1 0; min-inline-size: max(var(--sb-x-sebaro-board-column), 240px, 15em); display: flex; flex-direction: column; gap: var(--sb-space-2);   /* the column token (240 px; a product may set it wider, never below 240 px, D102 (40)), and 15em at large text (D102 lane narrow, spec/02 §3.16) */
   padding-inline: var(--sb-space-3); box-sizing: border-box;
 }
 .sb-board__column:first-child { padding-inline-start: var(--sb-border-width-hairline); }   /* a hairline, not 0: the drop line reaches 1 px past */
@@ -2169,7 +2169,7 @@ kbd, .sb-kbd {
   font-variant-numeric: var(--sb-type-numeric-variant);
 }
 .sb-card__meta > .sb-icon { flex: none; color: var(--sb-color-text-muted); }
-/* a board card's description (D102 (40), NV-B35): caption in text, all of it, between the title and the grey line */
+/* a board card's description (D102 (40), spec/02 §3.16): caption in text, all of it, between the title and the grey line */
 .sb-board .sb-card__text {
   grid-column: 1 / -1; margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking);
   color: var(--sb-color-text); overflow-wrap: break-word;
@@ -2185,11 +2185,11 @@ kbd, .sb-kbd {
 .sb-board .sb-card__text blockquote { margin-inline: 0; padding-inline-start: var(--sb-space-3); border-inline-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color); }
 .sb-board .sb-card__text pre { white-space: pre-wrap; overflow-wrap: anywhere; font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); }
 .sb-board .sb-card__text img { max-inline-size: 100%; block-size: auto; }
-/* the column's own „Neue Karte in „<Spalte>““ (D102 (36), NV-A7): a secondary action at the column's foot, for a
+/* the column's own „Neue Karte in „<Spalte>““ (D102 (36), spec/02 §3.16): a secondary action at the column's foot, for a
    product whose view keeps its own primary action; it takes the column's width with 8 px sides and wraps its words, and
    in the narrow board (below 152px + 6em) it leaves out its plus icon */
 .sb-board__add { inline-size: 100%; padding-inline: min(var(--sb-space-2), 8px); white-space: normal; text-align: center; }
-/* drag states of a card (D102 (40), NV-B35; provisional, agent), as sb-row's (spec/02 §4.22): "dragging" keeps a 2 px
+/* drag states of a card (D102 (40), spec/02 §3.16; provisional, agent), as sb-row's (spec/02 §4.22): "dragging" keeps a 2 px
    ink frame on the card, "drop-before" / "drop-after" draw the 3 px place line in the middle of the gap between two
    cards, "drop-into" on .sb-board__column gives the column the 3 px accent frame inside its edge (an empty column, or
    its end below the last card);
@@ -2226,7 +2226,7 @@ kbd, .sb-kbd {
     .sb-board__column { flex: 0 0 calc(100% - var(--sb-space-12)); min-inline-size: 0; scroll-snap-align: start; scroll-snap-stop: always; }
   }
 }
-/* the swipe layout also below 40em of the board (D102 lane narrow, RB-37, OR-21; provisional, agent): 640 px at 100 %,
+/* the swipe layout also below 40em of the board (D102 lane narrow, spec/02 §3.16, OR-21; provisional, agent): 640 px at 100 %,
    1280 px at 200 %, so at large text a board in a window swipes one column at a time instead of squeezing its columns */
 @container sb-board (width < 640px) or (width < 40em) {
   .sb-board__nav:not([hidden]) {
@@ -2236,7 +2236,7 @@ kbd, .sb-kbd {
   .sb-board__columns { scroll-snap-type: x mandatory; scroll-padding-inline: var(--sb-spacing-gutter); padding: var(--sb-space-3) var(--sb-spacing-gutter); }
   .sb-board__column { flex: 0 0 calc(100% - var(--sb-space-12)); min-inline-size: 0; scroll-snap-align: start; scroll-snap-stop: always; }
 }
-/* narrow columns at large text (D102 lane narrow, RB-37; provisional, agent): in the swipe layout the cue of the next
+/* narrow columns at large text (D102 lane narrow, spec/02 §3.16; provisional, agent): in the swipe layout the cue of the next
    column, the sides of a column and a card's start side stay at their 100 % sizes (48, 12 and 12 px) instead of
    growing with the text, so the words keep the room; a card whose title would get less than about 6em beside „Mehr“
    puts the title on the line under it; the position bar puts „Spalte 2 von 3: …“ under its two step buttons */
@@ -2404,8 +2404,8 @@ kbd, .sb-kbd {
 .sb-rating__count { color: var(--sb-color-text-muted); }
 
 /* collaboration patterns of a web app (D104 (8)–(14); spec/02 §3.29). The time box is a sentence of the
-   action zone in whole minutes (RB-1: no bar, no colour, no seconds) and has no rule here. Behaviour: sb-board.js */
-/* votes with a budget (RB-2): minus, the number in table digits, plus; 48 px targets in a web app, the compact
+   action zone in whole minutes (spec/02 §3.29: no bar, no colour, no seconds) and has no rule here. Behaviour: sb-board.js */
+/* votes with a budget (spec/02 §3.29): minus, the number in table digits, plus; 48 px targets in a web app, the compact
    32 px tools only under window density; the budget is a sentence in the action zone */
 .sb-vote { grid-column: 1 / -1; justify-self: start; display: inline-flex; align-items: center; gap: var(--sb-space-1); margin: 0; }
 .sb-vote__count {
@@ -2413,11 +2413,11 @@ kbd, .sb-kbd {
   font-weight: var(--sb-type-body-strong-weight); font-variant-numeric: var(--sb-type-numeric-variant);
 }
 .sb-board .sb-card--item > .sb-vote { grid-row: auto; margin-block: calc(-1 * var(--sb-space-1)) calc(-1 * var(--sb-space-2)); }   /* after the title and the grey line, also where a narrow board puts the title under „Mehr“ */
-/* a hidden card (RB-3, blind reveal): an empty card with its writer's name; „verdeckt“ is a state, so glyph and word
+/* a hidden card (spec/02 §3.29, blind reveal): an empty card with its writer's name; „verdeckt“ is a state, so glyph and word
    (eye-off, text-muted, body weight), never grey alone */
 .sb-card--hidden .sb-card__title { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1); color: var(--sb-color-text-muted); font-weight: var(--sb-type-body-weight); }
 .sb-card--hidden .sb-card__title > .sb-icon { flex: none; inline-size: var(--sb-size-icon-md); block-size: var(--sb-size-icon-md); --sb-icon-stroke: var(--sb-icon-w20); }
-/* the free canvas (RB-4): the plain ground, no grid; it scrolls both ways. Cards, groups and pointers lie on
+/* the free canvas (spec/02 §3.29): the plain ground, no grid; it scrolls both ways. Cards, groups and pointers lie on
    .sb-canvas__plane at the places the app gives them (inset-inline-start / inset-block-start through the CSSOM, CSP-safe);
    a group is a 1 px ink-grey frame with its name, no fill. Known limit (D104 (11), per D103): at 200 % text the cards
    grow at their places and may overlap; the canvas does not rearrange them */
@@ -2431,7 +2431,7 @@ kbd, .sb-kbd {
   padding: var(--sb-space-8) var(--sb-space-2) var(--sb-space-2);
 }
 .sb-canvas__group-name { position: absolute; inset-block-start: var(--sb-space-1); inset-inline-start: var(--sb-space-3); margin: 0; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
-/* pointers of the others (RB-5): an ink arrow on the ground with the name in a box (1 px text line); no colour per
+/* pointers of the others (spec/02 §3.29): an ink arrow on the ground with the name in a box (1 px text line); no colour per
    person (D40), the name tells them apart; aria-hidden (the action zone says „2 Personen sind auf der Fläche.“). They
    glide over motion.duration.short only inside the motion guard (a named exception of spec/03 §13.2), else they jump */
 .sb-pointer { display: flex; align-items: flex-start; gap: var(--sb-space-0-5); pointer-events: none; z-index: 1; transition: none; }
@@ -2447,12 +2447,12 @@ kbd, .sb-kbd {
   border: var(--sb-border-width-hairline) solid var(--sb-color-text); border-radius: var(--sb-radius-small); background: var(--sb-color-bg);
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking);
 }
-/* dialogs that show instead of asking (RB-6 invite, RB-7 wheel; spec/02 §4.6): no primary action, „Schließen“ last.
+/* dialogs that show instead of asking (the invite and the wheel of spec/02 §3.29; spec/02 §4.6): no primary action, „Schließen“ last.
    The code stands dark on light in both modes (scanners read inverted codes badly): its box carries data-theme="light" */
 .sb-dialog__qr { display: block; inline-size: fit-content; max-inline-size: 100%; box-sizing: border-box; margin: var(--sb-space-4) auto; padding: var(--sb-space-2); border-radius: var(--sb-radius-control); background: var(--sb-color-bg); color: var(--sb-color-text); }
 .sb-dialog__qr > :is(svg, img) { display: block; inline-size: 168px; max-inline-size: 100%; block-size: auto; aspect-ratio: 1; }
 .sb-dialog__text + .sb-dialog__qr + :is(.sb-field, .sb-dialog__text) { margin-block-start: 0; }   /* the link under the code: a sentence (or a field) */
-/* the wheel (RB-7): flat in ink, no colours, no gradients, no confetti; the disc turns forward to the drawn name over
+/* the wheel (spec/02 §3.29): flat in ink, no colours, no gradients, no confetti; the disc turns forward to the drawn name over
    motion.duration.long (200 ms) only inside the motion guard (a named exception of spec/03 §13.2); reduced motion: at
    once, the name appears */
 .sb-wheel { display: block; inline-size: min(100%, 15rem); block-size: auto; margin: var(--sb-space-2) auto; color: var(--sb-color-text); }
@@ -2581,7 +2581,7 @@ a.sb-pagination__page:hover, a.sb-pagination__page.is-hover { text-decoration: u
 .sb-side-nav__item:hover, .sb-side-nav__item.is-hover { background: var(--sb-color-hover-fill); color: var(--sb-color-text); }
 .sb-side-nav__item[aria-current="page"] { border-inline-start-color: var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
 .sb-side-nav__item:focus-visible { outline-offset: calc(-1 * var(--sb-focus-width)); }
-/* a place opened by a command is a button (NV-G1, D102 lane desktop): the full row, the word at the start, like a link */
+/* a place opened by a command is a button (spec/02 §4.3, D102 lane desktop): the full row, the word at the start, like a link */
 button.sb-side-nav__item {
   inline-size: 100%; margin: 0; border-block: 0; border-inline-end: 0; background: transparent;
   text-align: start; cursor: pointer;
@@ -2640,7 +2640,7 @@ button.sb-side-nav__item {
 }
 .sb-dialog:has(.sb-dialog__body) :is(.sb-dialog__title, .sb-dialog__actions) { flex: none; }
 .sb-dialog__actions[data-sb-fit="stack"] { flex-direction: column; align-items: stretch; }
-/* the input dialog (D102 (38), NV-B19): an sb-field under the title (and its text), the submit verb a secondary action */
+/* the input dialog (D102 (38), spec/02 §4.6): an sb-field under the title (and its text), the submit verb a secondary action */
 .sb-dialog__text + .sb-field { margin-block-start: var(--sb-space-4); }
 /* a failure without a field (D102 (23); spec/02 §4.6): above the actions, built like the action zone's message: the
    error glyph in danger, the sentence in one span, its „Details“ after it; empty and hidden until the dialog writes */
@@ -2714,7 +2714,7 @@ html.sb-starting > body > .sb-start, .sb-starting > .sb-start {
   font-variant-numeric: var(--sb-type-numeric-variant);
 }
 /* large text (D99 (1)): the action stays beside the message while the message's widest word fits there, else it goes
-   under the message at the end and the toast grows; the message wraps between words. At most the toast's width (NV-F7,
+   under the message at the end and the toast grows; the message wraps between words. At most the toast's width (spec/02 §4.8,
    D102 lane narrow): an overlong part of a file name (.sb-file-name breaks it only when it alone is wider than its line,
    D100 (6)) takes the whole line, the action goes under it, and the part breaks inside the toast instead of running
    past it (min-content as the minimum was wider than the toast) */
@@ -2815,7 +2815,7 @@ dialog.sb-sheet > form { margin: 0; }
  * D84 ⌘K / Strg+K; D46 layers by the 2 px ink line, no shadow, no tinted ground. Tool tooltips are the system
  * tooltip (sb-tooltip.js, .sb-tooltip[popover] in section 7). The palette enters through the entry rule of section 7.
  * Only var(--sb-*) (and the icon stroke variables --sb-icon-* of sprite.css): no raw colours, no shadows.
- * Pane widths are tokens (x-sebaro.pane.*, NV-B5): sidebar 240 (200–360) as .sb-side-nav, inspector 280 (240–400);
+ * Pane widths are tokens (x-sebaro.pane.*, spec/02 §4.23): sidebar 240 (200–360) as .sb-side-nav, inspector 280 (240–400);
  * sb-window.js reads the limits from them. Numbers that are not tokens: 480 px content minimum, 560 px palette (as
  * .sb-dialog), and the container breakpoints derived from them (722 = 240 + 2 + 480, 1004 = 722 + 2 + 280), because
  * @container cannot read var(): change them with the pane tokens. */
@@ -2836,14 +2836,14 @@ dialog.sb-sheet > form { margin: 0; }
 [data-sb-density="window"] .sb-list-row:has(.sb-list-row__text) { min-block-size: var(--sb-space-16); }
 [data-sb-density="window"] .sb-list-row.sb-list-row--done { min-block-size: var(--sb-size-control-sm); }
 [data-sb-density="window"] .sb-meta-list > div { min-block-size: var(--sb-size-control-sm); }
-/* a dialog of a window (NV-L2; per D103 the denser form, provisional, agent): the dialog carries data-sb-density="window"
+/* a dialog of a window (spec/02 §4.12; per D103 the denser form, provisional, agent): the dialog carries data-sb-density="window"
    itself (it opens in the top layer, outside the window) or stands in the scope; its actions take the compact
    secondary action's 32 px and label type, the danger action too (its 45° cut stays); 48 px again under touch */
 :is(.sb-dialog[data-sb-density="window"], [data-sb-density="window"] .sb-dialog) .sb-dialog__actions > :is(.sb-secondary-action, .sb-danger-action) {
   min-block-size: var(--sb-size-control-sm); padding-inline: var(--sb-space-3);
   font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking);
 }
-/* a list header in a window (NV-N3; provisional, agent): 32 px at 100 % (8 px above the label line, 4 px below), the
+/* a list header in a window (spec/02 §4.12; provisional, agent): 32 px at 100 % (8 px above the label line, 4 px below), the
    window's 16 px start instead of the phone gutter; the sizes in rem, so the header grows with the text like the
    board's column head */
 [data-sb-density="window"] .sb-list-header { padding: var(--sb-space-2) var(--sb-space-4) var(--sb-space-1); }
@@ -2851,7 +2851,7 @@ dialog.sb-sheet > form { margin: 0; }
 /* sb-row: the window row of trees, lists, the palette
    One line 32, two lines 48 (__main with __name + __sub), three lines 64 (+ __text). The name is cut at the end and
    never wraps only where the row or an ancestor carries data-sb-truncate (a virtualised list, D102 (35); the
-   documented ellipsis of spec/09 §3.1, NV-E1; the full name goes into the row's title); else it wraps (below); __meta (status glyph + word, numbers, dates)
+   documented ellipsis of spec/09 §3.1; the full name goes into the row's title); else it wraps (below); __meta (status glyph + word, numbers, dates)
    and .sb-keys never shrink. Current place = 3 px accent start edge + link colour + title weight (aria-current or, in a
    single-select tree or list, aria-selected) */
 .sb-row {
@@ -2885,7 +2885,7 @@ dialog.sb-sheet > form { margin: 0; }
   color: var(--sb-color-text-muted); white-space: nowrap;
 }
 .sb-row__meta > .sb-status { color: var(--sb-color-text); }
-/* narrow columns at large text (NV-G10, D102 (35), D102 lane narrow; provisional, agent): a row that is not cut on
+/* narrow columns at large text (spec/02 §4.13, D102 (35), D102 lane narrow; provisional, agent): a row that is not cut on
    purpose (no data-sb-truncate on it or an ancestor: not a virtualised list of fixed row height) wraps its name and puts __meta on the line
    under it once the name would get less than 6em beside it, starting where the name starts (below); the status word is never hidden
    (glyph + word). A virtualised row (data-sb-truncate) stays one line with the full name in title and accessible name */
@@ -2963,7 +2963,7 @@ dialog.sb-sheet > form { margin: 0; }
 .sb-tree__row[aria-level="6"] { --sb-tree-indent: 5; }
 .sb-tree__row[aria-level="7"] { --sb-tree-indent: 6; }
 .sb-tree__row[aria-level="8"] { --sb-tree-indent: 7; }
-/* deeper rows: sb-tree.js sets --sb-tree-indent = aria-level − 1 on the row (NV-B6), so every level keeps 16 px;
+/* deeper rows: sb-tree.js sets --sb-tree-indent = aria-level − 1 on the row (spec/02 §4.14), so every level keeps 16 px;
    without the script they stand at level 8 (until 2026-10-25 they fell back to level 1) */
 .sb-tree__row[aria-level]:not([aria-level="1"], [aria-level="2"], [aria-level="3"], [aria-level="4"], [aria-level="5"], [aria-level="6"], [aria-level="7"], [aria-level="8"]) { --sb-tree-indent: 7; }
 .sb-tree__twist {
@@ -3032,7 +3032,7 @@ dialog.sb-sheet > form { margin: 0; }
    state (3 px accent bottom edge, link colour, title weight), never a fill */
 .sb-secondary-action--compact[aria-pressed="true"] { border-block-end: var(--sb-border-width-strong) solid var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
 .sb-secondary-action--compact > .sb-icon--16 { inline-size: var(--sb-size-icon-sm); block-size: var(--sb-size-icon-sm); --sb-icon-stroke: var(--sb-icon-w16); }
-/* a compact action whose menu or popup is open (NV-O13; provisional, agent): the hover ground stays while it is open, as
+/* a compact action whose menu or popup is open (spec/02 §4.18; provisional, agent): the hover ground stays while it is open, as
    on a menu item whose submenu is open (spec/02 §4.24), so the way to what is open stays visible; no link colour (cobalt
    is place, link and focus) and not the pressed state. Only with aria-haspopup: a pane toggle's aria-expanded says
    „shown“ and keeps no ground */
@@ -3053,12 +3053,12 @@ dialog.sb-sheet > form { margin: 0; }
    slot, name, .sb-keys), the empty sentence (role=status), the key hints at the bottom. The active option carries the
    place line and the link colour (no weight change while the arrows move); hover is the fill */
 .sb-command-palette {
-  box-sizing: border-box; inline-size: min(35rem, calc(100vw - 2 * var(--sb-spacing-gutter))); max-inline-size: 100%; padding: 0;   /* 35rem = 560 px at 100 %, wider with the text up to the window's width, as sb-dialog (NV-L18, NV-M3; provisional, agent) */
+  box-sizing: border-box; inline-size: min(35rem, calc(100vw - 2 * var(--sb-spacing-gutter))); max-inline-size: 100%; padding: 0;   /* 35rem = 560 px at 100 %, wider with the text up to the window's width, as sb-dialog (spec/02 §4.16; provisional, agent) */
   border: var(--sb-elevation-overlay-border-width) solid var(--sb-elevation-overlay-border-color); border-radius: var(--sb-radius-container);
   background: var(--sb-elevation-overlay-surface); color: var(--sb-color-text); box-shadow: var(--sb-elevation-overlay-shadow);
   overflow: hidden;
 }
-/* a low window (NV-M4; provisional, agent): once the list has options it keeps at least three rows, and when search
+/* a low window (spec/02 §4.16; provisional, agent): once the list has options it keeps at least three rows, and when search
    row, three rows and the key hints do not fit the frame, the whole frame scrolls instead of squeezing the list to
    nothing */
 .sb-command-palette { overflow-y: auto; }
@@ -3074,7 +3074,7 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
 .sb-command-palette__search > input {
   flex: 1 1 auto; min-inline-size: 0; block-size: 46px; margin: 0; padding: 0; border: 0; background: transparent; outline: none;
   color: var(--sb-color-text); font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking);
-  block-size: max(46px, 1lh);   /* as the field's input: never cuts its line at 200 % (NV-M2; provisional, agent) */
+  block-size: max(46px, 1lh);   /* as the field's input: never cuts its line at 200 % (spec/02 §4.16; provisional, agent) */
 }
 .sb-command-palette__search > input::placeholder { color: var(--sb-color-text-muted); opacity: 1; }
 .sb-command-palette__search:focus-within { outline: var(--sb-focus-ring); outline-offset: calc(-1 * var(--sb-focus-width)); }
@@ -3085,7 +3085,7 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
   margin: 0; padding: var(--sb-space-2) var(--sb-space-3) var(--sb-space-1) var(--sb-command-palette-text-start);
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
 }
-/* group heads and the empty sentence start where the rows' names start (NV-M16; provisional, agent): the row's 16 px
+/* group heads and the empty sentence start where the rows' names start (spec/02 §4.16; provisional, agent): the row's 16 px
    start (padding + place line), the 16 px check slot and its gap, at every text size (the space-10 of before was
    40 px at 100 % but 80 px at 200 %, while the names stood at 64 px) */
 .sb-command-palette { --sb-command-palette-text-start: calc(var(--sb-space-4) + var(--sb-size-icon-sm) + var(--sb-space-2)); }
@@ -3104,7 +3104,7 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
   border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border);
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
 }
-/* sb-completion (D104 (40), NV-I5): the list an editor opens under its caret ([[ for a link, # for a tag), built from
+/* sb-completion (D104 (40), spec/02 §4.26): the list an editor opens under its caret ([[ for a link, # for a tag), built from
    the parts there are: the surface of sb-menu (2 px ink line, radius 12, 4 px above and below), sb-row options of
    32 px (48 under touch), the active option as in the palette (3 px place line and link colour, no fill, no weight
    change), the matched letters in body-strong (D102 (6)), long names wrap. The editor owns the keys and the place
@@ -3134,7 +3134,7 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
 .sb-window {
   container: sb-window / inline-size;
   /* one column of minmax(0, 1fr): an implicit auto column let a wide child (a long path, a wide table) widen the
-     whole window past its frame (NV-E9, D102 lane desktop) */
+     whole window past its frame (spec/02 §4.17, D102 lane desktop) */
   display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; box-sizing: border-box; min-inline-size: 0;
   background: var(--sb-color-bg); color: var(--sb-color-text);
   overflow-wrap: break-word;   /* the page's base rule (body.sb-page) for a window app whose body does not carry it (NV-J; provisional, agent) */
@@ -3168,7 +3168,7 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
   border-inline-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color);
 }
 .sb-window__sidebar[hidden], .sb-window__inspector[hidden] { display: none; }
-/* without sb-window.js (a framework counterpart without the fit, NV-G9, D102 lane desktop; provisional, agent): a docked
+/* without sb-window.js (a framework counterpart without the fit, spec/02 §4.17, D102 lane desktop; provisional, agent): a docked
    pane never takes the content's 480 px; the sidebar gives way down to its smallest width, the inspector too while
    both are docked. The script's fit (spec/02 §4.23) stays the contract; this only keeps the body inside the window */
 .sb-window__body > .sb-window__sidebar { max-inline-size: max(var(--sb-x-sebaro-pane-sidebar-min), calc(100cqi - 482px)); }
@@ -3176,15 +3176,15 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
   .sb-window__body > .sb-window__sidebar { max-inline-size: max(var(--sb-x-sebaro-pane-sidebar-min), calc(100cqi - 484px - var(--sb-x-sebaro-pane-inspector-min))); }
   .sb-window__body > .sb-window__inspector { max-inline-size: max(var(--sb-x-sebaro-pane-inspector-min), calc(100cqi - 484px - var(--sb-x-sebaro-pane-sidebar-min))); }
 }
-/* a lone empty state in the content stands in its middle (NV-E18, as .sb-view__content; provisional, agent); "safe"
+/* a lone empty state in the content stands in its middle (spec/02 §3.14, as .sb-view__content; provisional, agent); "safe"
    keeps its start in view when large text makes it taller than the content */
 .sb-window__content:has(> .sb-empty:only-child) { display: flex; flex-direction: column; justify-content: safe center; }
-/* the empty state of a pane (an empty tree in a 240 px sidebar, NV-G8; provisional, agent): window density, the title
+/* the empty state of a pane (an empty tree in a 240 px sidebar, spec/02 §3.14; provisional, agent): window density, the title
    in label, the text in caption, 16 px around */
 [data-sb-density="window"] :is(.sb-window__sidebar, .sb-window__inspector) .sb-empty { gap: var(--sb-space-1); padding: var(--sb-space-4); }
 [data-sb-density="window"] :is(.sb-window__sidebar, .sb-window__inspector) .sb-empty__title { font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
 [data-sb-density="window"] :is(.sb-window__sidebar, .sb-window__inspector) .sb-empty__text { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
-/* flush content (an editor, a viewer; NV-H5, provisional, agent): no padding and no scroll of its own, the editor
+/* flush content (an editor, a viewer; spec/02 §4.17, provisional, agent): no padding and no scroll of its own, the editor
    scrolls itself; the tab row stands where it stands in the padded form; „Keine Notiz offen.“ keeps its padding */
 .sb-window__content--flush { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
 .sb-window__content--flush > .sb-doc-tabs__panel:not([hidden]) { flex: 1 1 auto; min-block-size: 0; }
@@ -3212,7 +3212,7 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
   margin: var(--sb-space-4) 0 var(--sb-space-1); padding-inline: var(--sb-space-4);
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
 }
-/* a group head with its own tools (D104 (36), NV-G2): div.sb-side-nav__head > p.sb-side-nav__name (the group's name,
+/* a group head with its own tools (D104 (36), spec/02 §4.3): div.sb-side-nav__head > p.sb-side-nav__name (the group's name,
    the label of its tree) + div.sb-side-nav__tools (compact 32 px tools with an icon and a tooltip, only tools that act
    on this group); the name wraps, the tools stay at the end (provisional, agent: the names, the 4 px end padding, the
    name on the tools' middle line) */
@@ -3232,16 +3232,16 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
 .sb-window > .sb-bottom-block { position: static; }
 .sb-window .sb-primary-action-bar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-2) var(--sb-space-4); padding: var(--sb-space-3) var(--sb-space-4); }
 .sb-window .sb-primary-action-bar__status { display: flex; flex: 1 1 auto; min-inline-size: 0; margin: 0; }
-.sb-window .sb-primary-action-bar__message { flex: 1 1 16.25rem; min-inline-size: 0; margin: 0; }   /* min 0: an overlong part of a file name breaks inside the message instead of widening the zone (NV-F7); 16.25rem = 260 px at 100 %, so at large text the sentence takes its own line instead of a column of a few words (D102 (11); provisional, agent) */
-/* the sentence is one span beside the glyph (NV-F3): an element inside it (a .sb-file-name) stays in the sentence's
+.sb-window .sb-primary-action-bar__message { flex: 1 1 16.25rem; min-inline-size: 0; margin: 0; }   /* min 0: an overlong part of a file name breaks inside the message instead of widening the zone (spec/02 §4.8); 16.25rem = 260 px at 100 %, so at large text the sentence takes its own line instead of a column of a few words (D102 (11); provisional, agent) */
+/* the sentence is one span beside the glyph (spec/02 §1.1): an element inside it (a .sb-file-name) stays in the sentence's
    line instead of becoming a flex item of its own, and the span may shrink, so a long path breaks inside it */
 :is(.sb-primary-action-bar__message, .sb-primary-action-bar__status) > :not(.sb-icon) { min-inline-size: 0; }
-/* a part that warns inside a sentence of several parts (D104 (35), NV-F4): inline in the sentence's one span, so it
+/* a part that warns inside a sentence of several parts (D104 (35), spec/02 §4.17): inline in the sentence's one span, so it
    wraps like its text and sits on the line's baseline (an inline-flex part rose to its glyph's foot); the glyph as the
    changed tab's mark, 16 px, 4 px before the words (provisional, agent) */
 .sb-primary-action-bar__status > span > .sb-status { display: inline; }
 .sb-primary-action-bar__status > span > .sb-status > .sb-icon { vertical-align: -3px; margin-inline-end: var(--sb-space-1); margin-block-start: 0; }
-/* the counter line (D102 (1), NV-A2): words, characters, line and column, the selection; its own line of text before
+/* the counter line (D102 (1), spec/02 §4.17): words, characters, line and column, the selection; its own line of text before
    the state sentence, in caption and text-muted, digits in tabular figures, no role (counts are no state). Its parts
    wrap as units (a part breaks between its words only when it alone is wider than the line); a row of its own above
    the sentence and the primary action at every width („als eigene Zeile … getrennt vom Stand-Satz“; review of the
@@ -3260,7 +3260,7 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
 .sb-window .sb-primary-action-bar .sb-primary-action { inline-size: auto; min-inline-size: 200px; margin-inline-start: auto; padding-inline: min(var(--sb-space-6), 24px); }
 /* overlay panes: out of the grid, over the content edge, the ink line on their inner edge stays the layer line */
 /* overlay panes below 1004 / 722 px: only a pane in the window's grid (.sb-window__body >), so a sidebar or inspector
-   outside the grid stays in flow (NV-G11, D102 lane desktop); the contract for a framework counterpart without
+   outside the grid stays in flow (spec/02 §4.17, D102 lane desktop); the contract for a framework counterpart without
    sb-window.js is shared/ADOPTION.md §2.3 */
 @container sb-window (max-width: 1003.98px) {
   .sb-window__body > .sb-window__inspector {
@@ -3314,7 +3314,7 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
  * Only var(--sb-*) (and the icon stroke variables --sb-icon-* of sprite.css): no raw colours, no shadows. Lint L4:
  * cobalt marks (drop frame, drop line) are borders and outlines, never a background.
  * The title bar's start on macOS is the token x-sebaro.traffic-light.room (80 px: the three lights at x 16 plus their
- * width and a gap; px, not the rem space tokens, because the system's buttons do not grow with the text, NV-E10).
+ * width and a gap; px, not the rem space tokens, because the system's buttons do not grow with the text, spec/02 §4.17).
  * Numbers that are not tokens: 14 rem menu column, 11 px either side of a divider (24 px pointer target with the 2 px
  * line), 23 px inward beside a collapsed pane's hairline (24 px target, D102 (15)). */
 
@@ -3417,8 +3417,8 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
    allowed by ARIA; Entf (fn+⌫ on a Mac keyboard) and ⌘W / Strg+W close by keyboard, ⌫ alone never, D104 (38);
    „Schließen“ in the menu „Datei“). 32 px high, label type;
    the current tab like the system tabs (3 px accent bottom edge, link colour, title weight); long names are cut at
-   the end of 15rem, a deliberate ellipsis marked data-sb-truncate (spec/09 §3.1, D67 (2), NV-D3; every tab carries its
-   full name in its title, NV-H2); no tab shrinks below its name's width (D104 (39), NV-H13), the row scrolls instead. The cross (16 px icon, 24 px target) always on the current tab, on the others
+   the end of 15rem, a deliberate ellipsis marked data-sb-truncate (spec/09 §3.1, D67 (2), spec/02 §4.21; every tab carries its
+   full name in its title, spec/02 §4.21); no tab shrinks below its name's width (D104 (39)), the row scrolls instead. The cross (16 px icon, 24 px target) always on the current tab, on the others
    while the pointer is on the tab or the tab has focus; under touch on every tab with a 48 px target. The row sits
    at the top of the content, over its full width, and stays while the text scrolls; it scrolls sideways in a narrow
    window with the system's scroll bar (D102 (10): no scroll bar of our own), and sb-window.js scrolls the current tab
@@ -3435,7 +3435,7 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
   position: relative; display: flex; align-items: center; flex: 0 0 auto; min-inline-size: 8rem; max-inline-size: 15rem;
   border-inline-end: var(--sb-border-width-hairline) solid var(--sb-color-border);
 }
-/* D104 (39), NV-H13: every tab keeps the width of its name up to 15rem (flex-shrink 0), so names stay readable when
+/* D104 (39), spec/02 §4.21: every tab keeps the width of its name up to 15rem (flex-shrink 0), so names stay readable when
    many are open; only then the row scrolls, and sb-window.js scrolls the current tab into view (until D104 the others
    shrank to 8rem first and only the current tab kept its name, DSK-R2) */
 .sb-doc-tabs__tab {
@@ -3493,9 +3493,9 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
 .sb-window__content > .sb-doc-tabs {
   position: sticky; inset-block-start: 0; z-index: var(--sb-layer-sticky);
   margin: 0 calc(-1 * var(--sb-space-8)) var(--sb-space-6); padding-inline: var(--sb-space-4) 0; background: var(--sb-color-bg);
-  scroll-padding-inline-start: var(--sb-space-4);   /* the first tab scrolls back to the row's 16 px start (NV-H14) */
+  scroll-padding-inline-start: var(--sb-space-4);   /* the first tab scrolls back to the row's 16 px start (spec/02 §4.21) */
 }
-/* flush content (NV-H5): no padding to undo, the row keeps its place */
+/* flush content (spec/02 §4.17): no padding to undo, the row keeps its place */
 .sb-window__content--flush > .sb-doc-tabs { flex: none; margin: 0; }
 @container sb-window (max-width: 721.98px) {
   .sb-window__content > .sb-doc-tabs { margin-inline: calc(-1 * var(--sb-space-4)); margin-block-end: var(--sb-space-4); padding-inline-start: 0; scroll-padding-inline-start: 0; }
@@ -3513,7 +3513,7 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
 [data-sb-drag] { -webkit-user-select: none; user-select: none; }
 .sb-row[data-sb-state="dragging"] { outline: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color); outline-offset: calc(-1 * var(--sb-x-sebaro-layer-line-width)); }
 .sb-row[data-sb-state="drop-into"] { outline: var(--sb-border-width-strong) solid var(--sb-color-accent); outline-offset: calc(-1 * var(--sb-border-width-strong)); }
-/* the free space under the rows takes a row into the tree's top level (the vault root, NV-G6; provisional, agent): the
+/* the free space under the rows takes a row into the tree's top level (the vault root, spec/02 §4.22; provisional, agent): the
    whole tree gets the same 3 px frame. In a window's sidebar the last tree fills the room under it, so there is free
    space to aim at */
 .sb-tree[data-sb-state="drop-into"] { outline: var(--sb-border-width-strong) solid var(--sb-color-accent); outline-offset: calc(-1 * var(--sb-border-width-strong)); }
@@ -3576,7 +3576,7 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
 .sb-field--compact .sb-field__control { min-block-size: var(--sb-size-control-sm); padding-inline: var(--sb-space-2); }
 .sb-field--compact .sb-field__control > :is(input, select, textarea) {
   block-size: auto;   /* an engine without lh: the input as tall as its line, centred in the 32 px control */
-  block-size: max(calc(var(--sb-size-control-sm) - var(--sb-border-width-control)), 1lh);   /* 31 px at 100 % as before, the line's height once that is taller: the token only as a minimum (NV-D1, L8) */
+  block-size: max(calc(var(--sb-size-control-sm) - var(--sb-border-width-control)), 1lh);   /* 31 px at 100 % as before, the line's height once that is taller: the token only as a minimum (spec/01 §4) */
   font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); font-weight: var(--sb-type-body-weight);
 }
 .sb-field--compact .sb-field__suffix { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
@@ -3660,7 +3660,7 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
 [data-sb-find-row="line"] .sb-field--number { --sb-digits: 6; }
 .sb-field--number .sb-field__suffix { white-space: nowrap; }
 .sb-find-bar { display: grid; grid-template-columns: minmax(0, 1fr); min-inline-size: 0; }
-.sb-window__content--flush > .sb-find-bar { flex: none; }   /* under the tab row, over the panel (flush content, NV-H5) */
+.sb-window__content--flush > .sb-find-bar { flex: none; }   /* under the tab row, over the panel (flush content, spec/02 §4.17) */
 .sb-window__content--flush > .sb-reader:not([hidden]) { flex: 1 1 auto; }
 .sb-find-bar[hidden] { display: none; }
 .sb-find-bar .sb-field__error { grid-column: 1 / -1; }

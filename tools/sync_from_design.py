@@ -100,10 +100,13 @@ def sha256(path: Path) -> str:
 def export(design: Path, cfg: dict, out: Path, from_export: Path | None = None) -> dict:
     """Run export_system.py (or copy the given export) + --verify into out, then drop excluded products.
     Returns the guide sync record."""
+    # the workshop's export removes the excluded products itself (export_system.py 1.13.0) and its --verify needs the
+    # same list, so both get the guide's union through the environment, never on a command line
+    env = {**os.environ, EXCLUDE_ENV: ",".join(cfg.get("excludeProducts", []))}
     if from_export is None:
         cmd = [sys.executable, "tools/export_system.py", cfg["system"], "--target", "web", "--out", str(out),
                "--product", cfg["product"]]
-        subprocess.run(cmd, cwd=design, check=True, stdout=subprocess.DEVNULL)
+        subprocess.run(cmd, cwd=design, check=True, stdout=subprocess.DEVNULL, env=env)
     else:
         rec = json.loads((from_export / "sebaro-export.json").read_text(encoding="utf-8"))
         got = (rec.get("system", {}).get("slug"), rec.get("target"), rec.get("product"))
@@ -112,7 +115,7 @@ def export(design: Path, cfg: dict, out: Path, from_export: Path | None = None) 
             sys.exit(f"{from_export} is a {got} export; the guide needs (system, target, product) = {want}")
         shutil.copytree(from_export, out)
     subprocess.run([sys.executable, "tools/export_system.py", "--verify", str(out)], cwd=design, check=True,
-                   stdout=subprocess.DEVNULL)
+                   stdout=subprocess.DEVNULL, env=env)
 
     manifest_path = out / "sebaro-export.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
