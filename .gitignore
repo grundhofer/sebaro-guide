@@ -3,4 +3,4 @@ __pycache__/
 *.pyc
 tools/sync.local.json
 .work/
-node_modules/
+/node_modules

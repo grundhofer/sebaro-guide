@@ -341,3 +341,67 @@ mark.g-rx-hit-lime { padding: 0 var(--sb-space-0-5); background: var(--sb-color-
 /* DSK-04 „Nicht so“: a 760 px window, so the three fixed columns leave the text about 236 px */
 .demo-window-frame.g-rx-winfixed { inline-size: 760px; max-inline-size: none; }
 .g-rx-jumpbox { padding-inline-start: calc(var(--sb-space-3) + var(--sb-border-width-strong)); }   /* NAV-08: room for the place line a jump target draws before the text, which the stage would else clip */
+/* 2.13.1 examples (b) */
+/* DAT-03: the dashboard tiles of „Nicht so“ take one column once a value would not fit beside another (200 % text) */
+.g-rx-tiles { grid-template-columns: repeat(auto-fit, minmax(min(100%, max(96px, 6rem)), 1fr)); }
+/* DAT-03: the frame tile of a die (D105 (33), D106 (12)), drawn after Compose's SbValueTile; the web has no such part */
+.g-rx-b-dice { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--sb-space-4); margin: 0; padding: 0; list-style: none; }
+.g-rx-b-die { display: grid; justify-items: start; gap: var(--sb-space-1); }
+.g-rx-b-die__tile {
+  display: grid; place-items: center; box-sizing: border-box; min-inline-size: 64px; min-block-size: 64px; padding-inline: var(--sb-space-2);
+  border: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-control);
+  font: var(--sb-type-display); letter-spacing: var(--sb-type-display-tracking); font-variant-numeric: var(--sb-type-numeric-variant);
+}
+.g-rx-b-die__state { display: inline-flex; align-items: center; gap: var(--sb-space-1); font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); color: var(--sb-color-text); }
+.g-ex--dont .g-rx-b-die__tile--accent { border-color: var(--sb-color-accent); background: var(--sb-color-accent); color: var(--sb-color-on-accent); }
+.g-ex--dont .g-rx-b-die__tile--lime { border-color: var(--sb-color-primary-action); background: var(--sb-color-primary-action); color: var(--sb-color-on-primary-action); }
+.g-ex--dont .g-rx-b-die__tile--grey { border-color: var(--sb-color-surface-sunken); background: var(--sb-color-surface-sunken); }
+.g-ex--dont .g-rx-b-die__state--accent { color: var(--sb-color-accent); }
+/* DAT-07, ICO-07 „Nicht so“: a spot a product drew itself (D105 (18)) */
+.g-rx-b-ownspot { display: block; flex: none; inline-size: 128px; block-size: 96px; }
+.g-ex--dont .g-rx-b-ownspot__box { fill: var(--sb-dataviz-categorical-2); stroke: var(--sb-color-text); stroke-width: 2; stroke-linejoin: round; }
+.g-ex--dont .g-rx-b-ownspot__lid, .g-ex--dont .g-rx-b-ownspot__line { fill: none; stroke: var(--sb-color-text); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.g-ex--dont .g-rx-b-ownspot__line { stroke: var(--sb-dataviz-categorical-4); }
+.g-ex--dont .g-rx-b-ownspot__eye { fill: var(--sb-color-text); }
+.g-ex--dont .g-rx-b-ownspot--grey .g-rx-b-ownspot__box { fill: none; stroke: var(--sb-color-text-muted); }
+.g-ex--dont .g-rx-b-ownspot--grey .g-rx-b-ownspot__lid { stroke: var(--sb-color-text-muted); }
+/* FAR-02: a picture above its text (D105 (27)); the light or dark poster follows the scheme like tokens.css */
+.g-rx-b-picfig { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-2); margin: var(--sb-space-2) 0 0; max-inline-size: 30rem; }
+.g-rx-b-picfig figcaption { display: grid; gap: var(--sb-space-1); }
+.g-rx-b-picfig__title { font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
+.g-rx-b-pic { display: block; inline-size: 100%; block-size: auto; border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-control); }
+.g-rx-b-pic--dark { display: none; }
+/* the dark poster only on screen: print always takes the light one (WEB-11) */
+@media screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .g-rx-b-pic--light { display: none; }
+  :root:not([data-theme="light"]) .g-rx-b-pic--dark { display: block; }
+}
+@media screen {
+  [data-theme="dark"] .g-rx-b-pic--light { display: none; }
+  [data-theme="dark"] .g-rx-b-pic--dark { display: block; }
+  [data-theme="light"] .g-rx-b-pic--light { display: block; }
+  [data-theme="light"] .g-rx-b-pic--dark { display: none; }
+}
+.g-ex--dont .g-rx-b-picfig--over { gap: 0; }   /* picture and text share one cell, so a caption taller than the picture (200 % text) grows the cell instead of covering the field above */
+.g-ex--dont .g-rx-b-picfig--over > img { grid-area: 1 / 1; align-self: end; }
+.g-ex--dont .g-rx-b-picfig--over figcaption {
+  grid-area: 1 / 1; align-self: end; padding: var(--sb-space-8) var(--sb-space-3) var(--sb-space-3); overflow-wrap: break-word;
+  border-radius: 0 0 var(--sb-radius-control) var(--sb-radius-control);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0)); color: #FFFFFF; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+/* ICO-04: a line of text twice as large; the 16 px icon keeps its size (D104 (34)) */
+.g-rx-b-text2x { margin: 0; font-size: 200%; line-height: 1.25; }
+/* DAT-11: the heatmap reaches 6 px past its box on both sides (sebaro.css); room for it in a narrow stage */
+.g-rx-b-heatpad { padding-inline: calc(var(--sb-space-1) + var(--sb-space-0-5)); }
+/* DAT-12: the histogram's first and last boundary stand half outside the plot; room for them in a narrow stage */
+.g-rx-b-edgepad { padding-inline: var(--sb-space-4); }
+/* DAT-12: the „erwartet“ line (D105 (34), D106 (13)), drawn after Compose's SbShareRows(expected = …): 2 px text-muted
+   with a 1 px bg joint on both sides, 4 px past the bar */
+.g-rx-b-expect, .g-rx-b-expect-joint { vector-effect: non-scaling-stroke; stroke-linecap: butt; }
+.g-rx-b-expect-joint { stroke: var(--sb-color-bg); stroke-width: 4px; }
+.g-rx-b-expect { stroke: var(--sb-color-text-muted); stroke-width: 2px; }
+/* DAT-16 „Nicht so“: one week as a list of days that wraps at large text instead of a table that scrolls */
+.g-ex--dont .g-rx-b-badweek { display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.g-ex--dont .g-rx-b-badweek > li { display: grid; justify-items: center; gap: 4px; min-inline-size: 36px; }
+.g-ex--dont .g-rx-b-badweek__head { font: var(--sb-type-caption); color: var(--sb-color-text-muted); }
+.g-ex--dont .g-rx-b-badweek__day { position: relative; display: grid; place-items: center; box-sizing: border-box; min-inline-size: 36px; min-block-size: 36px; padding-inline: 2px; font: var(--sb-type-label); }

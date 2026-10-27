@@ -2093,7 +2093,7 @@ Setz Pfeile, Chevrons und das Zeichen für externe Links in der Oberfläche imme
 
 Nutze Spot-Illustrationen (128 × 96, Strich 2) nur für einen echten Zustand, einen je Leerzustand über der Überschrift. Nur zwei neutrale Farben: Tinte text-muted und Ton border; nie Marken-, Status-, Produkt- oder Hauptaktionsfarbe. Spots sind aria-hidden. Es gibt nur die vier Spots des Sets (empty-stats, facts, offline, onboarding); ein Produkt zeichnet keine eigenen.
 
-*EN:* Spots (128×96, stroke 2) illustrate one state, one per empty state; ink text-muted + tone border only; aria-hidden; nothing reassuring, no scene or figure.
+*EN:* Spots (128×96, stroke 2) illustrate one state, one per empty state; ink text-muted + tone border only; aria-hidden; nothing reassuring, no scene or figure. Only the set's four spots exist (empty-stats, facts, offline, onboarding); a product draws none of its own (D105).
 
 - **Warum:** Eine Farbe ohne Aufgabe ist in Richtung A nicht erlaubt; Spots enthalten keine Metapher, Szene oder Figur. D105 (18): „Nein: der leere Zustand mit Titel und einem Satz genügt.“
 - **So:** empty-stats bei „Noch keine Statistik“, offline, facts, onboarding.
@@ -2516,12 +2516,12 @@ Lass „DE / EN“ nur auf dieselbe Seite in der anderen Sprache führen, nie au
 
 Drucke jede Website hell, egal ob die Seite gerade dunkel ist, im gewählten Farbton. Die hellen Farben fürs Papier bringt tokens.css selbst mit (ein erzeugter Druckblock, Token-Vertrag 1.9), auch ohne Skript. Lade trotzdem sb-print.js am Ende jeder Seite: Es öffnet vor dem Druck zugeklappte Antworten außerhalb der Navigation und schließt sie danach wieder. Ein Bildpaar mit dunkler Fassung zeigt sie nur am Bildschirm (@media screen); ein Video nimmt vor dem Druck sein helles Vorschaubild (sb-media.js).
 
-*EN:* Paper is always light, in the chosen tone: tokens.css ends with a generated @media print block with the light values (token contract 1.9), also without scripts; every website page still loads sb-print.js at the end of body; it switches to light before printing, opens closed <details> outside navigation and restores both afterwards without touching the stored choice.
+*EN:* Paper is always light, in the chosen tone: tokens.css ends with a generated @media print block with the light values (token contract 1.9), also without scripts; every website page still loads sb-print.js at the end of body; it opens closed <details> outside navigation before printing and closes them again afterwards, without touching the stored choice; a dark image pair shows only on screen, a video takes its light poster (sb-media.js).
 
 - **Warum:** Inhaber D91: Druck immer hell (W8a). Papier ist hell; im dunklen Modus fiele der Grund weg und heller Text stünde auf weißem Papier.
 - **So:** <script src='sebaro/js/sb-print.js'></script> am Ende von body auf jeder Seite, auch auf Artikeln und Fakten.
 - **Nicht so:** Seiten ohne sb-print.js; Druck im dunklen Modus; die gespeicherte Wahl beim Drucken ändern; zugeklappte Antworten im Druck.
-- **Werte:** beforeprint: html[data-theme='light']; afterprint: zurück
+- **Werte:** beforeprint: zugeklappte <details> außerhalb von nav öffnen; afterprint: wieder schließen; Farben: @media print in tokens.css
 - **Prüfung:** Druckvorschau im dunklen Modus zeigt helles Papier, auch mit abgeschaltetem Skript (gemessen in Chromium mit page.pdf() und in der Werkstatt mit den Tests des Druckblocks); WebKit und Firefox ungeprüft.
 - **Entscheidung:** D91 · **Quelle:** `DECISIONS.md D91 (W8a); systems/sebaro/spec/09-platform-web.md §18.3; spec/02-components.md §7 (sb-print.js); shared/TOKEN-CONTRACT.md 1.9 §9.1; spec/09-platform-web.md §18.3; spec/06-imagery.md §6; CHECKS.md §29.5 (OR-11)`
 

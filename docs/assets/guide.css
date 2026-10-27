@@ -131,6 +131,12 @@
   .g-table-stack tr > th[scope="row"], .g-table-stack tr > td:first-child { font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
   .g-table-stack tr > :is(td, th)[data-label]:not(:first-child)::before { content: attr(data-label) ": "; color: var(--sb-color-text-muted); font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); }
 }
+/* g-table-stack--large-text (rule examples, guide 2.13.1): the same restack, but only while the text is large: a screen
+ * that holds fewer than 20rem (below 640 px at 200 % text, never on a phone of 320 px or more at 100 %) or a screen of
+ * 1024 px or more that holds less than 64rem (as the page frame below). At 100 % the table keeps its columns as before;
+ * the container exists only then (ZUG-09; provisional, agent) */
+:has(> .g-table-stack--large-text) { container: none; }
+@media (max-width: 19.99rem), (min-width: 1024px) and (max-width: 63.99rem) { :has(> .g-table-stack--large-text) { container: g-table / inline-size; } }
 
 /* long names in inline code break instead of pushing a column or the page sideways (code blocks keep their lines); a
  * file name (sb-file-name) breaks only after - . _ / where the page wrote <wbr>, an identifier (sb-id) never (D101 (6), D80) */

@@ -1,7 +1,7 @@
 {
  "$schema": "./rules.schema.json",
- "version": "2.13.0",
- "date": "2026-10-27",
+ "version": "2.13.1",
+ "date": "2026-10-28",
  "source": {
   "repo": "sebaroDesign",
   "system": "sebaro",
@@ -4128,7 +4128,7 @@
    "area": "icons",
    "title": "Spots zeigen nur einen Zustand",
    "rule": "Nutze Spot-Illustrationen (128 × 96, Strich 2) nur für einen echten Zustand, einen je Leerzustand über der Überschrift. Nur zwei neutrale Farben: Tinte text-muted und Ton border; nie Marken-, Status-, Produkt- oder Hauptaktionsfarbe. Spots sind aria-hidden. Es gibt nur die vier Spots des Sets (empty-stats, facts, offline, onboarding); ein Produkt zeichnet keine eigenen.",
-   "rule_en": "Spots (128×96, stroke 2) illustrate one state, one per empty state; ink text-muted + tone border only; aria-hidden; nothing reassuring, no scene or figure.",
+   "rule_en": "Spots (128×96, stroke 2) illustrate one state, one per empty state; ink text-muted + tone border only; aria-hidden; nothing reassuring, no scene or figure. Only the set's four spots exist (empty-stats, facts, offline, onboarding); a product draws none of its own (D105).",
    "why": "Eine Farbe ohne Aufgabe ist in Richtung A nicht erlaubt; Spots enthalten keine Metapher, Szene oder Figur. D105 (18): „Nein: der leere Zustand mit Titel und einem Satz genügt.“",
    "do": "empty-stats bei „Noch keine Statistik“, offline, facts, onboarding.",
    "dont": "Reihe von Spots; Maskottchen; Linien im Ton (border auf bg nur 1,47 : 1 im Dunkelmodus); ein eigener Spot eines Produkts für seine leere Liste.",
@@ -4145,7 +4145,7 @@
    "status": "entschieden",
    "check": "aria-hidden='true'; Ton im Dunkelmodus sichtbar; Überschrift und Satz tragen die Bedeutung.",
    "example_hint": "Leerzustand mit empty-stats-Spot; falsch: bunte Szene mit Figur.",
-   "changed": "2026-10-26"
+   "changed": "2026-10-28"
   },
   {
    "id": "ICO-08",
@@ -4926,11 +4926,11 @@
    "area": "plattform-web",
    "title": "Druck immer hell",
    "rule": "Drucke jede Website hell, egal ob die Seite gerade dunkel ist, im gewählten Farbton. Die hellen Farben fürs Papier bringt tokens.css selbst mit (ein erzeugter Druckblock, Token-Vertrag 1.9), auch ohne Skript. Lade trotzdem sb-print.js am Ende jeder Seite: Es öffnet vor dem Druck zugeklappte Antworten außerhalb der Navigation und schließt sie danach wieder. Ein Bildpaar mit dunkler Fassung zeigt sie nur am Bildschirm (@media screen); ein Video nimmt vor dem Druck sein helles Vorschaubild (sb-media.js).",
-   "rule_en": "Paper is always light, in the chosen tone: tokens.css ends with a generated @media print block with the light values (token contract 1.9), also without scripts; every website page still loads sb-print.js at the end of body; it switches to light before printing, opens closed <details> outside navigation and restores both afterwards without touching the stored choice.",
+   "rule_en": "Paper is always light, in the chosen tone: tokens.css ends with a generated @media print block with the light values (token contract 1.9), also without scripts; every website page still loads sb-print.js at the end of body; it opens closed <details> outside navigation before printing and closes them again afterwards, without touching the stored choice; a dark image pair shows only on screen, a video takes its light poster (sb-media.js).",
    "why": "Inhaber D91: Druck immer hell (W8a). Papier ist hell; im dunklen Modus fiele der Grund weg und heller Text stünde auf weißem Papier.",
    "do": "<script src='sebaro/js/sb-print.js'></script> am Ende von body auf jeder Seite, auch auf Artikeln und Fakten.",
    "dont": "Seiten ohne sb-print.js; Druck im dunklen Modus; die gespeicherte Wahl beim Drucken ändern; zugeklappte Antworten im Druck.",
-   "numbers": "beforeprint: html[data-theme='light']; afterprint: zurück",
+   "numbers": "beforeprint: zugeklappte <details> außerhalb von nav öffnen; afterprint: wieder schließen; Farben: @media print in tokens.css",
    "decisions": [
     "D91"
    ],
@@ -4942,7 +4942,7 @@
    "check": "Druckvorschau im dunklen Modus zeigt helles Papier, auch mit abgeschaltetem Skript (gemessen in Chromium mit page.pdf() und in der Werkstatt mit den Tests des Druckblocks); WebKit und Firefox ungeprüft.",
    "example_hint": "Dieselbe Karte am Bildschirm dunkel und auf Papier hell; falsch: dunkles Papier.",
    "note": "Seit dem Werkstatt-Commit 90843c8 (Token-Vertrag 1.9) endet tokens.css mit einem erzeugten @media print, das die hellen Werte wiederholt, auch für den warmen Farbton; damit druckt auch eine Seite ohne Skript hell. Seit dem Werkstatt-Commit 68ba334 hat sb-print.js keine Umschaltung auf Hell mehr: In Chromium mit emulierter Druckansicht druckten Seiten mit und ohne sie gleich, bis auf das dunkle Bildpaar, das jetzt unter @media screen steht, und das dunkle Vorschaubild eines Videos, das sb-media.js vor dem Druck tauscht. Ein echter Ausdruck außerhalb von Chromium ist nicht geprüft.",
-   "changed": "2026-10-26"
+   "changed": "2026-10-28"
   },
   {
    "id": "MOB-01",

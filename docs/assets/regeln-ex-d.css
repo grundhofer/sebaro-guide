@@ -290,3 +290,51 @@
 .g-rx-d-after { margin-block-start: var(--sb-space-6); }
 .g-rx-d-side240 { max-inline-size: 240px; margin-block-start: var(--sb-space-6); }
 .g-rx-d-pinrow { max-inline-size: 300px; margin-block-start: var(--sb-space-6); }
+
+/* 2.13.1, large text (ZUG-09, docs/ausblick.html#p-g-rahmen-scrollen): rule examples reflow in their stage instead of
+   scrolling in it. Only while the screen holds fewer than 20rem (below 640 px at 200 % text, never on a phone of 320 px
+   or more at 100 %), so at 100 % every example keeps its boxes (provisional, agent). One column instead of a column
+   as wide as its longest word, parts of a row under each other, and drawings bound to the stage's width */
+@media (max-width: 19.99rem) {
+  .g-ex__stage :is(.g-rx-sketch, .g-rx-wrong-gradient, .g-rx-wrong-ground, .g-rx-wrong-shadowcard, .g-rx-wrong-tintcard, .g-rx-c-site, .g-rx-c-paper) { grid-template-columns: minmax(0, 1fr); }
+  .g-ex__stage .g-rx-wrong-seal { max-inline-size: 100%; box-sizing: border-box; flex-wrap: wrap; }
+  .g-ex__stage .sb-check-list__item { grid-template-columns: minmax(0, 1fr); }
+  /* HAL-02: the theme button's words wrap in the stage */
+  .g-ex__stage .sb-theme-button { max-inline-size: 100%; }
+  /* RAU-01: the gap marks stand at the start under their field; their words fit beside them there */
+  .g-ex__stage .g-rx-spaced { grid-template-columns: minmax(0, 1fr); }
+  .g-ex__stage .g-rx-spaced > span:empty { display: none; }
+  /* BEW-03: the tone under its button */
+  .g-ex__stage .g-rx-dur { grid-template-columns: minmax(0, 1fr); justify-items: start; }
+  .g-ex__stage .g-rx-btn { max-inline-size: 100%; padding-inline: var(--sb-space-3); }
+  /* TXT-04: the narrow column stays narrower than the stage */
+  .g-ex__stage .g-rx-c-narrow { box-sizing: border-box; max-inline-size: 100%; }
+  /* ZEI-02, ZEI-03, ZEI-07, ICO-03: the swatch above its words, one tile per row, a web row that wraps */
+  .g-ex__stage .g-rx-c-tilegrid__item { flex-wrap: wrap; }
+  .g-ex__stage .g-rx-c-tiles:not(.g-rx-c-tiles--sizes) { grid-template-columns: minmax(0, 1fr); }
+  .g-ex__stage .g-rx-c-webrow { flex-wrap: wrap; max-inline-size: 100%; }
+  /* ZEI-09 („Nicht so“): the wrong wordmark stays spaced, stretched and glowing, in a smaller size */
+  /* lists, toasts and rows of a word and its icon: a word that alone does not fit breaks there (sb-fit.js gives it the
+     hyphen); in dark the words are a few px wider, so these overflowed only there */
+  .g-ex__stage :is(.g-rx-c-plainlist, .g-rx-toastspot) { grid-template-columns: minmax(0, 1fr); }
+  .g-ex__stage .sb-toast__action { flex-shrink: 1; min-inline-size: 0; max-inline-size: 100%; }
+  .g-ex__stage .g-rx-c-iconword { max-inline-size: 100%; flex-wrap: wrap; }
+  .g-ex__stage .sb-audio__title { min-inline-size: 0; }
+  .g-ex__stage .g-rx-d-tree { box-sizing: border-box; }
+  /* FAR-06: a token name goes under its swatch in a stacked row */
+  .g-ex__stage .g-rx-swatch-cell { flex-wrap: wrap; max-inline-size: 100%; }
+  .g-ex__stage .g-rx-c-bad-wordmark { font: var(--sb-type-title); letter-spacing: 0.15em; }
+  /* WEB-07: the chevron goes under the word of the closed contents */
+  .g-ex__stage .g-rx-d-docnav > details > summary { flex-wrap: wrap; }
+  /* DSK-02 („Nicht so“): the native menu hangs at the start of its bar */
+  .g-ex__stage .g-rx-c-nativemenu__list { margin-inline-start: 0; inline-size: 100%; }
+  .g-ex__stage .g-rx-c-nativemenu__list > li { display: block; overflow-wrap: break-word; }
+  .g-ex__stage .g-rx-c-nativemenu__list > li > :is(svg, .g-rx-c-nativemenu__gap) { display: inline-block; vertical-align: middle; margin-inline-end: var(--sb-space-2); }
+  /* DAT-14: the sortable table's wrap reaches only into the stage's 8 px, as far as sebaro's bleed goes on a page */
+  .g-ex__stage .sb-table-wrap:has(.sb-table__sort) { margin-inline: calc(-1 * min(var(--sb-space-2), 8px)); padding-inline: min(var(--sb-space-2), 8px); }
+  /* DSK-15: the inspector stands for a window part; it keeps its 280 px at double size, as a wide window shot does
+     (D104 (33)), and scrolls in its stage, so the label column and the field keep their room */
+  .g-ex__stage .g-rx-d-insp { inline-size: max(280px, 17.5rem); max-inline-size: none; }
+  /* DSK-11 („Nicht so“): the lifted card keeps its offset inside the stage */
+  .g-ex--dont .g-ex__stage .g-rx-d-ghost { max-inline-size: min(240px, 100% - 32px); }
+}

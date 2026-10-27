@@ -279,7 +279,7 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
    registry writes a name as the app does (D107 (2); ZEI-08). No question waits for the owner (the workshop's
    SYSTEM.md §5 has none open). Nothing of D106 is checked on a device, in a launcher, with a real camera or with
    TalkBack. The new web patterns of D102 to D105 are not yet shown as components on `docs/bauteile.html`
-   (`docs/ausblick.html#p-g-neue-muster`).
+   (`docs/ausblick.html#p-g-neue-muster`); the rule examples show them since 2.13.1.
    Settled by the owner with D108 (2026-10-27, synced from workshop `2b067c4`, export tool 1.11.0), six questions from
    the new gaps of novalis and this guide, all as proposed: in a window's sidebar a row's status that does not fit
    beside the name goes with glyph and word under the name, in the name's column (twist, icon and check hang in the
@@ -342,7 +342,7 @@ python3 tools/release.py 2.14.0        # turn "Unveröffentlicht" in CHANGELOG.m
 ```
 
 The workshop's demo check (1.8.0) measures one- and two-character text on screen pixels; on `regeln.html` it reports
-the deliberately unreadable cells of the „Nicht so“ specimens inside `g-ex--dont` (DAT-11's heatmap, one pill) as CTR1
+the deliberately unreadable cells of the „Nicht so“ specimens inside `g-ex--dont` (DAT-11's heatmap, one pill, since 2.13.1 FAR-02's title on a picture) as CTR1
 errors, which it cannot tell from real faults. Run `regeln.html` also with `--skip contrast` (a documented group of the
 tool; axe still checks contrast) and say so; every other page runs without it.
 Two limits of that command on guide pages: the colour group (COL1–COL4) never runs here, because the tool loads
@@ -422,6 +422,9 @@ hand with `tools/sync_from_design.py`.
     its `data-label`. Give each `td` a `data-label` equal to its column header; `guide.js` adds missing table roles.
     The wrapper must take its width from its parent (not a shrink-to-fit grid or flex item). Never on a sortable
     table (DAT-14, D92 (7): it scrolls sideways inside its `sb-table-wrap`) and never in markup meant to be copied.
+    With `g-table-stack--large-text` (rule examples, 2.13.1, provisional) the wrapper is a container only while the
+    text is large (a screen of fewer than 20rem, or 1024 px and more with less than 64rem), so at 100 % the table
+    keeps its columns.
   - Inline code in `main` breaks with `overflow-wrap: anywhere`, except a file name (`code.sb-file-name`, `<wbr>` after
     - . _ / but not before a short extension, D101 (6); the extension rule is provisional, workshop `ef6121d`) and an identifier (`sb-id`, D80); code blocks keep their lines.
   - Large text (D100 (5), ZUG-09): grids and lists in guide CSS take `minmax(0, 1fr)` or `min-inline-size: 0`, so a
@@ -435,9 +438,12 @@ hand with `tools/sync_from_design.py`.
     scroll in the stage instead of squeezing to a column no phone has (provisional, agent); a wide window shot
     (`g-rx-winwide`) is `max(740px, 46.25rem)` wide and its sidebar and inspector grow the same way, so at 200 % it is
     the window at double size (D104 (33)); below 24rem a stage keeps 8 px at its sides. Every other stage reflows as
-    far as its content can. Code blocks, tables, charts, drawings of fixed width and some deliberate „Nicht so“
-    specimens still scroll in their stage at 200 % (36 rule examples at 320 px, 23 at 360, 15 at 390, listed at
-    `docs/ausblick.html#p-g-rahmen-scrollen`); the page never scrolls and `OVF4` finds no frame that cuts a text. A menu
+    far as its content can; since 2.13.1, while the screen holds fewer than 20rem (`regeln-ex-d.css`), drawings and text
+    specimens take the stage's width and tables marked `g-table-stack--large-text` stack per row (at 100 % they keep
+    their columns). At 200 % only SCH-06's narrow column (`data-sb-narrow-ok`) and DSK-03's phone editor (`min(320px, 12rem)`)
+    still scroll in their stage, besides phone frames, window shots and screen specimens, plus code
+    blocks and the tables of DAT-05, DAT-14 (sortable), SCH-03 and TXT-12 in their own frame
+    (`docs/ausblick.html#p-g-rahmen-scrollen`); the page never scrolls and `OVF4` finds no frame that cuts a text. A menu
     row whose word would break beside its keys gets the keys under the word from the exported `sb-fit.js` (workshop
     `ef6121d`, `docs/ausblick.html#p-w-menue-kuerzel`); the guide adds no width of its own. `guide.js`
     gives a `g-ex__stage` or `g-daten-specimen` that scrolls sideways `tabindex="0"`, `role="region"` and a name, and
@@ -492,8 +498,8 @@ what is still open, and what is built but untested (real iOS and Android devices
 windows), is collected on `docs/ausblick.html`; no question waits for the owner.
 No guide page scrolls sideways at 200 % text on 320, 360 and 390 px, no frame cuts a text and, since 2.11.0, no word
 breaks inside itself where it would fit (`OVF3`, `OVF4`, `OVF6`; `docs/ausblick.html#p-g-grosse-schrift`); the workshop
-built the narrow-column parts after D102. Rule examples that still scroll in their own frame at 200 % are listed at
-`docs/ausblick.html#p-g-rahmen-scrollen`. The four workshop requests of 2.11.0 (menu rows with keys, a board column
+built the narrow-column parts after D102. Since 2.13.1 the only rule examples that still scroll at 200 % are phone frames, window shots, screen specimens, code,
+SCH-06's narrow column and four deliberate tables (`docs/ausblick.html#p-g-rahmen-scrollen`). The four workshop requests of 2.11.0 (menu rows with keys, a board column
 head with a long one-word name, deliberately narrow columns in `OVF6`, the calendar's day numbers at 200 % on 320 px)
 are built in workshop `ef6121d` and used here; none of them is checked in WebKit, Firefox or a Tauri window.
 Since 2.13.0 the same holds at 200 % text on 1024 and 1280 px (`docs/ausblick.html#p-g-breite-fenster`): every layout

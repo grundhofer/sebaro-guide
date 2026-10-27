@@ -413,3 +413,29 @@ caption.g-rx-c-caption { caption-side: top; text-align: start; padding-block-end
 .g-rx-c-ed--wrong .g-rx-c-ed__mk { color: var(--sb-color-accent); }                  /* wrong: markup in cobalt */
 .g-rx-c-ed--wrong .g-rx-c-ed__num { color: var(--sb-color-link); }                   /* wrong: line numbers in cobalt */
 .g-rx-c-ed--wrong .g-rx-c-ed__match { outline: 0; background: var(--sb-color-warning); color: var(--sb-color-on-warning); }   /* wrong: filled yellow match */
+
+/* 2.13.1 examples (c) */
+/* DSK-03: headings in em of the editor size, spaces and tabs in text-subtle, the other places of the selected word with
+   a 1 px border frame, the sign of a changed line, and the phone editor (all Mono, lines wrap) */
+.g-rx-c-ed__h1 { font-size: 1.75em; }
+.g-rx-c-ed__h2 { font-size: 1.25em; }
+/* spaces and tabs stay real characters; their marks are drawn over them as in the exported editor/sebaro-codemirror.ts
+   (.cm-highlightSpace::before, .cm-highlightTab::before), so they are no text of their own */
+.g-rx-c-ed__space, .g-rx-c-ed__tab { position: relative; }
+.g-rx-c-ed__tab { display: inline-block; inline-size: 1.25em; }
+.g-rx-c-ed__space::before, .g-rx-c-ed__tab::before { position: absolute; inset-block-start: 0; inset-inline-start: 0; color: var(--sb-color-text-subtle); font-family: var(--sb-font-family-ui); pointer-events: none; }
+.g-rx-c-ed__space::before { content: "\00B7" / ""; inline-size: 100%; text-align: center; }
+.g-rx-c-ed__tab::before { content: "\2192" / ""; inset-inline-start: auto; inset-inline-end: 0; }
+.g-rx-c-ed__selmatch { outline: var(--sb-border-width-hairline) solid var(--sb-color-border); outline-offset: -1px; }
+.g-rx-c-ed__num--current { color: var(--sb-color-text); }
+.g-rx-c-ed__sign { font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); color: var(--sb-color-text); }
+.g-rx-c-ed--phone {
+  box-sizing: border-box; inline-size: 100%; max-inline-size: 360px;
+  border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-container);
+}
+.g-ex__stage .g-rx-c-ed--phone { min-inline-size: min(320px, 12rem); }   /* stands for a phone: keeps a phone's width at large text and scrolls in the stage, as a phone frame does */
+.g-rx-c-ed--phone .g-rx-c-ed__line { grid-template-columns: 2em var(--sb-space-2) minmax(0, 1fr); align-items: start; }
+.g-rx-c-ed--phone .g-rx-c-ed__text { white-space: pre-wrap; overflow-wrap: break-word; }
+.g-ex--dont .g-rx-c-ed--wrong .g-rx-c-ed__line--diff, .g-ex--dont .g-rx-c-ed--wrong .g-rx-c-ed__line--diff .g-rx-c-ed__sel { background: var(--sb-color-success-subtle); }   /* wrong: diff fill covers the selection */
+.g-ex--dont .g-rx-c-ed--wrong .g-rx-c-ed__selmatch { outline: 0; background: var(--sb-color-accent-subtle); }   /* wrong: filled other places */
+.g-ex--dont .g-rx-c-ed__tag { padding: 0 var(--sb-space-1); border: var(--sb-border-width-hairline) solid var(--sb-color-accent); border-radius: var(--sb-radius-pill); color: var(--sb-color-accent); }   /* wrong: tag as a framed pill */
