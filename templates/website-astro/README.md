@@ -85,6 +85,25 @@ die Spalte des Inhaltsverzeichnisses mit `15rem` (die 240&nbsp;px der Seitenleis
 - „GitHub“ im Fuß fehlt, weil die Beispielseite kein öffentliches Repository hat (WEB-03).
 - Kein Kontaktformular: eine statische Seite hat keinen Server, der es annimmt (dann `sb-form.js`, WEB-05).
 
+## Lücken der Vorlage (Agenten-Test 2026-10)
+
+Eine Probeaufgabe auf dieser Vorlage (eine Vereinsseite, [`../../docs/agenten-test-2026-10.md`](../../docs/agenten-test-2026-10.md))
+hat gezeigt, was ein Agent übernimmt oder übersieht. Bau es so:
+
+- **Kopf:** die vier Wörter „Apps“, „Projekte“, „Über“, „Kontakt“ und „DE / EN“ sind fest (NAV-06, NAV-07). Passen sie
+  nicht zum Inhalt (eine Seite nur auf Deutsch, ein Verein), nenn NAV-06 und frag den Inhaber, statt eigene Wörter zu
+  setzen oder die Sprachwahl zu streichen; eine fehlende Fassung zeigt das Kürzel grau ohne Link (WEB-10).
+- **„nie auf dem Server“** in der Tabelle der Datenschutzseite (`src/strings.mjs`) ist eine beruhigende Angabe ohne
+  Prüfung (BEL-01); schreib nur, was der Code zeigt.
+- **„übersprungen“** für den nie gelaufenen Screenreader-Test (`src/strings.mjs`) heißt nach ZUG-08 „offen“.
+- **Gruppierte Listen** (Termine nach Monat) bekommen den mitlaufenden Gruppenkopf `sb-list-header--sticky` mit
+  `sb-sticky.js` (DAT-15).
+- **Vorschaubilder** zeigen die Dachmarke (`product: "studio"`), solange das Produkt kein eigenes Zeichen hat (WEB-09,
+  ZEI-03); ein echtes Produkt setzt seine Kachel und seinen Namen.
+- **`CHECKS.md`:** TEC-06 verlangt sie, mit jedem Befehl, Datum und Exit-Code.
+- **Port:** `npm test` nutzt einen Server, der auf seinem Port schon läuft (`reuseExistingServer` außerhalb der CI);
+  beende andere Vorschauen oder starte mit `CI=1`.
+
 ## Für Agenten
 
 Übernimm [`../AGENTS-snippet.md`](../AGENTS-snippet.md) in das `AGENTS.md` des Projekts. Behalte: nur Klassen aus

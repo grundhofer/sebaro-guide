@@ -86,6 +86,28 @@ Projekts. Dazu für diese Vorlage:
 - Die Kachel in der Titelleiste ist ein Platzhalter (die Kachel der Dachmarke). Ein echtes Produkt bekommt sein Zeichen
   aus der Werkstatt (ZEI-03, ZEI-08); die App-Icons erzeugt `npx tauri icon` aus dessen Bild.
 
+## Lücken der Vorlage (Agenten-Test 2026-10)
+
+Eine Probeaufgabe auf dieser Vorlage („Notizen“, [`../../docs/agenten-test-2026-10.md`](../../docs/agenten-test-2026-10.md))
+hat gezeigt, was ein Agent übernimmt oder übersieht. Bau es so:
+
+- **Datenweg-Zeile:** unter „Neue Notiz“ fehlt „Bleibt auf diesem Gerät.“ (BEL-10 gilt für jede Aktion mit Datenweg,
+  auch im Fenster; die Fenster auf `docs/desktop.html` zeigen sie auch nicht, eine Frage an die Werkstatt).
+- **Titelleiste:** `data-tauri-drag-region` fehlt an der Leiste (DSK-01, DSK-06); „Neues Fenster“ ist gesperrt, mehrere
+  Fenster baut die Vorlage nicht (DSK-12).
+- **Neu gezeichneter Text:** wer den Baum, die Reiter oder den Inspektor neu schreibt, ruft danach
+  `window.sbFit?.refresh(<Element>)`; sonst verlieren Wörter bei 200&nbsp;% ihren Trennstrich („Papierko|rb“, ZUG-09).
+- **Fokus nach einem Dialog:** nach „In den Papierkorb legen“ steht der Fokus auf einem sinnvollen Ziel, etwa der
+  nächsten Notiz im Baum, nie auf `<body>` (ZUG-06).
+- **Fehler beim Sichern:** schlägt `localStorage` oder ein Rust-Befehl fehl, sagt die Aktionszone das als Satz; nie
+  „Alles gesichert.“ nach einem verschluckten Fehler (HAL-04, STA-07).
+- **Markup ohne Skript:** die Oberfläche ist ein Modul (`type="module"`, TEC-02 verbietet Module); ob TEC-02 für eine
+  Tauri-Oberfläche mit Vite gilt, entscheidet der Inhaber.
+- **`CHECKS.md`:** TEC-06 verlangt sie, mit jedem Befehl, Datum und Exit-Code, auch dem nicht gelaufenen
+  `tauri build` mit Grund.
+- **Port 4174:** `npm test` nutzt einen Server, der dort schon läuft (`reuseExistingServer` außerhalb der CI); beende
+  andere Vorschauen oder starte mit `CI=1`.
+
 ## Nicht geprüft
 
 Nichts davon ist in einem echten Tauri-Fenster getestet (WebKit unter macOS und Linux, WebView2 unter Windows): weder

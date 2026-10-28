@@ -510,7 +510,17 @@ def llms_txt() -> str:
              "> The design guide of every sebaro app, website and desktop app: colour jobs, type, space, shape, "
              "behaviour, components, data display and the reasoning behind them. German UI language (du).", "",
              f"Machine-readable rules: {SITE_URL}rules.json · Markdown: {REPO_URL}/blob/main/guide/RULES.md · "
-             f"Agent entry: {REPO_URL}/blob/main/AGENTS.md", "", "## Pages", ""]
+             f"Agent entry: {REPO_URL}/blob/main/AGENTS.md", "",
+             "## Building a product", "",
+             f"- [Agent snippet]({REPO_URL}/blob/main/templates/AGENTS-snippet.md): paste into the product's AGENTS.md; "
+             "its first item says per product kind where light/dark, language, tone and the ⌘K palette go",
+             f"- [Starters]({REPO_URL}/blob/main/templates/README.md): website (Astro), web app (Vite), desktop (Tauri), "
+             "Android (Compose); each README lists what the starter itself does not do yet",
+             f"- [Screen checklist]({REPO_URL}/blob/main/templates/screen-checklist.md): walk it before a screen is done; "
+             "record every check in CHECKS.md (TEC-06)",
+             f"- [Agent test 2026-10]({REPO_URL}/blob/main/docs/agenten-test-2026-10.md): the rules agents missed most "
+             "(TXT-04 U+00A0, TEC-06, BEL-10, EBE-05, TXT-03, BEL-09) and why",
+             "", "## Pages", ""]
     for file, label, _icon, desc in PAGES:
         lines.append(f"- [{label}]({SITE_URL}{file}): {desc}")
     lines += ["", "## System files (generated, never edit)", "",

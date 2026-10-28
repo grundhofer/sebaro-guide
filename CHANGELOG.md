@@ -11,6 +11,18 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+Agenten-Test mit fünf Probeaufgaben (`docs/agenten-test-2026-10.md`). Keine Regel ist neu oder geändert; nur Texte für
+Agenten, also eine Korrektur.
+
+- `templates/AGENTS-snippet.md`: als erster Punkt eine Tabelle je Produktart (wo Hell oder Dunkel, Sprache, Farbton
+  und ⌘K stehen) und die Liste der leicht übersehenen Regeln (TXT-04, TXT-03, TEC-06, BEL-10, BEL-09, EBE-05, AKT-08,
+  ZUG-07, ZUG-08, RAU-07, ZUG-09); der Hinweis, dass `npm test` einen fremden Server auf seinem Port mitbenutzt.
+- `templates/screen-checklist.md`: Abschnitte „Before you start“ und „Done“ (`CHECKS.md`, eigener Testserver), Punkte zu
+  U+00A0, Titeln, Kurzmeldungen, Datenweg-Zeile, Beispieldaten und der Seite „Barrierefreiheit“.
+- READMEs von `webapp-vite`, `desktop-tauri` und `website-astro`: Abschnitt „Lücken der Vorlage“; der Widerspruch zu
+  NAV-06 bei ⌘K in `webapp-vite` ist berichtigt. `templates/README.md`, `AGENTS.md` und `docs/llms.txt` (aus
+  `tools/build.py`) verweisen auf Snippet, Vorlagen und Bericht.
+
 ## 2.16.0 · 2026-10-28
 
 Neue Startvorlagen: vier lauffähige kleine Projekte unter `templates/`. Keine Regel ist neu oder geändert. Neue

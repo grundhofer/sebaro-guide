@@ -3,6 +3,13 @@
 Walk this for every screen in **light and dark**, at **390 px and 1440 px** (desktop apps: smallest and a wide window).
 Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regeln.html. Decisions up to D110.
 
+## Before you start
+- [ ] Product kind named (website, web app without a window, web app with a window or desktop, phone app); light/dark,
+      language, „Farbton“ and ⌘K sit where that kind puts them (table in `AGENTS-snippet.md`; NAV-06, NAV-09, MOB-04,
+      DSK-05). A brief that asks otherwise is a question for the owner with the rule id, not a reason to move them
+- [ ] Every string you wrote or rewrote keeps U+00A0 between number and unit (`\u00a0` in code, `&nbsp;` in markup);
+      `grep -nE '[0-9] (%|kg|g|l|ml|km|Min\.|Std\.)'` over the strings finds nothing (TXT-04)
+
 ## Colour and hierarchy
 - [ ] Cobalt only for current place, links and focus; lime only for the one primary action (FAR, AKT)
 - [ ] Product colour only inside the sign tile; tiles carry the three-letter code, never words or names (ZEI)
@@ -31,7 +38,11 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
       all (STA-03, D98)
 - [ ] Required fields carry no mark; voluntary fields end their label with a grey „(optional)“ (`sb-optional`), never
       an asterisk or a „Pflichtfeld“ legend (EIN-01, D99)
-- [ ] Toast only for a reversible result outside the primary action, fixed duration, never for errors (EBE)
+- [ ] Toast only for a reversible result outside the primary action, fixed duration, never for errors, never to say
+      that nothing happened; a „Rückgängig“ shows only when it undoes something (EBE-05). Removing saved data asks in a
+      dialog; only an entry of an unsaved form goes with an undo toast (AKT-07, AKT-08)
+- [ ] Every action that stores or sends has its data-path line 8 px under it, also „Sichern“ in a dialog and the
+      primary action of a window; local data: „Bleibt auf diesem Gerät.“ (BEL-10)
 - [ ] Motion only in answer to an action: new content enters from below (8 px, 200 ms); only a fade with reduced
       motion / „Bewegung immer reduzieren“ (BEW)
 - [ ] The start shows the tile only while really loading and moves it into the header; on the web only on the first
@@ -75,6 +86,8 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
       key glyphs („⇧⌘P“) (SCH, ICO)
 - [ ] Code only in the five looks (three tones, comments grey, rest ink), no bold or italic; errors and diffs not by colour alone (TXT, FAR)
 - [ ] du, verb + thing, concrete sentences; U+00A0 between number and unit; German thousands 10.000 (TXT)
+- [ ] Screen titles are short nouns, also the not-found and error views („Unbekannter Eintrag“); sentence headings
+      only on websites (TXT-03)
 - [ ] Groups of people: a neutral word („Teilnehmende“, „Mitglieder“), else both forms („Nutzerinnen und Nutzer“);
       never a sign inside the word: no star, colon, underscore, middle dot or Binnen-I (TXT-05, D98)
 - [ ] Money, ranks, „etwa“, „keine“ vs „keine Angabe“, no automatic hyphenation in running text; menu paths as
@@ -105,4 +118,14 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
       texts, on the website or in headings (BEL-01, D105, D106)
 - [ ] Websites: footnote digits are text, notes 1..n in one column with backlinks; apps: claim rows (BEL)
 - [ ] No invented demo data shipped; no foreign network requests (WEB)
+- [ ] Invented data carries `<span class="sb-demo-marker">Beispieldaten</span>` beside the title of its display (BEL-09)
+- [ ] The page „Barrierefreiheit“ has Beschreibung, Bedienung, Erfüllung, Einschränkungen, Rückmeldung and Behörde, shows
+      no rule ids or instructions to users, and lists screen-reader and device tests that never ran as „offen“ (ZUG-07,
+      ZUG-08)
+
+## Done
+- [ ] `CHECKS.md` in the project root names every check with command, date and exit code, and every check that could
+      not run with its reason; the screen counts as done only when all ran and exit 0 (TEC-06)
+- [ ] A starter's `npm test` ran against this app: no other preview was listening on its port (it reuses one), or it
+      ran with `CI=1`
 - [ ] Website footer: „Impressum“, „Datenschutz“, „Barrierefreiheit“ always; „GitHub“ only with a public repository (WEB-03, D98)

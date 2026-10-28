@@ -93,5 +93,35 @@ Vorlage gilt zusätzlich:
 Nur Chromium; kein Firefox, kein WebKit, kein echter Screenreader. `tests/strings.spec.ts` liest nur Markup in
 den Vorlagen der Funktion `html` und `index.html`, keine Zeichenketten, die Code an Hilfsfunktionen übergibt; Zahlen und Zeichen allein
 (08:12, ±0) gelten als Werte. Die Frage beim Schließen ist die des Browsers (`beforeunload`); ihr Text ist nicht änderbar. Das Datumsfeld zeigt das Format der Browsersprache,
-nicht der Seitensprache. Audio und Video sind nicht dabei (keine Mediendateien), die Befehlspalette mit ⌘K auch nicht:
-sie gehört zur Web-App mit Fenster (siehe `../desktop-tauri/`).
+nicht der Seitensprache. Audio und Video sind nicht dabei (keine Mediendateien).
+
+## Lücken der Vorlage (Agenten-Test 2026-10)
+
+Fünf Probeaufgaben auf dieser und den anderen Vorlagen ([`../../docs/agenten-test-2026-10.md`](../../docs/agenten-test-2026-10.md))
+haben gezeigt, was Agenten aus der Vorlage übernehmen, obwohl es keiner Regel folgt. Übernimm es nicht, sondern bau es so:
+
+- **Befehlspalette mit ⌘K / Strg+K fehlt.** NAV-06 verlangt sie auch in einer Web-App ohne Fenster („⌘K öffnet auch
+  dort die Befehlspalette“). Die Vorlage hat sie noch nicht; das Markup steht in `docs/bauteile.html` (Befehlspalette),
+  das Verhalten in `../desktop-tauri/`. NAV-09 nennt nur Apps mit Fenster; das ist eine offene Frage an den Inhaber,
+  keine Erlaubnis, sie wegzulassen.
+- **Kurzmeldung „Alle Beispiele sind schon da.“** meldet, dass nichts geschah, und zeigt ein „Rückgängig“, das nichts tut:
+  `action.hidden` in `src/main.ts` setzt sich gegen `display` von `.sb-toast__action` in `sebaro.css` nicht durch.
+  Eine Kurzmeldung gibt es nur für ein umkehrbares Ergebnis (EBE-05); eine Aktion ohne Rückgängig nimm aus dem DOM.
+- **Titel als Satz:** „Diesen Eintrag gibt es nicht“ und „Diese Ansicht gibt es nicht“ in `src/strings.ts`. Bildschirmtitel
+  sind kurze Substantive (TXT-03), etwa „Unbekannter Eintrag“; der Satz gehört in den Text darunter.
+- **Barrierefreiheit** ist ein Platzhalter, der auf der Seite „(ZUG-07)“ zeigt. Ein Produkt schreibt die sechs Teile
+  Beschreibung, Bedienung, Erfüllung, Einschränkungen, Rückmeldung, Behörde (ZUG-07) und nennt nie gelaufene
+  Screenreader-Tests „offen“ (ZUG-08).
+- **Datenweg-Zeile** fehlt unter „Sichern“ im Dialog „Änderungen sichern?“ (BEL-10), und `src/app.css` setzt den Abstand von
+  `.sb-action-hint` in `sb-view--wide` auf 0 und richtet ihn ans Ende aus; BEL-10 will ihn 8&nbsp;px unter der Aktion.
+- **Abstand am Kind:** `.app-view-title` setzt `margin-block-start`; den Abstand trägt das Elternteil (`sb-stack`,
+  RAU-07). Kopier das Muster nicht für eigene Klassen.
+- **U+00A0 ist unsichtbar.** `src/strings.ts` schreibt es als Zeichen; wer einen Satz neu tippt, verliert es („200 %“).
+  Schreib `\u00a0` (TXT-04).
+- **Nicht eingebaut, Geltung offen:** Vorschaubild je Seite (WEB-09), `sb-print.js` (WEB-11), der Start mit der Kachel
+  (STR-01) und Markup ohne Skript (TEC-02, die Ansichten rendert ein Modul). Diese Regeln sind für Websites oder alle
+  Plattformen geschrieben; ob sie für eine Web-App mit einer Hülle gelten, entscheidet der Inhaber. Frag mit den IDs.
+- **`CHECKS.md` fehlt.** TEC-06 verlangt sie in jedem Produkt: jede Prüfung mit Befehl, Datum und Exit-Code, jede nicht
+  gelaufene mit Grund.
+- **Port 4173:** `playwright.config.ts` nutzt einen Server, der dort schon läuft (`reuseExistingServer` außerhalb der CI).
+  Läuft die Vorschau eines anderen Projekts, prüft `npm test` dieses. Beende andere Vorschauen oder starte mit `CI=1`.

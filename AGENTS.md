@@ -24,6 +24,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 | what waits for the owner's choice, is open, comes later or is done | `docs/ausblick.html` |
 | what changed between versions | [`CHANGELOG.md`](CHANGELOG.md) (every rule change by id) |
 | starting a new project | [`templates/`](templates/README.md) |
+| which rules agents miss when they build from the starters, and why | [`docs/agenten-test-2026-10.md`](docs/agenten-test-2026-10.md) (agent test of 2026-10, five products) |
 | system files (CSS tokens, components, fonts, icons, tiles, scripts) | `docs/sebaro/`, a verified web export, see §4 |
 
 Rule status: **entschieden** = owner decision, binding. **vorläufig** = an agent's decision, valid until the owner
@@ -52,11 +53,19 @@ in code reviews, commit messages and ADRs.
 10. **Honest content**: no claim without proof; outflows stay visible; demo data is labelled „Beispieldaten“. (HAL-03, BEL-01, BEL-09)
 
 Before you call a screen done, walk the checklist in [`templates/screen-checklist.md`](templates/screen-checklist.md).
+An agent test of 2026-10 ([`docs/agenten-test-2026-10.md`](docs/agenten-test-2026-10.md)) found these missed most
+often, besides the ten: U+00A0 lost in rewritten strings (TXT-04), no `CHECKS.md` (TEC-06), no data-path line under
+„Sichern“ in a dialog (BEL-10), a toast that says nothing happened (EBE-05), sentences as screen titles (TXT-03) and
+„Beispieldaten“ away from the title (BEL-09). Most came from the starters themselves; their READMEs now list these
+gaps under „Lücken der Vorlage“.
 
 ## 3 Building a product with sebaro
 
-1. Read `guide/RULES.md` (or filter `rules/rules.json` by `platforms`: `web`, `mobile`, `desktop`, `alle`; `mobile`
-   covers Android and iOS, rules only for iOS say „Nur iOS“ in their note).
+1. Name the product kind (website, web app without a window, web app with a window or desktop app, phone app); the
+   first item of [`templates/AGENTS-snippet.md`](templates/AGENTS-snippet.md) says where light/dark, language, tone
+   and ⌘K go for each. Then read `guide/RULES.md` (or filter `rules/rules.json` by `platforms`: `web`, `mobile`,
+   `desktop`, `alle`; `mobile` covers Android and iOS, rules only for iOS say „Nur iOS“ in their note). A web app
+   without a window follows the `web` rules even when it is used mostly on phones.
 2. Get the system files for your platform (§4). Never copy colour values; reference tokens (`var(--sb-color-*)`,
    `SebaroTheme`, `Color.sb*`).
 3. Copy markup from `docs/bauteile.html` and screen recipes from `docs/app.html`, `docs/ios.html`, `docs/web.html`,

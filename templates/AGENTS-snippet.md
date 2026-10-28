@@ -4,6 +4,39 @@
 
 This product uses the sebaro design system. Before building or changing any UI:
 
+0. Name the product kind first; it decides where things go (NAV-06, NAV-09, MOB-04, DSK-05, WEB-03). A brief that asks
+   for something else here (e.g. „Hell/Dunkel in den Einstellungen“ of a web app) does not override a rule: follow the
+   rule and ask the owner with the rule id.
+
+   | Kind | „Hell oder Dunkel“ | Language | ⌘K palette | „Farbton“ |
+   |---|---|---|---|---|
+   | website | button in the header | „DE / EN“ in the header; a page missing in the other language: grey code, no link (WEB-10) | no rule | footer, „Darstellung“ |
+   | web app without a window (also when used mostly on phones) | button in the header, never again in its settings view | „DE / EN“ in the header as a choice (WEB-10) | yes (NAV-06; the starter has none yet) | small settings view, with „Bewegung immer reduzieren“; footer without „Darstellung“ |
+   | web app with a window, desktop app | menu „Darstellung“ and the settings view (DSK-05) | no rule; the desktop starter has no language choice | yes (NAV-09) | menu „Darstellung“ and settings |
+   | phone app (Android, iOS) | settings: System · Hell · Dunkel (MOB-04) | no rule | no rule | settings, next to light/dark |
+
+   The website header words „Apps“, „Projekte“, „Über“, „Kontakt“ are fixed (NAV-06); a site whose content does not
+   fit them is a case for the owner, not for own words.
+
+   Easily missed (an agent test of 2026-10 found each of these in at least one of five solutions, most in several; see
+   https://github.com/grundhofer/sebaro-guide/blob/main/docs/agenten-test-2026-10.md):
+   - U+00A0 between number and unit, also in strings you rewrite (`200\u00a0%`, `2\u00a0kg`). It is invisible in an
+     editor: write it as `\u00a0` (or `&nbsp;` in markup) and grep for `[0-9] (%|kg|g|l|px|Min\.|Std\.)` (TXT-04).
+   - Screen titles are short nouns, also the not-found view („Unbekannter Eintrag“, not „Diesen Eintrag gibt es
+     nicht“; TXT-03).
+   - `CHECKS.md` in the project root: every check you ran with command, date and exit code, and every check you
+     could not run with the reason; „done“ only when all exit 0 (TEC-06).
+   - The data-path line under every action that stores or sends, also under „Sichern“ in a dialog and under the
+     primary action of a window: „Bleibt auf diesem Gerät.“ 8 px under it (BEL-10).
+   - „Beispieldaten“ as `sb-demo-marker` beside the title of each display with invented data (BEL-09).
+   - A toast only for a reversible result; never one that says nothing happened, never „Rückgängig“ without an undo
+     (EBE-05). Removing saved data asks in a dialog (AKT-08); only an entry of an unsaved form goes with an undo toast.
+   - The accessibility page has the six parts Beschreibung, Bedienung, Erfüllung, Einschränkungen, Rückmeldung,
+     Behörde and claims nothing no check ran; screen-reader tests that never ran stand as „offen“ (ZUG-07, ZUG-08).
+   - Spacing comes from the parent (`sb-stack`, `sb-form-grid`), never a margin on a child; lengths only from tokens
+     (RAU-07, RAU-01, TEC-01).
+   - After a script redraws text, call `sbFit.refresh()` so large-text hyphenation and fits stay (ZUG-09).
+
 1. Read the rules: https://grundhofer.github.io/sebaro-guide/rules.json (Markdown:
    https://github.com/grundhofer/sebaro-guide/blob/main/guide/RULES.md). Rules with status `entschieden` are binding.
 2. Use only the exported system files in `<path to the sebaro export>`; never edit them, never copy colour values,
@@ -12,7 +45,8 @@ This product uses the sebaro design system. Before building or changing any UI:
    app/web/desktop pages of the guide. `demo-*` and `g-*` classes are guide chrome, never ship them.
 4. Product id: `<id>`; its tile colour appears only in the sign tile.
 5. Before calling a screen done, walk https://github.com/grundhofer/sebaro-guide/blob/main/templates/screen-checklist.md
-   in light and dark, at 390 px and 1440 px.
+   in light and dark, at 390 px and 1440 px. A starter's `npm test` reuses a server already listening on its port
+   (`reuseExistingServer`): stop other previews first or run with `CI=1`, else you test another app.
 6. Light or dark per product kind (D75): a website has the labelled button „Hell oder Dunkel“ in its header; a phone
    app offers System, Hell, Dunkel in its settings; a desktop app in the menu „Darstellung“ and in its settings view.
    The second tone „Farbton: Kühl · Warm“ (D91, FAR-15): websites in the footer under „Darstellung“, apps next to
