@@ -99,6 +99,8 @@ This product uses the sebaro design system. Before building or changing any UI:
    (NAV-04); a Tauri app names its languages in `src-tauri/Info.plist` (DSK-08); the pinned tab stays at the start of
    a scrolling tab row (DSK-10); the counter line keeps its place (STA-07); how it holds it is provisional: the last
    document's parts stay invisible, `data-sb-held`.
+   Decided with D110: a value too long for a one-line dialog field at 200 % text scrolls inside the field, the caret
+   showing the place; the dialog does not grow and the field does not become multi-line (EIN-01, EBE-03).
    Without a new decision: a chord that is also a native menu accelerator moves no focus (DSK-04, provisional); a
    twice-cited footnote has one back link per citation and the digit focuses the note (BEL-02, provisional); an error
    whose action is unknown says „Das hat nicht geklappt. <Was sicher ist>. Versuch es noch einmal.“ (TXT-07,

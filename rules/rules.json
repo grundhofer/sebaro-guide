@@ -1,11 +1,11 @@
 {
  "$schema": "./rules.schema.json",
- "version": "2.14.0",
+ "version": "2.15.0",
  "date": "2026-10-28",
  "source": {
   "repo": "sebaroDesign",
   "system": "sebaro",
-  "decisions": "D1-D108"
+  "decisions": "D1-D110"
  },
  "areas": [
   {
@@ -1262,18 +1262,19 @@
    "id": "EBE-03",
    "area": "ebenen",
    "title": "Dialog: nativ, modal, über Scrim",
-   "rule": "Öffne Bestätigungen als natives <dialog> mit showModal() über dem Scrim: bg, 2-px-Tintenrahmen, Radius 16, Innenabstand 24, höchstens 560 px. Titel ist die Frage, Text die Folge, Aktionen rechtsbündig. Escape, Zurück und Tippen auf den Scrim brechen ab; im Dialog gibt es nie eine Hauptaktion. Den Scrim gibt es nur hinter modalen Dialogen und Sheets, auf jeder Plattform mit dem Wert der Palette, auch auf Android, nie mit dem Abdunkeln des Systems.",
-   "rule_en": "Confirm dialogs: native <dialog> showModal over the scrim, bg + 2 px ink, radius 16, padding 24, max 560 px; question title; actions end-aligned; Escape/back/scrim cancel; never a primary action; scrim only behind modal dialogs and sheets, with the palette value on every platform, Android included, never the system dim.",
-   "why": "D39: Löschen bleibt mit Bestätigungsdialog; D46: Linien statt Schatten. Der 45-%-Scrim färbte das Lindgrün oliv, darum hell 32 % (Fix-Stufe 2026-10-16). D99 (4), Antwort „Palettenwert überall (Empfohlen)“: Der Lösch-Dialog am Handy dunkelte mit dem Schwarz des Systems ab (60 %), die Website mit dem Wert der Palette (hell 32 %); jetzt dunkelt auch Android mit dem Wert der Palette ab.",
+   "rule": "Öffne Bestätigungen als natives <dialog> mit showModal() über dem Scrim: bg, 2-px-Tintenrahmen, Radius 16, Innenabstand 24, höchstens 560 px. Titel ist die Frage, Text die Folge, Aktionen rechtsbündig. Escape, Zurück und Tippen auf den Scrim brechen ab; im Dialog gibt es nie eine Hauptaktion. Den Scrim gibt es nur hinter modalen Dialogen und Sheets, auf jeder Plattform mit dem Wert der Palette, auch auf Android, nie mit dem Abdunkeln des Systems. Passt ein Wert bei 200 % Schrift auf einem schmalen Telefon nicht in das einzeilige Feld eines Eingabedialogs, scrollt er im Feld (EIN-01); der Dialog wird dafür nicht breiter.",
+   "rule_en": "Confirm dialogs: native <dialog> showModal over the scrim, bg + 2 px ink, radius 16, padding 24, max 560 px; question title; actions end-aligned; Escape/back/scrim cancel; never a primary action; scrim only behind modal dialogs and sheets, with the palette value on every platform, Android included, never the system dim. A value too long for an input dialog's one-line field at 200 % text on a narrow phone scrolls inside the field (EIN-01); the dialog does not grow for it.",
+   "why": "D39: Löschen bleibt mit Bestätigungsdialog; D46: Linien statt Schatten. Der 45-%-Scrim färbte das Lindgrün oliv, darum hell 32 % (Fix-Stufe 2026-10-16). D99 (4), Antwort „Palettenwert überall (Empfohlen)“: Der Lösch-Dialog am Handy dunkelte mit dem Schwarz des Systems ab (60 %), die Website mit dem Wert der Palette (hell 32 %); jetzt dunkelt auch Android mit dem Wert der Palette ab. D110, Antwort „Feld scrollt wie immer (Empfohlen)“: Ein langer Wert im Feld eines Dialogs läuft bei 200 % im Feld weiter, statt dass der Dialog bildschirmbreit wird oder das Feld umbricht.",
    "do": "<dialog class='sb-dialog' aria-labelledby aria-describedby><form method='dialog'>…; Compose SbConfirmDialog (zeichnet den Scrim der Palette selbst, das Fenster des Systems dunkelt nicht ab) und SbBottomSheet (scrimColor aus der Palette).",
    "dont": "AlertDialog mit Tonal-Elevation; Schatten; Scrim über Bildern, Hero oder Ladezuständen; am Handy das Abdunkeln des Systems (60 % Schwarz) hinter dem Dialog.",
    "numbers": "Radius 16 (--sb-radius-sheet); Padding 24 (--sb-space-6); max. 560 px (Handy: Breite − 2 × 16); Tastenabstand 12, 24 darüber; rein 8 px in 200 ms, raus 120 ms; --sb-color-scrim hell #1C1E2252 (32 %), dunkel #00000099 (60 %)",
    "decisions": [
     "D39",
     "D46",
-    "D99"
+    "D99",
+    "D110"
    ],
-   "source": "DECISIONS.md D99 (4); systems/sebaro/spec/02-components.md §4.6; spec/03-signature.md §7.3–§7.5; spec/08-platform-android.md §8; palettes/sebaro.json modes.light.scrim",
+   "source": "DECISIONS.md D99 (4), D110; systems/sebaro/spec/02-components.md §4.6; spec/03-signature.md §7.3–§7.5; spec/08-platform-android.md §8; palettes/sebaro.json modes.light.scrim",
    "platforms": [
     "alle"
    ],
@@ -1281,7 +1282,7 @@
    "check": "Farbprüfung des Dialogs „Hauptaktion 0“; Fokus kehrt nach Escape zum Auslöser zurück; --sb-color-scrim nur in Dialog/Sheet. Compose: in der Ecke hinter SbConfirmDialog liegt der Scrim der Palette über bg (Werkstatt, auf dem Rechner gezeichnet und gemessen).",
    "example_hint": "Echter sb-dialog hinter „Gewohnheit löschen“ über abgedunkeltem Formular; falsch: Schattenkasten mit lindgrüner „OK“-Taste.",
    "note": "spec/01 §1.2 nennt veraltet hellen Scrim #1C1E2273 (45 %); Palette und Tokens (#1C1E2252) gelten. Ausblenddauer 120 ms ist Agentenspezifikation. Der Scrim von SbConfirmDialog ist auf dem Rechner gezeichnet und mit einem Test geprüft, nicht auf einem Gerät (Systemleisten, Tastatur, Fensteranimation).",
-   "changed": "2026-10-24"
+   "changed": "2026-10-28"
   },
   {
    "id": "EBE-04",
@@ -2383,26 +2384,27 @@
    "id": "EIN-01",
    "area": "eingaben",
    "title": "Feld: Beschriftung oben, graue Fläche, Grundlinie",
-   "rule": "Setz über jedes Feld eine sichtbare <label for> (label 14/20). Das Feld ist eine surface-sunken-Fläche mit 1-px-border-strong-Grundlinie, oben 8 px gerundet, mindestens 48 px hoch, ohne Rahmen. Hilfetext und Fehler hängen per aria-describedby am Input; ein Zähler steht am Ende in Tabellenziffern. Pflichtfelder sind der Normalfall und tragen kein Zeichen. Ein freiwilliges Feld trägt hinter seiner Beschriftung ein graues „(optional)“ (sb-optional: text-muted, nicht fett, in der Zeile der Beschriftung), nie ein Sternchen; ohne Sternchen braucht es auch keine Legende „Pflichtfeld“. Die Seite schreibt „(optional)“ selbst in die Beschriftung; ein Feld, das immer einen Wert hat (Auswahl mit gewählter Möglichkeit, Segmente, Schalter), trägt keins, und eine Auswahl ist nur freiwillig, wenn „Keine“ eine ihrer Möglichkeiten ist.",
-   "rule_en": "Visible <label for> above; field = surface-sunken area with 1 px border-strong baseline, top radius 8, min 48 px, no frame; help and error linked via aria-describedby; counters end-aligned tabular; required is the norm and unmarked, a voluntary field ends its label with a grey „(optional)“ (sb-optional), never an asterisk, no „Pflichtfeld“ legend; the page writes the suffix itself, a field that always holds a value carries none, a select is voluntary only with „Keine“ among its options.",
-   "why": "Skizze A „Farbe ist Funktion“; Screenreader lesen Hilfe und Fehler beim Fokus. Auf versenktem Grund hätte die Grundlinie nur 3,05 : 1, deshalb nie ein Feld auf eigenem sunken-Grund. D99 (3), Antwort „„optional“ an freiwilligen (Empfohlen)“: Pflichtfelder sind der Normalfall; freiwillige Felder tragen an der Beschriftung ein graues „(optional)“, englisch „(optional)“, keine Sternchen, in Web, Compose und Swift. D100 (4), Antwort „Alle drei bestätigen (Empfohlen)“: Die drei Feinheiten, die der Agent dazu gewählt hatte, gelten.",
+   "rule": "Setz über jedes Feld eine sichtbare <label for> (label 14/20). Das Feld ist eine surface-sunken-Fläche mit 1-px-border-strong-Grundlinie, oben 8 px gerundet, mindestens 48 px hoch, ohne Rahmen. Hilfetext und Fehler hängen per aria-describedby am Input; ein Zähler steht am Ende in Tabellenziffern. Pflichtfelder sind der Normalfall und tragen kein Zeichen. Ein freiwilliges Feld trägt hinter seiner Beschriftung ein graues „(optional)“ (sb-optional: text-muted, nicht fett, in der Zeile der Beschriftung), nie ein Sternchen; ohne Sternchen braucht es auch keine Legende „Pflichtfeld“. Die Seite schreibt „(optional)“ selbst in die Beschriftung; ein Feld, das immer einen Wert hat (Auswahl mit gewählter Möglichkeit, Segmente, Schalter), trägt keins, und eine Auswahl ist nur freiwillig, wenn „Keine“ eine ihrer Möglichkeiten ist. Passt ein Wert bei 200 % Schrift auf einem schmalen Telefon nicht ganz in ein einzeiliges Feld eines Dialogs, läuft er wie in jedem Textfeld im Feld seitlich weiter, die Schreibmarke zeigt die Stelle; der Dialog wird dafür nicht breiter, das Feld nicht mehrzeilig.",
+   "rule_en": "Visible <label for> above; field = surface-sunken area with 1 px border-strong baseline, top radius 8, min 48 px, no frame; help and error linked via aria-describedby; counters end-aligned tabular; required is the norm and unmarked, a voluntary field ends its label with a grey „(optional)“ (sb-optional), never an asterisk, no „Pflichtfeld“ legend; the page writes the suffix itself, a field that always holds a value carries none, a select is voluntary only with „Keine“ among its options. A value too long for a one-line dialog field at 200 % on a narrow phone scrolls inside the field like any text field, the caret showing the place; the dialog does not grow and the field does not become multi-line.",
+   "why": "Skizze A „Farbe ist Funktion“; Screenreader lesen Hilfe und Fehler beim Fokus. Auf versenktem Grund hätte die Grundlinie nur 3,05 : 1, deshalb nie ein Feld auf eigenem sunken-Grund. D99 (3), Antwort „„optional“ an freiwilligen (Empfohlen)“: Pflichtfelder sind der Normalfall; freiwillige Felder tragen an der Beschriftung ein graues „(optional)“, englisch „(optional)“, keine Sternchen, in Web, Compose und Swift. D100 (4), Antwort „Alle drei bestätigen (Empfohlen)“: Die drei Feinheiten, die der Agent dazu gewählt hatte, gelten. D110, Antwort „Feld scrollt wie immer (Empfohlen)“ auf die Frage nach den Feldern des Eingabedialogs bei 200 % auf 320–390 px (zur Wahl auch „Dialog wird bildschirmbreit“ und „Feld bricht um“): Ein langer Wert läuft im Feld seitlich weiter; das gilt als erlaubt.",
    "do": "<div class='sb-field'><label class='sb-field__label' for='n'>Name</label><div class='sb-field__control'><input id='n' aria-describedby='n-help'></div><p class='sb-field__help' id='n-help'>…</p></div>; freiwillig: <label class='sb-field__label' for='notiz'>Notiz <span class='sb-optional'>(optional)</span></label>; Compose SbTextField(…, optional = true), Swift SbTextField(…, optional: true).",
-   "dont": "Platzhalter als einzige Beschriftung; umrandetes Feld; Hilfetext ohne Verknüpfung; „Name *“ und „* Pflichtfeld“; „(Pflicht)“ oder „freiwillig“ an der Beschriftung.",
+   "dont": "Platzhalter als einzige Beschriftung; umrandetes Feld; Hilfetext ohne Verknüpfung; „Name *“ und „* Pflichtfeld“; „(Pflicht)“ oder „freiwillig“ an der Beschriftung. Ein <textarea> an Stelle des einzeiligen Felds, nur damit ein langer Wert bei großer Schrift umbricht.",
    "numbers": "Höhe 48px (Input 46px); Padding 0 12px; Grundlinie 1px; Radius 8px oben; Hilfe caption 14/20 text-muted; „(optional)“ text-muted im Gewicht von body, so groß wie die Beschriftung",
    "decisions": [
     "D98",
     "D99",
-    "D100"
+    "D100",
+    "D110"
    ],
-   "source": "DECISIONS.md D98, D99 (3), D100 (4); systems/sebaro/spec/02-components.md §2.1; spec/07-voice.md §3 Regel 12, §7; css/sebaro.css Z. 354-381 und .sb-optional; demo/mobile.html Z. 343",
+   "source": "DECISIONS.md D98, D99 (3), D100 (4), D110; systems/sebaro/spec/02-components.md §2.1; spec/07-voice.md §3 Regel 12, §7; css/sebaro.css Z. 354-381 und .sb-optional; demo/mobile.html Z. 343",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "axe label; jede __help/__error-ID wird von aria-describedby referenziert; kein Sternchen: grep -rnE '\\*\\s*</(label|legend)>|\\* ?Pflichtfeld' über die Seiten findet nichts.",
    "example_hint": "Formular M4: Name, Tagesziel, Notiz (optional) mit Zähler „0 / 120“; falsch: nur Platzhalter in umrandeten Feldern, Sternchen und „* Pflichtfeld“.",
-   "note": "Mit D100 (4) bestätigt, vorher vom Agenten gewählt: Im Web schreibt die Seite „(optional)“ selbst in die Beschriftung, kein Skript fügt es hinzu; ein Feld, das immer einen Wert hat, trägt keins; eine Auswahl ist nur mit „Keine“ freiwillig. Bei großer Schrift rückt in einer Zeile mit zwei Feldern (sb-field__row) das kurze Feld unter das breite (ZUG-09). Screenreader bekommen im Web „Notiz (optional)“, in Compose „Notiz, optional“ (im Semantikbaum geprüft), in Swift „Notiz, optional“ (nur im Code gelesen); gehört mit einem Screenreader ist keins davon. D99 selbst sagt nur „(optional)“ und keine Sternchen; dass auch „(Pflicht)“, „freiwillig“ und eine Legende „Pflichtfeld“ nicht an die Beschriftung gehören, steht in spec/07 §3 Regel 12, die die Werkstatt nach D99 geschrieben hat.",
-   "changed": "2026-10-24"
+   "note": "Mit D100 (4) bestätigt, vorher vom Agenten gewählt: Im Web schreibt die Seite „(optional)“ selbst in die Beschriftung, kein Skript fügt es hinzu; ein Feld, das immer einen Wert hat, trägt keins; eine Auswahl ist nur mit „Keine“ freiwillig. Bei großer Schrift rückt in einer Zeile mit zwei Feldern (sb-field__row) das kurze Feld unter das breite (ZUG-09). Screenreader bekommen im Web „Notiz (optional)“, in Compose „Notiz, optional“ (im Semantikbaum geprüft), in Swift „Notiz, optional“ (nur im Code gelesen); gehört mit einem Screenreader ist keins davon. D99 selbst sagt nur „(optional)“ und keine Sternchen; dass auch „(Pflicht)“, „freiwillig“ und eine Legende „Pflichtfeld“ nicht an die Beschriftung gehören, steht in spec/07 §3 Regel 12, die die Werkstatt nach D99 geschrieben hat. D110 nennt nur das Feld eines Dialogs. Vorläufig von der Werkstatt so eng gefasst: Ein Platzhalter scrollt nicht und bleibt deshalb so kurz, dass er bei 200 % passt; ein Wert nur zum Lesen, der ganz gelesen werden muss, steht in einem Satz statt in einem Feld; die Demo-Prüfung der Werkstatt (1.9.0) zählt einen solchen Wert im Dialog in einer Info-Zeile (OVF5) und warnt weiter bei Feldern außerhalb von Dialogen.",
+   "changed": "2026-10-28"
   },
   {
    "id": "EIN-02",

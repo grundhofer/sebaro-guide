@@ -28,7 +28,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 
 Rule status: **entschieden** = owner decision, binding. **vorläufig** = an agent's decision, valid until the owner
 changes it. **offen** = proposal only, do not build it as a rule. `D<n>` refers to row n of the decision log in the
-workshop repository sebaroDesign (private; the guide covers D1–D108). A rule id (e.g. `AKT-01`) is stable; cite it
+workshop repository sebaroDesign (private; the guide covers D1–D110; D109 orders product adoptions and sets no rule). A rule id (e.g. `AKT-01`) is stable; cite it
 in code reviews, commit messages and ADRs.
 
 ## 2 The ten rules most often broken
@@ -304,6 +304,17 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
    `editor/sebaro-codemirror.ts` (TEC-08); every export carries `checks/verify-export.mjs` (Node 20+) to check itself
    without the workshop (TEC-09). No question waits for the owner (the workshop's SYSTEM.md §5 has none open). None of
    D108 is checked in WebKit or a real Tauri window, the footnote focus not with a screen reader.
+   Settled by the owner with D110 (2026-10-28, synced from workshop `fc2e7f2`): a value that does not fit a one-line
+   field of a dialog at 200 % text on a narrow phone runs on sideways inside the field, as in every text field, the
+   caret showing the place; the dialog does not grow for it and the field does not become multi-line (EIN-01, EBE-03).
+   The workshop's demo check 1.9.0 counts such a value in an `OVF5` info line; a placeholder, a read-only field (unless it is being sent, marked
+   `aria-busy="true"` on the field or its form) and a field outside a dialog still warn (provisional, workshop: D110 names only the dialog). In the same round, without a
+   new decision: a static specimen of a run-time alert (the dialog's failure, the start error, `sb-fatal`) uses
+   `role="note"`, while the product's `<div class="sb-dialog__message" role="alert">` starts empty and is collapsed by
+   `:empty`, not `hidden`; an input dialog that sends keeps its entry `readonly` with `aria-busy="true"` on its form (on
+   the field where there is no form); `.sb-completion[hidden]` and `.sb-completion__empty[hidden]` close the list with
+   `hidden` alone, so `docs/assets/desktop.js` no longer sets `display` through the CSSOM. D110 is not checked on a
+   real phone or with a screen reader.
 
 ## 4 Where the system files come from
 
@@ -340,7 +351,7 @@ node tools/og.mjs --check --png-bytes  # fresh render equals the committed snipp
 python3 tools/sync_from_design.py --check          # docs/sebaro/ equals a fresh export of the workshop commit
 # with a sebaroDesign checkout, its demo check on every page, run from there (absolute page path):
 #   python3 tools/check_demo.py <abs path>/docs/<page>.html --page web --skip content --no-write
-python3 tools/release.py 2.14.0        # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.13.0 is the last release)
+python3 tools/release.py 2.15.1        # turn "Unveröffentlicht" in CHANGELOG.md into a version + rules/releases/ snapshot (2.15.0 is the last release)
 ```
 
 The workshop's demo check (1.8.0) measures one- and two-character text on screen pixels; on `regeln.html` it reports
@@ -495,7 +506,7 @@ The owner answered the round-6 sketch (63 questions, private, never linked from 
 after it with D92 to D97, confirmed 70 of the 73 vorläufig rules with D98 and answered the four workshop questions on large
 text, inputs and charts on the phone and required fields with D99, and the steps, the novalis sidebar, page width at large text, the Compose sortable table and intro step with D100 and D101, the questions of the first adoptions with D102 to D104 (D103 sets the priority for future trade-offs) and
 the apps' waiting lists with D105 to D107 (D106 and D107 are built: widgets, camera and photos for Android only) and
-the new gaps of the adoptions with D108 (built);
+the new gaps of the adoptions with D108 (built) and the long value in a dialog field at large text with D110 (built);
 what is still open, and what is built but untested (real iOS and Android devices, launchers, a real camera, real Tauri
 windows), is collected on `docs/ausblick.html`; no question waits for the owner.
 No guide page scrolls sideways at 200 % text on 320, 360 and 390 px, no frame cuts a text and, since 2.11.0, no word

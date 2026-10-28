@@ -11,6 +11,16 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+## 2.15.0 · 2026-10-28
+
+Neue Entscheidung: D110 steht in zwei Regeln. Weil zwei Regeln eine neue Aussage bekommen, eine Nebenversion.
+
+- Abgleich mit der Werkstatt `fc2e7f2`: `sebaro.css` schließt die Liste zum Vervollständigen und ihre leere Zeile allein mit `hidden` (`.sb-completion[hidden]`, `.sb-completion__empty[hidden]`); der Kommentar zur Meldung im Dialog sagt, dass sie leer zusammengeklappt ist, nicht versteckt. Die README des Exports nennt das Skript der Musterseite für das Feld mit Vorschlägen als nicht exportiert.
+- EIN-01 (Feld) und EBE-03 (Dialog), D110: Passt ein Wert bei 200&nbsp;% Schrift auf einem schmalen Telefon nicht ganz in ein einzeiliges Feld eines Dialogs, läuft er wie in jedem Textfeld im Feld seitlich weiter, die Schreibmarke zeigt die Stelle; der Dialog wird nicht breiter, das Feld nicht mehrzeilig. EIN-01 nennt in der Notiz, wie eng die Werkstatt das vorläufig fasst (Platzhalter, Feld nur zum Lesen, Felder außerhalb von Dialogen).
+- Bauteile: Die Übersicht nennt jetzt jeden Eintrag der Seite in ihrer Reihenfolge; es fehlten 18 Zeilen, alle unter „Anzeige“: Board, App-Kachel, App-Raster, App-Liste, Große Zahl und Kennzahlen, Diagramm, Eigenschaften, Tabelle, Tabelle mit Sortierung und Summe, Diff, Bewertung, Code und Tasten, Hinweise, Fortschritt und Laden, Person, Leerer Zustand, Brotkrumen, Weiter, Änderungen, Menüpfad. „Board: Kartentext und Spaltenaktion“ steht jetzt hinter „Board“ statt am Ende der Gruppe, „Zusammenarbeit“ und „Layout“ sind getrennte Zeilengruppen, und „Textfeld“ zählt seine weiteren Klassen richtig (+7 statt +6). Das Inhaltsverzeichnis nennt die Gruppen und war vollständig.
+- Bauteile, Eingabedialog: Das Feld, das beim Absenden wartet, trägt `aria-busy="true"` wie in der Werkstatt; der Satz darunter nennt D110. Desktop: Der Startfehler sagt, dass die App ihn beim Fehler mit `role="alert"` schreibt und das stillstehende Muster deshalb ein Hinweis ist; das Feld mit Vorschlägen sagt, dass die Liste allein mit `hidden` schließt. `desktop.js` setzt dafür keine Anzeige mehr über das CSSOM.
+- Seiten: Ausblick führt D110 unter „Erledigt“ (136 Einträge, 121 erledigt); Gedanken nennt D110 in der Geschichte und mit einem eigenen Absatz; Start, README, AGENTS.md und die Prüfliste nennen die Entscheidungen bis D110 (D109 legt nur die Reihenfolge von Übernahmen fest und keine Regel).
+
 ## 2.14.0 · 2026-10-28
 
 Neue Bauteile: Die Muster aus D102 bis D108 stehen als eigene Einträge auf Bauteile und Desktop, mit Satz, Muster,

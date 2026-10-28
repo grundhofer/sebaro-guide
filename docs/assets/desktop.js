@@ -17,7 +17,7 @@
     else field.removeAttribute("aria-activedescendant");
   }
   function active() { var id = field.getAttribute("aria-activedescendant"); return items.filter(function (it) { return it.option.id === id; })[0]; }
-  function hide(el, off) { el.hidden = off; el.style.display = off ? "none" : ""; }   // sebaro's display outweighs [hidden]
+  function hide(el, off) { el.hidden = off; }                    // sebaro.css keeps [hidden] stronger (spec/02 §4.26)
   function open(on) {
     hide(list, !on);
     field.setAttribute("aria-expanded", on ? "true" : "false");
