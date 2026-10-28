@@ -1,0 +1,31 @@
+<!doctype html>
+<!-- Negative control for sebaro-checks.ts: textarea values cut by the textarea itself and by a frame around it, beside
+     a textarea that scrolls. The values are set through the value property, as an app does. Not a sebaro page. -->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Fixture: Textbereiche</title>
+<style>
+  body { margin: 16px; font: 16px/1.5 sans-serif; }
+  textarea { box-sizing: border-box; inline-size: 240px; font: inherit; resize: none; }
+  #eng { block-size: 20px; overflow: hidden; }
+  .frame { block-size: 40px; overflow: hidden; }
+  #gerahmt { block-size: 120px; }
+  #rollt { block-size: 48px; overflow: auto; }
+</style>
+</head>
+<body>
+  <label for="eng">Eng</label>
+  <textarea id="eng"></textarea>
+  <div class="frame">
+    <label for="gerahmt">Gerahmt</label>
+    <textarea id="gerahmt"></textarea>
+  </div>
+  <label for="rollt">Rollt</label>
+  <textarea id="rollt"></textarea>
+  <script>
+    const text = "Erste Zeile der Notiz.\nZweite Zeile der Notiz.\nDritte Zeile der Notiz.\nVierte Zeile der Notiz.";
+    for (const id of ["eng", "gerahmt", "rollt"]) document.getElementById(id).value = text;
+  </script>
+</body>
+</html>

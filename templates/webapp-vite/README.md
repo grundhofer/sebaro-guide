@@ -32,13 +32,16 @@ Jeder Fall nennt, was auf dem Bildschirm stehen muss: den HTTP-Status der Seite,
 Überschrift `h1`, die Ansicht (`data-sb-view` oder ein Selektor) und genau die offenen Überlagerungen (Dialoge, Popover,
 Kurzmeldungen; keine, wenn der Fall `null` sagt). Er scheitert auch an Text, den ein Bedienelement selbst abschneidet: der
 gewählte Eintrag einer Auswahl, ein Platzhalter, der Wert eines schreibgeschützten Felds, oder ein Icon oder Suffix über
-dem Text. Ein eingetippter Wert, der länger ist als sein einzeiliges Feld, läuft darin seitlich weiter (D110, „wie in
-jedem Textfeld“); er zählt als Notiz im Test, nicht als Fehler. Nicht gemessen: Datums- und Zeitfelder (ihre Teile zeichnet
-der Browser) und die offene Liste einer Auswahl (zeichnet das System). Einen Schnitt, den sebaros eigenes CSS verursacht
+dem Text. Ein eingetippter Wert, der länger ist als sein einzeiliges Feld, läuft darin seitlich weiter (D110, D111 (4),
+„wie in jedem Textfeld“), und ein Platzhalter, der nicht passt, darf mit dem „…“ enden, das sebaros Feld zeichnet,
+solange das Feld eine eigene Beschriftung hat (D111 (3)); beides zählt als Notiz im Test, nicht als Fehler, aber ein Rahmen um das Feld darf
+den Text, den es zeigt, nie abschneiden. Der Wert eines Textbereichs (`textarea`) ist kein einzeiliges Feld: Schneidet ihn der
+Textbereich selbst oder ein Rahmen ab, scheitert der Test; ein Textbereich, der rollt, hält ihn. `tests/control-cuts.spec.ts`
+prüft beides an zwei kleinen Seiten in `tests/fixtures/`. Nicht gemessen: Datums- und Zeitfelder (ihre Teile zeichnet
+der Browser), der Platzhalter eines Textbereichs und die offene Liste einer Auswahl (zeichnet das System). Einen Schnitt, den sebaros eigenes CSS verursacht
 und den die Vorlage nicht ändern darf, nennt der Fall als `controlWaivers` mit Grund; er steht bei jedem Lauf als Notiz
 im Bericht und ist eine Bitte an die Werkstatt.
-Heute steht dort einer: „Gesundheit“ in der Auswahl „Kategorie“ fehlen bei 200&nbsp;% auf 320&nbsp;px 4&nbsp;px, weil
-`.sb-select > select` am Ende Platz in rem für das Chevron hält.
+Heute steht dort keiner.
 
 `tests/keyboard.spec.ts` prüft die vier festen Aufgaben nur mit der Tastatur und dass jede Klasse von sebaro stammt oder
 mit `app-` beginnt. `tests/data-safety.spec.ts` prüft, dass nichts ungefragt verloren geht: jeder Weg aus einem Formular

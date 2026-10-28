@@ -932,7 +932,34 @@
     // the area the user works in: not „Menü“, a menu, the palette or another dialog, which only pass through (spec/02 §4.20)
     var win = area && windowOf(area);
     if (win && !el.closest(".sb-menu[popover], .sb-tooltip, dialog") && !isWindowMenuButton(el)) win._sbArea = area;
+    revealInSideNav(el);
   });
+  // a sidebar with a foot (spec/02 §4.17): the upper block scrolls by itself, so the row that gets focus (also one a
+  // virtualiser focused without scrolling) could lie under the foot or inside the tree's own scroller. Every scroller
+  // from the row up to the block scrolls, innermost first, by the least amount that shows the row in it; the block
+  // also shows the bottom edge of the scroller just inside it, as far as its height allows (block: "nearest"). Only
+  // these scroll, never the page or the content (review r13: moving the block alone could not uncover a row clipped
+  // inside the tree's scroller)
+  function revealInSideNav(el) {
+    var block = el.closest(".sb-side-nav__scroll");
+    if (!block || el === block) return;
+    var outer = null;
+    for (var up = el.parentElement; up; up = up.parentElement) {
+      var oy = getComputedStyle(up).overflowY;
+      var scroller = up === block || ((oy === "auto" || oy === "scroll") && up.scrollHeight > up.clientHeight);
+      if (scroller) {
+        var b = up.getBoundingClientRect(), r = el.getBoundingClientRect();
+        var bottom = up === block && outer ? Math.max(r.bottom, outer.getBoundingClientRect().bottom) : r.bottom;
+        var top = b.top + up.clientTop, end = top + up.clientHeight;
+        var delta = 0;
+        if (bottom > end) delta = Math.min(bottom - end, r.top - top);
+        else if (r.top < top) delta = r.top - top;
+        if (delta) up.scrollTop += delta;
+        if (up !== block) outer = up;
+      }
+      if (up === block) break;
+    }
+  }
   // F9a: a window that is not in front lets its path recede (sebaro.css); the attribute is absent while in front
   window.addEventListener("blur", function () { root.setAttribute("data-sb-window-active", "false"); });
   window.addEventListener("focus", function () { root.removeAttribute("data-sb-window-active"); });

@@ -33,6 +33,9 @@
 /* sb-part: base */
 /* ===================================================================== 1 base */
 
+/* the root carries the page ground too: body.sb-page is a size container, and layout containment stops the body's
+   background from reaching the canvas, so a short page showed white under it (spec/02 §5) */
+:root:has(> body.sb-page) { background-color: var(--sb-color-bg); }
 body.sb-page {
   margin: 0; background: var(--sb-color-bg); color: var(--sb-color-text);
   font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking);
@@ -112,6 +115,10 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
    (container-type: inline-size) as its fallback */
 body.sb-page { container: sb-page sb-content / inline-size; }
 .sb-container { container: sb-content / inline-size; }
+/* a part that reaches past the text by design (a footnote digit's invisible target) must not make the page scroll
+   sideways: the container clips sideways at its padding edge, so its gutter and every focus ring inside it stay
+   visible; clip makes no scroll container, sticky still works (spec/02 §5.1) */
+.sb-container { overflow-x: clip; }
 .sb-view--wide { container: sb-view / inline-size; }
 .sb-section { padding-block: var(--sb-spacing-section); }
 .sb-section + .sb-section { border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
@@ -194,6 +201,8 @@ body.sb-page { container: sb-page sb-content / inline-size; }
    reset, such as Tailwind's preflight, takes the browser's 40px away); a quote inside a list item carries the ink line
    of every quote; the first block of the prose has no space above, also a heading */
 .sb-prose > :is(ul, ol):not([class]) { padding-inline-start: 1.5em; }
+/* a list inside a quote indents the same; not in :where(), so a reset does not take the indent away, as above */
+.sb-prose blockquote > :is(ul, ol):not([class]) { padding-inline-start: 1.5em; }
 .sb-prose li > blockquote { margin-inline: 0; padding-inline-start: var(--sb-space-4); border-inline-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color); }
 .sb-prose li > blockquote > * { margin-block: 0; }
 .sb-prose li > blockquote > * + * { margin-block-start: var(--sb-spacing-stack); }
@@ -810,6 +819,9 @@ body.sb-page { container: sb-page sb-content / inline-size; }
 .sb-field__control > textarea { block-size: auto; min-block-size: 70px; padding-block: var(--sb-space-3); resize: vertical; }
 .sb-field__control:has(> textarea) { align-items: flex-start; }
 .sb-field__control > input::placeholder, .sb-field__control > textarea::placeholder { color: var(--sb-color-text-muted); opacity: 1; }
+/* D111 (3): a placeholder that does not fit a one-line field at large text may end in „…“; the field keeps its full
+   label. Only while the placeholder shows: a typed value scrolls inside the field (D110, D111 (4)) */
+.sb-field__control > input:placeholder-shown { text-overflow: ellipsis; }
 .sb-field__control:focus-within, .sb-field__control.is-focus { outline: var(--sb-focus-ring); outline-offset: var(--sb-focus-offset); }
 .sb-field__suffix { flex: none; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); color: var(--sb-color-text-muted); }
 .sb-field__help { margin: 0; display: flex; justify-content: space-between; gap: var(--sb-space-3); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
@@ -834,7 +846,7 @@ body.sb-page { container: sb-page sb-content / inline-size; }
 
 /* select: native select without its arrow, the chevron icon at the end */
 .sb-select { position: relative; padding-inline-end: 0; }
-.sb-select > select { -webkit-appearance: none; appearance: none; padding-inline-end: calc(var(--sb-space-3) + var(--sb-size-icon-lg) + var(--sb-space-2)); cursor: pointer; }   /* the chevron's room, not more: at 200 % text 48 px of rem would cut the chosen words (D99 (1)) */
+.sb-select > select { -webkit-appearance: none; appearance: none; padding-inline-end: calc(var(--sb-space-3) + var(--sb-size-icon-lg) + 8px); cursor: pointer; }   /* the chevron's room, not more: at 200 % text 48 px of rem would cut the chosen words (D99 (1)); the gap behind the chevron in px, as the 24 px icon is */
 .sb-select > select option { background: var(--sb-color-surface-raised); color: var(--sb-color-text); }
 .sb-select > .sb-icon { position: absolute; inset-inline-end: var(--sb-space-3); pointer-events: none; color: var(--sb-color-text-muted); }
 
@@ -3077,6 +3089,7 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
   block-size: max(46px, 1lh);   /* as the field's input: never cuts its line at 200 % (spec/02 §4.16; provisional, agent) */
 }
 .sb-command-palette__search > input::placeholder { color: var(--sb-color-text-muted); opacity: 1; }
+.sb-command-palette__search > input:placeholder-shown { text-overflow: ellipsis; }   /* D111 (3), as in a field */
 .sb-command-palette__search:focus-within { outline: var(--sb-focus-ring); outline-offset: calc(-1 * var(--sb-focus-width)); }
 .sb-command-palette__list { flex: 1 1 auto; min-block-size: 0; overflow-y: auto; margin: 0; padding: var(--sb-space-1) 0; }
 .sb-command-palette__list:has([role="option"]:not([hidden])) { min-block-size: calc(3 * max(var(--sb-size-control-sm), 1.25rem) + 2 * var(--sb-space-1)); }   /* a row is 32 px or its label line (1.25rem) */
@@ -3153,7 +3166,10 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
   display: flex; align-items: center; gap: var(--sb-space-1); min-inline-size: 0; margin: 0; overflow: hidden; white-space: nowrap;
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
 }
-.sb-window__path > span { flex: 0 10 auto; min-inline-size: 2em; overflow: hidden; text-overflow: ellipsis; }
+/* the ancestors give way first: their shrink weight is so far above the current place's that it keeps its whole name
+   until every ancestor is down to 2em (shrinking is weighted by size, so 10 against 1 still cut a long current place,
+   in dark mode first, D44); only then does the current place shrink (provisional, agent) */
+.sb-window__path > span { flex: 0 100000 auto; min-inline-size: 2em; overflow: hidden; text-overflow: ellipsis; }
 .sb-window__path > span:last-child { flex: 0 1 auto; color: var(--sb-color-text); font-weight: var(--sb-type-label-weight); }
 .sb-window__path > .sb-icon { flex: none; }
 .sb-window__tools { display: flex; align-items: center; gap: var(--sb-space-0-5); flex: none; margin-inline-start: auto; }
@@ -3493,13 +3509,18 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
 .sb-window__content:has(> .sb-doc-tabs) { padding-block-start: 0; }
 .sb-window__content > .sb-doc-tabs {
   position: sticky; inset-block-start: 0; z-index: var(--sb-layer-sticky);
-  margin: 0 calc(-1 * var(--sb-space-8)) var(--sb-space-6); padding-inline: var(--sb-space-4) 0; background: var(--sb-color-bg);
+  margin: 0 calc(-1 * var(--sb-space-8)) var(--sb-space-6); padding-inline: 0; background: var(--sb-color-bg);
   scroll-padding-inline-start: var(--sb-space-4);   /* the first tab scrolls back to the row's 16 px start (spec/02 §4.21) */
 }
+/* the 16 px start is the first tab's margin, not the row's padding: a sticky pinned tab is held inside a scroller's
+   padding, so with a padding it stayed 16 px from the edge and the scrolled tabs showed through the strip before it;
+   with the margin it scrolls with the row and then stays at the very edge (provisional, agent) */
+.sb-window__content > .sb-doc-tabs > .sb-doc-tabs__item:first-child { margin-inline-start: var(--sb-space-4); }
 /* flush content (spec/02 §4.17): no padding to undo, the row keeps its place */
 .sb-window__content--flush > .sb-doc-tabs { flex: none; margin: 0; }
 @container sb-window (max-width: 721.98px) {
-  .sb-window__content > .sb-doc-tabs { margin-inline: calc(-1 * var(--sb-space-4)); margin-block-end: var(--sb-space-4); padding-inline-start: 0; scroll-padding-inline-start: 0; }
+  .sb-window__content > .sb-doc-tabs { margin-inline: calc(-1 * var(--sb-space-4)); margin-block-end: var(--sb-space-4); scroll-padding-inline-start: 0; }
+  .sb-window__content > .sb-doc-tabs > .sb-doc-tabs__item:first-child { margin-inline-start: 0; }
   .sb-window__content--flush > .sb-doc-tabs { margin: 0; }
   .sb-window__content--flush > .sb-doc-tabs__none { padding: var(--sb-space-4); }
 }
@@ -3700,7 +3721,8 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
   color: var(--sb-color-text); text-decoration: underline var(--sb-color-link) var(--sb-x-sebaro-link-underline-width); text-underline-offset: 0.2em;
   scroll-margin-block-start: var(--sb-space-16);
 }
-.sb-note-ref::after { content: ""; position: absolute; inset-block-start: 50%; inset-inline-start: 50%; inline-size: max(24px, 100%); block-size: 24px; translate: -50% -50%; }
+/* the target is centred by logical insets, so it covers the digit in RTL too (a translate is physical; review r13) */
+.sb-note-ref::after { content: ""; position: absolute; inset-block-start: 50%; inset-inline: min(0px, calc(50% - 12px)); inline-size: auto; block-size: 24px; translate: 0 -50%; }
 .sb-note-refs > .sb-note-ref + .sb-note-ref::before { content: ","; }
 
 /* the list "Belege": one column at every width, 1 to n (D36; never columns, lint L7, check_demo TXT5/TXT6) */
@@ -3758,7 +3780,9 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
 @media (max-width: 1023.98px), (pointer: coarse) {
   .sb-note__checks, .sb-app-card__meta a, .sb-app-row__meta a, .sb-breadcrumb a, .sb-facts-line a { min-block-size: var(--sb-size-target-touch); }
   .sb-facts-line a { display: inline-flex; align-items: center; }
-  .sb-note-ref::after { inline-size: max(48px, 100%); block-size: 48px; }
+  /* 48 px reach past the digit's end only 12 px, less than the 16 px gutter the container clips at, and grow inward: a
+     digit at the line's end keeps its whole target (review r13; a digit follows its word, so never stands at the start) */
+  .sb-note-ref::after { inset-inline: auto -12px; inline-size: max(48px, 100%); block-size: 48px; }
 }
 .sb-note__body > p:last-child, .sb-claim-row__note > p:last-child { margin-block-end: 0; }
 

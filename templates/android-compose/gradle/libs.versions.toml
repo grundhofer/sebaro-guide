@@ -1,12 +1,12 @@
-# Every version of the template in one place. sebaro-compose 1.10.2 is the private Maven package of the sebaro
+# Every version of the template in one place. sebaro-compose 1.10.3 is the private Maven package of the sebaro
 # design system (token contract 1.10); it brings Compose and Material 3 as api dependencies.
 [versions]
 agp = "9.3.1"
 kotlin = "2.4.10"
-# the package runs on this BOM and on 2024.12.01 (binary-checked on both, workshop CHECKS §37)
+# the package runs on this BOM and on 2024.12.01 (binary-checked on both, workshop CHECKS §37, §38)
 composeBom = "2026.08.00"
 activityCompose = "1.13.0"
-sebaroCompose = "1.10.2"
+sebaroCompose = "1.10.3"
 desugarJdkLibs = "2.1.5"
 junit = "4.13.2"
 robolectric = "4.17"

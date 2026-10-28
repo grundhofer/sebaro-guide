@@ -1,0 +1,29 @@
+<!doctype html>
+<!-- Negative control for sebaro-checks.ts: a field whose own text is allowed (D111 (3) placeholder with „…“ beside a
+     label, D110 / D111 (4) typed value running on) inside a frame that cuts the field. Not a sebaro page. -->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Fixture: Feld in einem Rahmen</title>
+<style>
+  body { margin: 16px; font: 16px/1.5 sans-serif; }
+  .frame { inline-size: 80px; overflow: hidden; }
+  .wide { inline-size: 400px; overflow: hidden; }
+  input { box-sizing: border-box; inline-size: 220px; padding: 0 8px; text-overflow: ellipsis; font: inherit; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <label for="suche">Suche</label>
+    <input id="suche" type="search" placeholder="Nach Titel, Ort, Datum oder Notiz suchen">
+  </div>
+  <div class="frame">
+    <label for="titel">Titel</label>
+    <input id="titel" type="text" value="Ein sehr langer Titel, der in seinem Feld seitlich weiterläuft">
+  </div>
+  <div class="wide">
+    <label for="frei">Frei</label>
+    <input id="frei" type="search" placeholder="Nach Titel, Ort, Datum oder Notiz suchen">
+  </div>
+</body>
+</html>

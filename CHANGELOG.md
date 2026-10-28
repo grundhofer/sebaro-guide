@@ -11,8 +11,44 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
-Agenten-Test mit fünf Probeaufgaben (`docs/agenten-test-2026-10.md`). Keine Regel ist neu oder geändert; nur Texte für
-Agenten, also eine Korrektur.
+## 2.17.0 · 2026-10-28
+
+Abgleich mit dem Werkstatt-Commit `2560ef3`: die Entscheidung D111 des Inhabers und die Lücken, die novalis und die
+Startvorlagen gefunden haben. Regeln ändern ihre Werte, also eine Nebenversion. Dazu der Agenten-Test mit fünf
+Probeaufgaben (`docs/agenten-test-2026-10.md`), der nur Texte für Agenten ändert.
+
+- Export neu aus `2560ef3` (`docs/sebaro/`, `docs/assets/vendor/demo.css`): `sebaro.css` zeichnet „…“ am Platzhalter
+  eines Felds und der Suche in der Palette, hält 8&nbsp;px hinter dem Chevron einer Auswahl in px, gibt der Wurzel einer
+  sebaro-Seite den Seitengrund, schneidet `sb-container` seitlich an seinem Innenrand ab, legt die Trefferfläche einer
+  Fußnotenziffer mit logischen Rändern, rückt eine Liste im Zitat ein, setzt den Abstand am Anfang der Reiterzeile als
+  Rand des ersten Reiters und lässt im Pfad des Fensters den aktuellen Ort zuletzt schrumpfen; `sb-menu.js` macht ein
+  scrollendes Menü zum Tab-Halt, `sb-window.js` holt eine fokussierte Zeile des Baums unter dem Fuß hervor.
+- Geändert nach D111: EIN-01 (ein langer Wert läuft in jedem einzeiligen Feld seitlich weiter, nicht nur im Dialog; ein
+  Platzhalter, der bei großer Schrift nicht passt, darf mit „…“ enden, das Feld behält seine Beschriftung; im Beispiel
+  trägt die Notiz einen Platzhalter mit einem Beispiel), EIN-05 (das versteckte Label der Suche nennt die Aufgabe ganz;
+  die Maße hinter dem Chevron), EBE-03 (der Dialog verweist auf die Regel für jedes Feld), ZUG-09 (Platzhalter und
+  Wert im Feld, die Demo-Prüfung 1.10.0 mit ihren Info-Zeilen, der Pfad des Fensters, `SbWrapText` öffentlich), DSK-08
+  (Entwicklungsregion = Rückfallsprache, die Menüleiste folgt dem System, die Punkte von macOS in „Fenster“), DSK-05
+  (die Wahl „Hell“ / „Dunkel“ färbt nie die Menüleiste) und TEC-10 (die Rückfallsprache auch im App-Paket).
+- Geändert nach bestehenden Regeln, ohne neue Frage (die Wahlen ohne Regel vorläufig von der Werkstatt): DSK-10 (der
+  angeheftete Reiter steht beim Scrollen ganz am Rand, kein Einrasten, „Keine Notiz offen.“ in einer leeren Sammlung),
+  NAV-04 (ein leerer Baum ohne eigenen Rollrahmen, eine fokussierte Zeile nie unter dem Fuß), BEL-02 (die Trefferfläche
+  einer Ziffer am Zeilenende lässt die Seite nicht seitlich scrollen), EBE-07 (ein scrollendes Menü ist ein Tab-Halt),
+  TXT-17 (eine Liste im Zitat rückt ein), TXT-15 (`SbWrapText` öffentlich), TXT-14 („not given“ im Englischen), TXT-04
+  (weitere Eingaben bei „Gehe zu Zeile“, nur Spezifikation) und DSK-03 (das Kästchen einer Aufgabe bleibt 20&nbsp;px).
+- `docs/ausblick.html`: neuer Abschnitt „Am 28.10.2026 entschieden und gebaut (D111)“. `rules.json` nennt jetzt D1–D111.
+- Die Guide-Seiten bestehen die Demo-Prüfung 1.10.0 der Werkstatt wieder: Mit dem alten Export meldete sie auf Bauteile,
+  Desktop und Regeln abgeschnittene Platzhalter als Fehler; mit dem neuen zeichnet das Feld das „…“, keine Seite
+  musste dafür geändert werden. Weiter als Warnung bleiben gewählte Einträge einer Auswahl, die bei 200&nbsp;% auf
+  320&nbsp;px nicht ganz passen (Bauteile, Desktop, Regeln; D111 entscheidet nur Werte und Platzhalter).
+- Startvorlagen: Die drei Ausnahmen in den Tests (die Auswahl „Kategorie“ auf 320&nbsp;px in `webapp-vite`, die Suche
+  der Seitenleiste und der Platzhalter der Befehlspalette in `desktop-tauri`) sind entfernt, ebenso die Umgehungen,
+  deren Ursache sebaro jetzt behebt: der Grund an `html` (`webapp-vite`, `website-astro`), der seitliche Schnitt um den
+  Artikel für die Fußnoten (`website-astro`) und der wandernde Tab-Halt im Menü (`desktop-tauri`). `public/sebaro/` ist
+  neu kopiert. `tests/sebaro-checks.ts` kennt D111: Ein Platzhalter mit dem „…“ des Felds neben einer eigenen
+  Beschriftung ist eine Notiz, kein Fehler; schneidet aber ein Rahmen das Feld ab, ist es ein Fehler, wie in der Werkstatt, und der Wert
+  eines Textbereichs wird jetzt auch geprüft (Gegenproben in `tests/control-cuts.spec.ts`). `android-compose` nimmt `sebaro-compose` 1.10.3 und setzt die Notiz im
+  Detail mit dem jetzt öffentlichen `SbWrapText`; der Satz, er sei angefragt, ist aus der README entfernt.
 
 - `templates/AGENTS-snippet.md`: als erster Punkt eine Tabelle je Produktart (wo Hell oder Dunkel, Sprache, Farbton
   und ⌘K stehen) und die Liste der leicht übersehenen Regeln (TXT-04, TXT-03, TEC-06, BEL-10, BEL-09, EBE-05, AKT-08,

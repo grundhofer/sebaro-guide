@@ -29,7 +29,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 
 Rule status: **entschieden** = owner decision, binding. **vorläufig** = an agent's decision, valid until the owner
 changes it. **offen** = proposal only, do not build it as a rule. `D<n>` refers to row n of the decision log in the
-workshop repository sebaroDesign (private; the guide covers D1–D110; D109 orders product adoptions and sets no rule). A rule id (e.g. `AKT-01`) is stable; cite it
+workshop repository sebaroDesign (private; the guide covers D1–D111; D109 orders product adoptions and sets no rule). A rule id (e.g. `AKT-01`) is stable; cite it
 in code reviews, commit messages and ADRs.
 
 ## 2 The ten rules most often broken
@@ -327,6 +327,22 @@ The report's table lists the rules missed in two or three. Most came from the st
    the field where there is no form); `.sb-completion[hidden]` and `.sb-completion__empty[hidden]` close the list with
    `hidden` alone, so `docs/assets/desktop.js` no longer sets `display` through the CSSOM. D110 is not checked on a
    real phone or with a screen reader.
+   Settled by the owner with D111 (2026-10-28, synced from workshop `2560ef3`, guide 2.17.0): (1) a bundle's
+   `CFBundleDevelopmentRegion` is the product's fallback language, `de` by default, `en` for a product that falls back
+   to English (DSK-08, TEC-10); (2) the macOS menu bar follows the system's appearance, context menus the window, the
+   app's „Hell“ / „Dunkel“ never sets `NSApp.appearance` (DSK-05, DSK-08); (3) a placeholder that does not fit a
+   one-line field at large text may end in „…“, drawn by `sebaro.css` (`text-overflow: ellipsis` on
+   `input:placeholder-shown`), while the field keeps a full label of its own (EIN-01, EIN-05); (4) D110 holds for every
+   one-line field, not only in a dialog (EIN-01, EBE-03, ZUG-09). The demo check 1.10.0 counts both in `OVF5` info lines
+   and reports any other cut placeholder as an error; a read-only value not being sent, a disabled field and a
+   select's chosen option still warn (provisional, workshop). Fixed in the same round under existing rules
+   (provisional where no rule decides): the pinned tab at the very edge of a scrolled tab row, „Keine Notiz offen.“ in
+   an empty collection (DSK-10); a focused tree row never under the sidebar's foot, an empty tree without a scroll
+   frame (NAV-04); the root of a sebaro page carries `bg`; `sb-container` clips sideways so a footnote target never
+   makes the page scroll (BEL-02); a scrolling menu is a tab stop (EBE-07); 8 px behind a select's chevron (EIN-05);
+   the window path keeps the current place longest; a list in a quote indents (TXT-17); `SbWrapText` is public in
+   sebaro-compose 1.10.3 (TXT-15, ZUG-09). The starter templates dropped their waivers and workarounds for these.
+   Not checked: macOS menus in a built bundle, WebKit, Firefox, screen readers.
 
 ## 4 Where the system files come from
 
@@ -389,7 +405,8 @@ both, in light and dark (the warm-tone runs of `--tones warm` check axe, contras
 never weaken them with a local workaround. To see real 200 % text yourself, set
 the font sizes with CDP before `goto` and take viewport screenshots after scrolling (full-page screenshots lose the
 setting). `OVF4` does not see text inside an input or a select (since 1.5.0 `OVF5` warns about field text wider than
-its field). Since 1.6.0 `OVF6` also reports a word broken inside itself where it would fit its line or the part that
+its field; since 1.10.0, D111, a typed value that scrolls in its field and a placeholder that ends in „…“ beside a label
+of its own are info lines, any other cut placeholder is an error). Since 1.6.0 `OVF6` also reports a word broken inside itself where it would fit its line or the part that
 squeezes it (at 100 % and in the 200 % pass); every guide page passes it too. Since 1.8.0 a part narrow on purpose
 carries `data-sb-narrow-ok`: its squeezed words are counted in one info line instead of reported, an unneeded break
 stays an error (`docs/ausblick.html#p-w-ovf6-schmal`); the narrow columns of SCH-06, TXT-15 and the data page carry it
@@ -518,7 +535,7 @@ The owner answered the round-6 sketch (63 questions, private, never linked from 
 after it with D92 to D97, confirmed 70 of the 73 vorläufig rules with D98 and answered the four workshop questions on large
 text, inputs and charts on the phone and required fields with D99, and the steps, the novalis sidebar, page width at large text, the Compose sortable table and intro step with D100 and D101, the questions of the first adoptions with D102 to D104 (D103 sets the priority for future trade-offs) and
 the apps' waiting lists with D105 to D107 (D106 and D107 are built: widgets, camera and photos for Android only) and
-the new gaps of the adoptions with D108 (built) and the long value in a dialog field at large text with D110 (built);
+the new gaps of the adoptions with D108 (built) and the long value in a dialog field at large text with D110 (built) and the four questions from novalis and the starter templates with D111 (built);
 what is still open, and what is built but untested (real iOS and Android devices, launchers, a real camera, real Tauri
 windows), is collected on `docs/ausblick.html`; no question waits for the owner.
 No guide page scrolls sideways at 200 % text on 320, 360 and 390 px, no frame cuts a text and, since 2.11.0, no word

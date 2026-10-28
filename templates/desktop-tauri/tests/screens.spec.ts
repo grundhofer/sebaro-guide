@@ -121,15 +121,4 @@ const screens: Screen[] = [
 
 checkScreens(screens, {
   widths: [390, 480, 1440],
-  // placeholders of sebaro's parts whose width does not grow with the text; the words are the guide's own
-  controlWaivers: [
-    {
-      at: "#suche", text: "Suchen …", scale: 2,
-      reason: "the sidebar keeps sebaro's 240 px at 200 % text (NAV-04, D108); its sb-search frame leaves less than the word „Suchen …“ needs (workshop request)",
-    },
-    {
-      at: 'input[name=""]', text: "Befehl oder Einstellung suchen", scale: 2,
-      reason: "the placeholder of sb-command-palette as on docs/desktop.html; at 200 % text it is wider than the palette's field on every window width (workshop request)",
-    },
-  ],
 });

@@ -194,6 +194,9 @@
 /* the smallest window (D108 lane a): 480 × 400, the window fills the frame */
 .demo-window-frame--480x400 { max-inline-size: 480px; block-size: 400px; }
 .demo-window-frame--480x400 > .sb-window { block-size: 100%; }
+/* a low window at full width: the sidebar stays docked at large text and its upper block has to scroll */
+.demo-window-frame--low { block-size: 400px; }   /* the smallest window height (D108 lane a) */
+.demo-window-frame--low > .sb-window { block-size: 100%; }
 /* a frame for the start error and the last-resort notice: the notice stands in the frame instead of over the page */
 .demo-start-frame--short { position: relative; min-block-size: 240px; }
 .demo-start-frame--short > .sb-fatal.demo-static { position: absolute; z-index: auto; }

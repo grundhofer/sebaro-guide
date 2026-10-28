@@ -7,7 +7,7 @@ Starting points for new sebaro projects. Copy, then adapt; nothing here is loade
 | [`AGENTS-snippet.md`](AGENTS-snippet.md) | paste into a product repo's `AGENTS.md` / `CLAUDE.md` so every agent session there follows sebaro |
 | [`screen-checklist.md`](screen-checklist.md) | the per-screen review before a screen counts as done (both modes, 390 px and 1440 px) |
 | [`web-plain/index.html`](web-plain/index.html) | minimal website/web app page wired to an exported `sebaro/` folder, no build step |
-| [`android-compose/`](android-compose/README.md) | Android app (Kotlin, Jetpack Compose) on the private Maven package `sebaro-compose` 1.10.2: list, detail, form, settings, data and the three dialogs, with lint and Robolectric/Roborazzi screenshot tests; README in German |
+| [`android-compose/`](android-compose/README.md) | Android app (Kotlin, Jetpack Compose) on the private Maven package `sebaro-compose` 1.10.3: list, detail, form, settings, data and the three dialogs, with lint and Robolectric/Roborazzi screenshot tests; README in German |
 | [`design-exception.md`](design-exception.md) | how to ask the owner when a rule does not fit (instead of working around it) |
 | [`website-astro/`](website-astro/README.md) | runnable static website (Astro): start page DE/EN, article with footnotes, about, contact, imprint, privacy, accessibility, 404, one share image per page from the build |
 | [`webapp-vite/`](webapp-vite/README.md) | runnable web app without a window (Vite + TypeScript, no framework): list with search, filter and empty state, detail, form with validation, settings, every data type of `docs/daten.html`, dialogs, toasts with undo |

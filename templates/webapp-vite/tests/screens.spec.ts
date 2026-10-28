@@ -107,10 +107,6 @@ const screens: Screen[] = [
     prepare: async (page) => {
       await expect(page.locator("#app-f-cat")).toHaveValue("health");
     },
-    controlWaivers: [{
-      at: "#app-f-cat", text: "Gesundheit", width: 320, scale: 2,
-      reason: "sebaro.css .sb-select > select keeps calc(space-3 + icon-lg + space-2) at its end; its spaces grow with the text, so at 200 % on 320 px a 10-letter word lacks 4 px (workshop request in the pull request of this template)",
-    }],
   },
   { name: "einstellungen", path: "/#/einstellungen", heading: "Einstellungen", view: '[data-sb-view="einstellungen"]', overlay: null },
   {

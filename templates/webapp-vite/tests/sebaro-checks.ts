@@ -8,9 +8,14 @@
 //   - no text is cut by a frame with overflow hidden or clip (ZUG-09; the same reading as the guide's
 //     tools/check_a11y.mjs and the workshop's OVF4: a deliberate ellipsis with data-sb-truncate is exempt)
 //   - no value of a select, no placeholder and no value of a read-only field is cut by its control at the current text
-//     size, and no icon or suffix covers the text; a value typed into an editable one-line field may run on sideways
-//     inside it (D110: „as in every text field“, the caret shows the place), it is counted in an annotation. Not seen:
-//     date and time fields (the browser draws their parts) and the open list of a select (drawn by the system)
+//     size, and no icon or suffix covers the text; a value typed into any editable one-line field may run on sideways
+//     inside it (D110, D111 (4): „as in every text field“, the caret shows the place), and a placeholder that does not
+//     fit may end in „…“ drawn by the field (text-overflow: ellipsis) while the field has a label of its own (D111 (3));
+//     both are counted in annotations, and neither lets a frame around the field cut the text the field shows (its
+//     visible text box is followed up its ancestors like a text node, as the workshop's check_demo.mjs does). A
+//     textarea's value is no one-line field: cut by the textarea's own overflow hidden or clip, or by a frame around
+//     it, it is a fault (a textarea that scrolls holds it). Not seen: date and time fields (the browser draws their
+//     parts), a textarea's placeholder and the open list of a select (drawn by the system)
 //   - axe-core: 0 violations of WCAG 2.0 / 2.1 / 2.2 A and AA (ZUG-01, ZUG-08)
 //   - no console error, no page error and no Content-Security-Policy violation
 // A viewport screenshot of each run lands in test-results/screens/ (uploaded by CI).
@@ -61,7 +66,7 @@ const AXE_TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22a", "wcag22
 // (1 px tolerance), each axis on its own; in a scrolling axis only the part the scroll box shows counts further up.
 // Not counted: the visually hidden pattern (a cutting box of at most 2 px) and, in the inline axis, a deliberate
 // ellipsis (text-overflow: ellipsis with data-sb-truncate on it or above).
-function collectCut() {
+export function collectCut() {
   const out: Array<{ text: string; at: string; frame: string; over: number }> = [];
   const seen = new Set<string>();
   const path = (el: Element) => {
@@ -120,13 +125,63 @@ function openOverlays() {
 
 // The text of a control cut by the control itself: a select's chosen option, a placeholder, a read-only value, each
 // measured in the control's own font against its text box (its width without padding), and any icon or suffix of the
-// field that lies over that box. Editable values that run on sideways (D110) come back in `scrolls`, not as faults.
-function collectControlCuts() {
+// field that lies over that box. Editable values that run on sideways (D110, D111 (4)) and placeholders that end in
+// „…“ beside a label of their own (D111 (3)) come back in `allowed`, not as faults. Whatever the field does with its
+// own text, its visible text box is then followed up its ancestors as collectCut follows a text node (workshop
+// check_demo.mjs 1.10, review r13 finding 2): an allowed scroll or „…“ inside the field never allows a frame to cut
+// it. A textarea's value is measured by the textarea's layout (scrollWidth, scrollHeight): its own overflow hidden or
+// clip must hold it, and its visible part is followed up its ancestors; D110 and D111 stay with one-line fields.
+export function collectControlCuts() {
   const cut: Array<{ at: string; kind: string; text: string; over: number }> = [];
-  const scrolls: string[] = [];
+  const allowed: string[] = [];
+  // a label of the field's own with text: <label>, aria-labelledby or aria-label (a title or the placeholder is none)
+  const labelled = (el: HTMLInputElement) => [...(el.labels ?? [])].some((l) => l.textContent?.trim())
+    || (el.getAttribute("aria-labelledby") ?? "").split(/\s+/).some((id) => id && document.getElementById(id)?.textContent?.trim())
+    || !!el.getAttribute("aria-label")?.trim();
   const ctx = document.createElement("canvas").getContext("2d")!;
   const TEXTLIKE = new Set(["text", "search", "email", "url", "tel", "number", "password"]);
   const where = (el: Element) => (el.id ? `#${el.id}` : `${el.localName}[name="${el.getAttribute("name") ?? ""}"]`);
+  const path = (el: Element) => {
+    const parts: string[] = [];
+    for (let e: Element | null = el; e && e !== document.body && parts.length < 4; e = e.parentElement) {
+      parts.unshift(e.id ? `${e.localName}#${e.id}` : e.localName + (e.classList[0] ? "." + e.classList[0] : ""));
+      if (e.id) break;
+    }
+    return parts.join(" > ");
+  };
+  // the control's visible text box [x0, x1, y0, y1] followed up from its parent, read as collectCut reads a text node:
+  // the first frame with overflow hidden or clip that does not hold it in an axis is a fault
+  const frameCut = (el: Element, text: string, kind: string, [x0, x1, y0, y1]: number[]) => {
+    for (let a: Element | null = el.parentElement; a && a !== document.documentElement; a = a.parentElement) {
+      const cs = getComputedStyle(a);
+      const sx = /auto|scroll/.test(cs.overflowX), sy = /auto|scroll/.test(cs.overflowY);
+      const hx = /hidden|clip/.test(cs.overflowX), hy = /hidden|clip/.test(cs.overflowY);
+      if (!hx && !hy && !sx && !sy) continue;
+      const b = a.getBoundingClientRect();
+      if ((hx || hy) && (b.width <= 2 || b.height <= 2)) return;
+      const l = b.left + a.clientLeft, t = b.top + a.clientTop, r = l + a.clientWidth, btm = t + a.clientHeight;
+      let over = 0;
+      if (hx && !(cs.textOverflow === "ellipsis" && a.closest("[data-sb-truncate]"))) over = Math.max(over, x1 - r, l - x0);
+      if (hy) over = Math.max(over, y1 - btm, t - y0);
+      if (over > 1) { cut.push({ at: where(el), kind: `${kind} cut by the frame ${path(a)}`, text: text.slice(0, 40), over: Math.round(over) }); return; }
+      if (sx || hx) [x0, x1] = [Math.max(x0, l), Math.min(x1, r)];
+      if (sy || hy) [y0, y1] = [Math.max(y0, t), Math.min(y1, btm)];
+    }
+  };
+  for (const el of document.querySelectorAll<HTMLTextAreaElement>("textarea")) {
+    if (!el.value.trim() || !el.checkVisibility({ visibilityProperty: true })) continue;
+    const box = el.getBoundingClientRect();
+    if (box.width <= 2 || box.height <= 2) continue;
+    const cs = getComputedStyle(el);
+    const [pl, pr, pt, pb] = [cs.paddingLeft, cs.paddingRight, cs.paddingTop, cs.paddingBottom].map(parseFloat);
+    const text = el.value.replace(/\s+/g, " ").trim();
+    const overX = el.scrollWidth - el.clientWidth, overY = el.scrollHeight - el.clientHeight;
+    const over = Math.max(/hidden|clip/.test(cs.overflowX) ? overX : 0, /hidden|clip/.test(cs.overflowY) ? overY : 0);
+    if (over > 1) cut.push({ at: where(el), kind: "textarea value", text: text.slice(0, 40), over: Math.round(over) });
+    const l = box.left + el.clientLeft, t = box.top + el.clientTop;
+    frameCut(el, text, "textarea value",
+      [l + pl, l + Math.min(el.scrollWidth, el.clientWidth) - pr, t + pt, t + Math.min(el.scrollHeight, el.clientHeight) - pb]);
+  }
   for (const el of document.querySelectorAll<HTMLInputElement | HTMLSelectElement>("input, select")) {
     const isSelect = el instanceof HTMLSelectElement;
     if (isSelect ? el.multiple || el.size > 1 : !TEXTLIKE.has(el.type)) continue;
@@ -153,15 +208,22 @@ function collectControlCuts() {
       return r.width > 0 && r.left < used[1] - 1 && r.right > used[0] + 1 && r.top < box.bottom && r.bottom > box.top;
     }) : false;
     if (covered) cut.push({ at: where(el), kind: `${kind} covered by an icon or suffix`, text: text.slice(0, 40), over: 0 });
+    // the field's visible text box against its ancestors, whatever the field does with its own text
+    const top = box.top + el.clientTop;
+    frameCut(el, text, kind, [used[0], used[1], top, top + el.clientHeight]);
     if (over <= 1) continue;
     const busy = el.getAttribute("aria-busy") === "true" || !!el.closest("form[aria-busy='true']");
     if (kind === "value" && !(el as HTMLInputElement).readOnly && !el.disabled && !busy) {
-      scrolls.push(`${where(el)} runs on ${over} px inside its field (D110)`);
+      allowed.push(`${where(el)} runs on ${over} px inside its field (D110, D111 (4))`);
+      continue;
+    }
+    if (kind === "placeholder" && cs.textOverflow === "ellipsis" && labelled(el as HTMLInputElement)) {
+      allowed.push(`${where(el)} placeholder ends in „…“ beside its label (D111 (3))`);
       continue;
     }
     cut.push({ at: where(el), kind, text: text.slice(0, 40), over });
   }
-  return { cut, scrolls };
+  return { cut, allowed };
 }
 
 /** Registers one test per screen, scheme, width and text size. */
@@ -229,7 +291,7 @@ export function checkScreens(screens: Screen[], options: Options = {}) {
             const waived = (c: { at: string; text: string }) => waivers.find((w) => w.at === c.at && w.text === c.text && w.scale === scale && (w.width ?? width) === width);
             for (const c of controls.cut.filter(waived)) test.info().annotations.push({ type: "waiver", description: `${c.at} „${c.text}“ cut by ${c.over} px: ${waived(c)!.reason}` });
             expect(controls.cut.filter((c) => !waived(c)), "control text cut by its control").toEqual([]);
-            for (const line of controls.scrolls) test.info().annotations.push({ type: "D110", description: line });
+            for (const line of controls.allowed) test.info().annotations.push({ type: "D111", description: line });
 
             const axe = await new AxeBuilder({ page }).withTags(AXE_TAGS).analyze();
             const violations = axe.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(", ")}`);

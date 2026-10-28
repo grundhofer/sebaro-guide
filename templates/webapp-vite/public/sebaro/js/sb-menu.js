@@ -260,6 +260,7 @@
     if (open) {
       items(menu).forEach(function (i) { i.tabIndex = -1; });
       if (button) place(menu, button, false);
+      scrollStop(menu);
       if (!menu.contains(document.activeElement)) focusItem(menu, x.focus);   // a letter typed at once already moved in
       x.focus = "first"; x.noReturn = false;
       if (x.drill && parentMenu(menu) && menu.matches(":popover-open")) parentMenu(menu).setAttribute(REPLACED, "");   // focus is in: hide the parent
@@ -275,7 +276,20 @@
     }
     x.focusInside = false; x.noReturn = false; x.returnTo = null;
     if (x.drill) { removeBack(menu); menu.style.inlineSize = ""; x.drill = false; x.up = false; }
+    if (menu.getAttribute("data-sb-scroll-stop") === "") { menu.removeAttribute("tabindex"); menu.removeAttribute("data-sb-scroll-stop"); }
   }, true);
+  // a menu taller than its room scrolls (max-block-size in sebaro.css), but every item has tabindex -1 (roving focus),
+  // so nothing in it could be reached to scroll it by keys: while it scrolls the menu itself is a tab stop; when it
+  // fits again, or closes, the stop goes (a tabindex the page set itself is left alone)
+  function scrollStop(menu) {
+    var mine = menu.getAttribute("data-sb-scroll-stop") === "";
+    if (menu.hasAttribute("tabindex") && !mine) return;
+    if (menu.scrollHeight > menu.clientHeight + 1) { menu.tabIndex = 0; menu.setAttribute("data-sb-scroll-stop", ""); }
+    else if (mine) { menu.removeAttribute("tabindex"); menu.removeAttribute("data-sb-scroll-stop"); }
+  }
+  window.addEventListener("resize", function () {
+    document.querySelectorAll(".sb-menu:popover-open").forEach(scrollStop);
+  });
 
   // A button without popovertarget: the script toggles the menu itself, naming the button as the source so that a
   // press on it is not also a click outside (where the browser cannot take a source, the state before the press counts).

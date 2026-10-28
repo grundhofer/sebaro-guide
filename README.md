@@ -26,7 +26,7 @@ Produkts.
 
 ## Woher die Werte kommen
 
-Die Quellen von sebaro (Paletten, Verträge, Generatoren, Prüfungen und das Entscheidungsprotokoll D1–D110) liegen in
+Die Quellen von sebaro (Paletten, Verträge, Generatoren, Prüfungen und das Entscheidungsprotokoll D1–D111) liegen in
 der Werkstatt **sebaroDesign**, einem privaten Repository. Dieser Guide schreibt keine Farbe, Schrift und kein Icon ab:
 `docs/sebaro/` ist ein geprüfter Web-Export (`tools/sync_from_design.py`), jede Datei mit Prüfsumme. Regeln ändern sich
 nur in `rules/rules.json`; `tools/build.py` erzeugt daraus die Regelseite, `guide/RULES.md` und `docs/llms.txt`.

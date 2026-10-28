@@ -275,6 +275,7 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
   block-size: max(46px, 1lh);   /* as the field's input: never cuts its line at 200 % (spec/02 §4.16; provisional, agent) */
 }
 .sb-command-palette__search > input::placeholder { color: var(--sb-color-text-muted); opacity: 1; }
+.sb-command-palette__search > input:placeholder-shown { text-overflow: ellipsis; }   /* D111 (3), as in a field */
 .sb-command-palette__search:focus-within { outline: var(--sb-focus-ring); outline-offset: calc(-1 * var(--sb-focus-width)); }
 .sb-command-palette__list { flex: 1 1 auto; min-block-size: 0; overflow-y: auto; margin: 0; padding: var(--sb-space-1) 0; }
 .sb-command-palette__list:has([role="option"]:not([hidden])) { min-block-size: calc(3 * max(var(--sb-size-control-sm), 1.25rem) + 2 * var(--sb-space-1)); }   /* a row is 32 px or its label line (1.25rem) */
@@ -351,7 +352,10 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
   display: flex; align-items: center; gap: var(--sb-space-1); min-inline-size: 0; margin: 0; overflow: hidden; white-space: nowrap;
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
 }
-.sb-window__path > span { flex: 0 10 auto; min-inline-size: 2em; overflow: hidden; text-overflow: ellipsis; }
+/* the ancestors give way first: their shrink weight is so far above the current place's that it keeps its whole name
+   until every ancestor is down to 2em (shrinking is weighted by size, so 10 against 1 still cut a long current place,
+   in dark mode first, D44); only then does the current place shrink (provisional, agent) */
+.sb-window__path > span { flex: 0 100000 auto; min-inline-size: 2em; overflow: hidden; text-overflow: ellipsis; }
 .sb-window__path > span:last-child { flex: 0 1 auto; color: var(--sb-color-text); font-weight: var(--sb-type-label-weight); }
 .sb-window__path > .sb-icon { flex: none; }
 .sb-window__tools { display: flex; align-items: center; gap: var(--sb-space-0-5); flex: none; margin-inline-start: auto; }
@@ -691,13 +695,18 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
 .sb-window__content:has(> .sb-doc-tabs) { padding-block-start: 0; }
 .sb-window__content > .sb-doc-tabs {
   position: sticky; inset-block-start: 0; z-index: var(--sb-layer-sticky);
-  margin: 0 calc(-1 * var(--sb-space-8)) var(--sb-space-6); padding-inline: var(--sb-space-4) 0; background: var(--sb-color-bg);
+  margin: 0 calc(-1 * var(--sb-space-8)) var(--sb-space-6); padding-inline: 0; background: var(--sb-color-bg);
   scroll-padding-inline-start: var(--sb-space-4);   /* the first tab scrolls back to the row's 16 px start (spec/02 §4.21) */
 }
+/* the 16 px start is the first tab's margin, not the row's padding: a sticky pinned tab is held inside a scroller's
+   padding, so with a padding it stayed 16 px from the edge and the scrolled tabs showed through the strip before it;
+   with the margin it scrolls with the row and then stays at the very edge (provisional, agent) */
+.sb-window__content > .sb-doc-tabs > .sb-doc-tabs__item:first-child { margin-inline-start: var(--sb-space-4); }
 /* flush content (spec/02 §4.17): no padding to undo, the row keeps its place */
 .sb-window__content--flush > .sb-doc-tabs { flex: none; margin: 0; }
 @container sb-window (max-width: 721.98px) {
-  .sb-window__content > .sb-doc-tabs { margin-inline: calc(-1 * var(--sb-space-4)); margin-block-end: var(--sb-space-4); padding-inline-start: 0; scroll-padding-inline-start: 0; }
+  .sb-window__content > .sb-doc-tabs { margin-inline: calc(-1 * var(--sb-space-4)); margin-block-end: var(--sb-space-4); scroll-padding-inline-start: 0; }
+  .sb-window__content > .sb-doc-tabs > .sb-doc-tabs__item:first-child { margin-inline-start: 0; }
   .sb-window__content--flush > .sb-doc-tabs { margin: 0; }
   .sb-window__content--flush > .sb-doc-tabs__none { padding: var(--sb-space-4); }
 }

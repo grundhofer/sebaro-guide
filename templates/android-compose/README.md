@@ -5,7 +5,7 @@ erfundener Name, `de.example.musterapp` ein Platzhalter; beides ersetzt du in de
 Beispieleinträge und alle Werte auf dem Daten-Bildschirm; beide tragen „Beispieldaten“, ein Beispieleintrag in der
 Liste, im Detail und im Formular. Was du selbst anlegst, trägt die Marke nie (BEL-09).
 
-sebaro kommt nur aus dem privaten Maven-Paket `de.sebaro_ventures.design:sebaro-compose:1.10.2` (GitHub Packages,
+sebaro kommt nur aus dem privaten Maven-Paket `de.sebaro_ventures.design:sebaro-compose:1.10.3` (GitHub Packages,
 Repository `grundhofer/sebaroDesign`). Die App baut keine sebaro-Bauteile nach und schreibt keine Farbe selbst: Alles,
 was nach sebaro aussieht, kommt aus den Compose-Wrappern des Pakets (`SebaroAppTheme`, `SbScreen`, `SbTopBar`,
 `SbNavigationBar`, `SbListRow`, `SbTextField`, `SbConfirmDialog` …); eigene Teile nehmen nur Tokens aus
@@ -79,7 +79,7 @@ Maven-Verzeichnis. Die Liste der nicht veröffentlichten Produkte kommt aus der 
 ```sh
 cd <sebaroDesign-Checkout>
 SEBARO_EXCLUDE_PRODUCTS=$(python3 -c "import json; print(','.join(json.load(open('<Guide-Checkout>/tools/sync.local.json'))['excludeProducts']))") \
-  python3 tools/package_export.py maven --out <Arbeitsordner>/maven --tag v1.10.2
+  python3 tools/package_export.py maven --out <Arbeitsordner>/maven --tag v1.10.3
 gradle -p <Arbeitsordner>/maven publishToMavenLocal     # Gradle 9.x, JDK 17+, Android SDK 37
 ```
 
@@ -153,7 +153,7 @@ zusätzlich:
    MOB-02).
 3. Jedes Wort in `res/values/strings.xml` und `res/values-en/strings.xml`; Zahlen, Beträge und Daten über die
    Locale (`Formats.kt`, `sbFormatCount`, `sbMessages()`), U+00A0 zwischen Zahl und Einheit (TEC-10, TXT-04).
-4. Die Compose-BOM steht in `gradle/libs.versions.toml`; das Paket 1.10.2 läuft auf 2024.12.01 und auf 2026.08.00.
+4. Die Compose-BOM steht in `gradle/libs.versions.toml`; das Paket 1.10.3 läuft auf 2024.12.01 und auf 2026.08.00.
 5. Vor „fertig“: `lint`, `testDebugUnitTest`, `tools/lint-sebaro-android.sh`, die Bildschirmfotos ansehen.
 
 `tools/lint-sebaro-android.sh` sucht im Kotlin-Code nach dem, was Android Lint nicht kennt: ein eigener
@@ -165,16 +165,16 @@ POSIX-Shell (unter Windows Git Bash).
 
 ## Bekannte Grenzen
 
-- **Compose-BOM.** Das Paket 1.10.2 läuft auf beiden Compose-BOMs, 2024.12.01 und 2026.08.00 (Werkstatt, CHECKS §37).
+- **Compose-BOM.** Das Paket 1.10.3 läuft auf beiden Compose-BOMs, 2024.12.01 und 2026.08.00 (Werkstatt, CHECKS §37, §38).
   Diese Vorlage ist nur mit 2026.08.00 gebaut und getestet, nicht mit 2024.12.01.
 - **Platzhalter-Icon.** Das Launcher-Icon (drei Listenlinien in `sebaro_text` auf `sebaro_bg`) ist kein App-Zeichen.
   Ein Produkt ersetzt es durch sein erzeugtes Icon (`export_system.py --target android --product <id>
   --launcher-only` in der Werkstatt, ZEI-11); ein Platzhalter bleibt nie in einer veröffentlichten App.
-- **Überlange Wörter ohne Trennstrich.** Das Paket trennt ein Wort, das allein nicht in seine Zeile passt, mit
-  Trennstrich (ZUG-09, TXT-15), aber nur in seinem internen `SbWrapText`. Die Notiz im Detail steht darum in einfachem
-  `Text`: Ein solches Wort bricht dort in sich um, ohne Trennstrich, und nichts wird abgeschnitten (bei 2,0 im Bild
-  angesehen und im Test geprüft). Ein öffentlicher Text-Wrapper ist bei der Werkstatt angefragt; bis er kommt, baut
-  die Vorlage `SbWrapText` nicht nach.
+- **Überlange Wörter.** Die Notiz im Detail steht in `SbWrapText` aus dem Paket (öffentlich seit 1.10.3): Sie bricht
+  an Leerzeichen um, und nur ein Wort, das allein nicht in seine Zeile passt, wird getrennt (ZUG-09, TXT-15); nichts
+  wird abgeschnitten (im Test geprüft). Den Trennstrich zeichnet die Silbentrennung des Systems; Robolectric hat keine,
+  in den Testbildern bricht das Wort darum ohne Strich (bei 2,0 angesehen). Auf einem Gerät ist der Strich nicht
+  gesehen.
 - **Drei Ausnahmen der Textprüfung**, jede mit genauer Trefferzahl je Lauf, sonst schlägt der Test fehl:
   `SbSearchField` gibt sein Feld nur als Namen für TalkBack an, ohne ihn zu zeichnen (ein 0 × 0-Knoten ohne Layout);
   `SbTextField` gibt TalkBack „Notiz, optional“ als einen Text und nimmt die gezeichneten Wörter aus dem Semantikbaum,
@@ -187,7 +187,7 @@ POSIX-Shell (unter Windows Git Bash).
 - **Was die Textprüfung nicht sieht:** einen Text, den ein anderer Teil verdeckt statt abschneidet (etwa unter der
   Aktionszone; darum scrollt der Test vor dem Tippen ans Ende), Text, den ein Wrapper aus dem Semantikbaum nimmt, und
   einen Wert, der in einem einzeiligen Feld seitlich weiterläuft (das ist gewollt, EIN-01).
-- **Ob 1.10.2 schon in GitHub Packages liegt,** ist hier nicht geprüft (ohne Token antwortet GitHub Packages mit
+- **Ob 1.10.3 schon in GitHub Packages liegt,** ist hier nicht geprüft (ohne Token antwortet GitHub Packages mit
   einem Fehler). Bis es dort liegt, nimm den lokalen Weg oben.
 - **Nicht geprüft:** echtes Gerät oder Emulator, TalkBack selbst (nur der Semantikbaum in den Tests), Android unter
   13 mit der eigenen Sprachwahl, der Sprachwechsel über die echte Activity (der Test tauscht die Locale der

@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,6 +26,7 @@ import de.sebaro_ventures.design.designsystem.SbStatus
 import de.sebaro_ventures.design.designsystem.SbStatusGlyph
 import de.sebaro_ventures.design.designsystem.SbStatusTone
 import de.sebaro_ventures.design.designsystem.SbTopBar
+import de.sebaro_ventures.design.designsystem.SbWrapText
 import de.sebaro_ventures.design.designsystem.sbMessages
 import de.sebaro_ventures.design.icons.SebaroIcons
 
@@ -72,10 +72,11 @@ fun DetailScreen(
             } else {
                 SbStatus(SbStatusTone.Success, word = stringResource(R.string.state_done))
             }
-            Text(
+            // ZUG-09, TXT-15: the user's own note wraps at spaces and hyphenates only a word wider than the line
+            SbWrapText(
                 note.ifBlank { stringResource(R.string.detail_no_note) },
-                style = SebaroTheme.typography.body,
-                color = if (note.isBlank()) c.textMuted else c.text,
+                SebaroTheme.typography.body,
+                if (note.isBlank()) c.textMuted else c.text,
             )
             SbMetaList(
                 labels = true,

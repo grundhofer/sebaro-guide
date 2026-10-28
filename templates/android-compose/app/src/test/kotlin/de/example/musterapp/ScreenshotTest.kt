@@ -105,9 +105,9 @@ private fun ComposeContentTestRule.scrollDownAndTap(text: String) {
 private fun sampleStore(): EntryStore = remember { EntryStore.sample() }
 
 /**
- * A user's entry whose note holds one word wider than the phone's line at font scale 2.0 (ZUG-09, TXT-15): plain
- * Text breaks it inside the word, without a hyphen, and cuts nothing. The package's hyphenating wrapper is internal
- * (README, „Bekannte Grenzen“).
+ * A user's entry whose note holds one word wider than the phone's line at font scale 2.0 (ZUG-09, TXT-15): the
+ * package's SbWrapText breaks it inside the word and cuts nothing. The hyphen comes from the system's hyphenation
+ * patterns, which Robolectric lacks, so the test images show the break without one.
  */
 const val LONG_WORD = "Donaudampfschifffahrtsgesellschaftskapitänsmützenabzeichen"
 private val LONG_WORD_ENTRY = Entry(

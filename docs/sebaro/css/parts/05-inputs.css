@@ -23,6 +23,9 @@
 .sb-field__control > textarea { block-size: auto; min-block-size: 70px; padding-block: var(--sb-space-3); resize: vertical; }
 .sb-field__control:has(> textarea) { align-items: flex-start; }
 .sb-field__control > input::placeholder, .sb-field__control > textarea::placeholder { color: var(--sb-color-text-muted); opacity: 1; }
+/* D111 (3): a placeholder that does not fit a one-line field at large text may end in „…“; the field keeps its full
+   label. Only while the placeholder shows: a typed value scrolls inside the field (D110, D111 (4)) */
+.sb-field__control > input:placeholder-shown { text-overflow: ellipsis; }
 .sb-field__control:focus-within, .sb-field__control.is-focus { outline: var(--sb-focus-ring); outline-offset: var(--sb-focus-offset); }
 .sb-field__suffix { flex: none; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); color: var(--sb-color-text-muted); }
 .sb-field__help { margin: 0; display: flex; justify-content: space-between; gap: var(--sb-space-3); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
@@ -47,7 +50,7 @@
 
 /* select: native select without its arrow, the chevron icon at the end */
 .sb-select { position: relative; padding-inline-end: 0; }
-.sb-select > select { -webkit-appearance: none; appearance: none; padding-inline-end: calc(var(--sb-space-3) + var(--sb-size-icon-lg) + var(--sb-space-2)); cursor: pointer; }   /* the chevron's room, not more: at 200 % text 48 px of rem would cut the chosen words (D99 (1)) */
+.sb-select > select { -webkit-appearance: none; appearance: none; padding-inline-end: calc(var(--sb-space-3) + var(--sb-size-icon-lg) + 8px); cursor: pointer; }   /* the chevron's room, not more: at 200 % text 48 px of rem would cut the chosen words (D99 (1)); the gap behind the chevron in px, as the 24 px icon is */
 .sb-select > select option { background: var(--sb-color-surface-raised); color: var(--sb-color-text); }
 .sb-select > .sb-icon { position: absolute; inset-inline-end: var(--sb-space-3); pointer-events: none; color: var(--sb-color-text-muted); }
 

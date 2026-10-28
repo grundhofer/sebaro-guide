@@ -1716,7 +1716,8 @@ dialog.sb-sheet > form { margin: 0; }
   color: var(--sb-color-text); text-decoration: underline var(--sb-color-link) var(--sb-x-sebaro-link-underline-width); text-underline-offset: 0.2em;
   scroll-margin-block-start: var(--sb-space-16);
 }
-.sb-note-ref::after { content: ""; position: absolute; inset-block-start: 50%; inset-inline-start: 50%; inline-size: max(24px, 100%); block-size: 24px; translate: -50% -50%; }
+/* the target is centred by logical insets, so it covers the digit in RTL too (a translate is physical; review r13) */
+.sb-note-ref::after { content: ""; position: absolute; inset-block-start: 50%; inset-inline: min(0px, calc(50% - 12px)); inline-size: auto; block-size: 24px; translate: 0 -50%; }
 .sb-note-refs > .sb-note-ref + .sb-note-ref::before { content: ","; }
 
 /* the list "Belege": one column at every width, 1 to n (D36; never columns, lint L7, check_demo TXT5/TXT6) */
@@ -1774,7 +1775,9 @@ dialog.sb-sheet > form { margin: 0; }
 @media (max-width: 1023.98px), (pointer: coarse) {
   .sb-note__checks, .sb-app-card__meta a, .sb-app-row__meta a, .sb-breadcrumb a, .sb-facts-line a { min-block-size: var(--sb-size-target-touch); }
   .sb-facts-line a { display: inline-flex; align-items: center; }
-  .sb-note-ref::after { inline-size: max(48px, 100%); block-size: 48px; }
+  /* 48 px reach past the digit's end only 12 px, less than the 16 px gutter the container clips at, and grow inward: a
+     digit at the line's end keeps its whole target (review r13; a digit follows its word, so never stands at the start) */
+  .sb-note-ref::after { inset-inline: auto -12px; inline-size: max(48px, 100%); block-size: 48px; }
 }
 .sb-note__body > p:last-child, .sb-claim-row__note > p:last-child { margin-block-end: 0; }
 

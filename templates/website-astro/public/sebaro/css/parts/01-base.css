@@ -31,6 +31,9 @@
  */
 /* ===================================================================== 1 base */
 
+/* the root carries the page ground too: body.sb-page is a size container, and layout containment stops the body's
+   background from reaching the canvas, so a short page showed white under it (spec/02 §5) */
+:root:has(> body.sb-page) { background-color: var(--sb-color-bg); }
 body.sb-page {
   margin: 0; background: var(--sb-color-bg); color: var(--sb-color-text);
   font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking);
@@ -110,6 +113,10 @@ code, kbd, samp, .sb-mono { font: var(--sb-type-code); letter-spacing: var(--sb-
    (container-type: inline-size) as its fallback */
 body.sb-page { container: sb-page sb-content / inline-size; }
 .sb-container { container: sb-content / inline-size; }
+/* a part that reaches past the text by design (a footnote digit's invisible target) must not make the page scroll
+   sideways: the container clips sideways at its padding edge, so its gutter and every focus ring inside it stay
+   visible; clip makes no scroll container, sticky still works (spec/02 §5.1) */
+.sb-container { overflow-x: clip; }
 .sb-view--wide { container: sb-view / inline-size; }
 .sb-section { padding-block: var(--sb-spacing-section); }
 .sb-section + .sb-section { border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }

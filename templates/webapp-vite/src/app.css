@@ -1,10 +1,6 @@
 /* app.css: the app's own layout around sebaro's parts. Only app-* classes, only var(--sb-*) tokens, no colour
    values, no shadows (TEC-01, TEC-05). Everything that looks like sebaro comes from sebaro.css. */
 
-/* body.sb-page is a size container in sebaro.css; containment keeps the body's ground from reaching the canvas, so the
-   root carries the same ground below a short view (else the browser's own white shows) */
-html { background: var(--sb-color-bg); }
-
 .app-view-title { margin-block-start: var(--sb-space-6); }
 
 /* the data page: specimens stand apart from each other inside a section */
