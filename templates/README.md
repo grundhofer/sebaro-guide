@@ -27,7 +27,8 @@ dark at 100 % and real 200 % text with axe. CI: `.github/workflows/templates.yml
 2. **Start from a starter or get the system files**: copy `website-astro/`, `webapp-vite/` or `desktop-tauri/` and run
    `npm run sebaro:sync -- --from <docs/sebaro of a guide checkout>` there; else web → copy `docs/sebaro/` of this
    repo into the project (e.g. `public/sebaro/`), check it with `node public/sebaro/checks/verify-export.mjs
-   public/sebaro --strict`; Tauri (own export)/macOS/Android/iOS → `export_system.py` in sebaroDesign (see [AGENTS.md §4](../AGENTS.md)).
+   public/sebaro --strict`; Android → copy `android-compose/`, which takes sebaro from the Maven package `sebaro-compose`
+   (read access needed, see its README); Tauri (own export)/macOS/iOS → `export_system.py` in sebaroDesign (see [AGENTS.md §4](../AGENTS.md)).
 3. **Paste the agent snippet** into the project's `AGENTS.md`.
 4. **Build screens from recipes**: `docs/app.html`, `docs/ios.html`, `docs/web.html`, `docs/desktop.html`; components from
    `docs/bauteile.html`; data from `docs/daten.html`.

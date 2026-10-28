@@ -11,6 +11,8 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+## 2.16.0 · 2026-10-28
+
 Neue Startvorlagen: vier lauffähige kleine Projekte unter `templates/`. Keine Regel ist neu oder geändert. Neue
 Vorlagen sind eine Nebenversion.
 
