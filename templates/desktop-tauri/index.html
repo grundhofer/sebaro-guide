@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- the same policy as app.security.csp in src-tauri/tauri.conf.json (DSK-01); the meta form serves the browser tests -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self' ipc: http://ipc.localhost; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="color-scheme" content="light dark">
+<title>{{app.name}}</title>
+<!-- WEB-01 order: theme-init.js first (stored Hell oder Dunkel, Farbton, Bewegung), then fonts, tokens, sprite, sebaro.css.
+     public/sebaro/ is the sebaro web export, copied unchanged by npm run sebaro:sync; never edit inside it. -->
+<script src="/sebaro/js/theme-init.js"></script>
+<link rel="stylesheet" href="/sebaro/fonts/fonts.css">
+<link rel="stylesheet" href="/sebaro/tokens.css">
+<link rel="stylesheet" href="/sebaro/icons/sprite.css">
+<link rel="stylesheet" href="/sebaro/css/sebaro.css">
+<link rel="stylesheet" href="/src/app.css">
+<script type="module" src="/src/main.ts"></script>
+</head>
+<body class="sb-page">
+<!-- app:sprite -->
+<a class="sb-skip-link" href="#inhalt">{{app.skip}}</a>
+
+<!-- Main window (DSK-01): title bar, sidebar, content with document tabs, inspector, action zone over the full width.
+     Only the window on screen carries sb-window--fill, so sb-window.js finds it when focus is on the page itself. -->
+<div class="app-view" id="ansicht-haupt">
+<div class="sb-window sb-window--fill" id="haupt" data-sb-window-id="haupt" data-sb-density="window" role="group" aria-label="{{app.name}}" data-sb-view="haupt">
+  <div class="sb-window__titlebar">
+    <span class="sb-sign-tile sb-sign-tile--32" aria-hidden="true"><!-- app:tile --></span>
+    <p class="sb-window__name" translate="no">{{app.name}}</p>
+    <p class="sb-window__path" data-sb-truncate><span class="sb-visually-hidden">{{win.place}}</span><span id="pfad-notiz"></span></p>
+    <div class="sb-window__tools" role="group" aria-label="{{win.tools}}">
+      <button class="sb-icon-button sb-icon-button--compact" type="button" id="werkzeug-seite" aria-label="{{tool.sidebar}}" aria-describedby="tip-seite" aria-expanded="true" aria-controls="seite" aria-keyshortcuts="Control+Meta+S" data-sb-window-toggle>{{i:sidebar}}</button>
+      <span class="sb-tooltip" role="tooltip" id="tip-seite" popover="manual"><span aria-hidden="true">{{tool.sidebar}}</span><span class="sb-keys" data-sb-keys="Ctrl+Mod+S"></span></span>
+      <button class="sb-icon-button sb-icon-button--compact" type="button" id="werkzeug-inspektor" aria-label="{{tool.inspector}}" aria-describedby="tip-inspektor" aria-expanded="true" aria-controls="inspektor" aria-keyshortcuts="Alt+Meta+I" data-sb-window-toggle>{{i:info}}</button>
+      <span class="sb-tooltip" role="tooltip" id="tip-inspektor" popover="manual"><span aria-hidden="true">{{tool.inspector}}</span><span class="sb-keys" data-sb-keys="Alt+Mod+I"></span></span>
+      <button class="sb-icon-button sb-icon-button--compact" type="button" aria-label="{{tool.palette}}" aria-describedby="tip-befehle" aria-keyshortcuts="Meta+K" data-sb-palette-open="palette">{{i:keyboard}}</button>
+      <span class="sb-tooltip" role="tooltip" id="tip-befehle" popover="manual"><span aria-hidden="true">{{tool.palette}}</span><span class="sb-keys" data-sb-keys="Mod+K"></span></span>
+      <button class="sb-secondary-action sb-secondary-action--compact" type="button" id="menue-taste" aria-haspopup="menu" aria-expanded="false" popovertarget="menue">{{i:menu}}<span class="sb-window__word">{{tool.menu}}</span></button>
+      <!-- DSK-08: the five groups; every item with a fixed shortcut names it (DSK-09); an item without a target is
+           aria-disabled, never hidden -->
+      <ul class="sb-menu sb-menu--window" role="menu" id="menue" aria-label="{{tool.menu}}" popover data-sb-density="window">
+        <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-haspopup="menu" aria-expanded="false" popovertarget="menue-datei">{{menu.file}}<span class="sb-menu__sub" aria-hidden="true">{{i16:chevron-right--16}}</span></button>
+          <ul class="sb-menu" role="menu" id="menue-datei" aria-label="{{menu.file}}" popover>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-keyshortcuts="Meta+N" data-app-command="new-note"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.newNote}}<span class="sb-keys" data-sb-keys="Mod+N"></span></button></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-keyshortcuts="Shift+Meta+N" aria-disabled="true"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.newWindow}}<span class="sb-keys" data-sb-keys="Shift+Mod+N"></span></button></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-keyshortcuts="Meta+O" aria-disabled="true"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.open}}<span class="sb-keys" data-sb-keys="Mod+O"></span></button></li>
+            <li role="separator" class="sb-menu__sep"></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-keyshortcuts="Meta+W" data-app-command="close-tab"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.close}}<span class="sb-keys" data-sb-keys="Mod+W"></span></button></li>
+          </ul></li>
+        <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-haspopup="menu" aria-expanded="false" popovertarget="menue-bearbeiten">{{menu.edit}}<span class="sb-menu__sub" aria-hidden="true">{{i16:chevron-right--16}}</span></button>
+          <ul class="sb-menu" role="menu" id="menue-bearbeiten" aria-label="{{menu.edit}}" popover>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-keyshortcuts="Meta+Z" aria-disabled="true"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.undo}}<span class="sb-keys" data-sb-keys="Mod+Z"></span></button></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-keyshortcuts="Shift+Meta+Z" aria-disabled="true"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.redo}}<span class="sb-keys" data-sb-keys="Shift+Mod+Z"></span></button></li>
+            <li role="separator" class="sb-menu__sep"></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" data-app-command="find"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.find}}<span class="sb-keys" data-sb-keys="Mod+F"></span></button></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" data-app-command="settings"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.settings}}<span class="sb-keys" data-sb-keys="Mod+Comma"></span></button></li>
+            <li role="separator" class="sb-menu__sep"></li>
+            <li role="none"><button class="sb-menu__item sb-menu__item--danger" type="button" role="menuitem" tabindex="-1" id="menue-papierkorb" aria-keyshortcuts="Meta+Backspace" data-sb-opens="dlg-papierkorb"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.trash}}<span class="sb-keys" data-sb-keys="Mod+Backspace"></span></button></li>
+          </ul></li>
+        <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-haspopup="menu" aria-expanded="false" popovertarget="menue-darstellung">{{menu.view}}<span class="sb-menu__sub" aria-hidden="true">{{i16:chevron-right--16}}</span></button>
+          <ul class="sb-menu" role="menu" id="menue-darstellung" aria-label="{{menu.view}}" popover>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitemcheckbox" tabindex="-1" aria-checked="true" aria-controls="seite" data-sb-window-toggle><span class="sb-menu__check" aria-hidden="true">{{i16:check--16}}</span>{{menu.sidebar}}<span class="sb-keys" data-sb-keys="Ctrl+Mod+S"></span></button></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitemcheckbox" tabindex="-1" aria-checked="true" aria-controls="inspektor" data-sb-window-toggle><span class="sb-menu__check" aria-hidden="true">{{i16:check--16}}</span>{{menu.inspector}}<span class="sb-keys" data-sb-keys="Alt+Mod+I"></span></button></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-haspopup="menu" aria-expanded="false" popovertarget="menue-breite"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.sidebarWidth}}<span class="sb-menu__sub" aria-hidden="true">{{i16:chevron-right--16}}</span></button>
+              <ul class="sb-menu" role="menu" id="menue-breite" aria-label="{{menu.sidebarWidth}}" popover>
+                <li role="none"><button class="sb-menu__item" type="button" role="menuitemradio" tabindex="-1" aria-checked="false" aria-controls="seite" data-sb-pane-width="min"><span class="sb-menu__check" aria-hidden="true">{{i16:check--16}}</span>{{menu.narrow}}</button></li>
+                <li role="none"><button class="sb-menu__item" type="button" role="menuitemradio" tabindex="-1" aria-checked="true" aria-controls="seite" data-sb-pane-width="start"><span class="sb-menu__check" aria-hidden="true">{{i16:check--16}}</span>{{menu.normal}}</button></li>
+                <li role="none"><button class="sb-menu__item" type="button" role="menuitemradio" tabindex="-1" aria-checked="false" aria-controls="seite" data-sb-pane-width="max"><span class="sb-menu__check" aria-hidden="true">{{i16:check--16}}</span>{{menu.wide}}</button></li>
+              </ul></li>
+            <li role="separator" class="sb-menu__sep"></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-haspopup="menu" aria-expanded="false" popovertarget="menue-hell"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.theme}}<span class="sb-menu__sub" aria-hidden="true">{{i16:chevron-right--16}}</span></button>
+              <ul class="sb-menu" role="menu" id="menue-hell" aria-label="{{menu.theme}}" popover>
+                <li role="none"><button class="sb-menu__item" type="button" role="menuitemradio" tabindex="-1" aria-checked="true" data-sb-theme-choice="system"><span class="sb-menu__check" aria-hidden="true">{{i16:check--16}}</span>{{choice.system}}</button></li>
+                <li role="none"><button class="sb-menu__item" type="button" role="menuitemradio" tabindex="-1" aria-checked="false" data-sb-theme-choice="light"><span class="sb-menu__check" aria-hidden="true">{{i16:check--16}}</span>{{choice.light}}</button></li>
+                <li role="none"><button class="sb-menu__item" type="button" role="menuitemradio" tabindex="-1" aria-checked="false" data-sb-theme-choice="dark"><span class="sb-menu__check" aria-hidden="true">{{i16:check--16}}</span>{{choice.dark}}</button></li>
+              </ul></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-haspopup="menu" aria-expanded="false" popovertarget="menue-farbton"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.tone}}<span class="sb-menu__sub" aria-hidden="true">{{i16:chevron-right--16}}</span></button>
+              <ul class="sb-menu" role="menu" id="menue-farbton" aria-label="{{menu.tone}}" popover>
+                <li role="none"><button class="sb-menu__item" type="button" role="menuitemradio" tabindex="-1" id="farbton-kuehl" aria-checked="true" data-sb-tone-item="cool"><span class="sb-menu__check" aria-hidden="true">{{i16:check--16}}</span>{{choice.cool}}</button></li>
+                <li role="none"><button class="sb-menu__item" type="button" role="menuitemradio" tabindex="-1" id="farbton-warm" aria-checked="false" data-sb-tone-item="warm"><span class="sb-menu__check" aria-hidden="true">{{i16:check--16}}</span>{{choice.warm}}</button></li>
+              </ul></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitemcheckbox" tabindex="-1" aria-checked="false" data-sb-motion-setting><span class="sb-menu__check" aria-hidden="true">{{i16:check--16}}</span>{{menu.motion}}</button></li>
+            <li role="separator" class="sb-menu__sep"></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-keyshortcuts="Meta+Plus" data-app-command="text-bigger"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.textBigger}}<span class="sb-keys" data-sb-keys="Mod+Plus"></span></button></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-keyshortcuts="Meta+Minus" data-app-command="text-smaller"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.textSmaller}}<span class="sb-keys" data-sb-keys="Mod+Minus"></span></button></li>
+            <li role="separator" class="sb-menu__sep"></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" data-sb-palette-open="palette"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.palette}}<span class="sb-keys" data-sb-keys="Mod+K"></span></button></li>
+          </ul></li>
+        <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-haspopup="menu" aria-expanded="false" popovertarget="menue-fenster">{{menu.window}}<span class="sb-menu__sub" aria-hidden="true">{{i16:chevron-right--16}}</span></button>
+          <ul class="sb-menu" role="menu" id="menue-fenster" aria-label="{{menu.window}}" popover>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" data-sb-area="next"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.nextArea}}<span class="sb-keys" data-sb-keys="F6"></span></button></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" data-sb-area="previous"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.previousArea}}<span class="sb-keys" data-sb-keys="Shift+F6"></span></button></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" data-sb-tab-move="previous"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.tabForward}}</button></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" data-sb-tab-move="next"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.tabBack}}</button></li>
+            <li role="separator" class="sb-menu__sep"></li>
+            <!-- the app's own group (DSK-08): Zurück / Vor; this template keeps no history, so both have no target -->
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-keyshortcuts="Meta+ArrowLeft" aria-disabled="true"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.back}}<span class="sb-keys" data-sb-keys="Mod+Left"></span></button></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-keyshortcuts="Meta+ArrowRight" aria-disabled="true"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.forward}}<span class="sb-keys" data-sb-keys="Mod+Right"></span></button></li>
+          </ul></li>
+        <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-haspopup="menu" aria-expanded="false" popovertarget="menue-hilfe">{{menu.help}}<span class="sb-menu__sub" aria-hidden="true">{{i16:chevron-right--16}}</span></button>
+          <ul class="sb-menu" role="menu" id="menue-hilfe" aria-label="{{menu.help}}" popover>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" data-sb-opens="dlg-kuerzel"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.shortcuts}}</button></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-disabled="true"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.facts}}</button></li>
+          </ul></li>
+      </ul>
+    </div>
+  </div>
+  <div class="sb-window__body">
+    <nav class="sb-side-nav sb-window__sidebar" id="seite" aria-label="{{side.label}}">
+      <div class="sb-side-nav__scroll">
+        <div class="sb-field app-side-search">
+          <label class="sb-visually-hidden" for="suche">{{side.search}}</label>
+          <div class="sb-field__control sb-search">{{i:search}}<input id="suche" type="search" placeholder="{{side.searchPlaceholder}}" autocomplete="off" aria-keyshortcuts="Meta+F"><!-- sb-search.js adds „Suche leeren“ in the page's language --></div>
+        </div>
+        <div class="sb-side-nav__head"><p class="sb-side-nav__name" id="baum-h">{{side.folders}}</p></div>
+        <!-- the tree is drawn by src/main.ts from the notes (sb-tree.js gives it its keys, NAV-11) -->
+        <ul class="sb-tree" id="baum" role="tree" aria-labelledby="baum-h" data-sb-folder-toggle></ul>
+        <p class="app-side-none" id="baum-leer" role="status"></p>
+      </div>
+      <!-- NAV-04: „Einstellungen“ in a foot that never scrolls -->
+      <div class="sb-side-nav__foot">
+        <ul><li><a class="sb-side-nav__item" href="#/einstellungen" id="zu-einstellungen" aria-keyshortcuts="Meta+,">{{i:settings}}{{side.settings}}</a></li></ul>
+      </div>
+    </nav>
+    <div class="sb-window__divider" role="separator" aria-orientation="vertical" aria-controls="seite" aria-label="{{side.width}}" aria-valuemin="200" aria-valuemax="360" aria-valuenow="240"></div>
+    <main class="sb-window__content" id="inhalt">
+      <!-- DSK-10: document tabs and their panels, drawn by src/main.ts -->
+      <div class="sb-doc-tabs" data-sb-truncate role="tablist" aria-label="{{tabs.label}}" id="reiter"></div>
+      <p class="sb-doc-tabs__none" hidden>{{tabs.none}}</p>
+    </main>
+    <div class="sb-window__divider" role="separator" aria-orientation="vertical" aria-controls="inspektor" aria-label="{{insp.width}}" aria-valuemin="240" aria-valuemax="400" aria-valuenow="280"></div>
+    <aside class="sb-window__inspector" id="inspektor" aria-labelledby="inspektor-h">
+      <h2 class="sb-window__inspector-title" id="inspektor-h">{{insp.label}}</h2>
+      <dl class="sb-meta-list" id="eigenschaften"></dl>
+    </aside>
+  </div>
+  <!-- EBE-08, STA-07: the zone over the full width; counter line, message, state sentence, the one primary action -->
+  <div class="sb-bottom-block">
+    <div class="sb-primary-action-bar">
+      <p class="sb-primary-action-bar__counts" id="zaehler"></p>
+      <div class="sb-primary-action-bar__message" role="status" data-sb-message="command"></div>
+      <p class="sb-primary-action-bar__status" role="status" id="stand"></p>
+      <button class="sb-primary-action" type="button" id="neue-notiz" aria-keyshortcuts="Meta+N">{{i:plus}}<span class="sb-primary-action__label">{{zone.newNote}}</span><i class="sb-primary-action__bar" aria-hidden="true"></i></button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Settings as a view in the main window (DSK-02), slim: one group in the content, no sidebar, no action zone
+     (DSK-05, D102 (7)). „Zurück zu …“ and Escape lead back (data-sb-escape). -->
+<div class="app-view" id="ansicht-einstellungen" hidden>
+<div class="sb-window" id="einstellungen" data-sb-window-id="einstellungen" data-sb-density="window" role="group" aria-label="{{set.heading}}" data-sb-view="einstellungen" data-sb-primary-expected="0">
+  <div class="sb-window__titlebar">
+    <span class="sb-sign-tile sb-sign-tile--32" aria-hidden="true"><!-- app:tile --></span>
+    <p class="sb-window__name" translate="no">{{app.name}}</p>
+    <p class="sb-window__path" data-sb-truncate><span class="sb-visually-hidden">{{win.place}}</span><span>{{set.path}}</span></p>
+    <div class="sb-window__tools" role="group" aria-label="{{win.tools}}">
+      <a class="sb-text-action sb-text-action--compact" href="#/" id="zurueck" data-sb-escape>{{i:arrow-left}}<span class="sb-window__word" id="zurueck-wort"></span></a>
+    </div>
+  </div>
+  <div class="sb-window__body">
+    <main class="sb-window__content" id="einstellungen-inhalt">
+      <h1 class="sb-window__heading" id="einstellungen-h" tabindex="-1">{{set.heading}}</h1>
+      <p class="sb-window__meta">{{set.meta}}</p>
+      <form class="sb-window__settings-group" aria-labelledby="set-darstellung-h">
+        <h2 id="set-darstellung-h">{{set.groupLook}}</h2>
+        <fieldset class="sb-choice-row" aria-describedby="set-hell-hilfe"><legend>{{set.theme}}</legend>
+          <div class="sb-choice-row__options">
+            <label class="sb-radio"><input type="radio" name="app-theme" value="system" data-sb-theme-choice="system" checked><span>{{choice.system}}</span></label>
+            <label class="sb-radio"><input type="radio" name="app-theme" value="light" data-sb-theme-choice="light"><span>{{choice.light}}</span></label>
+            <label class="sb-radio"><input type="radio" name="app-theme" value="dark" data-sb-theme-choice="dark"><span>{{choice.dark}}</span></label>
+          </div>
+        </fieldset>
+        <p class="sb-field__help" id="set-hell-hilfe">{{set.themeHelp}}</p>
+        <fieldset class="sb-choice-row" data-sb-tone-choice aria-describedby="set-farbton-hilfe" hidden><legend>{{set.tone}}</legend>
+          <div class="sb-choice-row__options">
+            <label class="sb-radio"><input type="radio" name="sb-tone" value="cool" checked><span>{{choice.cool}}</span></label>
+            <label class="sb-radio"><input type="radio" name="sb-tone" value="warm"><span>{{choice.warm}}</span></label>
+          </div>
+        </fieldset>
+        <p class="sb-field__help" id="set-farbton-hilfe">{{set.toneHelp}}</p>
+        <div class="sb-switch-field">
+          <div class="sb-switch-row"><span id="set-bewegung">{{set.motion}}</span><button class="sb-switch" type="button" role="switch" aria-checked="false" aria-labelledby="set-bewegung" aria-describedby="set-bewegung-hilfe" data-sb-motion-setting><span class="sb-switch__track"></span><span class="sb-switch__thumb">{{i16:check--16}}</span></button></div>
+          <p class="sb-field__help" id="set-bewegung-hilfe">{{set.motionHelp}}</p>
+        </div>
+      </form>
+      <form class="sb-window__settings-group" aria-labelledby="set-notizen-h">
+        <h2 id="set-notizen-h">{{set.groupNotes}}</h2>
+        <div class="sb-switch-field">
+          <div class="sb-switch-row"><span id="set-sichern">{{set.autosave}}</span><button class="sb-switch" type="button" role="switch" aria-checked="false" id="autosave" aria-labelledby="set-sichern" aria-describedby="set-sichern-hilfe"><span class="sb-switch__track"></span><span class="sb-switch__thumb">{{i16:check--16}}</span></button></div>
+          <p class="sb-field__help" id="set-sichern-hilfe">{{set.autosaveHelp}}</p>
+        </div>
+      </form>
+    </main>
+  </div>
+</div>
+</div>
+
+<!-- NAV-09: the command palette, ⌘K / Strg+K anywhere (sb-window.js) -->
+<dialog class="sb-command-palette" id="palette" aria-label="{{palette.label}}" data-sb-density="window">
+  <div class="sb-command-palette__search">{{i:search}}<input type="text" role="combobox" aria-expanded="true" aria-controls="palette-liste" aria-autocomplete="list" aria-label="{{palette.search}}" placeholder="{{palette.search}}" autocomplete="off" spellcheck="false"></div>
+  <div class="sb-command-palette__list" id="palette-liste" role="listbox" aria-label="{{palette.label}}">
+    <div class="sb-command-palette__section">
+      <div class="sb-command-palette__group" id="pal-g1">{{palette.groupFile}}</div>
+      <div role="group" aria-labelledby="pal-g1">
+        <div class="sb-row" role="option" id="pal-neu" aria-selected="false" data-sb-palette-click="neue-notiz"><span class="sb-row__check" aria-hidden="true"></span><span class="sb-row__name">{{menu.newNote}}</span><span class="sb-keys" data-sb-keys="Mod+N"></span></div>
+      </div>
+    </div>
+    <div class="sb-command-palette__section">
+      <div class="sb-command-palette__group" id="pal-g2">{{palette.groupView}}</div>
+      <div role="group" aria-labelledby="pal-g2">
+        <div class="sb-row" role="option" id="pal-seite" aria-selected="false" aria-checked="true" data-sb-palette-click="werkzeug-seite" data-sb-keywords="sidebar ordner ausblenden"><span class="sb-row__check" aria-hidden="true">{{i16:check--16}}</span><span class="sb-row__name">{{tool.sidebar}}</span><span class="sb-keys" data-sb-keys="Ctrl+Mod+S"></span></div>
+        <div class="sb-row" role="option" id="pal-inspektor" aria-selected="false" aria-checked="true" data-sb-palette-click="werkzeug-inspektor" data-sb-keywords="inspektor ausblenden"><span class="sb-row__check" aria-hidden="true">{{i16:check--16}}</span><span class="sb-row__name">{{tool.inspector}}</span><span class="sb-keys" data-sb-keys="Alt+Mod+I"></span></div>
+      </div>
+    </div>
+    <div class="sb-command-palette__section">
+      <div class="sb-command-palette__group" id="pal-g3">{{palette.groupLook}}</div>
+      <div role="group" aria-labelledby="pal-g3">
+        <div class="sb-row" role="option" id="pal-system" aria-selected="false" aria-checked="true" data-sb-theme-choice="system" data-sb-keywords="hell dunkel modus"><span class="sb-row__check" aria-hidden="true">{{i16:check--16}}</span><span class="sb-row__name">{{choice.system}}</span></div>
+        <div class="sb-row" role="option" id="pal-hell" aria-selected="false" aria-checked="false" data-sb-theme-choice="light" data-sb-keywords="modus"><span class="sb-row__check" aria-hidden="true">{{i16:check--16}}</span><span class="sb-row__name">{{choice.light}}</span></div>
+        <div class="sb-row" role="option" id="pal-dunkel" aria-selected="false" aria-checked="false" data-sb-theme-choice="dark" data-sb-keywords="modus"><span class="sb-row__check" aria-hidden="true">{{i16:check--16}}</span><span class="sb-row__name">{{choice.dark}}</span></div>
+        <div class="sb-row" role="option" id="pal-warm" aria-selected="false" aria-checked="false" data-sb-palette-click="farbton-warm" data-sb-keywords="farbton papier"><span class="sb-row__check" aria-hidden="true">{{i16:check--16}}</span><span class="sb-row__name">{{palette.toneWarm}}</span></div>
+      </div>
+    </div>
+    <div class="sb-command-palette__section">
+      <div class="sb-command-palette__group" id="pal-g4">{{palette.groupPlaces}}</div>
+      <div role="group" aria-labelledby="pal-g4">
+        <div class="sb-row" role="option" id="pal-suche" aria-selected="false" data-sb-command="find"><span class="sb-row__check" aria-hidden="true"></span><span class="sb-row__name">{{palette.search2}}</span><span class="sb-keys" data-sb-keys="Mod+F"></span></div>
+        <div class="sb-row" role="option" id="pal-einstellungen" aria-selected="false" data-sb-command="settings"><span class="sb-row__check" aria-hidden="true"></span><span class="sb-row__name">{{palette.settings}}</span><span class="sb-keys" data-sb-keys="Mod+Comma"></span></div>
+      </div>
+    </div>
+  </div>
+  <p class="sb-command-palette__empty" role="status"></p>
+  <p class="sb-command-palette__foot"><span><span class="sb-keys" data-sb-keys="Up Down"></span>{{palette.move}}</span><span><span class="sb-keys" data-sb-keys="Enter"></span>{{palette.run}}</span><span><span class="sb-keys" data-sb-keys="Escape"></span>{{palette.close}}</span></p>
+</dialog>
+
+<!-- AKT-08: putting a note in the bin always asks; title and text are filled by src/main.ts with the note's name -->
+<dialog class="sb-dialog" id="dlg-papierkorb" aria-labelledby="dlg-papierkorb-t" aria-describedby="dlg-papierkorb-x">
+  <form method="dialog">
+    <h2 class="sb-dialog__title" id="dlg-papierkorb-t"></h2>
+    <p class="sb-dialog__text" id="dlg-papierkorb-x"></p>
+    <div class="sb-dialog__actions">
+      <button class="sb-secondary-action" value="cancel" autofocus>{{dlg.cancel}}</button>
+      <button class="sb-danger-action sb-danger-action--outlined" value="confirm">{{dlg.trashConfirm}}</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- AKT-11: before closing a tab with unsaved changes: „Abbrechen“ · „Verwerfen“ · „Sichern“, „Sichern“ last -->
+<dialog class="sb-dialog" id="dlg-ungesichert" aria-labelledby="dlg-ungesichert-t" aria-describedby="dlg-ungesichert-x">
+  <form method="dialog">
+    <h2 class="sb-dialog__title" id="dlg-ungesichert-t"></h2>
+    <p class="sb-dialog__text" id="dlg-ungesichert-x"></p>
+    <div class="sb-dialog__actions">
+      <button class="sb-secondary-action" value="cancel" autofocus>{{dlg.cancel}}</button>
+      <button class="sb-danger-action sb-danger-action--outlined" value="discard">{{dlg.discard}}</button>
+      <button class="sb-secondary-action" value="save">{{dlg.save}}</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- DSK-09: the 15 fixed shortcuts, written per platform by sb-window.js -->
+<dialog class="sb-dialog" id="dlg-kuerzel" aria-labelledby="dlg-kuerzel-t" aria-describedby="dlg-kuerzel-x">
+  <form method="dialog">
+    <h2 class="sb-dialog__title" id="dlg-kuerzel-t">{{dlg.shortcutsTitle}}</h2>
+    <p class="sb-dialog__text" id="dlg-kuerzel-x">{{dlg.shortcutsText}}</p>
+    <div class="sb-dialog__body">
+      <div class="sb-table-wrap" role="region" aria-labelledby="kuerzel-cap" tabindex="0">
+        <table class="sb-table">
+          <caption id="kuerzel-cap">{{dlg.shortcutsCaption}}</caption>
+          <thead><tr><th scope="col">{{dlg.shortcutsKey}}</th><th scope="col">{{dlg.shortcutsWhat}}</th></tr></thead>
+          <tbody>
+            <tr><td><span class="sb-keys" data-sb-keys="Mod+K"></span></td><td>{{sc.palette}}</td></tr>
+            <tr><td><span class="sb-keys" data-sb-keys="Mod+Comma"></span></td><td>{{sc.settings}}</td></tr>
+            <tr><td><span class="sb-keys" data-sb-keys="Mod+N"></span></td><td>{{sc.new}}</td></tr>
+            <tr><td><span class="sb-keys" data-sb-keys="Mod+O"></span></td><td>{{sc.open}}</td></tr>
+            <tr><td><span class="sb-keys" data-sb-keys="Mod+F"></span></td><td>{{sc.find}}</td></tr>
+            <tr><td><span class="sb-keys" data-sb-keys="Ctrl+Mod+S"></span></td><td>{{sc.sidebar}}</td></tr>
+            <tr><td><span class="sb-keys" data-sb-keys="Alt+Mod+I"></span></td><td>{{sc.inspector}}</td></tr>
+            <tr><td><span class="sb-keys" data-sb-keys="F6"></span> / <span class="sb-keys" data-sb-keys="Shift+F6"></span></td><td>{{sc.areas}}</td></tr>
+            <tr><td><span class="sb-keys" data-sb-keys="Ctrl+Tab"></span> / <span class="sb-keys" data-sb-keys="Ctrl+Shift+Tab"></span></td><td>{{sc.tabs}}</td></tr>
+            <tr><td><span class="sb-keys" data-sb-keys="Mod+W"></span></td><td>{{sc.close}}</td></tr>
+            <tr><td><span class="sb-keys" data-sb-keys="Shift+Mod+N"></span></td><td>{{sc.window}}</td></tr>
+            <tr><td><span class="sb-keys" data-sb-keys="Mod+Z"></span> / <span class="sb-keys" data-sb-keys="Shift+Mod+Z"></span></td><td>{{sc.undo}}</td></tr>
+            <tr><td><span class="sb-keys" data-sb-keys="Mod+Backspace"></span></td><td>{{sc.trash}}</td></tr>
+            <tr><td><span class="sb-keys" data-sb-keys="Mod+Plus"></span> / <span class="sb-keys" data-sb-keys="Mod+Minus"></span></td><td>{{sc.text}}</td></tr>
+            <tr><td><span class="sb-keys" data-sb-keys="Mod+Left"></span> / <span class="sb-keys" data-sb-keys="Mod+Right"></span></td><td>{{sc.history}}</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="sb-dialog__actions">
+      <button class="sb-secondary-action" value="close" autofocus>{{dlg.close}}</button>
+    </div>
+  </form>
+</dialog>
+
+<p class="sb-visually-hidden" role="status" data-sb-tone-status></p>
+<!-- Behaviour (DSK-01 order): sb-tooltip.js and sb-menu.js before sb-window.js; all files, all deferred -->
+<script defer src="/sebaro/js/sb-controls.js"></script>
+<script defer src="/sebaro/js/sb-tooltip.js"></script>
+<script defer src="/sebaro/js/sb-menu.js"></script>
+<script defer src="/sebaro/js/sb-window.js"></script>
+<script defer src="/sebaro/js/sb-tree.js"></script>
+<script defer src="/sebaro/js/sb-search.js"></script>
+<script defer src="/sebaro/js/sb-tone.js"></script>
+<script defer src="/sebaro/js/sb-fit.js"></script>
+</body>
+</html>

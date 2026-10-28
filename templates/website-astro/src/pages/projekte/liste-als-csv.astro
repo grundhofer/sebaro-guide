@@ -1,0 +1,81 @@
+---
+// Article with footnotes: breadcrumb, title, reading time and date, contents (on the phone a disclosure, from 1024 px a
+// bar), prose up to 70 characters, code in the five looks with „Kopieren“, a note, a quote, footnotes with one back link
+// per citation („1“, „1b“) and the popover below 1024 px, the „Weiter:“ link.
+// Rules: NAV-08, TXT-06, TXT-08, TXT-10, TXT-17, STA-05, BEL-02, BEL-07, LNK-01, LNK-02, AKT-04, TXT-04, TXT-05.
+import Base from "../../layouts/Base.astro";
+import { strings } from "../../strings.mjs";
+const t = strings.de;
+const a = t.pages.article;
+const nav = t.nav;
+const [worum, aufbau, umlaute, offen] = a.sections;
+const look = (kind: string) => (kind === "plain" ? null : `sb-tok-${kind}`);
+---
+<Base lang="de" title={a.title} ogId="csv" nav="projects" self="/projekte/liste-als-csv/" view="artikel" notes>
+  <div class="app-article">
+    <div class="app-article__head">
+      <nav class="sb-breadcrumb" aria-label={t.breadcrumb}>
+        <ol>
+          <li><a href="/projekte/">{nav.projects}</a><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#chevron-right--16"/></svg></li>
+          <li><span aria-current="page">{a.crumb}</span></li>
+        </ol>
+      </nav>
+      <h1>{a.title}</h1>
+      <p class="app-article__meta">{a.meta(a.readingMinutes)}<time datetime={a.date}>{a.dateText}</time></p>
+    </div>
+    <div class="app-article__toc">
+      <nav class="sb-toc" aria-label={a.tocLabel} data-sb-follow>
+        <details open>
+          <summary>{a.tocTitle} <svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#chevron-down"/></svg></summary>
+          <p class="sb-toc__title">{a.tocTitle}</p>
+          <ol>
+            {a.sections.map((sec, i) => (
+              <li><a href={`#${sec.id}`} aria-current={i === 0 ? "location" : undefined}>{sec.title}</a></li>
+            ))}
+          </ol>
+        </details>
+      </nav>
+    </div>
+    <div class="app-article__body">
+      <article class="sb-prose">
+        <h2 id={worum.id}>{worum.title}</h2>
+        {a.intro.map((p) => <p set:html={p} />)}
+        <figure class="sb-quote">
+          <blockquote class="sb-quote__text"><p>{a.quote}</p></blockquote>
+          <figcaption class="sb-quote__source">{a.quoteSource} <span class="sb-demo-marker">{t.demo}</span></figcaption>
+        </figure>
+        <h2 id={aufbau.id}>{aufbau.title}</h2>
+        {a.aufbau.map((p) => <p set:html={p} />)}
+        <div class="sb-code">
+          <div class="sb-code__bar"><span class="sb-code__lang">{a.codeLang}</span><button class="sb-code__copy" type="button"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#copy--16"/></svg><span class="sb-code__copy-label">{t.codeCopy}</span></button></div>
+          <pre tabindex="0" role="region" aria-label={a.codeLabel}><code>{a.code.map((line, i) => (
+            <Fragment>{line.map(([kind, text]) => (look(kind) ? <span class={look(kind)}>{text}</span> : text))}{i < a.code.length - 1 ? "\n" : ""}</Fragment>
+          ))}</code></pre>
+        </div>
+        <h2 id={umlaute.id}>{umlaute.title}</h2>
+        {a.umlaute.map((p) => <p set:html={p} />)}
+        <div class="sb-callout sb-callout--note" role="note" aria-labelledby="co-1">
+          <svg class="sb-icon sb-icon--20" aria-hidden="true" focusable="false"><use href="#info--filled"/></svg>
+          <p class="sb-callout__title" id="co-1">{a.calloutTitle}</p>
+          <p class="sb-callout__text">{a.calloutText}</p>
+        </div>
+        <h2 id={offen.id}>{offen.title}</h2>
+        {a.offen.map((p) => <p set:html={p} />)}
+      </article>
+      <section class="sb-notes" role="doc-endnotes" aria-labelledby="fn-h">
+        <h2 class="sb-notes__title" id="fn-h">{a.notesTitle}</h2>
+        <ol class="sb-notes__list">
+          {a.notes.map((note) => (
+            <li class="sb-note" id={note.id}>
+              <span class="sb-note__backs">
+                {note.backs.map((b) => <a class="sb-note__back" href={b.href} role="doc-backlink" aria-label={b.label}>{b.text}</a>)}
+              </span>
+              <div class="sb-note__body"><p set:html={note.html} /></div>
+            </li>
+          ))}
+        </ol>
+      </section>
+      <a class="sb-pager" href="/ueber/"><span class="sb-pager__label">{a.pagerLabel}</span><span class="sb-pager__title">{a.pagerTitle}</span><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#chevron-right"/></svg></a>
+    </div>
+  </div>
+</Base>

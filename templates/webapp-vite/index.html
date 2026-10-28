@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="de" data-sb-language="stored">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<!-- a strict CSP: only own files, no inline scripts or styles (HAL-09; sebaro's scripts are CSP-safe) -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+<title>Musterapp</title>
+<!-- WEB-01: theme-init.js before the stylesheets (stored Hell/Dunkel, Farbton, Bewegung and language before first paint) -->
+<script src="/sebaro/js/theme-init.js"></script>
+<link rel="stylesheet" href="/sebaro/fonts/fonts.css">
+<link rel="stylesheet" href="/sebaro/tokens.css">
+<link rel="stylesheet" href="/sebaro/icons/sprite.css">
+<link rel="stylesheet" href="/sebaro/css/sebaro.css">
+<link rel="stylesheet" href="/src/app.css">
+<!-- placeholder icons: the umbrella brand's (a real product uses its own export, ZEI-10, ZEI-11) -->
+<link rel="icon" href="/sebaro/brand/site-root/favicon.ico" sizes="32x32">
+<link rel="icon" href="/sebaro/brand/site-root/icon.svg" type="image/svg+xml">
+</head>
+<body class="sb-page">
+<!-- sebaro:sprite (vite.config.ts inlines public/sebaro/icons/sprite.svg here, unchanged) -->
+<!-- the sign tile: placeholder = the umbrella brand's tile (studio); a real product gets its own sign (ZEI-03, ZEI-08) -->
+<template id="app-tile"><!-- sebaro:tile-32 --></template>
+<template id="app-tile-48"><!-- sebaro:tile-48 --></template>
+<div id="app"></div>
+<p class="sb-visually-hidden" role="status" data-sb-theme-status></p>
+<p class="sb-visually-hidden" role="status" data-sb-tone-status></p>
+<script defer src="/sebaro/js/sb-controls.js"></script>
+<script defer src="/sebaro/js/sb-search.js"></script>
+<script defer src="/sebaro/js/sb-tree.js"></script>
+<script defer src="/sebaro/js/sb-table.js"></script>
+<script defer src="/sebaro/js/sb-chart.js"></script>
+<script defer src="/sebaro/js/sb-calendar.js"></script>
+<script defer src="/sebaro/js/sb-sticky.js"></script>
+<script defer src="/sebaro/js/sb-notes.js"></script>
+<script defer src="/sebaro/js/theme-button.js"></script>
+<script defer src="/sebaro/js/sb-tone.js"></script>
+<script defer src="/sebaro/js/sb-fit.js"></script>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>

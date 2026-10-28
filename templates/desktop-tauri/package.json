@@ -1,0 +1,27 @@
+{
+  "name": "musterapp-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "sebaro starter template: a Tauri 2 desktop app whose webview uses the sebaro web export (Musterapp Desktop, fictive).",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "sebaro:sync": "node scripts/sebaro-sync.mjs",
+    "sebaro:verify": "node public/sebaro/checks/verify-export.mjs public/sebaro --strict",
+    "dev": "vite --port 1420 --strictPort",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4174 --strictPort --host 127.0.0.1",
+    "test": "playwright test",
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.63.0",
+    "@tauri-apps/cli": "2.12.3",
+    "typescript": "6.0.3",
+    "vite": "8.3.4"
+  }
+}

@@ -1,0 +1,49 @@
+---
+// Accessibility statement (ZUG-07, vorläufig): what the site is, how to use it, what was checked with one of the four
+// fixed states each, skipped with its reason (HAL-04, STA-02, BEL-04), known limits, feedback, authority.
+import Base from "../layouts/Base.astro";
+import { strings } from "../strings.mjs";
+const t = strings.de;
+const s = t.pages.accessibility;
+const glyph: Record<string, string> = { passed: "#success--filled-16", open: "#pending--16", skipped: "#skipped--16", failed: "#error--filled-16" };
+---
+<Base lang="de" title={s.title} ogId="barrierefreiheit" self="/barrierefreiheit/" view="barrierefreiheit">
+  <section class="sb-section" aria-labelledby="bf-h">
+    <div class="app-text">
+      <h1 class="sb-page-lead__title" id="bf-h">{s.title} <span class="sb-demo-marker">{t.demo}</span></h1>
+      <p>{s.stand}</p>
+      <h2 class="sb-type-title">{s.whatTitle}</h2>
+      <p>{s.what}</p>
+      <h2 class="sb-type-title">{s.useTitle}</h2>
+      <p>{s.use}</p>
+    </div>
+  </section>
+  <section class="sb-section sb-check-list-block" aria-labelledby="bf-checks-h">
+    <h2 class="sb-section__title" id="bf-checks-h">{s.checksTitle}</h2>
+    <p>{s.checksIntro}</p>
+    <ol class="sb-check-list">
+      {s.checks.map((c) => (
+        <li class="sb-check-list__item" data-state={c.state}>
+          <p class={`sb-check-state sb-check-state--${c.state}`}><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href={glyph[c.state]}/></svg>{c.word}</p>
+          <p class="sb-check-list__title">{c.title}</p>
+          <p class="sb-check-list__meta">{c.meta}</p>
+          {c.reason && <p class="sb-check-list__reason">{c.reason}</p>}
+        </li>
+      ))}
+    </ol>
+  </section>
+  <section class="sb-section" aria-labelledby="bf-more-h">
+    <div class="app-text">
+      <h2 class="sb-section__title" id="bf-more-h">{s.limitsTitle}</h2>
+      <p>{s.limits}</p>
+      <h2 class="sb-type-title">{s.feedbackTitle}</h2>
+      <p>{s.feedbackPrefix}<a href={`mailto:${s.mail}`}>{s.mail}<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a>{s.feedbackSuffix}</p>
+      <h2 class="sb-type-title">{s.authorityTitle}</h2>
+      <p>{s.authority}</p>
+      <div class="sb-callout sb-callout--note" role="note">
+        <svg class="sb-icon sb-icon--20" aria-hidden="true" focusable="false"><use href="#info--filled"/></svg>
+        <p class="sb-callout__text">{s.notice}</p>
+      </div>
+    </div>
+  </section>
+</Base>

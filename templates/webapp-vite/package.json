@@ -1,0 +1,29 @@
+{
+  "name": "musterapp-webapp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "sebaro starter template: a web app without a window, Vite + TypeScript, no UI framework.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "sebaro:sync": "node scripts/sebaro-sync.mjs",
+    "sebaro:verify": "node public/sebaro/checks/verify-export.mjs public/sebaro --strict",
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4173 --strictPort --host 127.0.0.1",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.63.0",
+    "@types/node": "22.19.1",
+    "typescript": "6.0.3",
+    "vite": "8.3.4"
+  },
+  "overrides": {
+    "playwright-core": "1.63.0"
+  }
+}

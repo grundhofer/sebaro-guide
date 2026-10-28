@@ -1,0 +1,16 @@
+---
+// Apps: an empty state while the site has no app yet (DAT-07, TXT-14): title „Noch keine …“ and how it fills, no
+// own spot and no primary action, because there is no next step for a reader (AKT-01).
+import Base from "../layouts/Base.astro";
+import { strings } from "../strings.mjs";
+const s = strings.de.pages.apps;
+---
+<Base lang="de" title={s.title} ogId="apps" nav="apps" self="/apps/" view="apps">
+  <section class="sb-section" aria-labelledby="apps-h">
+    <h1 class="sb-page-lead__title" id="apps-h">{s.title}</h1>
+    <div class="sb-empty sb-empty--section">
+      <p class="sb-empty__title">{s.emptyTitle}</p>
+      <p class="sb-empty__text">{s.emptyText}</p>
+    </div>
+  </section>
+</Base>

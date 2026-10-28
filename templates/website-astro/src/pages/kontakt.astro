@@ -1,0 +1,20 @@
+---
+// Contact: the way to write, as a link that leaves the site with the external-link icon (LNK-02), and the data-path
+// line directly under the action (BEL-10). No form: a static site has no server to answer it (a form would use
+// sb-form.js and a server that answers POST with 303, WEB-05).
+import Base from "../layouts/Base.astro";
+import { strings } from "../strings.mjs";
+const s = strings.de.pages.contact;
+---
+<Base lang="de" title={s.title} ogId="kontakt" nav="contact" self="/kontakt/" view="kontakt" primary>
+  <section class="sb-section sb-page-lead" aria-labelledby="kontakt-h">
+    <h1 class="sb-page-lead__title" id="kontakt-h">{s.title}</h1>
+    <p class="sb-page-lead__text">{s.text}</p>
+    <div class="sb-section__actions">
+      <div>
+        <a class="sb-primary-action" href={`mailto:${s.mail}`}>{s.mailLabel}<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a>
+        <p class="sb-action-hint">{s.hint}</p>
+      </div>
+    </div>
+  </section>
+</Base>

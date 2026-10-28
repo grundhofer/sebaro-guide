@@ -1,0 +1,41 @@
+/* app.css: the app's own layout around sebaro's parts. Only app-* classes, only var(--sb-*) tokens, no colour
+   values, no shadows (TEC-01, TEC-05). Everything that looks like sebaro comes from sebaro.css. */
+
+/* body.sb-page is a size container in sebaro.css; containment keeps the body's ground from reaching the canvas, so the
+   root carries the same ground below a short view (else the browser's own white shows) */
+html { background: var(--sb-color-bg); }
+
+.app-view-title { margin-block-start: var(--sb-space-6); }
+
+/* the data page: specimens stand apart from each other inside a section */
+.app-specimen + .app-specimen { padding-block-start: var(--sb-spacing-group); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+.app-toc { margin: 0; padding: 0; list-style: none; }
+.app-toc a { display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-touch); }
+
+/* a web app without a window keeps 48 px targets (ZUG-03): the window row (sb-row, 32 px) grows like sebaro.css lets
+   it grow under touch */
+.app-touch-rows .sb-row { min-block-size: var(--sb-size-target-touch); }
+
+/* a grid of setting cards (EBE-02): one column on a phone, more as the place allows */
+.app-card-grid { display: grid; gap: var(--sb-spacing-group); grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); }
+
+.app-figure { margin: 0; }
+.app-figure img { display: block; max-inline-size: 100%; block-size: auto; border: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+
+/* BEL-10: the data-path line stands directly under its action. In a wide view sebaro.css puts the zone in one wrapping
+   row (state sentence, action); the line takes a row of its own there, under the action at the row's end */
+.sb-view--wide .sb-primary-action-bar > .sb-action-hint { flex: 1 1 100%; margin: 0; text-align: end; }
+
+/* the one place of the toast (EBE-05): sebaro draws the toast, the app places it; at the bottom of the screen, above
+   the action zone's line, never covering the primary action's row on a phone (it is shown only after an action
+   outside the zone) */
+.app-toast-place {
+  position: fixed; inset-inline: var(--sb-spacing-gutter); inset-block-end: calc(var(--sb-space-4) + env(safe-area-inset-bottom));
+  z-index: var(--sb-layer-toast); display: flex; justify-content: center; pointer-events: none;
+}
+.app-toast-place > .sb-toast { pointer-events: auto; inline-size: 100%; }
+
+/* settings stay a readable column on wide screens */
+.app-column { max-inline-size: 40rem; }
+
+.app-steps { margin: 0; padding: 0; border: 0; min-inline-size: 0; display: grid; gap: var(--sb-space-3); }

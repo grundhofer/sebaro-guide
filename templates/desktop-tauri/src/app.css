@@ -1,0 +1,21 @@
+/* app.css: the few parts this app adds around sebaro. Own classes carry the prefix app-, values only var(--sb-*)
+   tokens (TEC-01): no colour literal, no shadow, no new sb-* class. Everything else is css/sebaro.css. */
+
+/* the search field at the top of the sidebar, inside the sidebar's own start padding */
+.app-side-search {
+  margin-block: var(--sb-space-2) var(--sb-space-1);
+  margin-inline: var(--sb-space-2);
+}
+
+/* the sentence when no note matches the search; empty, it takes no room */
+.app-side-none {
+  margin: 0;
+  padding-inline: var(--sb-space-4);
+  font: var(--sb-type-caption);
+  letter-spacing: var(--sb-type-caption-tracking);
+  color: var(--sb-color-text-muted);
+}
+.app-side-none:empty { display: none; }
+
+/* ⌘+ / ⌘− change only the content's text (DSK-09); main.ts sets --app-doc-scale through the CSSOM */
+.app-doc > p { font-size: calc(var(--app-doc-scale, 1) * 1rem); }

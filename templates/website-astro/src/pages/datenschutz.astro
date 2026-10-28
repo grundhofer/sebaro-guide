@@ -1,0 +1,37 @@
+---
+// Privacy: what goes where and how long it stays, as a table (DAT-05, TXT-02); outflows stay visible (BEL-01);
+// no reassuring claim without a check, so this page makes none. Invented data marked (BEL-09).
+import Base from "../layouts/Base.astro";
+import { strings } from "../strings.mjs";
+const t = strings.de;
+const s = t.pages.privacy;
+---
+<Base lang="de" title={s.title} ogId="datenschutz" self="/datenschutz/" view="datenschutz">
+  <section class="sb-section" aria-labelledby="ds-h">
+    <div class="app-text">
+      <h1 class="sb-page-lead__title" id="ds-h">{s.title} <span class="sb-demo-marker">{t.demo}</span></h1>
+      <p>{s.stand}</p>
+      <p>{s.responsible}</p>
+    </div>
+  </section>
+  <section class="sb-section" aria-labelledby="ds-table-h">
+    <h2 class="sb-section__title" id="ds-table-h">{s.tableTitle}</h2>
+    <div class="sb-table-wrap" role="region" aria-labelledby="ds-cap" tabindex="0">
+      <table class="sb-table">
+        <caption id="ds-cap">{s.caption}</caption>
+        <thead><tr>{s.head.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+        <tbody>{s.rows.map(([what, why, how]) => <tr><th scope="row">{what}</th><td>{why}</td><td>{how}</td></tr>)}</tbody>
+      </table>
+    </div>
+  </section>
+  <section class="sb-section" aria-labelledby="ds-rights-h">
+    <div class="app-text">
+      <h2 class="sb-section__title" id="ds-rights-h">{s.rightsTitle}</h2>
+      <p>{s.rights}</p>
+      <div class="sb-callout sb-callout--note" role="note">
+        <svg class="sb-icon sb-icon--20" aria-hidden="true" focusable="false"><use href="#info--filled"/></svg>
+        <p class="sb-callout__text">{s.notice}</p>
+      </div>
+    </div>
+  </section>
+</Base>

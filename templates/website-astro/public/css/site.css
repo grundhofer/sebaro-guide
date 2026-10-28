@@ -1,0 +1,36 @@
+/* site.css: the layout this website adds around sebaro's components. Only app-* classes, only var(--sb-*) tokens that
+   the export's tokens.css or sebaro.css defines; no colour literals, no shadows (TEC-01, EBE-01). Components keep the
+   look of css/sebaro.css; never restyle an sb-* class here. */
+
+/* body.sb-page is a size container (sebaro.css); its containment keeps its ground from reaching the canvas, so the
+   browser's white showed below a short page. The root takes the same ground token (FAR-05). Named as a workshop
+   request in the pull request that added this template. */
+html { background: var(--sb-color-bg); }
+
+/* an article: the contents beside the text from 1024 px, as sb-toc switches there (NAV-08); below it the contents open
+   and close above the text. minmax(0, …) so a long word never sets a column's width (ZUG-09) */
+.app-article { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-spacing-group); padding-block: var(--sb-spacing-section); }
+@media (min-width: 1024px) {
+  .app-article { grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); column-gap: var(--sb-spacing-gutter-wide); }
+  .app-article__toc { grid-column: 1; grid-row: 1 / span 2; }
+  .app-article__toc .sb-toc { position: sticky; inset-block-start: var(--sb-space-4); }
+  .app-article__head, .app-article__body { grid-column: 2; }
+}
+.app-article__head { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-3); }
+.app-article__meta { margin: 0; color: var(--sb-color-text-muted); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
+.app-article__body { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-spacing-group); min-inline-size: 0; }
+/* a footnote number at the end of a line has an invisible 24 px (touch: 48 px) target from sebaro.css
+   (.sb-note-ref::after, ZUG-03) that can stick out past the screen's edge and make a phone page scroll sideways by a few
+   pixels. Clip only that invisible part: 8 px of clip margin keep every 2 px focus ring with its 2 px gap whole (ZUG-02).
+   Named as a workshop request in the pull request that added this template. */
+.app-article__body { overflow-x: clip; overflow-clip-margin: var(--sb-space-2); }
+
+/* a text page (legal pages, about): one column in reading width */
+.app-text { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-spacing-stack); max-inline-size: var(--sb-size-measure-prose); }
+.app-text > * { margin: 0; }
+.app-text h2 { margin-block-start: var(--sb-spacing-group); }
+.app-address { margin: 0; font-style: normal; }
+
+/* the person on the about page: initials beside the name */
+.app-person { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-3); margin-block-end: var(--sb-spacing-group); }
+.app-person > .sb-avatars { margin: 0; padding: 0; }

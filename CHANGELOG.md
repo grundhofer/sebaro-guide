@@ -11,6 +11,16 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+Neue Startvorlagen: drei lauffähige kleine Projekte unter `templates/`. Keine Regel ist neu oder geändert. Neue
+Vorlagen sind eine Nebenversion.
+
+- `templates/website-astro/`: statische Website mit Astro 7.3.8 („Beispielseite“, erfunden). Start deutsch und englisch, Apps (leerer Zustand), Projekte, ein Artikel mit Inhalt, Code in den fünf Looks, Hinweis, Zitat, Fußnoten mit zwei Rücksprüngen und Popover unter 1024&nbsp;px, Über, Kontakt mit dem Hinweis zum Datenweg, Impressum, Datenschutz, Barrierefreiheit, 404. Kopf, Fuß mit „Darstellung“, DE / EN auf dieselbe Seite oder grau, ein Vorschaubild je Seite aus dem eigenen Build (`render.mjs`, WEB-09).
+- `templates/webapp-vite/`: Web-App ohne Fenster mit Vite 8.3.4 und TypeScript, ohne UI-Framework („Musterapp“). Liste mit Suche, Filter und leerem Zustand, Detail, Formular mit Prüfung nach EIN-01, EIN-02 und STA-03, Einstellungen mit Farbton und „Bewegung immer reduzieren“ (NAV-06, WEB-03), eine Ansicht mit jeder Datenart der Seite Daten, die drei Dialoge (Löschen, „Abbrechen“ · „Verwerfen“ · „Sichern“, der endgültige Schritt mit der 45°-Kante) und Kurzmeldungen mit „Rückgängig“; DE / EN als Auswahl.
+- `templates/desktop-tauri/`: Tauri-2-App („Musterapp Desktop“), deren Webview denselben Web-Export lädt: Fenstergerüst in der Fensterdichte, Seitenleiste mit dem Fuß „Einstellungen“, Dokument-Reiter, Inspektor, „Menü“ mit den fünf Gruppen, Befehlspalette mit ⌘K / Strg+K, die 15 festen Kürzel, schlanke Einstellungen; das Fenster legt Rust aus der gespeicherten Wahl an (DSK-14), `Info.plist` nennt de und en (DSK-08).
+- Jede Vorlage trägt eine unveränderte Kopie von `docs/sebaro/` in `public/sebaro/` (`npm run sebaro:sync`, geprüft mit `verify-export.mjs --strict`), alle Wörter in einem Modul, nur `sb-*`-Klassen des Exports und eigene `app-*`-Klassen mit `var(--sb-*)`, eine strenge Content-Security-Policy ohne `'unsafe-inline'` und Playwright-Tests in Chromium: jeder Bildschirm hell und dunkel bei 100&nbsp;% und echten 200&nbsp;% Schrift (axe ohne Verstoß, kein seitliches Scrollen, kein abgeschnittener Text, kein Fehler in der Konsole), dazu Wege mit der Tastatur. Neuer Workflow `.github/workflows/templates.yml` (ubuntu-latest), der die drei Vorlagen installiert, baut und prüft, die Desktop-App mit `tauri build --debug --no-bundle`.
+- `tools/check_site.py` (TERM): liest in `templates/` die Kopien des Exports und die Ordner, die Installation, Build und Tests schreiben, nicht mehr; die Schriftlizenz in einer Kopie behält den Namen der Urheber wie in `docs/sebaro/`.
+- Kachel, Favicons und Vorschaubilder der Vorlagen zeigen das Zeichen der Dachmarke als Platzhalter; ein Produkt braucht sein eigenes Zeichen aus der Werkstatt (ZEI-03, ZEI-08). Nicht geprüft: WebKit, Firefox, echte Tauri-Fenster und Bildschirmleser.
+
 ## 2.15.0 · 2026-10-28
 
 Neue Entscheidung: D110 steht in zwei Regeln. Weil zwei Regeln eine neue Aussage bekommen, eine Nebenversion.

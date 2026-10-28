@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.astro/
+# written by npm run build (scripts/og.mjs): share images and their head snippets
+build/
+public/og/
+test-results/
+playwright-report/

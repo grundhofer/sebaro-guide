@@ -1,0 +1,111 @@
+# The three starter templates under templates/ (website-astro, webapp-vite, desktop-tauri): each job installs its
+# template from its own package-lock.json, checks its copy of the sebaro web export (verify-export.mjs --strict),
+# builds it and runs its Playwright tests in Chromium (every screen light and dark at 100 % and real 200 % text: axe
+# with 0 violations, no sideways scroll, no cut text, no console or Content-Security-Policy error; keyboard paths).
+# The desktop job also builds the Tauri app on Linux (debug, no bundle). Screenshots of every run are uploaded.
+# Each template's copy of the export is a snapshot: a guide sync does not touch it; update it with npm run sebaro:sync.
+name: templates
+on:
+  push:
+    branches: [main]
+    paths: ["templates/**", ".github/workflows/templates.yml"]
+  pull_request:
+    paths: ["templates/**", ".github/workflows/templates.yml"]
+permissions:
+  contents: read
+jobs:
+  website-astro:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: templates/website-astro
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: templates/website-astro/package-lock.json
+      - run: npm ci
+      - name: sebaro export unchanged (verify-export.mjs --strict)
+        run: npm run sebaro:verify
+      - run: npx playwright install --with-deps chromium
+      - name: Build (share images with render.mjs, then astro build)
+        run: npm run build
+      - name: Screens (light/dark, 320/390/1440 px, 100/200 % text, axe, overflow, cut text, CSP) and keyboard
+        run: npm test
+      - if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-astro-screens
+          path: templates/website-astro/test-results/
+          retention-days: 7
+          if-no-files-found: ignore
+
+  webapp-vite:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: templates/webapp-vite
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: templates/webapp-vite/package-lock.json
+      - run: npm ci
+      - name: sebaro export unchanged (verify-export.mjs --strict)
+        run: npm run sebaro:verify
+      - run: npx playwright install --with-deps chromium
+      - name: Build (tsc + vite)
+        run: npm run build
+      - name: Screens (light/dark, 320/390/1440 px, 100/200 % text, axe, overflow, cut text, CSP) and keyboard
+        run: npm test
+      - if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: webapp-vite-screens
+          path: templates/webapp-vite/test-results/
+          retention-days: 7
+          if-no-files-found: ignore
+
+  desktop-tauri:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: templates/desktop-tauri
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: templates/desktop-tauri/package-lock.json
+      - name: Tauri system packages (Linux)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev \
+            libayatana-appindicator3-dev librsvg2-dev
+      - name: Rust toolchain (rustup is on the runner image)
+        run: rustup toolchain install stable --profile minimal && rustup default stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: templates/desktop-tauri/src-tauri -> target
+      - run: npm ci
+      - name: sebaro export unchanged (verify-export.mjs --strict)
+        run: npm run sebaro:verify
+      - name: Frontend build (tsc + vite)
+        run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Screens (light/dark, 390/480/1440 px, 100/200 % text, axe, overflow, cut text, CSP) and keyboard
+        run: npm test
+      - name: Tauri app builds on Linux (debug, no bundle)
+        run: npx tauri build --debug --no-bundle
+      - if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: desktop-tauri-screens
+          path: templates/desktop-tauri/test-results/
+          retention-days: 7
+          if-no-files-found: ignore

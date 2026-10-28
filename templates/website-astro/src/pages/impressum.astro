@@ -1,0 +1,24 @@
+---
+// Imprint (WEB-03 names it in every footer): a calm text page in reading width, invented data marked (BEL-09).
+import Base from "../layouts/Base.astro";
+import { strings } from "../strings.mjs";
+const t = strings.de;
+const s = t.pages.imprint;
+---
+<Base lang="de" title={s.title} ogId="impressum" self="/impressum/" view="impressum">
+  <section class="sb-section" aria-labelledby="impressum-h">
+    <div class="app-text">
+      <h1 class="sb-page-lead__title" id="impressum-h">{s.title} <span class="sb-demo-marker">{t.demo}</span></h1>
+      <h2 class="sb-type-title">{s.legalTitle}</h2>
+      <address class="app-address">{s.address.map((line, i) => <Fragment>{line}{i < s.address.length - 1 && <br />}</Fragment>)}</address>
+      <h2 class="sb-type-title">{s.contactTitle}</h2>
+      <p>{s.mailPrefix}<a href={`mailto:${s.mail}`}>{s.mail}<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a></p>
+      <h2 class="sb-type-title">{s.disputeTitle}</h2>
+      <p>{s.dispute}</p>
+      <div class="sb-callout sb-callout--note" role="note">
+        <svg class="sb-icon sb-icon--20" aria-hidden="true" focusable="false"><use href="#info--filled"/></svg>
+        <p class="sb-callout__text">{s.notice}</p>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -39,13 +39,15 @@ Groups
          src/og/head/inputs.json (page list, template, script, tokens, fonts, sprite, tile, lockups) changed since
          the images were rendered (render again: node tools/og.mjs, then tools/build.py)
   TERM   retired names do not appear in pages, fragments, rules or docs (D71: only "sebaro Sans" and "sebaro Mono");
-         the font licence files in docs/sebaro/ keep the authors' copyright as the OFL requires
+         the font licence files in docs/sebaro/ keep the authors' copyright as the OFL requires, and so do the copies of
+         the export in the starter templates (templates/*/public/sebaro/, not scanned; see template_files())
 """
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
+import os
 import re
 import struct
 import sys
@@ -73,6 +75,23 @@ VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "met
 SWATCH_PAGES = {"index.html", "grundlagen.html", "regeln.html"}
 # a token name; wildcards in prose such as var(--sb-color-*) or var(--sb-space-…) are not names
 VAR_SB = re.compile(r"var\(\s*(--sb-[A-Za-z0-9_-]*[A-Za-z0-9_])(?![-*…A-Za-z0-9_])")
+
+
+def template_files() -> list[Path]:
+    """Files of templates/ for TERM. Left out: a copy of the web export inside a starter template (a folder that holds
+    sebaro-export.json; its font licence keeps the authors' copyright as the OFL requires, like docs/sebaro/, and
+    checks/verify-export.mjs --strict checks it against its record) and the folders a template's install, build or
+    tests write (git-ignored there, never committed)."""
+    base = ROOT / "templates"
+    generated = {"node_modules", "dist", "build", "target", "test-results", "playwright-report", ".astro"}
+    out: list[Path] = []
+    for folder, dirs, files in os.walk(base):
+        if "sebaro-export.json" in files:
+            dirs[:] = []
+            continue
+        dirs[:] = sorted(d for d in dirs if d not in generated)
+        out += [Path(folder) / f for f in sorted(files) if "." in f]
+    return out
 
 
 def is_dont_scoped(prelude: str) -> bool:
@@ -487,7 +506,7 @@ def main() -> int:
     retired = re.compile(r"radio[\s_-]*canada", re.I)
     term_files = [p for p in DOCS.glob("*.html")] + [p for p in DOCS.glob("assets/*.*")] + \
         sorted(EXAMPLES.glob("*.html")) + [RULES, ROOT / "AGENTS.md", ROOT / "README.md", ROOT / "LICENSE.md"] + \
-        sorted((ROOT / "templates").rglob("*.*")) + sorted((ROOT / "guide").glob("*.md")) + \
+        template_files() + sorted((ROOT / "guide").glob("*.md")) + \
         [DOCS / "llms.txt", DOCS / "rules.json"] + [p for p in (ROOT / "tools").glob("*.py") if p.name != "check_site.py"]
     for f in term_files:
         if f.is_file() and retired.search(f.read_text(encoding="utf-8", errors="ignore")):

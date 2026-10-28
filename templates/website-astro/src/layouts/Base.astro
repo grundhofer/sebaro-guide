@@ -1,0 +1,140 @@
+---
+// Base.astro: the frame of every page (WEB-01 load order, NAV-06/NAV-07 header, WEB-03 footer, WEB-09 share-image
+// head, WEB-10 language switch, WEB-02 „Hell oder Dunkel“, FAR-15 „Farbton“, WEB-11 print, ZUG-06 skip link).
+// Markup copied from docs/bauteile.html and docs/web.html of the sebaro guide; only sb-* classes of the export.
+import fs from "node:fs";
+import path from "node:path";
+import { strings } from "../strings.mjs";
+// the site's own CSS is public/css/site.css, linked as a file: an imported stylesheet would arrive as an inline
+// <style> in `astro dev`, which the Content-Security-Policy below blocks
+
+interface Props {
+  lang: "de" | "en";
+  /** <title> without the site suffix */
+  title: string;
+  /** id of the page in PAGES (src/strings.mjs): its share-image head from build/og-head/; none for the 404 page */
+  ogId?: string;
+  /** the header word of this page, if it is one of the four */
+  nav?: "apps" | "projects" | "about" | "contact";
+  /** the same page in the other language, if it exists (WEB-10); else the code stands grey without a link */
+  other?: string;
+  /** this page's own address, for the language switch */
+  self: string;
+  /** data-sb-view of the main area (TEC-03) and whether it has a primary action */
+  view: string;
+  primary?: boolean;
+  /** load sb-notes.js and the note popover (BEL-02, BEL-07) */
+  notes?: boolean;
+}
+const { lang, title, ogId, nav, other, self, view, primary = false, notes = false } = Astro.props;
+const s = strings[lang];
+const root = process.cwd();
+const read = (p: string) => fs.readFileSync(path.join(root, p), "utf8");
+// WEB-01: the sprite inline at the top of the body, unchanged; the tile inline, unchanged (ZEI-07)
+const sprite = read("public/sebaro/icons/sprite.svg");
+// placeholder: the umbrella sign of sebaro; a real product inlines its own tile-<id>-small.svg (ZEI-03, ZEI-06)
+const tile = read("public/sebaro/brand/inline/tile-studio-small.svg");
+const ogFile = ogId ? path.join(root, "build", "og-head", `${ogId}.head.html`) : null;
+const ogHead = ogFile && fs.existsSync(ogFile) ? fs.readFileSync(ogFile, "utf8") : "";
+const de = lang === "de" ? self : other;
+const en = lang === "en" ? self : other;
+const words = [
+  ["apps", "/apps/"],
+  ["projects", "/projekte/"],
+  ["about", "/ueber/"],
+  ["contact", "/kontakt/"],
+] as const;
+const csp = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; " +
+  "connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'";
+---
+<!doctype html>
+<html lang={lang}>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content={csp}>
+<meta name="color-scheme" content="light dark">
+<title>{title}{s.titleSuffix}</title>
+<script is:inline src="/sebaro/js/theme-init.js"></script>
+<link rel="stylesheet" href="/sebaro/fonts/fonts.css">
+<link rel="stylesheet" href="/sebaro/tokens.css">
+<link rel="stylesheet" href="/sebaro/icons/sprite.css">
+<link rel="stylesheet" href="/sebaro/css/sebaro.css">
+<link rel="stylesheet" href="/css/site.css">
+<!-- the lines of sebaro/brand/site-root/head.snippet.html (files copied to the site root by npm run sebaro:sync) -->
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#F4F5F8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#13161C" media="(prefers-color-scheme: dark)">
+{other && <link rel="alternate" hreflang={lang} href={new URL(self, Astro.site).href}>}
+{other && <link rel="alternate" hreflang={lang === "de" ? "en" : "de"} href={new URL(other, Astro.site).href}>}
+<Fragment set:html={ogHead} />
+</head>
+<body class="sb-page">
+<Fragment set:html={sprite} />
+<a class="sb-skip-link" href="#inhalt">{s.skip}</a>
+<header class="sb-site-header">
+  <a class="sb-lockup" href={lang === "en" ? "/en/" : "/"}>
+    <span class="sb-sign-tile sb-sign-tile--32" aria-hidden="true"><Fragment set:html={tile} /></span>
+    <span class="sb-wordmark" translate="no">{s.wordmark}</span>
+  </a>
+  <div class="sb-site-header__links">
+    <nav class="sb-site-nav" aria-label={s.nav.label}>
+      {words.map(([key, href]) => (
+        <Fragment>
+          <a href={href} hreflang={lang === "en" ? "de" : undefined} aria-current={nav === key ? "page" : undefined}>{s.nav[key]}</a>{" "}
+        </Fragment>
+      ))}
+    </nav>
+    <span class="sb-language-switch" role="group" aria-label={s.language.label}>
+      {de
+        ? <a href={de} lang="de" hreflang="de" aria-current={lang === "de" ? "true" : undefined}>DE</a>
+        : <span class="sb-language-switch__missing"><span lang="de">DE</span><span class="sb-visually-hidden">{s.language.missing}</span></span>}
+      {" "}<span aria-hidden="true">/</span>{" "}
+      {en
+        ? <a href={en} lang="en" hreflang="en" aria-current={lang === "en" ? "true" : undefined}>EN</a>
+        : <span class="sb-language-switch__missing"><span lang="en">EN</span><span class="sb-visually-hidden">{s.language.missing}</span></span>}
+    </span>
+  </div>
+  <button class="sb-theme-button" type="button">{s.theme}</button>
+</header>
+<main id="inhalt" class="sb-container" data-sb-view={view} data-sb-primary-expected={primary ? undefined : "0"}>
+  <slot />
+</main>
+<footer class="sb-site-footer">
+  <p>{s.footer.copyright}</p>
+  <ul class="sb-site-footer__links">
+    <li><a href="/impressum/" hreflang={lang === "en" ? "de" : undefined}>{s.footer.links.imprint}</a></li>
+    <li><a href="/datenschutz/" hreflang={lang === "en" ? "de" : undefined}>{s.footer.links.privacy}</a></li>
+    <li><a href="/barrierefreiheit/" hreflang={lang === "en" ? "de" : undefined}>{s.footer.links.accessibility}</a></li>
+    {/* „GitHub“ with external-link--16 only when the product has a public repository, always under the AGPL (WEB-03) */}
+  </ul>
+  <section class="sb-site-footer__display" aria-labelledby="darstellung-h" data-sb-tone-choice hidden>
+    <h2 id="darstellung-h">{s.footer.display}</h2>
+    <fieldset class="sb-segmented"><legend>{s.footer.tone}</legend>
+      <div class="sb-segmented__options">
+        <label class="sb-segmented__option"><input type="radio" name="sb-tone" value="cool" checked><span class="sb-segmented__face"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>{s.footer.cool}</span></label>
+        <label class="sb-segmented__option"><input type="radio" name="sb-tone" value="warm"><span class="sb-segmented__face"><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#check--16"/></svg>{s.footer.warm}</span></label>
+      </div>
+    </fieldset>
+  </section>
+  <p class="sb-visually-hidden" role="status" data-sb-tone-status></p>
+</footer>
+{notes && (
+  <div class="sb-note-popover" id="sb-note-popover" popover aria-labelledby="sb-note-popover-claim">
+    <p class="sb-note-popover__claim" id="sb-note-popover-claim"></p>
+    <div class="sb-note-popover__body"></div>
+    <button class="sb-secondary-action sb-note-popover__close" type="button" popovertarget="sb-note-popover" popovertargetaction="hide">{s.notePopover.close}</button>
+  </div>
+)}
+<p class="sb-visually-hidden" role="status" data-sb-theme-status></p>
+<script is:inline src="/sebaro/js/theme-button.js"></script>
+<script is:inline src="/sebaro/js/sb-tone.js"></script>
+<script is:inline src="/sebaro/js/sb-print.js"></script>
+<script is:inline src="/sebaro/js/sb-controls.js"></script>
+{notes && <script is:inline src="/sebaro/js/sb-notes.js"></script>}
+<script is:inline src="/sebaro/js/sb-fit.js"></script>
+</body>
+</html>

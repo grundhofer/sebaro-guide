@@ -1,0 +1,31 @@
+---
+// English start page (WEB-10, TXT-04): the same shape and order as the German one, „Light or dark“ on the button,
+// dates in the English form. The other pages exist only in German: their links carry hreflang="de".
+import Base from "../../layouts/Base.astro";
+import { strings } from "../../strings.mjs";
+const s = strings.en.pages.start;
+const a = strings.de.pages.article;
+---
+<Base lang="en" title={s.title} ogId="start-en" self="/en/" other="/" view="start-en" primary>
+  <section class="sb-section sb-page-lead" aria-labelledby="lead-h">
+    <h1 class="sb-page-lead__title" id="lead-h">{s.title}</h1>
+    <p class="sb-page-lead__text">{s.lead}</p>
+    <div class="sb-section__actions">
+      <a class="sb-secondary-action" href="/ueber/" hreflang="de">{s.secondary}</a>
+      <a class="sb-primary-action" href="/projekte/" hreflang="de">{s.primary}</a>
+    </div>
+  </section>
+  <section class="sb-section" aria-labelledby="recent-h">
+    <h2 class="sb-section__title" id="recent-h">{s.recentTitle}</h2>
+    <ul class="sb-list">
+      <li class="sb-list-row">
+        <div class="sb-list-row__main">
+          <p class="sb-list-row__title"><a class="sb-list-row__link" href="/projekte/liste-als-csv/" hreflang="de" lang="de">{a.title}</a></p>
+          <p class="sb-list-row__meta">{s.articleMeta(a.readingMinutes)}<time datetime={s.articleDate}>{s.articleDate}</time> · {strings.en.germanOnly}</p>
+        </div>
+        <span class="sb-list-row__trail"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#chevron-right"/></svg></span>
+      </li>
+    </ul>
+    <p class="sb-list-end">{s.recentEnd}</p>
+  </section>
+</Base>

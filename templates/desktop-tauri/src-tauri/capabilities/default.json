@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "The main window: core defaults and the window title (DSK-06: „<Ort> · <App>“).",
+  "windows": ["main"],
+  "permissions": ["core:default", "core:window:allow-set-title"]
+}

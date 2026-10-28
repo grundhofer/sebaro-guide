@@ -1,0 +1,27 @@
+---
+// Projects: a flat list with hairlines, the link over the whole row and a chevron, ending with a sentence (DAT-01).
+import Base from "../../layouts/Base.astro";
+import { strings } from "../../strings.mjs";
+const s = strings.de.pages.projects;
+const a = strings.de.pages.article;
+---
+<Base lang="de" title={s.title} ogId="projekte" nav="projects" self="/projekte/" view="projekte">
+  <section class="sb-section sb-page-lead" aria-labelledby="projekte-h">
+    <h1 class="sb-page-lead__title" id="projekte-h">{s.title}</h1>
+    <p class="sb-page-lead__text">{s.lead}</p>
+  </section>
+  <section class="sb-section" aria-labelledby="liste-h">
+    <h2 class="sb-section__title" id="liste-h">{s.listTitle}</h2>
+    <ul class="sb-list">
+      <li class="sb-list-row">
+        <div class="sb-list-row__main">
+          <p class="sb-list-row__title"><a class="sb-list-row__link" href="/projekte/liste-als-csv/">{a.title}</a></p>
+          <p class="sb-list-row__meta">{a.meta(a.readingMinutes)}<time datetime={a.date}>{a.dateText}</time></p>
+          <p class="sb-list-row__text">{a.description}</p>
+        </div>
+        <span class="sb-list-row__trail"><svg class="sb-icon" aria-hidden="true" focusable="false"><use href="#chevron-right"/></svg></span>
+      </li>
+    </ul>
+    <p class="sb-list-end">{s.end}</p>
+  </section>
+</Base>

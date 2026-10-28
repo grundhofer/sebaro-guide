@@ -1,0 +1,29 @@
+{
+  "name": "sebaro-website-astro",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Startvorlage: statische Website mit Astro und sebaro (Beispielseite).",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "sebaro:sync": "node scripts/sebaro-sync.mjs && node scripts/site-root.mjs",
+    "sebaro:verify": "node public/sebaro/checks/verify-export.mjs public/sebaro --strict",
+    "og": "node scripts/og.mjs",
+    "dev": "astro dev",
+    "build": "node scripts/og.mjs && astro build",
+    "preview": "astro preview",
+    "test": "playwright test"
+  },
+  "dependencies": {
+    "astro": "7.3.8"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.63.0"
+  },
+  "overrides": {
+    "vite": "8.3.4"
+  }
+}
