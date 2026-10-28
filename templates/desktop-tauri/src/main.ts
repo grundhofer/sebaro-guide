@@ -296,6 +296,18 @@ function init(): void {
   route(false);
   window.addEventListener("hashchange", () => route(true));
 
+  // roving tabindex in menus: sb-menu.js gives every item tabindex="-1" and moves focus itself; the focused item takes
+  // tabindex="0", so a menu that scrolls at large text has a reachable item inside its scroll box (axe
+  // scrollable-region-focusable, ZUG-09). Named as a workshop request in the pull request that added this template.
+  document.addEventListener("focusin", (event) => {
+    const item = event.target instanceof Element ? event.target.closest<HTMLElement>('[role="menu"] [role^="menuitem"]') : null;
+    const menu = item?.closest('[role="menu"]');
+    if (!item || !menu) return;
+    menu.querySelectorAll<HTMLElement>('[role^="menuitem"]').forEach((i) => {
+      if (i.closest('[role="menu"]') === menu) i.tabIndex = i === item ? 0 : -1;
+    });
+  });
+
   $<HTMLInputElement>("suche").addEventListener("input", filterTree);
   $("neue-notiz").addEventListener("click", newNote);
   document.addEventListener("click", (event) => {
