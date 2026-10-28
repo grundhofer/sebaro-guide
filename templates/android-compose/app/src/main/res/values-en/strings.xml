@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- English (TEC-10). Typographic quotes, U+00A0 (&#160;) between number and unit. -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Musterapp</string>
+
+    <string name="nav_entries">Entries</string>
+    <string name="nav_data">Data</string>
+    <string name="nav_settings">Settings</string>
+
+    <string name="list_title">Entries</string>
+    <string name="list_search_label">Search entries</string>
+    <string name="list_search_placeholder">Search …</string>
+    <string name="list_empty_title">No entries yet</string>
+    <string name="list_empty_text">Add your first entry and it shows up here.</string>
+    <string name="list_nohit_title">No entry with “%1$s”</string>
+    <string name="list_nohit_text">Try another word or clear the search.</string>
+    <string name="list_create">Add entry</string>
+    <string name="list_hide">Hide</string>
+    <string name="list_hidden_toast">“%1$s” hidden</string>
+    <string name="toast_undo">Undo</string>
+    <string name="list_meta_created">added on %1$s</string>
+    <string name="list_end">There are no more entries.</string>
+    <string name="group_open">Open</string>
+    <string name="group_done">Done</string>
+    <string name="demo_marker">Sample data</string>
+
+    <string name="state_open">open</string>
+    <string name="state_done">done</string>
+
+    <string name="detail_edit">Edit entry</string>
+    <string name="detail_no_note">No note.</string>
+    <string name="detail_created">Added</string>
+    <string name="detail_priority">Priority</string>
+    <string name="detail_finish">Finish entry</string>
+    <string name="detail_delete">Delete entry</string>
+    <string name="dialog_delete_title">Delete entry?</string>
+    <string name="dialog_delete_text">“%1$s” and its note will be removed. This cannot be undone.</string>
+    <string name="dialog_delete_confirm">Delete</string>
+    <string name="dialog_finish_title">Finish entry?</string>
+    <string name="dialog_finish_text">After this, “%1$s” can no longer be edited. Its title and note stay readable.</string>
+    <string name="dialog_finish_confirm">Finish</string>
+
+    <string name="form_new_title">New entry</string>
+    <string name="form_edit_title">Edit entry</string>
+    <string name="form_close">Close</string>
+    <string name="form_create">Add entry</string>
+    <string name="form_save">Save changes</string>
+    <string name="hint_local">Stays on this device.</string>
+    <string name="form_title_label">Title</string>
+    <string name="form_title_missing">Title is missing.</string>
+    <string name="form_priority_label">Priority</string>
+    <string name="priority_low">Low</string>
+    <string name="priority_normal">Normal</string>
+    <string name="priority_high">High</string>
+    <string name="form_note_label">Note</string>
+    <string name="form_note_counter">%1$s / %2$s</string>
+    <string name="form_note_too_long">The note is too long (%1$s / %2$s).</string>
+    <string name="unsaved_new_title">Save new entry?</string>
+    <string name="unsaved_new_text">If you discard, the title and note are lost.</string>
+    <string name="unsaved_edit_title">Save changes to “%1$s”?</string>
+    <string name="unsaved_edit_text">If you discard, the entry stays as it was.</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="settings_language">Language</string>
+    <string name="language_system">Like the system</string>
+    <string name="language_de">Deutsch</string>
+
+    <!-- TXT-04: dates in notes as ISO in English -->
+    <string name="date_pattern">yyyy-MM-dd</string>
+
+    <string name="data_title">Data</string>
+    <string name="data_numbers">Numbers</string>
+    <string name="data_expenses_month">Spent in October</string>
+    <string name="data_integer">Whole number</string>
+    <string name="data_fraction">Fraction</string>
+    <string name="fraction">%1$s / %2$s</string>
+    <string name="data_decimal">Decimal</string>
+    <string name="data_large">Large number</string>
+    <string name="data_percent">Percent</string>
+    <string name="data_money">Amount</string>
+    <string name="data_per_month">Subscription</string>
+    <string name="per_month">%1$s a month</string>
+    <string name="data_unit">Distance</string>
+    <string name="unit_km">%1$s&#160;km</string>
+    <string name="data_approx">Reading time</string>
+    <string name="approx">about %1$s&#160;min</string>
+    <string name="data_rank">Rank</string>
+    <string name="rank">Place %1$s of %2$s</string>
+    <string name="signed_plus">+%1$s</string>
+    <string name="signed_minus">−%1$s</string>
+    <string name="signed_zero">±%1$s</string>
+    <string name="data_time">Time</string>
+    <string name="data_day">Day</string>
+    <string name="data_date_note">Date</string>
+    <string name="data_date_short">Short</string>
+    <string name="data_clock">Time of day</string>
+    <string name="data_range">Time window</string>
+    <string name="range">%1$s–%2$s</string>
+    <string name="data_span">Period</string>
+    <string name="data_duration">Duration</string>
+    <string name="duration">%1$d&#160;h %2$d&#160;min</string>
+    <string name="data_remaining">Time left</string>
+    <string name="remaining_minutes">%1$d&#160;min left</string>
+    <string name="data_state">State</string>
+    <string name="state_conflict">Conflict</string>
+    <string name="state_count_open">%1$s open</string>
+    <string name="data_import">Import</string>
+    <string name="data_goal_day">Daily goal</string>
+    <string name="data_categories">Categories and marks</string>
+    <string name="data_mark_sentence">Plant the balcony in spring</string>
+    <string name="data_mark_word">balcony</string>
+    <string name="data_technical">Technical</string>
+    <string name="data_id">ID</string>
+    <string name="data_version">Version</string>
+    <string name="data_file">File</string>
+    <string name="sample_file_name" tools:ignore="TypographyDashes">musterapp-export-2026-10-10.csv</string>
+    <string name="data_table">Table</string>
+    <string name="data_table_caption">Spent in October</string>
+    <string name="data_col_item">Item</string>
+    <string name="data_col_date">Date</string>
+    <string name="data_col_amount">Amount</string>
+    <string name="data_sum">Total</string>
+    <string name="data_charts">Charts</string>
+    <string name="data_stat_steps">Average steps</string>
+    <string name="data_stat_streak">In a row</string>
+    <string name="data_bar_caption">Steps per day, target %1$s</string>
+    <string name="data_line_caption">Sleep in hours, week by week</string>
+    <string name="data_share_caption">Spending by area</string>
+    <string name="data_goal_caption">Glasses of water today</string>
+
+    <plurals name="days">
+        <item quantity="one">%1$d&#160;day</item>
+        <item quantity="other">%1$d&#160;days</item>
+    </plurals>
+
+    <string-array name="data_steps">
+        <item>Name</item>
+        <item>Data</item>
+        <item>Done</item>
+    </string-array>
+    <string-array name="data_tags">
+        <item>Household</item>
+        <item>Garden</item>
+    </string-array>
+    <string-array name="data_category_words">
+        <item>Work</item>
+        <item>Family</item>
+        <item>Sport</item>
+    </string-array>
+    <string-array name="data_expense_names">
+        <item>Bike lock</item>
+        <item>Washing machine</item>
+        <item>Potting soil</item>
+        <item>Hiking boots</item>
+    </string-array>
+    <string-array name="data_share_names">
+        <item>Home</item>
+        <item>Food</item>
+        <item>Leisure</item>
+    </string-array>
+
+    <string-array name="sample_titles">
+        <item>Take the bike in for a service</item>
+        <item>Plant the balcony</item>
+        <item>Sort the tax papers</item>
+        <item>Build the hallway shelf</item>
+        <item>Read the water meter</item>
+    </string-array>
+    <string-array name="sample_notes">
+        <item>Have the brakes and lights checked, book a slot first.</item>
+        <item>Soil, two boxes and herbs from the garden centre.</item>
+        <item></item>
+        <item>The screws were in the box, the wall plugs are still missing.</item>
+        <item>Note the reading and send it to the property manager.</item>
+    </string-array>
+</resources>

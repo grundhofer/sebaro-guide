@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- German, the default language (D11, TEC-10): „du“, German quotation marks, U+00A0 (&#160;) between number and
+     unit. The words the sebaro wrappers write themselves come from SbMessages and follow the same locale. -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Musterapp</string>
+
+    <!-- bottom navigation (NAV-02, NAV-03) -->
+    <string name="nav_entries">Einträge</string>
+    <string name="nav_data">Daten</string>
+    <string name="nav_settings">Einstellungen</string>
+
+    <!-- list -->
+    <string name="list_title">Einträge</string>
+    <string name="list_search_label">Einträge durchsuchen</string>
+    <string name="list_search_placeholder">Suchen …</string>
+    <string name="list_empty_title">Noch keine Einträge</string>
+    <string name="list_empty_text">Leg deinen ersten Eintrag an, dann steht er hier.</string>
+    <string name="list_nohit_title">Kein Eintrag mit „%1$s“</string>
+    <string name="list_nohit_text">Such nach einem anderen Wort oder leere die Suche.</string>
+    <string name="list_create">Eintrag anlegen</string>
+    <string name="list_hide">Ausblenden</string>
+    <string name="list_hidden_toast">„%1$s“ ausgeblendet</string>
+    <string name="toast_undo">Rückgängig</string>
+    <string name="list_meta_created">angelegt am %1$s</string>
+    <string name="list_end">Mehr Einträge gibt es nicht.</string>
+    <string name="group_open">Offen</string>
+    <string name="group_done">Erledigt</string>
+    <string name="demo_marker">Beispieldaten</string>
+
+    <!-- states (STA-02: the fixed words) -->
+    <string name="state_open">offen</string>
+    <string name="state_done">erledigt</string>
+
+    <!-- detail -->
+    <string name="detail_edit">Eintrag bearbeiten</string>
+    <string name="detail_no_note">Keine Notiz.</string>
+    <string name="detail_created">Angelegt</string>
+    <string name="detail_priority">Priorität</string>
+    <string name="detail_finish">Eintrag abschließen</string>
+    <string name="detail_delete">Eintrag löschen</string>
+    <string name="dialog_delete_title">Eintrag löschen?</string>
+    <string name="dialog_delete_text">„%1$s“ und seine Notiz werden entfernt. Das lässt sich nicht rückgängig machen.</string>
+    <string name="dialog_delete_confirm">Löschen</string>
+    <string name="dialog_finish_title">Eintrag abschließen?</string>
+    <string name="dialog_finish_text">Danach lässt sich „%1$s“ nicht mehr bearbeiten. Titel und Notiz bleiben lesbar.</string>
+    <string name="dialog_finish_confirm">Abschließen</string>
+
+    <!-- form -->
+    <string name="form_new_title">Neuer Eintrag</string>
+    <string name="form_edit_title">Eintrag bearbeiten</string>
+    <string name="form_close">Schließen</string>
+    <string name="form_create">Eintrag anlegen</string>
+    <string name="form_save">Änderungen sichern</string>
+    <string name="hint_local">Bleibt auf diesem Gerät.</string>
+    <string name="form_title_label">Titel</string>
+    <string name="form_title_missing">Titel fehlt.</string>
+    <string name="form_priority_label">Priorität</string>
+    <string name="priority_low">Niedrig</string>
+    <string name="priority_normal">Normal</string>
+    <string name="priority_high">Hoch</string>
+    <string name="form_note_label">Notiz</string>
+    <string name="form_note_counter">%1$s / %2$s</string>
+    <string name="form_note_too_long">Notiz ist zu lang (%1$s / %2$s).</string>
+    <string name="unsaved_new_title">Neuen Eintrag sichern?</string>
+    <string name="unsaved_new_text">Wenn du verwirfst, gehen Titel und Notiz verloren.</string>
+    <string name="unsaved_edit_title">Änderungen an „%1$s“ sichern?</string>
+    <string name="unsaved_edit_text">Wenn du verwirfst, bleibt der Eintrag, wie er war.</string>
+
+    <!-- settings (MOB-04, FAR-15, BEW-04 come with their words from SbMessages) -->
+    <string name="settings_title">Einstellungen</string>
+    <string name="settings_language">Sprache</string>
+    <string name="language_system">Wie das System</string>
+    <string name="language_de">Deutsch</string>
+    <string name="language_en" translatable="false">English</string>
+
+    <!-- formats (TXT-04): dates in notes -->
+    <string name="date_pattern">dd.MM.yyyy</string>
+
+    <!-- data -->
+    <string name="data_title">Daten</string>
+    <string name="data_numbers">Zahlen</string>
+    <string name="data_expenses_month">Ausgaben im Oktober</string>
+    <string name="data_integer">Ganze Zahl</string>
+    <string name="data_fraction">Bruch</string>
+    <string name="fraction">%1$s / %2$s</string>
+    <string name="data_decimal">Dezimalzahl</string>
+    <string name="data_large">Große Zahl</string>
+    <string name="data_percent">Prozent</string>
+    <string name="data_money">Betrag</string>
+    <string name="data_per_month">Abo</string>
+    <string name="per_month">%1$s im Monat</string>
+    <string name="data_unit">Strecke</string>
+    <string name="unit_km">%1$s&#160;km</string>
+    <string name="data_approx">Lesezeit</string>
+    <string name="approx">etwa %1$s&#160;Min.</string>
+    <string name="data_rank">Rang</string>
+    <string name="rank">Platz %1$s von %2$s</string>
+    <string name="signed_plus">+%1$s</string>
+    <string name="signed_minus">−%1$s</string>
+    <string name="signed_zero">±%1$s</string>
+    <string name="data_time">Zeit</string>
+    <string name="data_day">Tag</string>
+    <string name="data_date_note">Datum</string>
+    <string name="data_date_short">Kurz</string>
+    <string name="data_clock">Uhrzeit</string>
+    <string name="data_range">Zeitfenster</string>
+    <string name="range">%1$s–%2$s</string>
+    <string name="data_span">Zeitspanne</string>
+    <string name="data_duration">Dauer</string>
+    <string name="duration">%1$d&#160;Std. %2$d&#160;Min.</string>
+    <string name="data_remaining">Restzeit</string>
+    <string name="remaining_minutes">noch %1$d&#160;Min.</string>
+    <string name="data_state">Zustand</string>
+    <string name="state_conflict">Konflikt</string>
+    <string name="state_count_open">%1$s offen</string>
+    <string name="data_import">Import</string>
+    <string name="data_goal_day">Tagesziel</string>
+    <string name="data_categories">Kategorien und Markierungen</string>
+    <string name="data_mark_sentence">Balkon im Frühling bepflanzen</string>
+    <string name="data_mark_word">Balkon</string>
+    <string name="data_technical">Technisches</string>
+    <string name="data_id">Kennung</string>
+    <string name="sample_id" translatable="false">E-0042</string>
+    <string name="data_version">Version</string>
+    <string name="sample_version" translatable="false">1.4.0</string>
+    <string name="data_file">Datei</string>
+    <string name="sample_file_name" tools:ignore="TypographyDashes">musterapp-export-2026-10-10.csv</string>
+    <string name="code_language_json" translatable="false">JSON</string>
+    <string name="sample_json" translatable="false">{\n  \"id\": \"E-0042\",\n  \"done\": true\n}</string>
+    <string name="data_table">Tabelle</string>
+    <string name="data_table_caption">Ausgaben im Oktober</string>
+    <string name="data_col_item">Posten</string>
+    <string name="data_col_date">Datum</string>
+    <string name="data_col_amount">Betrag</string>
+    <string name="data_sum">Summe</string>
+    <string name="data_charts">Diagramme</string>
+    <string name="data_stat_steps">Schritte im Schnitt</string>
+    <string name="data_stat_streak">In Folge</string>
+    <string name="data_bar_caption">Schritte pro Tag, Ziel %1$s</string>
+    <string name="data_line_caption">Schlaf in Stunden, Woche für Woche</string>
+    <string name="data_share_caption">Ausgaben nach Bereich</string>
+    <string name="data_goal_caption">Gläser Wasser heute</string>
+
+    <plurals name="days">
+        <item quantity="one">%1$d&#160;Tag</item>
+        <item quantity="other">%1$d&#160;Tage</item>
+    </plurals>
+
+    <string-array name="data_steps">
+        <item>Name</item>
+        <item>Daten</item>
+        <item>Fertig</item>
+    </string-array>
+    <string-array name="data_tags">
+        <item>Haushalt</item>
+        <item>Garten</item>
+    </string-array>
+    <string-array name="data_category_words">
+        <item>Arbeit</item>
+        <item>Familie</item>
+        <item>Sport</item>
+    </string-array>
+    <string-array name="data_expense_names">
+        <item>Fahrradschloss</item>
+        <item>Waschmaschine</item>
+        <item>Blumenerde</item>
+        <item>Wanderschuhe</item>
+    </string-array>
+    <string-array name="data_share_names">
+        <item>Wohnen</item>
+        <item>Essen</item>
+        <item>Freizeit</item>
+    </string-array>
+
+    <!-- invented sample entries (BEL-09) -->
+    <string-array name="sample_titles">
+        <item>Fahrrad zur Inspektion bringen</item>
+        <item>Balkon bepflanzen</item>
+        <item>Steuerunterlagen sortieren</item>
+        <item>Regal im Flur aufbauen</item>
+        <item>Wasserzähler ablesen</item>
+    </string-array>
+    <string-array name="sample_notes">
+        <item>Bremsen und Licht prüfen lassen, vorher einen Termin ausmachen.</item>
+        <item>Erde, zwei Kästen und Kräuter aus dem Gartenmarkt.</item>
+        <item></item>
+        <item>Schrauben lagen im Karton, Wanddübel fehlen noch.</item>
+        <item>Stand notieren und an die Hausverwaltung schicken.</item>
+    </string-array>
+</resources>

@@ -1,0 +1,31 @@
+# Every version of the template in one place. sebaro-compose 1.10.2 is the private Maven package of the sebaro
+# design system (token contract 1.10); it brings Compose and Material 3 as api dependencies.
+[versions]
+agp = "9.3.1"
+kotlin = "2.4.10"
+# the package runs on this BOM and on 2024.12.01 (binary-checked on both, workshop CHECKS §37)
+composeBom = "2026.08.00"
+activityCompose = "1.13.0"
+sebaroCompose = "1.10.2"
+desugarJdkLibs = "2.1.5"
+junit = "4.13.2"
+robolectric = "4.17"
+robolectricAndroidAll = "16-robolectric-13921718-i7"
+roborazzi = "1.75.0"
+
+[libraries]
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
+compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+sebaro-compose = { module = "de.sebaro_ventures.design:sebaro-compose", version.ref = "sebaroCompose" }
+desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugarJdkLibs" }
+junit = { module = "junit:junit", version.ref = "junit" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+robolectric-android-all = { module = "org.robolectric:android-all-instrumented", version.ref = "robolectricAndroidAll" }
+roborazzi = { module = "io.github.takahirom.roborazzi:roborazzi", version.ref = "roborazzi" }
+roborazzi-compose = { module = "io.github.takahirom.roborazzi:roborazzi-compose", version.ref = "roborazzi" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

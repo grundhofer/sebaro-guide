@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Placeholder launcher icon of the template, not a sebaro app sign: three list lines in the text colour on the
+     ground colour, inside the 66 dp safe circle. A real product replaces it with its generated icon (ZEI-11). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:pathData="M38,42 L70,42 M38,54 L70,54 M38,66 L58,66"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:strokeColor="@color/sebaro_text" />
+</vector>
