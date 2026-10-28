@@ -40,7 +40,7 @@ Groups
          the images were rendered (render again: node tools/og.mjs, then tools/build.py)
   TERM   retired names do not appear in pages, fragments, rules or docs (D71: only "sebaro Sans" and "sebaro Mono");
          the font licence files in docs/sebaro/ keep the authors' copyright as the OFL requires, and so do the copies of
-         the export in the starter templates (templates/*/public/sebaro/, not scanned; see template_files())
+         the export in the starter templates (the three exact paths of TEMPLATE_EXPORTS, not scanned; see template_files())
 """
 from __future__ import annotations
 
@@ -50,6 +50,7 @@ import json
 import os
 import re
 import struct
+import subprocess
 import sys
 import zlib
 from collections import Counter
@@ -77,21 +78,21 @@ SWATCH_PAGES = {"index.html", "grundlagen.html", "regeln.html"}
 VAR_SB = re.compile(r"var\(\s*(--sb-[A-Za-z0-9_-]*[A-Za-z0-9_])(?![-*…A-Za-z0-9_])")
 
 
+# the only copies of the web export in templates/, each a verified snapshot (npm run sebaro:verify checks it)
+TEMPLATE_EXPORTS = ("templates/website-astro/public/sebaro/", "templates/webapp-vite/public/sebaro/",
+                    "templates/desktop-tauri/public/sebaro/")
+
+
 def template_files() -> list[Path]:
-    """Files of templates/ for TERM. Left out: a copy of the web export inside a starter template (a folder that holds
-    sebaro-export.json; its font licence keeps the authors' copyright as the OFL requires, like docs/sebaro/, and
-    checks/verify-export.mjs --strict checks it against its record) and the folders a template's install, build or
-    tests write (git-ignored there, never committed)."""
-    base = ROOT / "templates"
-    generated = {"node_modules", "dist", "build", "target", "test-results", "playwright-report", ".astro"}
-    out: list[Path] = []
-    for folder, dirs, files in os.walk(base):
-        if "sebaro-export.json" in files:
-            dirs[:] = []
-            continue
-        dirs[:] = sorted(d for d in dirs if d not in generated)
-        out += [Path(folder) / f for f in sorted(files) if "." in f]
-    return out
+    """Files of templates/ for TERM: what git tracks there plus new files git does not ignore (`git ls-files
+    --cached --others --exclude-standard`), so what a template's install, build or tests write (git-ignored there)
+    is left out by the template's own .gitignore, never by a folder name. Left out besides: the three exact copies
+    of the web export in TEMPLATE_EXPORTS (their font licence keeps the authors' copyright as the OFL requires, like
+    docs/sebaro/, and checks/verify-export.mjs --strict checks each against its record)."""
+    listed = subprocess.run(["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard", "--", "templates"],
+                            cwd=ROOT, capture_output=True, check=True).stdout.decode("utf-8").split("\0")
+    return [ROOT / f for f in sorted(listed)
+            if f and "." in Path(f).name and not f.startswith(TEMPLATE_EXPORTS) and (ROOT / f).is_file()]
 
 
 def is_dont_scoped(prelude: str) -> bool:

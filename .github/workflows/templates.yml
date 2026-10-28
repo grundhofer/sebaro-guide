@@ -20,8 +20,8 @@ jobs:
       run:
         working-directory: templates/website-astro
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: "22"
           cache: npm
@@ -35,7 +35,7 @@ jobs:
       - name: Screens (light/dark, 320/390/1440 px, 100/200 % text, axe, overflow, cut text, CSP) and keyboard
         run: npm test
       - if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: website-astro-screens
           path: templates/website-astro/test-results/
@@ -48,8 +48,8 @@ jobs:
       run:
         working-directory: templates/webapp-vite
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: "22"
           cache: npm
@@ -63,7 +63,7 @@ jobs:
       - name: Screens (light/dark, 320/390/1440 px, 100/200 % text, axe, overflow, cut text, CSP) and keyboard
         run: npm test
       - if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: webapp-vite-screens
           path: templates/webapp-vite/test-results/
@@ -76,8 +76,8 @@ jobs:
       run:
         working-directory: templates/desktop-tauri
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: "22"
           cache: npm
@@ -89,7 +89,7 @@ jobs:
             libayatana-appindicator3-dev librsvg2-dev
       - name: Rust toolchain (rustup is on the runner image)
         run: rustup toolchain install stable --profile minimal && rustup default stable
-      - uses: Swatinem/rust-cache@v2
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
         with:
           workspaces: templates/desktop-tauri/src-tauri -> target
       - run: npm ci
@@ -103,7 +103,7 @@ jobs:
       - name: Tauri app builds on Linux (debug, no bundle)
         run: npx tauri build --debug --no-bundle
       - if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: desktop-tauri-screens
           path: templates/desktop-tauri/test-results/
