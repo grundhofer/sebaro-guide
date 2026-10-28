@@ -30,10 +30,10 @@ sebaro-Oberflächen baut, und an welchen Texten es liegt, wenn nicht.
 | Lösung | eingehalten | verletzt | davon aus der Vorlage | nicht betroffen | `npm test` (Wiederholung) |
 |---|---|---|---|---|---|
 | Gewohnheiten | 112 | 15 | 8 | 101 | 347 bestanden, Exit 0 |
-| Verein | 107 | 10 | 1 | 111 | RERUN_VEREIN |
-| Notizen | 117 | 16 | 5 | 95 | RERUN_NOTIZEN |
+| Verein | 107 | 10 | 1 | 111 | 129 bestanden, Exit 0 |
+| Notizen | 117 | 16 | 5 | 95 | 174 bestanden, Exit 0 |
 | Einkauf | 105 | 20 | 8 | 103 | 383 bestanden, Exit 0 |
-| Tagebuch | 108 | 14 | 9 | 106 | RERUN_TAGEBUCH |
+| Tagebuch | 108 | 14 | 9 | 106 | 306 bestanden, Exit 0 |
 
 Alle fünf hielten die zehn Regeln von `AGENTS.md` §2 ein: eine Hauptaktion unten und zuletzt, Löschen mit Dialog,
 Status als Zeichen und Wort, Ebenen mit Tintenlinie, Ortslinie, Links, nur Tokens. axe meldete nichts, keine Seite
