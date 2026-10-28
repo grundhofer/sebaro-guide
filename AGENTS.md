@@ -278,8 +278,10 @@ Before you call a screen done, walk the checklist in [`templates/screen-checklis
    signs in the workshop's registry (D106 (1)–(4)); the guide never shows a sign of an unreleased app, and the
    registry writes a name as the app does (D107 (2); ZEI-08). No question waits for the owner (the workshop's
    SYSTEM.md §5 has none open). Nothing of D106 is checked on a device, in a launcher, with a real camera or with
-   TalkBack. The new web patterns of D102 to D105 are not yet shown as components on `docs/bauteile.html`
-   (`docs/ausblick.html#p-g-neue-muster`); the rule examples show them since 2.13.1.
+   TalkBack. Since 2.14.0 the new patterns of D102 to D108 are components of their own on `docs/bauteile.html`
+   (dialogs, toasts, callout actions, footnotes, the web app without a window, the group „Zusammenarbeit“) and
+   `docs/desktop.html` (sidebar foot, tab marks, find bar, reader, full-text search, start error and more),
+   copied from the workshop's demo pages; Compose-only parts are named, not drawn.
    Settled by the owner with D108 (2026-10-27, synced from workshop `2b067c4`, export tool 1.11.0), six questions from
    the new gaps of novalis and this guide, all as proposed: in a window's sidebar a row's status that does not fit
    beside the name goes with glyph and word under the name, in the name's column (twist, icon and check hang in the

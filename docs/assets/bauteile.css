@@ -109,3 +109,11 @@
 .g-bauteile-media { display: grid; gap: var(--sb-space-4); inline-size: 100%; max-inline-size: 560px; }
 .g-bauteile-video { inline-size: 100%; max-inline-size: 560px; margin: 0; }
 .g-bauteile-place { inline-size: 100%; max-inline-size: 360px; }
+
+/* ------------------------------------------------------------------ 2.14.0 entries */
+/* the web app without a window (vendor demo.css) bleeds to the screen edge below 640 px with negative margins; the
+   generic max 100 % of a state cell would cap it and shift it, and at 200 % text sebaro's switch row would not fit */
+.g-bauteile-state > .demo-webapp { max-inline-size: none; }
+/* at 200 % text on 1024 to 1280 px its header is its own sb-page while the text is large, as every header specimen
+   (guide.css), so sebaro's narrow header wraps instead of squeezing the name */
+@media (min-width: 1024px) and (max-width: 63.99rem) { main .demo-webapp { container: sb-page / inline-size; } }
