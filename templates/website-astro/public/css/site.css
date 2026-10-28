@@ -7,10 +7,14 @@
    request in the pull request that added this template. */
 html { background: var(--sb-color-bg); }
 
-/* an article: the contents beside the text from 1024 px, as sb-toc switches there (NAV-08); below it the contents open
-   and close above the text. minmax(0, …) so a long word never sets a column's width (ZUG-09) */
+/* an article: the contents beside the text from 64rem (NAV-08); below it the contents stand above the text.
+   minmax(0, …) so a long word never sets a column's width (ZUG-09).
+   no sebaro token: a media query cannot read a custom property, so the step is written here, in rem so it follows the
+   reader's text size (64rem = sebaro's 1024 px step at 16 px text; at 200 % text the article keeps one column up to
+   2048 px). sebaro.css switches sb-toc itself at 1024 px, so between the two the contents stand open above the text. */
 .app-article { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-spacing-group); padding-block: var(--sb-spacing-section); }
-@media (min-width: 1024px) {
+@media (min-width: 64rem) {
+  /* no sebaro token for the width of a side column: 15rem = the 240 px sidebar of NAV-04 at 16 px text, growing with it */
   .app-article { grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); column-gap: var(--sb-spacing-gutter-wide); }
   .app-article__toc { grid-column: 1; grid-row: 1 / span 2; }
   .app-article__toc .sb-toc { position: sticky; inset-block-start: var(--sb-space-4); }

@@ -24,11 +24,28 @@ npm test                          # baut, startet vite preview und prüft jede A
 npm run sebaro:verify             # die Kopie von sebaro ist unverändert (verify-export.mjs --strict)
 ```
 
-`npm test` lädt jede Ansicht und jeden Zustand (offene Dialoge, Kurzmeldung, Formularfehler, Englisch) hell und dunkel,
-bei 320, 390 und 1440&nbsp;px, mit 100 und echten 200&nbsp;% Schrift (CDP `Page.setFontSizes` vor dem Laden). Er scheitert
-an seitlichem Scrollen, abgeschnittenem Text, jedem axe-Fund (WCAG 2.2 AA), Konsolenfehlern und CSP-Verstößen
-(`tests/sebaro-checks.ts`). `tests/keyboard.spec.ts` prüft die vier festen Aufgaben nur mit der Tastatur und dass jede
-Klasse von sebaro stammt oder mit `app-` beginnt. Die Bildschirmfotos liegen danach in `test-results/screens/`.
+`npm test` lädt jede Ansicht und jeden Zustand (leere Liste, kein Treffer, abgeschlossener und unbekannter Eintrag,
+offene Dialoge, Kurzmeldungen, Formularfehler, lange Werte, Englisch) hell und dunkel, bei 320, 390 und 1440&nbsp;px, mit
+100 und echten 200&nbsp;% Schrift (CDP `Page.setFontSizes` vor dem Laden). Er scheitert an seitlichem Scrollen,
+abgeschnittenem Text, jedem axe-Fund (WCAG 2.2 AA), Konsolenfehlern und CSP-Verstößen (`tests/sebaro-checks.ts`).
+Jeder Fall nennt, was auf dem Bildschirm stehen muss: den HTTP-Status der Seite, den Text der einen sichtbaren
+Überschrift `h1`, die Ansicht (`data-sb-view` oder ein Selektor) und genau die offenen Überlagerungen (Dialoge, Popover,
+Kurzmeldungen; keine, wenn der Fall `null` sagt). Er scheitert auch an Text, den ein Bedienelement selbst abschneidet: der
+gewählte Eintrag einer Auswahl, ein Platzhalter, der Wert eines schreibgeschützten Felds, oder ein Icon oder Suffix über
+dem Text. Ein eingetippter Wert, der länger ist als sein einzeiliges Feld, läuft darin seitlich weiter (D110, „wie in
+jedem Textfeld“); er zählt als Notiz im Test, nicht als Fehler. Nicht gemessen: Datums- und Zeitfelder (ihre Teile zeichnet
+der Browser) und die offene Liste einer Auswahl (zeichnet das System). Einen Schnitt, den sebaros eigenes CSS verursacht
+und den die Vorlage nicht ändern darf, nennt der Fall als `controlWaivers` mit Grund; er steht bei jedem Lauf als Notiz
+im Bericht und ist eine Bitte an die Werkstatt.
+Heute steht dort einer: „Gesundheit“ in der Auswahl „Kategorie“ fehlen bei 200&nbsp;% auf 320&nbsp;px 4&nbsp;px, weil
+`.sb-select > select` am Ende Platz in rem für das Chevron hält.
+
+`tests/keyboard.spec.ts` prüft die vier festen Aufgaben nur mit der Tastatur und dass jede Klasse von sebaro stammt oder
+mit `app-` beginnt. `tests/data-safety.spec.ts` prüft, dass nichts ungefragt verloren geht: jeder Weg aus einem Formular
+mit ungesicherten Änderungen fragt zuerst (Link, Adresse, Zurück, Vor, Schließen und Neuladen; DE / EN behält den
+Entwurf), und „Beispieldaten wiederherstellen“ fügt nur fehlende Beispiele hinzu, die eigenen Einträge bleiben.
+`tests/strings.spec.ts` und `tests/dimensions.spec.ts` lesen den Quelltext: kein Wort im Markup einer Ansicht, keine Länge
+ohne Token oder Begründung. Die Bildschirmfotos liegen danach in `test-results/screens/`.
 
 ## sebaro aktualisieren
 
@@ -60,7 +77,11 @@ Danach `npm test` und die Fotos in beiden Modi ansehen. Die kopierten Dateien ge
 Übernimm den Abschnitt aus [`../AGENTS-snippet.md`](../AGENTS-snippet.md) in die `AGENTS.md` deines Projekts. Für diese
 Vorlage gilt zusätzlich:
 
-- Jedes Wort steht in `src/strings.ts` (de und en); Zahlen und Daten über `src/format.ts`.
+- Jedes Wort steht in `src/strings.ts` (de und en), auch die Beispieleinträge (`samples`); was in beiden Sprachen gleich
+  ist (Kürzel, Adressen, IDs, Dateinamen, Code), steht dort in `SHARED`. Zahlen und Daten über `src/format.ts`.
+- Maße nur aus Tokens (TEC-01). Wo sebaro keins hat, sagt ein Kommentar „no sebaro token“ warum; Umbrüche in rem oder
+  em, damit sie der Schriftgröße folgen. Heute ohne Token: die kleinste Breite einer Karte im Raster (`16rem`,
+  `.app-card-grid`).
 - Eigene Klassen beginnen mit `app-` und nutzen nur `var(--sb-*)`; nie eine eigene `sb-*`-Klasse, nie eine Farbe von Hand.
 - Kein `style`-Attribut, kein Inline-Skript: die CSP in `index.html` bleibt so streng.
 - Die Kachel im Kopf ist ein Platzhalter (die Dachmarke). Ein echtes Produkt bekommt sein eigenes Zeichen aus der
@@ -69,6 +90,8 @@ Vorlage gilt zusätzlich:
 
 ## Nicht geprüft
 
-Nur Chromium; kein Firefox, kein WebKit, kein echter Screenreader. Das Datumsfeld zeigt das Format der Browsersprache,
+Nur Chromium; kein Firefox, kein WebKit, kein echter Screenreader. `tests/strings.spec.ts` liest nur Markup in
+den Vorlagen der Funktion `html` und `index.html`, keine Zeichenketten, die Code an Hilfsfunktionen übergibt; Zahlen und Zeichen allein
+(08:12, ±0) gelten als Werte. Die Frage beim Schließen ist die des Browsers (`beforeunload`); ihr Text ist nicht änderbar. Das Datumsfeld zeigt das Format der Browsersprache,
 nicht der Seitensprache. Audio und Video sind nicht dabei (keine Mediendateien), die Befehlspalette mit ⌘K auch nicht:
 sie gehört zur Web-App mit Fenster (siehe `../desktop-tauri/`).

@@ -18,4 +18,7 @@
 .app-side-none:empty { display: none; }
 
 /* ⌘+ / ⌘− change only the content's text (DSK-09); main.ts sets --app-doc-scale through the CSSOM */
-.app-doc > p { font-size: calc(var(--app-doc-scale, 1) * 1rem); }
+.app-doc > p { font-size: calc(var(--app-doc-scale, 1) * var(--sb-type-body-size)); }
+
+/* the bin's actions under the inspector's list (AKT-07: the danger action at the end of the content) */
+.app-insp-actions:not([hidden]) { display: flex; flex-wrap: wrap; gap: var(--sb-space-2); margin-block-start: var(--sb-space-4); }

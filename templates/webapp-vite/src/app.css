@@ -16,7 +16,8 @@ html { background: var(--sb-color-bg); }
    it grow under touch */
 .app-touch-rows .sb-row { min-block-size: var(--sb-size-target-touch); }
 
-/* a grid of setting cards (EBE-02): one column on a phone, more as the place allows */
+/* a grid of setting cards (EBE-02): one column on a phone, more as the place allows.
+   no sebaro token for a card's least width: 16rem (256 px at 16 px text) grows with the reader's text size */
 .app-card-grid { display: grid; gap: var(--sb-spacing-group); grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); }
 
 .app-figure { margin: 0; }
@@ -35,7 +36,7 @@ html { background: var(--sb-color-bg); }
 }
 .app-toast-place > .sb-toast { pointer-events: auto; inline-size: 100%; }
 
-/* settings stay a readable column on wide screens */
-.app-column { max-inline-size: 40rem; }
+/* settings stay a readable column on wide screens: the reading width of sebaro (TXT, 70ch) */
+.app-column { max-inline-size: var(--sb-size-measure-prose); }
 
 .app-steps { margin: 0; padding: 0; border: 0; min-inline-size: 0; display: grid; gap: var(--sb-space-3); }

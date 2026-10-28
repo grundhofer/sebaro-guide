@@ -3,7 +3,7 @@
 // first, AKT-11 „Abbrechen“ · „Verwerfen“ · „Sichern“ before leaving with unsaved changes, EBE-05 removing a sub-step
 // from the unsaved form goes without a dialog and with an undo toast, BEL-10 the data-path line under the action).
 import { html, icon, type Html } from "../html";
-import { app, go, toast } from "../main";
+import { app, go, mayLeave, toast } from "../main";
 import { t } from "../strings";
 import { nextId, type Category, type Entry } from "../store";
 
@@ -50,7 +50,7 @@ export function formView(id: string | null): Html {
     <fieldset class="sb-form-grid__wide app-steps">
       <legend class="sb-field__label">${s.form.steps}${opt}</legend>
       <div id="app-steps">${stepRows()}</div>
-      <div class="sb-field"><label class="sb-visually-hidden" for="app-f-step">${s.form.stepLabel}</label><div class="sb-field__control"><input id="app-f-step" type="text" autocomplete="off" placeholder="${s.form.stepLabel}"></div></div>
+      <div class="sb-field"><label class="sb-field__label" for="app-f-step">${s.form.stepLabel}</label><div class="sb-field__control"><input id="app-f-step" type="text" autocomplete="off"></div></div>
       <div><button class="sb-secondary-action" type="button" data-app-step-add>${icon("plus")}${s.form.stepAdd}</button></div>
     </fieldset>
     <div class="sb-form-grid__actions">
@@ -84,9 +84,48 @@ export function formIsDirty(): boolean {
 }
 
 let leaveTo = "#/";
+/** Opens „Änderungen sichern?“; its „Verwerfen“ and „Sichern“ then go to `target`. Only main.ts's mayLeave calls it. */
 export function askBeforeLeaving(target: string): void {
   leaveTo = target;
-  (document.getElementById("app-dlg-unsaved") as HTMLDialogElement | null)?.showModal();
+  const dlg = document.getElementById("app-dlg-unsaved") as HTMLDialogElement | null;
+  if (dlg && !dlg.open) dlg.showModal();
+}
+
+function redrawSteps(): void {
+  const box = document.getElementById("app-steps");
+  if (box) box.innerHTML = stepRows().value;
+}
+
+function noteHelp(): void {
+  const note = document.getElementById("app-f-note") as HTMLTextAreaElement | null;
+  const help = document.querySelector("#app-f-note-help span");
+  if (note && help) help.textContent = t().form.noteHelp(Math.max(0, 200 - note.value.length));
+}
+
+type Draft = { values: Array<[string, string]>; steps: string[]; step: string; initial: string };
+
+/** What the form holds now, to put back after the view was drawn again in the other language. */
+export function keepDraft(): Draft | null {
+  const form = document.getElementById("app-form") as HTMLFormElement | null;
+  if (!form) return null;
+  const step = (document.getElementById("app-f-step") as HTMLInputElement | null)?.value ?? "";
+  return { values: [...new FormData(form).entries()].map(([k, v]) => [k, String(v)]), steps: [...steps], step, initial };
+}
+
+export function restoreDraft(draft: Draft | null): void {
+  const form = document.getElementById("app-form") as HTMLFormElement | null;
+  if (!form || !draft) return;
+  for (const [name, value] of draft.values) {
+    const control = form.elements.namedItem(name);
+    if (control instanceof HTMLInputElement || control instanceof HTMLSelectElement || control instanceof HTMLTextAreaElement) control.value = value;
+  }
+  const step = document.getElementById("app-f-step") as HTMLInputElement | null;
+  if (step) step.value = draft.step;
+  steps = [...draft.steps];
+  redrawSteps();
+  noteHelp();
+  // still unsaved against what was stored, not against the redrawn form
+  initial = draft.initial;
 }
 
 function setError(fieldId: string, message: string | null): void {
@@ -158,10 +197,6 @@ export function bindForm(id: string | null): void {
   const form = document.getElementById("app-form") as HTMLFormElement | null;
   if (!form) return;
   initial = snapshot(form);
-  const redrawSteps = () => {
-    const box = document.getElementById("app-steps");
-    if (box) box.innerHTML = stepRows().value;
-  };
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const values = validate(form);
@@ -171,11 +206,7 @@ export function bindForm(id: string | null): void {
     // saving on this device is instant: no progress, no check, no toast (AKT-05); the entry opens
     go(`#/eintrag/${saved}`);
   });
-  const note = document.getElementById("app-f-note") as HTMLTextAreaElement | null;
-  note?.addEventListener("input", () => {
-    const help = document.querySelector("#app-f-note-help span");
-    if (help) help.textContent = s.form.noteHelp(Math.max(0, 200 - note.value.length));
-  });
+  document.getElementById("app-f-note")?.addEventListener("input", noteHelp);
   const stepInput = document.getElementById("app-f-step") as HTMLInputElement | null;
   const addStep = () => {
     const v = stepInput?.value.trim();
@@ -206,8 +237,7 @@ export function bindForm(id: string | null): void {
   });
   const back = id ? `#/eintrag/${id}` : "#/";
   form.querySelector("[data-app-cancel]")?.addEventListener("click", () => {
-    if (formIsDirty()) askBeforeLeaving(back);
-    else go(back);
+    if (mayLeave(back)) go(back);
   });
   const dlg = document.getElementById("app-dlg-unsaved") as HTMLDialogElement | null;
   dlg?.addEventListener("close", () => {

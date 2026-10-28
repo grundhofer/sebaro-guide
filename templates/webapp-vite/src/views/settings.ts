@@ -1,10 +1,12 @@
 // settings.ts: the small view „Einstellungen“ of a web app without a window (NAV-06, D102): „Farbton: Kühl · Warm“
 // (FAR-15, sb-tone.js) and „Bewegung immer reduzieren“ (BEW-04, sb-controls.js stores it, theme-init.js applies it).
-// „Hell oder Dunkel“ stays the button in the header (AKT-09, WEB-02). No primary action (AKT-01).
+// „Hell oder Dunkel“ stays the button in the header (AKT-09, WEB-02). No primary action (AKT-01). „Beispieldaten
+// wiederherstellen“ only adds the examples that are missing; the user's entries stay, so it needs no dialog (AKT-08)
+// and its toast's „Rückgängig“ takes back only what it added (EBE-05).
 import { html, icon, type Html } from "../html";
-import { app, render, toast } from "../main";
-import { t, currentLang } from "../strings";
-import { seed } from "../store";
+import { app, toast } from "../main";
+import { t, currentLang, SHARED } from "../strings";
+import { missingExamples } from "../store";
 
 export function settingsView(): Html {
   const s = t();
@@ -29,9 +31,10 @@ export function settingsView(): Html {
     <section class="sb-stack" aria-labelledby="app-about-h">
       <h2 class="sb-type-title" id="app-about-h">${s.settings.about}</h2>
       <dl class="sb-meta-list">
-        <div><dt>${s.settings.version}</dt><dd><span class="sb-mono">0.1.0</span></dd></div>
+        <div><dt>${s.settings.version}</dt><dd><span class="sb-mono">${SHARED.version}</span></dd></div>
         <div><dt>${s.settings.storage}</dt><dd>${s.settings.storageValue}</dd></div>
       </dl>
+      <p>${s.settings.resetText}</p>
       <div>
         <button class="sb-secondary-action" type="button" data-app-reset>${icon("refresh")}${s.settings.reset}</button>
         <p class="sb-action-hint">${s.settings.resetHint}</p>
@@ -44,13 +47,16 @@ export function settingsView(): Html {
 export function bindSettings(): void {
   const s = t();
   document.querySelector("[data-app-reset]")?.addEventListener("click", () => {
-    const before = app.entries;
-    app.entries = seed(currentLang());
+    const added = missingExamples(app.entries, currentLang());
+    if (!added.length) {
+      toast(s.settings.resetNone);
+      return;
+    }
+    app.entries = [...app.entries, ...added];
     app.persist();
-    toast(s.settings.resetToast, () => {
-      app.entries = before;
+    toast(s.settings.resetToast(added.length), () => {
+      app.entries = app.entries.filter((e) => !added.includes(e));
       app.persist();
-      if (app.route.name !== "settings") render(false);
     });
   });
 }

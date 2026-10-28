@@ -1,6 +1,6 @@
 // store.ts: the app's entries, kept in localStorage on this device only (BEL-10: „Bleibt auf diesem Gerät.“).
 // The first start writes example entries (BEL-09: the list marks them „Beispieldaten“ until you change them).
-import type { Lang } from "./strings";
+import { STRINGS, type Lang } from "./strings";
 
 export type Category = "none" | "home" | "work" | "garden" | "health";
 export type State = "open" | "done" | "closed";
@@ -16,39 +16,39 @@ export type Entry = {
   state: State;
   created: string; // ISO date
   demo: boolean;
+  /** which example of SEED this is (only while demo is true it counts as that example) */
+  sample?: number;
 };
 
 const KEY = "musterapp-entries";
 
-// example content in both languages; the user's own entries are never translated
-const SEED: Record<Lang, Array<[string, Category, string, number, string, State]>> = {
-  de: [
-    ["Wasser trinken", "health", "2026-10-30", 5, "", "open"],
-    ["Rosen schneiden", "garden", "2026-11-02", 45, "Vor dem ersten Frost, mit der scharfen Schere.", "open"],
-    ["Steuerunterlagen sortieren", "work", "", 90, "", "done"],
-    ["Fenster putzen", "home", "2026-11-08", 60, "", "open"],
-  ],
-  en: [
-    ["Drink water", "health", "2026-10-30", 5, "", "open"],
-    ["Prune the roses", "garden", "2026-11-02", 45, "Before the first frost, with the sharp shears.", "open"],
-    ["Sort tax papers", "work", "", 90, "", "done"],
-    ["Clean the windows", "home", "2026-11-08", 60, "", "open"],
-  ],
-};
+// the example entries: their words are in strings.ts (`samples`, same order); the user's own entries are never translated
+const SEED: Array<[Category, string, number, State]> = [
+  ["health", "2026-10-30", 5, "open"],
+  ["garden", "2026-11-02", 45, "open"],
+  ["work", "", 90, "done"],
+  ["home", "2026-11-08", 60, "open"],
+];
+
+function example(lang: Lang, i: number, id: string): Entry {
+  const [category, due, effort, state] = SEED[i];
+  const { title, note } = STRINGS[lang].samples[i];
+  return { id, title, category, due, effort, note, steps: [], state, created: "2026-10-10", demo: true, sample: i };
+}
 
 export function seed(lang: Lang): Entry[] {
-  return SEED[lang].map(([title, category, due, effort, note, state], i) => ({
-    id: String(i + 1),
-    title,
-    category,
-    due,
-    effort,
-    note,
-    steps: [],
-    state,
-    created: "2026-10-10",
-    demo: true,
-  }));
+  return SEED.map((_, i) => example(lang, i, String(i + 1)));
+}
+
+/** The examples that are missing (deleted, or changed and so the user's own), added after the user's entries with new
+ *  ids. Nothing is removed or replaced, so this asks nothing (AKT-08 is about destroying data). */
+export function missingExamples(entries: Entry[], lang: Lang): Entry[] {
+  const present = new Set(entries.filter((e) => e.demo).map((e) => e.sample));
+  const added: Entry[] = [];
+  SEED.forEach((_, i) => {
+    if (!present.has(i)) added.push(example(lang, i, nextId([...entries, ...added])));
+  });
+  return added;
 }
 
 export function load(lang: Lang): Entry[] {

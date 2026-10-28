@@ -31,4 +31,5 @@ dark at 100 % and real 200 % text with axe. CI: `.github/workflows/templates.yml
 4. **Build screens from recipes**: `docs/app.html`, `docs/ios.html`, `docs/web.html`, `docs/desktop.html`; components from
    `docs/bauteile.html`; data from `docs/daten.html`.
 5. **Review with the checklist** in both modes; record exceptions with `design-exception.md`. In a starter, `npm test`
-   runs the automatic part (both modes, 100 % and 200 % text, axe, no sideways scroll, no cut text, CSP).
+   runs the automatic part (both modes, 100 % and 200 % text, the screen asked for with its heading and open overlays,
+   axe, no sideways scroll, no cut text or control value, CSP; no word written into markup, no length without a token).

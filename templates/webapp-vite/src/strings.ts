@@ -5,6 +5,44 @@
 
 export type Lang = "de" | "en";
 
+// Values that read the same in every language (language codes, version, names of the samples, addresses, IDs, file
+// names, code): the views take them from here like every word above, so no visible content lives in a view. Numbers
+// alone (times such as 08:12, counts) stay where they are formatted.
+export const SHARED = {
+  langCodes: { de: "DE", en: "EN" },
+  version: "0.1.0",
+  initials: ["AK", "LM", "JB"],
+  email: "example@example.org",
+  emailParts: ["example@", "example.", "org"], // a <wbr> after each part but the last
+  website: "example.org",
+  websiteUrl: "https://example.org/",
+  githubUrl: "https://github.com/",
+  units: { km: "km", celsius: "°C", mb: "MB" },
+  timeRange: "08:00–22:00",
+  shortHash: "7b3d2e1",
+  uuid: "3f2a9c1e-5b7d-4e0a-9c1f-2b8e6d4a0c17",
+  ruleId: "FAR-01",
+  idInSentence: "DAT-02",
+  releaseVersion: "1.4.0",
+  pathParts: ["notizen/", "research/", "offline-", "first.md"], // a <wbr> after each part but the last
+  diffFile: "entry.json",
+  diffHunk: "@@ -4,4 +4,5 @@",
+  keyLetter: "K",
+  menuKeys: "⇧⌘N",
+  logTimes: ["2026-10-10T08:12:03", "2026-10-10T08:12:04", "2026-10-10T08:12:04"],
+  // code in a small markup: ⟨k:…⟩ keyword, ⟨s:…⟩ string, ⟨c:…⟩ constant, ⟨m:…⟩ comment; {name} takes a word of the
+  // language table (data.ts fills it)
+  command: ["⟨m:{commandComment}⟩", "npm run build"],
+  code: ["⟨m:{codeComment}⟩", "⟨k:let⟩ count = ⟨c:0⟩;", "⟨k:function⟩ add(): ⟨k:string⟩ {", "  count += ⟨c:1⟩;", "  ⟨k:return⟩ ⟨s:`⟩${count}⟨s:{codeString}`⟩;", "}"],
+  json: ["{", '  "id": ⟨s:"wasser"⟩,', '  "title": ⟨s:"{jsonTitle}"⟩,', '  "goal": ⟨c:8⟩,', '  "reminder": { "every": ⟨s:"PT2H"⟩, "from": ⟨s:"08:00"⟩, "to": ⟨s:"22:00"⟩ }', "}"],
+  diff: {
+    goal: '  "goal": ⟨c:8⟩,',
+    removed: '  "every": ⟨s:"PT1H"⟩,',
+    added: ['  "every": ⟨s:"PT2H"⟩,', '  "quiet": [⟨s:"22:00"⟩, ⟨s:"08:00"⟩], ⟨m:{diffComment}⟩'],
+    sound: '  "sound": ⟨c:false⟩',
+  },
+} as const;
+
 const de = {
   app: {
     name: "Musterapp",
@@ -137,9 +175,18 @@ const de = {
     storage: "Ablage",
     storageValue: "Im Speicher des Browsers auf diesem Gerät, bis du einen Eintrag löschst",
     reset: "Beispieldaten wiederherstellen",
+    resetText: "Holt fehlende Beispiele zurück. Deine eigenen Einträge bleiben, wie sie sind.",
     resetHint: "Bleibt auf diesem Gerät.",
-    resetToast: "Beispieldaten wiederhergestellt",
+    resetToast: (n: number) => (n === 1 ? "1 Beispiel wiederhergestellt" : `${n} Beispiele wiederhergestellt`),
+    resetNone: "Alle Beispiele sind schon da.",
   },
+  // the example entries of the first start (store.ts adds category, date, effort and state); BEL-09
+  samples: [
+    { title: "Wasser trinken", note: "" },
+    { title: "Rosen schneiden", note: "Vor dem ersten Frost, mit der scharfen Schere." },
+    { title: "Steuerunterlagen sortieren", note: "" },
+    { title: "Fenster putzen", note: "" },
+  ],
   legal: {
     imprintTitle: "Impressum",
     privacyTitle: "Datenschutz",
@@ -253,6 +300,7 @@ const de = {
     amounts: "Mengen",
     times: "Uhrzeiten",
     days: "Tage",
+    daysRange: "10.–16.10.2026",
     approx: "Ungefähr",
     estimate: "Schätzung",
     rounded: "gerundet",
@@ -726,9 +774,17 @@ const en: Strings = {
     storage: "Storage",
     storageValue: "In the browser's storage on this device, until you delete an entry",
     reset: "Restore sample data",
+    resetText: "Brings back missing examples. Your own entries stay as they are.",
     resetHint: "Stays on this device.",
-    resetToast: "Sample data restored",
+    resetToast: (n) => (n === 1 ? "1 example restored" : `${n} examples restored`),
+    resetNone: "All examples are already there.",
   },
+  samples: [
+    { title: "Drink water", note: "" },
+    { title: "Prune the roses", note: "Before the first frost, with the sharp shears." },
+    { title: "Sort tax papers", note: "" },
+    { title: "Clean the windows", note: "" },
+  ],
   legal: {
     imprintTitle: "Imprint",
     privacyTitle: "Privacy",
@@ -836,6 +892,7 @@ const en: Strings = {
     amounts: "Amounts",
     times: "Times",
     days: "Days",
+    daysRange: "2026-10-10 – 2026-10-16",
     approx: "Approximate",
     estimate: "Estimate",
     rounded: "Rounded",

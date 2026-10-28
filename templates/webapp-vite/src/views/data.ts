@@ -4,7 +4,7 @@
 // The view's one primary action is „Als CSV exportieren“ in the action zone (AKT-01, AKT-05, BEL-10).
 import { html, icon, raw, type Html } from "../html";
 import { app } from "../main";
-import { t, currentLang, type Lang, type Strings } from "../strings";
+import { t, currentLang, SHARED, type Lang, type Strings } from "../strings";
 import * as fmt from "../format";
 
 let n = 0;
@@ -23,6 +23,21 @@ function section(key: string, title: string, items: Html[]): Html {
 function samples(rows: Array<[string | Html, Html | string]>): Html {
   return html`<dl class="sb-meta-list sb-meta-list--labels">${rows.map(([label, value]) => html`<div><dt>${label}</dt><dd>${value}</dd></div>`)}</dl>`;
 }
+
+/** code from SHARED's small markup (⟨k:…⟩ keyword, ⟨s:…⟩ string, ⟨c:…⟩ constant, ⟨m:…⟩ comment), {name} from `words` */
+const TOKEN_CLASS: Record<string, string> = { k: "sb-tok-keyword", s: "sb-tok-string", c: "sb-tok-constant", m: "sb-tok-comment" };
+function code(lines: string | readonly string[], words: Record<string, unknown>): Html {
+  const filled = (typeof lines === "string" ? [lines] : lines).join("\n").replace(/\{(\w+)\}/g, (_, k: string) => String(words[k] ?? ""));
+  const parts = filled.split(/⟨([ksmc]):([^⟩]*)⟩/);
+  const out: Array<Html | string> = [];
+  for (let i = 0; i < parts.length; i += 3) {
+    out.push(parts[i]);
+    if (i + 2 < parts.length) out.push(html`<span class="${TOKEN_CLASS[parts[i + 1]]}">${parts[i + 2]}</span>`);
+  }
+  return html`${out}`;
+}
+/** text with a <wbr> after each part but the last (file names, addresses) */
+const wbr = (parts: readonly string[]) => html`${parts.map((p, i) => html`${i ? raw("<wbr>") : ""}${p}`)}`;
 
 const num = (v: string) => html`<span class="sb-num">${v}</span>`;
 const demo = (s: Strings) => html`<span class="sb-demo-marker">${s.app.demo}</span>`;
@@ -57,7 +72,7 @@ function textSection(s: Strings, lang: Lang): Html {
 
 function numbersSection(s: Strings, lang: Lang): Html {
   const d = s.data;
-  const steps = [["Montag", 8412], ["Dienstag", 12075], ["Mittwoch", 980], ["Donnerstag", 10000]] as const;
+  const steps = [8412, 12075, 980, 10000] as const;
   const dayNames = ["2026-10-05", "2026-10-06", "2026-10-07", "2026-10-08"].map((iso) => fmt.weekday(lang, iso));
   return section("numbers", d.sections.numbers, [
     item(d.integer, samples([[d.numberWithUnit, num(fmt.unit(lang, 8, d.glasses))], [d.fraction, num("5 / 8")], [d.inSentence, num(d.ofDone(3, 5))]])),
@@ -68,21 +83,21 @@ function numbersSection(s: Strings, lang: Lang): Html {
     item(d.units, samples([
       [d.minutesL, num(fmt.unit(lang, 12, s.common.minutes))],
       [d.hoursL, num(fmt.unit(lang, 2, s.common.hours))],
-      [d.measure, num(fmt.unit(lang, 5.2, "km", 1))],
-      [d.temperature, num(fmt.unit(lang, 21, "°C"))],
-      [d.fileSize, num(fmt.unit(lang, 1.2, "MB", 1))],
+      [d.measure, num(fmt.unit(lang, 5.2, SHARED.units.km, 1))],
+      [d.temperature, num(fmt.unit(lang, 21, SHARED.units.celsius))],
+      [d.fileSize, num(fmt.unit(lang, 1.2, SHARED.units.mb, 1))],
     ])),
     item(d.signed, samples([
       [d.minus, html`<span class="sb-signed sb-signed--minus">${icon("arrow-down--16", 16)}${"−" + fmt.money(lang, 84)}</span>`],
       [d.plus, html`<span class="sb-signed sb-signed--plus">${icon("arrow-up--16", 16)}+3</span>`],
       [d.zero, html`<span class="sb-signed">±0</span>`],
     ])),
-    item(d.range, samples([[d.amounts, num(`3–5 ${d.glasses}`)], [d.times, num("08:00–22:00")], [d.days, num(lang === "de" ? "10.–16.10.2026" : "2026-10-10 – 2026-10-16")]])),
+    item(d.range, samples([[d.amounts, num(`3–5 ${d.glasses}`)], [d.times, num(SHARED.timeRange)], [d.days, num(d.daysRange)]])),
     item(d.approx, samples([[d.estimate, num(d.approxEstimate(fmt.unit(lang, 40, s.common.minutes)))], [d.rounded, num(d.approxRounded(`${fmt.num(lang, 2000)} ${d.stepsWord}`))]])),
     item(d.rank, samples([[d.rankWith, num(d.rankV(2, 14))], [d.ordinal, num(d.ordinalV(3))]])),
     item(d.columns, html`<div class="sb-table-wrap" role="region" aria-labelledby="app-d-steps-cap" tabindex="0"><table class="sb-table"><caption id="app-d-steps-cap">${d.stepsPerDay} ${demo(s)}</caption>
 <thead><tr><th scope="col">${d.day}</th><th scope="col" class="sb-num">${d.stepsWord}</th></tr></thead>
-<tbody>${steps.map(([, v], i) => html`<tr><td>${dayNames[i]}</td><td class="sb-num">${fmt.num(lang, v)}</td></tr>`)}</tbody></table></div>`),
+<tbody>${steps.map((v, i) => html`<tr><td>${dayNames[i]}</td><td class="sb-num">${fmt.num(lang, v)}</td></tr>`)}</tbody></table></div>`),
   ]);
 }
 
@@ -105,7 +120,7 @@ function timeSection(s: Strings, lang: Lang): Html {
       [d.yesterday, html`<time datetime="2026-10-09T18:40">${d.relYesterday(tm("2026-10-09T18:40"))}</time>`],
       [d.older, html`<time datetime="2026-10-07">${d.relOlder(fmt.date(lang, "2026-10-07"))}</time>`],
     ])),
-    item(d.span, samples([[d.tableTitle, d.thisWeek(fmt.dayMonth(lang, "2026-10-04"), fmt.date(lang, "2026-10-10"))], [d.reminderWindow, "08:00–22:00"]])),
+    item(d.span, samples([[d.tableTitle, d.thisWeek(fmt.dayMonth(lang, "2026-10-04"), fmt.date(lang, "2026-10-10"))], [d.reminderWindow, SHARED.timeRange]])),
     item(d.weekdayT, samples([[d.inText, fmt.weekday(lang, "2026-10-10")], [d.axisHead, fmt.weekday(lang, "2026-10-10", true)]])),
     item(d.calendar, html`<div class="sb-calendar" data-sb-calendar data-sb-month="2026-10" data-sb-selected="2026-10-09" data-sb-today="2026-10-10" data-sb-entries="2026-10-02 2026-10-09">
   <div class="sb-calendar__body">
@@ -191,9 +206,9 @@ function identitySection(s: Strings, lang: Lang): Html {
   const tile = (document.getElementById("app-tile-48") as HTMLTemplateElement | null)?.innerHTML ?? "";
   const tm = (iso: string) => fmt.time(lang, iso);
   return section("identity", d.sections.identity, [
-    item(d.person, html`<ul class="sb-list"><li class="sb-list-row"><span class="sb-list-row__lead"><span class="sb-avatar" aria-hidden="true"><span>AK</span></span></span><div class="sb-list-row__main"><p class="sb-list-row__title">${d.personName}</p><p class="sb-list-row__meta">${d.personMeta} · <time datetime="2026-10-10T14:32">${d.relJustNow(tm("2026-10-10T14:32"))}</time></p></div></li></ul>`),
-    item(d.group, html`<ul class="sb-avatars" aria-hidden="true"><li class="sb-avatar"><span>AK</span></li><li class="sb-avatar"><span>LM</span></li><li class="sb-avatar"><span>JB</span></li></ul><p>${d.groupNames}</p>`),
-    item(d.appT, html`<ul class="sb-app-list"><li class="sb-app-row"><span class="sb-sign-tile sb-sign-tile--48" aria-hidden="true">${raw(tile)}</span><div><h4 class="sb-app-row__name" translate="no">${s.app.name}</h4><p class="sb-app-row__text">${d.appLine}</p><p class="sb-app-row__meta"><span>${d.appPlatform}</span><span aria-hidden="true">·</span><span>${d.version} <span class="sb-mono">0.1.0</span></span><span aria-hidden="true">·</span><span class="sb-demo-marker">${s.app.demo}</span></p></div></li></ul><p class="sb-list-row__meta">${d.appTileNote}</p>`),
+    item(d.person, html`<ul class="sb-list"><li class="sb-list-row"><span class="sb-list-row__lead"><span class="sb-avatar" aria-hidden="true"><span>${SHARED.initials[0]}</span></span></span><div class="sb-list-row__main"><p class="sb-list-row__title">${d.personName}</p><p class="sb-list-row__meta">${d.personMeta} · <time datetime="2026-10-10T14:32">${d.relJustNow(tm("2026-10-10T14:32"))}</time></p></div></li></ul>`),
+    item(d.group, html`<ul class="sb-avatars" aria-hidden="true">${SHARED.initials.map((i) => html`<li class="sb-avatar"><span>${i}</span></li>`)}</ul><p>${d.groupNames}</p>`),
+    item(d.appT, html`<ul class="sb-app-list"><li class="sb-app-row"><span class="sb-sign-tile sb-sign-tile--48" aria-hidden="true">${raw(tile)}</span><div><h4 class="sb-app-row__name" translate="no">${s.app.name}</h4><p class="sb-app-row__text">${d.appLine}</p><p class="sb-app-row__meta"><span>${d.appPlatform}</span><span aria-hidden="true">·</span><span>${d.version} <span class="sb-mono">${SHARED.version}</span></span><span aria-hidden="true">·</span><span class="sb-demo-marker">${s.app.demo}</span></p></div></li></ul><p class="sb-list-row__meta">${d.appTileNote}</p>`),
     item(d.device, html`<ul class="sb-list">
   <li class="sb-list-row"><span class="sb-list-row__lead">${icon("smartphone")}</span><div class="sb-list-row__main"><p class="sb-list-row__title">${d.phone}</p><p class="sb-list-row__meta">${d.thisDevice} · ${d.synced(d.todayAt(tm("2026-10-10T08:12")))}</p></div></li>
   <li class="sb-list-row"><span class="sb-list-row__lead">${icon("monitor")}</span><div class="sb-list-row__main"><p class="sb-list-row__title">${d.laptop}</p><p class="sb-list-row__meta">${d.synced(d.yesterdayAt(tm("2026-10-09T22:40")))}</p></div></li>
@@ -201,8 +216,8 @@ function identitySection(s: Strings, lang: Lang): Html {
 </ul>`),
     item(d.address, html`<address>${d.addressLines.map((l, i) => html`${i ? raw("<br>") : ""}${l}`)}</address>`),
     item(d.contact, html`<dl class="sb-meta-list">
-  <div><dt>${d.email}</dt><dd><a href="mailto:example@example.org">example@${raw("<wbr>")}example.${raw("<wbr>")}org${icon("external-link--16", 16)}</a></dd></div>
-  <div><dt>${d.website}</dt><dd><a href="https://example.org/">example.org${icon("external-link--16", 16)}</a></dd></div>
+  <div><dt>${d.email}</dt><dd><a href="mailto:${SHARED.email}">${wbr(SHARED.emailParts)}${icon("external-link--16", 16)}</a></dd></div>
+  <div><dt>${d.website}</dt><dd><a href="${SHARED.websiteUrl}">${SHARED.website}${icon("external-link--16", 16)}</a></dd></div>
 </dl>`),
   ]);
 }
@@ -213,38 +228,34 @@ function codeBlock(lang: string, label: string, copy: string, code: Html): Html 
 
 function techSection(s: Strings, lang: Lang): Html {
   const d = s.data;
-  const k = (c: string) => html`<span class="sb-tok-keyword">${c}</span>`;
-  const str = (c: string) => html`<span class="sb-tok-string">${c}</span>`;
-  const con = (c: string) => html`<span class="sb-tok-constant">${c}</span>`;
-  const com = (c: string) => html`<span class="sb-tok-comment">${c}</span>`;
-  const [v0, v1, v2, v3] = d.versionLine("1.4.0", "");
+  const [v0, v1, v2, v3] = d.versionLine(SHARED.releaseVersion, "");
   return section("tech", d.sections.tech, [
     item(d.ids, samples([
-      [d.shortHash, html`<code class="sb-code-inline">7b3d2e1</code>`],
-      [d.uuid, html`<code class="sb-code-inline">3f2a9c1e-5b7d-4e0a-9c1f-2b8e6d4a0c17</code>`],
-      [d.ruleId, html`<code class="sb-code-inline">FAR-01</code>`],
-      [d.idInSentence, html`${d.ruleWord} <span class="sb-id">DAT-02</span>`],
+      [d.shortHash, html`<code class="sb-code-inline">${SHARED.shortHash}</code>`],
+      [d.uuid, html`<code class="sb-code-inline">${SHARED.uuid}</code>`],
+      [d.ruleId, html`<code class="sb-code-inline">${SHARED.ruleId}</code>`],
+      [d.idInSentence, html`${d.ruleWord} <span class="sb-id">${SHARED.idInSentence}</span>`],
     ])),
     item(d.version, html`<p>${v0}<code class="sb-code-inline">${v1}</code>${v2}<time datetime="2026-10-10">${fmt.date(lang, "2026-10-10")}</time>${v3}</p>`),
-    item(d.path, html`<p><code class="sb-code-inline sb-file-name">notizen/${raw("<wbr>")}research/${raw("<wbr>")}offline-${raw("<wbr>")}first.md</code></p>`),
-    item(d.command, codeBlock(d.commandLang, d.commandLabel, d.copy, html`${com(d.commandComment)}\nnpm run build`)),
-    item(d.code, codeBlock(d.codeLang, d.codeLabel, d.copy, html`${com(d.codeComment)}\n${k("let")} count = ${con("0")};\n${k("function")} add(): ${k("string")} {\n  count += ${con("1")};\n  ${k("return")} ${str("`")}\${count}${str(d.codeString + "`")};\n}`)),
-    item(d.json, codeBlock(d.json, d.jsonLabel, d.copy, html`{\n  "id": ${str('"wasser"')},\n  "title": ${str(`"${d.jsonTitle}"`)},\n  "goal": ${con("8")},\n  "reminder": { "every": ${str('"PT2H"')}, "from": ${str('"08:00"')}, "to": ${str('"22:00"')} }\n}`)),
-    item(d.log, codeBlock(d.logLang, d.logLabel, d.copy, html`${d.logLines.map((l, i) => `2026-10-10T08:12:0${i === 0 ? 3 : 4}  ${l}`).join("\n")}`)),
+    item(d.path, html`<p><code class="sb-code-inline sb-file-name">${wbr(SHARED.pathParts)}</code></p>`),
+    item(d.command, codeBlock(d.commandLang, d.commandLabel, d.copy, code(SHARED.command, d))),
+    item(d.code, codeBlock(d.codeLang, d.codeLabel, d.copy, code(SHARED.code, d))),
+    item(d.json, codeBlock(d.json, d.jsonLabel, d.copy, code(SHARED.json, d))),
+    item(d.log, codeBlock(d.logLang, d.logLabel, d.copy, html`${d.logLines.map((l, i) => `${SHARED.logTimes[i]}  ${l}`).join("\n")}`)),
     item(d.diff, html`<figure class="sb-diff" aria-labelledby="app-d-diff-file">
-  <figcaption class="sb-diff__bar"><span class="sb-diff__file" id="app-d-diff-file">entry.json</span><span>${d.diffVersions}</span></figcaption>
+  <figcaption class="sb-diff__bar"><span class="sb-diff__file" id="app-d-diff-file">${SHARED.diffFile}</span><span>${d.diffVersions}</span></figcaption>
   <div class="sb-diff__lines" role="region" aria-label="${d.diffLabel}" tabindex="0">
-    <span class="sb-diff__hunk">@@ -4,4 +4,5 @@</span>
-    <div class="sb-diff__line"><span class="sb-diff__num">4</span><span class="sb-diff__num">4</span><span class="sb-diff__sign" aria-hidden="true"> </span><span class="sb-diff__code">  "goal": ${con("8")},</span></div>
-    <div class="sb-diff__line sb-diff__line--del"><span class="sb-diff__num">5</span><span class="sb-diff__num"></span><span class="sb-diff__sign" aria-hidden="true">−</span><span class="sb-diff__code"><span class="sb-visually-hidden">${d.diffRemoved}</span>  "every": ${str('"PT1H"')},</span></div>
-    <div class="sb-diff__line sb-diff__line--add"><span class="sb-diff__num"></span><span class="sb-diff__num">5</span><span class="sb-diff__sign" aria-hidden="true">+</span><span class="sb-diff__code"><span class="sb-visually-hidden">${d.diffAdded}</span>  "every": ${str('"PT2H"')},</span></div>
-    <div class="sb-diff__line sb-diff__line--add"><span class="sb-diff__num"></span><span class="sb-diff__num">6</span><span class="sb-diff__sign" aria-hidden="true">+</span><span class="sb-diff__code"><span class="sb-visually-hidden">${d.diffAdded}</span>  "quiet": [${str('"22:00"')}, ${str('"08:00"')}], ${com(d.diffComment)}</span></div>
-    <div class="sb-diff__line"><span class="sb-diff__num">6</span><span class="sb-diff__num">7</span><span class="sb-diff__sign" aria-hidden="true"> </span><span class="sb-diff__code">  "sound": ${con("false")}</span></div>
+    <span class="sb-diff__hunk">${SHARED.diffHunk}</span>
+    <div class="sb-diff__line"><span class="sb-diff__num">4</span><span class="sb-diff__num">4</span><span class="sb-diff__sign" aria-hidden="true"> </span><span class="sb-diff__code">${code(SHARED.diff.goal, d)}</span></div>
+    <div class="sb-diff__line sb-diff__line--del"><span class="sb-diff__num">5</span><span class="sb-diff__num"></span><span class="sb-diff__sign" aria-hidden="true">−</span><span class="sb-diff__code"><span class="sb-visually-hidden">${d.diffRemoved}</span>${code(SHARED.diff.removed, d)}</span></div>
+    <div class="sb-diff__line sb-diff__line--add"><span class="sb-diff__num"></span><span class="sb-diff__num">5</span><span class="sb-diff__sign" aria-hidden="true">+</span><span class="sb-diff__code"><span class="sb-visually-hidden">${d.diffAdded}</span>${code(SHARED.diff.added[0], d)}</span></div>
+    <div class="sb-diff__line sb-diff__line--add"><span class="sb-diff__num"></span><span class="sb-diff__num">6</span><span class="sb-diff__sign" aria-hidden="true">+</span><span class="sb-diff__code"><span class="sb-visually-hidden">${d.diffAdded}</span>${code(SHARED.diff.added[1], d)}</span></div>
+    <div class="sb-diff__line"><span class="sb-diff__num">6</span><span class="sb-diff__num">7</span><span class="sb-diff__sign" aria-hidden="true"> </span><span class="sb-diff__code">${code(SHARED.diff.sound, d)}</span></div>
   </div>
   <p class="sb-diff__sum">${d.diffSum}</p>
 </figure>`),
-    item(d.keys, html`<p>${d.keysSentence[0]}<kbd><span aria-hidden="true">⌘</span> ${d.keysCmd}</kbd>${d.keysSentence[1]}<kbd>K</kbd>${d.keysSentence[2]}<kbd>${d.keysCtrl}</kbd>${d.keysSentence[3]}<kbd>K</kbd>${d.keysSentence[4]}</p>
-${samples([[d.keysInMenu, html`${d.keysNewNote} <span class="sb-keys"><span aria-hidden="true">⇧⌘N</span><span class="sb-visually-hidden">${d.keysWords}</span></span>`]])}`),
+    item(d.keys, html`<p>${d.keysSentence[0]}<kbd><span aria-hidden="true">⌘</span> ${d.keysCmd}</kbd>${d.keysSentence[1]}<kbd>${SHARED.keyLetter}</kbd>${d.keysSentence[2]}<kbd>${d.keysCtrl}</kbd>${d.keysSentence[3]}<kbd>${SHARED.keyLetter}</kbd>${d.keysSentence[4]}</p>
+${samples([[d.keysInMenu, html`${d.keysNewNote} <span class="sb-keys"><span aria-hidden="true">${SHARED.menuKeys}</span><span class="sb-visually-hidden">${d.keysWords}</span></span>`]])}`),
   ]);
 }
 
@@ -421,7 +432,7 @@ function mediaSection(s: Strings, lang: Lang): Html {
   const d = s.data;
   return section("media", d.sections.media, [
     item(d.image, html`<figure class="app-figure"><img src="/sebaro/brand/og/studio.png" width="1200" height="630" alt="${d.imageAlt}" loading="lazy"><figcaption class="sb-list-row__meta">${d.imageCaption}</figcaption></figure>`),
-    item(d.file, html`<ul class="sb-list">${d.files.map(([name, kind, mb, ic, iso]) => html`<li class="sb-list-row"><span class="sb-list-row__lead">${icon(ic)}</span><div class="sb-list-row__main"><p class="sb-list-row__title">${name}</p><p class="sb-list-row__meta">${kind} · ${fmt.unit(lang, mb, "MB", 1)} · <time datetime="${iso}">${fmt.date(lang, iso)}</time></p></div><span class="sb-list-row__trail"><button class="sb-icon-button" type="button" aria-label="${d.download(name)}">${icon("download")}</button></span></li>`)}</ul>`),
+    item(d.file, html`<ul class="sb-list">${d.files.map(([name, kind, mb, ic, iso]) => html`<li class="sb-list-row"><span class="sb-list-row__lead">${icon(ic)}</span><div class="sb-list-row__main"><p class="sb-list-row__title">${name}</p><p class="sb-list-row__meta">${kind} · ${fmt.unit(lang, mb, SHARED.units.mb, 1)} · <time datetime="${iso}">${fmt.date(lang, iso)}</time></p></div><span class="sb-list-row__trail"><button class="sb-icon-button" type="button" aria-label="${d.download(name)}">${icon("download")}</button></span></li>`)}</ul>`),
     html`<p>${d.mediaNote}</p>`,
   ]);
 }

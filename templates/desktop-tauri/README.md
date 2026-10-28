@@ -51,12 +51,26 @@ werden eingecheckt, damit die Vorlage allein läuft. Das Fenster bekommt seinen 
 | Befehlspalette mit ⌘K / Strg+K | NAV-09 |
 | die 15 festen Kürzel und F6, auch als Dialog „Tastaturkürzel“ | DSK-09, ICO-08 |
 | schlanke Einstellungen (⌘,): Hell oder Dunkel, Farbton, Bewegung | DSK-02, DSK-05, FAR-15, BEW-04 |
-| „In den Papierkorb legen …“ fragt, Dialog vor dem Schließen „Abbrechen“ · „Verwerfen“ · „Sichern“ | AKT-07, AKT-08, AKT-11, EBE-03, FOR-04 |
+| „In den Papierkorb legen …“ fragt; der Papierkorb im Baum hält die Notizen, „Zurücklegen“ holt eine zurück, „Papierkorb leeren …“ fragt und löscht endgültig; Dialog vor dem Schließen „Abbrechen“ · „Verwerfen“ · „Sichern“ | AKT-07, AKT-08, AKT-11, EBE-03, FOR-04, DSK-08 |
 | Fenstergrund aus der gespeicherten Wahl (`appearance.json`), Sprachen in `Info.plist` | DSK-14, DSK-08 |
 | alle Wörter in `src/strings.ts`, CSP ohne `unsafe-inline`, Schriften selbst gehostet | TEC-10, TXT-05, HAL-09, SCH-02 |
 | 200 % Schrift ohne seitliches Scrollen und ohne abgeschnittenen Text, axe ohne Befund | ZUG-01, ZUG-09, ZUG-06 |
 
-Getestet wird auf 390, 480 und 1440&nbsp;px, hell und dunkel, mit 100 und 200&nbsp;% Schrift.
+Getestet wird auf 390, 480 und 1440&nbsp;px, hell und dunkel, mit 100 und 200&nbsp;% Schrift (`tests/sebaro-checks.ts`),
+mit dem Papierkorb (eine Notiz darin gewählt, Dialog „Papierkorb leeren?“) und dem Fenster ohne offene Notiz.
+Jeder Fall nennt, was auf dem Bildschirm stehen muss: den HTTP-Status der Seite, den Text der einen sichtbaren
+Überschrift `h1`, die Ansicht (`data-sb-view` oder ein Selektor) und genau die offenen Überlagerungen (Dialoge, Popover,
+Kurzmeldungen; keine, wenn der Fall `null` sagt). Er scheitert auch an Text, den ein Bedienelement selbst abschneidet: der
+gewählte Eintrag einer Auswahl, ein Platzhalter, der Wert eines schreibgeschützten Felds, oder ein Icon oder Suffix über
+dem Text. Ein eingetippter Wert, der länger ist als sein einzeiliges Feld, läuft darin seitlich weiter (D110, „wie in
+jedem Textfeld“); er zählt als Notiz im Test, nicht als Fehler. Nicht gemessen: Datums- und Zeitfelder (ihre Teile zeichnet
+der Browser) und die offene Liste einer Auswahl (zeichnet das System). Einen Schnitt, den sebaros eigenes CSS verursacht
+und den die Vorlage nicht ändern darf, nennt der Fall als `controlWaivers` mit Grund; er steht bei jedem Lauf als Notiz
+im Bericht und ist eine Bitte an die Werkstatt.
+Heute stehen dort zwei, beide bei 200&nbsp;% Schrift: der Platzhalter „Suchen …“ in der Seitenleiste, die sebaros
+240&nbsp;px behält (NAV-04, D108), und „Befehl oder Einstellung suchen“ in der Befehlspalette, wie auf `docs/desktop.html`.
+`tests/strings.spec.ts` prüft, dass `index.html` kein Wort selbst schreibt; `tests/dimensions.spec.ts`, dass jede Länge
+in `src/app.css` ein Token ist (heute keine Ausnahme).
 
 ## Was ein Agent behalten muss
 
@@ -66,7 +80,9 @@ Projekts. Dazu für diese Vorlage:
 - `public/sebaro/` nie ändern, nur mit `npm run sebaro:sync` erneuern.
 - Eigene Klassen beginnen mit `app-` und nutzen nur `var(--sb-*)`; keine neuen `sb-*`-Klassen, keine Farbwerte.
 - Kein `style`-Attribut, kein Skript im HTML: die CSP in `index.html` und `src-tauri/tauri.conf.json` bleibt gleich.
-- Jedes Wort kommt aus `src/strings.ts`.
+- Jedes Wort kommt aus `src/strings.ts`. `src/main.ts` schreibt seine Wörter mit `t()`; das prüft kein Test, nur die
+  Durchsicht.
+- Maße nur aus Tokens (TEC-01); wo sebaro keins hat, sagt ein Kommentar „no sebaro token“ warum, Umbrüche in rem oder em.
 - Die Kachel in der Titelleiste ist ein Platzhalter (die Kachel der Dachmarke). Ein echtes Produkt bekommt sein Zeichen
   aus der Werkstatt (ZEI-03, ZEI-08); die App-Icons erzeugt `npx tauri icon` aus dessen Bild.
 

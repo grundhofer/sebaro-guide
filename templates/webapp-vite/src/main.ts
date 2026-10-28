@@ -3,11 +3,11 @@
 // sebaro's own scripts (public/sebaro/js/*.js) do the behaviour of the parts: dialogs, chips, switch, tone, language,
 // toasts, tabs, tree, sortable tables, calendar, heatmap and large text. This file only renders and routes.
 import { html, icon, raw, type Html } from "./html";
-import { currentLang, t } from "./strings";
+import { currentLang, t, SHARED } from "./strings";
 import { load, save, type Entry } from "./store";
 import { listView, bindList } from "./views/list";
 import { detailView, bindDetail } from "./views/detail";
-import { formView, bindForm, formIsDirty, askBeforeLeaving } from "./views/form";
+import { formView, bindForm, formIsDirty, askBeforeLeaving, keepDraft, restoreDraft } from "./views/form";
 import { settingsView, bindSettings } from "./views/settings";
 import { dataView, bindData } from "./views/data";
 import { legalView, notFoundView } from "./views/legal";
@@ -63,9 +63,9 @@ function header(): Html {
     <nav class="sb-site-nav" aria-label="${s.header.navLabel}"><a href="#/einstellungen"${raw(onSettings ? ' aria-current="page"' : "")}>${s.header.settings}</a></nav>
     <fieldset class="sb-language-switch sb-language-switch--choice" data-sb-language-choice>
       <legend class="sb-visually-hidden">${s.header.language}</legend>
-      <label class="sb-language-switch__option"><input type="radio" name="app-lang" value="de"${raw(lang === "de" ? " checked" : "")}><span lang="de">DE</span></label>
+      <label class="sb-language-switch__option"><input type="radio" name="app-lang" value="de"${raw(lang === "de" ? " checked" : "")}><span lang="de">${SHARED.langCodes.de}</span></label>
       <span aria-hidden="true">/</span>
-      <label class="sb-language-switch__option"><input type="radio" name="app-lang" value="en"${raw(lang === "en" ? " checked" : "")}><span lang="en">EN</span></label>
+      <label class="sb-language-switch__option"><input type="radio" name="app-lang" value="en"${raw(lang === "en" ? " checked" : "")}><span lang="en">${SHARED.langCodes.en}</span></label>
     </fieldset>
   </div>
   <button class="sb-theme-button" type="button">${s.header.theme}</button>
@@ -80,7 +80,7 @@ function footer(): Html {
     <li><a href="#/impressum">${s.imprint}</a></li>
     <li><a href="#/datenschutz">${s.privacy}</a></li>
     <li><a href="#/barrierefreiheit">${s.accessibility}</a></li>
-    <li><a href="https://github.com/" title="${s.githubTitle}">${s.github}${icon("external-link--16", 16)}</a></li>
+    <li><a href="${SHARED.githubUrl}" title="${s.githubTitle}">${s.github}${icon("external-link--16", 16)}</a></li>
   </ul>
 </footer>`;
 }
@@ -121,11 +121,14 @@ function setUpSebaroParts(root: Element): void {
 }
 
 let firstRender = true;
+/** the address of the view on screen; a departure that the guard holds back puts it back */
+let shownHash = "";
 
 export function render(focusMain = true): void {
   const root = document.getElementById("app");
   if (!root) return;
   const v = view();
+  shownHash = location.hash;
   root.innerHTML = html`<a class="sb-skip-link" href="#inhalt" data-app-skip>${t().app.skip}</a>
 ${header()}
 <main id="inhalt" tabindex="-1">${v.markup}</main>
@@ -179,9 +182,24 @@ export function go(hash: string): void {
   }
 }
 
+/** The one guard before leaving a form with unsaved changes (AKT-11): a link, „Abbrechen“, a hash change (Back,
+ *  Forward, an address typed in) all come here. Returns true when the departure may go on now. */
+export function mayLeave(target: string): boolean {
+  if (!formIsDirty()) return true;
+  askBeforeLeaving(target);
+  return false;
+}
+
 function onHash(): void {
   // in-page anchors (footnotes, contents) are no routes: the view stays
   if (!location.hash.startsWith("#/") && location.hash !== "") return;
+  const target = location.hash || "#/";
+  if (!mayLeave(target)) {
+    // the address already moved (Back, Forward): put the form's address back without a new hashchange; the dialog's
+    // „Verwerfen“ or „Sichern“ then goes to the target
+    history.pushState(null, "", `${location.pathname}${location.search}${shownHash}`);
+    return;
+  }
   app.route = parse(location.hash);
   render();
 }
@@ -201,10 +219,13 @@ function start(): void {
     }
     // with unsaved changes in the form, leaving asks first (AKT-11)
     const link = target.closest<HTMLAnchorElement>('a[href^="#/"]');
-    if (link && formIsDirty() && !link.closest("form")) {
-      event.preventDefault();
-      askBeforeLeaving(link.getAttribute("href") ?? "#/");
-    }
+    if (link && !link.closest("form") && !mayLeave(link.getAttribute("href") ?? "#/")) event.preventDefault();
+  });
+
+  // closing the tab or window, reloading or leaving the site: the browser's own question (AKT-11; a page may not
+  // show its own dialog there)
+  window.addEventListener("beforeunload", (event) => {
+    if (formIsDirty()) event.preventDefault();
   });
 
   // „Rückgängig“ of the toast (sb-controls.js fires sb-toast-action, then closes the toast)
@@ -214,9 +235,12 @@ function start(): void {
     if (undo) undo();
   });
 
-  // DE / EN: sb-controls.js has set <html lang> and stored it; the app swaps its words without a reload (D102 (50))
+  // DE / EN: sb-controls.js has set <html lang> and stored it; the app swaps its words without a reload (D102 (50));
+  // a form keeps what was typed and stays unsaved (no departure, so no question)
   document.addEventListener("sb-language-change", () => {
+    const draft = keepDraft();
     render(false);
+    restoreDraft(draft);
     document.querySelector<HTMLInputElement>(`[data-sb-language-choice] input[value="${currentLang()}"]`)?.focus();
   });
 }

@@ -11,6 +11,8 @@ const notes: Note[] = demoNotes.map((n) => ({ ...n, paragraphs: [...n.paragraphs
 const openIds: string[] = ["wochenplan", "einkauf"];
 let currentId: string | null = "wochenplan";
 let newCount = 0;
+/** what the tree chose in the bin: "bin" (its row), the id of a note in it, or null (the inspector shows the open note) */
+let binChoice: string | null = null;
 const TEXT_STEPS = [0.875, 1, 1.125, 1.25, 1.5];   // ⌘+ / ⌘− change only the content's text (DSK-09)
 let textStep = 1;
 
@@ -42,6 +44,8 @@ function icon(name: string, cls = ""): SVGSVGElement {
   return svg;
 }
 function note(id: string | null): Note | undefined { return notes.find((n) => n.id === id); }
+function binned(): Note[] { return notes.filter((n) => n.trashed); }
+function folderName(n: Note): string | undefined { return folders.find((f) => f.id === n.folder)?.name; }
 function words(n: Note): number { return n.paragraphs.join(" ").split(/\s+/).filter(Boolean).length; }
 function chars(n: Note): number { return n.paragraphs.join("\n").length; }
 function changedText(n: Note): string {
@@ -63,24 +67,43 @@ function drawTree(): void {
   const tree = $("baum");
   const open = new Map<string, boolean>();
   tree.querySelectorAll<HTMLElement>("[data-folder]").forEach((r) => open.set(r.dataset.folder!, r.getAttribute("aria-expanded") === "true"));
+  const binWasOpen = tree.querySelector("[data-bin]")?.getAttribute("aria-expanded") === "true";
   tree.replaceChildren();
   for (const f of folders) {
     const isOpen = open.get(f.id) ?? f.open;
     const group = el("ul", { class: "sb-tree__group", role: "group", id: `gruppe-${f.id}` });
     group.hidden = !isOpen;
-    for (const n of notes.filter((x) => x.folder === f.id)) group.append(noteRow(n, 2));
+    for (const n of notes.filter((x) => x.folder === f.id && !x.trashed)) group.append(noteRow(n, 2));
     const row = el("div", {
       class: "sb-row sb-tree__row", role: "treeitem", "aria-level": "1", "aria-expanded": String(isOpen),
       "aria-owns": group.id, "aria-selected": "false", tabindex: "-1", "data-folder": f.id,
     }, el("span", { class: "sb-tree__twist", "aria-hidden": "true" }, icon("chevron-right--16", "sb-icon--16")), icon("folder", "sb-row__icon"), el("span", { class: "sb-row__name" }, f.name));
     tree.append(el("li", { role: "none" }, row, group));
   }
-  for (const n of notes.filter((x) => x.folder === null)) tree.append(noteRow(n, 1));
-  // the bin takes nothing by dragging (DSK-11); it goes through the dialog
-  tree.append(el("li", { role: "none" }, el("div", {
-    class: "sb-row sb-tree__row", role: "treeitem", "aria-level": "1", "aria-selected": "false", tabindex: "-1",
-    "data-sb-drop": "none", title: t("side.trashTitle"),
-  }, el("span", { class: "sb-tree__twist", "aria-hidden": "true" }), icon("trash", "sb-row__icon"), el("span", { class: "sb-row__name" }, t("side.trash")))));
+  for (const n of notes.filter((x) => x.folder === null && !x.trashed)) tree.append(noteRow(n, 1));
+  // the bin takes nothing by dragging (DSK-11); it goes through the dialog. With notes in it, it opens like a folder and
+  // lists them; choosing one shows „Zurücklegen“ in the inspector and the menu
+  const inBin = binned();
+  const binRow = el("div", {
+    class: "sb-row sb-tree__row", role: "treeitem", "aria-level": "1", "aria-selected": String(binChoice === "bin"), tabindex: "-1",
+    "data-sb-drop": "none", "data-bin": "", title: t("side.trashTitle"),
+  }, el("span", { class: "sb-tree__twist", "aria-hidden": "true" }, ...(inBin.length ? [icon("chevron-right--16", "sb-icon--16")] : [])),
+  icon("trash", "sb-row__icon"), el("span", { class: "sb-row__name" }, t("side.trash")));
+  const binItem = el("li", { role: "none" }, binRow);
+  if (inBin.length) {
+    const group = el("ul", { class: "sb-tree__group", role: "group", id: "gruppe-papierkorb" });
+    group.hidden = !binWasOpen;
+    binRow.setAttribute("aria-expanded", String(binWasOpen));
+    binRow.setAttribute("aria-owns", group.id);
+    for (const n of inBin) {
+      group.append(el("li", { role: "none" }, el("div", {
+        class: "sb-row sb-tree__row", role: "treeitem", "aria-level": "2", "aria-selected": String(binChoice === n.id),
+        tabindex: "-1", "data-trashed": n.id, title: n.name,
+      }, el("span", { class: "sb-tree__twist", "aria-hidden": "true" }), icon("file-text", "sb-row__icon"), el("span", { class: "sb-row__name" }, n.name))));
+    }
+    binItem.append(group);
+  }
+  tree.append(binItem);
   if (!tree.querySelector("[tabindex='0']")) tree.querySelector("[role='treeitem']")?.setAttribute("tabindex", "0");
   filterTree();
 }
@@ -169,12 +192,45 @@ function current(id: string | null): void {
   currentId = id;
   const n = note(id);
   $("pfad-notiz").textContent = n ? n.name : "";
-  $("baum").querySelectorAll<HTMLElement>("[data-note]").forEach((row) => row.setAttribute("aria-selected", String(row.dataset.note === id)));
+  $("baum").querySelectorAll<HTMLElement>("[data-note]").forEach((row) => row.setAttribute("aria-selected", String(binChoice === null && row.dataset.note === id)));
+  if (binChoice === null) $("baum").querySelectorAll<HTMLElement>("[data-bin], [data-trashed]").forEach((row) => row.setAttribute("aria-selected", "false"));
+  inspect();
+  zone();
+  const title = n ? t("app.title", { doc: n.name }) : t("app.name");
+  if (location.hash !== "#/einstellungen") { document.title = title; setWindowTitle(title); }
+  $("zurueck-wort").textContent = t("set.back", { doc: n ? n.name : t("app.name") });
+  menuState();
+}
+function pair(label: string, value: Node | string, num = false): HTMLDivElement {
+  return el("div", {}, el("dt", {}, label), el("dd", num ? { class: "sb-num" } : {}, value));
+}
+/** The inspector: the note chosen in the bin, the bin itself, or else the open note. */
+function inspect(): void {
   const dl = $("eigenschaften");
   dl.replaceChildren();
+  const actions = $("papierkorb-aktionen");
+  actions.hidden = binChoice === null;
+  if (binChoice === "bin") {
+    const count = binned().length;
+    dl.append(pair(t("insp.bin"), count === 0 ? t("insp.binEmpty") : count === 1 ? t("insp.binOne") : t("insp.binNotes", { n: nf.format(count) })));
+    $("zuruecklegen").hidden = true;
+    $("leeren").hidden = count === 0;
+    actions.hidden = count === 0;
+    return;
+  }
+  const inBin = note(binChoice);
+  if (inBin) {
+    dl.append(
+      pair(t("insp.from"), folderName(inBin) ?? t("insp.fromRoot")),
+      pair(t("insp.changed"), el("time", { datetime: inBin.changed }, changedText(inBin))),
+      pair(t("insp.words"), nf.format(words(inBin)), true),
+    );
+    $("zuruecklegen").hidden = false;
+    $("leeren").hidden = true;
+    return;
+  }
+  const n = note(currentId);
   if (n) {
-    const pair = (label: string, value: Node | string, num = false) =>
-      el("div", {}, el("dt", {}, label), el("dd", num ? { class: "sb-num" } : {}, value));
     const created = new Date(n.created);
     dl.append(
       pair(t("insp.folder"), folders.find((f) => f.id === n.folder)?.name ?? t("insp.noFolder")),
@@ -184,12 +240,18 @@ function current(id: string | null): void {
       pair(t("insp.size"), t("doc.size", { n: nf.format(Math.max(1, Math.ceil(chars(n) / 1024))) }), true),
     );
   } else dl.append(el("div", {}, el("dt", {}, t("insp.label")), el("dd", {}, t("insp.empty"))));
-  zone();
-  const title = n ? t("app.title", { doc: n.name }) : t("app.name");
-  if (location.hash !== "#/einstellungen") { document.title = title; setWindowTitle(title); }
-  $("zurueck-wort").textContent = t("set.back", { doc: n ? n.name : t("app.name") });
-  const trash = $("menue-papierkorb");
-  if (n) trash.removeAttribute("aria-disabled"); else trash.setAttribute("aria-disabled", "true");
+}
+/** DSK-08: an item without a target is disabled, never hidden. */
+function menuState(): void {
+  const able = (id: string, on: boolean) => { if (on) $(id).removeAttribute("aria-disabled"); else $(id).setAttribute("aria-disabled", "true"); };
+  able("menue-papierkorb", !!note(currentId));
+  able("menue-zuruecklegen", !!note(binChoice)?.trashed);
+  able("menue-leeren", binned().length > 0);
+}
+function chooseInBin(choice: string | null): void {
+  binChoice = choice;
+  inspect();
+  menuState();
 }
 function zone(): void {
   const n = note(currentId);
@@ -243,6 +305,7 @@ function runCommand(command: string | undefined): void {
     case "settings": goSettings(); break;
     case "text-bigger": setTextStep(textStep + 1); break;
     case "text-smaller": setTextStep(textStep - 1); break;
+    case "restore": restore(); break;
   }
 }
 
@@ -254,19 +317,47 @@ function openTrashDialog(): void {
   $("dlg-papierkorb-t").textContent = t("dlg.trashTitle", { name: n.name });
   $("dlg-papierkorb-x").textContent = t("dlg.trashText", { name: n.name });
 }
+function message(text: string): void {
+  ($("haupt").querySelector(".sb-primary-action-bar__message") as HTMLElement).textContent = text;
+}
+/** Into the bin: the note leaves its folder and its tab, and comes back with „Zurücklegen“. */
 function trash(id: string): void {
-  const i = notes.findIndex((n) => n.id === id);
-  if (i < 0) return;
-  const name = notes[i].name;
-  notes.splice(i, 1);
+  const n = note(id);
+  if (!n || n.trashed) return;
+  const name = n.name;
+  n.trashed = true;
   const at = openIds.indexOf(id);
   if (at >= 0) openIds.splice(at, 1);
   currentId = openIds[Math.min(at, openIds.length - 1)] ?? null;
   drawTree();
   drawTabs();
   current(currentId);
-  const message = $("haupt").querySelector(".sb-primary-action-bar__message") as HTMLElement;
-  message.textContent = t("zone.trashed", { name });
+  message(t("zone.trashed", { name }));
+}
+/** „Zurücklegen“: the chosen note goes back into the folder it came from; it does not open on its own. */
+function restore(): void {
+  const n = note(binChoice);
+  if (!n?.trashed) return;
+  n.trashed = false;
+  binChoice = binned().length ? "bin" : null;
+  drawTree();
+  current(currentId);
+  const folder = folderName(n);
+  message(folder ? t("zone.restored", { name: n.name, folder }) : t("zone.restoredRoot", { name: n.name }));
+  $<HTMLElement>("baum").querySelector<HTMLElement>(`[data-note="${n.id}"]`)?.focus();
+}
+function openEmptyDialog(): void {
+  const inBin = binned();
+  $("dlg-leeren-x").textContent = inBin.length === 1 ? t("dlg.emptyTextOne", { name: inBin[0].name }) : t("dlg.emptyTextMany", { n: nf.format(inBin.length) });
+}
+/** „Papierkorb leeren“: every note in the bin is gone for good (the dialog said so). */
+function emptyBin(): void {
+  for (let i = notes.length - 1; i >= 0; i--) if (notes[i].trashed) notes.splice(i, 1);
+  binChoice = null;
+  drawTree();
+  current(currentId);
+  message(t("zone.emptied"));
+  $<HTMLElement>("baum").querySelector<HTMLElement>("[data-bin]")?.focus();
 }
 
 // ------------------------------------------------------------------ settings view (DSK-02) and the window's place
@@ -314,18 +405,23 @@ function init(): void {
     const target = event.target instanceof Element ? event.target.closest<HTMLElement>("[data-app-command]") : null;
     if (target && target.getAttribute("aria-disabled") !== "true") runCommand(target.dataset.appCommand);
     if (event.target instanceof Element && event.target.closest("[data-sb-opens='dlg-papierkorb']")) openTrashDialog();
+    if (event.target instanceof Element && event.target.closest("[data-sb-opens='dlg-leeren']")) openEmptyDialog();
   }, true);
+  // back in the document: the inspector shows the open note again
+  $("inhalt").addEventListener("focusin", () => { if (binChoice !== null) { binChoice = null; current(currentId); } });
   document.addEventListener("sb-command", (event) => runCommand((event as CustomEvent).detail?.command));
   document.addEventListener("sb-tree-select", (event) => {
     const item = (event as CustomEvent).detail?.item as HTMLElement | undefined;
-    if (item?.dataset.note) openNote(item.dataset.note);
+    if (item?.dataset.note) { binChoice = null; openNote(item.dataset.note); }
+    else if (item?.hasAttribute("data-bin")) chooseInBin("bin");
+    else if (item?.dataset.trashed) chooseInBin(item.dataset.trashed);
   });
   // a tab chosen by click or keys (sb-window.js keeps aria-selected): follow it
   new MutationObserver(() => {
     const sel = $("reiter").querySelector<HTMLElement>("[role='tab'][aria-selected='true']");
     const id = sel ? sel.id.replace(/^reiter-/, "") : null;
     for (let i = openIds.length - 1; i >= 0; i--) if (!tabFor(openIds[i])) openIds.splice(i, 1);
-    if (id !== currentId) current(id);
+    if (id !== currentId) { binChoice = null; current(id); }
   }).observe($("reiter"), { subtree: true, childList: true, attributes: true, attributeFilter: ["aria-selected"] });
 
   // AKT-11: a tab with unsaved changes asks before it closes, unless the app saves on its own (the setting)
@@ -358,6 +454,9 @@ function init(): void {
   });
   $<HTMLDialogElement>("dlg-papierkorb").addEventListener("close", () => {
     if ($<HTMLDialogElement>("dlg-papierkorb").returnValue === "confirm" && currentId) trash(currentId);
+  });
+  $<HTMLDialogElement>("dlg-leeren").addEventListener("close", () => {
+    if ($<HTMLDialogElement>("dlg-leeren").returnValue === "confirm" && binned().length) emptyBin();
   });
   $("autosave").addEventListener("click", () => {
     // sb-controls.js turns aria-checked over on the click; read it after that

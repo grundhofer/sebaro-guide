@@ -57,7 +57,24 @@ Das Skript kopiert den Ordner, prüft ihn mit `checks/verify-export.mjs --strict
 
 Geprüft mit `npm test`: jede Seite hell und dunkel, bei 320, 390 und 1440&nbsp;px, bei 100&nbsp;% und echten
 200&nbsp;% Schrift (kein seitliches Scrollen, kein abgeschnittener Text, axe ohne Verstoß, kein Fehler in der Konsole,
-keine Verletzung der Content-Security-Policy), dazu die Wege mit der Tastatur.
+keine Verletzung der Content-Security-Policy), dazu die Wege mit der Tastatur. Eine Adresse, die es nicht gibt, muss mit
+404 und der eigenen Seite „Diese Seite gibt es nicht“ antworten.
+Jeder Fall nennt, was auf dem Bildschirm stehen muss: den HTTP-Status der Seite, den Text der einen sichtbaren
+Überschrift `h1`, die Ansicht (`data-sb-view` oder ein Selektor) und genau die offenen Überlagerungen (Dialoge, Popover,
+Kurzmeldungen; keine, wenn der Fall `null` sagt). Er scheitert auch an Text, den ein Bedienelement selbst abschneidet: der
+gewählte Eintrag einer Auswahl, ein Platzhalter, der Wert eines schreibgeschützten Felds, oder ein Icon oder Suffix über
+dem Text. Ein eingetippter Wert, der länger ist als sein einzeiliges Feld, läuft darin seitlich weiter (D110, „wie in
+jedem Textfeld“); er zählt als Notiz im Test, nicht als Fehler. Nicht gemessen: Datums- und Zeitfelder (ihre Teile zeichnet
+der Browser) und die offene Liste einer Auswahl (zeichnet das System). Einen Schnitt, den sebaros eigenes CSS verursacht
+und den die Vorlage nicht ändern darf, nennt der Fall als `controlWaivers` mit Grund; er steht bei jedem Lauf als Notiz
+im Bericht und ist eine Bitte an die Werkstatt.
+Heute steht dort keiner. `tests/strings.spec.ts` prüft, dass keine Seite und kein Layout ein Wort selbst ins Markup
+schreibt; `tests/dimensions.spec.ts`, dass jede Länge in `public/css/site.css` ein Token ist oder sagt, warum nicht.
+
+Maße ohne Token in `public/css/site.css` (je mit Kommentar „no sebaro token“): der Umbruch des Artikels bei `64rem` (eine
+Media Query kann kein Token lesen; in rem folgt er der Schriftgröße, bei 200&nbsp;% also erst ab 2048&nbsp;px, während
+sebaro.css `sb-toc` schon bei 1024&nbsp;px umschaltet: dazwischen steht das Inhaltsverzeichnis offen über dem Text) und
+die Spalte des Inhaltsverzeichnisses mit `15rem` (die 240&nbsp;px der Seitenleiste von NAV-04).
 
 ## Platzhalter
 

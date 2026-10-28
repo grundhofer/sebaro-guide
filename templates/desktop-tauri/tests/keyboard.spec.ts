@@ -95,6 +95,60 @@ test("⌘⌫ / Entf asks before a note goes to the bin (AKT-08), then it is gone
   await expect(page.locator("#baum [data-note='umzug']")).toHaveCount(0);
 });
 
+test("the bin keeps the note: open it in the tree, „Zurücklegen“ brings it back (AKT-08)", async ({ page }) => {
+  await load(page);
+  await expect(page.locator("#menue-zuruecklegen")).toHaveAttribute("aria-disabled", "true");
+  await expect(page.locator("#menue-leeren")).toHaveAttribute("aria-disabled", "true");
+  await page.locator("#baum [data-note='umzug']").click();
+  await page.keyboard.press(TRASH);
+  await page.locator("#dlg-papierkorb button[value='confirm']").click();
+  await expect(page.locator("#haupt .sb-primary-action-bar__message")).toHaveText("„Umzug Checkliste“ liegt im Papierkorb.");
+  // the bin is a parent row now; by keyboard: focus it, → opens it, ↓ moves to the note, Enter chooses it
+  const bin = page.locator("#baum [data-bin]");
+  await expect(bin).toHaveAttribute("aria-expanded", "false");
+  await bin.focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(bin).toHaveAttribute("aria-expanded", "true");
+  await page.keyboard.press("ArrowDown");
+  await expect(page.locator("#baum [data-trashed='umzug']")).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#eigenschaften")).toContainText("Projekte");
+  await expect(page.locator("#menue-zuruecklegen")).not.toHaveAttribute("aria-disabled");
+  await page.locator("#zuruecklegen").click();
+  await expect(page.locator("#haupt .sb-primary-action-bar__message")).toHaveText("„Umzug Checkliste“ liegt wieder in „Projekte“.");
+  await expect(page.locator("#gruppe-projekte [data-note='umzug']")).toHaveCount(1);
+  await expect(page.locator("#baum [data-trashed]")).toHaveCount(0);
+  await expect(bin).not.toHaveAttribute("aria-expanded");
+});
+
+test("„Papierkorb leeren …“ asks, says it is for good, and only „Papierkorb leeren“ deletes (AKT-08)", async ({ page }) => {
+  await load(page);
+  for (const id of ["umzug", "oktober"]) {
+    await page.evaluate((note) => {
+      document.querySelector<HTMLElement>(`#baum [data-note='${note}']`)!.click();
+      document.querySelector<HTMLElement>("[data-sb-opens='dlg-papierkorb']")!.click();
+    }, id);
+    await page.locator("#dlg-papierkorb button[value='confirm']").click();
+  }
+  await expect(page.locator("#menue-leeren")).not.toHaveAttribute("aria-disabled");
+  await page.locator("#baum [data-bin]").click();
+  const dialog = page.locator("#dlg-leeren");
+  await page.locator("#leeren").click();
+  await expect(dialog).toHaveJSProperty("open", true);
+  await expect(page.locator("#dlg-leeren-t")).toHaveText("Papierkorb leeren?");
+  await expect(page.locator("#dlg-leeren-x")).toHaveText("Die 2 Notizen im Papierkorb werden endgültig gelöscht. Das lässt sich nicht rückgängig machen.");
+  await expect(dialog.locator("button[value='cancel']")).toBeFocused();
+  await expect(dialog.locator(".sb-dialog__actions button")).toHaveText(["Abbrechen", "Papierkorb leeren"]);
+  await page.keyboard.press("Escape");
+  await expect(page.locator("#baum [data-trashed]")).toHaveCount(2);
+  await page.locator("#leeren").click();
+  await dialog.locator("button[value='confirm']").click();
+  await expect(page.locator("#baum [data-trashed]")).toHaveCount(0);
+  await expect(page.locator("#haupt .sb-primary-action-bar__message")).toHaveText("Der Papierkorb ist leer.");
+  await expect(page.locator("#menue-leeren")).toHaveAttribute("aria-disabled", "true");
+  await expect(page.locator("#baum [data-note='umzug'], #baum [data-note='oktober']")).toHaveCount(0);
+});
+
 test("⌘N / Strg+N is the primary action: a new note opens in a tab", async ({ page }) => {
   await load(page);
   await page.locator("#werkzeug-seite").focus();

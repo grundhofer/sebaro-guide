@@ -36,6 +36,8 @@ export const de = {
   "menu.find": "Suchen",
   "menu.settings": "Einstellungen …",
   "menu.trash": "In den Papierkorb legen …",
+  "menu.restore": "Zurücklegen",
+  "menu.emptyTrash": "Papierkorb leeren …",
   "menu.sidebar": "Seitenleiste",
   "menu.inspector": "Inspektor",
   "menu.sidebarWidth": "Breite der Seitenleiste",
@@ -89,6 +91,14 @@ export const de = {
   "insp.size": "Größe",
   "insp.empty": "Keine Notiz gewählt.",
   "insp.noFolder": "keiner",
+  "insp.bin": "Papierkorb",
+  "insp.binNotes": "{n} Notizen",
+  "insp.binOne": "1 Notiz",
+  "insp.binEmpty": "leer",
+  "insp.from": "Lag in",
+  "insp.fromRoot": "keinem Ordner",
+  "insp.restore": "Zurücklegen",
+  "insp.emptyTrash": "Papierkorb leeren …",
 
   "status.unsaved": "nicht gesichert",
   "status.online": "nur online",
@@ -101,6 +111,9 @@ export const de = {
   "zone.hint": "Bleibt auf diesem Gerät.",
   "zone.newNoteName": "Neue Notiz {n}",
   "zone.trashed": "„{name}“ liegt im Papierkorb.",
+  "zone.restored": "„{name}“ liegt wieder in „{folder}“.",
+  "zone.restoredRoot": "„{name}“ liegt wieder bei den Notizen.",
+  "zone.emptied": "Der Papierkorb ist leer.",
 
   "doc.meta": "{folder} · geändert {when}",
   "doc.today": "heute, {time}",
@@ -127,6 +140,10 @@ export const de = {
   "dlg.trashTitle": "„{name}“ in den Papierkorb legen?",
   "dlg.trashText": "Die Notiz „{name}“ kommt in den Papierkorb. Von dort kannst du sie zurückholen.",
   "dlg.trashConfirm": "In den Papierkorb legen",
+  "dlg.emptyTitle": "Papierkorb leeren?",
+  "dlg.emptyTextOne": "Die Notiz „{name}“ im Papierkorb wird endgültig gelöscht. Das lässt sich nicht rückgängig machen.",
+  "dlg.emptyTextMany": "Die {n} Notizen im Papierkorb werden endgültig gelöscht. Das lässt sich nicht rückgängig machen.",
+  "dlg.emptyConfirm": "Papierkorb leeren",
   "dlg.unsavedTitle": "Änderungen an „{name}“ sichern?",
   "dlg.unsavedText": "Ohne Sichern gehen die Änderungen seit {time} verloren. Die Notiz bleibt.",
   "dlg.discard": "Verwerfen",
@@ -191,6 +208,8 @@ export type Note = {
   paragraphs: string[];
   unsaved?: boolean;
   online?: boolean;
+  /** in the bin: out of its folder, back with „Zurücklegen“, gone for good with „Papierkorb leeren …“ (AKT-08) */
+  trashed?: boolean;
 };
 
 export const folders = [

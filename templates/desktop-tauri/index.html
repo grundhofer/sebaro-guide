@@ -57,6 +57,8 @@
             <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" data-app-command="settings"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.settings}}<span class="sb-keys" data-sb-keys="Mod+Comma"></span></button></li>
             <li role="separator" class="sb-menu__sep"></li>
             <li role="none"><button class="sb-menu__item sb-menu__item--danger" type="button" role="menuitem" tabindex="-1" id="menue-papierkorb" aria-keyshortcuts="Meta+Backspace" data-sb-opens="dlg-papierkorb"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.trash}}<span class="sb-keys" data-sb-keys="Mod+Backspace"></span></button></li>
+            <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" id="menue-zuruecklegen" aria-disabled="true" data-app-command="restore"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.restore}}</button></li>
+            <li role="none"><button class="sb-menu__item sb-menu__item--danger" type="button" role="menuitem" tabindex="-1" id="menue-leeren" aria-disabled="true" data-sb-opens="dlg-leeren"><span class="sb-menu__check" aria-hidden="true"></span>{{menu.emptyTrash}}</button></li>
           </ul></li>
         <li role="none"><button class="sb-menu__item" type="button" role="menuitem" tabindex="-1" aria-haspopup="menu" aria-expanded="false" popovertarget="menue-darstellung">{{menu.view}}<span class="sb-menu__sub" aria-hidden="true">{{i16:chevron-right--16}}</span></button>
           <ul class="sb-menu" role="menu" id="menue-darstellung" aria-label="{{menu.view}}" popover>
@@ -133,6 +135,11 @@
     <aside class="sb-window__inspector" id="inspektor" aria-labelledby="inspektor-h">
       <h2 class="sb-window__inspector-title" id="inspektor-h">{{insp.label}}</h2>
       <dl class="sb-meta-list" id="eigenschaften"></dl>
+      <!-- the bin chosen in the tree: „Zurücklegen“ for a note in it, „Papierkorb leeren …“ for the bin (AKT-07, AKT-08) -->
+      <div class="app-insp-actions" id="papierkorb-aktionen" hidden>
+        <button class="sb-secondary-action" type="button" id="zuruecklegen" data-app-command="restore">{{insp.restore}}</button>
+        <button class="sb-danger-action" type="button" id="leeren" data-sb-opens="dlg-leeren">{{i:trash}}{{insp.emptyTrash}}</button>
+      </div>
     </aside>
   </div>
   <!-- EBE-08, STA-07: the zone over the full width; counter line, message, state sentence, the one primary action -->
@@ -243,6 +250,18 @@
     <div class="sb-dialog__actions">
       <button class="sb-secondary-action" value="cancel" autofocus>{{dlg.cancel}}</button>
       <button class="sb-danger-action sb-danger-action--outlined" value="confirm">{{dlg.trashConfirm}}</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- AKT-08: emptying the bin deletes for good and says so; text filled by src/main.ts with the number or the name -->
+<dialog class="sb-dialog" id="dlg-leeren" aria-labelledby="dlg-leeren-t" aria-describedby="dlg-leeren-x">
+  <form method="dialog">
+    <h2 class="sb-dialog__title" id="dlg-leeren-t">{{dlg.emptyTitle}}</h2>
+    <p class="sb-dialog__text" id="dlg-leeren-x"></p>
+    <div class="sb-dialog__actions">
+      <button class="sb-secondary-action" value="cancel" autofocus>{{dlg.cancel}}</button>
+      <button class="sb-danger-action sb-danger-action--outlined" value="confirm">{{dlg.emptyConfirm}}</button>
     </div>
   </form>
 </dialog>
