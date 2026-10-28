@@ -22,8 +22,9 @@ sebaro-Oberflächen baut, und an welchen Texten es liegt, wenn nicht.
   allem, worin er unsicher war.
 - **Prüfen:** je ein zweiter, unabhängiger Agent gegen alle 228 Regeln („eingehalten / verletzt / nicht betroffen“, mit
   Datei:Zeile und Herkunft „Vorlage“ oder „Agent“), dazu Bildschirmfotos hell und dunkel bei 390 und 1440&nbsp;px (Desktop
-  480 und 1440&nbsp;px) und bei echten 200&nbsp;% Schrift, ein Tastaturlauf und axe. Danach liefen die Tests jeder Lösung
-  noch einmal mit `CI=1` auf eigenem Port (siehe „Port“ unten).
+  480 und 1440&nbsp;px) und bei echten 200&nbsp;% Schrift, ein Tastaturlauf und axe.
+- **Wiederholt:** die Tests aller fünf Lösungen liefen danach noch einmal, mit `CI=1`; ein schon belegter Port lässt
+  den Lauf dann scheitern, statt eine fremde App zu prüfen (siehe „Port“ unten).
 
 ## Ergebnis je Lösung
 
@@ -35,9 +36,12 @@ sebaro-Oberflächen baut, und an welchen Texten es liegt, wenn nicht.
 | Einkauf | 105 | 20 | 8 | 103 | 383 bestanden, Exit 0 |
 | Tagebuch | 108 | 14 | 9 | 106 | 306 bestanden, Exit 0 |
 
-Alle fünf hielten die zehn Regeln von `AGENTS.md` §2 ein: eine Hauptaktion unten und zuletzt, Löschen mit Dialog,
-Status als Zeichen und Wort, Ebenen mit Tintenlinie, Ortslinie, Links, nur Tokens. axe meldete nichts, keine Seite
-scrollte bei 200&nbsp;% seitlich. 75 Verstöße insgesamt, 31 davon aus der Vorlage übernommen.
+Von den zehn Regeln in `AGENTS.md` §2 hielten alle fünf Lösungen nur fünf ein. Gemessen an den Regel-IDs, die §2
+nennt, verletzte keine Lösung die Punkte 1 (Farbe je Aufgabe, Status als Zeichen und Wort), 4 (Ebenen mit
+Tintenlinie), 5 (Ortslinie), 6 (Links) und 8 (Bewegung). Die anderen fünf wurden verfehlt: Punkt 9 mit TXT-04 in
+4 von 5 Lösungen, 7 mit EBE-05 in 4 von 4, 10 mit BEL-09 in 3 von 5 und mit BEL-01 in einer, 2 mit AKT-04 und 3 mit
+AKT-08 in je einer. axe meldete nichts, keine Seite scrollte bei 200&nbsp;% seitlich. 75 Verstöße insgesamt, 31 davon
+aus der Vorlage übernommen.
 
 ## Wiederholt verfehlt
 
@@ -46,12 +50,12 @@ Probelösungen; die Ursache ist am Text des Guides belegt.
 
 | Regel | Fehlerquote | Ursache | Änderung |
 |---|---|---|---|
-| TEC-06 `CHECKS.md` | 5/5 (eine Prüfung zählte die Übergabe als Ersatz) | Snippet sagt es nicht: `CHECKS.md` steht nur in `RULES.md`, in keiner Vorlage, nicht in Snippet, Prüfliste oder einer README. | Snippet (Liste „Easily missed“), Prüfliste „Done“, alle drei READMEs |
-| TXT-04 U+00A0 | 4/5 | Vorlage zeigt es nicht sichtbar: `webapp-vite/src/strings.ts` schreibt „200 % Schrift“ mit einem unsichtbaren U+00A0; wer den Satz neu tippt, verliert es (Einkauf `strings.ts:181`, Tagebuch `strings.ts:143`, Gewohnheiten). Snippet nennt U+00A0 nicht. | Snippet und Prüfliste: ` ` schreiben, grep-Befehl; README `webapp-vite` |
+| TEC-06 `CHECKS.md` | 5/5 (eine Prüfung ließ die Übergabe als Ersatz gelten; hier als Verstoß gezählt) | Snippet sagt es nicht: `CHECKS.md` steht nur in `RULES.md`, in keiner Vorlage, nicht in Snippet, Prüfliste oder einer README. | Snippet (Liste „Easily missed“), Prüfliste „Done“, alle drei READMEs |
+| TXT-04 U+00A0 | 4/5 | Vorlage zeigt es nicht sichtbar: `webapp-vite/src/strings.ts` schreibt „200&nbsp;% Schrift“ mit einem unsichtbaren U+00A0; wer den Satz neu tippt, verliert es (Einkauf `strings.ts:181`, Tagebuch `strings.ts:143`, Gewohnheiten). Snippet nennt U+00A0 nicht. | Snippet und Prüfliste: `\u00a0` schreiben, grep-Befehl als Suchhilfe; README `webapp-vite` |
 | EBE-05 Kurzmeldung | 4/4 | Vorlage zeigt es falsch: „Alle Beispiele sind schon da.“ meldet, dass nichts geschah, und ihr „Rückgängig“ bleibt sichtbar, weil `action.hidden` gegen `display` von `.sb-toast__action` verliert (`webapp-vite/src/main.ts:170`). Drei Lösungen übernahmen es; Notizen nahm eine Kurzmeldung für ein gesichertes Schlagwort (Widerspruch AKT-08 / DSK-15, siehe Vorschläge). | Snippet, Prüfliste, README `webapp-vite` |
-| BEL-10 Datenweg-Zeile | 4/5 | Vorlage zeigt es nicht: keine Zeile unter „Sichern“ im Dialog (`webapp-vite/src/views/form.ts:70`), Abstand 0 (`app.css:28`), keine unter „Neue Notiz“ (`desktop-tauri/index.html`); auch die Fenster auf `docs/desktop.html` zeigen keine. | Snippet, Prüfliste, READMEs `webapp-vite` und `desktop-tauri` |
+| BEL-10 Datenweg-Zeile | 4/5 | Vorlage zeigt es nicht: keine Zeile unter „Sichern“ im Dialog (`webapp-vite/src/views/form.ts:70`), Abstand 0 unter 640&nbsp;px Ansichtsbreite (`app.css:28`), keine unter „Neue Notiz“ (`desktop-tauri/index.html`); auch die Fenster auf `docs/desktop.html` zeigen keine. | Snippet, Prüfliste, READMEs `webapp-vite` und `desktop-tauri` |
 | NAV-06 Kopf, ⌘K | 4/4 | Widerspruch zwischen Texten: NAV-06 „⌘K öffnet auch dort die Befehlspalette“, README `webapp-vite` „gehört zur Web-App mit Fenster“, NAV-09 nur „mit Fenster“; drei Web-Apps bauten keine. Verein: die festen Wörter „Apps / Projekte“ passen nicht zu einer Vereinsseite (Regel selbst, siehe Vorschläge). | README `webapp-vite` berichtigt; Snippet: Tabelle je Produktart |
-| WEB-09, WEB-11, STR-01, TEC-02 | 3–4/4 | Regel unklar für eine Web-App mit einer Hülle; die Vorlage baut keins davon; die Prüfungen urteilten verschieden (Verein: eingehalten, Web-Apps: verletzt). | README `webapp-vite` und `desktop-tauri` nennen die Lücke als Frage an den Inhaber |
+| WEB-09, WEB-11, STR-01, TEC-02 | je 3/4 | Vorlage `webapp-vite` baut keins davon (Verein: eingehalten, Web-Apps: verletzt). Die Quote folgt den Urteilen der Prüfungen: gezählt sind Verein und die drei Web-Apps; die Prüfung von Notizen wertete STR-01 und TEC-02 als nicht betroffen, obwohl beide auch für Desktop gelten. Den Start (STR-01) baut auch die Website-Vorlage nicht; ob die Lösung Verein ihn selbst einbaute, zeigen die Rohdaten, die nicht im Repository liegen. STR-01 nennt die App mit einer Hülle ausdrücklich, WEB-09 die App mit einer Hülle und privaten Zugangslinks, sonst jede Seite mit eigenem Titel; TEC-02 gilt für Web und Desktop. Offen ist nur, ob WEB-11 („jede Website“) eine Web-App betrifft und wie TEC-02 („keine Module“) zu einem Vite-Build passt. | README `webapp-vite`: WEB-09, STR-01 und TEC-02 als Lücke der Vorlage, WEB-11 und die Module als Frage an den Inhaber; READMEs `desktop-tauri` und `website-astro`: STR-01 als Lücke, in `desktop-tauri` auch TEC-02 |
 | TXT-03 Titel | 3/5 | Vorlage zeigt es falsch: „Diesen Eintrag gibt es nicht“, „Diese Ansicht gibt es nicht“ (`webapp-vite/src/strings.ts:134`, `:200`), dem Muster nach kopiert. | Snippet, Prüfliste, README `webapp-vite` |
 | ZUG-07 Barrierefreiheit | 3/4 | Vorlage zeigt einen Platzhalter, der auf der Seite „(ZUG-07)“ zeigt; die sechs Teile nennt nur `RULES.md`. | Snippet, Prüfliste, README `webapp-vite` |
 | BEL-09 Beispieldaten | 3/5 | Regel schwer zu finden: „neben dem Titel“ steht nur in der Langfassung; Snippet und Prüfliste nennen den Marker nicht. | Snippet, Prüfliste |
@@ -62,7 +66,7 @@ Probelösungen; die Ursache ist am Text des Guides belegt.
 Einzelfälle (je eine Lösung): AKT-04, AKT-08, BEL-01, BEL-06, BEL-08, DAT-01, DAT-07, DAT-15, DAT-17, DSK-03, DSK-06,
 DSK-12, FAR-07, HAL-04, NAV-07, NAV-09, RAU-01, RAU-05, STA-05, TEC-01, TXT-16, WEB-10, ZEI-13, ZUG-06, ZUG-08, ZUG-09.
 Davon in die READMEs übernommen, weil die Vorlage sie nahelegt: DSK-06, DSK-12, ZUG-06, ZUG-09 (`sbFit.refresh` nach
-dem Neuzeichnen), HAL-04 (`desktop-tauri`); BEL-01, ZUG-08 „übersprungen“, DAT-15, NAV-06/NAV-07, WEB-10
+dem Neuzeichnen), HAL-04 (`desktop-tauri`); BEL-01, ZUG-08 „übersprungen“, DAT-15, NAV-07, WEB-10
 (`website-astro`).
 
 ## Nicht als Verstoß gezählt, aber in jeder Web-App
@@ -72,20 +76,23 @@ dem Neuzeichnen), HAL-04 (`desktop-tauri`); BEL-01, ZUG-08 „übersprungen“, 
   Web-App ohne Fenster keinen Ort. Änderung: Tabelle je Produktart als erster Punkt des Snippets, Satz in `AGENTS.md` §3.
 - **Port:** die Tests aller Vorlagen nutzen außerhalb der CI einen Server, der auf ihrem Port schon läuft. Drei Agenten
   prüften so zuerst eine fremde App und hielten das für grün. Änderung: Snippet, Prüfliste, `templates/README.md`, alle
-  drei READMEs (`CI=1`).
+  drei READMEs: erst jeden anderen Server auf dem Port beenden, dann mit `CI=1` prüfen, damit ein belegter Port laut
+  scheitert.
 - **„Einen Beleg öffnen“ (ZUG-08):** drei Apps ohne Belege konnten die vierte feste Aufgabe nicht bauen (Vorschlag).
 
 ## Vorschläge an den Inhaber (Regeltexte nicht geändert)
 
 1. NAV-06: die festen Wörter „Apps“, „Projekte“, „Über“, „Kontakt“ und „DE / EN“ für Websites, die nicht vom Studio
    sind (Verein, Produktseite nur auf Deutsch).
-2. NAV-06 gegen NAV-09: gilt ⌘K in einer Web-App ohne Fenster? Wenn ja, NAV-09 um sie erweitern und der Vorlage die
-   Palette geben.
+2. NAV-09 um die Web-App ohne Fenster erweitern: NAV-06 verlangt ⌘K dort schon, NAV-09 nennt nur Apps mit Fenster.
+   Der Vorlage `webapp-vite` fehlt die Palette ohnehin.
 3. TXT-01 „nie wir“: eine Website, auf der eine Gruppe von sich spricht (Verein).
 4. ZUG-08: die vierte Aufgabe für ein Produkt ohne Belege.
 5. DAT-02 gegen EIN-03: ein Muster für Abhaklisten (Einkauf).
 6. AKT-08 gegen DSK-15 und EBE-05: ein gesichertes Schlagwort im Inspektor entfernen, Dialog oder Kurzmeldung.
-7. WEB-09, WEB-11, STR-01, TEC-02 für eine Web-App mit einer Hülle und eine Tauri-Oberfläche mit Vite (Module).
+7. WEB-11 für eine Web-App (die Regel nennt Websites) und TEC-02 „keine Module“ für eine Oberfläche, die Vite als Modul
+   baut (Web-App und Tauri). STR-01 regelt die App mit einer Hülle schon, WEB-09 die mit privaten Zugangslinks und
+   sonst jede Seite mit eigenem Titel; dort fehlt nur der Einbau in den Vorlagen.
 8. BEL-10 im Fenster: die Fenster auf `docs/desktop.html` zeigen die Zeile unter „Neue Notiz“ nicht.
 9. DAT-17 „In Karten öffnen“ in einem privaten Tagebuch (sendet den Ort an einen fremden Dienst).
 10. WEB-05 ohne Server (ein Formular, das eine E-Mail öffnet).

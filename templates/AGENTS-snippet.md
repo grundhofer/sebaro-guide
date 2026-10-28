@@ -11,9 +11,9 @@ This product uses the sebaro design system. Before building or changing any UI:
    | Kind | „Hell oder Dunkel“ | Language | ⌘K palette | „Farbton“ |
    |---|---|---|---|---|
    | website | button in the header | „DE / EN“ in the header; a page missing in the other language: grey code, no link (WEB-10) | no rule | footer, „Darstellung“ |
-   | web app without a window (also when used mostly on phones) | button in the header, never again in its settings view | „DE / EN“ in the header as a choice (WEB-10) | yes (NAV-06; the starter has none yet) | small settings view, with „Bewegung immer reduzieren“; footer without „Darstellung“ |
+   | web app without a window (also when used mostly on phones) | button in the header, never again in its settings view | „DE / EN“ in the header; a choice only when the app has no own address per language, otherwise links as on a website (WEB-10) | yes (NAV-06; the starter has none yet) | small settings view, with „Bewegung immer reduzieren“; footer without „Darstellung“ |
    | web app with a window, desktop app | menu „Darstellung“ and the settings view (DSK-05) | no rule; the desktop starter has no language choice | yes (NAV-09) | menu „Darstellung“ and settings |
-   | phone app (Android, iOS) | settings: System · Hell · Dunkel (MOB-04) | no rule | no rule | settings, next to light/dark |
+   | phone app (Android, iOS) | settings: „Wie das System“ · „Hell“ · „Dunkel“ (MOB-04) | no rule | no rule | settings, next to light/dark |
 
    The website header words „Apps“, „Projekte“, „Über“, „Kontakt“ are fixed (NAV-06); a site whose content does not
    fit them is a case for the owner, not for own words.
@@ -21,16 +21,21 @@ This product uses the sebaro design system. Before building or changing any UI:
    Easily missed (an agent test of 2026-10 found each of these in at least one of five solutions, most in several; see
    https://github.com/grundhofer/sebaro-guide/blob/main/docs/agenten-test-2026-10.md):
    - U+00A0 between number and unit, also in strings you rewrite (`200\u00a0%`, `2\u00a0kg`). It is invisible in an
-     editor: write it as `\u00a0` (or `&nbsp;` in markup) and grep for `[0-9] (%|kg|g|l|px|Min\.|Std\.)` (TXT-04).
+     editor: write it as `\u00a0` (or `&nbsp;` in markup). To find candidates, run
+     `grep -nE '[0-9] (%|Tage|Gläser|Min\.|Std\.|(kg|g|l|ml|km|px)\b)'` over the strings and check every hit by
+     hand: not every hit is a fault, and an empty result proves nothing (TXT-04).
    - Screen titles are short nouns, also the not-found view („Unbekannter Eintrag“, not „Diesen Eintrag gibt es
      nicht“; TXT-03).
    - `CHECKS.md` in the project root: every check you ran with command, date and exit code, and every check you
      could not run with the reason; „done“ only when all exit 0 (TEC-06).
-   - The data-path line under every action that stores or sends, also under „Sichern“ in a dialog and under the
-     primary action of a window: „Bleibt auf diesem Gerät.“ 8 px under it (BEL-10).
+   - The data-path line „<Auslöser>. Ziel: <wohin>.“ (caption, text-muted) directly under every action that stores
+     or sends, also under „Sichern“ in a dialog and under the primary action of a window (8 px under the primary
+     action); when the data stay on the device: „Bleibt auf diesem Gerät.“ Never in a tooltip (BEL-10, BEL-01).
    - „Beispieldaten“ as `sb-demo-marker` beside the title of each display with invented data (BEL-09).
-   - A toast only for a reversible result; never one that says nothing happened, never „Rückgängig“ without an undo
-     (EBE-05). Removing saved data asks in a dialog (AKT-08); only an entry of an unsaved form goes with an undo toast.
+   - A toast only for the reversible result of an action outside the primary action, or for a copy to the clipboard
+     from the palette or a menu that nothing else shows (no „Rückgängig“); never for the primary action's result,
+     never one that says nothing happened, never „Rückgängig“ without an undo (EBE-05). Removing saved data asks in a
+     dialog (AKT-08); only an entry of an unsaved form goes with an undo toast.
    - The accessibility page has the six parts Beschreibung, Bedienung, Erfüllung, Einschränkungen, Rückmeldung,
      Behörde and claims nothing no check ran; screen-reader tests that never ran stand as „offen“ (ZUG-07, ZUG-08).
    - Spacing comes from the parent (`sb-stack`, `sb-form-grid`), never a margin on a child; lengths only from tokens
@@ -46,14 +51,17 @@ This product uses the sebaro design system. Before building or changing any UI:
 4. Product id: `<id>`; its tile colour appears only in the sign tile.
 5. Before calling a screen done, walk https://github.com/grundhofer/sebaro-guide/blob/main/templates/screen-checklist.md
    in light and dark, at 390 px and 1440 px. A starter's `npm test` reuses a server already listening on its port
-   (`reuseExistingServer`): stop other previews first or run with `CI=1`, else you test another app.
+   (`reuseExistingServer`), so it would test another app: stop any other server on that port first, and run with
+   `CI=1`, which makes a busy port fail loudly instead.
 6. Light or dark per product kind (D75): a website has the labelled button „Hell oder Dunkel“ in its header; a phone
-   app offers System, Hell, Dunkel in its settings; a desktop app in the menu „Darstellung“ and in its settings view.
-   The second tone „Farbton: Kühl · Warm“ (D91, FAR-15): websites in the footer under „Darstellung“, apps next to
-   light/dark in their settings (`sb-tone.js`, `theme-init.js`). Websites print always light (`sb-print.js`, WEB-11).
+   app offers „Wie das System“, „Hell“, „Dunkel“ in its settings; a desktop app in the menu „Darstellung“ and in its
+   settings view. The second tone „Farbton: Kühl · Warm“ (D91, FAR-15): websites in the footer under „Darstellung“,
+   apps next to light/dark in their settings (`sb-tone.js`, `theme-init.js`). A web app without a window keeps
+   light/dark in its header and the tone in its small settings view (table in item 0). Websites print always light
+   (`sb-print.js`, WEB-11).
 7. The one primary action sits at the bottom of the area it acts on and comes last in every action group (D74, D83).
-   Desktop: command palette on ⌘K / Ctrl+K (D84); sidebar and inspector can be hidden, the content keeps ≥ 480 px
-   (D81). Focus ring 2 px (D85).
+   Desktop and web apps with a window: command palette on ⌘K / Ctrl+K (D84; a web app without a window: item 0);
+   sidebar and inspector can be hidden, the content keeps ≥ 480 px (D81). Focus ring 2 px (D85).
 8. Plan for several languages (D87): no UI string built into code; script messages follow `lang`.
 9. The round-6 components are decided (D91) and part of sebaro; copy them from the guide, do not rebuild them:
    category and mark (`sb-category--1…6`, `sb-mark`), signed numbers (`sb-signed`), board (`sb-board`), sticky group
@@ -65,7 +73,9 @@ This product uses the sebaro design system. Before building or changing any UI:
    (`SbSortableTable`) and the intro step (`SbIntroStep`). Settled with D92 and D93: the heatmap „heute“ is
    a 4 px cobalt frame with a 1 px ground joint inside, drawn by `sebaro.css` (legend „Rahmen: heute“), „Konflikt“
    always carries the warning glyph, sortable tables scroll sideways inside `sb-table-wrap` on phones and never stack
-   (DAT-11, STA-08, DAT-14). Confirmed with D93: the light/dark places of item 6 and ⌘K / Ctrl+K of item 7.
+   (DAT-11, STA-08, DAT-14). Confirmed with D93: the light/dark places of websites, phone and desktop apps in item 6
+   and ⌘K / Ctrl+K of desktop apps in item 7; the web app without a window follows NAV-06, whose places for its
+   settings view, light/dark and DE / EN are partly provisional.
    Decided with D94: the six agent additions to D91 as built (pane widths „Schmal · Normal · Breit“, sort heads 48 px
    with 32 px only in windows, the narrow board's position bar, the poster sentence, docs nav with „Übersicht“ and page
    counts, the pointer-only tab cross); for now no brand figure (BIL-05; a figure needs a new decision row).

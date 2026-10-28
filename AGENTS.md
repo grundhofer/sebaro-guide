@@ -53,11 +53,14 @@ in code reviews, commit messages and ADRs.
 10. **Honest content**: no claim without proof; outflows stay visible; demo data is labelled „Beispieldaten“. (HAL-03, BEL-01, BEL-09)
 
 Before you call a screen done, walk the checklist in [`templates/screen-checklist.md`](templates/screen-checklist.md).
-An agent test of 2026-10 ([`docs/agenten-test-2026-10.md`](docs/agenten-test-2026-10.md)) found these missed most
-often, besides the ten: U+00A0 lost in rewritten strings (TXT-04), no `CHECKS.md` (TEC-06), no data-path line under
-„Sichern“ in a dialog (BEL-10), a toast that says nothing happened (EBE-05), sentences as screen titles (TXT-03) and
-„Beispieldaten“ away from the title (BEL-09). Most came from the starters themselves; their READMEs now list these
-gaps under „Lücken der Vorlage“.
+An agent test of 2026-10 ([`docs/agenten-test-2026-10.md`](docs/agenten-test-2026-10.md)) found these missed in at
+least four of the solutions a rule applied to: no `CHECKS.md` (TEC-06, 5 of 5), U+00A0 between number and unit
+(TXT-04, part of rule 9, 4 of 5), toasts (EBE-05, part of rule 7, 4 of 4: three kept the starter's toast that says
+nothing happened, one used a toast for removing a saved tag), the data-path line (BEL-10, 4 of 5: missing under
+„Sichern“ in a dialog or under „Neue Notiz“ in a window) and the header (NAV-06, 4 of 4: the three web apps without a
+window had no ⌘K palette, where the guide's own texts disagreed; for the club website it was the fixed header words).
+The report's table lists the rules missed in two or three. Most came from the starters themselves; the READMEs of
+`website-astro`, `webapp-vite` and `desktop-tauri` now list these gaps under „Lücken der Vorlage“.
 
 ## 3 Building a product with sebaro
 

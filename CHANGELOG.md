@@ -16,12 +16,23 @@ Agenten, also eine Korrektur.
 
 - `templates/AGENTS-snippet.md`: als erster Punkt eine Tabelle je Produktart (wo Hell oder Dunkel, Sprache, Farbton
   und ⌘K stehen) und die Liste der leicht übersehenen Regeln (TXT-04, TXT-03, TEC-06, BEL-10, BEL-09, EBE-05, AKT-08,
-  ZUG-07, ZUG-08, RAU-07, ZUG-09); der Hinweis, dass `npm test` einen fremden Server auf seinem Port mitbenutzt.
+  ZUG-07, ZUG-08, RAU-07, ZUG-09); der Hinweis, dass `npm test` einen fremden Server auf seinem Port mitbenutzt: erst
+  jeden anderen Server beenden, dann mit `CI=1` prüfen, damit ein belegter Port laut scheitert.
 - `templates/screen-checklist.md`: Abschnitte „Before you start“ und „Done“ (`CHECKS.md`, eigener Testserver), Punkte zu
-  U+00A0, Titeln, Kurzmeldungen, Datenweg-Zeile, Beispieldaten und der Seite „Barrierefreiheit“.
-- READMEs von `webapp-vite`, `desktop-tauri` und `website-astro`: Abschnitt „Lücken der Vorlage“; der Widerspruch zu
-  NAV-06 bei ⌘K in `webapp-vite` ist berichtigt. `templates/README.md`, `AGENTS.md` und `docs/llms.txt` (aus
-  `tools/build.py`) verweisen auf Snippet, Vorlagen und Bericht.
+  U+00A0 (ein grep-Befehl als Suchhilfe, jeder Treffer von Hand geprüft), Titeln, Kurzmeldungen, Datenweg-Zeile,
+  Beispieldaten und der Seite „Barrierefreiheit“.
+- READMEs von `webapp-vite`, `desktop-tauri` und `website-astro`: Abschnitt „Lücken der Vorlage“. STR-01 (in allen
+  drei), WEB-09 und TEC-02 stehen dort als Regeln, die gelten und die die Vorlage noch nicht erfüllt. Als Frage an den
+  Inhaber bleibt nur, was die Regeln offen lassen: WEB-11 für eine Web-App, TEC-02 „keine Module“ in einem Vite-Build,
+  NAV-09 für die Web-App ohne Fenster und die festen Wörter von NAV-06 auf einer Website, die nicht vom Studio ist.
+  `templates/README.md`, `AGENTS.md` und `docs/llms.txt` (aus `tools/build.py`) verweisen auf Snippet, Vorlagen und
+  Bericht.
+- Berichtigt: der Widerspruch zu NAV-06 bei ⌘K in der README von `webapp-vite`; im Snippet nennen Punkt 6 und 7 die
+  Web-App ohne Fenster wie die Tabelle, und Punkt 9 sagt, dass D93 nur die Orte für Websites, Telefon- und
+  Desktop-Apps bestätigt hat; die Zeilen des Telefons heißen wie in MOB-04 „Wie das System“, „Hell“, „Dunkel“, auch in
+  der Prüfliste; EBE-05 und WEB-09 stehen mit ihren Bedingungen da; die Listen „Was die Vorlage zeigt“ in
+  `webapp-vite` und `desktop-tauri` verweisen auf ihre Lücken. In `webapp-vite/src/strings.ts` steht in
+  „vor 3&nbsp;Tagen“ jetzt das U+00A0 (TXT-04). Im Bericht nennt die Methode keinen eigenen Port mehr.
 
 ## 2.16.0 · 2026-10-28
 

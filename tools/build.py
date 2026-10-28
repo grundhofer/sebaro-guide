@@ -519,7 +519,7 @@ def llms_txt() -> str:
              f"- [Screen checklist]({REPO_URL}/blob/main/templates/screen-checklist.md): walk it before a screen is done; "
              "record every check in CHECKS.md (TEC-06)",
              f"- [Agent test 2026-10]({REPO_URL}/blob/main/docs/agenten-test-2026-10.md): the rules agents missed most "
-             "(TXT-04 U+00A0, TEC-06, BEL-10, EBE-05, TXT-03, BEL-09) and why",
+             "(TEC-06, TXT-04 U+00A0, EBE-05, BEL-10, NAV-06) and why",
              "", "## Pages", ""]
     for file, label, _icon, desc in PAGES:
         lines.append(f"- [{label}]({SITE_URL}{file}): {desc}")

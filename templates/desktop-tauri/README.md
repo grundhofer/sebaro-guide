@@ -40,6 +40,10 @@ werden eingecheckt, damit die Vorlage allein läuft. Das Fenster bekommt seinen 
 
 ## Was die Vorlage zeigt
 
+Wo die Vorlage eine dieser Regeln noch nicht ganz erfüllt, steht es unter „Lücken der Vorlage“: DSK-01 und DSK-06
+(Ziehfläche), ZUG-06 (Fokus nach „In den Papierkorb legen“), ZUG-09 (`sbFit.refresh`) und STA-07 (Fehler beim
+Sichern).
+
 | Teil | Regeln |
 |---|---|
 | Fenster: Titelleiste, Seitenleiste, Inhalt, Inspektor, Aktionszone über die ganze Breite, Dichte „window“ | DSK-01, EBE-01, EBE-08, RAU-06 |
@@ -93,20 +97,27 @@ hat gezeigt, was ein Agent übernimmt oder übersieht. Bau es so:
 
 - **Datenweg-Zeile:** unter „Neue Notiz“ fehlt „Bleibt auf diesem Gerät.“ (BEL-10 gilt für jede Aktion mit Datenweg,
   auch im Fenster; die Fenster auf `docs/desktop.html` zeigen sie auch nicht, eine Frage an die Werkstatt).
-- **Titelleiste:** `data-tauri-drag-region` fehlt an der Leiste (DSK-01, DSK-06); „Neues Fenster“ ist gesperrt, mehrere
-  Fenster baut die Vorlage nicht (DSK-12).
+- **Titelleiste:** `data-tauri-drag-region` fehlt an der Leiste (DSK-01, DSK-06: an `sb-window__titlebar`,
+  `sb-window__name` und `sb-window__path`, nie an Tasten), und `src-tauri/capabilities/default.json` erlaubt das
+  Ziehen nicht: ergänze `core:window:allow-start-dragging` (`core:default` enthält es nicht). Ohne beides lässt sich
+  das Fenster unter macOS nicht ziehen, weil die Leiste dort die Titelleiste ist. „Neues Fenster“ ist gesperrt,
+  mehrere Fenster baut die Vorlage nicht (DSK-12).
 - **Neu gezeichneter Text:** wer den Baum, die Reiter oder den Inspektor neu schreibt, ruft danach
   `window.sbFit?.refresh(<Element>)`; sonst verlieren Wörter bei 200&nbsp;% ihren Trennstrich („Papierko|rb“, ZUG-09).
 - **Fokus nach einem Dialog:** nach „In den Papierkorb legen“ steht der Fokus auf einem sinnvollen Ziel, etwa der
   nächsten Notiz im Baum, nie auf `<body>` (ZUG-06).
 - **Fehler beim Sichern:** schlägt `localStorage` oder ein Rust-Befehl fehl, sagt die Aktionszone das als Satz; nie
   „Alles gesichert.“ nach einem verschluckten Fehler (HAL-04, STA-07).
-- **Markup ohne Skript:** die Oberfläche ist ein Modul (`type="module"`, TEC-02 verbietet Module); ob TEC-02 für eine
-  Tauri-Oberfläche mit Vite gilt, entscheidet der Inhaber.
+- **Start mit der Kachel:** STR-01 gilt auf jeder Plattform; die Vorlage baut ihn noch nicht ein (weder
+  `data-sb-start` noch `sb-start.js`). Bau ihn ein: die 96-px-Kachel wandert in die Kachel der Titelleiste.
+- **Markup ohne Skript:** TEC-02 gilt auch hier (Plattformen `web` und `desktop`) und verlangt klassische Skripte,
+  keine Module; die Oberfläche ist aber ein Modul (`type="module"`). Das ist eine Lücke der Vorlage. Wie TEC-02 zu
+  einem Vite-Build passt, ist eine Frage an den Inhaber; frag mit der ID.
 - **`CHECKS.md`:** TEC-06 verlangt sie, mit jedem Befehl, Datum und Exit-Code, auch dem nicht gelaufenen
   `tauri build` mit Grund.
-- **Port 4174:** `npm test` nutzt einen Server, der dort schon läuft (`reuseExistingServer` außerhalb der CI); beende
-  andere Vorschauen oder starte mit `CI=1`.
+- **Port 4174:** `npm test` nutzt einen Server, der dort schon läuft (`reuseExistingServer` außerhalb der CI). Beende
+  zuerst jeden anderen Server auf dem Port und starte mit `CI=1`: dann bricht ein belegter Port den Lauf laut ab,
+  statt eine fremde App zu prüfen.
 
 ## Nicht geprüft
 

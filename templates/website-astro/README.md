@@ -100,9 +100,12 @@ hat gezeigt, was ein Agent übernimmt oder übersieht. Bau es so:
   `sb-sticky.js` (DAT-15).
 - **Vorschaubilder** zeigen die Dachmarke (`product: "studio"`), solange das Produkt kein eigenes Zeichen hat (WEB-09,
   ZEI-03); ein echtes Produkt setzt seine Kachel und seinen Namen.
+- **Start mit der Kachel:** STR-01 gilt auf jeder Plattform; die Vorlage baut ihn noch nicht ein (weder
+  `data-sb-start` noch `sb-start.js`). Bau ihn ein: im Web nur beim ersten Aufruf je Browser-Tab und nur bis `load`.
 - **`CHECKS.md`:** TEC-06 verlangt sie, mit jedem Befehl, Datum und Exit-Code.
-- **Port:** `npm test` nutzt einen Server, der auf seinem Port schon läuft (`reuseExistingServer` außerhalb der CI);
-  beende andere Vorschauen oder starte mit `CI=1`.
+- **Port 4321:** `npm test` nutzt einen Server, der dort schon läuft (`reuseExistingServer` außerhalb der CI). Beende
+  zuerst jeden anderen Server auf dem Port und starte mit `CI=1`: dann bricht ein belegter Port den Lauf laut ab,
+  statt eine fremde App zu prüfen.
 
 ## Für Agenten
 

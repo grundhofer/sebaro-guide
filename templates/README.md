@@ -30,15 +30,17 @@ dark at 100 % and real 200 % text with axe. CI: `.github/workflows/templates.yml
    public/sebaro --strict`; Android → copy `android-compose/`, which takes sebaro from the Maven package `sebaro-compose`
    (read access needed, see its README); Tauri (own export)/macOS/iOS → `export_system.py` in sebaroDesign (see [AGENTS.md §4](../AGENTS.md)).
 3. **Paste the agent snippet** into the project's `AGENTS.md`, fill in the export path and the product id, and name the
-   product kind (its first item says where light/dark, language, „Farbton“ and ⌘K go). Read the starter's section
-   „Lücken der Vorlage“: what the starter itself does not do yet, so it is never copied as a pattern.
+   product kind (its first item says where light/dark, language, „Farbton“ and ⌘K go). Read what the starter itself
+   does not do yet, so it is never copied as a pattern: the section „Lücken der Vorlage“ in `website-astro/`,
+   `webapp-vite/` and `desktop-tauri/`, „Bekannte Grenzen“ in `android-compose/` (the agent test did not cover it).
 4. **Build screens from recipes**: `docs/app.html`, `docs/ios.html`, `docs/web.html`, `docs/desktop.html`; components from
    `docs/bauteile.html`; data from `docs/daten.html`.
 5. **Review with the checklist** in both modes; record exceptions with `design-exception.md`. In a starter, `npm test`
    runs the automatic part (both modes, 100 % and 200 % text, the screen asked for with its heading and open overlays,
    axe, no sideways scroll, no cut text or control value, CSP; no word written into markup, no length without a token).
    `npm test` reuses a server already listening on its port outside CI: with another preview running it tests that
-   app, so stop it or run `CI=1 npm test`. Write what ran into `CHECKS.md` (TEC-06).
+   app. Stop any other server on the port first and run `CI=1 npm test`, which makes a busy port fail loudly instead.
+   Write what ran into `CHECKS.md` (TEC-06).
 
 An agent test of 2026-10 built five small products from these starters with only the snippet, `llms.txt`, `RULES.md`
 and the guide pages; what agents missed and why is in [`../docs/agenten-test-2026-10.md`](../docs/agenten-test-2026-10.md).

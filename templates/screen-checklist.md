@@ -7,8 +7,9 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
 - [ ] Product kind named (website, web app without a window, web app with a window or desktop, phone app); light/dark,
       language, „Farbton“ and ⌘K sit where that kind puts them (table in `AGENTS-snippet.md`; NAV-06, NAV-09, MOB-04,
       DSK-05). A brief that asks otherwise is a question for the owner with the rule id, not a reason to move them
-- [ ] Every string you wrote or rewrote keeps U+00A0 between number and unit (`\u00a0` in code, `&nbsp;` in markup);
-      `grep -nE '[0-9] (%|kg|g|l|ml|km|Min\.|Std\.)'` over the strings finds nothing (TXT-04)
+- [ ] Every string you wrote or rewrote keeps U+00A0 between number and unit (`\u00a0` in code, `&nbsp;` in markup)
+      (TXT-04). Search aid, not a pass condition: `grep -nE '[0-9] (%|Tage|Gläser|Min\.|Std\.|(kg|g|l|ml|km|px)\b)'`
+      over the strings; check every hit by hand (not every hit is a fault, and an empty result proves nothing)
 
 ## Colour and hierarchy
 - [ ] Cobalt only for current place, links and focus; lime only for the one primary action (FAR, AKT)
@@ -41,8 +42,9 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
 - [ ] Toast only for a reversible result outside the primary action, fixed duration, never for errors, never to say
       that nothing happened; a „Rückgängig“ shows only when it undoes something (EBE-05). Removing saved data asks in a
       dialog; only an entry of an unsaved form goes with an undo toast (AKT-07, AKT-08)
-- [ ] Every action that stores or sends has its data-path line 8 px under it, also „Sichern“ in a dialog and the
-      primary action of a window; local data: „Bleibt auf diesem Gerät.“ (BEL-10)
+- [ ] Every action that stores or sends has its data-path line „<Auslöser>. Ziel: <wohin>.“ directly under it (8 px
+      under the primary action), also „Sichern“ in a dialog and the primary action of a window; local data: „Bleibt
+      auf diesem Gerät.“ (BEL-10)
 - [ ] Motion only in answer to an action: new content enters from below (8 px, 200 ms); only a fade with reduced
       motion / „Bewegung immer reduzieren“ (BEW)
 - [ ] The start shows the tile only while really loading and moves it into the header; on the web only on the first
@@ -55,7 +57,7 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
 
 ## Light or dark (D75)
 - [ ] Website: the labelled button „Hell oder Dunkel“ in the header, after the navigation and the language switch (NAV, WEB)
-- [ ] Phone app: System / Hell / Dunkel in the settings, no button in the app bar (MOB)
+- [ ] Phone app: „Wie das System“ · „Hell“ · „Dunkel“ in the settings, no button in the app bar (MOB-04)
 - [ ] Desktop app: menu „Darstellung“ and the settings view (DSK)
 - [ ] Tone „Farbton: Kühl · Warm“: websites in the footer under „Darstellung“, apps next to light/dark in the
       settings; only grounds, text and lines turn warm, cobalt, lime, status and tiles stay (FAR-15)
@@ -122,10 +124,10 @@ Rule ids in brackets; details at https://grundhofer.github.io/sebaro-guide/regel
 - [ ] The page „Barrierefreiheit“ has Beschreibung, Bedienung, Erfüllung, Einschränkungen, Rückmeldung and Behörde, shows
       no rule ids or instructions to users, and lists screen-reader and device tests that never ran as „offen“ (ZUG-07,
       ZUG-08)
+- [ ] Website footer: „Impressum“, „Datenschutz“, „Barrierefreiheit“ always; „GitHub“ only with a public repository (WEB-03, D98)
 
 ## Done
 - [ ] `CHECKS.md` in the project root names every check with command, date and exit code, and every check that could
       not run with its reason; the screen counts as done only when all ran and exit 0 (TEC-06)
-- [ ] A starter's `npm test` ran against this app: no other preview was listening on its port (it reuses one), or it
-      ran with `CI=1`
-- [ ] Website footer: „Impressum“, „Datenschutz“, „Barrierefreiheit“ always; „GitHub“ only with a public repository (WEB-03, D98)
+- [ ] A starter's `npm test` ran against this app: any other server on its port was stopped first (outside CI the
+      tests reuse one), and it ran with `CI=1`, which makes a busy port fail loudly

@@ -60,6 +60,9 @@ Danach `npm test` und die Fotos in beiden Modi ansehen. Die kopierten Dateien ge
 
 ## Was die Vorlage zeigt (Regeln)
 
+Wo die Vorlage eine dieser Regeln noch nicht ganz erfüllt, steht es unter „Lücken der Vorlage“: NAV-06 (⌘K), BEL-10,
+RAU-07, EBE-05, TXT-04 und ZUG-08.
+
 - Kopf einer Web-App ohne Fenster mit „Einstellungen“, DE / EN als Auswahl ohne Neuladen und „Hell oder Dunkel“; Fuß mit
   Impressum, Datenschutz, Barrierefreiheit und GitHub: NAV-06, NAV-07, WEB-02, WEB-03, WEB-10, AKT-09, TEC-10
 - Farbton und Bewegung in den Einstellungen: FAR-15, BEW-04; Laden im Kopf: WEB-01
@@ -106,22 +109,31 @@ haben gezeigt, was Agenten aus der Vorlage übernehmen, obwohl es keiner Regel f
   keine Erlaubnis, sie wegzulassen.
 - **Kurzmeldung „Alle Beispiele sind schon da.“** meldet, dass nichts geschah, und zeigt ein „Rückgängig“, das nichts tut:
   `action.hidden` in `src/main.ts` setzt sich gegen `display` von `.sb-toast__action` in `sebaro.css` nicht durch.
-  Eine Kurzmeldung gibt es nur für ein umkehrbares Ergebnis (EBE-05); eine Aktion ohne Rückgängig nimm aus dem DOM.
+  Eine Kurzmeldung gibt es nur für das umkehrbare Ergebnis einer Aktion außerhalb der Hauptaktion (EBE-05); eine
+  Aktion ohne Rückgängig nimm aus dem DOM.
 - **Titel als Satz:** „Diesen Eintrag gibt es nicht“ und „Diese Ansicht gibt es nicht“ in `src/strings.ts`. Bildschirmtitel
   sind kurze Substantive (TXT-03), etwa „Unbekannter Eintrag“; der Satz gehört in den Text darunter.
 - **Barrierefreiheit** ist ein Platzhalter, der auf der Seite „(ZUG-07)“ zeigt. Ein Produkt schreibt die sechs Teile
   Beschreibung, Bedienung, Erfüllung, Einschränkungen, Rückmeldung, Behörde (ZUG-07) und nennt nie gelaufene
   Screenreader-Tests „offen“ (ZUG-08).
-- **Datenweg-Zeile** fehlt unter „Sichern“ im Dialog „Änderungen sichern?“ (BEL-10), und `src/app.css` setzt den Abstand von
-  `.sb-action-hint` in `sb-view--wide` auf 0 und richtet ihn ans Ende aus; BEL-10 will ihn 8&nbsp;px unter der Aktion.
+- **Datenweg-Zeile** fehlt unter „Sichern“ im Dialog „Änderungen sichern?“ (BEL-10). `src/app.css` setzt den Abstand von
+  `.sb-action-hint` in `sb-view--wide` auf 0 und richtet die Zeile ans Ende aus. Unter 640&nbsp;px Ansichtsbreite steht
+  sie darum bündig unter der Aktion; erst ab 640&nbsp;px gibt der Zeilenabstand der Leiste 8&nbsp;px. BEL-10 will sie
+  8&nbsp;px unter der Hauptaktion und zentriert.
 - **Abstand am Kind:** `.app-view-title` setzt `margin-block-start`; den Abstand trägt das Elternteil (`sb-stack`,
   RAU-07). Kopier das Muster nicht für eigene Klassen.
 - **U+00A0 ist unsichtbar.** `src/strings.ts` schreibt es als Zeichen; wer einen Satz neu tippt, verliert es („200 %“).
   Schreib `\u00a0` (TXT-04).
-- **Nicht eingebaut, Geltung offen:** Vorschaubild je Seite (WEB-09), `sb-print.js` (WEB-11), der Start mit der Kachel
-  (STR-01) und Markup ohne Skript (TEC-02, die Ansichten rendert ein Modul). Diese Regeln sind für Websites oder alle
-  Plattformen geschrieben; ob sie für eine Web-App mit einer Hülle gelten, entscheidet der Inhaber. Frag mit den IDs.
+- **Nicht eingebaut, obwohl die Regeln gelten:** der Start mit der Kachel (STR-01 gilt auf jeder Plattform, auch für eine
+  App mit einer Hülle: `index.html` hat weder `data-sb-start` noch `sb-start.js`), das Vorschaubild der Startseite
+  (WEB-09: eine App mit einer Hülle und privaten Zugangslinks braucht nur das Bild der Startseite; sonst bekommt jede
+  Seite mit eigenem Titel ihr eigenes) und Markup, das ohne Skript den richtigen Zustand zeigt
+  (TEC-02 gilt für `web`; die Ansichten rendert hier ein Modul). Bau STR-01 und WEB-09 ein.
+- **Frage an den Inhaber:** ob WEB-11 („Drucke jede Website hell“, `sb-print.js`) für eine Web-App gilt, und wie
+  TEC-02 („klassische Skripte, keine Module“) zu einem Vite-Build passt, der die Oberfläche als Modul ausliefert. Frag
+  mit den IDs, statt es selbst zu entscheiden.
 - **`CHECKS.md` fehlt.** TEC-06 verlangt sie in jedem Produkt: jede Prüfung mit Befehl, Datum und Exit-Code, jede nicht
   gelaufene mit Grund.
 - **Port 4173:** `playwright.config.ts` nutzt einen Server, der dort schon läuft (`reuseExistingServer` außerhalb der CI).
-  Läuft die Vorschau eines anderen Projekts, prüft `npm test` dieses. Beende andere Vorschauen oder starte mit `CI=1`.
+  Läuft die Vorschau eines anderen Projekts, prüft `npm test` dieses. Beende zuerst jeden anderen Server auf dem Port und
+  starte mit `CI=1`: dann bricht ein belegter Port den Lauf laut ab, statt eine fremde App zu prüfen.

@@ -329,7 +329,7 @@ const de = {
     relative: "Relative Zeit",
     relJustNow: (t: string) => `vor 5 Min. (${t})`,
     relYesterday: (t: string) => `gestern, ${t}`,
-    relOlder: (d: string) => `vor 3 Tagen, am ${d}`,
+    relOlder: (d: string) => `vor 3 Tagen, am ${d}`,
     justNow: "eben",
     older: "älter",
     span: "Zeitspanne",
