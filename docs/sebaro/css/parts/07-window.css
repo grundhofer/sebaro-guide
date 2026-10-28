@@ -314,6 +314,7 @@ dialog.sb-command-palette { margin-block: min(12vh, 96px) auto; max-block-size: 
   border: var(--sb-elevation-overlay-border-width) solid var(--sb-elevation-overlay-border-color); border-radius: var(--sb-radius-container);
   background: var(--sb-elevation-overlay-surface); color: var(--sb-color-text); box-shadow: var(--sb-elevation-overlay-shadow);
 }
+.sb-completion[hidden], .sb-completion__empty[hidden] { display: none; }   /* hidden closes the list (its display: block outweighs the UA's [hidden]); an option's sb-row[hidden] is above */
 .sb-completion .sb-row[aria-selected="true"] { font-weight: var(--sb-type-body-weight); }
 .sb-completion__hit { font-weight: var(--sb-type-body-strong-weight); }
 .sb-completion__empty {

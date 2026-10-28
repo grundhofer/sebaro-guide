@@ -233,4 +233,4 @@ One line per finding (`FAIL  missing in target: …`, `FAIL  edited in target: �
 
 ## Not exported
 
-- **demo-only files in demo/assets/**: `demo.css`: specimen chrome and phone stand-ins; `pages.css`: reference page layout
+- **demo-only files in demo/assets/**: `demo-completion.js`: the keys of the specimen „Feld mit Vorschlägen“; sebaro ships no completion script, the app or its editor owns the keys (spec/02 §4.26); `demo.css`: specimen chrome and phone stand-ins; `pages.css`: reference page layout

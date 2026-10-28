@@ -1549,7 +1549,7 @@ button.sb-side-nav__item {
 /* the input dialog (D102 (38), spec/02 §4.6): an sb-field under the title (and its text), the submit verb a secondary action */
 .sb-dialog__text + .sb-field { margin-block-start: var(--sb-space-4); }
 /* a failure without a field (D102 (23); spec/02 §4.6): above the actions, built like the action zone's message: the
-   error glyph in danger, the sentence in one span, its „Details“ after it; empty and hidden until the dialog writes */
+   error glyph in danger, the sentence in one span, its „Details“ after it; empty and collapsed (not hidden) until the dialog writes */
 .sb-dialog__message {
   display: flex; align-items: flex-start; gap: var(--sb-space-1); margin: var(--sb-space-4) 0 0;
   font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); color: var(--sb-color-text);
