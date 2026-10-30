@@ -2,9 +2,9 @@
   "$comment": "written by tools/sync_from_design.py; do not edit",
   "system": "sebaro",
   "product": "studio",
-  "sebaroDesignCommit": "2560ef344b5290f8c20c28c5f59871d68b684819",
+  "sebaroDesignCommit": "b112f4520d35ad2d77670d1f0dbf5c757940d0e9",
   "sebaroDesignUncommitted": false,
-  "exportTool": "export_system.py 1.13.0",
+  "exportTool": "export_system.py 1.14.0",
   "contracts": {
     "tokens": "1.10",
     "palette": "2.6",
