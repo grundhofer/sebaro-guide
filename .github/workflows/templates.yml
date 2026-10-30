@@ -4,6 +4,10 @@
 # with 0 violations, no sideways scroll, no cut text, no console or Content-Security-Policy error; keyboard paths).
 # The desktop job also builds the Tauri app on Linux (debug, no bundle). Screenshots of every run are uploaded.
 # Each template's copy of the export is a snapshot: a guide sync does not touch it; update it with npm run sebaro:sync.
+# The iOS template (ios-swiftui, D112) runs on a GitHub-hosted macOS runner: its copy of the iOS export checked against
+# its record (tools/sebaro-verify.py), the SwiftUI lint, the test judge's regression cases, swift build of the local
+# package, the app built for the iOS simulator, and every test in a simulator (screenshots of every screen light and
+# dark, default size and AX5, 393 and 320 pt, with the text check; behaviour). Its export copy is updated with tools/sebaro-sync.sh (needs the workshop).
 name: templates
 on:
   push:
@@ -107,5 +111,42 @@ jobs:
         with:
           name: desktop-tauri-screens
           path: templates/desktop-tauri/test-results/
+          retention-days: 7
+          if-no-files-found: ignore
+
+  ios-swiftui:
+    runs-on: macos-latest
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: templates/ios-swiftui
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - name: Xcode and simulators on the runner
+        run: |
+          xcodebuild -version
+          xcrun simctl list runtimes
+      - name: sebaro export unchanged (every file against sebaro-export.json, nothing else in the folder)
+        run: python3 tools/sebaro-verify.py
+      - name: SwiftUI lint (no system look, no raw colours or sizes, no shadows, pills or system fonts)
+        run: ./tools/lint-sebaro-ios.sh
+      - name: Test judge and runner regression cases (bundle Failed, incomplete log, unexpected exit, timeout …)
+        run: ./tools/test-result-fixtures/check.sh
+      - name: Local package builds (swift build)
+        run: swift build --package-path SebaroDesign --scratch-path "$RUNNER_TEMP/spm"
+      - name: App builds for the iOS simulator
+        run: |
+          xcodebuild build -project Musterapp.xcodeproj -scheme Musterapp \
+            -destination 'generic/platform=iOS Simulator' -derivedDataPath "$RUNNER_TEMP/dd-build" \
+            CODE_SIGNING_ALLOWED=NO
+      - name: Tests in a simulator (screens light/dark, default and AX5, 393 and 320 pt, text check; behaviour)
+        run: ./tools/run-tests.sh
+      - if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ios-swiftui-screens
+          path: |
+            templates/ios-swiftui/build/test/shots/
+            templates/ios-swiftui/build/test/xcodebuild.log
           retention-days: 7
           if-no-files-found: ignore

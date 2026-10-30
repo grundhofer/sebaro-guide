@@ -1,0 +1,28 @@
+Command line invocation:
+    xcodebuild test -project Musterapp.xcodeproj -scheme Musterapp -destination id=SIM -resultBundlePath build/test/Tests.xcresult
+
+Testing started
+Test Suite 'All tests' started at 2026-10-30 13:14:56.982.
+Test Suite 'MusterappTests.xctest' started at 2026-10-30 13:14:56.983.
+Test Suite 'BehaviourTests' started at 2026-10-30 13:14:56.983.
+Test Case '-[MusterappTests.BehaviourTests testEntriesSurviveASecondStoreOnTheSameFile]' started.
+Test Case '-[MusterappTests.BehaviourTests testEntriesSurviveASecondStoreOnTheSameFile]' passed (0.102 seconds).
+Test Case '-[MusterappTests.BehaviourTests testSearchWithoutHitSaysSo]' started.
+Test Case '-[MusterappTests.BehaviourTests testSearchWithoutHitSaysSo]' passed (0.512 seconds).
+Test Suite 'BehaviourTests' passed at 2026-10-30 13:14:57.600.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.614 (0.617) seconds
+Test Suite 'ScreenshotTests' started at 2026-10-30 13:14:57.601.
+Test Case '-[MusterappTests.ScreenshotTests testList]' started.
+Test Case '-[MusterappTests.ScreenshotTests testList]' passed (20.410 seconds).
+Test Suite 'ScreenshotTests' passed at 2026-10-30 13:15:18.020.
+	 Executed 1 test, with 0 failures (0 unexpected) in 20.410 (20.412) seconds
+Test Suite 'MusterappTests.xctest' passed at 2026-10-30 13:15:18.021.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 21.024 (21.030) seconds
+Test Suite 'All tests' passed at 2026-10-30 13:15:18.021.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 21.024 (21.031) seconds
+2026-10-30 13:15:28.336 xcodebuild[92692:51025987] [MT] IDETestOperationsObserverDebug: 31.851 sec, +31.851 sec -- end
+
+Test session results, code coverage, and logs:
+	build/test/Tests.xcresult
+
+** TEST SUCCEEDED **

@@ -1,0 +1,13 @@
+{
+  "devicesAndConfigurations": [],
+  "environmentDescription": "Musterapp \u00b7 fixture",
+  "expectedFailures": 0,
+  "failedTests": 0,
+  "passedTests": 3,
+  "result": "Passed",
+  "skippedTests": 0,
+  "startTime": 1793362460.606,
+  "statistics": [],
+  "testFailures": [],
+  "finishTime": 1793362922.337
+}

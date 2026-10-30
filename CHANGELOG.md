@@ -11,6 +11,42 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+## 2.18.0 · 2026-10-30
+
+Neue Startvorlage für iOS (D112: die Vorlage trägt den gefilterten iOS-Export). Keine Regel ist neu oder geändert. Eine neue Vorlage ist eine Nebenversion.
+
+- Neue Vorlage `templates/ios-swiftui/`: eine kleine iOS-App „Musterapp“ (Swift 6, SwiftUI, ab iOS 17,
+  `de.example.musterapp`), die sebaro nur aus dem lokalen Swift-Paket `SebaroDesign/` nimmt: dem gefilterten
+  iOS-Export der Werkstatt (D112, ohne Produkt-ID und ohne die nicht veröffentlichten Produkte), als Schnappschuss;
+  Werkzeug, Werkstatt-Commit und Token-Vertrag stehen nur in seiner `sebaro-export.json`, `tools/sebaro-verify.py`
+  zeigt sie an und prüft die Kopie ohne Werkstatt, `tools/sebaro-sync.sh` holt den Export mit einem
+  Werkstatt-Checkout und der privaten Ausschlussliste neu.
+  Sie zeigt sebaros untere Leiste, Liste mit Suche, leerem Zustand, Kontextmenü „Ausblenden“ und Kurzmeldung mit
+  „Rückgängig“, Detail mit Hauptaktion, Formular-Sheet mit „(optional)“, „Titel fehlt.“, Minus und Plus und der
+  Uhrzeit in halben Stunden, Einstellungen (Hell oder Dunkel, Farbton, Bewegung, Sprache), einen Daten-Bildschirm mit
+  jeder Datenart und jedem Diagramm und die drei Dialoge (Löschen, endgültiger Schritt mit der 45°-Kante ohne
+  Papierkorb, „Abbrechen“ · „Verwerfen“ · „Sichern“). Jedes Wort steht deutsch und englisch in
+  `Localizable.xcstrings`, die Sprache wechselt in der App ohne Neustart, `Info.plist` nennt `de` als
+  Entwicklungsregion (D111); jede Zahl steht mit U+00A0 vor ihrer Einheit, auch „60&nbsp;%“ im Englischen, Tag und
+  Monat sind verbunden (TXT-04). Die Einträge bleiben in einer JSON-Datei in Application Support, von der
+  Gerätesicherung ausgenommen, mit Formatversion: Eine ältere wird überführt, eine neuere oder unlesbare Datei bleibt
+  Byte für Byte, wie sie ist, und die App sagt ruhig, dass die Einträge auf dem Gerät bleiben. Das Xcode-Projekt ist von Hand geschrieben, mit synchronisierten Ordnern (kein Generator nötig),
+  `DEVELOPMENT_TEAM` leer; das App-Icon ist ein neutraler Platzhalter (ZEI-11). Geprüft mit dem Bau für den Simulator,
+  `swift build` des Pakets, `tools/lint-sebaro-ios.sh` (die Regeln I1–I8 aus spec/12 §14 und fünf eigene) und
+  XCTest im Simulator: jeder Bildschirm und Dialog hell und dunkel, Standardgröße und AX5, 393 × 852 und
+  320 × 568&nbsp;pt, jeder Text über den Bedienungshilfen-Baum auf Abschneiden geprüft (mit Fällen, die fehlschlagen
+  müssen), dazu Speichern, Überführen und Ablehnen der Datei, U+00A0 im Katalog und in der Ausgabe, Sprachwechsel und
+  die Frage bei ungesicherten Änderungen. `tools/run-tests.sh` lässt nur das bekannte Hängen von xcodebuild nach
+  einem vollständigen Lauf als Lauf gelten, eine Zeitüberschreitung davor schlägt fehl; `tools/test-result.py`
+  verlangt „Passed“ im Ergebnisbündel, den vollständigen Lauf im Protokoll und keinen Absturz, Neustart oder Fehler
+  der Umgebung; beides prüfen Regressionsfälle in `tools/test-result-fixtures/`. Nicht auf einem Gerät und nicht
+  mit VoiceOver selbst. Die Lücken der Vorlage (Kopfleiste ohne Kachel, Druckzustand der Zeile, der gekürzte Titel der
+  Systemleiste bei AX5, ausgelassene Beschriftungen des Balkendiagramms im Baum, die Kurzmeldung bei AX5 auf 320&nbsp;pt) stehen in ihrem README.
+- `.github/workflows/templates.yml`: neuer Job `ios-swiftui` auf `macos-latest` (von GitHub gestellt), der die Kopie
+  des Exports prüft, das Lint-Skript, die Regressionsfälle des Testrichters, `swift build` und den Bau ausführt und die
+  Tests mit `tools/run-tests.sh` laufen lässt; die Bilder lädt er hoch.
+- `templates/README.md` nennt die Vorlage.
+
 ## 2.17.0 · 2026-10-28
 
 Abgleich mit dem Werkstatt-Commit `2560ef3`: die Entscheidung D111 des Inhabers und die Lücken, die novalis und die

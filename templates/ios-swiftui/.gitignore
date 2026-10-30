@@ -1,0 +1,8 @@
+# what builds, tests and Xcode write; tools/run-tests.sh writes into build/
+build/
+DerivedData/
+*.xcresult
+xcuserdata/
+.swiftpm/
+.build/
+.DS_Store

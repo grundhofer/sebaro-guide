@@ -1,0 +1,16 @@
+# case | expected exit | arguments of test-result.py | a line the output must contain | what it shows
+passed | 0 | --exit-status 0 | test-result: passed | a complete passing run with its bundle
+stopped-after-run | 0 | --stopped-after-run | test-result: passed | the known hang: the run completed and passed, xcodebuild was stopped before it wrote the bundle
+no-bundle | 1 | --exit-status 0 | no readable result bundle | xcodebuild exited by itself without a bundle
+bundle-failed-no-failures | 1 | --exit-status 0 | not „Passed“ | the bundle says Failed but counts no failure
+bundle-without-finish | 1 | --exit-status 0 | no finish time | the bundle has no finish time
+incomplete-log | 1 | --exit-status 0 | the run did not complete | the log stops in the middle of the run
+incomplete-log-stopped | 1 | --stopped-after-run | the run did not complete | stopped, but the log never showed the end of the run
+unexpected-exit | 1 | --exit-status 0 | unexpected exit of the test host | the test host crashed and was restarted; the totals leave the crashed test out
+infrastructure | 1 | --exit-status 65 | an infrastructure failure | the test runner never started
+skipped | 1 | --exit-status 0 | skipped test(s) | a skipped test
+count-mismatch | 1 | --exit-status 0 | the result bundle counts 3 tests, the log 4 | the bundle counts fewer tests than the log
+exit-status | 1 | --exit-status 65 | exit status 65 | xcodebuild ended with an error after a passing run
+failed | 1 | --exit-status 65 | says „failed“ | a failing test
+stopped-partial-bundle | 0 | --stopped-after-run | the result bundle is not complete | the known hang, stopped while xcodebuild was writing the bundle (a folder without Info.plist)
+partial-bundle | 1 | --exit-status 0 | xcresulttool could not read the result bundle | xcodebuild exited by itself and left a bundle without Info.plist

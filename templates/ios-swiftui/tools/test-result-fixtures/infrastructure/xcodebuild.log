@@ -1,0 +1,7 @@
+Command line invocation:
+    xcodebuild test
+
+Testing failed:
+	Test runner exited before starting test execution.
+
+** TEST EXECUTE FAILED **

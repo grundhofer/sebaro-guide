@@ -19,7 +19,7 @@ layers, motion, behaviour, components, data display, writing, signs, platforms, 
 | how to show any kind of data | `docs/daten.html` |
 | full example: website / phone app / desktop app | `docs/web.html`, `docs/app.html`, `docs/desktop.html` |
 | the four platform pages at a glance, what differs per platform | `docs/plattformen.html` (the header entry „Plattformen“) |
-| iOS (SwiftUI): what differs on the iPhone | `docs/ios.html`; the SwiftUI package comes with the workshop export (`--target ios`, §4), its spec is sebaroDesign `systems/sebaro/spec/12-platform-ios.md` (private) |
+| iOS (SwiftUI): what differs on the iPhone | `docs/ios.html`; the starter `templates/ios-swiftui/` carries the filtered iOS export as a local Swift package (D112); otherwise the SwiftUI package comes with the workshop export (`--target ios`, §4), its spec is sebaroDesign `systems/sebaro/spec/12-platform-ios.md` (private) |
 | why it is the way it is | `docs/gedanken.html` |
 | what waits for the owner's choice, is open, comes later or is done | `docs/ausblick.html` |
 | what changed between versions | [`CHANGELOG.md`](CHANGELOG.md) (every rule change by id) |

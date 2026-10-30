@@ -40,7 +40,7 @@ Groups
          the images were rendered (render again: node tools/og.mjs, then tools/build.py)
   TERM   retired names do not appear in pages, fragments, rules or docs (D71: only "sebaro Sans" and "sebaro Mono");
          the font licence files in docs/sebaro/ keep the authors' copyright as the OFL requires, and so do the copies of
-         the export in the starter templates (the three exact paths of TEMPLATE_EXPORTS, not scanned; see template_files())
+         the export in the starter templates (the exact paths of TEMPLATE_EXPORTS, not scanned; see template_files())
 """
 from __future__ import annotations
 
@@ -80,7 +80,7 @@ VAR_SB = re.compile(r"var\(\s*(--sb-[A-Za-z0-9_-]*[A-Za-z0-9_])(?![-*…A-Za-z0-
 
 # the only copies of the web export in templates/, each a verified snapshot (npm run sebaro:verify checks it)
 TEMPLATE_EXPORTS = ("templates/website-astro/public/sebaro/", "templates/webapp-vite/public/sebaro/",
-                    "templates/desktop-tauri/public/sebaro/")
+                    "templates/desktop-tauri/public/sebaro/", "templates/ios-swiftui/SebaroDesign/")
 
 
 def template_files() -> list[Path]:
