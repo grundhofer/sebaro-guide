@@ -500,6 +500,12 @@ struct SbSeriesLegend: View {
     let order: [Int]
     private var context = SbContext()
 
+    // explicit, because a private stored property makes the memberwise initializer private (Swift 6.0/6.1, Xcode 26)
+    init(series: [SbSeries], order: [Int]) {
+        self.series = series
+        self.order = order
+    }
+
     var body: some View {
         SbWrapRow(spacing: SebaroSpace.s4) {
             ForEach(order, id: \.self) { k in

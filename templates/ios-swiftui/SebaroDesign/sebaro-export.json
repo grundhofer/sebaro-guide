@@ -16,7 +16,7 @@
   "launcherOnly": false,
   "excludedProducts": 7,
   "sebaroDesign": {
-    "commit": "0c4e046124d7680f06fec9b119bcb450d49f67bf",
+    "commit": "2cc6e8f10caa1cdf23e77305558707b468b6b831",
     "uncommittedChanges": false
   },
   "contracts": {
@@ -232,9 +232,9 @@
     {
       "path": "Sources/SebaroDesign/SbCharts.swift",
       "source": "systems/sebaro/swift/Sources/SebaroDesign/SbCharts.swift",
-      "sourceSha256": "a07f4deaff1af28d10b7e6d7af24044fb070bc295b4d670174a46fe99b63c7f8",
-      "sha256": "a07f4deaff1af28d10b7e6d7af24044fb070bc295b4d670174a46fe99b63c7f8",
-      "bytes": 42142
+      "sourceSha256": "f6bbf7fbdab73929bcfa076a0f05f131bfcfcb83bc6dafef340100ca9b53715d",
+      "sha256": "f6bbf7fbdab73929bcfa076a0f05f131bfcfcb83bc6dafef340100ca9b53715d",
+      "bytes": 42368
     },
     {
       "path": "Sources/SebaroDesign/SbChoices.swift",
@@ -337,16 +337,16 @@
     {
       "path": "Sources/SebaroDesign/SbRecorder.swift",
       "source": "systems/sebaro/swift/Sources/SebaroDesign/SbRecorder.swift",
-      "sourceSha256": "007243d4daf2cf169629a72c0614ff01c0d3082fcb97188faaa31e113c9fdabd",
-      "sha256": "007243d4daf2cf169629a72c0614ff01c0d3082fcb97188faaa31e113c9fdabd",
-      "bytes": 14340
+      "sourceSha256": "7d431ca03605fc7184f5908a4465592c76bbe1659c3c84a0915b6d157ed39ddc",
+      "sha256": "7d431ca03605fc7184f5908a4465592c76bbe1659c3c84a0915b6d157ed39ddc",
+      "bytes": 14693
     },
     {
       "path": "Sources/SebaroDesign/SbScreen.swift",
       "source": "systems/sebaro/swift/Sources/SebaroDesign/SbScreen.swift",
-      "sourceSha256": "0548b30446a8d23df75e7cd01917d870088341198aef562b79e2c1582f549b6e",
-      "sha256": "0548b30446a8d23df75e7cd01917d870088341198aef562b79e2c1582f549b6e",
-      "bytes": 20159
+      "sourceSha256": "c9d08f9b46b05a6a16ff575fa93b3fc34f7466976e113cb150723fea3d00ff00",
+      "sha256": "c9d08f9b46b05a6a16ff575fa93b3fc34f7466976e113cb150723fea3d00ff00",
+      "bytes": 20443
     },
     {
       "path": "Sources/SebaroDesign/SbSequence.swift",

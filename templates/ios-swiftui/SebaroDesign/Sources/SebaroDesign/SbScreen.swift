@@ -340,6 +340,13 @@ struct SbTopLevelNavigation: ViewModifier {
     @Environment(\.sebaroTone) private var tone
     @Environment(\.dynamicTypeSize) private var typeSize
 
+    // explicit, because private stored properties make the memberwise initializer private (Swift 6.0/6.1, Xcode 26)
+    init(title: String, subtitle: String?, product: SebaroProduct) {
+        self.title = title
+        self.subtitle = subtitle
+        self.product = product
+    }
+
     func body(content: Content) -> some View {
         #if os(iOS)
         #if compiler(>=6.2)   // the iOS 26 SDK (see SbHardScrollEdge)

@@ -153,8 +153,15 @@ struct SbWrapRow: Layout {
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let width = proposal.width ?? .infinity
         let ls = lines(width, subviews)
-        let h = ls.map { $0.map(\.1.height).max() ?? 0 }.reduce(0, +) + spacing * CGFloat(max(ls.count - 1, 0))
-        let w = ls.map { l in l.map(\.1.width).reduce(0, +) + spacing * CGFloat(max(l.count - 1, 0)) }.max() ?? 0
+        // split into small typed steps: Swift 6.0/6.1 (Xcode 26) could not type-check the one-line form in time
+        let lineHeights: [CGFloat] = ls.map { line in line.map { $0.1.height }.max() ?? 0 }
+        let gaps: CGFloat = spacing * CGFloat(max(ls.count - 1, 0))
+        let h: CGFloat = lineHeights.reduce(0, +) + gaps
+        let lineWidths: [CGFloat] = ls.map { line in
+            let items: CGFloat = line.map { $0.1.width }.reduce(0, +)
+            return items + spacing * CGFloat(max(line.count - 1, 0))
+        }
+        let w: CGFloat = lineWidths.max() ?? 0
         return CGSize(width: proposal.width ?? w, height: h)
     }
 
