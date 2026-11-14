@@ -19,6 +19,13 @@ auch sichtbar „sebaro Blueprint“: im Kopf, in den Seitentiteln, in der Fußz
 breiter ist als „Guide“, bricht die Beschriftung des Knopfs „Hell oder Dunkel“ schon unter 424 px um; so bleibt der
 Kopf ab 360 px einzeilig.
 
+Web-App-Vorlage mit Start und „Über“ (Kernregel 29): Beim ersten Aufruf je Tab zeigt sie die ganze Fläche in der
+Produktfarbe mit dem weißen Zeichen und blendet in 200 ms zur App über; „Über“ in den Einstellungen zeigt Kachel, Name,
+Version und „Ein Werkzeug von sebaro“, auf Deutsch und Englisch. Die Prüfliste je Ansicht
+(`templates/screen-checklist.md`) steht auf dem Stand der 31 Kernregeln (Entscheidungen bis D148): keine Kürzel auf
+Kacheln mehr, Start und „Über“ nach Kernregel 29, Deutsch und Englisch ab der ersten Version, der Boden der
+Barrierefreiheit nach Kernregel 30.
+
 Neue Werkstatt: Die private Werkstatt, aus der dieser Guide seinen Web-Export und die Kopien bekommt, heißt jetzt
 **sebaro Foundry** (`grundhofer/sebaro-foundry`, Inhaber, 13.11.2026). Sie ist auf das zugeschnitten, was Guide und
 Kopien brauchen, und ihre Geschichte ist von 1,1 GB auf 8 MB geschrumpft; die alte Werkstatt `sebaroDesign` bleibt

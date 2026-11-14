@@ -145,6 +145,8 @@
     "themeHint": "„Hell oder Dunkel“ und der Farbton stehen im Menü „Mehr“.",
     "about": "Über",
     "version": "Version",
+    "sender": "Ein Werkzeug von",
+    "senderName": "sebaro",
     "storage": "Ablage",
     "storageValue": "Im Speicher des Browsers auf diesem Gerät, bis du einen Eintrag löschst",
     "reset": "Beispieldaten wiederherstellen",

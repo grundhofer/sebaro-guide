@@ -8,6 +8,7 @@ import { defineConfig } from "vitest/config";
 // index.html loads, and the product's icons and manifest, which its head snippet names at the root.
 const SERVED: Record<string, string> = {
   "sebaro/js/theme-init.js": "src/sebaro/js/theme-init.js",
+  "sebaro/js/sb-start.js": "src/sebaro/js/sb-start.js",
   "favicon.ico": "sebaro-product/web/favicon.ico",
   "icon.svg": "sebaro-product/web/icon.svg",
   "apple-touch-icon.png": "sebaro-product/web/apple-touch-icon.png",
@@ -18,6 +19,14 @@ const SERVED: Record<string, string> = {
 };
 
 const read = (file: string) => readFileSync(new URL(file, import.meta.url));
+
+// The start: the copy's markup with the product's id from its declaration and the bare sign the kit wrote into
+// sebaro-product/. Its colours come from the product's product.css, which src/app.css imports.
+function start(): string {
+  const { id } = JSON.parse(read("sebaro.product.json").toString()) as { id: string };
+  const sign = read("sebaro-product/sign/sign.svg").toString().trim();
+  return `<div class="sb-start" data-sb-product="${id}" aria-hidden="true"><span class="sb-start__tile">${sign}</span></div>`;
+}
 
 function sebaro(): Plugin {
   return {
@@ -35,9 +44,10 @@ function sebaro(): Plugin {
       for (const [fileName, file] of Object.entries(SERVED))
         this.emitFile({ type: "asset", fileName, source: read(file) });
     },
-    // the icon sprite inline at the top of the body, the product's head snippet in the head
+    // the start as the first element of the body, then the icon sprite inline; the product's head snippet in the head
     transformIndexHtml(html) {
       return html
+        .replace("<!-- sebaro:start -->", start)
         .replace("<!-- sebaro:sprite -->", () => read("src/sebaro/icons/sprite.svg").toString().trim())
         .replace("<!-- sebaro:head -->", () => read("sebaro-product/web/head.snippet.html").toString().trim());
     },

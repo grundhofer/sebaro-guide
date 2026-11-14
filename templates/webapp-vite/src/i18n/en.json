@@ -145,6 +145,8 @@
     "themeHint": "“Light or dark” and the tone are in the “More” menu.",
     "about": "About",
     "version": "Version",
+    "sender": "A tool by",
+    "senderName": "sebaro",
     "storage": "Storage",
     "storageValue": "In the browser's storage on this device, until you delete an entry",
     "reset": "Restore sample data",

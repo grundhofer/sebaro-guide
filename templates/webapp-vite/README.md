@@ -13,11 +13,12 @@ im Menü „Mehr“ in der oberen Leiste jedes Orts.
 
 | Ansicht | Adresse | Was sie zeigt |
 |---|---|---|
+| Start | | beim ersten Aufruf je Browser-Tab der ganze Bildschirm in der Produktfarbe mit dem weißen Zeichen, dann die App |
 | Einträge | `/` | Suche, Filterchips, Liste mit Erledigtem, leerer Zustand, Stand-Satz und „Neuer Eintrag“ unten |
 | Eintrag | `/eintrag/2` | Eigenschaften, Zustand als Zeichen und Wort, „Bearbeiten“ als die eine umrandete Aktion in der Aktionszone, „Als erledigt markieren“ als Textaktion mit Kurzmeldung und „Rückgängig“; am Ende des Inhalts „Eintrag abschließen“ als Textaktion und „Eintrag löschen“ als die eine Gefahrtaste dort, beide mit Dialog, dessen Bestätigung die 45°-Kante trägt |
 | Neuer Eintrag, Bearbeiten | `/neu`, `/bearbeiten/2` | Formular mit „(optional)“, Fehlern je Feld, Teilschritten mit „Rückgängig“, Dialog „Abbrechen“ · „Verwerfen“ · „Sichern“ |
 | Datenarten | `/daten` | jede Datenart von `docs/daten.html`: Text, Zahlen, Geld, Zeit, Kalender, Zustände, Tabellen mit Sortierung und Summe, Baum, Mehrfachauswahl, alle Diagramme, Orte, Belege |
-| Einstellungen | `/einstellungen` | „Bewegung immer reduzieren“, „Über“, der Weg zu den Pflichtseiten und zum Quelltext |
+| Einstellungen | `/einstellungen` | „Bewegung immer reduzieren“, „Über“ mit Kachel, Name, Version und dem Absender „von sebaro“, der Weg zu den Pflichtseiten und zum Quelltext |
 | Impressum, Datenschutz, Barrierefreiheit | `/impressum` … | Platzhalter für die Pflichtseiten, Unteransichten von „Einstellungen“ |
 | jede andere Adresse | | „Diese Ansicht gibt es nicht“ |
 | eine Ansicht, die scheitert | | „Fehler“: was los ist und was du tun kannst; der Rahmen bleibt stehen |
@@ -46,7 +47,8 @@ pnpm sebaro:lint         # lint-web.sh der Kopie über src/app.css und die gebau
 ## Aufbau
 
 ```
-index.html          lädt theme-init.js zuerst, dann src/app.css; das Icon-Sprite steht inline oben im body
+index.html          lädt theme-init.js und sb-start.js zuerst, dann src/app.css; der Start und das Icon-Sprite
+                    stehen inline oben im body
 vite.config.ts      Vite, Vitest und das kleine Plugin für die Kopie
 src/main.tsx        Einstieg: die Routen (mit ihrem Ort im Rahmen), ihre Fehlergrenze, der Start
 src/pages/          eine Datei je Route
@@ -87,21 +89,28 @@ Der letzte Befehl schreibt `sebaro-product/` neu, wenn sich `sebaro.product.json
 und ICO-Dateien mit Playwright). Die Erklärung dort ist ein Platzhalter: die Dachmarke. Ein echtes Produkt trägt sein
 eigenes Zeichen ein.
 
-Das Plugin in `vite.config.ts` liefert aus, was ein Bundler nicht bündelt: `theme-init.js` unter
-`/sebaro/js/theme-init.js` und die Icons und das Manifest aus `sebaro-product/web/` an der Wurzel. Es setzt das
+Das Plugin in `vite.config.ts` liefert aus, was ein Bundler nicht bündelt: `theme-init.js` und `sb-start.js` unter
+`/sebaro/js/` und die Icons und das Manifest aus `sebaro-product/web/` an der Wurzel. Es setzt den Start, das
 Icon-Sprite und das Kopf-Schnipsel des Kits in `index.html` ein.
+
+**Der Start** (Kernregel 29). Das Markup der Kopie (`.sb-start`) steht als erstes Element im Body, mit der ID des
+Produkts aus `sebaro.product.json` und seinem Zeichen (`sebaro-product/sign/sign.svg`); die Farben gibt
+`sign/product.css`, das `src/app.css` nach `tokens.css` einbindet. `sb-start.js` der Kopie zeigt ihn nur beim ersten
+Aufruf je Browser-Tab (D144 (3)) und blendet ihn aus, sobald die Seite geladen ist und die App ihn nicht mehr hält:
+`src/main.tsx` hält ihn mit `src/lib/start.ts`, bis die App gemalt hat. Das Ausblenden dauert 200&nbsp;ms, auch bei
+reduzierter Bewegung (System oder „Bewegung immer reduzieren“, D102 (52)).
 
 ### Die klassischen Skripte der Kopie
 
-Die Bauteile der Kopie sind CSS und Markup. Was ihre klassischen Skripte täten, steht hier in React. Geladen wird nur
-eines:
+Die Bauteile der Kopie sind CSS und Markup. Was ihre klassischen Skripte täten, steht hier in React. Geladen werden nur
+die zwei, die vor dem ersten Bild laufen müssen:
 
 | Skript | Geladen | Warum, oder wo das Verhalten jetzt steht |
 |---|---|---|
 | `theme-init.js` | ja | muss vor dem ersten Bild laufen: setzt gespeichertes Hell/Dunkel, Farbton, Bewegung und Sprache an `<html>` und führt die `theme-color`-Angaben nach |
 | `theme-button.js` | nein | eine Web-App hat keinen Knopf im Kopf: die Wahl steht im Menü „Mehr“ (`components/More.tsx`, `lib/appearance.ts`, `store/appearance.ts`) |
 | `sb-tone.js` | nein | `components/More.tsx`, `store/appearance.ts` |
-| `sb-start.js` | nein | die Vorlage zeigt keinen Start (siehe Lücken) |
+| `sb-start.js` | ja | muss vor dem ersten Bild laufen: zeigt den Start nur beim ersten Aufruf je Tab und blendet ihn aus; die App hält ihn mit `lib/start.ts`, bis sie gemalt hat |
 | `sb-sheet.js` | nein | die Vorlage hat kein Sheet |
 | `sb-fit.js` | nein | es schreibt in Textknoten und Bauteile, die React rendert; das hält Reacts Abgleich nicht aus. Übernommen ist eine seiner Formen (siehe Lücken) |
 | `sb-calendar.js` | nein | `parts/Calendar.tsx`, `lib/calendar.ts` |
@@ -122,8 +131,8 @@ Den App-Rahmen der Kopie (`sb-app-frame`, `sb-bottom-nav`, `sb-top-bar`) schreib
 
 ## Tests
 
-`pnpm test` (Vitest, jsdom) prüft die Logik in `src/lib/`, die Stores, die Bauteile und die Ansichten Liste und
-Formular; `src/i18n.test.ts` prüft, dass Deutsch und Englisch dieselben Schlüssel haben. jsdom kennt weder CSS noch
+`pnpm test` (Vitest, jsdom) prüft die Logik in `src/lib/`, die Stores, die Bauteile, die Ansichten Liste und
+Formular und „Über“ in den Einstellungen, deutsch und englisch; `src/i18n.test.ts` prüft, dass Deutsch und Englisch dieselben Schlüssel haben. jsdom kennt weder CSS noch
 `<dialog>` noch Popover: was davon abhängt, prüfen die End-to-End-Tests.
 
 `pnpm test:e2e` lädt jede Ansicht und jeden Zustand (leere Liste, kein Treffer, abgeschlossener und unbekannter Eintrag,
@@ -155,7 +164,10 @@ Neuladen; die Sprache behält den Entwurf), und „Beispieldaten wiederherstelle
 eigenen Einträge bleiben.
 `tests/parts.spec.ts` prüft, was die Bauteile erst im Browser zeigen: Dialog und Popover geben den Fokus zurück, ein
 Klick neben den Dialog bricht ab, Aktionen ohne Platz stehen untereinander, „Kopieren“ erreicht die Zwischenablage, und
-eine Ansicht, die sich nicht laden lässt, sagt es. `tests/dimensions.spec.ts` liest `src/app.css`: keine Länge ohne
+eine Ansicht, die sich nicht laden lässt, sagt es. `tests/start.spec.ts` prüft den Start, hell und dunkel und bei
+jeder Bewegungseinstellung: das erste Bild ist der ganze Bildschirm in der Kachelfarbe mit dem weißen Zeichen, dann
+blendet er in 200&nbsp;ms aus, und die App steht auf ihrem eigenen Grund; ein zweiter Aufruf im selben Tab zeigt ihn
+nicht, ein neuer Tab wieder. `tests/dimensions.spec.ts` liest `src/app.css`: keine Länge ohne
 Token oder Begründung. Dass kein Wort im Markup steht, prüft ESLint (`eslint.config.js`). Die Bildschirmfotos liegen
 danach in `test-results/screens/`.
 
@@ -180,6 +192,8 @@ Wo die Vorlage eine dieser Regeln noch nicht ganz erfüllt, steht es unter „L�
 - „Hell oder Dunkel“, „Farbton: Kühl · Warm“ und die Sprache ohne Neuladen im Menü „Mehr“: AKT-09, FAR-15, EBE-07,
   TEC-10; Impressum, Datenschutz, Barrierefreiheit und GitHub unter „Einstellungen“
 - Bewegung in den Einstellungen: BEW-04; Laden im Kopf: WEB-01
+- Start in der Produktfarbe nur beim ersten Aufruf je Tab, 200&nbsp;ms Ausblenden bei jeder Bewegungseinstellung;
+  „Über“ mit Kachel, Name, Version und „von sebaro“: Kernregel 29 (D143 (5), D144 (3), D102 (52))
 - eine Hauptaktion unten in der Aktionszone, zuletzt in jeder Gruppe, mit Stand-Satz und Datenweg-Zeile: AKT-01, AKT-02,
   AKT-04, AKT-11, STA-07, EBE-08, BEL-10
 - drei Stufen von Aktionen (Kernregel 13): höchstens eine umrandete je Bereich, alles andere eine Textaktion; im
@@ -217,8 +231,9 @@ Vorlage gilt zusätzlich:
   Leiste, die Aktionen eines Dialogs. In einer Detailansicht ist es „Bearbeiten“ in der Aktionszone, in einem Formular
   „Abbrechen“ neben der Hauptaktion; alles andere ist eine Textaktion (`sb-text-action`). „Abbrechen“ in einem Dialog
   trägt `data-sb-dialog-cancel` und zählt nicht. Die End-to-End-Tests scheitern an einer zweiten.
-- Die Kachel in der oberen Leiste und über der Navigation am Rand ist ein Platzhalter (die Dachmarke). Ein echtes
-  Produkt trägt sein eigenes Zeichen in `sebaro.product.json` ein (ZEI-03, ZEI-08).
+- Die Kachel in der oberen Leiste, über der Navigation am Rand und in „Über“ und der Start (Zeichen und Farbe) sind
+  Platzhalter (die Dachmarke). Ein echtes Produkt trägt sein eigenes Zeichen in `sebaro.product.json` ein (ZEI-03,
+  ZEI-08); `pnpm build` übernimmt es in den Start.
 - Alle Befehle von „Starten“ müssen grün sein, bevor eine Ansicht fertig ist; die Prüfliste `../screen-checklist.md`
   gilt dazu.
 
@@ -298,12 +313,8 @@ solche Stellen übernehmen. Übernimm sie nicht, sondern bau es so:
   Klasse der Kopie. Unter 840&nbsp;px Rahmenbreite und in der Spalte der Liste steht sie darum bündig unter der Aktion;
   erst die breite Form der Zone gibt mit ihrem Zeilenabstand 8&nbsp;px. BEL-10 will sie 8&nbsp;px unter der Hauptaktion
   und zentriert.
-- **Nicht eingebaut, obwohl die Regeln gelten:** der Start in der Produktfarbe (Kernregel 29: `index.html` hat weder
-  `data-sb-start` noch `sb-start.js`, `src/app.css` importiert `sebaro-product/sign/product.css` nicht), „Über“ mit
-  Kachel, Name und dem Absender „von sebaro“ (Kernregel 29: „Über“ in den Einstellungen nennt nur Version und Ablage,
-  und der Name der App steht seit dem App-Rahmen nur noch im Titel des Dokuments), das Vorschaubild der Startseite
-  (WEB-09) und Markup, das ohne Skript den richtigen Zustand zeigt (TEC-02 gilt für `web`; die Ansichten rendert hier
-  React). Bau den Start, „Über“ und WEB-09 ein.
+- **Nicht eingebaut, obwohl die Regeln gelten:** das Vorschaubild der Startseite (WEB-09) und Markup, das ohne Skript
+  den richtigen Zustand zeigt (TEC-02 gilt für `web`; die Ansichten rendert hier React). Bau WEB-09 ein.
 - **Frage an den Inhaber:** ob WEB-11 („Drucke jede Website hell“, `sb-print.js`) für eine Web-App gilt, und wie
   TEC-02 („klassische Skripte, keine Module“) zu einem Vite-Build passt, der die Oberfläche als Modul ausliefert. Frag
   mit den IDs, statt es selbst zu entscheiden.

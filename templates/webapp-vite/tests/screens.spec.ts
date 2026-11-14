@@ -181,6 +181,15 @@ const screens: Screen[] = [
     overlay: "app-toast",
     prepare: press("Beispieldaten wiederherstellen"),
   },
+  {
+    // „About“ with the tile, the name, the version and the sender in English (core rule 29)
+    name: "einstellungen-englisch",
+    path: "/einstellungen",
+    heading: "Settings",
+    view: '[data-sb-view="einstellungen"]',
+    overlay: null,
+    prepare: english,
+  },
   { name: "daten", path: "/daten", heading: "Datenarten", view: '[data-sb-view="daten"]', overlay: null },
   {
     name: "daten-englisch",

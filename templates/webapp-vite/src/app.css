@@ -1,8 +1,9 @@
 /* app.css: the copy's stylesheets in their order, then the app's own layout around sebaro's parts. Only app-*
    classes, only var(--sb-*) tokens, no colour values, no shadows. Everything that looks like sebaro comes from the
-   copy. */
+   copy. The product's colours for its start come after tokens.css: product.css, written by the copy's kit. */
 @import "./sebaro/fonts/fonts.css";
 @import "./sebaro/tokens.css";
+@import "../sebaro-product/sign/product.css";
 @import "./sebaro/icons/sprite.css";
 @import "./sebaro/css/sebaro.css";
 

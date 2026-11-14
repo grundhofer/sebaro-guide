@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de" data-sb-language="stored">
+<html lang="de" data-sb-language="stored" data-sb-start>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,11 +14,17 @@
     <!-- theme-init.js first, before anything paints: the stored theme, tone, motion setting and language. A classic
          script of the copy, served as a file by the plugin in vite.config.ts -->
     <script src="/sebaro/js/theme-init.js" vite-ignore></script>
+    <!-- sb-start.js next, also before anything paints: on the first visit per tab it shows the start
+         (html.sb-starting) and fades it once the page has loaded and the app has painted (src/lib/start.ts) -->
+    <script src="/sebaro/js/sb-start.js" vite-ignore></script>
     <!-- src/app.css imports the copy's stylesheets in their order, then holds the app's own rules -->
     <link rel="stylesheet" href="/src/app.css" />
     <!-- sebaro:head -->
   </head>
   <body class="sb-page">
+    <!-- the start: the copy's .sb-start, the whole screen in the product's colour with its white sign, written here by
+         the plugin in vite.config.ts -->
+    <!-- sebaro:start -->
     <!-- sebaro:sprite -->
     <div id="app"></div>
     <script type="module" src="/src/main.tsx"></script>

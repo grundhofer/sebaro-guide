@@ -1,5 +1,6 @@
 // Settings.tsx: „Einstellungen“ of a web app: „Bewegung immer reduzieren“, „Über“ and the way to the required
-// pages. „Hell oder Dunkel“ and „Farbton“ stand in the „Mehr“ menu. No primary action. „Beispieldaten
+// pages. „Hell oder Dunkel“ and „Farbton“ stand in the „Mehr“ menu. No primary action. „Über“ shows the sign tile,
+// the name and the version, then the sender „von sebaro“ with the copy's key mark (core rule 29). „Beispieldaten
 // wiederherstellen“ only adds the examples that are missing, so it asks nothing, and its toast takes back only
 // what it added.
 import { useTranslation } from "react-i18next";
@@ -7,7 +8,10 @@ import { Link } from "react-router";
 import { version } from "../../package.json";
 import { Icon } from "../components/parts/Icon";
 import { Switch } from "../components/parts/Switch";
+import { SignTile } from "../components/SignTile";
 import { View } from "../components/View";
+import keymark from "../sebaro/brand/inline/keymark-small.svg?raw";
+import keymarkDark from "../sebaro/brand/inline/keymark-small.dark.svg?raw";
 import { useAppearance } from "../store/appearance";
 import { useEntries } from "../store/entries";
 import { useToast } from "../store/toast";
@@ -47,13 +51,23 @@ export default function Settings() {
               <h2 className="sb-type-title" id="app-about-h">
                 {t("settings.about")}
               </h2>
-              <dl className="sb-meta-list">
-                <div>
-                  <dt>{t("settings.version")}</dt>
-                  <dd>
-                    <span className="sb-mono">{version}</span>
-                  </dd>
+              <div className="sb-about-head">
+                <SignTile size={64} />
+                <div className="sb-about-head__text">
+                  <h3 className="sb-about-head__name">{t("app.name")}</h3>
+                  <p className="sb-about-head__meta">
+                    {t("settings.version")} <span className="sb-mono">{version}</span>
+                  </p>
                 </div>
+              </div>
+              <div className="sb-sender">
+                <p>{t("settings.sender")}</p>
+                <span className="sb-keymark sb-keymark--small" role="img" aria-label={t("settings.senderName")}>
+                  <span className="sb-keymark__light" dangerouslySetInnerHTML={{ __html: keymark }} />
+                  <span className="sb-keymark__dark" dangerouslySetInnerHTML={{ __html: keymarkDark }} />
+                </span>
+              </div>
+              <dl className="sb-meta-list">
                 <div>
                   <dt>{t("settings.storage")}</dt>
                   <dd>{t("settings.storageValue")}</dd>

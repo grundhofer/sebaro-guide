@@ -1,11 +1,12 @@
-// main.tsx: the entry. The routes with their error boundary, then the start.
-import { lazy, StrictMode } from "react";
+// main.tsx: the entry. The routes with their error boundary; once the app has painted, the start ends.
+import { lazy, StrictMode, useEffect, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, type RouteObject } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import "./i18n";
 import { ErrorView } from "./components/ErrorView";
 import { Shell, type Place } from "./components/Shell";
+import { endStart, holdStart } from "./lib/start";
 
 // what the start does not need is loaded when its route opens
 const Detail = lazy(() => import("./pages/Detail"));
@@ -45,11 +46,20 @@ export const routes: RouteObject[] = [
   },
 ];
 
+/** Ends the start once the app, or the error view that stands for a failed one, has painted. */
+function Start({ children }: { children: ReactNode }) {
+  useEffect(endStart, []);
+  return children;
+}
+
 const root = document.getElementById("app");
 if (root) {
+  holdStart();
   createRoot(root).render(
     <StrictMode>
-      <RouterProvider router={createBrowserRouter(routes)} />
+      <Start>
+        <RouterProvider router={createBrowserRouter(routes)} />
+      </Start>
     </StrictMode>,
   );
 }
